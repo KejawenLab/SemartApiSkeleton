@@ -33,6 +33,11 @@ final class SettingService
         throw new SettingNotFoundException();
     }
 
+    public function get(string $id)
+    {
+        return $this->serializer->toArray($this->repository->find($id), ['groups' => 'read']);
+    }
+
     public function paginate(Pagination $pagination, array $filters = []): array
     {
         return [
