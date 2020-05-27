@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller\Setting;
 
-use App\Entity\Setting;
+use App\Setting\Model\SettingInterface;
 use App\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Get extends AbstractFOSRestController
+class Delete extends AbstractFOSRestController
 {
     private $service;
 
@@ -27,14 +28,10 @@ class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings/{id}")
+     * @Rest\Delete("/settings/{id}")
      * @SWG\Response(
-     *     response=200,
-     *     description="Return setting detail",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *     )
+     *     response=204,
+     *     description="Delete setting"
      * )
      * @SWG\Tag(name="Setting")
      * @Security(name="Bearer")
@@ -46,6 +43,14 @@ class Get extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $id): View
     {
-        return $this->view($this->service->get($id, true));
+        /** @var SettingInterface $setting */
+        $setting = $this->service->get($id);
+        if (!$setting) {
+            throw new NotFoundHttpException(sprintf('Setting ID: "%s" not found', $id));
+        }
+
+        $this->service->remove($setting);
+
+        return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

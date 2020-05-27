@@ -24,6 +24,18 @@ class SettingRepository extends ServiceEntityRepository implements SettingReposi
         parent::__construct($registry, Setting::class);
     }
 
+    public function persist(SettingInterface $setting): void
+    {
+        $this->_em->persist($setting);
+        $this->_em->flush();
+    }
+
+    public function remove(SettingInterface $setting): void
+    {
+        $this->_em->remove($setting);
+        $this->_em->flush();
+    }
+
     public function findByParameter(string $parameter): ?SettingInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');

@@ -1,5 +1,6 @@
 # Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
 fos_rest:
+    disable_csrf_role: ROLE_USER
     versioning: true
     param_fetcher_listener: force
     allowed_methods_listener: true

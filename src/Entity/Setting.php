@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\GroupRepository;
+use App\Repository\SettingRepository;
 use App\Setting\Model\SettingInterface;
 use App\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=GroupRepository::class)
+ * @ORM\Entity(repositoryClass=SettingRepository::class)
  * @ORM\Table(name="core_setting")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")

@@ -12,4 +12,8 @@ use App\Pagination\Model\PaginatableRepositoryInterface;
 interface SettingRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findByParameter(string $parameter): ?SettingInterface;
+
+    public function persist(SettingInterface $setting): void;
+
+    public function remove(SettingInterface $setting): void;
 }

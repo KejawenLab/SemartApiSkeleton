@@ -33,9 +33,23 @@ final class SettingService
         throw new SettingNotFoundException();
     }
 
-    public function get(string $id)
+    public function get(string $id, bool $toArray = false)
     {
-        return $this->serializer->toArray($this->repository->find($id), ['groups' => 'read']);
+        if ($toArray) {
+            return $this->serializer->toArray($this->repository->find($id), ['groups' => 'read']);
+        }
+
+        return $this->repository->find($id);
+    }
+
+    public function save(SettingInterface $setting): void
+    {
+        $this->repository->persist($setting);
+    }
+
+    public function remove(SettingInterface $setting): void
+    {
+        $this->repository->remove($setting);
     }
 
     public function paginate(Pagination $pagination, array $filters = []): array
