@@ -49,6 +49,6 @@ class GetAll extends AbstractFOSRestController
      */
     public function __invoke(Request $request): View
     {
-        return $this->view($this->service->paginate($this->paginator->createFromRequest($request)));
+        return $this->view($this->paginator->paginate($this->service->getQueryBuilder('o'), $request, Setting::class));
     }
 }

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Pagination\Model;
 
-use App\Pagination\Pagination;
+use App\Service\Model\ServiceableRepositoryInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-interface PaginatableRepositoryInterface
+interface PaginatableRepositoryInterface extends ServiceableRepositoryInterface
 {
-    public function paginate(Pagination $pagination, array $filters): array;
-
-    public function count(array $filters);
+    public function queryBuilder(string $alias): QueryBuilder;
 }

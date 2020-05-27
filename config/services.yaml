@@ -27,6 +27,9 @@ services:
         App\Security\Model\UserProviderInterface:
             tags:
                 - { name: alpabit.user_provider }
+        App\Pagination\Model\FilterInterface:
+            tags:
+                - { name: alpabit.pagination_filter }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -38,3 +41,8 @@ services:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
+
+    App\Pagination\Paginator:
+        arguments:
+            - '@App\Setting\SettingService'
+            - '@App\Util\Serializer'

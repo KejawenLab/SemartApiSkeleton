@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Pagination\Paginator;
 use App\Security\Service\UserProviderFactory;
 use App\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -65,6 +66,14 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
         $definition = $container->getDefinition(UserProviderFactory::class);
         $definition->addArgument($userProviders);
+
+        $filters = [];
+        foreach ($container->findTaggedServiceIds('alpabit.pagination_filter') as $id => $tag) {
+            $filters[] = new Reference($id);
+        }
+
+        $definition = $container->getDefinition(Paginator::class);
+        $definition->addArgument($filters);
 
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);
