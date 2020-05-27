@@ -85,7 +85,7 @@ class Menu implements MenuInterface
 
     public function getId(): ?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getParent(): ?MenuInterface

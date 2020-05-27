@@ -9,6 +9,7 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-redis": "*",
+        "ext-pcntl": "*",
         "composer/composer": "^1.9",
         "cron/cron-bundle": "^2.4",
         "friendsofsymfony/rest-bundle": "^3.0@beta",

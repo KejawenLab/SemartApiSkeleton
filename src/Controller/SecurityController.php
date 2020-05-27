@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Security\Model\UserInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
@@ -15,7 +14,7 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 class SecurityController extends AbstractFOSRestController
 {
     /**
-     * @Route("/login", methods={"POST"})
+     * @Rest\Post("/login")
      */
     public function check()
     {

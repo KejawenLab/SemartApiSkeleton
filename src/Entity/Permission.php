@@ -77,6 +77,11 @@ class Permission implements PermissionInterface
         $this->deletable = false;
     }
 
+    public function getId(): ?string
+    {
+        return (string) $this->id;
+    }
+
     public function getGroup(): ?GroupInterface
     {
         return $this->group;

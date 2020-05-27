@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Security\Service\UserProviderFactory;
 use App\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -56,8 +58,15 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->getDefinition('doctrine.dbal.default_connection');
+        $userProviders = [];
+        foreach ($container->findTaggedServiceIds('alpabit.user_provider') as $id => $tag) {
+            $userProviders[] = new Reference($id);
+        }
 
+        $definition = $container->getDefinition(UserProviderFactory::class);
+        $definition->addArgument($userProviders);
+
+        $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);
         /** @var string $databasePassword */
         $databasePassword = $_ENV['DATABASE_PASSWORD'];

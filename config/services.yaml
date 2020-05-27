@@ -23,6 +23,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    _instanceof:
+        App\Security\Model\UserProviderInterface:
+            tags:
+                - { name: alpabit.user_provider }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Repository\UserRepository:

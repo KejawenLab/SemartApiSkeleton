@@ -3,11 +3,8 @@ security:
         App\Entity\User:
             algorithm: auto
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: username
+        user_provider:
+            id: App\Security\Service\UserProviderFactory
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

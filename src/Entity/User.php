@@ -89,7 +89,7 @@ class User implements UserInterface, AppUser
 
     public function getId(): ?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getUsername(): ?string
