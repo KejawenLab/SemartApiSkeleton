@@ -45,7 +45,6 @@ final class UserProviderFactory implements UserProviderInterface
     {
         foreach ($this->providers as $provider) {
             if ($provider->support($class)) {
-
                 return true;
             }
         }

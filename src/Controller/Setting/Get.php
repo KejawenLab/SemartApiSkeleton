@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Setting;
 
 use App\Entity\Setting;
-use App\Pagination\Paginator;
 use App\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -22,12 +21,9 @@ class Get extends AbstractFOSRestController
 {
     private $service;
 
-    private $paginator;
-
-    public function __construct(SettingService $service, Paginator $paginator)
+    public function __construct(SettingService $service)
     {
         $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
