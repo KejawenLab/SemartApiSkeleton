@@ -1,0 +1,1 @@
+- { username: 'admin', fullName: 'Super Administrator', email: 'dev@alpabit.com', plainPassword: 'admin', group: 'ref:group#group1' }
