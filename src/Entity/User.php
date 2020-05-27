@@ -14,6 +14,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -45,9 +46,33 @@ class User implements UserInterface, AppUser
     private $group;
 
     /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $supervisor;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Assert\Length(max=180)
+     * @Assert\NotBlank()
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="string", length=55)
+     *
+     * @Assert\Length(max=55)
+     * @Assert\NotBlank()
+     */
+    private $fullName;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="json")
@@ -59,12 +84,12 @@ class User implements UserInterface, AppUser
      */
     private $password;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return (string) $this->username;
     }
@@ -81,7 +106,7 @@ class User implements UserInterface, AppUser
         return ['ROLE_USER'];
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return (string) $this->password;
     }
@@ -103,6 +128,14 @@ class User implements UserInterface, AppUser
 
     public function getSupervisor(): ?AppUser
     {
+        return $this->supervisor;
+    }
+
+    public function setSupervisor(?AppUser $supervisor): AppUser
+    {
+        $this->supervisor = $supervisor;
+
+        return $this;
     }
 
     public function getFullName(): ?string
@@ -115,5 +148,11 @@ class User implements UserInterface, AppUser
 
     public function getGroup(): ?GroupInterface
     {
+        return $this->group;
+    }
+
+    public function setGroup(?GroupInterface $group): void
+    {
+        $this->group = $group;
     }
 }

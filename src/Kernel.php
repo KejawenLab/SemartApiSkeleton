@@ -56,15 +56,15 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-//        $definition = $container->getDefinition('doctrine.dbal.default_connection');
-//
-//        $argument = $definition->getArgument(0);
-//        /** @var string $databasePassword */
-//        $databasePassword = $_ENV['DATABASE_PASSWORD'];
-//        /** @var string $appSecret */
-//        $appSecret = $_ENV['APP_SECRET'];
-//        $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
-//
-//        $definition->replaceArgument(0, $argument);
+        $definition = $container->getDefinition('doctrine.dbal.default_connection');
+
+        $argument = $definition->getArgument(0);
+        /** @var string $databasePassword */
+        $databasePassword = $_ENV['DATABASE_PASSWORD'];
+        /** @var string $appSecret */
+        $appSecret = $_ENV['APP_SECRET'];
+        $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+
+        $definition->replaceArgument(0, $argument);
     }
 }

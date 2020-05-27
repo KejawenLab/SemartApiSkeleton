@@ -42,20 +42,18 @@ class ScriptHandler
         $composer = $event->getComposer();
         $io = $event->getIO();
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
-        $semartPath = sprintf('%s/.semart', $rootPath);
+        $lock = sprintf('%s/.alpabit', $rootPath);
 
-        if (1 === (int) file_get_contents($semartPath)) {
+        if (file_exists($lock) && 1 === (int) file_get_contents($lock)) {
             return 0;
         }
 
         $io->write('<comment>===========================================================</comment>');
-        $io->write('<options=bold>Semart Application Installation is finished</>');
+        $io->write('<options=bold>Alpabit Core Installation is finished</>');
         $io->write('<comment>===========================================================</comment>');
-        $io->write('<comment>Run <info>symfony server:start</info> to start your server</comment>');
-        $io->write('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
 
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile($semartPath, (string) 1);
+        $fileSystem->dumpFile($lock, (string) 1);
     }
 
     private static function createEnvironment(IOInterface $io, string $envPath, string $template): void
@@ -71,12 +69,9 @@ class ScriptHandler
         $dbCharset = $io->ask('Please enter your database charset [default: <info>utf8mb4</info>]: ', 'utf8mb4');
         $dbUser = $io->ask('Please enter your database user [default: <info>root</info>]: ', 'root');
         $dbPassword = $io->ask('Please enter your database password [default: <info>null</info>]: ', '');
-        $dbName = $io->ask('Please enter your database name [default: <info>semart_app</info>]: ', 'semart_app');
+        $dbName = $io->ask('Please enter your database name [default: <info>alpabit_core</info>]: ', 'alpabit_core');
         $dbHost = $io->ask('Please enter your database host [default: <info>localhost</info>]: ', 'localhost');
         $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
-        $appShort = $io->ask('Please enter your application short title [default: <info>SEMART SKELETON</info>]: ', 'SEMART SKELETON');
-        $appLong = $io->ask('Please enter your application long title [default: <info>KEJAWENLAB APPLICATION SKELETON</info>]: ', 'KEJAWENLAB APPLICATION SKELETON');
-        $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
 
         $search = [
             '{{ENV}}',
@@ -90,13 +85,10 @@ class ScriptHandler
             '{{DB_NAME}}',
             '{{DB_HOST}}',
             '{{DB_PORT}}',
-            '{{APP_SHORT}}',
-            '{{APP_LONG}}',
-            '{{APP_VERSION}}',
         ];
 
-        $secret = Encryptor::encrypt(sprintf('%s:%s', Application::APP_UNIQUE_NAME, date('YmdHis')), Application::APP_UNIQUE_NAME);
-        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
+        $secret = Encryptor::encrypt(date('YmdHis'), sha1(date('YmdHis')));
+        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort];
 
         $envString = str_replace($search, $replace, $template);
 

@@ -1,4 +1,5 @@
 .env
+.alpabit
 
 ###> symfony/framework-bundle ###
 /.env.local

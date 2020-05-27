@@ -61,10 +61,14 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "App\\Composer\\ScriptHandler::preInstall",
+            "@auto-scripts",
+            "App\\Composer\\ScriptHandler::postInstall"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "App\\Composer\\ScriptHandler::preInstall",
+            "@auto-scripts",
+            "App\\Composer\\ScriptHandler::postInstall"
         ]
     },
     "conflict": {

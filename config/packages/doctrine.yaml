@@ -10,16 +10,16 @@ doctrine:
         default_table_options:
             charset: '%env(resolve:DATABASE_CHARSET)%'
             collate: '%env(resolve:DATABASE_CHARSET)%_unicode_ci'
-        url: '%env(resolve:DATABASE_URL)%'
+#        url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
-#        metadata_cache_driver: ~
-#        query_cache_driver: ~
-#        result_cache_driver:
-#            type: pool
-#            pool: doctrine.result_cache_pool
+        metadata_cache_driver: ~
+        query_cache_driver: ~
+        result_cache_driver:
+            type: pool
+            pool: doctrine.result_cache_pool
         filters:
             semart_softdeletable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
