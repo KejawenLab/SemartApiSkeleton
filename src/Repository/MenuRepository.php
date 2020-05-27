@@ -7,7 +7,6 @@ namespace App\Repository;
 use App\Entity\Menu;
 use App\Security\Model\MenuInterface;
 use App\Security\Model\MenuRepositoryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Menu[]    findAll()
  * @method Menu[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MenuRepository extends ServiceEntityRepository implements MenuRepositoryInterface
+class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

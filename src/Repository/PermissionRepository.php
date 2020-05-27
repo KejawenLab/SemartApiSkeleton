@@ -9,7 +9,6 @@ use App\Security\Model\GroupInterface;
 use App\Security\Model\MenuInterface;
 use App\Security\Model\PermissionInterface;
 use App\Security\Model\PermissionRepositoryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Permission[]    findAll()
  * @method Permission[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PermissionRepository extends ServiceEntityRepository implements PermissionRepositoryInterface
+class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
