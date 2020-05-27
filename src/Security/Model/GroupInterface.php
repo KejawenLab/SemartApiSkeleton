@@ -9,9 +9,9 @@ namespace App\Security\Model;
  */
 interface GroupInterface
 {
-    public function getId(): string;
+    public function getId(): ?string;
 
-    public function getCode(): string;
+    public function getCode(): ?string;
 
-    public function getName(): string;
+    public function getName(): ?string;
 }

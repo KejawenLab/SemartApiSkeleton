@@ -11,13 +11,13 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
  */
 interface UserInterface extends SymfonyUser
 {
-    public function getId(): string;
+    public function getId(): ?string;
 
-    public function getSupervisor(): self;
+    public function getSupervisor(): ?self;
 
-    public function getFullName();
+    public function getFullName(): ?string;
 
-    public function getEmail();
+    public function getEmail(): ?string;
 
-    public function getGroup(): GroupInterface;
+    public function getGroup(): ?GroupInterface;
 }

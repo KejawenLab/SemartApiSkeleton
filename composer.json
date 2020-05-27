@@ -9,18 +9,23 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-redis": "*",
-        "api-platform/api-pack": "^1.2",
+        "composer/composer": "^1.9",
         "lexik/jwt-authentication-bundle": "^2.6",
         "ramsey/uuid-doctrine": "^1.6",
         "snc/redis-bundle": "^3.0",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "symfony/console": "5.0.*",
-        "symfony/dotenv": "5.0.*",
+        "symfony/console": "^5.0",
+        "symfony/dotenv": "^5.0",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "5.0.*",
+        "symfony/inflector": "^5.0",
+        "symfony/maker-bundle": "^1.18",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/var-dumper": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/orm-pack": "^1.0",
+        "symfony/string": "^5.0",
+        "symfony/validator": "^5.0",
+        "symfony/var-dumper": "^5.0",
+        "symfony/yaml": "^5.0"
     },
     "require-dev": {
         "symfony/profiler-pack": "^1.0"
@@ -68,7 +73,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "5.0.*"
+            "require": "^5.0"
         }
     }
 }

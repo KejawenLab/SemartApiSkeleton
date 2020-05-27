@@ -9,9 +9,9 @@ namespace App\Security\Model;
  */
 interface PermissionInterface
 {
-    public function getGroup(): GroupInterface;
+    public function getGroup(): ?GroupInterface;
 
-    public function getMenu(): MenuInterface;
+    public function getMenu(): ?MenuInterface;
 
     public function isAddable(): bool;
 

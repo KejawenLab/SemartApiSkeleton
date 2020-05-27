@@ -9,17 +9,17 @@ namespace App\Security\Model;
  */
 interface MenuInterface
 {
-    public function getId(): string;
+    public function getId(): ?string;
 
-    public function getParent(): self;
+    public function getParent(): ?self;
 
-    public function getCode(): string;
+    public function getCode(): ?string;
 
-    public function getName(): string;
+    public function getName(): ?string;
 
-    public function getOrder(): int;
+    public function getSortOrder(): ?int;
 
-    public function getRouteName(): string;
+    public function getRouteName(): ?string;
 
-    public function isShowable(): bool;
+    public function isShowable(): ?bool;
 }

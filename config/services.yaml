@@ -25,6 +25,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Repository\UserRepository:
+        arguments:
+            $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
+
     App\Security\Authorization\Ownership:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'

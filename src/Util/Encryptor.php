@@ -18,7 +18,7 @@ final class Encryptor
         $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);
 
-        return openssl_encrypt($plainText, self::ENCRYPTION_METHOD, $key, false, $iv);
+        return openssl_encrypt($plainText, self::ENCRYPTION_METHOD, $key, 0, $iv);
     }
 
     public static function decrypt(string $cipherText, string $key): string
@@ -26,6 +26,6 @@ final class Encryptor
         $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);
 
-        return openssl_decrypt($cipherText, self::ENCRYPTION_METHOD, $key, false, $iv);
+        return openssl_decrypt($cipherText, self::ENCRYPTION_METHOD, $key, 0, $iv);
     }
 }
