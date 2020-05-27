@@ -51,6 +51,8 @@ class ScriptHandler
         $io->write('<comment>===========================================================</comment>');
         $io->write('<options=bold>Alpabit Core Installation is finished</>');
         $io->write('<comment>===========================================================</comment>');
+        $io->write('<comment>Please create private dan public key use <info>openssl library</info></comment>');
+        $io->write('<comment>Visit <info>https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys</info> for more information</comment>');
 
         $fileSystem = new Filesystem();
         $fileSystem->dumpFile($lock, (string) 1);
