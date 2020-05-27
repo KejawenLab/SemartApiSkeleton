@@ -9,7 +9,7 @@ use Symfony\Component\String\UnicodeString;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class StringUtil
+final class StringUtil
 {
     public static function uppercase(string $string): string
     {

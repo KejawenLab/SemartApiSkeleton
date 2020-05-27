@@ -40,8 +40,11 @@ final class PermissionSubscriber implements EventSubscriberInterface
         $controllerReflection = new \ReflectionObject($controller);
 
         $permission = $this->parser->parse($controllerReflection, $controllerArray[1]);
-        $uathorize = $this->authorization->authorize($permission);
+        if (!$permission) {
+            return;
+        }
 
+        $uathorize = $this->authorization->authorize($permission);
         if (!$uathorize) {
             throw new AccessDeniedException();
         }

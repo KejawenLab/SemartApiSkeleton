@@ -18,10 +18,14 @@ final class Parser
         $this->reader = $reader;
     }
 
-    public function parse(\ReflectionClass $metadata, string $action): Permission
+    public function parse(\ReflectionClass $metadata, string $action): ?Permission
     {
         /** @var Permission|null $class */
         $class = $this->reader->getClassAnnotation($metadata, Permission::class);
+        if (!$class) {
+            return null;
+        }
+
         /** @var Permission|null $method */
         $method = $this->reader->getMethodAnnotation($metadata->getMethod($action), Permission::class);
 
