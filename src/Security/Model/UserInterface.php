@@ -20,4 +20,6 @@ interface UserInterface extends SymfonyUser
     public function getEmail(): ?string;
 
     public function getGroup(): ?GroupInterface;
+
+    public function getPlainPassword(): ?string;
 }

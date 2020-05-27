@@ -15,4 +15,14 @@ final class StringUtil
     {
         return (new UnicodeString($string))->upper()->toString();
     }
+
+    public static function lowercase(string $string): string
+    {
+        return (new UnicodeString($string))->lower()->toString();
+    }
+
+    public static function title(string $string, bool $allWords = true): string
+    {
+        return (new UnicodeString($string))->lower()->title($allWords)->toString();
+    }
 }

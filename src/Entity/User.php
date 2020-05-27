@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use App\Security\Model\GroupInterface;
 use App\Security\Model\UserInterface as AppUser;
+use App\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -84,6 +85,8 @@ class User implements UserInterface, AppUser
      */
     private $password;
 
+    private $plainPassword;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -91,19 +94,14 @@ class User implements UserInterface, AppUser
 
     public function getUsername(): ?string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function setUsername(string $username): self
     {
-        $this->username = $username;
+        $this->username = StringUtil::lowercase($username);
 
         return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return ['ROLE_USER'];
     }
 
     public function getPassword(): ?string
@@ -118,12 +116,16 @@ class User implements UserInterface, AppUser
         return $this;
     }
 
-    public function getSalt()
+    public function getGroup(): ?GroupInterface
     {
+        return $this->group;
     }
 
-    public function eraseCredentials()
+    public function setGroup(?GroupInterface $group): self
     {
+        $this->group = $group;
+
+        return $this;
     }
 
     public function getSupervisor(): ?AppUser
@@ -131,7 +133,7 @@ class User implements UserInterface, AppUser
         return $this->supervisor;
     }
 
-    public function setSupervisor(?AppUser $supervisor): AppUser
+    public function setSupervisor(?AppUser $supervisor): self
     {
         $this->supervisor = $supervisor;
 
@@ -140,19 +142,50 @@ class User implements UserInterface, AppUser
 
     public function getFullName(): ?string
     {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): self
+    {
+        $this->fullName = StringUtil::title($fullName);
+
+        return $this;
     }
 
     public function getEmail(): ?string
     {
+        return $this->email;
     }
 
-    public function getGroup(): ?GroupInterface
+    public function setEmail($email): self
     {
-        return $this->group;
+        $this->email = $email;
+
+        return $this;
     }
 
-    public function setGroup(?GroupInterface $group): void
+    public function getPlainPassword(): ?string
     {
-        $this->group = $group;
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function eraseCredentials()
+    {
     }
 }

@@ -10,9 +10,11 @@
         "ext-pdo": "*",
         "ext-redis": "*",
         "composer/composer": "^1.9",
+        "cron/cron-bundle": "^2.4",
         "friendsofsymfony/rest-bundle": "^3.0@beta",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^3.6",
+        "nelmio/cors-bundle": "^2.0",
         "ramsey/uuid-doctrine": "^1.6",
         "snc/redis-bundle": "^3.0",
         "stof/doctrine-extensions-bundle": "^1.4",
@@ -33,6 +35,7 @@
         "symfony/yaml": "^5.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {
