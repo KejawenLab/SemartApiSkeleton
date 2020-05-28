@@ -36,15 +36,8 @@ class Put extends AbstractFOSRestController
 
     /**
      * @Rest\Put("/settings/{id}")
-     * @SWG\Response(
-     *     response=200,
-     *     description="Update setting",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *     )
-     * )
      *
+     * @SWG\Tag(name="Setting")
      * @SWG\Parameter(
      *     name="setting",
      *     in="body",
@@ -52,8 +45,15 @@ class Put extends AbstractFOSRestController
      *     description="Setting form",
      *     @Model(type=SettingType::class)
      * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Update setting",
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=Setting::class, groups={"read"})
+     *     )
+     * )
      *
-     * @SWG\Tag(name="Setting")
      * @Security(name="Bearer")
      *
      * @param Request $request

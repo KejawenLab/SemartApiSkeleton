@@ -28,15 +28,16 @@ class Get extends AbstractFOSRestController
 
     /**
      * @Rest\Get("/settings/{id}")
+     *
+     * @SWG\Tag(name="Setting")
      * @SWG\Response(
      *     response=200,
      *     description="Return setting detail",
      *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
+     *         type="object",
+     *         ref=@Model(type=Setting::class, groups={"read"})
      *     )
      * )
-     * @SWG\Tag(name="Setting")
      * @Security(name="Bearer")
      *
      * @param Request $request

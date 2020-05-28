@@ -33,15 +33,7 @@ class GetAll extends AbstractFOSRestController
     /**
      * @Rest\Get("/settings")
      *
-     * @SWG\Response(
-     *     response=200,
-     *     description="Return setting list",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *     )
-     * )
-     *
+     * @SWG\Tag(name="Setting")
      * @SWG\Parameter(
      *     name="page",
      *     in="query",
@@ -66,7 +58,14 @@ class GetAll extends AbstractFOSRestController
      *     type="string",
      *     description="Filter setting by parameter"
      * )
-     * @SWG\Tag(name="Setting")
+     * @SWG\Response(
+     *     response=200,
+     *     description="Return setting list",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
+     *     )
+     * )
      *
      * @Security(name="Bearer")
      *

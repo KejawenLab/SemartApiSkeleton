@@ -35,15 +35,8 @@ class Post extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/settings")
-     * @SWG\Response(
-     *     response=201,
-     *     description="Crate new setting",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *     )
-     * )
      *
+     * @SWG\Tag(name="Setting")
      * @SWG\Parameter(
      *     name="setting",
      *     in="body",
@@ -51,8 +44,15 @@ class Post extends AbstractFOSRestController
      *     description="Setting form",
      *     @Model(type=SettingType::class)
      * )
+     * @SWG\Response(
+     *     response=201,
+     *     description="Crate new setting",
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=Setting::class, groups={"read"})
+     *     )
+     * )
      *
-     * @SWG\Tag(name="Setting")
      * @Security(name="Bearer")
      *
      * @param Request $request

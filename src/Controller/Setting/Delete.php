@@ -29,11 +29,13 @@ class Delete extends AbstractFOSRestController
 
     /**
      * @Rest\Delete("/settings/{id}")
+     *
+     * @SWG\Tag(name="Setting")
      * @SWG\Response(
      *     response=204,
      *     description="Delete setting"
      * )
-     * @SWG\Tag(name="Setting")
+     *
      * @Security(name="Bearer")
      *
      * @param Request $request
