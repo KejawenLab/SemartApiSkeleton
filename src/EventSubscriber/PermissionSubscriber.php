@@ -31,7 +31,13 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
     public function validate(ControllerEvent $event)
     {
-        $controllerReflection = new \ReflectionObject($event->getController());
+        /** @var object $controller */
+        $controller = $event->getController();
+        if (!is_object($controller)) {
+            return;
+        }
+
+        $controllerReflection = new \ReflectionObject($controller);
         $permission = $this->parser->parse($controllerReflection);
         if (!$permission) {
             return;

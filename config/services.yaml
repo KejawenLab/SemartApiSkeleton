@@ -10,6 +10,8 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            Psr\Log\LoggerInterface $auditLogger: '@monolog.logger.audit'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -24,6 +26,9 @@ services:
         tags: ['controller.service_arguments']
 
     _instanceof:
+        Doctrine\Common\EventSubscriber:
+            tags:
+                - { name: doctrine.event_subscriber }
         App\Security\Model\UserProviderInterface:
             tags:
                 - { name: alpabit.user_provider }
@@ -46,3 +51,6 @@ services:
         arguments:
             - '@App\Setting\SettingService'
             - '@App\Util\Serializer'
+    App\Logger\DatabaseLogger:
+        arguments:
+            $logger: '@monolog.logger.db'

@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,14 +29,17 @@ class Put extends AbstractFOSRestController
 
     private $service;
 
-    public function __construct(FormFactory $formFactory, GroupService $service)
+    private $logger;
+
+    public function __construct(FormFactory $formFactory, GroupService $service, LoggerInterface $auditLogger)
     {
         $this->formFactory = $formFactory;
         $this->service = $service;
+        $this->logger = $auditLogger;
     }
 
     /**
-     * @Rest\Put("/groups")
+     * @Rest\Put("/groups/{id}")
      *
      * @SWG\Tag(name="Group")
      * @SWG\Parameter(
@@ -70,12 +74,14 @@ class Put extends AbstractFOSRestController
 
         $form = $this->formFactory->submitRequest(GroupType::class, $request, $group);
         if (!$form->isValid()) {
-            return $this->view($form->getErrors(), Response::HTTP_BAD_REQUEST);
+            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         /** @var GroupInterface $group */
         $group = $form->getData();
         $this->service->save($group);
+
+        $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));
 
         return $this->view($this->service->get($group->getId(), true));
     }

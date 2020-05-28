@@ -28,24 +28,24 @@ final class Paginator
     /**
      * @var QueryExtensionInterface[]
      */
-    private $filters;
+    private $queryExtension;
 
-    public function __construct(SettingService $settingService, Serializer $serializer, array $filters = [])
+    public function __construct(SettingService $settingService, Serializer $serializer, array $queryExtension = [])
     {
         $this->pageField = $settingService->getSetting('PAGE_FIELD')->getValue();
         $this->perPageField = $settingService->getSetting('PER_PAGE_FIELD')->getValue();
         $this->perPageDefault = (int) $settingService->getSetting('PER_PAGE')->getValue();
         $this->cacheLifetime = (int) $settingService->getSetting('CACHE_LIFETIME')->getValue();
         $this->serializer = $serializer;
-        $this->filters = $filters;
+        $this->queryExtension = $queryExtension;
     }
 
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
         $pagination = $this->pagination($request);
-        foreach ($this->filters as $filter) {
-            if ($filter->support($class)) {
-                $filter->apply($queryBuilder, $request);
+        foreach ($this->queryExtension as $extension) {
+            if ($extension->support($class)) {
+                $extension->apply($queryBuilder, $request);
             }
         }
 

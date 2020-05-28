@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,9 +23,12 @@ class Delete extends AbstractFOSRestController
 {
     private $service;
 
-    public function __construct(GroupService $service)
+    private $logger;
+
+    public function __construct(GroupService $service, LoggerInterface $auditLogger)
     {
         $this->service = $service;
+        $this->logger = $auditLogger;
     }
 
     /**
@@ -52,6 +56,8 @@ class Delete extends AbstractFOSRestController
         }
 
         $this->service->remove($group);
+
+        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id));
 
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
