@@ -18,7 +18,7 @@ final class Parser
         $this->reader = $reader;
     }
 
-    public function parse(\ReflectionClass $metadata, string $action): ?Permission
+    public function parse(\ReflectionClass $metadata): ?Permission
     {
         /** @var Permission|null $class */
         $class = $this->reader->getClassAnnotation($metadata, Permission::class);
@@ -26,13 +26,10 @@ final class Parser
             return null;
         }
 
-        /** @var Permission|null $method */
-        $method = $this->reader->getMethodAnnotation($metadata->getMethod($action), Permission::class);
-
         return new Permission([
             'menu' => $class->getMenu(),
-            'actions' => $method->getActions(),
-            'ownership' => $class->isOwnership()?: $method->isOwnership(),
+            'actions' => $class->getActions(),
+            'ownership' => $class->isOwnership(),
         ]);
     }
 }

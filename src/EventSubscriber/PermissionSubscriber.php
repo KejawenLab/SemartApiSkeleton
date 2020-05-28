@@ -31,21 +31,14 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
     public function validate(ControllerEvent $event)
     {
-        $controllerArray = $event->getController();
-        if (!is_array($controllerArray)) {
-            return;
-        }
-
-        $controller = $controllerArray[0];
-        $controllerReflection = new \ReflectionObject($controller);
-
-        $permission = $this->parser->parse($controllerReflection, $controllerArray[1]);
+        $controllerReflection = new \ReflectionObject($event->getController());
+        $permission = $this->parser->parse($controllerReflection);
         if (!$permission) {
             return;
         }
 
-        $uathorize = $this->authorization->authorize($permission);
-        if (!$uathorize) {
+        $authorize = $this->authorization->authorize($permission);
+        if (!$authorize) {
             throw new AccessDeniedException();
         }
 

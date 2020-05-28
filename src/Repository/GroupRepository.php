@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Group;
+use App\Security\Model\GroupRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group[]    findAll()
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends AbstractRepository
+class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

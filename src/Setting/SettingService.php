@@ -29,9 +29,4 @@ final class SettingService extends AbstractService implements ServiceInterface
 
         throw new SettingNotFoundException();
     }
-
-    public function support(object $object): bool
-    {
-        return $object instanceof SettingInterface;
-    }
 }

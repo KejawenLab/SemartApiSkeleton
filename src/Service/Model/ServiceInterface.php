@@ -16,6 +16,4 @@ interface ServiceInterface extends PaginatableServiceInterface
     public function save(object $object): void;
 
     public function remove(object $object): void;
-
-    public function support(object $object): bool;
 }

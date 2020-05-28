@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,6 +35,8 @@ class Group implements GroupInterface
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Groups({"read"})
      */
     private $id;
 
@@ -42,6 +45,8 @@ class Group implements GroupInterface
      *
      * @Assert\Length(max=7)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $code;
 
@@ -50,6 +55,8 @@ class Group implements GroupInterface
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $name;
 
@@ -77,7 +84,7 @@ class Group implements GroupInterface
 
     public function setName(string $name): self
     {
-        $this->name = StringUtil::uppercase($name);
+        $this->name = StringUtil::title($name);
 
         return $this;
     }

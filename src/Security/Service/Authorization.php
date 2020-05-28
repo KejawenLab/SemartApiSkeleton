@@ -26,8 +26,12 @@ class Authorization
     public function authorize(Annotation $permission): bool
     {
         $menu = $this->menuRepository->findByCode($permission->getMenu());
+        if (!$menu) {
+            return false;
+        }
+
         foreach ($permission->getActions() as $value) {
-            if ($this->checker->isGranted($menu, $value)) {
+            if ($this->checker->isGranted($value, $menu)) {
                 return true;
             }
         }

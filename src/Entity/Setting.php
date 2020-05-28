@@ -36,7 +36,7 @@ class Setting implements SettingInterface
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $id;
 
@@ -46,7 +46,7 @@ class Setting implements SettingInterface
      * @Assert\Length(max=7)
      * @Assert\NotBlank()
      *
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $parameter;
 
@@ -55,7 +55,7 @@ class Setting implements SettingInterface
      *
      * @Assert\NotBlank()
      *
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $value;
 

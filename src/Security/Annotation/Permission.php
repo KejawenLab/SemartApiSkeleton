@@ -6,7 +6,7 @@ namespace App\Security\Annotation;
 
 /**
  * @Annotation()
- * @Target({"CLASS", "METHOD"})
+ * @Target({"CLASS"})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */

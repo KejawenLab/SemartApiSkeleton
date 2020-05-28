@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class SearchParameterQueryExtension extends AbstractQueryExtension
+final class FilterParameterExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $query = $request->query->get('q');
-        if (!$query) {
+        $filter = $request->query->get('parameter');
+        if (!$filter) {
             return;
         }
 
         $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('%s.parameter', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.parameter', $alias), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
     }
 }

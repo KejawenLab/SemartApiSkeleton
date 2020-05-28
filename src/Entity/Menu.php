@@ -119,7 +119,7 @@ class Menu implements MenuInterface
 
     public function setName(string $name): self
     {
-        $this->name = StringUtil::uppercase($name);
+        $this->name = StringUtil::title($name);
 
         return $this;
     }
