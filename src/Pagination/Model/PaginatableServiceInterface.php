@@ -11,5 +11,5 @@ use Doctrine\ORM\QueryBuilder;
  */
 interface PaginatableServiceInterface
 {
-    public function getQueryBuilder(string $alias): QueryBuilder;
+    public function getQueryBuilder(): QueryBuilder;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Pagination\AliasHelper;
 use App\Service\Model\ServiceableRepositoryInterface;
 use App\Service\Model\ServiceInterface;
 use App\Util\Serializer;
@@ -18,10 +19,13 @@ abstract class AbstractService implements ServiceInterface
 
     protected $serializer;
 
-    public function __construct(ServiceableRepositoryInterface $repository, Serializer $serializer)
+    protected $aliasHelper;
+
+    public function __construct(ServiceableRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
     {
         $this->repository = $repository;
         $this->serializer = $serializer;
+        $this->aliasHelper = $aliasHelper;
     }
 
     public function get(string $id, bool $toArray = false)
@@ -43,8 +47,8 @@ abstract class AbstractService implements ServiceInterface
         $this->repository->remove($object);
     }
 
-    public function getQueryBuilder(string $alias): QueryBuilder
+    public function getQueryBuilder(): QueryBuilder
     {
-        return $this->repository->queryBuilder($alias);
+        return $this->repository->queryBuilder($this->aliasHelper->findAlias('root'));
     }
 }

@@ -27,9 +27,9 @@ services:
         App\Security\Model\UserProviderInterface:
             tags:
                 - { name: alpabit.user_provider }
-        App\Pagination\Model\FilterInterface:
+        App\Pagination\Model\QueryExtensionInterface:
             tags:
-                - { name: alpabit.pagination_filter }
+                - { name: alpabit.query_extension }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

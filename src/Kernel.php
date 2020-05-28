@@ -68,7 +68,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $definition->addArgument($userProviders);
 
         $filters = [];
-        foreach ($container->findTaggedServiceIds('alpabit.pagination_filter') as $id => $tag) {
+        foreach ($container->findTaggedServiceIds('alpabit.query_extension') as $id => $tag) {
             $filters[] = new Reference($id);
         }
 

@@ -32,6 +32,7 @@ class GetAll extends AbstractFOSRestController
 
     /**
      * @Rest\Get("/settings")
+     *
      * @SWG\Response(
      *     response=200,
      *     description="Return setting list",
@@ -40,7 +41,33 @@ class GetAll extends AbstractFOSRestController
      *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
      *     )
      * )
+     *
+     * @SWG\Parameter(
+     *     name="page",
+     *     in="query",
+     *     type="string",
+     *     description="Page indicator"
+     * )
+     * @SWG\Parameter(
+     *     name="limit",
+     *     in="query",
+     *     type="string",
+     *     description="Records per page"
+     * )
+     * @SWG\Parameter(
+     *     name="q",
+     *     in="query",
+     *     type="string",
+     *     description="Search setting by parameter"
+     * )
+     * @SWG\Parameter(
+     *     name="parameter",
+     *     in="query",
+     *     type="string",
+     *     description="Filter setting by parameter"
+     * )
      * @SWG\Tag(name="Setting")
+     *
      * @Security(name="Bearer")
      *
      * @param Request $request
@@ -49,6 +76,6 @@ class GetAll extends AbstractFOSRestController
      */
     public function __invoke(Request $request): View
     {
-        return $this->view($this->paginator->paginate($this->service->getQueryBuilder('o'), $request, Setting::class));
+        return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class));
     }
 }

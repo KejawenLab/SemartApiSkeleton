@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Setting;
 
+use App\Pagination\AliasHelper;
 use App\Service\AbstractService;
 use App\Service\Model\ServiceInterface;
 use App\Setting\Model\SettingInterface;
@@ -15,9 +16,9 @@ use App\Util\Serializer;
  */
 final class SettingService extends AbstractService implements ServiceInterface
 {
-    public function __construct(SettingRepositoryInterface $repository, Serializer $serializer)
+    public function __construct(SettingRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
     {
-        parent::__construct($repository, $serializer);
+        parent::__construct($repository, $serializer, $aliasHelper);
     }
 
     public function getSetting(string $key): SettingInterface

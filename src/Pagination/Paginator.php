@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pagination;
 
-use App\Pagination\Model\FilterInterface;
+use App\Pagination\Model\QueryExtensionInterface;
 use App\Setting\SettingService;
 use App\Util\Serializer;
 use Doctrine\ORM\QueryBuilder;
@@ -23,14 +23,10 @@ final class Paginator
 
     private $perPageDefault;
 
-    private $sortField;
-
-    private $sortDirectionField;
-
     private $cacheLifetime;
 
     /**
-     * @var FilterInterface[]
+     * @var QueryExtensionInterface[]
      */
     private $filters;
 
@@ -39,28 +35,26 @@ final class Paginator
         $this->pageField = $settingService->getSetting('PAGE_FIELD')->getValue();
         $this->perPageField = $settingService->getSetting('PER_PAGE_FIELD')->getValue();
         $this->perPageDefault = (int) $settingService->getSetting('PER_PAGE')->getValue();
-        $this->sortField = $settingService->getSetting('SORT_FIELD')->getValue();
-        $this->sortDirectionField = $settingService->getSetting('SORT_DIRECTION_FIELD')->getValue();
         $this->cacheLifetime = (int) $settingService->getSetting('CACHE_LIFETIME')->getValue();
         $this->serializer = $serializer;
         $this->filters = $filters;
     }
 
-    public function paginate(QueryBuilder $queryBuilder, Request $request, string $class, string $sortField = 'id', string $sortDirection = 'ASC'): array
+    public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
-        $pagination = $this->pagination($request, $sortField, $sortDirection);
+        $pagination = $this->pagination($request);
         foreach ($this->filters as $filter) {
             if ($filter->support($class)) {
-                $filter->apply($queryBuilder);
+                $filter->apply($queryBuilder, $request);
             }
         }
 
         return [
-            'items' => $this->serializer->toArray($this->paging($queryBuilder, $pagination), ['groups' => 'read']),
             'page' => $pagination->getPage(),
             'per_page' => $pagination->getPerPage(),
             'total_page' => ceil($this->count($queryBuilder) / $pagination->getPerPage()),
             'total_item' => $this->count($queryBuilder),
+            'items' => $this->serializer->toArray($this->paging($queryBuilder, $pagination), ['groups' => 'read']),
         ];
     }
 
@@ -88,13 +82,8 @@ final class Paginator
         return (int) $query->getSingleScalarResult();
     }
 
-    private function pagination(Request $request, string $sortField = 'id', string $sortDirection = 'ASC'): Pagination
+    private function pagination(Request $request): Pagination
     {
-        return new Pagination(
-            $request->get($this->pageField, 1),
-            $request->get($this->perPageField, $this->perPageDefault),
-            $request->get($this->sortField, $sortField),
-            $request->get($this->sortDirectionField, $sortDirection)
-        );
+        return new Pagination((int) $request->query->get($this->pageField, 1), (int) $request->query->get($this->perPageField, $this->perPageDefault));
     }
 }

@@ -1,6 +1,4 @@
 - { parameter: 'PAGE_FIELD', value: 'page'}
 - { parameter: 'PER_PAGE_FIELD', value: 'limit'}
 - { parameter: 'PER_PAGE', value: '17' }
-- { parameter: 'SORT_FIELD', value: 'sort' }
-- { parameter: 'SORT_DIRECTION_FIELD', value: 'direction' }
 - { parameter: 'CACHE_LIFETIME', value: '300' }

@@ -9,12 +9,23 @@ namespace App\Pagination;
  */
 final class AliasHelper
 {
-    public static function getAlias(array $exclude = []): string
+    private $aliases = [];
+
+    public function findAlias(string $field): ?string
+    {
+        if (!array_key_exists($field, $this->aliases)) {
+            $this->aliases[$field] = $this->getAlias(array_values($this->aliases));
+        }
+
+        return $this->aliases[$field];
+    }
+
+    private function getAlias(array $exclude = []): string
     {
         $list = 'abcdefghijklmnopqrstuvwxyz';
         $alias = $list[rand(0, \strlen($list) - 1)];
         if (\in_array($alias, $exclude)) {
-            return static::getAlias($exclude);
+            return $this->getAlias($exclude);
         }
 
         return $alias;
