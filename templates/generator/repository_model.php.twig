@@ -1,0 +1,15 @@
+{% set entityHumanize = entity | humanize %}
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\ApiSkeleton\{{ entityHumanize }}\Model;
+
+use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
+
+/**
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+*/
+interface {{ entityHumanize }}RepositoryInterface extends PaginatableRepositoryInterface
+{
+}

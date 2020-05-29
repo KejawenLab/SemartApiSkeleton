@@ -35,6 +35,9 @@ services:
         KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface:
             tags:
                 - { name: semart.query_extension }
+        KejawenLab\Semart\ApiSkeleton\Generator\Model\GeneratorInterface:
+            tags:
+                - { name: semart.generator }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

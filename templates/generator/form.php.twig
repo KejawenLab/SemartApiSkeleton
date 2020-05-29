@@ -1,0 +1,31 @@
+{% set entityHumanize = entity | humanize %}
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\ApiSkeleton\Form\Type;
+
+use KejawenLab\Semart\ApiSkeleton\Entity\{{ entityHumanize }};
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+/**
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+*/
+final class GroupType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        /**
+         * @todo implement your form here
+         */
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => {{ entityHumanize }}::class,
+        ]);
+    }
+}

@@ -13,7 +13,7 @@ use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class GroupService extends AbstractService implements ServiceInterface
+final class GroupService extends AbstractService implements ServiceInterface
 {
     public function __construct(GroupRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
     {

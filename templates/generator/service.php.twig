@@ -1,0 +1,23 @@
+{% set entityHumanize = entity | humanize %}
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\ApiSkeleton\{{ entityHumanize }}\Service;
+
+use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\Semart\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
+
+/**
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+*/
+final class {{ entityHumanize }}Service extends AbstractService implements ServiceInterface
+{
+    public function __construct({{ entityHumanize }}RepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
+    {
+        parent::__construct($repository, $serializer, $aliasHelper);
+    }
+}

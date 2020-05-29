@@ -2,6 +2,7 @@
 
 namespace KejawenLab\Semart\ApiSkeleton;
 
+use KejawenLab\Semart\ApiSkeleton\Generator\GeneratorFactory;
 use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\Semart\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
@@ -74,6 +75,14 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
         $definition = $container->getDefinition(Paginator::class);
         $definition->addArgument($filters);
+
+        $generators = [];
+        foreach ($container->findTaggedServiceIds('semart.generator') as $id => $tag) {
+            $generators[] = new Reference($id);
+        }
+
+        $definition = $container->getDefinition(GeneratorFactory::class);
+        $definition->addArgument($generators);
 
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);
