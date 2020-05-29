@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace KejawenLab\Semart\ApiSkeleton\Entity;
 
-use App\Repository\SettingRepository;
-use App\Setting\Model\SettingInterface;
-use App\Util\StringUtil;
+use KejawenLab\Semart\ApiSkeleton\Repository\SettingRepository;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;

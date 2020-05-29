@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Composer;
+namespace KejawenLab\Semart\ApiSkeleton\Composer;
 
-use App\Util\Encryptor;
+use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;

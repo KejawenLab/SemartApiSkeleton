@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
 
-use App\Entity\User;
+use KejawenLab\Semart\ApiSkeleton\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**

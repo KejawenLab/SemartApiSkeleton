@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Setting;
+namespace KejawenLab\Semart\ApiSkeleton\Controller\Setting;
 
-use App\Entity\Setting;
-use App\Form\FormFactory;
-use App\Form\Type\SettingType;
-use App\Setting\Model\SettingInterface;
-use App\Setting\SettingService;
+use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
+use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
+use KejawenLab\Semart\ApiSkeleton\Form\Type\SettingType;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -78,7 +78,6 @@ class Put extends AbstractFOSRestController
         }
 
         /** @var SettingInterface $setting */
-        $setting = $form->getData();
         $this->service->save($setting);
 
         $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));

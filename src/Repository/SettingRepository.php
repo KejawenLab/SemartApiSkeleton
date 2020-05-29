@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Entity\Setting;
-use App\Setting\Model\SettingInterface;
-use App\Setting\Model\SettingRepositoryInterface;
-use App\Util\StringUtil;
+use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

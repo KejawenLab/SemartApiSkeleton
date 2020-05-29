@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Entity\Menu;
-use App\Security\Model\MenuInterface;
-use App\Security\Model\MenuRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

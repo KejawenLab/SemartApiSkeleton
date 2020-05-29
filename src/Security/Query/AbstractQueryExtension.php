@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Query;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Query;
 
-use App\Pagination\AbstractQueryExtension as Base;
-use App\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

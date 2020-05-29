@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace KejawenLab\Semart\ApiSkeleton\Service;
 
-use App\Pagination\AliasHelper;
-use App\Service\Model\ServiceableRepositoryInterface;
-use App\Service\Model\ServiceInterface;
-use App\Util\Serializer;
+use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -31,7 +31,7 @@ abstract class AbstractService implements ServiceInterface
     public function get(string $id, bool $toArray = false)
     {
         if ($toArray) {
-            return $this->serializer->toArray($this->repository->find($id), ['groups' => 'read']);
+            return $this->serializer->toArray($this->repository->find($id));
         }
 
         return $this->repository->find($id);

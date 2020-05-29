@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Setting\Model;
+namespace KejawenLab\Semart\ApiSkeleton\Setting\Model;
 
-use App\Pagination\Model\PaginatableRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

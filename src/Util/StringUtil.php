@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Util;
+namespace KejawenLab\Semart\ApiSkeleton\Util;
 
 use Symfony\Component\String\UnicodeString;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
 
-use App\Entity\Setting;
+use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

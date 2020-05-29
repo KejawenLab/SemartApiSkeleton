@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\EventSubscriber;
+namespace KejawenLab\Semart\ApiSkeleton\EventSubscriber;
 
-use App\Security\Annotation\Parser;
-use App\Security\Authorization\Ownership;
-use App\Security\Service\Authorization;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Parser;
+use KejawenLab\Semart\ApiSkeleton\Security\Authorization\Ownership;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\Authorization;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

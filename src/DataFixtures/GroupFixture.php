@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
 
-use App\Entity\Group;
+use KejawenLab\Semart\ApiSkeleton\Entity\Group;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

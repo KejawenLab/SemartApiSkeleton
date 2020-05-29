@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Setting;
+namespace KejawenLab\Semart\ApiSkeleton\Setting;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

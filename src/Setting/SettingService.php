@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Setting;
+namespace KejawenLab\Semart\ApiSkeleton\Setting;
 
-use App\Pagination\AliasHelper;
-use App\Service\AbstractService;
-use App\Service\Model\ServiceInterface;
-use App\Setting\Model\SettingInterface;
-use App\Setting\Model\SettingRepositoryInterface;
-use App\Util\Serializer;
+use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Annotation;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Annotation;
 
 use Doctrine\Common\Annotations\Reader;
 

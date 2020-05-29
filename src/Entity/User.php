@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace KejawenLab\Semart\ApiSkeleton\Entity;
 
-use App\Repository\UserRepository;
-use App\Security\Model\GroupInterface;
-use App\Security\Model\UserInterface as AppUser;
-use App\Util\StringUtil;
+use KejawenLab\Semart\ApiSkeleton\Repository\UserRepository;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;

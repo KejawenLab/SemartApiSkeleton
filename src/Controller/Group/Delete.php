@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Group;
+namespace KejawenLab\Semart\ApiSkeleton\Controller\Group;
 
-use App\Security\Model\GroupInterface;
-use App\Security\Service\GroupService;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

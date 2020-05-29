@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Authorization;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Authorization;
 
-use App\Security\Model\UserInterface;
-use App\Security\Model\UserRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;

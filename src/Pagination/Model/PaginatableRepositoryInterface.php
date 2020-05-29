@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Pagination\Model;
+namespace KejawenLab\Semart\ApiSkeleton\Pagination\Model;
 
-use App\Service\Model\ServiceableRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 
 /**

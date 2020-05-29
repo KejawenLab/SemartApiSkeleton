@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Model;
+namespace KejawenLab\Semart\ApiSkeleton\Service\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

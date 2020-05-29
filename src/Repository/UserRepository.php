@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Entity\User;
-use App\Security\Model\UserInterface as AppUser;
-use App\Security\Model\UserRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Entity\User;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;

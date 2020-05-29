@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Pagination\Model;
+namespace KejawenLab\Semart\ApiSkeleton\Pagination\Model;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;

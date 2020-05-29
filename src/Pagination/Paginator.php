@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Pagination;
+namespace KejawenLab\Semart\ApiSkeleton\Pagination;
 
-use App\Pagination\Model\QueryExtensionInterface;
-use App\Setting\SettingService;
-use App\Util\Serializer;
+use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -54,7 +54,7 @@ final class Paginator
             'per_page' => $pagination->getPerPage(),
             'total_page' => ceil($this->count($queryBuilder) / $pagination->getPerPage()),
             'total_item' => $this->count($queryBuilder),
-            'items' => $this->serializer->toArray($this->paging($queryBuilder, $pagination), ['groups' => 'read']),
+            'items' => $this->serializer->toArray($this->paging($queryBuilder, $pagination)),
         ];
     }
 

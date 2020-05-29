@@ -48,12 +48,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "KejawenLab\\Semart\\ApiSkeleton\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "KejawenLab\\Semart\\ApiSkeleton\\Tests\\": "tests/"
         }
     },
     "replace": {

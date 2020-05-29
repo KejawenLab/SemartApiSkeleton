@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Pagination\Model\PaginatableRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 

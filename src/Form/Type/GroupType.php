@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Type;
+namespace KejawenLab\Semart\ApiSkeleton\Form\Type;
 
-use App\Entity\Group;
+use KejawenLab\Semart\ApiSkeleton\Entity\Group;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class GroupType extends AbstractType
+final class GroupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

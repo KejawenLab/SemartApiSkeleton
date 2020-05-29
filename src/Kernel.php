@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace KejawenLab\Semart\ApiSkeleton;
 
-use App\Pagination\Paginator;
-use App\Security\Service\UserProviderFactory;
-use App\Util\Encryptor;
+use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -60,7 +60,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $userProviders = [];
-        foreach ($container->findTaggedServiceIds('alpabit.user_provider') as $id => $tag) {
+        foreach ($container->findTaggedServiceIds('semart.user_provider') as $id => $tag) {
             $userProviders[] = new Reference($id);
         }
 
@@ -68,7 +68,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $definition->addArgument($userProviders);
 
         $filters = [];
-        foreach ($container->findTaggedServiceIds('alpabit.query_extension') as $id => $tag) {
+        foreach ($container->findTaggedServiceIds('semart.query_extension') as $id => $tag) {
             $filters[] = new Reference($id);
         }
 

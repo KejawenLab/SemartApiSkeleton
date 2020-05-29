@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Entity\Permission;
-use App\Security\Model\GroupInterface;
-use App\Security\Model\MenuInterface;
-use App\Security\Model\PermissionInterface;
-use App\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Entity\Permission;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

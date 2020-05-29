@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Util;
+namespace KejawenLab\Semart\ApiSkeleton\Util;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -25,7 +25,10 @@ final class Encryptor
     {
         $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);
+        if (false === $plainText = openssl_decrypt($cipherText, self::ENCRYPTION_METHOD, $key, 0, $iv)) {
+            return '';
+        }
 
-        return openssl_decrypt($cipherText, self::ENCRYPTION_METHOD, $key, 0, $iv);
+        return $plainText;
     }
 }

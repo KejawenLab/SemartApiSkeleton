@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
-use App\Entity\Group;
-use App\Security\Model\GroupRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Entity\Group;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

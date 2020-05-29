@@ -1,0 +1,14 @@
+Cron\CronBundle\Entity\CronJob:
+    attributes:
+        id:
+            groups: ['read']
+        name:
+            groups: ['read']
+        description:
+            groups: ['read']
+        command:
+            groups: ['read']
+        schedule:
+            groups: ['read']
+        enabled:
+            groups: ['read']

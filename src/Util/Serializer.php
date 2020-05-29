@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Util;
+namespace KejawenLab\Semart\ApiSkeleton\Util;
 
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -18,13 +18,13 @@ final class Serializer
         $this->serializer = $serializer;
     }
 
-    public function serialize($data, string $format, array $context = []): string
+    public function serialize($data, string $format): string
     {
-        return $this->serializer->serialize($data, $format, $context);
+        return $this->serializer->serialize($data, $format, ['groups' => 'read']);
     }
 
-    public function toArray($data, array $context = []): array
+    public function toArray($data): array
     {
-        return json_decode($this->serialize($data, 'json', $context), true);
+        return json_decode($this->serialize($data, 'json'), true);
     }
 }

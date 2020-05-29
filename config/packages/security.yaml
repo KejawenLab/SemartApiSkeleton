@@ -1,10 +1,10 @@
 security:
     encoders:
-        App\Entity\User:
+        KejawenLab\Semart\ApiSkeleton\Entity\User:
             algorithm: auto
     providers:
         user_provider:
-            id: App\Security\Service\UserProviderFactory
+            id: KejawenLab\Semart\ApiSkeleton\Security\Service\UserProviderFactory
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

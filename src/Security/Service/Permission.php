@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Service;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
 
-use App\Security\Model\GroupInterface;
-use App\Security\Model\MenuInterface;
-use App\Security\Model\PermissionInterface;
-use App\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

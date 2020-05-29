@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Setting\Query;
+namespace KejawenLab\Semart\ApiSkeleton\Setting\Query;
 
-use App\Util\StringUtil;
+use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace KejawenLab\Semart\ApiSkeleton\Entity;
 
-use App\Repository\PermissionRepository;
-use App\Security\Model\GroupInterface;
-use App\Security\Model\MenuInterface;
-use App\Security\Model\PermissionInterface;
+use KejawenLab\Semart\ApiSkeleton\Repository\PermissionRepository;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Setting;
+namespace KejawenLab\Semart\ApiSkeleton\Controller\Setting;
 
-use App\Entity\Setting;
-use App\Setting\SettingService;
+use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
+use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

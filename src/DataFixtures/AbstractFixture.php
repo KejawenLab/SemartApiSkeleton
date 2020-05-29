@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
 
-use App\Entity\User;
-use App\Security\Service\PasswordEncoder;
-use App\Util\StringUtil;
+use KejawenLab\Semart\ApiSkeleton\Entity\User;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\PasswordEncoder;
+use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;

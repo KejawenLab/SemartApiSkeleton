@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Service;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
 
-use App\Security\Model\UserInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**

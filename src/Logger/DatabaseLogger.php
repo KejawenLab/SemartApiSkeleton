@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Logger;
+namespace KejawenLab\Semart\ApiSkeleton\Logger;
 
-use App\Util\Serializer;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
@@ -58,7 +58,6 @@ final class DatabaseLogger implements EventSubscriber
             return;
         }
 
-        $context = ['groups' => 'read'];
         $object = $event->getObject();
         if ('UPDATE' === $action) {
             /** @var EntityManagerInterface $entityManager */
@@ -67,7 +66,7 @@ final class DatabaseLogger implements EventSubscriber
 
             $this->logger->info(sprintf('[%s]<%s>[%s]', $token->getUsername(), $action, json_encode($changeSet)));
         } else {
-            $this->logger->info(sprintf('[%s]<%s>[%s]', $token->getUsername(), $action, $this->serializer->serialize($object, 'json', $context)));
+            $this->logger->info(sprintf('[%s]<%s>[%s]', $token->getUsername(), $action, $this->serializer->serialize($object, 'json')));
         }
     }
 }
