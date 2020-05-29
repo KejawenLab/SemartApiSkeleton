@@ -13,7 +13,7 @@ use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterfac
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class CronJobRepository implements PaginatableRepositoryInterface
+final class CronJobRepository implements PaginatableRepositoryInterface
 {
     private $manager;
 

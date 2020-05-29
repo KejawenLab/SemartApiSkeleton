@@ -14,7 +14,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
  * @method Group[]    findAll()
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
+final class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Run extends AbstractFOSRestController
+final class Run extends AbstractFOSRestController
 {
     private $service;
 

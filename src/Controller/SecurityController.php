@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class SecurityController extends AbstractFOSRestController
+final class SecurityController extends AbstractFOSRestController
 {
     /**
      * @Rest\Post("/login")

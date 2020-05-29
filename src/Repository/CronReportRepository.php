@@ -14,7 +14,7 @@ use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterfac
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class CronReportRepository implements PaginatableRepositoryInterface
+final class CronReportRepository implements PaginatableRepositoryInterface
 {
     private $manager;
 

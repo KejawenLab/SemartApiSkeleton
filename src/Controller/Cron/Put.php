@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Put extends AbstractFOSRestController
+final class Put extends AbstractFOSRestController
 {
     private $formFactory;
 

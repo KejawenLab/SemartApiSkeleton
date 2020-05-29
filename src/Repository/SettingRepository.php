@@ -16,7 +16,7 @@ use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
  * @method Setting[]    findAll()
  * @method Setting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
+final class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

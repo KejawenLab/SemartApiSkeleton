@@ -15,7 +15,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
  * @method Menu[]    findAll()
  * @method Menu[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
+final class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

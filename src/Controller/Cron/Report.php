@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Report extends AbstractFOSRestController
+final class Report extends AbstractFOSRestController
 {
     private $service;
 

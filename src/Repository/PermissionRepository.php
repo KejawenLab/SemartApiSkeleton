@@ -17,7 +17,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
  * @method Permission[]    findAll()
  * @method Permission[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
+final class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

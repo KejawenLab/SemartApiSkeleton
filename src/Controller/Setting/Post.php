@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Post extends AbstractFOSRestController
+final class Post extends AbstractFOSRestController
 {
     private $formFactory;
 

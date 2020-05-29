@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class GetAll extends AbstractFOSRestController
+final class GetAll extends AbstractFOSRestController
 {
     private $service;
 
