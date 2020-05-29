@@ -13,6 +13,8 @@ use KejawenLab\Semart\ApiSkeleton\Repository\MenuRepository;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,11 +36,16 @@ class Menu implements MenuInterface
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\OneToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
+     *
+     * @Groups({"read"})
+     * @MaxDepth(1)
      */
     private $parent;
 
@@ -47,6 +54,8 @@ class Menu implements MenuInterface
      *
      * @Assert\Length(max=27)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $code;
 
@@ -55,6 +64,8 @@ class Menu implements MenuInterface
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $name;
 
@@ -62,6 +73,8 @@ class Menu implements MenuInterface
      * @ORM\Column(type="integer")
      *
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $sortOrder;
 
@@ -70,11 +83,15 @@ class Menu implements MenuInterface
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $routeName;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
      */
     private $showable;
 
