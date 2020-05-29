@@ -12,3 +12,15 @@ Cron\CronBundle\Entity\CronJob:
             groups: ['read']
         enabled:
             groups: ['read']
+Cron\CronBundle\Entity\CronReport:
+    attributes:
+        id:
+            groups: ['read']
+        runAt:
+            groups: ['read']
+        runTime:
+            groups: ['read']
+        exitCode:
+            groups: ['read']
+        output:
+            groups: ['read']

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Query;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Query\Group;
 
 use KejawenLab\Semart\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Query;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Query\Group;
 
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\QueryBuilder;
@@ -21,7 +21,7 @@ final class SearchQueryExtension extends AbstractQueryExtension
         }
 
         $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('%s.code', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('%s.name', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
     }
 }
