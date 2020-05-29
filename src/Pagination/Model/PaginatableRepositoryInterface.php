@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Pagination\Model;
 
-use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
+use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

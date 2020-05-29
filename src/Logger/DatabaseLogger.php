@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Logger;
 
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 

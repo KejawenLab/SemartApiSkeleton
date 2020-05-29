@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
 
+use Doctrine\Bundle\FixturesBundle\Fixture as Base;
+use Doctrine\Persistence\ObjectManager;
 use KejawenLab\Semart\ApiSkeleton\Entity\User;
 use KejawenLab\Semart\ApiSkeleton\Security\Service\PasswordEncoder;
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
-use Doctrine\Bundle\FixturesBundle\Fixture as Base;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;

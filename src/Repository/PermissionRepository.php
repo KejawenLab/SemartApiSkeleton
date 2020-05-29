@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Permission;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)

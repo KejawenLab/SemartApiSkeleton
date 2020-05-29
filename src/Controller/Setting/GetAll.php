@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Controller\Setting;
 
-use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
+use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

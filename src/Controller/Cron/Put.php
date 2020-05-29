@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Controller\Cron;
 
-use KejawenLab\Semart\ApiSkeleton\Cron\CronService;
-use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
-use KejawenLab\Semart\ApiSkeleton\Form\Type\CronType;
 use Cron\CronBundle\Entity\CronJob;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use KejawenLab\Semart\ApiSkeleton\Cron\CronService;
+use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
+use KejawenLab\Semart\ApiSkeleton\Form\Type\CronType;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
@@ -67,7 +67,7 @@ class Put extends AbstractFOSRestController
     public function __invoke(Request $request, string $id): View
     {
         $cronjob = $this->service->get($id);
-        if (!$cronjob) {
+        if (!$cronjob instanceof CronJob) {
             throw new NotFoundHttpException(sprintf('Cron Job ID: "%s" not found', $id));
         }
 
@@ -76,7 +76,6 @@ class Put extends AbstractFOSRestController
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
-        /** @var CronJob $cronjob */
         $this->service->save($cronjob);
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));

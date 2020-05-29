@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Pagination;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

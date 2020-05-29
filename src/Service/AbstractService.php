@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Service;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

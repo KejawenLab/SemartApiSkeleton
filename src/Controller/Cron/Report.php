@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Controller\Cron;
 
-use Cron\CronBundle\Entity\CronJob;
 use Cron\CronBundle\Entity\CronReport;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;

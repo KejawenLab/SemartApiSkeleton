@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Menu|null find($id, $lockMode = null, $lockVersion = null)
