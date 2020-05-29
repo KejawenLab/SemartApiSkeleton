@@ -9,9 +9,5 @@ namespace KejawenLab\Semart\ApiSkeleton\Generator\Model;
  */
 interface GeneratorInterface
 {
-    public const DEFAULT_PRIORITY = 0;
-
     public function generate(\ReflectionClass $entityClass): void;
-
-    public function getPriority(): int;
 }

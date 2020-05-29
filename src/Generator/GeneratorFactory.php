@@ -18,9 +18,7 @@ final class GeneratorFactory
 
     public function __construct(array $generators = [])
     {
-        foreach ($generators as $generator) {
-            $this->addGenerator($generator);
-        }
+        $this->generators = $generators;
     }
 
     public function generate(\ReflectionClass $class): void
@@ -28,12 +26,5 @@ final class GeneratorFactory
         foreach ($this->generators as $generator) {
             $generator->generate($class);
         }
-    }
-
-    private function addGenerator(GeneratorInterface $generator)
-    {
-        $index = 255 === $generator->getPriority() ?: \count($this->generators);
-
-        $this->generators[$index] = $generator;
     }
 }

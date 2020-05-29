@@ -46,15 +46,20 @@ final class GenerateCommand extends Command
         $application = $this->getApplication();
 
         $output->writeln('<info>Creating Migration File</info>');
-        $updatee = $application->find('doctrine:migration:diff');
-        $updatee->run(new ArrayInput(['command' => 'doctrine:migration:diff']), $output);
+        $migrate = $application->find('doctrine:migration:diff');
+        $migrate->ignoreValidationErrors();
+        $migrate->run(new ArrayInput([
+            'command' => 'doctrine:migration:diff',
+            '--allow-empty-diff' => null,
+            '--no-interaction' => null,
+        ]), $output);
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
-        $updatee = $application->find('doctrine:schema:update');
-        $updatee->run(new ArrayInput([
+        $update = $application->find('doctrine:schema:update');
+        $update->run(new ArrayInput([
             'command' => 'doctrine:schema:update',
-            '--force' => true,
-            '--no-interaction' => true,
+            '--force' => null,
+            '--no-interaction' => null,
         ]), $output);
 
         $output->writeln('<info>Running Semart RESTful API Generator</info>');

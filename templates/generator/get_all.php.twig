@@ -1,8 +1,7 @@
 {% set entityHumanize = entity | humanize %}
 {% set entityLowerize = entity | lower %}
 {% set entityUpper = entity | upper %}
-{% set entityPlural =  entity | pluralize %}
-{% set entityPluralDash = entityPlural | dash %}
+{% set entityPluralDash = entity | pluralize | dash %}
 <?php
 
 declare(strict_types=1);

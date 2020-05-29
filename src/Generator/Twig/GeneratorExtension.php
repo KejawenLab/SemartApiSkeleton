@@ -31,7 +31,7 @@ final class GeneratorExtension extends AbstractExtension
 
     public function humanize(string $value): string
     {
-        return StringUtil::title($value, false);
+        return ucfirst($value);
     }
 
     public function underscore(string $value): string
