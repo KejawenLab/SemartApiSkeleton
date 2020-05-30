@@ -13,6 +13,7 @@ use KejawenLab\Semart\ApiSkeleton\Repository\PermissionRepository;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -32,6 +33,8 @@ class Permission implements PermissionInterface
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Groups({"read"})
      */
     private $id;
 
@@ -39,6 +42,8 @@ class Permission implements PermissionInterface
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
      *
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      **/
     private $group;
 
@@ -46,26 +51,36 @@ class Permission implements PermissionInterface
      * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
      *
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      **/
     private $menu;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
      */
     private $addable;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
      */
     private $editable;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
      */
     private $viewable;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
      */
     private $deletable;
 

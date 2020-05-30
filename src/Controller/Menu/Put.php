@@ -81,6 +81,6 @@ final class Put extends AbstractFOSRestController
 
         $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));
 
-        return $this->view($this->service->get($menu->getId(), true));
+        return $this->view($this->service->get($menu->getId()));
     }
 }

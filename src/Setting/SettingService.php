@@ -9,16 +9,15 @@ use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class SettingService extends AbstractService implements ServiceInterface
 {
-    public function __construct(SettingRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
+    public function __construct(SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
-        parent::__construct($repository, $serializer, $aliasHelper);
+        parent::__construct($repository, $aliasHelper);
     }
 
     public function getSetting(string $key): SettingInterface

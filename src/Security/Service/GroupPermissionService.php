@@ -47,7 +47,7 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     public function remove(PermissionableInterface $object): void
     {
         /** @var GroupInterface $object */
-        $this->permissionRepository->removePermissionsByGroup($object);
+        $this->permissionRepository->removeByGroup($object);
     }
 
     public function support(PermissionableInterface $object): bool

@@ -9,9 +9,9 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionableInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -32,19 +32,13 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     private $class;
 
-    public function __construct(
-        PermissionRepositoryInterface $repository,
-        Serializer $serializer,
-        AliasHelper $aliasHelper,
-        iterable $initiators,
-        iterable $removers,
-        string $class
-    ) {
+    public function __construct(PermissionRepositoryInterface $repository, AliasHelper $aliasHelper, iterable $initiators, iterable $removers, string $class)
+    {
         $this->initiators = $initiators;
         $this->removers = $removers;
         $this->class = $class;
 
-        parent::__construct($repository, $serializer, $aliasHelper);
+        parent::__construct($repository, $aliasHelper);
     }
 
     public function initiate(PermissionableInterface $object): void
@@ -64,5 +58,10 @@ final class PermissionService extends AbstractService implements ServiceInterfac
                 $initiator->remove($object);
             }
         }
+    }
+
+    public function getByUser(UserInterface $user): array
+    {
+        return $this->repository->findByUser($user);
     }
 }

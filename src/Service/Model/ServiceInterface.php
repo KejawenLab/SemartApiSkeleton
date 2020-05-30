@@ -11,7 +11,7 @@ use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
  */
 interface ServiceInterface extends PaginatableServiceInterface
 {
-    public function get(string $id, bool $toArray = false);
+    public function get(string $id);
 
     public function save(object $object): void;
 

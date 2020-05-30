@@ -53,6 +53,6 @@ final class Get extends AbstractFOSRestController
     {
         $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, serialize($request->query->all())));
 
-        return $this->view($this->service->get($id, true));
+        return $this->view($this->service->get($id));
     }
 }

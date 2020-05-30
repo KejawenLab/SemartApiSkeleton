@@ -47,7 +47,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     public function remove(PermissionableInterface $object): void
     {
         /** @var MenuInterface $object */
-        $this->permissionRepository->removePermissionsByMenu($object);
+        $this->permissionRepository->removeByMenu($object);
     }
 
     public function support(PermissionableInterface $object): bool

@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

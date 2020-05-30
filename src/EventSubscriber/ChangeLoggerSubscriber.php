@@ -8,9 +8,9 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -23,7 +23,7 @@ final class ChangeLoggerSubscriber implements EventSubscriber
 
     private $logger;
 
-    public function __construct(Serializer $serializer, TokenStorageInterface $tokenStorage, LoggerInterface $logger)
+    public function __construct(SerializerInterface $serializer, TokenStorageInterface $tokenStorage, LoggerInterface $logger)
     {
         $this->serializer = $serializer;
         $this->tokenStorage = $tokenStorage;

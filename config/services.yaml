@@ -55,16 +55,10 @@ services:
     KejawenLab\Semart\ApiSkeleton\Repository\UserRepository:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
-
     KejawenLab\Semart\ApiSkeleton\Security\Authorization\Ownership:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
-
-    KejawenLab\Semart\ApiSkeleton\Pagination\Paginator:
-        arguments:
-            - '@KejawenLab\Semart\ApiSkeleton\Setting\SettingService'
-            - '@KejawenLab\Semart\ApiSkeleton\Util\Serializer'
     KejawenLab\Semart\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
         arguments:
             $logger: '@monolog.logger.db'

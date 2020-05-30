@@ -8,7 +8,6 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -17,23 +16,16 @@ abstract class AbstractService implements ServiceInterface
 {
     protected $repository;
 
-    protected $serializer;
-
     protected $aliasHelper;
 
-    public function __construct(ServiceableRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
+    public function __construct(ServiceableRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         $this->repository = $repository;
-        $this->serializer = $serializer;
         $this->aliasHelper = $aliasHelper;
     }
 
-    public function get(string $id, bool $toArray = false)
+    public function get(string $id)
     {
-        if ($toArray) {
-            return $this->serializer->toArray($this->repository->find($id));
-        }
-
         return $this->repository->find($id);
     }
 

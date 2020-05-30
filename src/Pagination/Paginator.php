@@ -7,7 +7,6 @@ namespace KejawenLab\Semart\ApiSkeleton\Pagination;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
-use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,8 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Paginator
 {
-    private $serializer;
-
     private $pageField;
 
     private $perPageField;
@@ -30,13 +27,12 @@ final class Paginator
      */
     private $queryExtension;
 
-    public function __construct(SettingService $settingService, Serializer $serializer, iterable $queryExtension)
+    public function __construct(SettingService $settingService, iterable $queryExtension)
     {
         $this->pageField = $settingService->getSetting('PAGE_FIELD')->getValue();
         $this->perPageField = $settingService->getSetting('PER_PAGE_FIELD')->getValue();
         $this->perPageDefault = (int) $settingService->getSetting('PER_PAGE')->getValue();
         $this->cacheLifetime = (int) $settingService->getSetting('CACHE_LIFETIME')->getValue();
-        $this->serializer = $serializer;
         $this->queryExtension = $queryExtension;
     }
 
@@ -54,7 +50,7 @@ final class Paginator
             'per_page' => $pagination->getPerPage(),
             'total_page' => ceil($this->count($queryBuilder) / $pagination->getPerPage()),
             'total_item' => $this->count($queryBuilder),
-            'items' => $this->serializer->toArray($this->paging($queryBuilder, $pagination)),
+            'items' => $this->paging($queryBuilder, $pagination),
         ];
     }
 

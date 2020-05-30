@@ -8,7 +8,10 @@ fos_rest:
         rules:
             - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }
-
+    service:
+        serializer: ~
+    serializer:
+        groups: ['read']
     view:
         view_response_listener: 'force'
         formats:

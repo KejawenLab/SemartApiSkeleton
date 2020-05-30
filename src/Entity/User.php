@@ -15,6 +15,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface as AppUser;
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -36,6 +37,8 @@ class User implements UserInterface, AppUser
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Groups({"read"})
      */
     private $id;
 
@@ -43,11 +46,15 @@ class User implements UserInterface, AppUser
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
      *
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      **/
     private $group;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     *
+     * @Groups({"read"})
      */
     private $supervisor;
 
@@ -56,6 +63,8 @@ class User implements UserInterface, AppUser
      *
      * @Assert\Length(max=180)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $username;
 
@@ -64,6 +73,8 @@ class User implements UserInterface, AppUser
      *
      * @Assert\Length(max=55)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $fullName;
 
@@ -72,6 +83,8 @@ class User implements UserInterface, AppUser
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
      */
     private $email;
 

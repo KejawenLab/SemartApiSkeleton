@@ -76,6 +76,6 @@ final class Post extends AbstractFOSRestController
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));
 
-        return $this->view($this->service->get($group->getId(), true), Response::HTTP_CREATED);
+        return $this->view($this->service->get($group->getId()), Response::HTTP_CREATED);
     }
 }
