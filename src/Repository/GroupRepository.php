@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Group;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Group|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,8 +17,8 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
  */
 final class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Group::class);
+        parent::__construct($eventDispatcher, $registry, Group::class);
     }
 }

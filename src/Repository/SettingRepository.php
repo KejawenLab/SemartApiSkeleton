@@ -9,6 +9,7 @@ use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
 use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Setting|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,9 +19,9 @@ use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
  */
 final class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Setting::class);
+        parent::__construct($eventDispatcher, $registry, Setting::class);
     }
 
     public function findByParameter(string $parameter): ?SettingInterface

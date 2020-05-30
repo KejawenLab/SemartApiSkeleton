@@ -7,7 +7,7 @@ namespace KejawenLab\Semart\ApiSkeleton\Security\Model;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-interface MenuInterface
+interface MenuInterface extends PermissionableInterface
 {
     public function getId(): ?string;
 
@@ -20,6 +20,8 @@ interface MenuInterface
     public function getSortOrder(): ?int;
 
     public function getRouteName(): ?string;
+
+    public function setUrlPath(string $urlPath): self;
 
     public function isShowable(): ?bool;
 }

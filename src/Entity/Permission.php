@@ -87,9 +87,11 @@ class Permission implements PermissionInterface
         return $this->group;
     }
 
-    public function setGroup(?GroupInterface $group): void
+    public function setGroup(?GroupInterface $group): PermissionInterface
     {
         $this->group = $group;
+
+        return $this;
     }
 
     public function getMenu(): ?MenuInterface
@@ -97,9 +99,11 @@ class Permission implements PermissionInterface
         return $this->menu;
     }
 
-    public function setMenu(?MenuInterface $menu): void
+    public function setMenu(?MenuInterface $menu): PermissionInterface
     {
         $this->menu = $menu;
+
+        return $this;
     }
 
     public function isAddable(): bool
@@ -107,9 +111,11 @@ class Permission implements PermissionInterface
         return $this->addable;
     }
 
-    public function setAddable(bool $addable): void
+    public function setAddable(bool $addable): self
     {
         $this->addable = (bool) $addable;
+
+        return $this;
     }
 
     public function isEditable(): bool
@@ -117,9 +123,11 @@ class Permission implements PermissionInterface
         return $this->editable;
     }
 
-    public function setEditable(bool $editable): void
+    public function setEditable(bool $editable): self
     {
         $this->editable = (bool) $editable;
+
+        return $this;
     }
 
     public function isViewable(): bool
@@ -127,9 +135,11 @@ class Permission implements PermissionInterface
         return $this->viewable;
     }
 
-    public function setViewable(bool $viewable): void
+    public function setViewable(bool $viewable): self
     {
         $this->viewable = (bool) $viewable;
+
+        return $this;
     }
 
     public function isDeletable(): bool
@@ -137,8 +147,10 @@ class Permission implements PermissionInterface
         return $this->deletable;
     }
 
-    public function setDeletable(bool $deletable): void
+    public function setDeletable(bool $deletable): self
     {
         $this->deletable = (bool) $deletable;
+
+        return $this;
     }
 }

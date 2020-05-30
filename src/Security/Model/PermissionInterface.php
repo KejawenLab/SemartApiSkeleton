@@ -11,7 +11,11 @@ interface PermissionInterface
 {
     public function getGroup(): ?GroupInterface;
 
+    public function setGroup(GroupInterface $group): self;
+
     public function getMenu(): ?MenuInterface;
+
+    public function setMenu(MenuInterface $menu): self;
 
     public function isAddable(): bool;
 

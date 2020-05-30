@@ -10,6 +10,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,13 +20,33 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
  */
 final class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Permission::class);
+        parent::__construct($eventDispatcher, $registry, Permission::class);
     }
 
     public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface
     {
         return $this->findOneBy(['group' => $group, 'menu' => $menu]);
+    }
+
+    public function removePermissionsByGroup(GroupInterface $group): void
+    {
+        $queryBuilder = $this->createQueryBuilder('o')->update();
+        $queryBuilder->set('o.deletedAt', ':now');
+        $queryBuilder->where('o.group = :group');
+        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->setParameter('group', $group);
+        $queryBuilder->getQuery()->execute();
+    }
+
+    public function removePermissionsByMenu(MenuInterface $menu): void
+    {
+        $queryBuilder = $this->createQueryBuilder('o')->update();
+        $queryBuilder->set('o.deletedAt', ':now');
+        $queryBuilder->where('o.menu= :menu');
+        $queryBuilder->setParameter('menu', $menu);
+        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->getQuery()->execute();
     }
 }

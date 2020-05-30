@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
 
 use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
 use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
@@ -15,7 +15,7 @@ use KejawenLab\Semart\ApiSkeleton\Util\Serializer;
  */
 final class MenuService extends AbstractService implements ServiceInterface
 {
-    public function __construct(GroupRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
+    public function __construct(MenuRepositoryInterface $repository, Serializer $serializer, AliasHelper $aliasHelper)
     {
         parent::__construct($repository, $serializer, $aliasHelper);
     }

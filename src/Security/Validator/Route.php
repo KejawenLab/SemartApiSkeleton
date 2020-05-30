@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Cron\Validator;
+namespace KejawenLab\Semart\ApiSkeleton\Security\Validator;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -11,11 +11,11 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class ConsoleCommand extends Constraint
+final class Route extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Command "[COMMAND]" is not found';
+        return 'Route "[ROUTE]" ia not found';
     }
 
     public function getTargets()

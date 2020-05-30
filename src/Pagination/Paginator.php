@@ -30,7 +30,7 @@ final class Paginator
      */
     private $queryExtension;
 
-    public function __construct(SettingService $settingService, Serializer $serializer, array $queryExtension = [])
+    public function __construct(SettingService $settingService, Serializer $serializer, iterable $queryExtension)
     {
         $this->pageField = $settingService->getSetting('PAGE_FIELD')->getValue();
         $this->perPageField = $settingService->getSetting('PER_PAGE_FIELD')->getValue();

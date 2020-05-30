@@ -2,16 +2,12 @@
 
 namespace KejawenLab\Semart\ApiSkeleton;
 
-use KejawenLab\Semart\ApiSkeleton\Generator\GeneratorFactory;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -60,30 +56,6 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $userProviders = [];
-        foreach ($container->findTaggedServiceIds('semart.user_provider') as $id => $tag) {
-            $userProviders[] = new Reference($id);
-        }
-
-        $definition = $container->getDefinition(UserProviderFactory::class);
-        $definition->addArgument($userProviders);
-
-        $filters = [];
-        foreach ($container->findTaggedServiceIds('semart.query_extension') as $id => $tag) {
-            $filters[] = new Reference($id);
-        }
-
-        $definition = $container->getDefinition(Paginator::class);
-        $definition->addArgument($filters);
-
-        $generators = [];
-        foreach ($container->findTaggedServiceIds('semart.generator') as $id => $tag) {
-            $generators[] = new Reference($id);
-        }
-
-        $definition = $container->getDefinition(GeneratorFactory::class);
-        $definition->addArgument($generators);
-
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);
         /** @var string $databasePassword */

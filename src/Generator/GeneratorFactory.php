@@ -16,7 +16,7 @@ final class GeneratorFactory
      */
     private $generators = [];
 
-    public function __construct(array $generators = [])
+    public function __construct(iterable $generators)
     {
         $this->generators = $generators;
     }

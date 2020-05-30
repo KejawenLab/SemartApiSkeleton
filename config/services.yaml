@@ -12,6 +12,11 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             Psr\Log\LoggerInterface $auditLogger: '@monolog.logger.audit'
+            iterable $providers: !tagged_iterator semart.user_provider
+            iterable $queryExtension: !tagged_iterator semart.query_extension
+            iterable $generators: !tagged_iterator semart.generator
+            iterable $initiators: !tagged_iterator semart.permission_initiator
+            iterable $removers: !tagged_iterator semart.permission_remover
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -38,6 +43,12 @@ services:
         KejawenLab\Semart\ApiSkeleton\Generator\Model\GeneratorInterface:
             tags:
                 - { name: semart.generator }
+        KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInitiatorInterface:
+            tags:
+                - { name: semart.permission_initiator }
+        KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRemoverInterface:
+            tags:
+                - { name: semart.permission_remover }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -54,9 +65,12 @@ services:
         arguments:
             - '@KejawenLab\Semart\ApiSkeleton\Setting\SettingService'
             - '@KejawenLab\Semart\ApiSkeleton\Util\Serializer'
-    KejawenLab\Semart\ApiSkeleton\Logger\DatabaseLogger:
+    KejawenLab\Semart\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
         arguments:
             $logger: '@monolog.logger.db'
     KejawenLab\Semart\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
         arguments:
             $validator: '@cron.validator'
+    KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService:
+        arguments:
+            $class: 'KejawenLab\Semart\ApiSkeleton\Entity\Permission'

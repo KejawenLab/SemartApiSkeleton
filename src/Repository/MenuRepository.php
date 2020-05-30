@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Menu|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,9 +18,9 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
  */
 final class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Menu::class);
+        parent::__construct($eventDispatcher, $registry, Menu::class);
     }
 
     public function findByCode(string $code): ?MenuInterface

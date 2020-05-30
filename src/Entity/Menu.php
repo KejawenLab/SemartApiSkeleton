@@ -11,6 +11,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\ApiSkeleton\Repository\MenuRepository;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Validator\Route;
 use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -83,8 +84,7 @@ class Menu implements MenuInterface
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
+     * @Route()
      */
     private $routeName;
 
@@ -94,6 +94,11 @@ class Menu implements MenuInterface
      * @Groups({"read"})
      */
     private $showable;
+
+    /**
+     * @Groups({"read"})
+     */
+    private $urlPath;
 
     public function __construct()
     {
@@ -161,6 +166,18 @@ class Menu implements MenuInterface
     public function setRouteName(string $routeName): self
     {
         $this->routeName = $routeName;
+
+        return $this;
+    }
+
+    public function getUrlPath(): ?string
+    {
+        return $this->urlPath;
+    }
+
+    public function setUrlPath(string $urlPath): MenuInterface
+    {
+        $this->urlPath = $urlPath;
 
         return $this;
     }

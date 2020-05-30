@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Logger;
+namespace KejawenLab\Semart\ApiSkeleton\EventSubscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class DatabaseLogger implements EventSubscriber
+final class ChangeLoggerSubscriber implements EventSubscriber
 {
     private $serializer;
 
@@ -34,10 +34,12 @@ final class DatabaseLogger implements EventSubscriber
     {
         $this->log('CREATE', $args);
     }
+
     public function preUpdate(LifecycleEventArgs $args): void
     {
         $this->log('UPDATE', $args);
     }
+
     public function preRemove(LifecycleEventArgs $args): void
     {
         $this->log('DELETE', $args);

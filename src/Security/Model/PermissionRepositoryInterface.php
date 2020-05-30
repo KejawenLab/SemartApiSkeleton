@@ -12,4 +12,8 @@ use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterfac
 interface PermissionRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface;
+
+    public function removePermissionsByGroup(GroupInterface $group): void;
+
+    public function removePermissionsByMenu(MenuInterface $menu): void;
 }

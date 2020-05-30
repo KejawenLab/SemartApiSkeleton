@@ -88,4 +88,9 @@ class Group implements GroupInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getId();
+    }
 }
