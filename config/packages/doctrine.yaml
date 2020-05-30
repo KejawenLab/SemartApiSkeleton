@@ -17,9 +17,7 @@ doctrine:
         auto_mapping: true
         metadata_cache_driver: ~
         query_cache_driver: ~
-        result_cache_driver:
-            type: pool
-            pool: doctrine.result_cache_pool
+        result_cache_driver: ~
         filters:
             semart_softdeletable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter

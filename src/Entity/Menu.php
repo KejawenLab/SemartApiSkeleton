@@ -43,10 +43,12 @@ class Menu implements MenuInterface
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
      *
      * @Groups({"read"})
      * @MaxDepth(1)
+     *
+     * @Groups({"read"})
      */
     private $parent;
 
@@ -87,6 +89,15 @@ class Menu implements MenuInterface
      * @Route()
      */
     private $routeName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(max=255)
+     *
+     * @Groups({"read"})
+     */
+    private $extra;
 
     /**
      * @ORM\Column(type="boolean")
@@ -178,6 +189,18 @@ class Menu implements MenuInterface
     public function setUrlPath(string $urlPath): MenuInterface
     {
         $this->urlPath = $urlPath;
+
+        return $this;
+    }
+
+    public function getExtra(): ?string
+    {
+        return $this->extra;
+    }
+
+    public function setExtra(string $extra): self
+    {
+        $this->extra = $extra;
 
         return $this;
     }

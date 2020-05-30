@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Menu extends AbstractFOSRestController
+final class Menu extends AbstractFOSRestController
 {
     private $service;
 

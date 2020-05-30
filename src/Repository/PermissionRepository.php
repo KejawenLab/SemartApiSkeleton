@@ -33,7 +33,18 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
     public function findByUser(UserInterface $user): array
     {
-        return $this->findBy(['group' => $user->getGroup()]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.group', 'g');
+        $queryBuilder->innerJoin('o.menu', 'm');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($user->getGroup()->getId())));
+        $queryBuilder->addOrderBy('m.parent', 'ASC');
+        $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(7, sprintf('%s:%s:%s', __CLASS__, __METHOD__, serialize($query->getParameters())));
+
+        return $query->getResult();
     }
 
     public function removeByGroup(GroupInterface $group): void

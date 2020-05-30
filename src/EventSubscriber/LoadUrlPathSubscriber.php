@@ -29,8 +29,11 @@ final class LoadUrlPathSubscriber implements EventSubscriber
         if ($object instanceof MenuInterface) {
             $path = $object->getRouteName();
             try {
-                $path = $this->urlGenerator->generate($object->getRouteName());
+                if ('#' !== $path) {
+                    $path = $this->urlGenerator->generate($object->getRouteName());
+                }
             } catch (RouteNotFoundException $exception) {
+                $path = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
             }
 
             $object->setUrlPath($path);

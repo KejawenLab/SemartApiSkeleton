@@ -36,7 +36,7 @@ final class RouteValidator extends ConstraintValidator
             return;
         }
 
-        if (!($this->routeCollection->get($value) || $this->routeCollection->get(sprintf('%s_getall__invoke', $value)))) {
+        if (!($this->routeCollection->get($value) || $this->routeCollection->get(sprintf('%s__invoke', $value)))) {
             $this->context->buildViolation($constraint->getMessage())->setParameter('[ROUTE]', $value)->addViolation();
         }
     }

@@ -52,7 +52,7 @@ class User implements UserInterface, AppUser
     private $group;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
      *
      * @Groups({"read"})
      */

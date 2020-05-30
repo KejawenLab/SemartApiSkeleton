@@ -55,10 +55,9 @@ final class GenerateCommand extends Command
         ]), $output);
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
-        $update = $application->find('doctrine:schema:update');
+        $update = $application->find('doctrine:migration:migrate');
         $update->run(new ArrayInput([
-            'command' => 'doctrine:schema:update',
-            '--force' => null,
+            'command' => 'doctrine:migration:migrate',
             '--no-interaction' => null,
         ]), $output);
 
