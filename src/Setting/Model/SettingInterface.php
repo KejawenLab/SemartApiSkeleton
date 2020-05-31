@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Setting\Model;
+namespace Alpabit\ApiSkeleton\Setting\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

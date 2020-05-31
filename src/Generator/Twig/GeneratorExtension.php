@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Generator\Twig;
+namespace Alpabit\ApiSkeleton\Generator\Twig;
 
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 

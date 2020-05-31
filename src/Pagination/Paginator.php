@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Pagination;
+namespace Alpabit\ApiSkeleton\Pagination;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
-use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
+use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use Alpabit\ApiSkeleton\Setting\SettingService;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

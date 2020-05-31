@@ -50,12 +50,12 @@
     },
     "autoload": {
         "psr-4": {
-            "KejawenLab\\Semart\\ApiSkeleton\\": "src/"
+            "Alpabit\\ApiSkeleton\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KejawenLab\\Semart\\ApiSkeleton\\Tests\\": "tests/"
+            "Alpabit\\ApiSkeleton\\Tests\\": "tests/"
         }
     },
     "replace": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Entity\Event;
+namespace Alpabit\ApiSkeleton\Entity\Event;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

@@ -14,9 +14,9 @@ Cron\CronBundle\Entity\CronJob:
                 max: 191
         command:
             - NotBlank: ~
-            - KejawenLab\Semart\ApiSkeleton\Cron\Validator\ConsoleCommand: ~
+            - Alpabit\ApiSkeleton\Cron\Validator\ConsoleCommand: ~
         schedule:
             - NotBlank: ~
-            - KejawenLab\Semart\ApiSkeleton\Cron\Validator\CronScheduleFormat: ~
+            - Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormat: ~
         enabled:
             - NotBlank: ~

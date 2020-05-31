@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Query\User;
+namespace Alpabit\ApiSkeleton\Security\Query\User;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

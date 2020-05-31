@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
-use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
-use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Entity\Setting;
+use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
+use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

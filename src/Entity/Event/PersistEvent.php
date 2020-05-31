@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Entity\Event;
+namespace Alpabit\ApiSkeleton\Entity\Event;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\EventDispatcher\Event;

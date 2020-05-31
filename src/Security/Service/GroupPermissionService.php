@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
+namespace Alpabit\ApiSkeleton\Security\Service;
 
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionableInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRemoverInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionableInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

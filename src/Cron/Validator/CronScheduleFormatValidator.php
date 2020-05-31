@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Cron\Validator;
+namespace Alpabit\ApiSkeleton\Cron\Validator;
 
 use Cron\Exception\InvalidPatternException;
 use Cron\Validator\CrontabValidator;

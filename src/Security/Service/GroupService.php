@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
+namespace Alpabit\ApiSkeleton\Security\Service;
 
-use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
-use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
+use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use Alpabit\ApiSkeleton\Service\AbstractService;
+use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

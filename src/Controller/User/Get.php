@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Controller\User;
+namespace Alpabit\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\Semart\ApiSkeleton\Entity\User;
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\UserService;
+use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use Alpabit\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

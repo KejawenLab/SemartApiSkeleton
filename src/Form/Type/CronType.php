@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Form\Type;
+namespace Alpabit\ApiSkeleton\Form\Type;
 
 use Cron\CronBundle\Entity\CronJob;
 use Symfony\Component\Form\AbstractType;

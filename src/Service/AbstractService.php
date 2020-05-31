@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Service;
+namespace Alpabit\ApiSkeleton\Service;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceInterface;
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
+use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

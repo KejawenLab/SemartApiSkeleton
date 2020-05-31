@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Composer;
+namespace Alpabit\ApiSkeleton\Composer;
 
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
-use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
+use Alpabit\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

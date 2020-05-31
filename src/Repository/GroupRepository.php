@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\Group;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\Group;
+use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

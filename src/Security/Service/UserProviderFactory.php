@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
+namespace Alpabit\ApiSkeleton\Security\Service;
 
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface as Model;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface as Model;
+use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

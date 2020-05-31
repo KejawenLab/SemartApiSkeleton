@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Cron\Query;
+namespace Alpabit\ApiSkeleton\Cron\Query;
 
 use Cron\CronBundle\Entity\CronReport;
-use KejawenLab\Semart\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

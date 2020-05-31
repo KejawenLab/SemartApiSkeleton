@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Query\Group;
+namespace Alpabit\ApiSkeleton\Security\Query\Group;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

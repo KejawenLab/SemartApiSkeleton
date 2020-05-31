@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Setting\Query;
+namespace Alpabit\ApiSkeleton\Setting\Query;
 
-use KejawenLab\Semart\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
-use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
+use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Validator;
+namespace Alpabit\ApiSkeleton\Security\Validator;
 
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraint;

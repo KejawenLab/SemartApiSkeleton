@@ -1,6 +1,6 @@
 <?php
 
-use KejawenLab\Semart\ApiSkeleton\Kernel;
+use Alpabit\ApiSkeleton\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

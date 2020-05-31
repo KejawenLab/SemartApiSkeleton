@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Controller\Setting;
+namespace Alpabit\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
-use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
-use KejawenLab\Semart\ApiSkeleton\Form\Type\SettingType;
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
-use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
+use Alpabit\ApiSkeleton\Entity\Setting;
+use Alpabit\ApiSkeleton\Form\FormFactory;
+use Alpabit\ApiSkeleton\Form\Type\SettingType;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
+use Alpabit\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

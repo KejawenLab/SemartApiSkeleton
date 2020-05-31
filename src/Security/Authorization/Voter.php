@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Authorization;
+namespace Alpabit\ApiSkeleton\Security\Authorization;
 
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\EventSubscriber;
+namespace Alpabit\ApiSkeleton\EventSubscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 

@@ -20,13 +20,13 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    KejawenLab\Semart\ApiSkeleton\:
+    Alpabit\ApiSkeleton\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    KejawenLab\Semart\ApiSkeleton\Controller\:
+    Alpabit\ApiSkeleton\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
@@ -34,43 +34,43 @@ services:
         Doctrine\Common\EventSubscriber:
             tags:
                 - { name: doctrine.event_subscriber }
-        KejawenLab\Semart\ApiSkeleton\Security\Model\UserProviderInterface:
+        Alpabit\ApiSkeleton\Security\Model\UserProviderInterface:
             tags:
                 - { name: semart.user_provider }
-        KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface:
+        Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface:
             tags:
                 - { name: semart.query_extension }
-        KejawenLab\Semart\ApiSkeleton\Generator\Model\GeneratorInterface:
+        Alpabit\ApiSkeleton\Generator\Model\GeneratorInterface:
             tags:
                 - { name: semart.generator }
-        KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInitiatorInterface:
+        Alpabit\ApiSkeleton\Security\Model\PermissionInitiatorInterface:
             tags:
                 - { name: semart.permission_initiator }
-        KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRemoverInterface:
+        Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface:
             tags:
                 - { name: semart.permission_remover }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    KejawenLab\Semart\ApiSkeleton\Repository\UserRepository:
+    Alpabit\ApiSkeleton\Repository\UserRepository:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
-    KejawenLab\Semart\ApiSkeleton\Security\Authorization\Ownership:
+    Alpabit\ApiSkeleton\Security\Authorization\Ownership:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
-    KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService:
+    Alpabit\ApiSkeleton\Security\Service\GroupService:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
-    KejawenLab\Semart\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
+    Alpabit\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
         arguments:
             $logger: '@monolog.logger.db'
-    KejawenLab\Semart\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
+    Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
         arguments:
             $validator: '@cron.validator'
-    KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService:
+    Alpabit\ApiSkeleton\Security\Service\PermissionService:
         arguments:
-            $class: 'KejawenLab\Semart\ApiSkeleton\Entity\Permission'
-    KejawenLab\Semart\ApiSkeleton\Generator\PermissionGenerator:
+            $class: 'Alpabit\ApiSkeleton\Entity\Permission'
+    Alpabit\ApiSkeleton\Generator\PermissionGenerator:
         arguments:
-            $class: 'KejawenLab\Semart\ApiSkeleton\Entity\Menu'
+            $class: 'Alpabit\ApiSkeleton\Entity\Menu'

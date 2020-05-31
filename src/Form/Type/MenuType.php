@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Form\Type;
+namespace Alpabit\ApiSkeleton\Form\Type;
 
-use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
+use Alpabit\ApiSkeleton\Entity\Menu;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

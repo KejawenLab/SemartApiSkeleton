@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Command;
+namespace Alpabit\ApiSkeleton\Command;
 
-use KejawenLab\Semart\ApiSkeleton\Generator\GeneratorFactory;
+use Alpabit\ApiSkeleton\Generator\GeneratorFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class GenerateCommand extends Command
 {
-    private const NAMESPACE = 'KejawenLab\Semart\ApiSkeleton\Entity';
+    private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
 
     private $generatorFactory;
 

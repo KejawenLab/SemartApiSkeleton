@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Entity;
+namespace Alpabit\ApiSkeleton\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\Semart\ApiSkeleton\Repository\MenuRepository;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Validator\Route;
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Repository\MenuRepository;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Validator\Route;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;

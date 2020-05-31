@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Cron;
+namespace Alpabit\ApiSkeleton\Cron;
 
-use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\Semart\ApiSkeleton\Repository\CronJobRepository;
-use KejawenLab\Semart\ApiSkeleton\Service\AbstractService;
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Repository\CronJobRepository;
+use Alpabit\ApiSkeleton\Service\AbstractService;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

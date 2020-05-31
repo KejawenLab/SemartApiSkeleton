@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Model;
+namespace Alpabit\ApiSkeleton\Security\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
 

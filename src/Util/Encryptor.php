@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Util;
+namespace Alpabit\ApiSkeleton\Util;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Generator;
+namespace Alpabit\ApiSkeleton\Generator;
 
-use KejawenLab\Semart\ApiSkeleton\Generator\Model\GeneratorInterface;
+use Alpabit\ApiSkeleton\Generator\Model\GeneratorInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Controller\Menu;
+namespace Alpabit\ApiSkeleton\Controller\Menu;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\MenuService;
+use Alpabit\ApiSkeleton\Entity\Menu;
+use Alpabit\ApiSkeleton\Pagination\Paginator;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use Alpabit\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

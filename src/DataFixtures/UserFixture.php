@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\DataFixtures;
+namespace Alpabit\ApiSkeleton\DataFixtures;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use KejawenLab\Semart\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Entity\User;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

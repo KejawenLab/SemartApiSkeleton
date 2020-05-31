@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Cron\Query;
+namespace Alpabit\ApiSkeleton\Cron\Query;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

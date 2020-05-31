@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\Event\PersistEvent;
-use KejawenLab\Semart\ApiSkeleton\Entity\Event\RemoveEvent;
-use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\Event\PersistEvent;
+use Alpabit\ApiSkeleton\Entity\Event\RemoveEvent;
+use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

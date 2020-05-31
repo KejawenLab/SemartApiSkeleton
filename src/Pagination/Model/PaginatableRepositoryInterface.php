@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Pagination\Model;
+namespace Alpabit\ApiSkeleton\Pagination\Model;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
+use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

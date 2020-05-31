@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\User;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface as AppUser;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;

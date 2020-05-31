@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Pagination;
+namespace Alpabit\ApiSkeleton\Pagination;
 
-use KejawenLab\Semart\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

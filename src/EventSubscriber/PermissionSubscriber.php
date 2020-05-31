@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\EventSubscriber;
+namespace Alpabit\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\Semart\ApiSkeleton\Entity\Event\PersistEvent;
-use KejawenLab\Semart\ApiSkeleton\Entity\Event\RemoveEvent;
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Parser;
-use KejawenLab\Semart\ApiSkeleton\Security\Authorization\Ownership;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionableInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\Authorization;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService;
+use Alpabit\ApiSkeleton\Entity\Event\PersistEvent;
+use Alpabit\ApiSkeleton\Entity\Event\RemoveEvent;
+use Alpabit\ApiSkeleton\Security\Annotation\Parser;
+use Alpabit\ApiSkeleton\Security\Authorization\Ownership;
+use Alpabit\ApiSkeleton\Security\Model\PermissionableInterface;
+use Alpabit\ApiSkeleton\Security\Service\Authorization;
+use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

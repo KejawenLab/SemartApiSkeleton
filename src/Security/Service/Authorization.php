@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
+namespace Alpabit\ApiSkeleton\Security\Service;
 
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission as Annotation;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission as Annotation;
+use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**

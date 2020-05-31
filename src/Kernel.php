@@ -1,8 +1,8 @@
 <?php
 
-namespace KejawenLab\Semart\ApiSkeleton;
+namespace Alpabit\ApiSkeleton;
 
-use KejawenLab\Semart\ApiSkeleton\Util\Encryptor;
+use Alpabit\ApiSkeleton\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;

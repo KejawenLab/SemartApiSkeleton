@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Generator;
+namespace Alpabit\ApiSkeleton\Generator;
 
 use Doctrine\ORM\EntityManagerInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\MenuService;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService;
-use KejawenLab\Semart\ApiSkeleton\Util\StringUtil;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Service\GroupService;
+use Alpabit\ApiSkeleton\Security\Service\MenuService;
+use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;

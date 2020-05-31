@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\Menu;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

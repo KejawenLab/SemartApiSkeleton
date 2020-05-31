@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Security\Query\Group;
+namespace Alpabit\ApiSkeleton\Security\Query\Group;
 
-use KejawenLab\Semart\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

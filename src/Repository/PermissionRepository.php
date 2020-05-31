@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Repository;
+namespace Alpabit\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\Semart\ApiSkeleton\Entity\Permission;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\Permission;
+use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
+use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

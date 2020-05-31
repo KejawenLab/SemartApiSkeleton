@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Generator;
+namespace Alpabit\ApiSkeleton\Generator;
 
-use KejawenLab\Semart\ApiSkeleton\Generator\Model\GeneratorInterface;
+use Alpabit\ApiSkeleton\Generator\Model\GeneratorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
