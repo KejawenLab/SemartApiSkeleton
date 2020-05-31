@@ -11,8 +11,4 @@ use Symfony\Component\Validator\Constraint;
  */
 final class CronScheduleFormat extends Constraint
 {
-    public function getTargets()
-    {
-        return self::PROPERTY_CONSTRAINT;
-    }
 }

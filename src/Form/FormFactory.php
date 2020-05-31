@@ -7,7 +7,6 @@ namespace Alpabit\ApiSkeleton\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -21,21 +20,11 @@ final class FormFactory
         $this->formFactory = $formFactory;
     }
 
-    public function submitRequest(string $type, Request $request, $data = null): FormInterface
+    public function submitRequest(string $formType, Request $request, $data = null): FormInterface
     {
-        $form = $this->formFactory->create($type, $data);
-        $form->submit($this->getData($request));
+        $form = $this->formFactory->create($formType, $data);
+        $form->submit($request->request->all());
 
         return $form;
-    }
-
-    private function getData(Request $request): array
-    {
-        $data = json_decode($request->getContent(), true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new BadRequestHttpException('Invalid JSON');
-        }
-
-        return $data;
     }
 }
