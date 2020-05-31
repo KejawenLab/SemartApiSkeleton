@@ -100,6 +100,11 @@ class User implements UserInterface, AppUser
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $deviceId;
+
     private $plainPassword;
 
     public function getId(): ?string
@@ -177,6 +182,16 @@ class User implements UserInterface, AppUser
         $this->email = $email;
 
         return $this;
+    }
+
+    public function getDeviceId(): ?string
+    {
+        return $this->deviceId;
+    }
+
+    public function setDeviceId(string $deviceId): void
+    {
+        $this->deviceId = $deviceId;
     }
 
     public function getPlainPassword(): ?string

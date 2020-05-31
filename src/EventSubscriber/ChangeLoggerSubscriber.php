@@ -17,6 +17,12 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class ChangeLoggerSubscriber implements EventSubscriber
 {
+    private const CREATE = 'CREATE';
+
+    private const UPDATE = 'UPDATE';
+
+    private const DELETE = 'DELETE';
+
     private $serializer;
 
     private $tokenStorage;
@@ -32,17 +38,17 @@ final class ChangeLoggerSubscriber implements EventSubscriber
 
     public function prePersist(LifecycleEventArgs $args): void
     {
-        $this->log('CREATE', $args);
+        $this->log(static::CREATE, $args);
     }
 
     public function preUpdate(LifecycleEventArgs $args): void
     {
-        $this->log('UPDATE', $args);
+        $this->log(static::UPDATE, $args);
     }
 
     public function preRemove(LifecycleEventArgs $args): void
     {
-        $this->log('DELETE', $args);
+        $this->log(static::DELETE, $args);
     }
 
     public function getSubscribedEvents(): array
@@ -61,7 +67,7 @@ final class ChangeLoggerSubscriber implements EventSubscriber
         }
 
         $object = $event->getObject();
-        if ('UPDATE' === $action) {
+        if (static::UPDATE === $action) {
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $event->getObjectManager();
             $changeSet = $entityManager->getUnitOfWork()->getEntityChangeSet($object);

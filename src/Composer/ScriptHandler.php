@@ -31,7 +31,7 @@ class ScriptHandler
 
             $template = (string) file_get_contents(sprintf('%s/.env.template', $rootPath));
 
-            self::createEnvironment($io, $envPath, $template);
+            static::createEnvironment($io, $envPath, $template);
         } else {
             $io->write('<info>Environment variable file is already exist</info>');
         }

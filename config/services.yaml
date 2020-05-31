@@ -17,6 +17,7 @@ services:
             iterable $generators: !tagged_iterator semart.generator
             iterable $initiators: !tagged_iterator semart.permission_initiator
             iterable $removers: !tagged_iterator semart.permission_remover
+            Redis $redis: '@snc_redis.default'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

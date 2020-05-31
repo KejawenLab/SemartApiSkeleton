@@ -37,10 +37,10 @@ abstract class AbstractFixture extends Base
             $entity = $this->createNew();
 
             foreach ($fixtures as $key => $value) {
-                if (self::REF_KEY === sprintf('%s:', $key)) {
+                if (static::REF_KEY === sprintf('%s:', $key)) {
                     $this->setReference(StringUtil::uppercase(sprintf('%s#%s', $this->getReferenceKey(), $value)), $entity);
                 } else {
-                    if (\is_string($value) && false !== strpos($value, self::REF_KEY)) {
+                    if (\is_string($value) && false !== strpos($value, static::REF_KEY)) {
                         $value = $this->getReference(StringUtil::uppercase(str_replace('ref:', '', $value)));
                     }
 

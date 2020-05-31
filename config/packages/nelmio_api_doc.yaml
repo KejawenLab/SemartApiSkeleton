@@ -12,4 +12,4 @@ nelmio_api_doc:
                 in: header
     areas: # to filter documented areas
         path_patterns:
-            - ^/api(?!/(doc|login)$)
+            - ^/api(?!/(doc)$)

@@ -73,14 +73,14 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "App\\Composer\\ScriptHandler::preInstall",
+            "Alpabit\\ApiSkeleton\\Composer\\ScriptHandler::preInstall",
             "@auto-scripts",
-            "App\\Composer\\ScriptHandler::postInstall"
+            "Alpabit\\ApiSkeleton\\Composer\\ScriptHandler::postInstall"
         ],
         "post-update-cmd": [
-            "App\\Composer\\ScriptHandler::preInstall",
+            "Alpabit\\ApiSkeleton\\Composer\\ScriptHandler::preInstall",
             "@auto-scripts",
-            "App\\Composer\\ScriptHandler::postInstall"
+            "Alpabit\\ApiSkeleton\\Composer\\ScriptHandler::postInstall"
         ]
     },
     "conflict": {

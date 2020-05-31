@@ -6,6 +6,7 @@ namespace Alpabit\ApiSkeleton\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
@@ -13,10 +14,29 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
  */
 final class SecurityController extends AbstractFOSRestController
 {
+    public const ROUTE_NAME = 'security_login';
+
     /**
-     * @Rest\Post("/login")
+     * @Rest\Post("/login", name=SecurityController::ROUTE_NAME)
+     *
+     * @SWG\Tag(name="Security")
+     * @SWG\Parameter(
+     *     name="login",
+     *     in="body",
+     *     @SWG\Schema(
+     *         @SWG\Property(property="username", type="string"),
+     *         @SWG\Property(property="password", type="string")
+     *     )
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="JWT Token",
+     *     @SWG\Schema(
+     *         @SWG\Property(property="token", type="string")
+     *     )
+     * )
      */
-    public function check()
+    public function __invoke()
     {
         throw new RuntimeException('Invalid security configuration');
     }

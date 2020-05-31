@@ -17,6 +17,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements PaginatableRepositoryInterface
 {
+    protected const MICRO_CACHE = 3;
+
     private $eventDispatcher;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry, $entityClass)

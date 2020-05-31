@@ -64,7 +64,7 @@ final class GenerateCommand extends Command
 
         /** @var string $entity */
         $entity = $input->getArgument('entity');
-        $reflection = new \ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $entity));
+        $reflection = new \ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
         $application = $this->getApplication();
 
         $output->writeln('<info>Creating Migration File</info>');

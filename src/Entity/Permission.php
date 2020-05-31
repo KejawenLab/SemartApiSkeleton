@@ -39,7 +39,7 @@ class Permission implements PermissionInterface
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist", "remove"})
      *
      * @Assert\NotBlank()
      *
@@ -48,7 +48,7 @@ class Permission implements PermissionInterface
     private $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
      *
      * @Assert\NotBlank()
      *
