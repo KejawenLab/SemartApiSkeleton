@@ -54,7 +54,7 @@ final class Delete extends AbstractFOSRestController
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
-            throw new NotFoundHttpException(sprintf('Group ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Group with ID "%s" not found', $id));
         }
 
         $this->service->remove($group);

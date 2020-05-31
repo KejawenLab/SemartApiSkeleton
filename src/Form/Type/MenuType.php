@@ -21,7 +21,7 @@ final class MenuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('parent', EntityType::class, [
-            'required' => true,
+            'required' => false,
             'class' => Menu::class,
             'choice_label' => 'name',
         ]);

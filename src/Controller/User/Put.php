@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Group;
+namespace Alpabit\ApiSkeleton\Controller\User;
 
+use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Form\FormFactory;
+use Alpabit\ApiSkeleton\Form\Type\UpdateUserType;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use Alpabit\ApiSkeleton\Security\Service\UserService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Alpabit\ApiSkeleton\Entity\Group;
-use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\GroupType;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::EDIT})
+ * @Permission(menu="USER", actions={Permission::EDIT})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
@@ -34,7 +34,7 @@ final class Put extends AbstractFOSRestController
 
     private $logger;
 
-    public function __construct(FormFactory $formFactory, GroupService $service, LoggerInterface $auditLogger)
+    public function __construct(FormFactory $formFactory, UserService $service, LoggerInterface $auditLogger)
     {
         $this->formFactory = $formFactory;
         $this->service = $service;
@@ -42,22 +42,22 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/groups/{id}")
+     * @Rest\Put("/users/{id}")
      *
-     * @SWG\Tag(name="Group")
+     * @SWG\Tag(name="User")
      * @SWG\Parameter(
-     *     name="group",
+     *     name="user",
      *     in="body",
      *     type="object",
-     *     description="Group form",
-     *     @Model(type=GroupType::class)
+     *     description="User form",
+     *     @Model(type=UpdateUserType::class)
      * )
      * @SWG\Response(
      *     response=200,
-     *     description="Update group",
+     *     description="Update user",
      *     @SWG\Schema(
      *         type="object",
-     *         ref=@Model(type=Group::class, groups={"read"})
+     *         ref=@Model(type=User::class, groups={"read"})
      *     )
      * )
      *
@@ -70,20 +70,20 @@ final class Put extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $id): View
     {
-        $group = $this->service->get($id);
-        if (!$group instanceof GroupInterface) {
-            throw new NotFoundHttpException(sprintf('Group with ID "%s" not found', $id));
+        $user = $this->service->get($id);
+        if (!$user instanceof UserInterface) {
+            throw new NotFoundHttpException(sprintf('User with ID "%s" not found', $id));
         }
 
-        $form = $this->formFactory->submitRequest(GroupType::class, $request, $group);
+        $form = $this->formFactory->submitRequest(UpdateUserType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
-        $this->service->save($group);
+        $this->service->save($user);
 
         $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));
 
-        return $this->view($this->service->get($group->getId()));
+        return $this->view($this->service->get($user->getId()));
     }
 }

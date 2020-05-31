@@ -54,7 +54,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function validate(ControllerEvent $event)
+    public function validate(ControllerEvent $event): void
     {
         /** @var object $controller */
         $controller = $event->getController();
@@ -78,7 +78,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             PersistEvent::class => 'initiate',

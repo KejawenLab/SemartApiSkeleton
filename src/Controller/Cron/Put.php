@@ -71,7 +71,7 @@ final class Put extends AbstractFOSRestController
     {
         $cronjob = $this->service->get($id);
         if (!$cronjob instanceof CronJob) {
-            throw new NotFoundHttpException(sprintf('Cron Job ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
         }
 
         $form = $this->formFactory->submitRequest(CronType::class, $request, $cronjob);

@@ -54,7 +54,7 @@ final class Delete extends AbstractFOSRestController
     {
         $cronjob = $this->service->get($id);
         if (!$cronjob instanceof CronJob) {
-            throw new NotFoundHttpException(sprintf('Cron Job ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
         }
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id));

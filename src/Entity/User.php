@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
  */
 class User implements UserInterface, AppUser
 {
@@ -83,6 +84,7 @@ class User implements UserInterface, AppUser
      *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
+     * @Assert\Email()
      *
      * @Groups({"read"})
      */

@@ -72,7 +72,7 @@ final class Put extends AbstractFOSRestController
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
-            throw new NotFoundHttpException(sprintf('Menu ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Menu with ID "%s" not found', $id));
         }
 
         $form = $this->formFactory->submitRequest(MenuType::class, $request, $menu);

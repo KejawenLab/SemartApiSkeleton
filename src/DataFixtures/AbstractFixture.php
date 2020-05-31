@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture as Base;
-use Doctrine\Persistence\ObjectManager;
-use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Security\Service\PasswordEncoder;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use Doctrine\Bundle\FixturesBundle\Fixture as Base;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
@@ -52,7 +52,7 @@ abstract class AbstractFixture extends Base
                 }
             }
 
-            if ($entity instanceof User) {
+            if ($entity instanceof UserInterface) {
                 $this->encoder->encode($entity);
             }
 

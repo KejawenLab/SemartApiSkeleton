@@ -62,7 +62,7 @@ final class Run extends AbstractFOSRestController
         $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, serialize($request->query->all())));
         $job = $this->service->get($id);
         if (!$job instanceof CronJob) {
-            throw new NotFoundHttpException(sprintf('Cron Job ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
         }
 
         $application = new Application($this->kernel);

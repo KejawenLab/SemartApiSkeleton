@@ -72,7 +72,7 @@ final class Put extends AbstractFOSRestController
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
-            throw new NotFoundHttpException(sprintf('Setting ID: "%s" not found', $id));
+            throw new NotFoundHttpException(sprintf('Setting with ID "%s" not found', $id));
         }
 
         $form = $this->formFactory->submitRequest(SettingType::class, $request, $setting);

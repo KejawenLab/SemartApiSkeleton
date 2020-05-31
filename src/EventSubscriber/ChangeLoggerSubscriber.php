@@ -45,7 +45,7 @@ final class ChangeLoggerSubscriber implements EventSubscriber
         $this->log('DELETE', $args);
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist,
