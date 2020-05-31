@@ -233,8 +233,6 @@ php bin/console semart:generate Test
 
 - [ ] Front User/Customer Reset Password
 
-- [ ] Generator Support Parent Menu
-
 - [ ] File/Media Management
 
 - [ ] Upgrade (Database) Management

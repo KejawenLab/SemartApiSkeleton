@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Repository;
 use Alpabit\ApiSkeleton\Entity\Menu;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -25,7 +26,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
     public function findByCode(string $code): ?MenuInterface
     {
-        return $this->findOneBy(['code' => $code]);
+        return $this->findOneBy(['code' => StringUtil::uppercase($code)]);
     }
 
     public function findChilds(MenuInterface $menu): array

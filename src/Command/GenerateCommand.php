@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Command;
 
 use Alpabit\ApiSkeleton\Generator\GeneratorFactory;
+use Alpabit\ApiSkeleton\Security\Service\MenuService;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,9 +24,12 @@ final class GenerateCommand extends Command
 
     private $generatorFactory;
 
-    public function __construct(GeneratorFactory $generatorFactory)
+    private $menuService;
+
+    public function __construct(GeneratorFactory $generatorFactory, MenuService $menuService)
     {
         $this->generatorFactory = $generatorFactory;
+        $this->menuService = $menuService;
 
         parent::__construct();
     }
@@ -84,7 +89,18 @@ final class GenerateCommand extends Command
         ]), $output);
 
         $output->writeln('<info>Generating RESTful API</info>');
-        $this->generatorFactory->generate($reflection);
+        $this->generatorFactory->generate($reflection, $output);
+
+        if ($parentCode = $input->getOption('parent')) {
+            $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));
+            $menu = $this->menuService->getMenuByCode($reflection->getShortName());
+            $parent = $this->menuService->getMenuByCode($parentCode);
+            if ($menu && $parent) {
+                $menu->setParent($parent);
+
+                $this->menuService->save($menu);
+            }
+        }
 
         $output->writeln(sprintf('<comment>RESTful API for <info>"%s"</info> class is generated</comment>', $reflection->getName()));
 

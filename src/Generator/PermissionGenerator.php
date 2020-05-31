@@ -10,6 +10,7 @@ use Alpabit\ApiSkeleton\Security\Service\MenuService;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
@@ -50,16 +51,19 @@ final class PermissionGenerator extends AbstractGenerator
         parent::__construct($twig, $fileSystem, $kernel);
     }
 
-    public function generate(\ReflectionClass $entityClass): void
+    public function generate(\ReflectionClass $class, OutputInterface $output): void
     {
+        $shortName = $class->getShortName();
+        $shortNameUppercase = StringUtil::uppercase($shortName);
         /** @var MenuInterface $menu */
         $menu = new $this->class();
-        $menu->setCode(StringUtil::uppercase($entityClass->getShortName()));
-        $menu->setName(StringUtil::uppercase($entityClass->getShortName()));
-        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, $entityClass->getShortName()));
+        $menu->setCode($shortNameUppercase);
+        $menu->setName($shortNameUppercase);
+        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, $shortName));
 
         $this->menuService->save($menu);
 
+        $output->writeln(sprintf('<comment>Generating permission(s) for menu "%s"', $shortNameUppercase));
         $this->entityManager->getFilters()->disable(PermissionService::FILTER_NAME);
         $this->permissionService->initiate($menu);
         $this->entityManager->getFilters()->enable(PermissionService::FILTER_NAME);
