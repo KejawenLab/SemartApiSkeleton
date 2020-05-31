@@ -21,7 +21,11 @@ interface MenuInterface extends PermissionableInterface
 
     public function getRouteName(): ?string;
 
+    public function getUrlPath(): ?string;
+
     public function setUrlPath(string $urlPath): self;
+
+    public function getExtra(): ?string;
 
     public function isShowable(): ?bool;
 }

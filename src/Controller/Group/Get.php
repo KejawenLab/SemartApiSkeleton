@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Entity\Group;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
@@ -16,6 +17,8 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * @Permission(menu="GROUP", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Get extends AbstractFOSRestController

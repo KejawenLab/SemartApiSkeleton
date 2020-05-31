@@ -11,7 +11,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\UserRepositoryInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class UserProvider implements UserProviderInterface
+final class UserProvider implements UserProviderInterface
 {
     private $repository;
 

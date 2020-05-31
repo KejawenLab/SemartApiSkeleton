@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
 use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
 use KejawenLab\Semart\ApiSkeleton\Form\Type\MenuType;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -20,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * @Permission(menu="MENU", actions={Permission::ADD})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Post extends AbstractFOSRestController

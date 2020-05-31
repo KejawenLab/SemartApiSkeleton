@@ -9,7 +9,7 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\Permission as Service;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
 
@@ -20,7 +20,7 @@ final class Voter extends SymfonyVoter
 {
     private $service;
 
-    public function __construct(Service $service)
+    public function __construct(PermissionService $service)
     {
         $this->service = $service;
     }

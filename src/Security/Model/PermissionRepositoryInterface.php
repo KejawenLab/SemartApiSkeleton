@@ -13,7 +13,7 @@ interface PermissionRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface;
 
-    public function findByUser(UserInterface $user): array;
+    public function findAllowedMenusByGroup(GroupInterface $user): array;
 
     public function removeByGroup(GroupInterface $group): void;
 

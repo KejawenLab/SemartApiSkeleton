@@ -8,7 +8,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -27,5 +26,19 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
     public function findByCode(string $code): ?MenuInterface
     {
         return $this->findOneBy(['code' => $code]);
+    }
+
+    public function findChilds(MenuInterface $menu): array
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.parent', 'p');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('p.id', $queryBuilder->expr()->literal($menu->getId())));
+        $queryBuilder->addOrderBy('o.sortOrder', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(7, sprintf('%s:%s:%s', __CLASS__, __METHOD__, serialize($query->getParameters())));
+
+        return $query->getResult();
     }
 }

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Controller\Group;
+namespace KejawenLab\Semart\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\Semart\ApiSkeleton\Entity\Permission as Entity;
+use KejawenLab\Semart\ApiSkeleton\Entity\User;
 use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\Semart\ApiSkeleton\Security\Annotation as Semart;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
@@ -18,11 +18,11 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Semart\Permission(menu="GROUP", actions={Semart\Permission::ADD, Semart\Permission::EDIT})
+ * @Permission(menu="USER", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class Permission extends AbstractFOSRestController
+final class GetAll extends AbstractFOSRestController
 {
     private $service;
 
@@ -30,7 +30,7 @@ final class Permission extends AbstractFOSRestController
 
     private $logger;
 
-    public function __construct(PermissionService $service, Paginator $paginator, LoggerInterface $auditLogger)
+    public function __construct(UserService $service, Paginator $paginator, LoggerInterface $auditLogger)
     {
         $this->service = $service;
         $this->paginator = $paginator;
@@ -38,9 +38,9 @@ final class Permission extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups/{id}/permissions")
+     * @Rest\Get("/users")
      *
-     * @SWG\Tag(name="Group")
+     * @SWG\Tag(name="User")
      * @SWG\Parameter(
      *     name="page",
      *     in="query",
@@ -53,12 +53,24 @@ final class Permission extends AbstractFOSRestController
      *     type="string",
      *     description="Records per page"
      * )
+     * @SWG\Parameter(
+     *     name="q",
+     *     in="query",
+     *     type="string",
+     *     description="Search user by name, email or username"
+     * )
+     * @SWG\Parameter(
+     *     name="username",
+     *     in="query",
+     *     type="string",
+     *     description="Filter user by username"
+     * )
      * @SWG\Response(
      *     response=200,
-     *     description="Return permission list of group",
+     *     description="Return user list",
      *     @SWG\Schema(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=Entity::class, groups={"read"}))
+     *         @SWG\Items(ref=@Model(type=User::class, groups={"read"}))
      *     )
      * )
      *
@@ -72,6 +84,6 @@ final class Permission extends AbstractFOSRestController
     {
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, serialize($request->query->all())));
 
-        return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Entity::class));
+        return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, User::class));
     }
 }

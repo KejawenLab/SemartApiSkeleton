@@ -12,4 +12,6 @@ use KejawenLab\Semart\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterfac
 interface MenuRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findByCode(string $code): ?MenuInterface;
+
+    public function findChilds(MenuInterface $menu): array;
 }

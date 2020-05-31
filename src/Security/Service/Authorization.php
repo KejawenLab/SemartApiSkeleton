@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class Authorization
+final class Authorization
 {
     private $menuRepository;
 
@@ -30,10 +30,17 @@ class Authorization
             return false;
         }
 
-        foreach ($permission->getActions() as $value) {
+        $actions = $permission->getActions();
+        $count = count($actions);
+        $granted = 0;
+        foreach ($actions as $value) {
             if ($this->checker->isGranted($value, $menu)) {
-                return true;
+                $granted++;
             }
+        }
+
+        if ($count === $granted) {
+            return true;
         }
 
         return false;

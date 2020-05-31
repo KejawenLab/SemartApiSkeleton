@@ -113,6 +113,7 @@ class Menu implements MenuInterface
 
     public function __construct()
     {
+        $this->sortOrder = 0;
         $this->showable = true;
     }
 

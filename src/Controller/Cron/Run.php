@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Cron\CronService;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
@@ -20,6 +21,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
+ * @Permission(menu="CRONJOB", actions={Permission::ADD, Permission::EDIT})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Run extends AbstractFOSRestController

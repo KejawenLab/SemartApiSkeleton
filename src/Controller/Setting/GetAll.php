@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
 use KejawenLab\Semart\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
@@ -17,6 +18,8 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * @Permission(menu="SETTING", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class GetAll extends AbstractFOSRestController

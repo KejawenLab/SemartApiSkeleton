@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\ApiSkeleton\Controller\Menu;
+namespace KejawenLab\Semart\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\Semart\ApiSkeleton\Entity\Menu;
+use KejawenLab\Semart\ApiSkeleton\Entity\User;
 use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\Semart\ApiSkeleton\Security\Service\MenuService;
+use KejawenLab\Semart\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
@@ -17,7 +17,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Permission(menu="MENU", actions={Permission::VIEW})
+ * @Permission(menu="USER", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
@@ -27,22 +27,22 @@ final class Get extends AbstractFOSRestController
 
     private $logger;
 
-    public function __construct(MenuService $service, LoggerInterface $auditLogger)
+    public function __construct(UserService $service, LoggerInterface $auditLogger)
     {
         $this->service = $service;
         $this->logger = $auditLogger;
     }
 
     /**
-     * @Rest\Get("/menus/{id}")
+     * @Rest\Get("/users/{id}")
      *
-     * @SWG\Tag(name="Menu")
+     * @SWG\Tag(name="User")
      * @SWG\Response(
      *     response=200,
-     *     description="Return menu detail",
+     *     description="Return user detail",
      *     @SWG\Schema(
      *         type="object",
-     *         ref=@Model(type=Menu::class, groups={"read"})
+     *         ref=@Model(type=User::class, groups={"read"})
      *     )
      * )
      * @Security(name="Bearer")

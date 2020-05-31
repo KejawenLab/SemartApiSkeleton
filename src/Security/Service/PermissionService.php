@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\ApiSkeleton\Security\Service;
 
 use KejawenLab\Semart\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionableInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
+use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
@@ -20,8 +24,10 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 {
     public const FILTER_NAME = 'semart_softdeletable';
 
+    private $menuRepository;
+
     /**
-     * @var PermissionInitiatorInterface[] | PermissionRemoverInterface[]
+     * @var PermissionInitiatorInterface[]
      */
     private $initiators;
 
@@ -32,8 +38,15 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     private $class;
 
-    public function __construct(PermissionRepositoryInterface $repository, AliasHelper $aliasHelper, iterable $initiators, iterable $removers, string $class)
-    {
+    public function __construct(
+        PermissionRepositoryInterface $repository,
+        AliasHelper $aliasHelper,
+        MenuRepositoryInterface $menuRepository,
+        iterable $initiators,
+        iterable $removers,
+        string $class
+    ) {
+        $this->menuRepository = $menuRepository;
         $this->initiators = $initiators;
         $this->removers = $removers;
         $this->class = $class;
@@ -53,15 +66,52 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     public function revoke(PermissionableInterface $object): void
     {
-        foreach ($this->initiators as $initiator) {
-            if ($initiator->support($object)) {
-                $initiator->remove($object);
+        foreach ($this->removers as $remover) {
+            if ($remover->support($object)) {
+                $remover->remove($object);
             }
         }
     }
 
+    public function getPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface
+    {
+        return $this->repository->findPermission($group, $menu);
+    }
+
     public function getByUser(UserInterface $user): array
     {
-        return $this->repository->findByUser($user);
+        /** @var MenuInterface[] $parents */
+        $parents = $this->repository->findAllowedMenusByGroup($user->getGroup(), true);
+        $menus = [];
+        foreach ($parents as $key => $parent) {
+            $menus[$key] = $this->buildMenu($parent, $user->getGroup());
+        }
+
+        return $menus;
+    }
+
+    private function buildMenu(MenuInterface $menu, GroupInterface $group): array
+    {
+        $tree = [
+            'id' => $menu->getId(),
+            'code' => $menu->getCode(),
+            'name' => $menu->getName(),
+            'path' => $menu->getUrlPath(),
+            'extra' => $menu->getExtra(),
+        ];
+
+        /** @var MenuInterface[] $childs */
+        $childs = $this->menuRepository->findChilds($menu);
+        if (!empty($childs)) {
+            $tree['childs'] = [];
+            foreach ($childs as $key => $child) {
+                $permission = $this->getPermission($group, $child);
+                if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
+                    $tree['childs'][$key] = $this->buildMenu($child, $group);
+                }
+            }
+        }
+
+        return $tree;
     }
 }

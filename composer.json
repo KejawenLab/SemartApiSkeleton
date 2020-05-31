@@ -24,7 +24,7 @@
         "symfony/dotenv": "^5.0",
         "symfony/flex": "^1.3.1",
         "symfony/form": "^5.0",
-        "symfony/framework-bundle": "5.0.*",
+        "symfony/framework-bundle": "^5.0",
         "symfony/inflector": "^5.0",
         "symfony/maker-bundle": "^1.18",
         "symfony/monolog-bundle": "^3.5",
@@ -38,7 +38,9 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/stopwatch": "^5.0",
+        "symfony/twig-bundle": "^5.0",
+        "symfony/web-profiler-bundle": "^5.0"
     },
     "config": {
         "preferred-install": {

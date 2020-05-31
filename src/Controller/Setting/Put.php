@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Entity\Setting;
 use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
 use KejawenLab\Semart\ApiSkeleton\Form\Type\SettingType;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\Semart\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\Semart\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
+ * @Permission(menu="SETTING", actions={Permission::EDIT})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Put extends AbstractFOSRestController

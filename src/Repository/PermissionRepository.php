@@ -10,7 +10,6 @@ use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
-use KejawenLab\Semart\ApiSkeleton\Security\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -31,20 +30,30 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $this->findOneBy(['group' => $group, 'menu' => $menu]);
     }
 
-    public function findByUser(UserInterface $user): array
+    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): array
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
         $queryBuilder->innerJoin('o.menu', 'm');
-        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($user->getGroup()->getId())));
-        $queryBuilder->addOrderBy('m.parent', 'ASC');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)));
         $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
+        if ($parentOnly) {
+            $queryBuilder->andWhere($queryBuilder->expr()->isNull('m.parent'));
+        }
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
         $query->enableResultCache(7, sprintf('%s:%s:%s', __CLASS__, __METHOD__, serialize($query->getParameters())));
 
-        return $query->getResult();
+        /** @var PermissionInterface[] $permissions */
+        $menus = [];
+        $permissions = $query->getResult();
+        foreach ($permissions as $permission) {
+            $menus[] = $permission->getMenu();
+        }
+
+        return $menus;
     }
 
     public function removeByGroup(GroupInterface $group): void

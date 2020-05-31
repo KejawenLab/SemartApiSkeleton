@@ -4,4 +4,4 @@
 - { parent: 'ref:menu#administrator', code: 'GROUP', sortOrder: 2, name: 'Group', routeName: 'kejawenlab_semart_apiskeleton_group_getall', ref: 'administrator_group' }
 - { parent: 'ref:menu#administrator', code: 'MENU', sortOrder: 3, name: 'Menu', routeName: 'kejawenlab_semart_apiskeleton_menu_getall', ref: 'administrator_menu' }
 - { parent: 'ref:menu#administrator', code: 'SETTING', sortOrder: 4, name: 'Setting', routeName: 'kejawenlab_semart_apiskeleton_setting_getall', ref: 'administrator_setting' }
-- { parent: 'ref:menu#administrator', code: 'CRONJOB', sortOrder: 4, name: 'Cronjob', routeName: 'kejawenlab_semart_apiskeleton_cron_getall', ref: 'administrator_cronjob' }
+- { parent: 'ref:menu#administrator', code: 'CRONJOB', sortOrder: 5, name: 'Cronjob', routeName: 'kejawenlab_semart_apiskeleton_cron_getall', ref: 'administrator_cronjob' }

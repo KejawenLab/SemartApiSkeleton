@@ -296,6 +296,9 @@
     "symfony/dependency-injection": {
         "version": "v5.0.8"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.1.2"
+    },
     "symfony/doctrine-bridge": {
         "version": "v5.0.8"
     },
@@ -373,9 +376,6 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
-    "symfony/mime": {
-        "version": "v5.0.8"
-    },
     "symfony/monolog-bridge": {
         "version": "v5.0.8"
     },
@@ -405,9 +405,6 @@
     "symfony/polyfill-intl-icu": {
         "version": "v1.17.0"
     },
-    "symfony/polyfill-intl-idn": {
-        "version": "v1.17.0"
-    },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.17.0"
     },
@@ -415,6 +412,9 @@
         "version": "v1.17.0"
     },
     "symfony/polyfill-php73": {
+        "version": "v1.17.0"
+    },
+    "symfony/polyfill-php80": {
         "version": "v1.17.0"
     },
     "symfony/process": {

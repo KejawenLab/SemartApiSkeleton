@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Entity\Group;
 use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
 use KejawenLab\Semart\ApiSkeleton\Form\Type\GroupType;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\Semart\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
+ * @Permission(menu="GROUP", actions={Permission::EDIT})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Put extends AbstractFOSRestController

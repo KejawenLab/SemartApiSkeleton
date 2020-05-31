@@ -59,6 +59,9 @@ services:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
+    KejawenLab\Semart\ApiSkeleton\Security\Service\GroupService:
+        arguments:
+            $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
     KejawenLab\Semart\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
         arguments:
             $logger: '@monolog.logger.db'
@@ -68,3 +71,6 @@ services:
     KejawenLab\Semart\ApiSkeleton\Security\Service\PermissionService:
         arguments:
             $class: 'KejawenLab\Semart\ApiSkeleton\Entity\Permission'
+    KejawenLab\Semart\ApiSkeleton\Generator\PermissionGenerator:
+        arguments:
+            $class: 'KejawenLab\Semart\ApiSkeleton\Entity\Menu'

@@ -11,6 +11,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\Semart\ApiSkeleton\Cron\CronService;
 use KejawenLab\Semart\ApiSkeleton\Form\FormFactory;
 use KejawenLab\Semart\ApiSkeleton\Form\Type\CronType;
+use KejawenLab\Semart\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
@@ -19,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * @Permission(menu="CRONJOB", actions={Permission::ADD})
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class Post extends AbstractFOSRestController
