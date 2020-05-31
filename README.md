@@ -5,23 +5,26 @@
 #### Api Doc
 ![Api Doc](doc/assets/full.png)
 
+#### Sandbox
+![Sandbox](doc/assets/sandbox.png)
+
 #### Cronjob Management
-![Api Doc](doc/assets/cron.png)
+![Cronjob](doc/assets/cron.png)
 
 #### Setting Management
-![Api Doc](doc/assets/setting.png)
+![Setting](doc/assets/setting.png)
 
 #### Group Management
-![Api Doc](doc/assets/group.png)
+![Group](doc/assets/group.png)
 
 #### Menu Management
-![Api Doc](doc/assets/menu.png)
+![Menu](doc/assets/menu.png)
 
 #### User Management
-![Api Doc](doc/assets/user.png)
+![User](doc/assets/user.png)
 
 #### Profile Management
-![Api Doc](doc/assets/profile.png)
+![Profile](doc/assets/profile.png)
 
 ## Copyright
 
