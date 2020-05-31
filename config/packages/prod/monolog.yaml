@@ -8,23 +8,26 @@ monolog:
             excluded_http_codes: [404, 405]
             buffer_size: 50 # How many messages should be saved? Prevent memory leaks
         nested:
-            type: stream
+            type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            max_files: 99
         console:
             type: console
             process_psr_3_messages: false
             channels: ["!event", "!doctrine"]
         db:
-            type: stream
+            type: rotating_file
             path: "%kernel.logs_dir%/db.log"
             level: debug
             channels: [db]
+            max_files: 99
         audit:
-            type: stream
+            type: rotating_file
             path: "%kernel.logs_dir%/audit.log"
             level: debug
             channels: [audit]
+            max_files: 99
 
         # Uncomment to log deprecations
         #deprecation:

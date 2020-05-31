@@ -23,7 +23,7 @@ final class LoginFailSubscriber implements EventSubscriberInterface
 
     private const MAX_LOGIN_FAILURE = 9;
 
-    private const FAILURE_TTL = 3600;
+    private const FAILURE_TTL = 300;
 
     private $requestStack;
 
