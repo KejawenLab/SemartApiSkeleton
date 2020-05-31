@@ -125,6 +125,8 @@ php bin/console cron:stop
 >
 > * Cache Management
 >
+> * Upgrade Management
+>
 
 ## Cara Penggunaan
 
