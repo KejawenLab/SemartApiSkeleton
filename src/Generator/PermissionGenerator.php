@@ -63,7 +63,7 @@ final class PermissionGenerator extends AbstractGenerator
 
         $this->menuService->save($menu);
 
-        $output->writeln(sprintf('<comment>Generating permission(s) for menu "%s"', $shortNameUppercase));
+        $output->writeln(sprintf('<comment>Generating permission(s) for menu "<info>%s</info></comment>"', $shortNameUppercase));
         $this->entityManager->getFilters()->disable(PermissionService::FILTER_NAME);
         $this->permissionService->initiate($menu);
         $this->entityManager->getFilters()->enable(PermissionService::FILTER_NAME);

@@ -6,7 +6,6 @@ namespace Alpabit\ApiSkeleton\Command;
 
 use Alpabit\ApiSkeleton\Generator\GeneratorFactory;
 use Alpabit\ApiSkeleton\Security\Service\MenuService;
-use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,13 +21,13 @@ final class GenerateCommand extends Command
 {
     private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
 
-    private $generatorFactory;
+    private $generator;
 
     private $menuService;
 
-    public function __construct(GeneratorFactory $generatorFactory, MenuService $menuService)
+    public function __construct(GeneratorFactory $generator, MenuService $menuService)
     {
-        $this->generatorFactory = $generatorFactory;
+        $this->generator = $generator;
         $this->menuService = $menuService;
 
         parent::__construct();
@@ -37,9 +36,7 @@ final class GenerateCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('semart:crud:generate')
-            ->setAliases(['semart:generate', 'semart:gen'])
-            ->setDescription('Generate RESTful API')
+            ->setName('semart:generate')
             ->setDescription('Generate RESTful API')
             ->addArgument('entity', InputArgument::REQUIRED)
             ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
@@ -56,7 +53,7 @@ final class GenerateCommand extends Command
  ___/ /  __/ / / / / / /_/ / /  / /_   / /_/ /  __/ / / /  __/ /  / /_/ / /_/ /_/ / /
 /____/\___/_/ /_/ /_/\__,_/_/   \__/   \____/\___/_/ /_/\___/_/   \__,_/\__/\____/_/
 
-<comment>By: KejawenLab - Muhamad Surya Iksanudin<surya.kejawen@gmail.com></comment>
+By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comment>>
 
 </>');
         if (!$input->getOption('force')) {
@@ -89,7 +86,7 @@ final class GenerateCommand extends Command
         ]), $output);
 
         $output->writeln('<info>Generating RESTful API</info>');
-        $this->generatorFactory->generate($reflection, $output);
+        $this->generator->generate($reflection, $output);
 
         if ($parentCode = $input->getOption('parent')) {
             $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));
@@ -102,7 +99,7 @@ final class GenerateCommand extends Command
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful API for <info>"%s"</info> class is generated</comment>', $reflection->getName()));
+        $output->writeln(sprintf('<comment>RESTful API for class <info>"%s"</info> is generated</comment>', $reflection->getName()));
 
         return 0;
     }

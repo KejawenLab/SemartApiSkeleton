@@ -227,6 +227,38 @@ class Test implements TestInterface
 php bin/console semart:generate Test
 ```
 
+#### Update form type
+
+```php
+//class: Alpabit\ApiSkeleton\Form\Type\TestType 
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        /**
+         * @todo implement your form here
+         */
+    }
+```
+
+#### Update search query extension
+
+```php
+//class: Alpabit\ApiSkeleton\Test\Query\SearchQueryExtension
+    public function apply(QueryBuilder $queryBuilder, Request $request): void
+    {
+        $query = $request->query->get('q');
+        if (!$query) {
+            return;
+        }
+
+        /**
+        * Uncomment to implement your own search logic
+        *
+        * $alias = $this->aliasHelper->findAlias('root');
+        * $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        */
+    }
+```
+
 ## TODO
 
 - [ ] Front User/Customer Management
@@ -234,8 +266,6 @@ php bin/console semart:generate Test
 - [ ] Front User/Customer Reset Password
 
 - [ ] File/Media Management
-
-- [ ] Upgrade (Database) Management
 
 ## Copyright
 
