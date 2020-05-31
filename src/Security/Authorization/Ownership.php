@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Authorization;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

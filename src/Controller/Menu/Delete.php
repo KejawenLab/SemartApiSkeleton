@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Controller\Menu;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Service\MenuService;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;

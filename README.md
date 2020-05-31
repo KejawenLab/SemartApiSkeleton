@@ -74,6 +74,20 @@ php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load
 ```
 
+## Cron Daemon
+
+#### Start Cron Daemon
+
+```bash
+php bin/console cron:start
+```
+
+#### Stop Cron Daemon
+
+```bash
+php bin/console cron:stop
+```
+
 ## Fitur
 
 >
@@ -114,14 +128,14 @@ php bin/console doctrine:fixtures:load
 
 ## Cara Penggunaan
 
-#### Buat Class Model
+#### Buat Interface Model
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Test;
+namespace Alpabit\ApiSkeleton\Test\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -129,8 +143,6 @@ namespace Alpabit\ApiSkeleton\Test;
 interface TestInterface
 {
     public function getId(): ?string;
-
-    public function getCode(): ?string;
 
     public function getName(): ?string;
 }
@@ -146,15 +158,14 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Entity;
 
+use Alpabit\ApiSkeleton\Repository\TestRepository;
+use Alpabit\ApiSkeleton\Test\Model\TestInterface;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Alpabit\ApiSkeleton\Repository\TestRepository;
-use Alpabit\ApiSkeleton\Test\TestInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -163,8 +174,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="test_table")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"code"})
  */
 class Test implements TestInterface
 {
@@ -183,16 +192,6 @@ class Test implements TestInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
-     *
-     * @Assert\Length(max=7)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
-    private $code;
-
-    /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\Length(max=255)
@@ -207,18 +206,6 @@ class Test implements TestInterface
         return (string) $this->id;
     }
 
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = StringUtil::uppercase($code);
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -229,11 +216,6 @@ class Test implements TestInterface
         $this->name = StringUtil::title($name);
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getId();
     }
 }
 
@@ -247,15 +229,15 @@ php bin/console semart:generate Test
 
 ## TODO
 
-[ ] Front User/Customer Management
+- [ ] Front User/Customer Management
 
-[ ] Front User/Customer Reset Password
+- [ ] Front User/Customer Reset Password
 
-[ ] Generator Support Parent Menu
+- [ ] Generator Support Parent Menu
 
-[ ] File/Media Management
+- [ ] File/Media Management
 
-[ ] Upgrade (Database) Management
+- [ ] Upgrade (Database) Management
 
 ## Copyright
 

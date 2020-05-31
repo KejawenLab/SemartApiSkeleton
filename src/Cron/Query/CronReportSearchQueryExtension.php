@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Cron\Query;
 
-use Doctrine\ORM\QueryBuilder;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

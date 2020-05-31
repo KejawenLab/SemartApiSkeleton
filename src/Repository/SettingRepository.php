@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Alpabit\ApiSkeleton\Entity\Setting;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

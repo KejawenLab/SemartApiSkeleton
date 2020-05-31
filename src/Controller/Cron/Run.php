@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Controller\Cron;
 
+use Alpabit\ApiSkeleton\Cron\CronService;
+use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Cron\CronBundle\Entity\CronJob;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Alpabit\ApiSkeleton\Cron\CronService;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
@@ -46,7 +46,11 @@ final class Run extends AbstractFOSRestController
      * @SWG\Tag(name="Cron Job")
      * @SWG\Response(
      *     response=200,
-     *     description="Run job manually"
+     *     description="Job status",
+     *     @SWG\Schema(
+     *         @SWG\Property(property="code", type="integer"),
+     *         @SWG\Property(property="message", type="string")
+     *     )
      * )
      * @Security(name="Bearer")
      *

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Generator;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Service\GroupService;
 use Alpabit\ApiSkeleton\Security\Service\MenuService;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;

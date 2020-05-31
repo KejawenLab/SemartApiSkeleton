@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Controller\Setting;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Alpabit\ApiSkeleton\Entity\Setting;
 use Alpabit\ApiSkeleton\Form\FormFactory;
 use Alpabit\ApiSkeleton\Form\Type\SettingType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Setting\SettingService;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

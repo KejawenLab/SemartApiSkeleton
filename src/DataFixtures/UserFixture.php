@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\DataFixtures;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Alpabit\ApiSkeleton\Entity\User;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

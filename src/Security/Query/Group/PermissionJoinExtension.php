@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Query\Group;
 
-use Doctrine\ORM\QueryBuilder;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

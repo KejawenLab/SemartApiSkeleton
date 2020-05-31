@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Pagination;
 
-use Doctrine\ORM\QueryBuilder;
 use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use Alpabit\ApiSkeleton\Setting\SettingService;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

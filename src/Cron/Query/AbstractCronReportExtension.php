@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Cron\Query;
 
-use Cron\CronBundle\Entity\CronReport;
 use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Cron\CronBundle\Entity\CronReport;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

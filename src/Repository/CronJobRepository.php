@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use Cron\CronBundle\Entity\CronJob;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

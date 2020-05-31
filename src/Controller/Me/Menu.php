@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Controller\Me;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Alpabit\ApiSkeleton\Entity\Menu as Entity;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;

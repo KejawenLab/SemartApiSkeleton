@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Service;
 
-use Doctrine\ORM\QueryBuilder;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\Persistence\ManagerRegistry;
 use Alpabit\ApiSkeleton\Entity\Event\PersistEvent;
 use Alpabit\ApiSkeleton\Entity\Event\RemoveEvent;
 use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

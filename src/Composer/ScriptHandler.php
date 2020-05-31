@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Composer;
 
+use Alpabit\ApiSkeleton\Util\Encryptor;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
-use Alpabit\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Alpabit\ApiSkeleton\Entity\Group;
 use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

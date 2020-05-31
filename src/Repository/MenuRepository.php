@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Alpabit\ApiSkeleton\Entity\Menu;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

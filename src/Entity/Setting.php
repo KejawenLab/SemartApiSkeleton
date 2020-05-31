@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Entity;
 
+use Alpabit\ApiSkeleton\Repository\SettingRepository;
+use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
+use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Alpabit\ApiSkeleton\Repository\SettingRepository;
-use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
