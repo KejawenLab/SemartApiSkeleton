@@ -26,6 +26,14 @@
 #### Profile Management
 ![Profile](doc/assets/profile.png)
 
+## Install
+
+```bash
+git clone https://github.com/KejawenLab/SemartApiSkeleton
+cd SemartApiSkeleton
+composer update --prefer-dist -vvv
+```
+
 ## Copyright
 
 Project ini disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
