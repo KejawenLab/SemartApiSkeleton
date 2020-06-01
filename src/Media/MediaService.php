@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Media;
 
 use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Media\Model\MediaRepositoryInterface;
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
