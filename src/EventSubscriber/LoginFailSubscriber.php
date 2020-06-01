@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 
 /**
@@ -25,14 +26,17 @@ final class LoginFailSubscriber implements EventSubscriberInterface
 
     private const FAILURE_TTL = 300;
 
+    private $kernel;
+
     private $requestStack;
 
     private $logger;
 
     private $redis;
 
-    public function __construct(RequestStack $requestStack, LoggerInterface $logger, \Redis $redis)
+    public function __construct(KernelInterface $kernel, RequestStack $requestStack, LoggerInterface $logger, \Redis $redis)
     {
+        $this->kernel = $kernel;
         $this->requestStack = $requestStack;
         $this->logger = $logger;
         $this->redis = $redis;
@@ -64,7 +68,7 @@ final class LoginFailSubscriber implements EventSubscriberInterface
 
         $clientIp = $request->getClientIp();
         $key = sprintf('%s_%s_%s', static::FAILURE_KEY, $request->request->get('username'), $clientIp);
-        if ((int) $this->redis->get($key) >= static::MAX_LOGIN_FAILURE) {
+        if ((int) $this->redis->get($key) >= static::MAX_LOGIN_FAILURE && !$this->kernel->isDebug()) {
             $this->logger->critical(sprintf('IP "%s" banned due to %d login attempts failures.', $clientIp, static::MAX_LOGIN_FAILURE));
 
             throw new HttpException(Response::HTTP_TOO_MANY_REQUESTS);

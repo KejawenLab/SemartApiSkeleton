@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination;
+namespace Alpabit\ApiSkeleton\Pagination\Query;
 
+use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 
 /**

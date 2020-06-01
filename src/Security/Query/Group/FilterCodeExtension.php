@@ -20,7 +20,6 @@ final class FilterCodeExtension extends AbstractQueryExtension
             return;
         }
 
-        $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('UPPER(%s.code)', $alias), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('UPPER(%s.code)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
     }
 }

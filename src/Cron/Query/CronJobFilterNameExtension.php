@@ -20,7 +20,6 @@ final class CronJobFilterNameExtension extends AbstractCronJobExtension
             return;
         }
 
-        $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('UPPER(%s.name)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
     }
 }

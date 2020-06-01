@@ -138,6 +138,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
+    "jms/metadata": {
+        "version": "2.2.0"
+    },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
     },
@@ -376,6 +379,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mime": {
+        "version": "v5.1.0"
+    },
     "symfony/monolog-bridge": {
         "version": "v5.0.8"
     },
@@ -403,6 +409,9 @@
         "version": "v1.17.0"
     },
     "symfony/polyfill-intl-icu": {
+        "version": "v1.17.0"
+    },
+    "symfony/polyfill-intl-idn": {
         "version": "v1.17.0"
     },
     "symfony/polyfill-intl-normalizer": {
@@ -546,6 +555,18 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
     },
     "webmozart/assert": {
         "version": "1.8.0"

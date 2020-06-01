@@ -9,8 +9,6 @@ namespace Alpabit\ApiSkeleton\Security\Model;
  */
 interface GroupInterface extends PermissionableInterface
 {
-    public function getId(): ?string;
-
     public function getCode(): ?string;
 
     public function getName(): ?string;

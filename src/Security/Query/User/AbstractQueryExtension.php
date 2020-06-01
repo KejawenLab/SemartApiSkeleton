@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Query\User;
 
-use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 
 /**

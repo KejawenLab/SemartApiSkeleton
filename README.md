@@ -177,7 +177,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
-class Test implements TestInterface
+final class Test implements TestInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;

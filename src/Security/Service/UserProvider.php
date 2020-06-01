@@ -15,8 +15,11 @@ final class UserProvider implements UserProviderInterface
 {
     private $repository;
 
-    public function __construct(UserRepositoryInterface $repository)
+    private $class;
+
+    public function __construct(UserRepositoryInterface $repository, string $class)
     {
+        $this->class = $class;
         $this->repository = $repository;
     }
 
@@ -27,6 +30,6 @@ final class UserProvider implements UserProviderInterface
 
     public function support(string $class): bool
     {
-        return UserInterface::class === $class;
+        return $this->class === $class;
     }
 }

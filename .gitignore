@@ -1,5 +1,7 @@
 .env
 .alpabit
+/storage
+!/storage/.gitignore
 
 ###> symfony/framework-bundle ###
 /.env.local

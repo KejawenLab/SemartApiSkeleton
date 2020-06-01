@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Setting\Query;
 
-use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 
 /**

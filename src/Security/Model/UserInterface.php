@@ -11,8 +11,6 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
  */
 interface UserInterface extends SymfonyUser
 {
-    public function getId(): ?string;
-
     public function getSupervisor(): ?self;
 
     public function getFullName(): ?string;

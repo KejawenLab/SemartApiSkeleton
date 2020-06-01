@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Query\Menu;
 
-use Alpabit\ApiSkeleton\Pagination\AbstractQueryExtension as Base;
+use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 
 /**

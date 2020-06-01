@@ -1,11 +1,10 @@
-{% set entityHumanize = entity | humanize %}
 <?php
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\{{ entityHumanize }}\Query;
+namespace Alpabit\ApiSkeleton\Media\Query;
 
-use Alpabit\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
 use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\QueryBuilder;
@@ -23,15 +22,11 @@ final class SearchQueryExtension extends AbstractQueryExtension
             return;
         }
 
-        /**
-        * Uncomment to implement your own search logic
-        *
-        * $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        */
+        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.filePath)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
     }
 
     public function support(string $class): bool
     {
-        return in_array({{ entityHumanize }}Interface::class, class_implements($class));
+        return in_array(MediaInterface::class, class_implements($class));
     }
 }

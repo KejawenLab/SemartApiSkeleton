@@ -67,6 +67,9 @@ services:
     Alpabit\ApiSkeleton\Security\Service\GroupService:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
+    Alpabit\ApiSkeleton\Security\Service\UserProvider:
+        arguments:
+            $class: 'Alpabit\ApiSkeleton\Entity\User'
     Alpabit\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
         arguments:
             $logger: '@monolog.logger.db'

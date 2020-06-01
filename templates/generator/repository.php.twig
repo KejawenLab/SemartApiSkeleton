@@ -8,6 +8,7 @@ namespace Alpabit\ApiSkeleton\Repository;
 use Alpabit\ApiSkeleton\Entity\{{ entityHumanize }};
 use Alpabit\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method {{ entityHumanize }}|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,8 +20,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class {{ entityHumanize }}Repository extends AbstractRepository implements {{ entityHumanize }}RepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        parent::__construct($registry, {{ entityHumanize }}::class);
+        parent::__construct($eventDispatcher, $registry, {{ entityHumanize }}::class);
     }
 }

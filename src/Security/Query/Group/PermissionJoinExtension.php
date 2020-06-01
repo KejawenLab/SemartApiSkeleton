@@ -29,9 +29,8 @@ final class PermissionJoinExtension implements QueryExtensionInterface
             return;
         }
 
-        $root = $this->aliasHelper->findAlias('root');
         $alias = $this->aliasHelper->findAlias('group');
-        $queryBuilder->innerJoin(sprintf('%s.group', $root), $alias);
+        $queryBuilder->innerJoin(sprintf('%s.group', $this->aliasHelper->findAlias('root')), $alias);
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.id', $alias), $queryBuilder->expr()->literal($groupId)));
     }
 

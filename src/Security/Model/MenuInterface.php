@@ -9,8 +9,6 @@ namespace Alpabit\ApiSkeleton\Security\Model;
  */
 interface MenuInterface extends PermissionableInterface
 {
-    public function getId(): ?string;
-
     public function getParent(): ?self;
 
     public function getCode(): ?string;

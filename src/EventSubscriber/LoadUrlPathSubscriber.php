@@ -26,18 +26,20 @@ final class LoadUrlPathSubscriber implements EventSubscriber
     public function postLoad(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
-        if ($object instanceof MenuInterface) {
-            $path = $object->getRouteName();
-            try {
-                if ('#' !== $path) {
-                    $path = $this->urlGenerator->generate($object->getRouteName());
-                }
-            } catch (RouteNotFoundException $exception) {
-                $path = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
-            }
-
-            $object->setUrlPath($path);
+        if (!$object instanceof MenuInterface) {
+            return;
         }
+
+        $path = $object->getRouteName();
+        try {
+            if ('#' !== $path) {
+                $path = $this->urlGenerator->generate($object->getRouteName());
+            }
+        } catch (RouteNotFoundException $exception) {
+            $path = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
+        }
+
+        $object->setUrlPath($path);
     }
 
     public function getSubscribedEvents(): array
