@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class SetMediaFileSubscriber implements EventSubscriberInterface
+final class SetFileSubscriber implements EventSubscriberInterface
 {
     private $request;
 
