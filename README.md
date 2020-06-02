@@ -52,18 +52,35 @@
 >
 > * Redis Server >= 4.0
 >
+> * Composer
+>
+> * Symfony Console 
+>
 
 ## Install
+
+### Non Docker Install
+
+>
+> Install menggunakan metode Non Docker secara default akan menggunakan secure connection configuration
+>
+> Ini artinya password database akan dienkripsi sehingga lebih aman
+>
 
 #### Pengguna MySQL/MariaDB
 
 ```bash
 git clone https://github.com/KejawenLab/SemartApiSkeleton
 cd SemartApiSkeleton
+mkdir -p config/jwt
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
 php bin/console doctrine:migration:migrate
 php bin/console doctrine:fixtures:load
+php bin/console cron:start
+symfony server:start
 ```
 
 #### Pengguna PostgreSQL/OracleDB/SQLServer
@@ -71,11 +88,43 @@ php bin/console doctrine:fixtures:load
 ```bash
 git clone https://github.com/KejawenLab/SemartApiSkeleton
 cd SemartApiSkeleton
+mkdir -p config/jwt
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load
+php bin/console cron:start
+symfony server:start
 ```
+
+> 
+> Buka browser pada halaman https://localhost:8000/api/doc atau sesuai alamat yang tertera ketika menjalankan perintah `symfony server:start`
+>
+
+### Docker Install
+
+>
+> Install menggunakan metode Docker adalah cara tercepat untuk memulai
+>
+
+```bash
+git clone https://github.com/KejawenLab/SemartApiSkeleton
+cd SemartApiSkeleton
+mkdir -p config/jwt
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+# Pastikan key-nya sama dengan nilai JWT_PASSPHRASE pada file docker-compose.yml atau sesuai dengan yang Anda kehendaki
+docker-compose build && docker-compose up
+docker exec -it semart_app bash -c "php bin/console doctrine:database:create"
+docker exec -it semart_app bash -c "php bin/console doctrine:schema:update --force"
+docker exec -it semart_app bash -c "php bin/console doctrine:fixtures:load"
+```
+
+> 
+> Buka browser pada halaman http://localhost:9876/api/doc
+>
 
 ## Cron Daemon
 

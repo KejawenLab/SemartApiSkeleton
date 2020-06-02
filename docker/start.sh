@@ -52,5 +52,6 @@ done
 cd /semart && composer update --prefer-dist -vvv
 
 chmod 777 -R var/
+chmod 755 -R config/
 
 /usr/bin/supervisord -n -c /etc/supervisord.conf
