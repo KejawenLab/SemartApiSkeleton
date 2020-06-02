@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        driver: 'pdo_%env(resolve:DATABASE_DRIVER)%'
+        driver: '%env(resolve:DATABASE_DRIVER)%'
         dbname: '%env(resolve:DATABASE_NAME)%'
         host: '%env(resolve:DATABASE_HOST)%'
         port: '%env(resolve:DATABASE_PORT)%'
@@ -10,7 +10,6 @@ doctrine:
         default_table_options:
             charset: '%env(resolve:DATABASE_CHARSET)%'
             collate: '%env(resolve:DATABASE_CHARSET)%_unicode_ci'
-#        url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware

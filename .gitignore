@@ -1,5 +1,5 @@
 .env
-.alpabit
+.semart
 /storage
 !/storage/.gitignore
 

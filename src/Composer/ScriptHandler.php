@@ -26,7 +26,7 @@ class ScriptHandler
 
         $envPath = sprintf('%s/.env', $rootPath);
         $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($envPath)) {
+        if (!$fileSystem->exists($envPath) && (!isset($_SERVER['APP_ENV']) || !$_SERVER['APP_ENV'])) {
             $io->write('<info>Creating new environment variable file</info>');
 
             $template = (string) file_get_contents(sprintf('%s/.env.template', $rootPath));
@@ -42,7 +42,7 @@ class ScriptHandler
         $composer = $event->getComposer();
         $io = $event->getIO();
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
-        $lock = sprintf('%s/.alpabit', $rootPath);
+        $lock = sprintf('%s/.semart', $rootPath);
 
         if (file_exists($lock) && 1 === (int) file_get_contents($lock)) {
             return 0;
@@ -66,7 +66,7 @@ class ScriptHandler
 
         $environment = $io->ask('Please enter your application environment [default: <info>dev</info>]: ', 'dev');
         $redisUlr = $io->ask('Please enter your redis url [default: <info>localhost</info>]: ', 'localhost');
-        $dbDriver = $io->ask('Please enter your database driver [default: <info>mysql</info>]: ', 'mysql');
+        $dbDriver = $io->ask('Please enter your database driver [default: <info>pdo_mysql</info>]: ', 'pdo_mysql');
         $dbVersion = $io->ask('Please enter your database version [default: <info>5.7</info>]: ', '5.7');
         $dbCharset = $io->ask('Please enter your database charset [default: <info>utf8mb4</info>]: ', 'utf8mb4');
         $dbUser = $io->ask('Please enter your database user [default: <info>root</info>]: ', 'root');

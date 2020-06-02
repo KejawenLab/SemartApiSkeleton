@@ -1,0 +1,42 @@
+version: '2'
+services:
+    app:
+        container_name: semart_app
+        build: .
+        environment:
+            NGINX_WEBROOT: /semart/public
+            APP_ENV: dev
+            APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
+            DATABASE_DRIVER: pdo_mysql
+            DATABASE_SERVER_VERSION: 5.7
+            DATABASE_CHARSET: utf8mb4
+            DATABASE_URL: mysql://root:semart@db:3306/semart
+            REDIS_URL: redis://session
+        volumes:
+            - .:/semart
+        ports:
+            - 9876:80
+        links:
+            - session
+            - db
+        depends_on:
+            - session
+
+    db:
+        container_name: semart_db
+        image: mysql:latest
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: semart
+
+    adminer:
+        container_name: semart_adminer
+        image: adminer:latest
+        ports:
+            - 6789:8080
+        links:
+            - db
+
+    session:
+        container_name: semart_session
+        image: redis:alpine

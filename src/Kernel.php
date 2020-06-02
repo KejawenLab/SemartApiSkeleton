@@ -9,7 +9,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 class Kernel extends BaseKernel implements CompilerPassInterface
 {
@@ -45,24 +45,26 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $confDir = $this->getProjectDir().'/config';
-
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import('../config/{routes}/*.yaml');
+        $routes->import('../config/{routes}.yaml');
     }
 
     public function process(ContainerBuilder $container)
     {
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);
-        /** @var string $databasePassword */
-        $databasePassword = $_ENV['DATABASE_PASSWORD'];
-        /** @var string $appSecret */
-        $appSecret = $_ENV['APP_SECRET'];
-        $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+        if (isset($_SERVER['DATABASE_URL']) && $_SERVER['DATABASE_URL']) {
+            $argument['url'] = $_SERVER['DATABASE_URL'];
+        } else {
+            /** @var string $databasePassword */
+            $databasePassword = $_ENV['DATABASE_PASSWORD'];
+            /** @var string $appSecret */
+            $appSecret = $_ENV['APP_SECRET'];
+            $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+        }
 
         $definition->replaceArgument(0, $argument);
     }
