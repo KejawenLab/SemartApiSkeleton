@@ -35,4 +35,9 @@ final class MediaService extends AbstractService implements ServiceInterface
 
         return $media;
     }
+
+    public function getByFile(string $fileName): ?MediaInterface
+    {
+        return $this->repository->findOneBy(['fileName' => $fileName]);
+    }
 }

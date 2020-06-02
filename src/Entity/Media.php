@@ -18,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=MediaRepository::class)
  * @ORM\Table(name="core_media")
  *
- * @UniqueEntity(fields={"filePath"})
+ * @UniqueEntity(fields={"fileName"})
  *
  * @Vich\Uploadable
  */
@@ -40,7 +40,7 @@ class Media implements MediaInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $filePath;
+    private $fileName;
 
     /**
      * @ORM\Column(type="boolean")
@@ -53,7 +53,7 @@ class Media implements MediaInterface
     private $fileUrl;
 
     /**
-     * @Vich\UploadableField(mapping="media", fileNameProperty="filePath")
+     * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
      */
     private $file;
 
@@ -67,14 +67,14 @@ class Media implements MediaInterface
         return (string) $this->id;
     }
 
-    public function getFilePath(): ?string
+    public function getFileName(): ?string
     {
-        return $this->filePath;
+        return $this->fileName;
     }
 
-    public function setFilePath(?string $filePath): self
+    public function setFileName(?string $fileName): self
     {
-        $this->filePath = $filePath;
+        $this->fileName = $fileName;
 
         return $this;
     }

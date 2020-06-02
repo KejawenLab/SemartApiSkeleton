@@ -15,7 +15,7 @@ interface MediaInterface
 
     public function getFile(): ?File;
 
-    public function getFilePath(): ?string;
+    public function getFileName(): ?string;
 
     public function getFileUrl(): ?string;
 

@@ -54,7 +54,7 @@ final class Post extends AbstractFOSRestController
      * @SWG\Parameter(
      *     name="public",
      *     in="formData",
-     *     type="integer",
+     *     type="boolean",
      *     description="Is public"
      * )
     * @SWG\Response(
@@ -74,13 +74,18 @@ final class Post extends AbstractFOSRestController
     */
     public function __invoke(Request $request): View
     {
-        $form = $this->formFactory->submitRequest(MediaType::class, $request);
-        if (!$form->isValid()) {
-            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+        $media = new Media();
+        if (!$file = $request->files->get('file')) {
+            return $this->view(['file' => 'This property can not be blank']);
         }
 
-        /** @var MediaInterface $media */
-        $media = $form->getData();
+        $public = $request->request->get('public', true);
+        if ('false' === $public) {
+            $public = false;
+        }
+
+        $media->setFile($file);
+        $media->setPublic((bool) $public);
         $this->service->save($media);
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));

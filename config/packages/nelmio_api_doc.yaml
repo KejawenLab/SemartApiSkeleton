@@ -1,9 +1,9 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: '%env(resolve:APPLICATION_TITLE)%'
-            description: '%env(resolve:APPLICATION_DESCRIPTION)%'
-            version: '%env(resolve:APPLICATION_VERSION)%'
+            title: '%env(resolve:APP_TITLE)%'
+            description: '%env(resolve:APP_DESCRIPTION)%'
+            version: '%env(resolve:APP_VERSION)%'
         securityDefinitions:
             Bearer:
                 type: apiKey

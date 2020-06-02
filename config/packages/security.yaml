@@ -24,6 +24,11 @@ security:
             methods: ['GET']
             stateless: true
             anonymous: true
+        media_public:
+            pattern: ^/api/medias/
+            methods: ['GET']
+            stateless: true
+            anonymous: true
         api:
             pattern: ^/api
             stateless: true
@@ -34,5 +39,5 @@ security:
     access_control:
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
-        - { path: ^/api/medias/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
+        - { path: ^/api/medias/, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
