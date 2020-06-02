@@ -59,11 +59,11 @@ final class Measurement
 
             $report->addJobReport($set->getReport());
             $set->run();
-
-            $this->manager->flush();
         } catch (\Exception $e) {
             $this->logger->critical(sprintf('Optimistic Lock Problem: %s', $e->getMessage()));
         }
+
+        $this->manager->flush();
     }
 
     private function isRunning(CronInterface $cron): bool
