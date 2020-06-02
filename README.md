@@ -14,6 +14,9 @@
 #### Setting Management
 ![Setting](doc/assets/setting.png)
 
+#### Media Management
+![Setting](doc/assets/media.png)
+
 #### Group Management
 ![Group](doc/assets/group.png)
 
@@ -124,6 +127,10 @@ php bin/console cron:stop
 > * Cronjob Management
 >
 > * Cache Management
+>
+> * Media Management
+>
+> * Public & Private Media Support
 >
 > * Upgrade Management
 >
@@ -266,8 +273,6 @@ php bin/console semart:generate Test
 - [ ] Front User/Customer Management
 
 - [ ] Front User/Customer Reset Password
-
-- [ ] File/Media Management
 
 ## Copyright
 
