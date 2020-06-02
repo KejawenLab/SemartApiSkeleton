@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Controller\Cron;
 
 use Alpabit\ApiSkeleton\Cron\CronService;
+use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Cron\CronBundle\Entity\CronJob;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Permission(menu="CRONJOB", actions={Permission::DELETE})
+ * @Permission(menu="CRON", actions={Permission::DELETE})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
- */
+*/
 final class Delete extends AbstractFOSRestController
 {
     private $service;
@@ -35,31 +35,31 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/cronjobs/{id}")
-     *
-     * @SWG\Tag(name="Cron Job")
-     * @SWG\Response(
-     *     response=204,
-     *     description="Delete cron job"
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
-     */
+    * @Rest\Delete("/cronjobs/{id}")
+    *
+    * @SWG\Tag(name="Cron")
+    * @SWG\Response(
+    *     response=204,
+    *     description="Delete cron"
+    * )
+    *
+    * @Security(name="Bearer")
+    *
+    * @param Request $request
+    * @param string $id
+    *
+    * @return View
+    */
     public function __invoke(Request $request, string $id): View
     {
-        $cronjob = $this->service->get($id);
-        if (!$cronjob instanceof CronJob) {
-            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
+        $cron = $this->service->get($id);
+        if (!$cron instanceof CronInterface) {
+            throw new NotFoundHttpException(sprintf('Cron ID: "%s" not found', $id));
         }
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id));
 
-        $this->service->remove($cronjob);
+        $this->service->remove($cron);
 
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }

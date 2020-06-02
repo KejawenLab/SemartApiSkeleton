@@ -32,7 +32,7 @@
 ## Requirement
 
 > 
-> * PHP >= 7.25
+> * PHP >= 7.2.5
 >
 > * Extension Ctype 
 >
@@ -45,6 +45,8 @@
 > * Extension Pcntl
 >
 > * Extension Pdo
+>
+> * Extension Posix
 >
 > * Extension Redis
 >

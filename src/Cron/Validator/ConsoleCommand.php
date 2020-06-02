@@ -7,6 +7,8 @@ namespace Alpabit\ApiSkeleton\Cron\Validator;
 use Symfony\Component\Validator\Constraint;
 
 /**
+ * @Annotation
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class ConsoleCommand extends Constraint
@@ -14,5 +16,10 @@ final class ConsoleCommand extends Constraint
     public function getMessage(): string
     {
         return 'Command "[COMMAND]" is not found';
+    }
+
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
     }
 }

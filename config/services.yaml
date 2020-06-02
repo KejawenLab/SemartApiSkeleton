@@ -75,10 +75,14 @@ services:
             $logger: '@monolog.logger.db'
     Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
         arguments:
-            $validator: '@cron.validator'
+            $validator: '@Cron\Validator\CrontabValidator'
     Alpabit\ApiSkeleton\Security\Service\PermissionService:
         arguments:
             $class: 'Alpabit\ApiSkeleton\Entity\Permission'
     Alpabit\ApiSkeleton\Generator\PermissionGenerator:
         arguments:
             $class: 'Alpabit\ApiSkeleton\Entity\Menu'
+    Alpabit\ApiSkeleton\Command\CronRunCommand:
+        arguments:
+            $reportClass: 'Alpabit\ApiSkeleton\Entity\CronReport'
+    Cron\Validator\CrontabValidator:

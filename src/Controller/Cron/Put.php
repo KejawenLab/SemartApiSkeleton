@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Controller\Cron;
 
 use Alpabit\ApiSkeleton\Cron\CronService;
+use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
+use Alpabit\ApiSkeleton\Entity\Cron;
 use Alpabit\ApiSkeleton\Form\FormFactory;
 use Alpabit\ApiSkeleton\Form\Type\CronType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Cron\CronBundle\Entity\CronJob;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -21,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Permission(menu="CRONJOB", actions={Permission::EDIT})
+ * @Permission(menu="CRON", actions={Permission::EDIT})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
- */
+*/
 final class Put extends AbstractFOSRestController
 {
     private $formFactory;
@@ -41,48 +42,48 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/cronjobs/{id}")
-     *
-     * @SWG\Tag(name="Cron Job")
-     * @SWG\Parameter(
-     *     name="cronjob",
-     *     in="body",
-     *     type="object",
-     *     description="Cron job form",
-     *     @Model(type=CronType::class)
-     * )
-     * @SWG\Response(
-     *     response=200,
-     *     description="Update new cron job",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=CronJob::class, groups={"read"})
-     *     )
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
-     */
+    * @Rest\Put("/cronjobs/{id}")
+    *
+    * @SWG\Tag(name="Cron")
+    * @SWG\Parameter(
+    *     name="cron",
+    *     in="body",
+    *     type="object",
+    *     description="Cron form",
+    *     @Model(type=CronType::class)
+    * )
+    * @SWG\Response(
+    *     response=200,
+    *     description="Update cron",
+    *     @SWG\Schema(
+    *         type="object",
+    *         ref=@Model(type=Cron::class, groups={"read"})
+    *     )
+    * )
+    *
+    * @Security(name="Bearer")
+    *
+    * @param Request $request
+    * @param string $id
+    *
+    * @return View
+    */
     public function __invoke(Request $request, string $id): View
     {
-        $cronjob = $this->service->get($id);
-        if (!$cronjob instanceof CronJob) {
-            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
+        $cron = $this->service->get($id);
+        if (!$cron instanceof CronInterface) {
+            throw new NotFoundHttpException(sprintf('Cron ID: "%s" not found', $id));
         }
 
-        $form = $this->formFactory->submitRequest(CronType::class, $request, $cronjob);
+        $form = $this->formFactory->submitRequest(CronType::class, $request, $cron);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
-        $this->service->save($cronjob);
+        $this->service->save($cron);
 
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));
+        $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));
 
-        return $this->view($this->service->get((string) $cronjob->getId()), Response::HTTP_CREATED);
+        return $this->view($this->service->get($cron->getId()));
     }
 }

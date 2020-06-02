@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Controller\Cron;
 
 use Alpabit\ApiSkeleton\Cron\CronService;
+use Alpabit\ApiSkeleton\Entity\Cron;
 use Alpabit\ApiSkeleton\Pagination\Paginator;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Cron\CronBundle\Entity\CronJob;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -18,10 +18,10 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Permission(menu="CRONJOB", actions={Permission::VIEW})
+ * @Permission(menu="CRON", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
- */
+*/
 final class GetAll extends AbstractFOSRestController
 {
     private $service;
@@ -38,46 +38,46 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/cronjobs")
-     *
-     * @SWG\Tag(name="Cron Job")
-     * @SWG\Parameter(
-     *     name="page",
-     *     in="query",
-     *     type="string",
-     *     description="Page indicator"
-     * )
-     * @SWG\Parameter(
-     *     name="limit",
-     *     in="query",
-     *     type="string",
-     *     description="Records per page"
-     * )
-     * @SWG\Parameter(
-     *     name="q",
-     *     in="query",
-     *     type="string",
-     *     description="Search cron job by code or name"
-     * )
-     * @SWG\Response(
-     *     response=200,
-     *     description="Return cron job list",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=CronJob::class, groups={"read"}))
-     *     )
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     *
-     * @return View
-     */
+    * @Rest\Get("/cronjobs")
+    *
+    * @SWG\Tag(name="Cron")
+    * @SWG\Parameter(
+    *     name="page",
+    *     in="query",
+    *     type="string",
+    *     description="Page indicator"
+    * )
+    * @SWG\Parameter(
+    *     name="limit",
+    *     in="query",
+    *     type="string",
+    *     description="Records per page"
+    * )
+    * @SWG\Parameter(
+    *     name="q",
+    *     in="query",
+    *     type="string",
+    *     description="Search cron by name or command"
+    * )
+    * @SWG\Response(
+    *     response=200,
+    *     description="Return cron list",
+    *     @SWG\Schema(
+    *         type="array",
+    *         @SWG\Items(ref=@Model(type=Cron::class, groups={"read"}))
+    *     )
+    * )
+    *
+    * @Security(name="Bearer")
+    *
+    * @param Request $request
+    *
+    * @return View
+    */
     public function __invoke(Request $request): View
     {
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, serialize($request->query->all())));
 
-        return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, CronJob::class));
+        return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Cron::class));
     }
 }

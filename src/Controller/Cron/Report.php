@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Controller\Cron;
 
 use Alpabit\ApiSkeleton\Cron\CronReportService;
+use Alpabit\ApiSkeleton\Entity\CronReport;
 use Alpabit\ApiSkeleton\Pagination\Paginator;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Cron\CronBundle\Entity\CronReport;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -18,7 +18,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Permission(menu="CRONJOB", actions={Permission::VIEW})
+ * @Permission(menu="CRON", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
@@ -40,7 +40,7 @@ final class Report extends AbstractFOSRestController
     /**
      * @Rest\Get("/cronjobs/{id}/logs")
      *
-     * @SWG\Tag(name="Cron Job")
+     * @SWG\Tag(name="Cron")
      * @SWG\Response(
      *     response=200,
      *     description="Return cron job report",

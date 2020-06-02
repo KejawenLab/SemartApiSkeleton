@@ -47,8 +47,6 @@ class Menu implements MenuInterface
      *
      * @Groups({"read"})
      * @MaxDepth(1)
-     *
-     * @Groups({"read"})
      */
     private $parent;
 

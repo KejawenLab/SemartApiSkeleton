@@ -23,9 +23,6 @@
     "cron/cron": {
         "version": "1.4.2"
     },
-    "cron/cron-bundle": {
-        "version": "2.4.1"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

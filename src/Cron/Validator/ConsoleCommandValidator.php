@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Cron\Validator;
 
+use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -30,12 +31,16 @@ final class ConsoleCommandValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, ConsoleCommand::class);
         }
 
-        if (!is_string($value)) {
-            throw new UnexpectedValueException($value, 'string');
+        if (!$value instanceof CronInterface) {
+            throw new UnexpectedValueException($value, CronInterface::class);
+        }
+
+        if (!$value->isSymfonyCommand()) {
+            return;
         }
 
         $console = new Application($this->kernel);
-        $command = explode(' ', $value);
+        $command = explode(' ', $value->getCommand());
         try {
             $console->get((string) $command[0]);
         } catch (CommandNotFoundException $exception) {

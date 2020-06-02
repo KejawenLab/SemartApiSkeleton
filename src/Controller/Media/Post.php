@@ -8,7 +8,6 @@ use Alpabit\ApiSkeleton\Entity\Media;
 use Alpabit\ApiSkeleton\Form\FormFactory;
 use Alpabit\ApiSkeleton\Form\Type\MediaType;
 use Alpabit\ApiSkeleton\Media\MediaService;
-use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;

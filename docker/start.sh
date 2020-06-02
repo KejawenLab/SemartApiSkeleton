@@ -49,7 +49,9 @@ do
     sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
 done
 
-cd /semart && composer update --prefer-dist -vvv
+if [[ ! -d "/semart/vendor" ]]; then
+    cd /semart && composer update --prefer-dist -vvv
+fi
 
 chmod 777 -R var/
 chmod 755 -R config/

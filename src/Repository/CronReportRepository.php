@@ -4,50 +4,23 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
-use Cron\CronBundle\Entity\CronJob;
-use Cron\CronBundle\Entity\CronReport;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
+use Alpabit\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
+use Alpabit\ApiSkeleton\Entity\CronReport;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
+ * @method CronReport|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CronReport|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CronReport[]    findAll()
+ * @method CronReport[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class CronReportRepository implements PaginatableRepositoryInterface
+final class CronReportRepository extends AbstractRepository implements CronReportRepositoryInterface
 {
-    private $manager;
-
-    private $repository;
-
-    private $aliasHelper;
-
-    public function __construct(EntityManagerInterface $manager, AliasHelper $aliasHelper)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
     {
-        $this->manager = $manager;
-        $this->repository = $manager->getRepository(CronReport::class);
-        $this->aliasHelper = $aliasHelper;
-    }
-
-    public function queryBuilder(string $alias): QueryBuilder
-    {
-        return $this->repository->createQueryBuilder($this->aliasHelper->findAlias('root'));
-    }
-
-    public function persist(object $object): void
-    {
-        $this->manager->persist($object);
-        $this->manager->flush();
-    }
-
-    public function remove(object $object): void
-    {
-        $this->manager->remove($object);
-        $this->manager->flush();
-    }
-
-    public function find(string $id): ?CronJob
-    {
-        return $this->repository->find($id);
+        parent::__construct($eventDispatcher, $registry, CronReport::class);
     }
 }

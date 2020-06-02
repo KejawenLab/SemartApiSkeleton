@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class CronJobSearchQueryExtension extends AbstractCronJobExtension
+final class CronSearchQueryExtension extends AbstractCronExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {

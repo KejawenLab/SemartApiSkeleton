@@ -1,7 +1,6 @@
 version: '2'
 services:
     app:
-        container_name: semart_app
         build: .
         environment:
             NGINX_WEBROOT: /semart/public
@@ -17,13 +16,23 @@ services:
             JWT_PASSPHRASE: 4e938d7532adc7163e0c657b1eb3ce93ed8f42c2
         volumes:
             - .:/semart
-        ports:
-            - 9876:80
         links:
             - session
             - db
         depends_on:
             - session
+
+    balancer:
+        container_name: semart_frontend
+        image: dockercloud/haproxy:latest
+        ports:
+            - 9876:80
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        links:
+            - app
+        depends_on:
+            - app
 
     db:
         container_name: semart_db

@@ -19,8 +19,8 @@ final class CronReportJoinExtension extends AbstractCronReportExtension
             return;
         }
 
-        $alias = $this->aliasHelper->findAlias('job');
-        $queryBuilder->innerJoin(sprintf('%s.job', $this->aliasHelper->findAlias('root')), $alias);
+        $alias = $this->aliasHelper->findAlias('cron');
+        $queryBuilder->innerJoin(sprintf('%s.cron', $this->aliasHelper->findAlias('root')), $alias);
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.id', $alias), $queryBuilder->expr()->literal($cronId)));
     }
 }
