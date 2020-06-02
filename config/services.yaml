@@ -12,6 +12,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             Psr\Log\LoggerInterface $auditLogger: '@monolog.logger.audit'
+            Psr\Log\LoggerInterface $dbLogger: '@monolog.logger.db'
             iterable $providers: !tagged_iterator semart.user_provider
             iterable $queryExtension: !tagged_iterator semart.query_extension
             iterable $generators: !tagged_iterator semart.generator
@@ -70,9 +71,6 @@ services:
     Alpabit\ApiSkeleton\Security\Service\UserProvider:
         arguments:
             $class: 'Alpabit\ApiSkeleton\Entity\User'
-    Alpabit\ApiSkeleton\EventSubscriber\ChangeLoggerSubscriber:
-        arguments:
-            $logger: '@monolog.logger.db'
     Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
         arguments:
             $validator: '@Cron\Validator\CrontabValidator'

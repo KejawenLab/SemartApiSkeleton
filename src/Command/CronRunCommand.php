@@ -68,7 +68,6 @@ final class CronRunCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        dump($input);
         $cron = new Cron();
         $cron->setExecutor($this->executor);
         if ($input->getArgument('job')) {

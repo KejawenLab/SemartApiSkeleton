@@ -22,17 +22,16 @@ final class CronService extends AbstractService implements ServiceInterface, Res
 
     private $builder;
 
-    public function __construct(KernelInterface $kernel, CronRepositoryInterface $repository, AliasHelper $aliasHelper, CronBuilder $builder)
-    {
+    public function __construct(
+        CronRepositoryInterface $repository,
+        AliasHelper $aliasHelper,
+        KernelInterface $kernel,
+        CronBuilder $builder
+    ) {
         $this->kernel = $kernel;
         $this->builder = $builder;
 
         parent::__construct($repository, $aliasHelper);
-    }
-
-    public function getByName(string $name): ?CronInterface
-    {
-        return $this->repository->findOneBy(['name' => $name]);
     }
 
     public function resolve(): array

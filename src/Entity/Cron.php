@@ -84,6 +84,13 @@ class Cron implements CronInterface
     private $schedule;
 
     /**
+     * @ORM\Column(type="integer")
+     *
+     * @Groups({"read"})
+     */
+    private $estimation;
+
+    /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
@@ -104,11 +111,18 @@ class Cron implements CronInterface
      */
     private $running;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Version()
+     */
+    private $version;
+
     public function __construct()
     {
         $this->enabled = true;
         $this->symfonyCommand = true;
         $this->running = false;
+        $this->estimation = 1;
     }
 
     public function getId(): ?string
@@ -164,6 +178,18 @@ class Cron implements CronInterface
         return $this;
     }
 
+    public function getEstimation(): int
+    {
+        return $this->estimation;
+    }
+
+    public function setEstimation(int $estimation): self
+    {
+        $this->estimation = $estimation;
+
+        return $this;
+    }
+
     public function isEnabled(): bool
     {
         return $this->enabled;
@@ -184,6 +210,18 @@ class Cron implements CronInterface
     public function setSymfonyCommand(bool $symfonyCommand): self
     {
         $this->symfonyCommand = $symfonyCommand;
+
+        return $this;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(int $version): self
+    {
+        $this->version = $version;
 
         return $this;
     }

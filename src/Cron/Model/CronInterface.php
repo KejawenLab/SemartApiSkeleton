@@ -21,6 +21,8 @@ interface CronInterface
 
     public function getSchedule(): ?string;
 
+    public function getEstimation(): int;
+
     public function isEnabled(): bool;
 
     public function isSymfonyCommand(): bool;

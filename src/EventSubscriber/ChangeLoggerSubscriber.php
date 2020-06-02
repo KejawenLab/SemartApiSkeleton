@@ -29,11 +29,11 @@ final class ChangeLoggerSubscriber implements EventSubscriber
 
     private $logger;
 
-    public function __construct(SerializerInterface $serializer, TokenStorageInterface $tokenStorage, LoggerInterface $logger)
+    public function __construct(SerializerInterface $serializer, TokenStorageInterface $tokenStorage, LoggerInterface $dbLogger)
     {
         $this->serializer = $serializer;
         $this->tokenStorage = $tokenStorage;
-        $this->logger = $logger;
+        $this->logger = $dbLogger;
     }
 
     public function prePersist(LifecycleEventArgs $args): void
