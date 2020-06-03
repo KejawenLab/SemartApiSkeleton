@@ -77,6 +77,7 @@ final class ScriptHandler
         $appTitle= $io->ask('Please enter your application title [default: <info>Alpabit Core</info>]: ', 'Alpabit Core');
         $appDescription = $io->ask('Please enter your application description [default: <info>Alpabit Core Application</info>]: ', 'Alpabit Core Application');
         $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
+        $passPhrase = $io->ask('Please enter your PKI pass phrase [default: <info>null</info>]: ', '');
 
         $search = [
             '{{ENV}}',
@@ -93,10 +94,11 @@ final class ScriptHandler
             '{{APP_TITLE}}',
             '{{APP_DESCRIPTION}}',
             '{{APP_VERSION}}',
+            '{{JWT_PASSPHRASE}}',
         ];
 
         $secret = Encryptor::encrypt(date('YmdHis'), sha1(date('YmdHis')));
-        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appTitle, $appDescription, $appVersion];
+        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appTitle, $appDescription, $appVersion, $passPhrase];
 
         $envString = str_replace($search, $replace, $template);
 

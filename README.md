@@ -90,8 +90,8 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```bash
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
-php bin/console doctrine:migration:migrate
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:migration:migrate --no-interaction
+php bin/console doctrine:fixtures:load --no-interaction
 php bin/console assets:install
 php bin/console cron:start
 symfony server:start
@@ -103,7 +103,7 @@ symfony server:start
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load --no-interaction
 php bin/console assets:install
 php bin/console cron:start
 symfony server:start
@@ -127,7 +127,7 @@ symfony server:start
 
 ```bash
 docker-compose build && docker-compose up
-docker exec -it semart_app_1 bash -c "php bin/console semart:encrypt [DATABASE_PASSWORD]"
+docker-compose exec app bash -c "php bin/console semart:encrypt [DATABASE_PASSWORD]"
 ```
 
 > 
@@ -139,11 +139,11 @@ docker exec -it semart_app_1 bash -c "php bin/console semart:encrypt [DATABASE_P
 >
 
 ```bash
-docker-compose build && docker-compose up
-docker exec -it semart_app_1 bash -c "php bin/console doctrine:database:create"
-docker exec -it semart_app_1 bash -c "php bin/console doctrine:schema:update --force"
-docker exec -it semart_app_1 bash -c "php bin/console doctrine:fixtures:load"
-docker exec -it semart_app_1 bash -c "php bin/console assets:install"
+docker-compose down && docker-compose build && docker-compose up
+docker-compose exec app bash -c "php bin/console doctrine:database:create"
+docker-compose exec app bash -c "php bin/console doctrine:migration:migrate --no-interaction"
+docker-compose exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+docker-compose exec app bash -c "php bin/console assets:install"
 ```
 
 > 

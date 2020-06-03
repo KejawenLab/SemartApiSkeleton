@@ -13,7 +13,6 @@ services:
             - session
 
     balancer:
-        container_name: semart_frontend
         image: dockercloud/haproxy:latest
         ports:
             - 9876:80
@@ -25,14 +24,12 @@ services:
             - app
 
     db:
-        container_name: semart_db
         image: mysql:latest
         command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_ROOT_PASSWORD: semart
 
     adminer:
-        container_name: semart_adminer
         image: adminer:latest
         ports:
             - 6789:8080
@@ -40,5 +37,4 @@ services:
             - db
 
     session:
-        container_name: semart_session
         image: redis:alpine
