@@ -31,6 +31,8 @@
 
 ## Requirement
 
+#### Abaikan Requirement jika Anda menggunakan Docker
+
 > 
 > * PHP >= 7.2.5
 >
@@ -61,6 +63,20 @@
 
 ## Install
 
+### Pre Step
+
+> 
+> Generate Public dan Private Key
+>
+
+```bash
+git clone https://github.com/KejawenLab/SemartApiSkeleton
+cd SemartApiSkeleton
+mkdir -p config/jwt
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+```
+
 ### Non Docker Install
 
 >
@@ -72,15 +88,11 @@
 #### Pengguna MySQL/MariaDB
 
 ```bash
-git clone https://github.com/KejawenLab/SemartApiSkeleton
-cd SemartApiSkeleton
-mkdir -p config/jwt
-openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
 php bin/console doctrine:migration:migrate
 php bin/console doctrine:fixtures:load
+php bin/console assets:install
 php bin/console cron:start
 symfony server:start
 ```
@@ -88,15 +100,11 @@ symfony server:start
 #### Pengguna PostgreSQL/OracleDB/SQLServer
 
 ```bash
-git clone https://github.com/KejawenLab/SemartApiSkeleton
-cd SemartApiSkeleton
-mkdir -p config/jwt
-openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load
+php bin/console assets:install
 php bin/console cron:start
 symfony server:start
 ```
@@ -108,24 +116,42 @@ symfony server:start
 ### Docker Install
 
 >
-> Install menggunakan metode Docker adalah cara tercepat untuk memulai
+> Install menggunakan metode Docker adalah cara tercepat untuk memulai tanpa perlu install dependencies terlebih dahulu
+>
+
+>
+> * Ubah file `.env.template` menjadi file `.env`
+>
+> * Ubah isi file `.env` sesuai dengan kebutuhan
+>
+> * Jalankan perintah berikut:
 >
 
 ```bash
-git clone https://github.com/KejawenLab/SemartApiSkeleton
-cd SemartApiSkeleton
-mkdir -p config/jwt
-openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
-# Pastikan key-nya sama dengan nilai JWT_PASSPHRASE pada file docker-compose.yml atau sesuai dengan yang Anda kehendaki
 docker-compose build && docker-compose up
-docker exec -it semart_app bash -c "php bin/console doctrine:database:create"
-docker exec -it semart_app bash -c "php bin/console doctrine:schema:update --force"
-docker exec -it semart_app bash -c "php bin/console doctrine:fixtures:load"
+docker exec -it semart_app_1 bash -c "php bin/console semart:encrypt [DATABASE_PASSWORD]"
 ```
 
 > 
-> Buka browser pada halaman http://localhost:9876/api/doc
+> * Abaikan warning atau error yang terjadi
+> 
+> * Ubah nilai `DATABASE_PASSWORD` pada file `.env` sesuai dengan hasil perintah di atas
+>
+> * Jalankan perintah berikut:
+>
+
+```bash
+docker-compose build && docker-compose up
+docker exec -it semart_app_1 bash -c "php bin/console doctrine:database:create"
+docker exec -it semart_app_1 bash -c "php bin/console doctrine:schema:update --force"
+docker exec -it semart_app_1 bash -c "php bin/console doctrine:fixtures:load"
+docker exec -it semart_app_1 bash -c "php bin/console assets:install"
+```
+
+> 
+> * Aplikasi berjalan pada alamat `http://localhost:9876/api/doc`
+>
+> * Adminer berjalan pada alamat `http://localhost:6789`
 >
 
 ## Cron Daemon

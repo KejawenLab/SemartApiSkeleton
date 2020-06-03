@@ -60,9 +60,9 @@ class Kernel extends BaseKernel implements CompilerPassInterface
             $argument['url'] = $_SERVER['DATABASE_URL'];
         } else {
             /** @var string $databasePassword */
-            $databasePassword = $_ENV['DATABASE_PASSWORD'];
+            $databasePassword = $_SERVER['DATABASE_PASSWORD'];
             /** @var string $appSecret */
-            $appSecret = $_ENV['APP_SECRET'];
+            $appSecret = $_SERVER['APP_SECRET'];
             $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
         }
 

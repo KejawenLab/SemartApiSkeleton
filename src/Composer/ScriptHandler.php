@@ -26,7 +26,7 @@ class ScriptHandler
 
         $envPath = sprintf('%s/.env', $rootPath);
         $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($envPath) && (!isset($_SERVER['APP_ENV']) || !$_SERVER['APP_ENV'])) {
+        if (!$fileSystem->exists($envPath)) {
             $io->write('<info>Creating new environment variable file</info>');
 
             $template = (string) file_get_contents(sprintf('%s/.env.template', $rootPath));
@@ -65,7 +65,7 @@ class ScriptHandler
         $io->write('<comment>===========================================================</comment>');
 
         $environment = $io->ask('Please enter your application environment [default: <info>dev</info>]: ', 'dev');
-        $redisUlr = $io->ask('Please enter your redis url [default: <info>localhost</info>]: ', 'localhost');
+        $redisUlr = $io->ask('Please enter your redis url [default: <info>redis://localhost</info>]: ', 'redis://localhost');
         $dbDriver = $io->ask('Please enter your database driver [default: <info>pdo_mysql</info>]: ', 'pdo_mysql');
         $dbVersion = $io->ask('Please enter your database version [default: <info>5.7</info>]: ', '5.7');
         $dbCharset = $io->ask('Please enter your database charset [default: <info>utf8mb4</info>]: ', 'utf8mb4');

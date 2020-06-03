@@ -7,53 +7,16 @@ do
     sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
 done
 
-for name in APP_ENV
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in APP_SECRET
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in DATABASE_DRIVER
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in DATABASE_SERVER_VERSION
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in DATABASE_CHARSET
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in DATABASE_URL
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
-for name in REDIS_URL
-do
-    eval value=\$$name
-    sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
-done
-
 if [[ ! -d "/semart/vendor" ]]; then
     cd /semart && composer update --prefer-dist -vvv
 fi
 
+if [[ ! -d "/semart/var" ]]; then
+    cd /semart && mkdir var
+fi
+
 chmod 777 -R var/
 chmod 755 -R config/
+chmod 755 -R vendor/
 
 /usr/bin/supervisord -n -c /etc/supervisord.conf
