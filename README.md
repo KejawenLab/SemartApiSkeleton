@@ -66,7 +66,7 @@
 ### Pre Step
 
 > 
-> Generate Public dan Private Key
+> Clone dan Generate PKI (Public Key Infrastucture)
 >
 
 ```bash
@@ -117,8 +117,6 @@ symfony server:start
 
 >
 > Install menggunakan metode Docker adalah cara tercepat untuk memulai tanpa perlu install dependencies terlebih dahulu
->
-
 >
 > * Ubah file `.env.template` menjadi file `.env`
 >

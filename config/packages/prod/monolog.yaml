@@ -1,5 +1,5 @@
 monolog:
-    channels: ['db', 'audit']
+    channels: [db, audit, cron]
     handlers:
         main:
             type: fingers_crossed
@@ -27,6 +27,12 @@ monolog:
             path: "%kernel.logs_dir%/audit.log"
             level: debug
             channels: [audit]
+            max_files: 99
+        cron:
+            type: rotating_file
+            path: "%kernel.logs_dir%/cron.log"
+            level: debug
+            channels: [cron]
             max_files: 99
 
         # Uncomment to log deprecations

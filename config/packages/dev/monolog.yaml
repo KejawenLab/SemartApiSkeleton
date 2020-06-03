@@ -1,5 +1,5 @@
 monolog:
-    channels: ['db', 'audit']
+    channels: [db, audit, cron]
     handlers:
         main:
             type: stream
@@ -28,3 +28,8 @@ monolog:
             path: "%kernel.logs_dir%/audit.log"
             level: debug
             channels: [audit]
+        cron:
+            type: stream
+            path: "%kernel.logs_dir%/cron.log"
+            level: debug
+            channels: [cron]

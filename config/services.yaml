@@ -13,6 +13,7 @@ services:
         bind:
             Psr\Log\LoggerInterface $auditLogger: '@monolog.logger.audit'
             Psr\Log\LoggerInterface $dbLogger: '@monolog.logger.db'
+            Psr\Log\LoggerInterface $cronLogger: '@monolog.logger.cron'
             iterable $providers: !tagged_iterator semart.user_provider
             iterable $queryExtension: !tagged_iterator semart.query_extension
             iterable $generators: !tagged_iterator semart.generator

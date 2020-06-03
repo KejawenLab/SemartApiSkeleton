@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class ScriptHandler
+final class ScriptHandler
 {
     public static function preInstall(Event $event)
     {
@@ -65,7 +65,7 @@ class ScriptHandler
         $io->write('<comment>===========================================================</comment>');
 
         $environment = $io->ask('Please enter your application environment [default: <info>dev</info>]: ', 'dev');
-        $redisUlr = $io->ask('Please enter your redis url [default: <info>redis://localhost</info>]: ', 'redis://localhost');
+        $redisUlr = $io->ask('Please enter your redis url [default: <info>localhost</info>]: ', 'localhost');
         $dbDriver = $io->ask('Please enter your database driver [default: <info>pdo_mysql</info>]: ', 'pdo_mysql');
         $dbVersion = $io->ask('Please enter your database version [default: <info>5.7</info>]: ', '5.7');
         $dbCharset = $io->ask('Please enter your database charset [default: <info>utf8mb4</info>]: ', 'utf8mb4');
