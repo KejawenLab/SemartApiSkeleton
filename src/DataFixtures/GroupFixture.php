@@ -9,7 +9,7 @@ use Alpabit\ApiSkeleton\Entity\Group;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class GroupFixture extends AbstractFixture
+final class GroupFixture extends AbstractFixture
 {
     protected function createNew()
     {

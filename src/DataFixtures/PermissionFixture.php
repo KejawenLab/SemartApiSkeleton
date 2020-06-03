@@ -10,7 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class PermissionFixture extends AbstractFixture implements DependentFixtureInterface
+final class PermissionFixture extends AbstractFixture implements DependentFixtureInterface
 {
     protected function createNew()
     {

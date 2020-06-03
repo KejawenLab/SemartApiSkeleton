@@ -9,7 +9,7 @@ use Alpabit\ApiSkeleton\Entity\Menu;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class MenuFixture extends AbstractFixture
+final class MenuFixture extends AbstractFixture
 {
     protected function createNew()
     {

@@ -9,7 +9,7 @@ use Alpabit\ApiSkeleton\Entity\Setting;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class SettingFixture extends AbstractFixture
+final class SettingFixture extends AbstractFixture
 {
     protected function createNew()
     {

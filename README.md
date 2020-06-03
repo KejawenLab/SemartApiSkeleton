@@ -343,12 +343,10 @@ php bin/console semart:generate Test
     }
 ```
 
-## TODO
-
-- [ ] Front User/Customer Management
-
-- [ ] Front User/Customer Reset Password
-
 ## Copyright
 
 Project ini disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
+
+## Lisensi
+
+[MIT License](LICENSE)
