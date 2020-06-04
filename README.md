@@ -352,15 +352,17 @@ php bin/console semart:generate Test
 > 
 > * [Sandbox](doc/sandbox.md)
 >
-> * [Atuh](doc/auth.md)
+> * [Auth](doc/auth.md)
 >
 > * [Generator](doc/generator.md)
 >
 > * [Menu](doc/menu.md)
 >
+> * [Cron Job](doc/cron.md)
+>
 > * [Searching dan Filtering](doc/query.md)
 >
-> * [Cron Job](doc/cron.md)
+> * [User Customer](doc/user.md)
 >
 > * [Upgrade](doc/upgrade.md)
 >
@@ -371,4 +373,4 @@ Semart Api Skeleton disupport dan didedikasikan untuk PT. Alpabit Digital Inovas
 
 ## Lisensi
 
-Lisensi dari Semart Api Skeleton adalah [MIT License](LICENSE) namun proyek yang dibangun menggunakannya menyeseuaikan dengan kebijakan masing-masing
+Lisensi dari Semart Api Skeleton adalah [MIT License](LICENSE) namun proyek yang dibangun menyeseuaikan dengan kebijakan masing-masing
