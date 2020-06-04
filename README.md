@@ -211,6 +211,8 @@ php bin/console cron:stop
 >
 > * Public & Private Media Support
 >
+> * Public & Private Api Support
+>
 > * Upgrade Management
 >
 
@@ -358,11 +360,15 @@ php bin/console semart:generate Test
 >
 > * [Menu](doc/menu.md)
 >
+> * [Hak Akses](doc/permission.md)
+>
 > * [Cron Job](doc/cron.md)
 >
 > * [Searching dan Filtering](doc/query.md)
 >
-> * [User Customer](doc/user.md)
+> * [Extended User](doc/user.md)
+>
+> * [Public Api](doc/public.md)
 >
 > * [Upgrade](doc/upgrade.md)
 >
