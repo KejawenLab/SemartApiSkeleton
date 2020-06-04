@@ -1,5 +1,9 @@
 # Semart Api Skeleton
 
+>
+> Semart Api Skeleton adalah skeleton untuk membangun aplikasi berbasis Api
+>
+
 ## Screenshot
 
 #### Api Doc
@@ -343,10 +347,28 @@ php bin/console semart:generate Test
     }
 ```
 
+## Dokumentasi
+
+> 
+> * [Sandbox](doc/sandbox.md)
+>
+> * [Atuh](doc/auth.md)
+>
+> * [Generator](doc/generator.md)
+>
+> * [Menu](doc/menu.md)
+>
+> * [Searching dan Filtering](doc/query.md)
+>
+> * [Cron Job](doc/cron.md)
+>
+> * [Upgrade](doc/upgrade.md)
+>
+
 ## Copyright
 
-Project ini disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
+Semart Api Skeleton disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
 
 ## Lisensi
 
-[MIT License](LICENSE)
+Lisensi dari Semart Api Skeleton adalah [MIT License](LICENSE) namun proyek yang dibangun menggunakannya menyeseuaikan dengan kebijakan masing-masing

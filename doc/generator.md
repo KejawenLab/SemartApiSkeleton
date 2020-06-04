@@ -1,0 +1,1 @@
+# Semart Api Generator
