@@ -59,6 +59,16 @@ class Setting implements SettingInterface
      */
     private $value;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $public;
+
+    public function __construct()
+    {
+        $this->public = false;
+    }
+
     public function getId(): ?string
     {
         return (string) $this->id;
@@ -84,6 +94,18 @@ class Setting implements SettingInterface
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
 
         return $this;
     }

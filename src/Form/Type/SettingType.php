@@ -6,6 +6,7 @@ namespace Alpabit\ApiSkeleton\Form\Type;
 
 use Alpabit\ApiSkeleton\Entity\Setting;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +20,7 @@ final class SettingType extends AbstractType
     {
         $builder->add('parameter', TextType::class, ['required' => true]);
         $builder->add('value', TextType::class, ['required' => true]);
+        $builder->add('public', CheckboxType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

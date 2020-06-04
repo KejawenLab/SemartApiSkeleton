@@ -45,7 +45,11 @@ nelmio_api_doc:
 >
 > NelmioApiDoc menggunakan annotation `@Swagger\Annotations\Response()` untuk membuat request format pada Sandbox
 >
-> *NB:* Anda dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
+> *NB:* 
+>
+> * Anda dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
+>
+> * Pastikan response yang Anda berikan sesuai dengan dokumentasi
 >
 
 ## Extra

@@ -12,4 +12,6 @@ interface SettingInterface
     public function getParameter(): ?string;
 
     public function getValue(): ?string;
+
+    public function isPublic(): bool ;
 }
