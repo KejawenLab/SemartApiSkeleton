@@ -352,25 +352,7 @@ php bin/console semart:generate Test
 ## Dokumentasi
 
 > 
-> * [Sandbox](doc/sandbox.md)
->
-> * [Auth](doc/auth.md)
->
-> * [Generator](doc/generator.md)
->
-> * [Menu](doc/menu.md)
->
-> * [Hak Akses](doc/permission.md)
->
-> * [Cron Job](doc/cron.md)
->
-> * [Searching dan Filtering](doc/query.md)
->
-> * [Extended User](doc/user.md)
->
-> * [Public Api](doc/public.md)
->
-> * [Upgrade](doc/upgrade.md)
+> Kunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk dokumentasi selengkapnya
 >
 
 ## Copyright
