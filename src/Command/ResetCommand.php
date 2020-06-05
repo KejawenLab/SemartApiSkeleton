@@ -51,7 +51,7 @@ final class ResetCommand extends Command
         }
 
         $fileSystem = new Filesystem();
-        if ($fileSystem->exists($this->semart)) {
+        if (!$fileSystem->exists($this->semart)) {
             return 0;
         }
 

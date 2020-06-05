@@ -421,6 +421,17 @@ php bin/console semart:generate Test
 > Kunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk dokumentasi selengkapnya
 >
 
+## Demo
+
+>
+> Kunjungi [Demo](http://arsiteknologi.com:8080/api/doc)
+>
+> * Username: `admin`
+> * Password: `admin`
+>
+> *NB*: Data akan direset setiap 15 menit sekali
+>
+
 ## Copyright
 
 Semart Api Skeleton disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
