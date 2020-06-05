@@ -429,7 +429,7 @@ php bin/console semart:generate Test
 > * Username: `admin`
 > * Password: `admin`
 >
-> *NB*: Data akan direset setiap 15 menit sekali
+> **NB:** Data akan direset setiap **15 menit** sekali
 >
 
 ## Copyright
