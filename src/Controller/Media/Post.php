@@ -78,7 +78,7 @@ final class Post extends AbstractFOSRestController
         }
 
         $public = $request->request->get('public', true);
-        if ('false' === $public) {
+        if ('false' === $public || 0 === $public) {
             $public = false;
         }
 
