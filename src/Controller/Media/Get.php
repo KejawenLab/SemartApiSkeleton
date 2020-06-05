@@ -40,7 +40,24 @@ final class Get extends AbstractFOSRestController
      * @Cache(expires="+2 week", public=true)
      *
      * @SWG\Tag(name="Media")
-     * @SWG\Get(produces={"image/png", "image/gif", "image/jpg", "image/jpeg"})
+     * @SWG\Get(produces={
+     *     "image/png",
+     *     "image/gif",
+     *     "image/jpeg",
+     *     "application/pdf",
+     *     "application/zip",
+     *     "application/gzip",
+     *     "application/vnd.rar",
+     *     "application/x-tar",
+     *     "application/x-7z-compressed",
+     *     "audio/mpeg",
+     *     "video/mpeg",
+     *     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+     *     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+     *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+     *     "text/csv",
+     *     "text/plain"
+     * })
      * @SWG\Response(
      *     response=200,
      *     description="Return file",
