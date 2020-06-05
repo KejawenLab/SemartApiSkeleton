@@ -18,6 +18,7 @@
         "nelmio/api-doc-bundle": "^3.6",
         "nelmio/cors-bundle": "^2.0",
         "ramsey/uuid-doctrine": "^1.6",
+        "sensio/framework-extra-bundle": "^5.5",
         "snc/redis-bundle": "^3.0",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/asset": "^5.0",

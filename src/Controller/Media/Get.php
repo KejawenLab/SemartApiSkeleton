@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,8 @@ final class Get extends AbstractFOSRestController
     }
     /**
      * @Rest\Get("/medias/{path}", requirements={"path"=".+"})
+     *
+     * @Cache(expires="+2 week", public=true)
      *
      * @SWG\Tag(name="Media")
      * @SWG\Get(produces={"image/png", "image/gif", "image/jpg", "image/jpeg"})

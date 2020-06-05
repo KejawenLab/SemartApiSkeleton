@@ -1,5 +1,6 @@
 <?php
 
+use Alpabit\ApiSkeleton\CachedKernel;
 use Alpabit\ApiSkeleton\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,10 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
 }
 
 $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+if ('prod' === $kernel->getEnvironment()) {
+    $kernel = new CachedKernel($kernel);
+}
+
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
