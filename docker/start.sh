@@ -15,6 +15,10 @@ if [[ ! -d "/semart/var" ]]; then
     cd /semart && mkdir var
 fi
 
+if [[ "prod" == APP_ENV ]]; then
+    composer dump-autoload --no-dev --classmap-authoritative
+fi
+
 chmod 777 -R var/
 chmod 755 -R config/
 chmod 755 -R vendor/
