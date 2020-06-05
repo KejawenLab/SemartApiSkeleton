@@ -14,14 +14,24 @@ services:
 
     balancer:
         image: dockercloud/haproxy:latest
-        ports:
-            - 9876:80
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
         links:
             - app
         depends_on:
             - app
+
+    http3:
+        image: caddy:alpine
+        ports:
+            - 9876:443
+            - 1234:80
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+        links:
+            - balancer
+        depends_on:
+            - balancer
 
     db:
         image: mysql:latest

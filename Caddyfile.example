@@ -1,0 +1,7 @@
+{
+    experimental_http3
+}
+
+localhost
+
+reverse_proxy balancer:80
