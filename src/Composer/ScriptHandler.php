@@ -43,7 +43,6 @@ final class ScriptHandler
         $io = $event->getIO();
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
         $lock = sprintf('%s/.semart', $rootPath);
-
         if (file_exists($lock) && 1 === (int) file_get_contents($lock)) {
             return 0;
         }
@@ -55,7 +54,7 @@ final class ScriptHandler
         $io->write('<comment>Visit <info>https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys</info> for more information</comment>');
 
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile($lock, (string) 1);
+        $fileSystem->dumpFile($lock, 1);
     }
 
     private static function createEnvironment(IOInterface $io, string $envPath, string $template): void
