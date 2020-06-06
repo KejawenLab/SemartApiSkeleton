@@ -425,7 +425,7 @@ php bin/console semart:generate Test
 ## Demo
 
 >
-> Kunjungi [Demo](http://arsiteknologi.com:8080/api/doc)
+> Kunjungi [Demo](https://arsiteknologi.com:8080/api/doc)
 >
 > * Username: `admin`
 > * Password: `admin`
