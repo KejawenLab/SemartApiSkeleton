@@ -17,6 +17,8 @@ interface MediaInterface
 
     public function getFileName(): ?string;
 
+    public function getFolder(): ?string;
+
     public function getFileUrl(): ?string;
 
     public function isPublic(): bool;

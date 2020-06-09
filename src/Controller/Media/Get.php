@@ -78,7 +78,8 @@ final class Get extends AbstractFOSRestController
         $this->logger->info(sprintf('[%s][%s][%s]', __CLASS__, $path, serialize($request->query->all())));
 
         $path = explode('/', $path);
-        $fileName = array_pop($path);
+        array_shift($path);
+        $fileName = implode('/', $path);
         $media = $this->service->getByFile($fileName);
         if (!$media) {
             throw new NotFoundHttpException(sprintf('File "%s" not found', $fileName));
@@ -89,7 +90,7 @@ final class Get extends AbstractFOSRestController
         }
 
         $response = new Response();
-        $file = new File(sprintf('%s/%s', $this->mapping->fromField($media, 'file')->getUploadDestination(), $media->getFileName()));
+        $file = new File(sprintf('%s%s%s%s%s', $this->mapping->fromField($media, 'file')->getUploadDestination(), DIRECTORY_SEPARATOR, $media->getFolder(), DIRECTORY_SEPARATOR, $media->getFileName()));
 
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', (string) $file->getMimeType());

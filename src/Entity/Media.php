@@ -43,6 +43,11 @@ class Media implements MediaInterface
     private $fileName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $folder;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $public;
@@ -75,6 +80,18 @@ class Media implements MediaInterface
     public function setFileName(?string $fileName): self
     {
         $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    public function getFolder(): ?string
+    {
+        return $this->folder;
+    }
+
+    public function setFolder(string $folder): self
+    {
+        $this->folder = $folder;
 
         return $this;
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Util;
 
-use Symfony\Component\Inflector\Inflector;
+use Symfony\Component\String\Inflector\EnglishInflector;
 use Symfony\Component\String\UnicodeString;
 
 /**
@@ -44,7 +44,7 @@ final class StringUtil
 
     public static function plural(string $string): string
     {
-        $plural = Inflector::pluralize($string);
+        $plural = EnglishInflector::pluralize($string);
         if (is_array($plural)) {
             $plural = $plural[0];
         }

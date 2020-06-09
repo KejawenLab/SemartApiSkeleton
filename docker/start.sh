@@ -20,6 +20,7 @@ if [[ "prod" == APP_ENV ]]; then
 fi
 
 chmod 777 -R var/
+chmod 777 -R storage/
 chmod 755 -R config/
 chmod 755 -R vendor/
 

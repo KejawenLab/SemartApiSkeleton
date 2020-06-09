@@ -50,6 +50,12 @@ final class Post extends AbstractFOSRestController
     *     description="File to upload"
     * )
      * @SWG\Parameter(
+     *     name="folder",
+     *     in="formData",
+     *     type="string",
+     *     description="Folder path"
+     * )
+     * @SWG\Parameter(
      *     name="public",
      *     in="formData",
      *     type="boolean",
@@ -84,6 +90,7 @@ final class Post extends AbstractFOSRestController
 
         $media->setFile($file);
         $media->setPublic((bool) $public);
+        $media->setFolder($request->request->get('folder'));
         $this->service->save($media);
 
         $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));
