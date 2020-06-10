@@ -27,7 +27,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class PermissionService extends AbstractService implements ServiceInterface, MessageSubscriberInterface
 {
-    public const FILTER_NAME = 'semart_softdeletable';
+    private const FILTER_NAME = 'semart_softdeletable';
 
     private $entityManager;
 
