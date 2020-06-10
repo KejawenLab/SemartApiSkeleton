@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\DataFixtures;
 
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
-use Alpabit\ApiSkeleton\Security\Service\PasswordEncoder;
+use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
 
@@ -20,14 +20,14 @@ abstract class AbstractFixture extends Base
 {
     protected const REF_KEY = 'ref:';
 
-    private $encoder;
+    private $messageBus;
 
     protected $container;
 
-    public function __construct(ContainerInterface $container, PasswordEncoder $encoder)
+    public function __construct(ContainerInterface $container, MessageBusInterface $messageBus)
     {
         $this->container = $container;
-        $this->encoder = $encoder;
+        $this->messageBus = $messageBus;
     }
 
     public function load(ObjectManager $manager)
@@ -52,10 +52,7 @@ abstract class AbstractFixture extends Base
                 }
             }
 
-            if ($entity instanceof UserInterface) {
-                $this->encoder->encode($entity);
-            }
-
+            $this->messageBus->dispatch(new EntityPersisted($entity));
             $manager->persist($entity);
         }
 
