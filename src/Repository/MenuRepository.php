@@ -9,7 +9,6 @@ use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Menu|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +18,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, Menu::class);
+        parent::__construct($registry, Menu::class);
     }
 
     public function findByCode(string $code): ?MenuInterface

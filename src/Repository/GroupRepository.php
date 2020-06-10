@@ -7,7 +7,6 @@ namespace Alpabit\ApiSkeleton\Repository;
 use Alpabit\ApiSkeleton\Entity\Group;
 use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Group|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,8 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, Group::class);
+        parent::__construct($registry, Group::class);
     }
 }

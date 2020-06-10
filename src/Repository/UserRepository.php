@@ -8,7 +8,6 @@ use Alpabit\ApiSkeleton\Entity\User;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface as AppUser;
 use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,11 +22,11 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 {
     private $superAdmin;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry, string $superAdmin)
+    public function __construct(ManagerRegistry $registry, string $superAdmin)
     {
         $this->superAdmin = $superAdmin;
 
-        parent::__construct($eventDispatcher, $registry, User::class);
+        parent::__construct($registry, User::class);
     }
 
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void

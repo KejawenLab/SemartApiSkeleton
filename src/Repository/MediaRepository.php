@@ -7,7 +7,6 @@ namespace Alpabit\ApiSkeleton\Repository;
 use Alpabit\ApiSkeleton\Entity\Media;
 use Alpabit\ApiSkeleton\Media\Model\MediaRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Media|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,8 +18,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, Media::class);
+        parent::__construct($registry, Media::class);
     }
 }

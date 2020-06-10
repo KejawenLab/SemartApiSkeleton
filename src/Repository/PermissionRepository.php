@@ -10,7 +10,6 @@ use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,9 +19,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, Permission::class);
+        parent::__construct($registry, Permission::class);
     }
 
     public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface

@@ -9,7 +9,6 @@ use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method Setting|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +18,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, Setting::class);
+        parent::__construct($registry, Setting::class);
     }
 
     public function findByParameter(string $parameter): ?SettingInterface

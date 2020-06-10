@@ -7,7 +7,6 @@ namespace Alpabit\ApiSkeleton\Repository;
 use Alpabit\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
 use Alpabit\ApiSkeleton\Entity\CronReport;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method CronReport|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,8 +18,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class CronReportRepository extends AbstractRepository implements CronReportRepositoryInterface
 {
-    public function __construct(EventDispatcherInterface $eventDispatcher, ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($eventDispatcher, $registry, CronReport::class);
+        parent::__construct($registry, CronReport::class);
     }
 }

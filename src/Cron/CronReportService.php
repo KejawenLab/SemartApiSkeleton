@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Cron;
 
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Repository\CronReportRepository;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

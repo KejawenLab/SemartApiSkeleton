@@ -6,7 +6,6 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
