@@ -27,11 +27,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    private $formFactory;
+    private FormFactory $formFactory;
 
-    private $service;
+    private GroupService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(FormFactory $formFactory, GroupService $service, LoggerInterface $auditLogger)
     {

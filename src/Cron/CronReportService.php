@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Cron;
 
+use Alpabit\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\AbstractService;
-use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class CronReportService extends AbstractService
 {
-    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, CronReportRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

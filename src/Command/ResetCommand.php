@@ -19,9 +19,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class ResetCommand extends Command
 {
-    private $kernel;
+    private KernelInterface $kernel;
 
-    private $semart;
+    private string $semart;
 
     public function __construct(KernelInterface $kernel)
     {

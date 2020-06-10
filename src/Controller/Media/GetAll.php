@@ -24,11 +24,11 @@ use Symfony\Component\HttpFoundation\Request;
 */
 final class GetAll extends AbstractFOSRestController
 {
-    private $service;
+    private MediaService $service;
 
-    private $paginator;
+    private Paginator $paginator;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(MediaService $service, Paginator $paginator, LoggerInterface $auditLogger)
     {

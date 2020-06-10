@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    private $service;
+    private GroupService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(GroupService $service, LoggerInterface $auditLogger)
     {

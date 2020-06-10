@@ -38,7 +38,7 @@
 #### Abaikan Requirement jika Anda menggunakan Docker
 
 > 
-> * PHP >= 7.2.5
+> * PHP >= 7.4.0
 >
 > * Extension Ctype 
 >

@@ -24,9 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 */
 final class Delete extends AbstractFOSRestController
 {
-    private $service;
+    private CronService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(CronService $service, LoggerInterface $auditLogger)
     {

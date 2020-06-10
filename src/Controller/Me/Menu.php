@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Menu extends AbstractFOSRestController
 {
-    private $service;
+    private PermissionService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(PermissionService $service, LoggerInterface $auditLogger)
     {

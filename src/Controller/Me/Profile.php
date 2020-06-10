@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Profile extends AbstractFOSRestController
 {
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $auditLogger)
     {

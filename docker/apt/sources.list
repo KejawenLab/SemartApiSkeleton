@@ -1,11 +1,5 @@
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic main restricted
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-updates main restricted
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic universe
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-updates universe
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic multiverse
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-updates multiverse
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-backports main restricted universe multiverse
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-security main restricted
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-security universe
-deb http://kartolo.sby.datautama.net.id/ubuntu/ bionic-security multiverse
-
+deb http://kambing.ui.ac.id/ubuntu/ focal main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu/ focal-updates main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu/ focal-security main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu/ focal-backports main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu/ focal-proposed main restricted universe multiverse

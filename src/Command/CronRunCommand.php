@@ -26,17 +26,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronRunCommand extends Command
 {
-    private $redis;
+    private \Redis $redis;
 
-    private $cronService;
+    private CronService $cronService;
 
-    private $reportService;
+    private CronReportService $reportService;
 
-    private $builder;
+    private CronBuilder $builder;
 
-    private $executor;
+    private Executor $executor;
 
-    private $reportClass;
+    private string $reportClass;
 
     public function __construct(
         \Redis $redis,

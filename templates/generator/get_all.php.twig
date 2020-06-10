@@ -28,11 +28,11 @@ use Symfony\Component\HttpFoundation\Request;
 */
 final class GetAll extends AbstractFOSRestController
 {
-    private $service;
+    private {{ entityHumanize }}Service $service;
 
-    private $paginator;
+    private Paginator $paginator;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct({{ entityHumanize }}Service $service, Paginator $paginator, LoggerInterface $auditLogger)
     {

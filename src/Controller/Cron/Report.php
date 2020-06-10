@@ -24,11 +24,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Report extends AbstractFOSRestController
 {
-    private $service;
+    private CronReportService $service;
 
-    private $paginator;
+    private Paginator $paginator;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(CronReportService $service, Paginator $paginator, LoggerInterface $auditLogger)
     {

@@ -28,11 +28,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 */
 final class Put extends AbstractFOSRestController
 {
-    private $formFactory;
+    private FormFactory $formFactory;
 
-    private $service;
+    private CronService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(FormFactory $formFactory, CronService $service, LoggerInterface $auditLogger)
     {

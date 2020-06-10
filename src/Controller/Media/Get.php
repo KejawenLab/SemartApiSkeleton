@@ -22,11 +22,11 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
  */
 final class Get extends AbstractFOSRestController
 {
-    private $service;
+    private MediaService $service;
 
-    private $mapping;
+    private PropertyMappingFactory $mapping;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(MediaService $service, PropertyMappingFactory $mapping, LoggerInterface $auditLogger)
     {

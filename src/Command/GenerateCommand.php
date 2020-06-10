@@ -21,9 +21,9 @@ final class GenerateCommand extends Command
 {
     private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
 
-    private $generator;
+    private GeneratorFactory $generator;
 
-    private $menuService;
+    private MenuService $menuService;
 
     public function __construct(GeneratorFactory $generator, MenuService $menuService)
     {

@@ -27,11 +27,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class Run extends AbstractFOSRestController
 {
-    private $service;
+    private CronService $service;
 
-    private $logger;
+    private LoggerInterface $logger;
 
-    private $kernel;
+    private KernelInterface $kernel;
 
     public function __construct(CronService $service, LoggerInterface $auditLogger, KernelInterface $kernel)
     {

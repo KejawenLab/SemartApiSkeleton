@@ -12,7 +12,8 @@ security:
         main:
             pattern:  ^/api/login
             stateless: true
-            anonymous: lazy
+            anonymous: true
+            lazy: true
             json_login:
                 check_path: /api/login
                 username_path: username
