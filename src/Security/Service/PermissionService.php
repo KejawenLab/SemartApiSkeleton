@@ -16,6 +16,7 @@ use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -39,6 +40,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     private $class;
 
     public function __construct(
+        MessageBusInterface $messageBus,
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         MenuRepositoryInterface $menuRepository,
@@ -51,7 +53,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         $this->removers = $removers;
         $this->class = $class;
 
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function initiate(PermissionableInterface $object): void

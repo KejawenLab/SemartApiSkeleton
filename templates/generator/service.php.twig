@@ -9,14 +9,15 @@ use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
 */
 final class {{ entityHumanize }}Service extends AbstractService implements ServiceInterface
 {
-    public function __construct({{ entityHumanize }}RepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, {{ entityHumanize }}RepositoryInterface $repository, AliasHelper $aliasHelper)
     {
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 }

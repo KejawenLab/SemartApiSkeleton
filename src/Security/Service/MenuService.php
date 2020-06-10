@@ -9,15 +9,17 @@ use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class MenuService extends AbstractService implements ServiceInterface
 {
-    public function __construct(MenuRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function getMenuByCode(string $code): ?MenuInterface

@@ -12,6 +12,7 @@ use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Cron\Resolver\ResolverInterface;
 use Cron\Schedule\CrontabSchedule;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
@@ -23,6 +24,7 @@ final class CronService extends AbstractService implements ServiceInterface, Res
     private $builder;
 
     public function __construct(
+        MessageBusInterface $messageBus,
         CronRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         KernelInterface $kernel,
@@ -31,7 +33,7 @@ final class CronService extends AbstractService implements ServiceInterface, Res
         $this->kernel = $kernel;
         $this->builder = $builder;
 
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function resolve(): array

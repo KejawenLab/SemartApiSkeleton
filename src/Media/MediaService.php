@@ -9,6 +9,7 @@ use Alpabit\ApiSkeleton\Media\Model\MediaRepositoryInterface;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
@@ -18,11 +19,11 @@ final class MediaService extends AbstractService implements ServiceInterface
 {
     private $storage;
 
-    public function __construct(StorageInterface $storage, MediaRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(StorageInterface $storage, MessageBusInterface $messageBus, MediaRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         $this->storage = $storage;
 
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function get(string $id)

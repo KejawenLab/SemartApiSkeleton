@@ -9,15 +9,16 @@ use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
 final class SettingService extends AbstractService implements ServiceInterface
 {
-    public function __construct(SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
-        parent::__construct($repository, $aliasHelper);
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function getSetting(string $key): SettingInterface
