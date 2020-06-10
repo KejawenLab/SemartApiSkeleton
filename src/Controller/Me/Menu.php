@@ -12,7 +12,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,12 +24,9 @@ final class Menu extends AbstractFOSRestController
 {
     private PermissionService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(PermissionService $service, LoggerInterface $auditLogger)
+    public function __construct(PermissionService $service)
     {
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -53,8 +49,6 @@ final class Menu extends AbstractFOSRestController
      */
     public function __invoke(Request $request): View
     {
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, serialize($request->query->all())));
-
         return $this->view($this->service->getByUser($this->getUser()));
     }
 }

@@ -11,7 +11,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -29,14 +28,11 @@ final class Run extends AbstractFOSRestController
 {
     private CronService $service;
 
-    private LoggerInterface $logger;
-
     private KernelInterface $kernel;
 
-    public function __construct(CronService $service, LoggerInterface $auditLogger, KernelInterface $kernel)
+    public function __construct(CronService $service, KernelInterface $kernel)
     {
         $this->service = $service;
-        $this->logger = $auditLogger;
         $this->kernel = $kernel;
     }
 
@@ -63,7 +59,6 @@ final class Run extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $id): View
     {
-        $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, serialize($request->query->all())));
         $cron = $this->service->get($id);
         if (!$cron instanceof Cron) {
             throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));

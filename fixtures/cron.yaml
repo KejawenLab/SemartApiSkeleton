@@ -1,0 +1,1 @@
+- { name: 'Audit Clean', description: 'Cleaning Audit Every 12 Month', command: 'bin/console audit:clean --no-confirm', schedule: '0 0 * * * *' }

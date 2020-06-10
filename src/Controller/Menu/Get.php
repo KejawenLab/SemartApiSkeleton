@@ -25,12 +25,9 @@ final class Get extends AbstractFOSRestController
 {
     private MenuService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(MenuService $service, LoggerInterface $auditLogger)
+    public function __construct(MenuService $service)
     {
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -54,8 +51,6 @@ final class Get extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $id): View
     {
-        $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, serialize($request->query->all())));
-
         return $this->view($this->service->get($id));
     }
 }

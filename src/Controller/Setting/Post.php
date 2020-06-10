@@ -15,7 +15,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,13 +30,10 @@ final class Post extends AbstractFOSRestController
 
     private SettingService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(FormFactory $formFactory, SettingService $service, LoggerInterface $auditLogger)
+    public function __construct(FormFactory $formFactory, SettingService $service)
     {
         $this->formFactory = $formFactory;
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -76,8 +72,6 @@ final class Post extends AbstractFOSRestController
         /** @var SettingInterface $setting */
         $setting = $form->getData();
         $this->service->save($setting);
-
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));
 
         return $this->view($this->service->get($setting->getId()), Response::HTTP_CREATED);
     }

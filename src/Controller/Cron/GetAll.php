@@ -13,7 +13,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,13 +27,10 @@ final class GetAll extends AbstractFOSRestController
 
     private Paginator $paginator;
 
-    private LoggerInterface $logger;
-
-    public function __construct(CronService $service, Paginator $paginator, LoggerInterface $auditLogger)
+    public function __construct(CronService $service, Paginator $paginator)
     {
         $this->service = $service;
         $this->paginator = $paginator;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -76,8 +72,6 @@ final class GetAll extends AbstractFOSRestController
     */
     public function __invoke(Request $request): View
     {
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, serialize($request->query->all())));
-
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Cron::class));
     }
 }

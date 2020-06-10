@@ -32,13 +32,10 @@ final class Put extends AbstractFOSRestController
 
     private MenuService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(FormFactory $formFactory, MenuService $service, LoggerInterface $auditLogger)
+    public function __construct(FormFactory $formFactory, MenuService $service)
     {
         $this->formFactory = $formFactory;
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -81,8 +78,6 @@ final class Put extends AbstractFOSRestController
         }
 
         $this->service->save($menu);
-
-        $this->logger->info(sprintf('[%s][%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id, $request->getContent()));
 
         return $this->view($this->service->get($menu->getId()));
     }

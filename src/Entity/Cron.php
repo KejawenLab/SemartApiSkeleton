@@ -15,6 +15,7 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -43,7 +44,7 @@ class Cron implements CronInterface
      *
      * @Groups({"read"})
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,7 +54,7 @@ class Cron implements CronInterface
      *
      * @Groups({"read"})
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -62,7 +63,7 @@ class Cron implements CronInterface
      *
      * @Groups({"read"})
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -72,7 +73,7 @@ class Cron implements CronInterface
      *
      * @Groups({"read"})
      */
-    private $command;
+    private ?string $command;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -83,28 +84,28 @@ class Cron implements CronInterface
      *
      * @Groups({"read"})
      */
-    private $schedule;
+    private ?string $schedule;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $enabled;
+    private bool $enabled;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $symfonyCommand;
+    private bool $symfonyCommand;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $running;
+    private bool $running;
 
     public function __construct()
     {

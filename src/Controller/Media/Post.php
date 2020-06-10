@@ -13,7 +13,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,13 +28,10 @@ final class Post extends AbstractFOSRestController
 
     private MediaService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(FormFactory $formFactory, MediaService $service, LoggerInterface $auditLogger)
+    public function __construct(FormFactory $formFactory, MediaService $service)
     {
         $this->formFactory = $formFactory;
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -92,8 +88,6 @@ final class Post extends AbstractFOSRestController
         $media->setPublic((bool) $public);
         $media->setFolder($request->request->get('folder'));
         $this->service->save($media);
-
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $request->getContent()));
 
         return $this->view($this->service->get($media->getId()), Response::HTTP_CREATED);
     }

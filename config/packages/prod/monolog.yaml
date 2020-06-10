@@ -1,5 +1,5 @@
 monolog:
-    channels: [db, audit, cron]
+    channels: [cron]
     handlers:
         main:
             type: fingers_crossed
@@ -16,18 +16,6 @@ monolog:
             type: console
             process_psr_3_messages: false
             channels: ["!event", "!doctrine"]
-        db:
-            type: rotating_file
-            path: "%kernel.logs_dir%/db.log"
-            level: debug
-            channels: [db]
-            max_files: 99
-        audit:
-            type: rotating_file
-            path: "%kernel.logs_dir%/audit.log"
-            level: debug
-            channels: [audit]
-            max_files: 99
         cron:
             type: rotating_file
             path: "%kernel.logs_dir%/cron.log"

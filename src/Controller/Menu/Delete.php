@@ -11,7 +11,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,12 +25,9 @@ final class Delete extends AbstractFOSRestController
 {
     private MenuService $service;
 
-    private LoggerInterface $logger;
-
-    public function __construct(MenuService $service, LoggerInterface $auditLogger)
+    public function __construct(MenuService $service)
     {
         $this->service = $service;
-        $this->logger = $auditLogger;
     }
 
     /**
@@ -58,8 +54,6 @@ final class Delete extends AbstractFOSRestController
         }
 
         $this->service->remove($menu);
-
-        $this->logger->info(sprintf('[%s][%s][%s]', $this->getUser()->getUsername(), __CLASS__, $id));
 
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }

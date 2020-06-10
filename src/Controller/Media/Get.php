@@ -8,7 +8,6 @@ use Alpabit\ApiSkeleton\Media\MediaService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\File\File;
@@ -26,13 +25,10 @@ final class Get extends AbstractFOSRestController
 
     private PropertyMappingFactory $mapping;
 
-    private LoggerInterface $logger;
-
-    public function __construct(MediaService $service, PropertyMappingFactory $mapping, LoggerInterface $auditLogger)
+    public function __construct(MediaService $service, PropertyMappingFactory $mapping)
     {
         $this->service = $service;
         $this->mapping = $mapping;
-        $this->logger = $auditLogger;
     }
     /**
      * @Rest\Get("/medias/{path}", requirements={"path"=".+"})
@@ -75,8 +71,6 @@ final class Get extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $path): Response
     {
-        $this->logger->info(sprintf('[%s][%s][%s]', __CLASS__, $path, serialize($request->query->all())));
-
         $path = explode('/', $path);
         array_shift($path);
         $fileName = implode('/', $path);
