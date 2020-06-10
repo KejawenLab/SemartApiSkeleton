@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Service;
 
-use Alpabit\ApiSkeleton\Messenger\Message\EntityMessage;
+use Alpabit\ApiSkeleton\Entity\Message\EntityMessage;
+use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
+use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
@@ -36,12 +38,14 @@ abstract class AbstractService implements ServiceInterface
 
     public function save(object $object): void
     {
-        $this->messageBus->dispatch(new EntityMessage($object));
+        $this->repository->persist($object);
+        $this->messageBus->dispatch(new EntityPersisted($object));
     }
 
     public function remove(object $object): void
     {
-        $this->messageBus->dispatch(new EntityMessage($object, EntityMessage::ACTION_REMOVE));
+        $this->repository->remove($object);
+        $this->messageBus->dispatch(new EntityRemoved($object));
     }
 
     public function getQueryBuilder(): QueryBuilder

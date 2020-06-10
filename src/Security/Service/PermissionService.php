@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Messenger\Message\EntityPersisted;
-use Alpabit\ApiSkeleton\Messenger\Message\EntityRemoved;
+use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
+use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;

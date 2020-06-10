@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Messenger\Message\EntityPersisted;
+use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

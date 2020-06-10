@@ -11,6 +11,5 @@ framework:
 
         routing:
             # Route your messages to the transports
-            Alpabit\ApiSkeleton\Messenger\Message\EntityMessage: sync
-            Alpabit\ApiSkeleton\Messenger\Message\EntityPersisted: sync
-            Alpabit\ApiSkeleton\Messenger\Message\EntityRemoved: sync
+            Alpabit\ApiSkeleton\Entity\Message\EntityPersisted: sync
+            Alpabit\ApiSkeleton\Entity\Message\EntityRemoved: sync
