@@ -13,6 +13,7 @@
         "ext-redis": "*",
         "composer/composer": "^1.9",
         "cron/cron": "^1.4",
+        "damienharper/doctrine-audit-bundle": "^3.4",
         "friendsofsymfony/rest-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^3.6",

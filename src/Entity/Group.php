@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Entity;
 use Alpabit\ApiSkeleton\Repository\GroupRepository;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="core_group")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  *
  * @UniqueEntity(fields={"code"})
  */

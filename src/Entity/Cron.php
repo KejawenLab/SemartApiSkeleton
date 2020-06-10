@@ -9,6 +9,7 @@ use Alpabit\ApiSkeleton\Cron\Validator\ConsoleCommand;
 use Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormat;
 use Alpabit\ApiSkeleton\Repository\CronRepository;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="core_cronjob")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  *
  * @UniqueEntity(fields={"name"})
  * @ConsoleCommand()

@@ -6,6 +6,7 @@ namespace Alpabit\ApiSkeleton\Entity;
 
 use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
 use Alpabit\ApiSkeleton\Repository\MediaRepository;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -17,6 +18,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=MediaRepository::class)
  * @ORM\Table(name="core_media")
+ *
+ * @Auditable()
  *
  * @UniqueEntity(fields={"fileName"})
  *

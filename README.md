@@ -256,7 +256,7 @@ php bin/console cron:stop
 >
 > * Soft Deletable
 >
-> * Activity Log
+> * Audit Trail
 >
 > * User Management
 >

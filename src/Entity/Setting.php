@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Entity;
 use Alpabit\ApiSkeleton\Repository\SettingRepository;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="core_setting")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  *
  * @UniqueEntity(fields={"parameter"})
  */

@@ -6,9 +6,9 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
-use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class MenuService extends AbstractService implements ServiceInterface
 {
-    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, MenuRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

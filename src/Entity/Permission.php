@@ -8,6 +8,7 @@ use Alpabit\ApiSkeleton\Repository\PermissionRepository;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="core_permission")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  */
 class Permission implements PermissionInterface
 {

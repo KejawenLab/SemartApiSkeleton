@@ -1,0 +1,8 @@
+dh_doctrine_audit:
+    table_suffix: '_audit'
+    timezone: 'Asia/Jakarta'
+    enabled_viewer: false
+    ignored_columns:
+        - createdAt
+        - deletedAt
+        - updatedAt

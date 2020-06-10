@@ -8,6 +8,7 @@ use Alpabit\ApiSkeleton\Repository\MenuRepository;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Validator\Route;
 use Alpabit\ApiSkeleton\Util\StringUtil;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="core_menu")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  *
  * @UniqueEntity(fields={"code"})
  */

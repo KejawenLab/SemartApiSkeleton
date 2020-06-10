@@ -23,6 +23,18 @@
     "cron/cron": {
         "version": "1.4.2"
     },
+    "damienharper/doctrine-audit-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "ab8b371ee4206c79a144f3617d8eef3d6e7b87be"
+        },
+        "files": [
+            "config/packages/dh_doctrine_audit.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -523,6 +535,19 @@
     },
     "symfony/string": {
         "version": "v5.0.8"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "config/packages/translation.yaml",
+            "translations/.gitignore"
+        ]
     },
     "symfony/translation-contracts": {
         "version": "v2.0.1"
