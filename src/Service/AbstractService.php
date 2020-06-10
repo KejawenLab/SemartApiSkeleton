@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Service;
 
-use Alpabit\ApiSkeleton\Messenger\EntityMessage;
+use Alpabit\ApiSkeleton\Messenger\Message\EntityMessage;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity\Event;
+namespace Alpabit\ApiSkeleton\Messenger\Message;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-class RemoveEvent extends PersistEvent
+final class EntityRemoved extends EntityPersisted
 {
 }

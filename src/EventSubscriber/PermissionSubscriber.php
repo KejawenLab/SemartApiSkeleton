@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\EventSubscriber;
 
-use Alpabit\ApiSkeleton\Entity\Event\PersistEvent;
-use Alpabit\ApiSkeleton\Entity\Event\RemoveEvent;
 use Alpabit\ApiSkeleton\Security\Annotation\Parser;
 use Alpabit\ApiSkeleton\Security\Authorization\Ownership;
-use Alpabit\ApiSkeleton\Security\Model\PermissionableInterface;
 use Alpabit\ApiSkeleton\Security\Service\Authorization;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,24 +31,6 @@ final class PermissionSubscriber implements EventSubscriberInterface
         $this->parser = $parser;
         $this->authorization = $authorization;
         $this->ownership = $ownership;
-    }
-
-    public function initiate(PersistEvent $event): void
-    {
-        $object = $event->getEntity();
-        if ($object instanceof PermissionableInterface) {
-            $event->getManager()->getFilters()->disable(PermissionService::FILTER_NAME);
-            $this->service->initiate($object);
-            $event->getManager()->getFilters()->enable(PermissionService::FILTER_NAME);
-        }
-    }
-
-    public function revoke(RemoveEvent $event): void
-    {
-        $object = $event->getEntity();
-        if ($object instanceof PermissionableInterface) {
-            $this->service->revoke($object);
-        }
     }
 
     public function validate(ControllerEvent $event): void
@@ -81,8 +60,6 @@ final class PermissionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            PersistEvent::class => 'initiate',
-            RemoveEvent::class => 'revoke',
             ControllerEvent::class => 'validate',
         ];
     }

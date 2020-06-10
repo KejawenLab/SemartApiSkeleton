@@ -6,9 +6,9 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
-use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class UserService extends AbstractService implements ServiceInterface
 {
-    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, UserRepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

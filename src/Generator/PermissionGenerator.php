@@ -9,7 +9,6 @@ use Alpabit\ApiSkeleton\Security\Service\GroupService;
 use Alpabit\ApiSkeleton\Security\Service\MenuService;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
 use Alpabit\ApiSkeleton\Util\StringUtil;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -22,8 +21,6 @@ final class PermissionGenerator extends AbstractGenerator
 {
     private const ROUTE_PLACEHOLDER = 'alpabit_apiskeleton_%s_getall';
 
-    private $entityManager;
-
     private $permissionService;
 
     private $menuService;
@@ -33,7 +30,6 @@ final class PermissionGenerator extends AbstractGenerator
     private $class;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
         PermissionService $permissionService,
         MenuService $menuService,
         GroupService $groupService,
@@ -42,7 +38,6 @@ final class PermissionGenerator extends AbstractGenerator
         KernelInterface $kernel,
         string $class
     ) {
-        $this->entityManager = $entityManager;
         $this->permissionService = $permissionService;
         $this->menuService = $menuService;
         $this->groupService = $groupService;
@@ -64,9 +59,7 @@ final class PermissionGenerator extends AbstractGenerator
         $this->menuService->save($menu);
 
         $output->writeln(sprintf('<comment>Generating permission(s) for menu "<info>%s</info></comment>"', $shortNameUppercase));
-        $this->entityManager->getFilters()->disable(PermissionService::FILTER_NAME);
         $this->permissionService->initiate($menu);
-        $this->entityManager->getFilters()->enable(PermissionService::FILTER_NAME);
 
         $superGroup = $this->groupService->getSuperAdmin();
         if ($superGroup && $permission = $this->permissionService->getPermission($superGroup, $menu)) {

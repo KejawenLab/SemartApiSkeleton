@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Service;
 
+use Alpabit\ApiSkeleton\Messenger\Message\EntityPersisted;
+use Alpabit\ApiSkeleton\Messenger\Message\EntityRemoved;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
@@ -16,14 +18,18 @@ use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class PermissionService extends AbstractService implements ServiceInterface
+final class PermissionService extends AbstractService implements ServiceInterface, MessageSubscriberInterface
 {
     public const FILTER_NAME = 'semart_softdeletable';
+
+    private $entityManager;
 
     private $menuRepository;
 
@@ -40,6 +46,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     private $class;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         MessageBusInterface $messageBus,
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
@@ -48,6 +55,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         iterable $removers,
         string $class
     ) {
+        $this->entityManager = $entityManager;
         $this->menuRepository = $menuRepository;
         $this->initiators = $initiators;
         $this->removers = $removers;
@@ -56,14 +64,31 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
+    public function __invoke(EntityPersisted $message): void
+    {
+        $entity = $message->getEntity();
+        if (!$entity instanceof PermissionableInterface) {
+            return;
+        }
+
+        if (EntityPersisted::class === get_class($message)) {
+            $this->initiate($entity);
+        } else {
+            $this->revoke($entity);
+        }
+    }
+
     public function initiate(PermissionableInterface $object): void
     {
+        $this->entityManager->getFilters()->disable(static::FILTER_NAME);
         foreach ($this->initiators as $initiator) {
             if ($initiator->support($object)) {
                 $initiator->setClass($this->class);
                 $initiator->initiate($object);
             }
         }
+
+        $this->entityManager->getFilters()->enable(static::FILTER_NAME);
     }
 
     public function revoke(PermissionableInterface $object): void
@@ -90,6 +115,12 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         }
 
         return $menus;
+    }
+
+    public static function getHandledMessages(): iterable
+    {
+        yield EntityPersisted::class;
+        yield EntityRemoved::class;
     }
 
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
