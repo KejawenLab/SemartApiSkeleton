@@ -416,6 +416,8 @@ php bin/console semart:generate Test
     }
 ```
 
+Dan walllaaaaaaa **Api + Dokumentasi + Permission + Audit Trail** secara otomatis dibuatkan untuk Anda.
+
 ## Dokumentasi
 
 > 
