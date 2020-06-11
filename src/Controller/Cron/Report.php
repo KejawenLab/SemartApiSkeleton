@@ -37,7 +37,7 @@ final class Report extends AbstractFOSRestController
     /**
      * @Rest\Get("/cronjobs/{id}/logs")
      *
-     * @Cache(expires="+17 minute", public=false)
+     * @Cache(expires="+1 minute", public=false)
      *
      * @SWG\Tag(name="Cron")
      * @SWG\Response(
