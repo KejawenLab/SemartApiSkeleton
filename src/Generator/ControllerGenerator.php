@@ -19,6 +19,7 @@ final class ControllerGenerator extends AbstractGenerator
         $delete = $this->twig->render('generator/delete.php.twig', ['entity' => $shortName]);
         $post = $this->twig->render('generator/post.php.twig', ['entity' => $shortName]);
         $put = $this->twig->render('generator/put.php.twig', ['entity' => $shortName]);
+        $audit = $this->twig->render('generator/audit.php.twig', ['entity' => $shortName]);
 
         $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\Controller\%s\GetAll"</info></comment>', $shortName));
         $this->fileSystem->dumpFile(sprintf('%s/src/Controller/%s/GetAll.php', $this->kernel->getProjectDir(), $shortName), $getAll);
@@ -30,5 +31,7 @@ final class ControllerGenerator extends AbstractGenerator
         $this->fileSystem->dumpFile(sprintf('%s/src/Controller/%s/Post.php', $this->kernel->getProjectDir(), $shortName), $post);
         $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\Controller\%s\Put"</info></comment>', $shortName));
         $this->fileSystem->dumpFile(sprintf('%s/src/Controller/%s/Put.php', $this->kernel->getProjectDir(), $shortName), $put);
+        $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\Controller\%s\Audit"</info></comment>', $shortName));
+        $this->fileSystem->dumpFile(sprintf('%s/src/Controller/%s/Audit.php', $this->kernel->getProjectDir(), $shortName), $audit);
     }
 }

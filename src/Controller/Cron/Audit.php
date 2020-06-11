@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Group;
+namespace Alpabit\ApiSkeleton\Controller\Cron;
 
 use Alpabit\ApiSkeleton\Audit\AuditService;
-use Alpabit\ApiSkeleton\Entity\Group;
+use Alpabit\ApiSkeleton\Cron\CronService;
+use Alpabit\ApiSkeleton\Entity\Cron;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Service\GroupService;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -26,13 +26,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Audit extends AbstractFOSRestController
 {
-    private GroupService $service;
+    private CronService $service;
 
     private AuditService $audit;
 
     private AuditReader $reader;
 
-    public function __construct(GroupService $service, AuditService $audit, AuditReader $reader)
+    public function __construct(CronService $service, AuditService $audit, AuditReader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;
@@ -40,18 +40,18 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups/{id}/audit")
+     * @Rest\Get("/cronjobs/{id}/audit")
      *
      * @Cache(expires="+17 minute", public=false)
      *
-     * @SWG\Tag(name="Group")
+     * @SWG\Tag(name="Cron")
      * @SWG\Response(
      *     response=200,
      *     description="Return audit list",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(
-     *             @SWG\Property(type="object", property="entity", ref=@Model(type=Group::class, groups={"read"})),
+     *             @SWG\Property(type="object", property="entity", ref=@Model(type=Cron::class, groups={"read"})),
      *             @SWG\Property(type="array", property="items", @SWG\Items(
      *                 @SWG\Property(type="string", property="type"),
      *                 @SWG\Property(type="string", property="user_id"),
@@ -86,7 +86,7 @@ final class Audit extends AbstractFOSRestController
             throw new NotFoundHttpException();
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable(Group::class)) {
+        if (!$this->reader->getConfiguration()->isAuditable(Cron::class)) {
             return $this->view([]);
         }
 
