@@ -10,16 +10,3 @@ snc_redis:
             dsn: '%env(REDIS_URL)%/1'
     session:
         client: default
-    doctrine:
-        metadata_cache:
-            client: cache
-            entity_manager: default
-        result_cache:
-            client: cache
-            entity_manager: default
-        query_cache:
-            client: cache
-            entity_manager: default
-        second_level_cache:
-            client: cache
-            entity_manager: default

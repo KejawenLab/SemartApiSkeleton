@@ -6,3 +6,4 @@
 - { parent: 'ref:menu#administrator', code: 'SETTING', sortOrder: 4, name: 'Setting', routeName: 'alpabit_apiskeleton_setting_getall', ref: 'administrator_setting' }
 - { parent: 'ref:menu#administrator', code: 'CRON', sortOrder: 5, name: 'Cronjob', routeName: 'alpabit_apiskeleton_cron_getall', ref: 'administrator_cronjob' }
 - { parent: null, code: 'MEDIA', name: 'Media', sortOrder: 2, routeName: 'alpabit_apiskeleton_media_getall', ref: 'media' }
+- { parent: null, code: 'AUDIT', name: 'Audit', sortOrder: -99, routeName: '#', showable: false, ref: 'audit' }

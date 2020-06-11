@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Service;
 
-use Alpabit\ApiSkeleton\Entity\Message\EntityMessage;
 use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
 use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;

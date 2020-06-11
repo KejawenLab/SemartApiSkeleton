@@ -14,9 +14,15 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
-        metadata_cache_driver: ~
-        query_cache_driver: ~
-        result_cache_driver: ~
+        metadata_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        query_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        result_cache_driver:
+            type: pool
+            pool: doctrine.result_cache_pool
         filters:
             semart_softdeletable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
