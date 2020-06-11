@@ -10,6 +10,8 @@ use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -37,33 +39,35 @@ class Media implements MediaInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fileName;
+    private ?string $fileName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $folder;
+    private ?string $folder;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $public;
+    private bool $public;
 
     /**
      * @Groups({"read"})
      */
-    private $fileUrl;
+    private ?string $fileUrl;
 
     /**
      * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
      */
-    private $file;
+    private ?File $file;
 
     public function __construct()
     {

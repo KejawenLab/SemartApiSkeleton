@@ -18,7 +18,7 @@ final class UserProviderFactory implements UserProviderInterface
     /**
      * @var Provider[]
      */
-    private $providers;
+    private iterable $providers;
 
     public function __construct(iterable $providers)
     {

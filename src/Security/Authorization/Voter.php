@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
  */
 final class Voter extends SymfonyVoter
 {
-    private $service;
+    private PermissionService $service;
 
     public function __construct(PermissionService $service)
     {

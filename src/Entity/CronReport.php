@@ -9,6 +9,8 @@ use Alpabit\ApiSkeleton\Cron\Model\CronReportInterface;
 use Alpabit\ApiSkeleton\Repository\CronReportRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -26,8 +28,10 @@ class CronReport implements CronReportInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Cron::class, cascade={"persist", "remove"})
@@ -41,28 +45,28 @@ class CronReport implements CronReportInterface
      *
      * @Groups({"read"})
      */
-    private $runAt;
+    private \DateTime $runAt;
 
     /**
      * @ORM\Column(type="float")
      *
      * @Groups({"read"})
      */
-    private $runtime;
+    private float $runtime;
 
     /**
      * @ORM\Column(type="text")
      *
      * @Groups({"read"})
      */
-    private $output;
+    private ?string $output;
 
     /**
      * @ORM\Column(type="smallint")
      *
      * @Groups({"read"})
      */
-    private $exitCode;
+    private int $exitCode;
 
     public function getId(): ?string
     {

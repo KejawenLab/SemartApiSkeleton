@@ -9,7 +9,7 @@ namespace Alpabit\ApiSkeleton\Entity\Message;
  */
 class EntityPersisted
 {
-    private $entity;
+    private object $entity;
 
     public function __construct(object $entity)
     {

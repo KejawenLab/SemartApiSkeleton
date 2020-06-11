@@ -17,13 +17,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class PermissionSubscriber implements EventSubscriberInterface
 {
-    private $service;
+    private PermissionService $service;
 
-    private $parser;
+    private Parser $parser;
 
-    private $authorization;
+    private Authorization $authorization;
 
-    private $ownership;
+    private Ownership $ownership;
 
     public function __construct(PermissionService $service, Parser $parser, Authorization $authorization, Ownership $ownership)
     {

@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class SingleLoginSubscriber implements EventSubscriberInterface
 {
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    private $service;
+    private UserService $service;
 
     public function __construct(RequestStack $requestStack, UserService $service)
     {

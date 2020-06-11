@@ -13,9 +13,9 @@ use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
  */
 final class UserProvider implements UserProviderInterface
 {
-    private $repository;
+    private UserRepositoryInterface $repository;
 
-    private $class;
+    private string $class;
 
     public function __construct(UserRepositoryInterface $repository, string $class)
     {

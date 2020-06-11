@@ -16,15 +16,15 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class Ownership
 {
-    private $doctrine;
+    private ManagerRegistry $doctrine;
 
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    private $token;
+    private TokenStorageInterface $tokenStorage;
 
-    private $superAdmin;
+    private string $superAdmin;
 
-    private $ownershipProperty;
+    private string $ownershipProperty;
 
     public function __construct(
         ManagerRegistry $doctrine,
@@ -35,19 +35,19 @@ final class Ownership
     ) {
         $this->doctrine = $doctrine;
         $this->userRepository = $userRepository;
-        $this->token = $tokenStorage->getToken();
+        $this->tokenStorage = $tokenStorage;
         $this->superAdmin = $superAdmin;
         $this->ownershipProperty = $ownershipProperty;
     }
 
     public function isOwner(Request $request): bool
     {
-        if (!$this->token) {
+        if (!$token = $this->tokenStorage->getToken()) {
             return false;
         }
 
         /** @var UserInterface $user */
-        $user = $this->token->getUser();
+        $user = $token->getUser();
         if ($user->getGroup()->getCode() === $this->superAdmin) {
             return true;
         }
@@ -72,7 +72,7 @@ final class Ownership
                 return true;
             }
 
-            return $creator === $this->token->getUsername();
+            return $creator === $token->getUsername();
         } catch (\Exception $e) {
         }
 

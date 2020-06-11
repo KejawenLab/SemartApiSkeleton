@@ -9,9 +9,9 @@ namespace Alpabit\ApiSkeleton\Util;
  */
 final class Encryptor
 {
-    const ENCRYPTION_METHOD = 'AES-256-CBC';
+    private const ENCRYPTION_METHOD = 'AES-256-CBC';
 
-    const HASH_METHOD = 'sha256';
+    private const HASH_METHOD = 'sha256';
 
     public static function encrypt(string $plainText, string $key): string
     {

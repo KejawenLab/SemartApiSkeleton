@@ -18,11 +18,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 abstract class AbstractService implements ServiceInterface
 {
-    private $messageBus;
+    private MessageBusInterface $messageBus;
 
-    protected $repository;
+    protected ServiceableRepositoryInterface $repository;
 
-    protected $aliasHelper;
+    protected AliasHelper $aliasHelper;
 
     public function __construct(MessageBusInterface $messageBus, ServiceableRepositoryInterface $repository, AliasHelper $aliasHelper)
     {

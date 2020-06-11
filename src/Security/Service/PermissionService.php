@@ -29,21 +29,21 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 {
     private const FILTER_NAME = 'semart_softdeletable';
 
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $menuRepository;
+    private MenuRepositoryInterface $menuRepository;
 
     /**
      * @var PermissionInitiatorInterface[]
      */
-    private $initiators;
+    private iterable $initiators;
 
     /**
      * @var PermissionRemoverInterface[]
      */
-    private $removers;
+    private iterable $removers;
 
-    private $class;
+    private string $class;
 
     public function __construct(
         EntityManagerInterface $entityManager,

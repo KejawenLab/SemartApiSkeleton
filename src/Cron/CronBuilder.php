@@ -13,7 +13,7 @@ use Symfony\Component\Process\PhpExecutableFinder;
  */
 final class CronBuilder
 {
-    private $kernel;
+    private KernelInterface $kernel;
 
     public function __construct(KernelInterface $kernel)
     {

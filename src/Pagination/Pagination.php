@@ -9,9 +9,9 @@ namespace Alpabit\ApiSkeleton\Pagination;
  */
 final class Pagination
 {
-    private $page;
+    private int $page;
 
-    private $perPage;
+    private int $perPage;
 
     public function __construct(int $page = 1, int $perPage = 17)
     {

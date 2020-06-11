@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\Reader;
  */
 final class Parser
 {
-    private $reader;
+    private Reader $reader;
 
     public function __construct(Reader $reader)
     {

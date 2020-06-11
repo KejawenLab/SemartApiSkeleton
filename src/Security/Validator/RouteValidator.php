@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Validator;
 
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class RouteValidator extends ConstraintValidator
 {
-    private $routeCollection;
+    private RouteCollection $routeCollection;
 
     public function __construct(RouterInterface $router)
     {

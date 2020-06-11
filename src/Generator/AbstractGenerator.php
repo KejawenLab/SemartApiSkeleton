@@ -14,11 +14,11 @@ use Twig\Environment;
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {
-    protected $twig;
+    protected Environment $twig;
 
-    protected $fileSystem;
+    protected Filesystem $fileSystem;
 
-    protected $kernel;
+    protected KernelInterface $kernel;
 
     public function __construct(Environment $twig, Filesystem $fileSystem, KernelInterface $kernel)
     {

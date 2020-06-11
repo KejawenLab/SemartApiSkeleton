@@ -12,15 +12,15 @@ use Cron\Job\ShellJob as Base;
  */
 final class ShellJob extends Base
 {
-    private $cron;
+    private CronInterface $cron;
+
+    public function __construct(CronInterface $cron)
+    {
+        $this->cron = $cron;
+    }
 
     public function getCron(): CronInterface
     {
         return $this->cron;
-    }
-
-    public function setCron(CronInterface $cron): void
-    {
-        $this->cron = $cron;
     }
 }

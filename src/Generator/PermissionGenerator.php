@@ -21,13 +21,13 @@ final class PermissionGenerator extends AbstractGenerator
 {
     private const ROUTE_PLACEHOLDER = 'alpabit_apiskeleton_%s_getall';
 
-    private $permissionService;
+    private PermissionService $permissionService;
 
-    private $menuService;
+    private MenuService $menuService;
 
-    private $groupService;
+    private GroupService $groupService;
 
-    private $class;
+    private string $class;
 
     public function __construct(
         PermissionService $permissionService,

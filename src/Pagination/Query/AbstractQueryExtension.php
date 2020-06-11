@@ -12,7 +12,7 @@ use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
  */
 abstract class AbstractQueryExtension implements QueryExtensionInterface
 {
-    protected $aliasHelper;
+    protected AliasHelper $aliasHelper;
 
     public function __construct(AliasHelper $aliasHelper)
     {

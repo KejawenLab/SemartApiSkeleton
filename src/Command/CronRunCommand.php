@@ -121,8 +121,7 @@ final class CronRunCommand extends Command
             throw new \InvalidArgumentException('Job is disabled, run with --force to force schedule it.');
         }
 
-        $job = new ShellJob();
-        $job->setCron($cron);
+        $job = new ShellJob($cron);
         $job->setCommand($this->builder->build($cron));
         $job->setSchedule(new CrontabSchedule(!$schedule_now? $cron->getSchedule(): '* * * * *'));
 

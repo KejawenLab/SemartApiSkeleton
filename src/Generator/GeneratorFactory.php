@@ -15,7 +15,7 @@ final class GeneratorFactory
     /**
      * @var GeneratorInterface[]
      */
-    private $generators = [];
+    private iterable $generators;
 
     public function __construct(iterable $generators)
     {

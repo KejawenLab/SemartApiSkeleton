@@ -26,13 +26,13 @@ final class LoginFailSubscriber implements EventSubscriberInterface
 
     private const FAILURE_TTL = 300;
 
-    private $kernel;
+    private KernelInterface $kernel;
 
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    private $logger;
+    private LoggerInterface $logger;
 
-    private $redis;
+    private \Redis $redis;
 
     public function __construct(KernelInterface $kernel, RequestStack $requestStack, LoggerInterface $logger, \Redis $redis)
     {

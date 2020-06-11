@@ -14,18 +14,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Paginator
 {
-    private $pageField;
+    private ?string $pageField;
 
-    private $perPageField;
+    private ?string $perPageField;
 
-    private $perPageDefault;
+    private int $perPageDefault;
 
-    private $cacheLifetime;
+    private int $cacheLifetime;
 
     /**
      * @var QueryExtensionInterface[]
      */
-    private $queryExtension;
+    private iterable $queryExtension;
 
     public function __construct(SettingService $settingService, iterable $queryExtension)
     {

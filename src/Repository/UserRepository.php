@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    private $superAdmin;
+    private string $superAdmin;
 
     public function __construct(ManagerRegistry $registry, string $superAdmin)
     {

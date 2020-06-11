@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class FormFactory
 {
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(FormFactoryInterface $formFactory)
     {

@@ -14,6 +14,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -41,8 +43,10 @@ class Menu implements MenuInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
@@ -50,7 +54,7 @@ class Menu implements MenuInterface
      * @Groups({"read"})
      * @MaxDepth(1)
      */
-    private $parent;
+    private ?MenuInterface $parent;
 
     /**
      * @ORM\Column(type="string", length=27)
@@ -60,7 +64,7 @@ class Menu implements MenuInterface
      *
      * @Groups({"read"})
      */
-    private $code;
+    private ?string $code;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -70,7 +74,7 @@ class Menu implements MenuInterface
      *
      * @Groups({"read"})
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="integer")
@@ -79,7 +83,7 @@ class Menu implements MenuInterface
      *
      * @Groups({"read"})
      */
-    private $sortOrder;
+    private int $sortOrder;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -88,7 +92,7 @@ class Menu implements MenuInterface
      * @Assert\NotBlank()
      * @Route()
      */
-    private $routeName;
+    private ?string $routeName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -97,19 +101,19 @@ class Menu implements MenuInterface
      *
      * @Groups({"read"})
      */
-    private $extra;
+    private ?string $extra;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $showable;
+    private bool $showable;
 
     /**
      * @Groups({"read"})
      */
-    private $urlPath;
+    private ?string $urlPath;
 
     public function __construct()
     {

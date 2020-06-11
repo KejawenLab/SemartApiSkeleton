@@ -14,6 +14,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -37,8 +39,10 @@ class Permission implements PermissionInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist", "remove"})
@@ -47,7 +51,7 @@ class Permission implements PermissionInterface
      *
      * @Groups({"read"})
      **/
-    private $group;
+    private ?GroupInterface $group;
 
     /**
      * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
@@ -56,35 +60,35 @@ class Permission implements PermissionInterface
      *
      * @Groups({"read"})
      **/
-    private $menu;
+    private ?MenuInterface $menu;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $addable;
+    private bool $addable;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $editable;
+    private bool $editable;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $viewable;
+    private bool $viewable;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @Groups({"read"})
      */
-    private $deletable;
+    private bool $deletable;
 
     public function __construct()
     {

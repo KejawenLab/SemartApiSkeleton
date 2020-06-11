@@ -14,6 +14,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -42,8 +44,10 @@ class User implements UserInterface, AppUser
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
@@ -52,14 +56,14 @@ class User implements UserInterface, AppUser
      *
      * @Groups({"read"})
      **/
-    private $group;
+    private ?GroupInterface $group;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
      *
      * @Groups({"read"})
      */
-    private $supervisor;
+    private ?AppUser $supervisor;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -69,7 +73,7 @@ class User implements UserInterface, AppUser
      *
      * @Groups({"read"})
      */
-    private $username;
+    private ?string $username;
 
     /**
      * @ORM\Column(type="string", length=55)
@@ -79,7 +83,7 @@ class User implements UserInterface, AppUser
      *
      * @Groups({"read"})
      */
-    private $fullName;
+    private ?string $fullName;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -90,24 +94,24 @@ class User implements UserInterface, AppUser
      *
      * @Groups({"read"})
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string")
      */
-    private $password;
+    private ?string $password;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $deviceId;
+    private ?string $deviceId;
 
-    private $plainPassword;
+    private ?string $plainPassword;
 
     public function getId(): ?string
     {

@@ -19,9 +19,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 */
 final class CronService extends AbstractService implements ServiceInterface, ResolverInterface
 {
-    private $kernel;
+    private KernelInterface $kernel;
 
-    private $builder;
+    private CronBuilder $builder;
 
     public function __construct(
         MessageBusInterface $messageBus,
@@ -39,8 +39,7 @@ final class CronService extends AbstractService implements ServiceInterface, Res
     public function resolve(): array
     {
         return array_map(function (CronInterface $cron) {
-            $job = new ShellJob();
-            $job->setCron($cron);
+            $job = new ShellJob($cron);
             $job->setCommand($this->builder->build($cron), $this->kernel->getProjectDir());
             $job->setSchedule(new CrontabSchedule($cron->getSchedule()));
 

@@ -13,6 +13,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,8 +41,10 @@ class Setting implements SettingInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=27)
@@ -50,7 +54,7 @@ class Setting implements SettingInterface
      *
      * @Groups({"read"})
      */
-    private $parameter;
+    private ?string $parameter;
 
     /**
      * @ORM\Column(type="text")
@@ -59,12 +63,12 @@ class Setting implements SettingInterface
      *
      * @Groups({"read"})
      */
-    private $value;
+    private ?string $value;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $public;
+    private bool $public;
 
     public function __construct()
     {

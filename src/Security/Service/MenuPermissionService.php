@@ -16,11 +16,11 @@ use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
  */
 final class MenuPermissionService implements PermissionInitiatorInterface, PermissionRemoverInterface
 {
-    private $groupRepository;
+    private GroupRepositoryInterface $groupRepository;
 
-    private $permissionRepository;
+    private PermissionRepositoryInterface $permissionRepository;
 
-    private $class;
+    private string $class;
 
     public function __construct(GroupRepositoryInterface $groupRepository, PermissionRepositoryInterface $permissionRepository)
     {

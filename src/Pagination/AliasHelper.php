@@ -9,7 +9,7 @@ namespace Alpabit\ApiSkeleton\Pagination;
  */
 final class AliasHelper
 {
-    private $aliases = [];
+    private array $aliases = [];
 
     public function findAlias(string $field): ?string
     {
