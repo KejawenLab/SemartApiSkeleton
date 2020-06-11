@@ -38,7 +38,7 @@ class CronReport implements CronReportInterface
      *
      * @Groups({"read"})
      */
-    private $cron;
+    private ?CronInterface $cron;
 
     /**
      * @ORM\Column(type="datetime")

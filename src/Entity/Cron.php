@@ -112,6 +112,10 @@ class Cron implements CronInterface
 
     public function __construct()
     {
+        $this->name = null;
+        $this->description = null;
+        $this->command = null;
+        $this->schedule = null;
         $this->enabled = true;
         $this->symfonyCommand = true;
         $this->running = false;

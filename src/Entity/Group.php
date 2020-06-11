@@ -66,6 +66,12 @@ class Group implements GroupInterface
      */
     private ?string $name;
 
+    public function __construct()
+    {
+        $this->code = null;
+        $this->name = null;
+    }
+
     public function getId(): ?string
     {
         return (string) $this->id;

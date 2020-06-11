@@ -72,6 +72,8 @@ class Setting implements SettingInterface
 
     public function __construct()
     {
+        $this->parameter = null;
+        $this->value = null;
         $this->public = false;
     }
 

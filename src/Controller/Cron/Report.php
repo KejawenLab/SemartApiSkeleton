@@ -13,6 +13,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,6 +36,8 @@ final class Report extends AbstractFOSRestController
 
     /**
      * @Rest\Get("/cronjobs/{id}/logs")
+     *
+     * @Cache(expires="+17 minute", public=false)
      *
      * @SWG\Tag(name="Cron")
      * @SWG\Response(

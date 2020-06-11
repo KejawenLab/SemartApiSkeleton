@@ -117,8 +117,14 @@ class Menu implements MenuInterface
 
     public function __construct()
     {
+        $this->parent = null;
+        $this->code = null;
+        $this->name = null;
         $this->sortOrder = 0;
+        $this->routeName = '#';
+        $this->extra = null;
         $this->showable = true;
+        $this->urlPath = '#';
     }
 
     public function getId(): ?string

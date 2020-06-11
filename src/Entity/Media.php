@@ -71,7 +71,11 @@ class Media implements MediaInterface
 
     public function __construct()
     {
-        $this->public = true;
+        $this->fileName = null;
+        $this->folder = null;
+        $this->fileUrl = null;
+        $this->file = null;
+        $this->public = false;
     }
 
     public function getId(): ?string

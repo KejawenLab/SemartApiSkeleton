@@ -113,6 +113,18 @@ class User implements UserInterface, AppUser
 
     private ?string $plainPassword;
 
+    public function __construct()
+    {
+        $this->group = null;
+        $this->supervisor = null;
+        $this->username = null;
+        $this->fullName = null;
+        $this->email = null;
+        $this->password = null;
+        $this->deviceId = null;
+        $this->plainPassword = null;
+    }
+
     public function getId(): ?string
     {
         return (string) $this->id;

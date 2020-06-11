@@ -92,6 +92,8 @@ class Permission implements PermissionInterface
 
     public function __construct()
     {
+        $this->group = null;
+        $this->menu = null;
         $this->addable = false;
         $this->editable = false;
         $this->viewable = false;
