@@ -75,10 +75,7 @@ abstract class AbstractFixture extends Base
 
     protected function getData(): iterable
     {
-        $fixtures = Yaml::parse((string) file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
-        foreach ($fixtures as $fixture) {
-            yield $fixture;
-        }
+        return Yaml::parse((string) file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
     }
 
     abstract protected function createNew();

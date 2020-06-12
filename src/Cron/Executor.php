@@ -39,7 +39,7 @@ final class Executor extends Base
 
     protected function startProcesses(CronReport $report): void
     {
-        foreach ($this->getSets() as $set) {
+        foreach ($this->sets as $set) {
             /** @var CronInterface $cron */
             $cron = $set->getJob()->getCron();
             $key = sprintf('%s_%s', CronInterface::CRON_RUN_KEY, $cron->getId());
@@ -66,13 +66,6 @@ final class Executor extends Base
             $set->run();
 
             $lock->release();
-        }
-    }
-
-    public function getSets(): iterable
-    {
-        foreach ($this->sets as $set) {
-            yield $set;
         }
     }
 }
