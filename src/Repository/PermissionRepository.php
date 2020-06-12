@@ -10,6 +10,7 @@ use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,8 +36,12 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->innerJoin('o.group', 'g');
         $queryBuilder->innerJoin('o.menu', 'm');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)));
         $queryBuilder->andWhere($queryBuilder->expr()->eq('m.showable', $queryBuilder->expr()->literal(true)));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(
+            $queryBuilder->expr()->eq('o.addable', $queryBuilder->expr()->literal(true)),
+            $queryBuilder->expr()->eq('o.editable', $queryBuilder->expr()->literal(true)),
+            $queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)),
+        ));
         $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
         if ($parentOnly) {
             $queryBuilder->andWhere($queryBuilder->expr()->isNull('m.parent'));
