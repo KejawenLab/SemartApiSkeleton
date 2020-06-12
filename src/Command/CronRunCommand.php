@@ -26,8 +26,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronRunCommand extends Command
 {
-    private \Redis $redis;
-
     private CronService $cronService;
 
     private CronReportService $reportService;
@@ -39,14 +37,12 @@ final class CronRunCommand extends Command
     private string $reportClass;
 
     public function __construct(
-        \Redis $redis,
         CronService $cronService,
         CronReportService $reportService,
         CronBuilder $builder,
         Executor $executor,
         string $reportClass
     ) {
-        $this->redis = $redis;
         $this->cronService = $cronService;
         $this->reportService = $reportService;
         $this->builder = $builder;
@@ -89,10 +85,6 @@ final class CronRunCommand extends Command
             /** @var CronInterface $cron */
             $cron = $value->getJob()->getCron();
             $cron->setRunning(false);
-            $key = sprintf('%s_%s_', CronInterface::CRON_RUN_KEY, $cron->getId());
-            if ($this->redis->get($key)) {
-                $this->redis->del($key);
-            }
 
             $this->cronService->save($cron);
 

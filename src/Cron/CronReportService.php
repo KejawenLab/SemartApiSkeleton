@@ -18,4 +18,34 @@ final class CronReportService extends AbstractService
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
+
+    public function countStale(): int
+    {
+        $stale = (new \DateTime())->sub(new \DateInterval('P3M'));
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->select('COUNT(1)');
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->lt(
+                sprintf('%s.createdAt', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal($stale->format('Y-m-d H:i:s'))
+            )
+        );
+
+        return (int) $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    public function clean(): void
+    {
+        $stale = (new \DateTime())->sub(new \DateInterval('P3M'));
+
+        $queryBuilder = $this->getQueryBuilder()->delete();
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->lt(
+                sprintf('%s.createdAt', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal($stale->format('Y-m-d H:i:s'))
+            )
+        );
+        $queryBuilder->getQuery()->execute();
+    }
 }
