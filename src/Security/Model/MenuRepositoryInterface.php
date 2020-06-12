@@ -13,5 +13,5 @@ interface MenuRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findByCode(string $code): ?MenuInterface;
 
-    public function findChilds(MenuInterface $menu): array;
+    public function findChilds(MenuInterface $menu): iterable;
 }

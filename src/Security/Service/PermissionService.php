@@ -105,16 +105,13 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermission($group, $menu);
     }
 
-    public function getByUser(UserInterface $user): array
+    public function getByUser(UserInterface $user): iterable
     {
         /** @var MenuInterface[] $parents */
         $parents = $this->repository->findAllowedMenusByGroup($user->getGroup(), true);
-        $menus = [];
         foreach ($parents as $key => $parent) {
-            $menus[$key] = $this->buildMenu($parent, $user->getGroup());
+            yield $this->buildMenu($parent, $user->getGroup());
         }
-
-        return $menus;
     }
 
     public static function getHandledMessages(): iterable

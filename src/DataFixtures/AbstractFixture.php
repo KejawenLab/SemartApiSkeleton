@@ -73,9 +73,12 @@ abstract class AbstractFixture extends Base
         $manager->flush();
     }
 
-    protected function getData(): array
+    protected function getData(): iterable
     {
-        return Yaml::parse((string) file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
+        $fixtures = Yaml::parse((string) file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
+        foreach ($fixtures as $fixture) {
+            yield $fixture;
+        }
     }
 
     abstract protected function createNew();

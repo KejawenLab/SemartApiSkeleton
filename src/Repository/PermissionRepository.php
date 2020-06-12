@@ -29,7 +29,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $this->findOneBy(['group' => $group, 'menu' => $menu]);
     }
 
-    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): array
+    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
@@ -46,13 +46,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%d', __CLASS__, __METHOD__, $group->getId(), (int) $parentOnly));
 
         /** @var PermissionInterface[] $permissions */
-        $menus = [];
         $permissions = $query->getResult();
         foreach ($permissions as $permission) {
-            $menus[] = $permission->getMenu();
+            yield $permission->getMenu();
         }
-
-        return $menus;
     }
 
     public function removeByGroup(GroupInterface $group): void

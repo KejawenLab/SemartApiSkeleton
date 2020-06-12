@@ -39,10 +39,10 @@ final class Executor extends Base
 
     protected function startProcesses(CronReport $report): void
     {
-        foreach ($this->sets as $set) {
+        foreach ($this->getSets() as $set) {
             /** @var CronInterface $cron */
             $cron = $set->getJob()->getCron();
-            $key = sprintf('%s_%s_', CronInterface::CRON_RUN_KEY, $cron->getId());
+            $key = sprintf('%s_%s', CronInterface::CRON_RUN_KEY, $cron->getId());
             $lock = (new LockFactory(new RedisStore($this->redis)))->createLock($key);
             if (!$lock->acquire()) {
                 $this->logger->info(sprintf('"%s" schedule is locked by same process in other machine', $cron->getName()));
@@ -66,6 +66,13 @@ final class Executor extends Base
             $set->run();
 
             $lock->release();
+        }
+    }
+
+    public function getSets(): iterable
+    {
+        foreach ($this->sets as $set) {
+            yield $set;
         }
     }
 }
