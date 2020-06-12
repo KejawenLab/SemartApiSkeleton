@@ -31,7 +31,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     public function initiate(PermissionableInterface $object): void
     {
         /** @var MenuInterface $object */
-        foreach ($this->getAllGroup() as $group) {
+        foreach ($this->groupRepository->findAll() as $group) {
             $permission = $this->permissionRepository->findPermission($group, $object);
             if (!$permission) {
                 $permission = new $this->class();
@@ -58,13 +58,5 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     public function setClass(string $class): void
     {
         $this->class = $class;
-    }
-
-    private function getAllGroup(): iterable
-    {
-        $groups = $this->groupRepository->findAll();
-        foreach ($groups as $group) {
-            yield $group;
-        }
     }
 }

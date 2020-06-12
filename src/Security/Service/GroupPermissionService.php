@@ -31,7 +31,7 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     public function initiate(PermissionableInterface $object): void
     {
         /** @var GroupInterface $object */
-        foreach ($this->getAllMenu() as $menu) {
+        foreach ($this->menuRepository->findAll() as $menu) {
             $permission = $this->permissionRepository->findPermission($object, $menu);
             if (!$permission) {
                 $permission = new $this->class();
@@ -58,13 +58,5 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     public function setClass(string $class): void
     {
         $this->class = $class;
-    }
-
-    private function getAllMenu(): iterable
-    {
-        $menus = $this->menuRepository->findAll();
-        foreach ($menus as $menu) {
-            yield $menu;
-        }
     }
 }
