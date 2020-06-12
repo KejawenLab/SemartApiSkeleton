@@ -10,7 +10,6 @@ use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)
