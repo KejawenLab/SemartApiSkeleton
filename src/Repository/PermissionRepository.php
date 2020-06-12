@@ -30,6 +30,25 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $this->findOneBy(['group' => $group, 'menu' => $menu]);
     }
 
+    public function findPermissions(GroupInterface $group, iterable $menus): iterable
+    {
+        $ids = [];
+        array_push( $ids, ...$this->getIds($menus));
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.group', 'g');
+        $queryBuilder->innerJoin('o.menu', 'm');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
+        $queryBuilder->add('where', $queryBuilder->expr()->in('m.id', ':ids'));
+        $queryBuilder->setParameter('ids', $ids);
+        $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), serialize($ids)));
+
+        return $query->getResult();
+    }
+
     public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -76,5 +95,13 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->setParameter('menu', $menu);
         $queryBuilder->setParameter('now', new \DateTime());
         $queryBuilder->getQuery()->execute();
+    }
+
+    private function getIds(iterable $menus): iterable
+    {
+        /** @var MenuInterface $menu */
+        foreach ($menus as $menu) {
+            yield $menu->getId();
+        }
     }
 }

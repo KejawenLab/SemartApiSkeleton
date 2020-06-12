@@ -105,6 +105,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermission($group, $menu);
     }
 
+    public function getPermissions(GroupInterface $group, iterable $menus): iterable
+    {
+        return $this->repository->findPermissions($group, $menus);
+    }
+
     public function getByUser(UserInterface $user): iterable
     {
         /** @var MenuInterface[] $parents */
@@ -134,10 +139,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         $childs = $this->menuRepository->findChilds($menu);
         if (!empty($childs)) {
             $tree['childs'] = [];
-            foreach ($childs as $key => $child) {
-                $permission = $this->getPermission($group, $child);
+            $permissions = $this->getPermissions($group, $childs);
+            foreach ($permissions as $key => $permission) {
+                /** @var PermissionInterface $permission */
                 if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
-                    $tree['childs'][$key] = $this->buildMenu($child, $group);
+                    $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
                 }
             }
         }
