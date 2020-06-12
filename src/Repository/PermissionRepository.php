@@ -36,6 +36,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->innerJoin('o.menu', 'm');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('m.showable', $queryBuilder->expr()->literal(true)));
         $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
         if ($parentOnly) {
             $queryBuilder->andWhere($queryBuilder->expr()->isNull('m.parent'));
