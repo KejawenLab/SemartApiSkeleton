@@ -282,6 +282,8 @@ php bin/console cron:stop
 >
 > * Upgrade Management
 >
+> * House Keeping
+>
 
 ## Cara Penggunaan
 
