@@ -33,7 +33,11 @@ final class PermissionRepository extends AbstractRepository implements Permissio
     public function findPermissions(GroupInterface $group, iterable $menus): iterable
     {
         $ids = [];
-        array_push( $ids, ...$this->getIds($menus));
+        /** @var MenuInterface $menu */
+        foreach ($menus as $menu) {
+            $ids[] = $menu->getId();
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
         $queryBuilder->innerJoin('o.menu', 'm');
@@ -95,13 +99,5 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->setParameter('menu', $menu);
         $queryBuilder->setParameter('now', new \DateTime());
         $queryBuilder->getQuery()->execute();
-    }
-
-    private function getIds(iterable $menus): iterable
-    {
-        /** @var MenuInterface $menu */
-        foreach ($menus as $menu) {
-            yield $menu->getId();
-        }
     }
 }
