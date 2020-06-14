@@ -89,20 +89,6 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 > Ini artinya password database akan dienkripsi sehingga lebih aman
 >
 
-#### Pengguna MySQL/MariaDB
-
-```bash
-composer update --prefer-dist -vvv
-php bin/console doctrine:database:create
-php bin/console doctrine:migration:migrate --no-interaction
-php bin/console doctrine:fixtures:load --no-interaction
-php bin/console assets:install
-php bin/console cron:start
-symfony server:start
-```
-
-#### Pengguna PostgreSQL/OracleDB/SQLServer
-
 ```bash
 composer update --prefer-dist -vvv
 php bin/console doctrine:database:create
@@ -379,6 +365,8 @@ final class Test implements TestInterface
 }
 
 ```
+
+Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) untuk membuat entity lalu kemudian memodifikasinya sesuai dengan spek dari Semart Api Skeleton.
 
 #### Generate RESTful Api
 
