@@ -198,7 +198,7 @@ docker-compose exec app bash -c "php bin/console semart:encrypt [DATABASE_PASSWO
 docker-compose exec app bash -c "php bin/console cache:clear"
 docker-compose exec app bash -c "chmod 777 -R var"
 docker-compose exec app bash -c "php bin/console doctrine:database:create"
-docker-compose exec app bash -c "php bin/console doctrine:migration:migrate --no-interaction"
+docker-compose exec app bash -c "php bin/console doctrine:schema:update --force"
 docker-compose exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 docker-compose exec app bash -c "php bin/console assets:install"
 ```
