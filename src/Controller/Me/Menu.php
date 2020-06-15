@@ -30,7 +30,7 @@ final class Menu extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/me/menus")
+     * @Rest\Get("/me/menus", priority=1)
      *
      * @SWG\Tag(name="Profile")
      * @SWG\Response(

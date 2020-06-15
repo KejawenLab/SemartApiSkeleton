@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class Profile extends AbstractFOSRestController
 {
     /**
-     * @Rest\Get("/me")
+     * @Rest\Get("/me", priority=1)
      *
      * @SWG\Tag(name="Profile")
      * @SWG\Response(

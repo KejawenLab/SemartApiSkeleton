@@ -30,7 +30,7 @@ final class PublicSetting extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/public/settings")
+     * @Rest\Get("/settings/public", priority=1)
      *
      * @SWG\Tag(name="Setting")
      * @SWG\Parameter(

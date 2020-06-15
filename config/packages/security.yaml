@@ -30,6 +30,11 @@ security:
             methods: ['GET']
             stateless: true
             anonymous: true
+        setting_public:
+            pattern: ^/api/settings/public
+            methods: ['GET']
+            stateless: true
+            anonymous: true
         public_api:
             pattern: ^/api/public
             stateless: true
@@ -45,5 +50,6 @@ security:
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/medias/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
+        - { path: ^/api/settings/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
