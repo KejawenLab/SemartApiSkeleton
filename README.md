@@ -269,6 +269,8 @@ php bin/console cron:stop
 > * Upgrade Management
 >
 > * House Keeping
+> 
+> * Password History
 >
 
 ## Cara Penggunaan
