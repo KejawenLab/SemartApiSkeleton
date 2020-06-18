@@ -17,7 +17,7 @@ final class SecurityController extends AbstractFOSRestController
     public const ROUTE_NAME = 'security_login';
 
     /**
-     * @Rest\Post("/login", name=SecurityController::ROUTE_NAME)
+     * @Rest\Post("/login", name=SecurityController::ROUTE_NAME, priority=17)
      *
      * @SWG\Tag(name="Security")
      * @SWG\Parameter(
