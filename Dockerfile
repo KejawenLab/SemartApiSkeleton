@@ -8,12 +8,15 @@ ADD docker/apt/sources.list /etc/apt/sources.list
 
 # Install Software
 RUN apt update && apt upgrade -y && apt autoremove -y
-RUN apt install nginx-full supervisor vim curl unzip -y
+RUN apt install nginx-full supervisor vim wget curl unzip -y
 RUN apt install php php-cli php-curl php-intl php-mbstring php-xml php-zip \
     php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc \
     php-bz2 php-common php-gd php-ldap php-mysql php-readline php-soap php-tidy php-xsl php-redis -y
 
-RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer.phar && chmod a+x /usr/local/bin/composer && composer self-update
+ADD docker/php/composer.sh /composer.sh
+RUN chmod +x /composer.sh
+RUN /composer.sh && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
+RUN rm -f /composer.sh
 
 RUN apt autoremove -y && apt clean && apt autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
