@@ -29,4 +29,9 @@ final class SettingService extends AbstractService implements ServiceInterface
 
         throw new SettingNotFoundException();
     }
+
+    public function getPublicSetting(string $id): ?SettingInterface
+    {
+        return $this->repository->findOneBy(['id' => $id, 'public' => true]);
+    }
 }

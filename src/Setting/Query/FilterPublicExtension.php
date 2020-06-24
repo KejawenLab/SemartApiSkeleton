@@ -14,7 +14,7 @@ final class FilterPublicExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        if (false === strpos($request->getPathInfo(), 'public')) {
+        if (false === strpos($request->getPathInfo(), '/settings/public')) {
             return;
         }
 

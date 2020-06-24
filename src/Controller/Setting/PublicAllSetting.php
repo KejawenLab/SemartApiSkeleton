@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class PublicSetting extends AbstractFOSRestController
+final class PublicAllSetting extends AbstractFOSRestController
 {
     private SettingService $service;
 
