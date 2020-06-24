@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Form\Type;
 
 use Alpabit\ApiSkeleton\Entity\User;
-use Alpabit\ApiSkeleton\Security\Validator\Password;
+use Alpabit\ApiSkeleton\Security\Validator\PasswordLength;
+use Alpabit\ApiSkeleton\Security\Validator\PasswordMatch;
 use Alpabit\ApiSkeleton\Security\Validator\PasswordHistory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -26,12 +27,12 @@ final class UpdateProfileType extends AbstractType
         $builder->add('oldPassword', PasswordType::class, [
             'required' => false,
             'mapped' => false,
-            'constraints' => [new Password()],
+            'constraints' => [new PasswordMatch()],
         ]);
         $builder->add('newPassword', PasswordType::class, [
             'required' => false,
             'mapped' => false,
-            'constraints' => [new PasswordHistory()],
+            'constraints' => [new PasswordHistory(), new PasswordLength()],
         ]);
     }
 

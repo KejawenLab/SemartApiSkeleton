@@ -6,6 +6,8 @@ namespace Alpabit\ApiSkeleton\Form\Type;
 
 use Alpabit\ApiSkeleton\Entity\Group;
 use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Security\Validator\PasswordHistory;
+use Alpabit\ApiSkeleton\Security\Validator\PasswordLength;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -33,7 +35,10 @@ final class UpdateUserType extends AbstractType
         ]);
         $builder->add('fullName', TextType::class, ['required' => true]);
         $builder->add('email', EmailType::class, ['required' => true]);
-        $builder->add('plainPassword', PasswordType::class, ['required' => false]);
+        $builder->add('plainPassword', PasswordType::class, [
+            'required' => false,
+            'constraints' => [new PasswordHistory(), new PasswordLength()],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

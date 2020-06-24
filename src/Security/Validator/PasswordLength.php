@@ -9,10 +9,10 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class Password extends Constraint
+final class PasswordLength extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Password not match';
+        return 'Password length must longer than 6 characters';
     }
 }

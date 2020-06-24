@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
  */
-final class PasswordValidator extends ConstraintValidator
+final class PasswordMatchValidator extends ConstraintValidator
 {
     private UserPasswordEncoderInterface $encoder;
 
@@ -29,8 +29,8 @@ final class PasswordValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        if (!$constraint instanceof Password) {
-            throw new UnexpectedTypeException($constraint, Password::class);
+        if (!$constraint instanceof PasswordMatch) {
+            throw new UnexpectedTypeException($constraint, PasswordMatch::class);
         }
 
         if (!$token = $this->tokenStorage->getToken()) {
