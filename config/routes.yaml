@@ -1,3 +1,6 @@
 home:
     path: /
     controller: Alpabit\ApiSkeleton\Controller\HomeController::__invoke
+api:
+    path: /api
+    controller: Alpabit\ApiSkeleton\Controller\HomeController::__invoke
