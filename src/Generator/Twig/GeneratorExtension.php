@@ -13,15 +13,13 @@ use Twig\TwigFilter;
  */
 final class GeneratorExtension extends AbstractExtension
 {
-    public function getFilters(): array
+    public function getFilters(): iterable
     {
-        return [
-            new TwigFilter('pluralize', [$this, 'pluralize']),
-            new TwigFilter('humanize', [$this, 'humanize']),
-            new TwigFilter('underscore', [$this, 'underscore']),
-            new TwigFilter('dash', [$this, 'dash']),
-            new TwigFilter('camelcase', [$this, 'camelcase']),
-        ];
+        yield new TwigFilter('pluralize', [$this, 'pluralize']);
+        yield new TwigFilter('humanize', [$this, 'humanize']);
+        yield new TwigFilter('underscore', [$this, 'underscore']);
+        yield new TwigFilter('dash', [$this, 'dash']);
+        yield new TwigFilter('camelcase', [$this, 'camelcase']);
     }
 
     public function pluralize(string $value): string
