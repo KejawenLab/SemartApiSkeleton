@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
-*/
+ */
 final class CronType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

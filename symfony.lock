@@ -186,6 +186,9 @@
     "nikic/php-parser": {
         "version": "v4.4.0"
     },
+    "noxlogic/ratelimit-bundle": {
+        "version": "1.15.1"
+    },
     "ocramius/package-versions": {
         "version": "1.4.2"
     },

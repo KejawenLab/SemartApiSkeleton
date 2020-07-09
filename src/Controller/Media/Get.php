@@ -8,6 +8,7 @@ use Alpabit\ApiSkeleton\Media\MediaService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\File\File;
@@ -63,6 +64,8 @@ final class Get extends AbstractFOSRestController
      *     )
      * )
      * @Security(name="Bearer")
+     *
+     * @RateLimit(limit=77, period=1)
      *
      * @param Request $request
      * @param string $path

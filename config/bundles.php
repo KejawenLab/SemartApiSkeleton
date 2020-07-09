@@ -19,4 +19,5 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     DH\DoctrineAuditBundle\DHDoctrineAuditBundle::class => ['all' => true],
+    Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle::class => ['all' => true],
 ];

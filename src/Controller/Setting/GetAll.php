@@ -13,6 +13,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -71,6 +72,8 @@ final class GetAll extends AbstractFOSRestController
      * )
      *
      * @Security(name="Bearer")
+     *
+     * @RateLimit(limit=17, period=1)
      *
      * @param Request $request
      *

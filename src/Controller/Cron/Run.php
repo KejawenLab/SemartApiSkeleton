@@ -11,6 +11,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -49,6 +50,8 @@ final class Run extends AbstractFOSRestController
      *     )
      * )
      * @Security(name="Bearer")
+     *
+     * @RateLimit(limit=7, period=1)
      *
      * @param Request $request
      * @param string $id

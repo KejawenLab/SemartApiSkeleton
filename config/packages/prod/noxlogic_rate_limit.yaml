@@ -1,0 +1,4 @@
+noxlogic_rate_limit:
+    enabled: true
+    redis_client: default
+    rate_response_message: 'API rate limit exceeded.'

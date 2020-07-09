@@ -11,6 +11,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -65,6 +66,8 @@ final class PublicAllSetting extends AbstractFOSRestController
      *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
      *     )
      * )
+     *
+     * @RateLimit(limit=17, period=1)
      *
      * @param Request $request
      *

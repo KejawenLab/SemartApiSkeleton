@@ -13,6 +13,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,16 +36,16 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-    * @Rest\Post("/medias")
-    *
-    * @SWG\Tag(name="Media")
-    * @SWG\Post(consumes={"multipart/form-data"})
-    * @SWG\Parameter(
-    *     name="file",
-    *     in="formData",
-    *     type="file",
-    *     description="File to upload"
-    * )
+     * @Rest\Post("/medias")
+     *
+     * @SWG\Tag(name="Media")
+     * @SWG\Post(consumes={"multipart/form-data"})
+     * @SWG\Parameter(
+     *     name="file",
+     *     in="formData",
+     *     type="file",
+     *     description="File to upload"
+     * )
      * @SWG\Parameter(
      *     name="folder",
      *     in="formData",
@@ -57,21 +58,23 @@ final class Post extends AbstractFOSRestController
      *     type="boolean",
      *     description="Is public"
      * )
-    * @SWG\Response(
-    *     response=201,
-    *     description="Crate new media",
-    *     @SWG\Schema(
-    *         type="object",
-    *         ref=@Model(type=Media::class, groups={"read"})
-    *     )
-    * )
-    *
-    * @Security(name="Bearer")
-    *
-    * @param Request $request
-    *
-    * @return View
-    */
+     * @SWG\Response(
+     *     response=201,
+     *     description="Crate new media",
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=Media::class, groups={"read"})
+     *     )
+     * )
+     *
+     * @Security(name="Bearer")
+     *
+     * @RateLimit(limit=7, period=1)
+     *
+     * @param Request $request
+     *
+     * @return View
+     */
     public function __invoke(Request $request): View
     {
         $media = new Media();

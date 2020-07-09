@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,31 +38,33 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-    * @Rest\Post("/cronjobs")
-    *
-    * @SWG\Tag(name="Cron")
-    * @SWG\Parameter(
-    *     name="cron",
-    *     in="body",
-    *     type="object",
-    *     description="Cron form",
-    *     @Model(type=CronType::class)
-    * )
-    * @SWG\Response(
-    *     response=201,
-    *     description="Crate new cron",
-    *     @SWG\Schema(
-    *         type="object",
-    *         ref=@Model(type=Cron::class, groups={"read"})
-    *     )
-    * )
-    *
-    * @Security(name="Bearer")
-    *
-    * @param Request $request
-    *
-    * @return View
-    */
+     * @Rest\Post("/cronjobs")
+     *
+     * @SWG\Tag(name="Cron")
+     * @SWG\Parameter(
+     *     name="cron",
+     *     in="body",
+     *     type="object",
+     *     description="Cron form",
+     *     @Model(type=CronType::class)
+     * )
+     * @SWG\Response(
+     *     response=201,
+     *     description="Crate new cron",
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=Cron::class, groups={"read"})
+     *     )
+     * )
+     *
+     * @Security(name="Bearer")
+     *
+     * @RateLimit(limit=7, period=1)
+     *
+     * @param Request $request
+     *
+     * @return View
+     */
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(CronType::class, $request);
