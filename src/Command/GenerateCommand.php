@@ -69,20 +69,11 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
         $reflection = new \ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
         $application = $this->getApplication();
 
-        $output->writeln('<info>Creating Migration File</info>');
-        $migrate = $application->find('doctrine:migration:diff');
-        $migrate->ignoreValidationErrors();
-        $migrate->run(new ArrayInput([
-            'command' => 'doctrine:migration:diff',
-            '--allow-empty-diff' => null,
-            '--no-interaction' => null,
-        ]), $output);
-
         $output->writeln('<info>Running Schema Updater</info>');
-        $update = $application->find('doctrine:migration:migrate');
+        $update = $application->find('doctrine:schema:update');
         $update->run(new ArrayInput([
-            'command' => 'doctrine:migration:migrate',
-            '--no-interaction' => null,
+            'command' => 'doctrine:schema:update',
+            '--force' => null,
         ]), $output);
 
         $output->writeln('<info>Generating RESTful API</info>');
