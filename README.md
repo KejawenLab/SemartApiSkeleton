@@ -429,7 +429,7 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Copyright
 
-Semart Api Skeleton disupport dan didedikasikan untuk PT. Alpabit Digital Inovasi
+Semart Api Skeleton dikembangkan dan dimaintain oleh [KejawenLab](https://github.com/KejawenLab)
 
 ## Lisensi
 
