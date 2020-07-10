@@ -1,4 +1,6 @@
 noxlogic_rate_limit:
     enabled: true
+    storage_engine: php_redis
     redis_client: default
+    php_redis_service: snc_redis.default
     rate_response_message: 'API rate limit exceeded.'
