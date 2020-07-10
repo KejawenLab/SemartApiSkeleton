@@ -54,7 +54,7 @@ final class PermissionGenerator extends AbstractGenerator
         $menu = new $this->class();
         $menu->setCode($shortNameUppercase);
         $menu->setName($shortNameUppercase);
-        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, $shortName));
+        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
 
         $this->menuService->save($menu);
 
