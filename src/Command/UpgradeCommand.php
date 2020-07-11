@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Command;
 
+use Alpabit\ApiSkeleton\Upgrade\Model\UpgradeInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,7 +17,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 final class UpgradeCommand extends Command
 {
     /**
-     * @var @var UpgradeInterface[]
+     * @var UpgradeInterface[]
      */
     private iterable $upgraders;
 
@@ -50,7 +51,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
 </>');
         if (!$input->getOption('force')) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Upgrade can\'t be rolled back. Continue?</question> (y/n)', false);
+            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Upgrade software can\'t be rolled back. Continue?</question> (y/n)', false);
             if (!$helper->ask($input, $output, $question)) {
                 return 0;
             }
