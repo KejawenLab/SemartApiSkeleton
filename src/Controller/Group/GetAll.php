@@ -74,10 +74,6 @@ final class GetAll extends AbstractFOSRestController
      * @RateLimit(limit=7, period=1)
      *
      * @Security(name="Bearer")
-     *
-     * @param Request $request
-     *
-     * @return View
      */
     public function __invoke(Request $request): View
     {

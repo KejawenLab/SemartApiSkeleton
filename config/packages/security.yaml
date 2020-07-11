@@ -1,6 +1,6 @@
 security:
     encoders:
-        Alpabit\ApiSkeleton\Entity\User:
+        Alpabit\ApiSkeleton\Security\User:
             algorithm: auto
     providers:
         user_provider:

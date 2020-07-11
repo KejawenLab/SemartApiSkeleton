@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\EventSubscriber;
 
+use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
 use Alpabit\ApiSkeleton\Security\Service\UserService;
 use Alpabit\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
@@ -20,10 +21,13 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
     private UserService $service;
 
-    public function __construct(RequestStack $requestStack, UserService $service)
+    private UserProviderFactory $userProviderFactory;
+
+    public function __construct(RequestStack $requestStack, UserService $service, UserProviderFactory $userProviderFactory)
     {
         $this->requestStack = $requestStack;
         $this->service = $service;
+        $this->userProviderFactory = $userProviderFactory;
     }
 
     public function validate(JWTDecodedEvent $event): void
@@ -47,7 +51,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
     public function sign(JWTCreatedEvent $event): void
     {
-        $user = $event->getUser();
+        $user = $this->userProviderFactory->getRealUser($event->getUser());
         $payload = $event->getData();
 
         $deviceId = Encryptor::hash(date('YmdHis'));

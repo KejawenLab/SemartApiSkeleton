@@ -53,11 +53,6 @@ final class Run extends AbstractFOSRestController
      *
      * @RateLimit(limit=7, period=1)
      *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
-     *
      * @throws \Exception
      */
     public function __invoke(Request $request, string $id): View

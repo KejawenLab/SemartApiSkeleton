@@ -30,7 +30,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
 
     public function initiate(PermissionableInterface $object): void
     {
-        /** @var MenuInterface $object */
+        /* @var MenuInterface $object */
         foreach ($this->groupRepository->findAll() as $group) {
             $permission = $this->permissionRepository->findPermission($group, $object);
             if (!$permission) {
@@ -46,7 +46,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
 
     public function remove(PermissionableInterface $object): void
     {
-        /** @var MenuInterface $object */
+        /* @var MenuInterface $object */
         $this->permissionRepository->removeByMenu($object);
     }
 

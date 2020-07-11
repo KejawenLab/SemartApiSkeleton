@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @Permission(menu="CRON", actions={Permission::DELETE})
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
-*/
+ */
 final class Delete extends AbstractFOSRestController
 {
     private CronService $service;
@@ -43,11 +43,6 @@ final class Delete extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
      */
     public function __invoke(Request $request, string $id): View
     {

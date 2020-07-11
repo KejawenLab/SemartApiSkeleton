@@ -31,6 +31,7 @@ final class Get extends AbstractFOSRestController
         $this->service = $service;
         $this->mapping = $mapping;
     }
+
     /**
      * @Rest\Get("/medias/{path}", requirements={"path"=".+"})
      *
@@ -66,11 +67,6 @@ final class Get extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=77, period=1)
-     *
-     * @param Request $request
-     * @param string $path
-     *
-     * @return Response
      */
     public function __invoke(Request $request, string $path): Response
     {

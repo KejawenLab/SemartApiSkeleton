@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
 use Alpabit\ApiSkeleton\Entity\PasswordHistory;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use Alpabit\ApiSkeleton\Security\User;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -19,10 +20,16 @@ final class PasswordEncoder implements MessageSubscriberInterface
 
     private PasswordHistoryService $history;
 
-    public function __construct(UserPasswordEncoderInterface $service, PasswordHistoryService $history)
-    {
+    private UserProviderFactory $userProviderFactory;
+
+    public function __construct(
+        UserPasswordEncoderInterface $service,
+        PasswordHistoryService $history,
+        UserProviderFactory $userProviderFactory
+    ) {
         $this->service = $service;
         $this->history = $history;
+        $this->userProviderFactory = $userProviderFactory;
     }
 
     public function __invoke(EntityPersisted $message): void
@@ -33,7 +40,7 @@ final class PasswordEncoder implements MessageSubscriberInterface
         }
 
         if ($plainPassword = $user->getPlainPassword()) {
-            $password = $this->service->encodePassword($user, $plainPassword);
+            $password = $this->service->encodePassword(new User($user), $plainPassword);
             $user->setPassword($password);
 
             $passwordHistory = new PasswordHistory();

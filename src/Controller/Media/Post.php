@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @Permission(menu="MEDIA", actions={Permission::ADD})
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
-*/
+ */
 final class Post extends AbstractFOSRestController
 {
     private FormFactory $formFactory;
@@ -70,10 +70,6 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     *
-     * @return View
      */
     public function __invoke(Request $request): View
     {

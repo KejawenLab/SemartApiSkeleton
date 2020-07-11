@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Controller\Me;
 use Alpabit\ApiSkeleton\Entity\Menu as Entity;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -45,13 +46,9 @@ final class Menu extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     *
-     * @return View
      */
-    public function __invoke(Request $request): View
+    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
     {
-        return $this->view($this->service->getByUser($this->getUser()));
+        return $this->view($this->service->getByUser($userProviderFactory->getRealUser($this->getUser())));
     }
 }

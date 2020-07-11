@@ -8,8 +8,8 @@ use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use Alpabit\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
 
@@ -37,7 +37,7 @@ final class Voter extends SymfonyVoter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof User) {
             return false;
         }
 

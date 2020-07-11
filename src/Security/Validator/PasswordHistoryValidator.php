@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Validator;
 
-use Alpabit\ApiSkeleton\Entity\User;
 use Alpabit\ApiSkeleton\Security\Service\PasswordHistoryService;
+use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
+use Alpabit\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,11 +26,18 @@ final class PasswordHistoryValidator extends ConstraintValidator
 
     private PasswordHistoryService $service;
 
-    public function __construct(UserPasswordEncoderInterface $encoder, TokenStorageInterface $tokenStorage, PasswordHistoryService $service)
-    {
+    private UserProviderFactory $userProviderFactory;
+
+    public function __construct(
+        UserPasswordEncoderInterface $encoder,
+        TokenStorageInterface $tokenStorage,
+        PasswordHistoryService $service,
+        UserProviderFactory $userProviderFactory
+    ) {
         $this->encoder = $encoder;
         $this->tokenStorage = $tokenStorage;
         $this->service = $service;
+        $this->userProviderFactory = $userProviderFactory;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -42,13 +50,13 @@ final class PasswordHistoryValidator extends ConstraintValidator
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 
-        $passwords = $this->service->getPasswords($token->getUser());
+        $passwords = $this->service->getPasswords($this->userProviderFactory->getRealUser($token->getUser()));
         $invalid = count($passwords);
         $user = new User();
         foreach ($passwords as $password) {
             $user->setPassword($password->getPassword());
             if (!$this->encoder->isPasswordValid($user, $value)) {
-                $invalid--;
+                --$invalid;
             }
         }
 

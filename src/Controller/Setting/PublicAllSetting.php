@@ -68,10 +68,6 @@ final class PublicAllSetting extends AbstractFOSRestController
      * )
      *
      * @RateLimit(limit=17, period=1)
-     *
-     * @param Request $request
-     *
-     * @return View
      */
     public function __invoke(Request $request): View
     {

@@ -35,7 +35,7 @@ final class Authorization
         $granted = 0;
         foreach ($actions as $value) {
             if ($this->checker->isGranted($value, $menu)) {
-                $granted++;
+                ++$granted;
             }
         }
 

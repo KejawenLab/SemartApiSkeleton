@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Form;
 
 use Alpabit\ApiSkeleton\Entity\User;
+use Alpabit\ApiSkeleton\Security\Validator\PasswordHistory;
 use Alpabit\ApiSkeleton\Security\Validator\PasswordLength;
 use Alpabit\ApiSkeleton\Security\Validator\PasswordMatch;
-use Alpabit\ApiSkeleton\Security\Validator\PasswordHistory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

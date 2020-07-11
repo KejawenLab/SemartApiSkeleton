@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Entity\User;
 use Alpabit\ApiSkeleton\Form\FormFactory;
 use Alpabit\ApiSkeleton\Form\UpdateProfileType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
 use Alpabit\ApiSkeleton\Security\Service\UserService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -59,15 +59,10 @@ final class Put extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     *
-     * @return View
      */
-    public function __invoke(Request $request): View
+    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
     {
-        /** @var UserInterface $user */
-        $user = $this->getUser();
+        $user = $userProviderFactory->getRealUser($this->getUser());
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);

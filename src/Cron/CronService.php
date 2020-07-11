@@ -16,7 +16,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
-*/
+ */
 final class CronService extends AbstractService implements ServiceInterface, ResolverInterface
 {
     private KernelInterface $kernel;

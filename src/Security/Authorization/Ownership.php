@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Authorization;
 
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -16,6 +15,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class Ownership
 {
+    private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
+
     private ManagerRegistry $doctrine;
 
     private UserRepositoryInterface $userRepository;
@@ -26,41 +27,44 @@ final class Ownership
 
     private string $ownershipProperty;
 
+    private UserProviderFactory $userProviderFactory;
+
     public function __construct(
         ManagerRegistry $doctrine,
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
+        UserProviderFactory $userProviderFactory,
         string $superAdmin,
         string $ownershipProperty
     ) {
         $this->doctrine = $doctrine;
         $this->userRepository = $userRepository;
         $this->tokenStorage = $tokenStorage;
+        $this->userProviderFactory = $userProviderFactory;
         $this->superAdmin = $superAdmin;
         $this->ownershipProperty = $ownershipProperty;
     }
 
-    public function isOwner(Request $request): bool
+    public function isOwner(string $id, string $entity): bool
     {
         if (!$token = $this->tokenStorage->getToken()) {
             return false;
         }
 
-        /** @var UserInterface $user */
-        $user = $token->getUser();
+        $user = $this->userProviderFactory->getRealUser($token->getUser());
         if ($user->getGroup()->getCode() === $this->superAdmin) {
             return true;
         }
 
-        if (!$class = $request->attributes->get('_api_resource_class')) {
+        if (!class_exists($entity = sprintf('%s\%s', static::NAMESPACE, $entity))) {
             return false;
         }
 
-        if (!$manager = $this->doctrine->getManagerForClass($class)) {
+        if (!$manager = $this->doctrine->getManagerForClass($entity)) {
             return false;
         }
 
-        if (!$object = $manager->getRepository($class)->find($request->get('id'))) {
+        if (!$object = $manager->getRepository($entity)->find($id)) {
             return false;
         }
 

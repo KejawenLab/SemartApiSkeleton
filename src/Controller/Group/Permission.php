@@ -62,10 +62,6 @@ final class Permission extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     *
-     * @return View
      */
     public function __invoke(Request $request): View
     {

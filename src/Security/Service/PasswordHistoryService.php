@@ -23,8 +23,6 @@ final class PasswordHistoryService extends AbstractService implements ServiceInt
     }
 
     /**
-     * @param UserInterface $user
-     *
      * @return PasswordHistoryInterface[]
      */
     public function getPasswords(UserInterface $user): array

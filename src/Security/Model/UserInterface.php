@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
-
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-interface UserInterface extends SymfonyUser
+interface UserInterface
 {
     public function getSupervisor(): ?self;
 

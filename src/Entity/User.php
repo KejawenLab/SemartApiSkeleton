@@ -6,7 +6,7 @@ namespace Alpabit\ApiSkeleton\Entity;
 
 use Alpabit\ApiSkeleton\Repository\UserRepository;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Util\StringUtil;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +17,6 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\UuidInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class User implements UserInterface, AppUser
+class User implements UserInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -63,7 +62,7 @@ class User implements UserInterface, AppUser
      *
      * @Groups({"read"})
      */
-    private ?AppUser $supervisor;
+    private ?UserInterface $supervisor;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -166,12 +165,12 @@ class User implements UserInterface, AppUser
         return $this;
     }
 
-    public function getSupervisor(): ?AppUser
+    public function getSupervisor(): ?UserInterface
     {
         return $this->supervisor;
     }
 
-    public function setSupervisor(?AppUser $supervisor): self
+    public function setSupervisor(?UserInterface $supervisor): self
     {
         $this->supervisor = $supervisor;
 
@@ -222,18 +221,5 @@ class User implements UserInterface, AppUser
         $this->plainPassword = $plainPassword;
 
         return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return ['ROLE_USER'];
-    }
-
-    public function getSalt()
-    {
-    }
-
-    public function eraseCredentials()
-    {
     }
 }

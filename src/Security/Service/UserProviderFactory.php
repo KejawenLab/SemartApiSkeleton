@@ -6,6 +6,7 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 
 use Alpabit\ApiSkeleton\Security\Model\UserInterface as Model;
 use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
+use Alpabit\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -25,18 +26,29 @@ final class UserProviderFactory implements UserProviderInterface
         $this->providers = $providers;
     }
 
-    public function loadUserByUsername(string $username): Model
+    public function loadUserByUsername(string $username): User
     {
         foreach ($this->providers as $provider) {
             if ($user = $provider->findUsername($username)) {
-                return $user;
+                return new User($user);
             }
         }
 
         throw new UsernameNotFoundException();
     }
 
-    public function refreshUser(UserInterface $user): Model
+    public function getRealUser(User $user): Model
+    {
+        foreach ($this->providers as $provider) {
+            if ($provider->support($user->getClass())) {
+                return $provider->findUsername($user->getUsername());
+            }
+        }
+
+        throw new UsernameNotFoundException();
+    }
+
+    public function refreshUser(UserInterface $user): User
     {
         return $this->loadUserByUsername($user->getUsername());
     }

@@ -17,7 +17,7 @@ final class Storage extends FileSystemStorage
 {
     public function upload($obj, PropertyMapping $mapping): void
     {
-        if (! $obj instanceof MediaInterface) {
+        if (!$obj instanceof MediaInterface) {
             parent::upload($obj, $mapping);
         }
 
@@ -48,7 +48,7 @@ final class Storage extends FileSystemStorage
         $target = rtrim($target, DIRECTORY_SEPARATOR);
         $dir = trim(sprintf('%s%s%s', $mapping->getUploadDir($obj), DIRECTORY_SEPARATOR, $target), DIRECTORY_SEPARATOR);
         $fileSystem = new Filesystem();
-        $storage =  sprintf('%s%s%s', $mapping->getUploadDestination(), DIRECTORY_SEPARATOR, $dir);
+        $storage = sprintf('%s%s%s', $mapping->getUploadDestination(), DIRECTORY_SEPARATOR, $dir);
         if (!$fileSystem->exists($storage)) {
             $fileSystem->mkdir($storage);
         }
@@ -73,7 +73,7 @@ final class Storage extends FileSystemStorage
             $uploadDir = sprintf('public/%s', $uploadDir);
         }
 
-        return sprintf('%s/%s%s%s', $mapping->getUriPrefix(), $uploadDir, $obj->getFolder()? sprintf('%s/', $obj->getFolder()): '', $name);
+        return sprintf('%s/%s%s%s', $mapping->getUriPrefix(), $uploadDir, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
     }
 
     private function convertWindowsDirectorySeparator(string $string): string

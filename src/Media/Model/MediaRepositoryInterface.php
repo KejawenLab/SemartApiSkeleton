@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
-*/
+ */
 interface MediaRepositoryInterface extends PaginatableRepositoryInterface
 {
 }

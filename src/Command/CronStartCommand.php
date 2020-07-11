@@ -29,7 +29,7 @@ final class CronStartCommand extends Command
     {
         if ($input->getOption('blocking')) {
             $output->writeln('<info>Starting cron scheduler in blocking mode</info>');
-            $this->scheduler($output->isVerbose()? $output: new NullOutput(), null);
+            $this->scheduler($output->isVerbose() ? $output : new NullOutput(), null);
 
             return 0;
         }

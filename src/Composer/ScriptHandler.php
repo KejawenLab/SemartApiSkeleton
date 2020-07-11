@@ -73,7 +73,7 @@ final class ScriptHandler
         $dbName = $io->ask('Please enter your database name [default: <info>alpabit_core</info>]: ', 'alpabit_core');
         $dbHost = $io->ask('Please enter your database host [default: <info>localhost</info>]: ', 'localhost');
         $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
-        $appTitle= $io->ask('Please enter your application title [default: <info>Alpabit Core</info>]: ', 'Alpabit Core');
+        $appTitle = $io->ask('Please enter your application title [default: <info>Alpabit Core</info>]: ', 'Alpabit Core');
         $appDescription = $io->ask('Please enter your application description [default: <info>Alpabit Core Application</info>]: ', 'Alpabit Core Application');
         $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
         $passPhrase = $io->ask('Please enter your PKI pass phrase [default: <info>null</info>]: ', '');

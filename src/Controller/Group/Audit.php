@@ -76,12 +76,6 @@ final class Audit extends AbstractFOSRestController
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)
-     *
-     * @param Request $request
-     *
-     * @param string $id
-     *
-     * @return View
      */
     public function __invoke(Request $request, string $id): View
     {

@@ -46,6 +46,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "symfony/maker-bundle": "^1.19",
         "symfony/stopwatch": "^5.0",
         "symfony/twig-bundle": "^5.0",

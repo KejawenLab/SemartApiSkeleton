@@ -44,11 +44,6 @@ final class PublicGetSetting extends AbstractFOSRestController
      * )
      *
      * @RateLimit(limit=17, period=1)
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
      */
     public function __invoke(Request $request, string $id): View
     {

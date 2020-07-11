@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
-*/
+ */
 final class SearchQueryExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void

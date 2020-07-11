@@ -67,7 +67,7 @@ final class CronRunCommand extends Command
         $cron = new Cron();
         $cron->setExecutor($this->executor);
         if ($input->getArgument('job')) {
-            $resolver = $this->getResolver($input->getArgument('job'), $input->getParameterOption('--force') !== false, $input->getParameterOption('--schedule_now') !== false);
+            $resolver = $this->getResolver($input->getArgument('job'), false !== $input->getParameterOption('--force'), false !== $input->getParameterOption('--schedule_now'));
         } else {
             $resolver = $this->cronService;
         }
@@ -80,7 +80,7 @@ final class CronRunCommand extends Command
         while ($cron->isRunning()) {
         }
 
-        $output->writeln('time: ' . (microtime(true) - $time));
+        $output->writeln('time: '.(microtime(true) - $time));
         foreach ($outputs->getReports() as $value) {
             /** @var CronInterface $cron */
             $cron = $value->getJob()->getCron();
@@ -115,7 +115,7 @@ final class CronRunCommand extends Command
 
         $job = new ShellJob($cron);
         $job->setCommand($this->builder->build($cron));
-        $job->setSchedule(new CrontabSchedule(!$schedule_now? $cron->getSchedule(): '* * * * *'));
+        $job->setSchedule(new CrontabSchedule(!$schedule_now ? $cron->getSchedule() : '* * * * *'));
 
         $resolver = new ArrayResolver();
         $resolver->addJob($job);
