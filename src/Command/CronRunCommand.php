@@ -80,7 +80,7 @@ final class CronRunCommand extends Command
         while ($cron->isRunning()) {
         }
 
-        $output->writeln('time: '.(microtime(true) - $time));
+        $output->writeln(sprintf('time: %s', (microtime(true) - $time)));
         foreach ($outputs->getReports() as $value) {
             /** @var CronInterface $cron */
             $cron = $value->getJob()->getCron();
