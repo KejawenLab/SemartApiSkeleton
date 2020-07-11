@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Media\Model;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface MediaInterface
 {

@@ -9,7 +9,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class GeneratorExtension extends AbstractExtension
 {

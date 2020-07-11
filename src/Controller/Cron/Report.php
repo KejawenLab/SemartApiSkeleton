@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @Permission(menu="CRON", actions={Permission::VIEW})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Report extends AbstractFOSRestController
 {

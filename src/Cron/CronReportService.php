@@ -10,7 +10,7 @@ use Alpabit\ApiSkeleton\Service\AbstractService;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class CronReportService extends AbstractService
 {

@@ -9,7 +9,7 @@ use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class UserProvider implements UserProviderInterface
 {

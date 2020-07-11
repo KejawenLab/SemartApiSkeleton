@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class PermissionGenerator extends AbstractGenerator
 {

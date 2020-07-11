@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Pagination;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Pagination
 {

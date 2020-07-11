@@ -13,6 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group|null findOneBy(array $criteria, array $orderBy = null)
  * @method Group[]    findAll()
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {

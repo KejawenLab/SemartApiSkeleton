@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Pagination\AliasHelper;
 use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 abstract class AbstractQueryExtension implements QueryExtensionInterface
 {

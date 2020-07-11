@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @Permission(menu="CRON", actions={Permission::ADD, Permission::EDIT})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Run extends AbstractFOSRestController
 {

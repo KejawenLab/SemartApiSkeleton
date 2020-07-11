@@ -8,7 +8,7 @@ namespace Alpabit\ApiSkeleton\Security\Annotation;
  * @Annotation()
  * @Target({"CLASS"})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Permission
 {

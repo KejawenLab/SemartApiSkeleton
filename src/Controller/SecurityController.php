@@ -11,7 +11,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class SecurityController extends AbstractFOSRestController
 {

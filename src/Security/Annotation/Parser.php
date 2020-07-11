@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Annotation;
 use Doctrine\Common\Annotations\Reader;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Parser
 {

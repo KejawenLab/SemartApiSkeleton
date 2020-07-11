@@ -6,7 +6,7 @@ namespace Alpabit\ApiSkeleton\Controller\Menu;
 
 use Alpabit\ApiSkeleton\Entity\Menu;
 use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\MenuType;
+use Alpabit\ApiSkeleton\Form\MenuType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Service\MenuService;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @Permission(menu="MENU", actions={Permission::EDIT})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Put extends AbstractFOSRestController
 {

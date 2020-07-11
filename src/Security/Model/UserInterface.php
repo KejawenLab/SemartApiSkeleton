@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Model;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface UserInterface extends SymfonyUser
 {

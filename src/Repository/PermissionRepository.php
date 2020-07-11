@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Permission|null findOneBy(array $criteria, array $orderBy = null)
  * @method Permission[]    findAll()
  * @method Permission[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {

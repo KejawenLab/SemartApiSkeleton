@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Cron\CronService;
 use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
 use Alpabit\ApiSkeleton\Entity\Cron;
 use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\CronType;
+use Alpabit\ApiSkeleton\Form\CronType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @Permission(menu="CRON", actions={Permission::ADD})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
 */
 final class Post extends AbstractFOSRestController
 {

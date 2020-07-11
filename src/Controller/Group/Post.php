@@ -6,7 +6,7 @@ namespace Alpabit\ApiSkeleton\Controller\Group;
 
 use Alpabit\ApiSkeleton\Entity\Group;
 use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\GroupType;
+use Alpabit\ApiSkeleton\Form\GroupType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Service\GroupService;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @Permission(menu="GROUP", actions={Permission::ADD})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Post extends AbstractFOSRestController
 {

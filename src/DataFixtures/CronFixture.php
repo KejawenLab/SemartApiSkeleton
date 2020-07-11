@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\DataFixtures;
 use Alpabit\ApiSkeleton\Entity\Cron;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class CronFixture extends AbstractFixture
 {

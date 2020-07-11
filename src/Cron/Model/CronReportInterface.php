@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Alpabit\ApiSkeleton\Cron\Model;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface CronReportInterface
 {

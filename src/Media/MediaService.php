@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
 */
 final class MediaService extends AbstractService implements ServiceInterface
 {

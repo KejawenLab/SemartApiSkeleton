@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method PasswordHistory|null findOneBy(array $criteria, array $orderBy = null)
  * @method PasswordHistory[]    findAll()
  * @method PasswordHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>ssss
  */
 final class PasswordHistoryRepository extends AbstractRepository implements PasswordHistoryRepositoryInterface
 {

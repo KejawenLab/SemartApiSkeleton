@@ -6,7 +6,7 @@ namespace Alpabit\ApiSkeleton\Controller\Setting;
 
 use Alpabit\ApiSkeleton\Entity\Setting;
 use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\SettingType;
+use Alpabit\ApiSkeleton\Form\SettingType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
 use Alpabit\ApiSkeleton\Setting\SettingService;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @Permission(menu="SETTING", actions={Permission::EDIT})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Put extends AbstractFOSRestController
 {

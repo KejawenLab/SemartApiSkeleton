@@ -12,7 +12,7 @@ use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class UserService extends AbstractService implements ServiceInterface
 {

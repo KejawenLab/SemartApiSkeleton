@@ -10,7 +10,7 @@ use DH\DoctrineAuditBundle\Reader\AuditReader;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class AuditService
 {

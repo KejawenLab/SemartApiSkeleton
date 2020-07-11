@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
 use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 abstract class AbstractCronExtension extends Base
 {

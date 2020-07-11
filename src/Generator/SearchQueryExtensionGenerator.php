@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Generator;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class SearchQueryExtensionGenerator extends AbstractGenerator
 {

@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Model;
 use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface PasswordHistoryRepositoryInterface extends ServiceableRepositoryInterface
 {

@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Cron\Model;
 use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
 */
 interface CronReportRepositoryInterface extends PaginatableRepositoryInterface
 {

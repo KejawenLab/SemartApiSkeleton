@@ -6,7 +6,7 @@ namespace Alpabit\ApiSkeleton\Controller\Me;
 
 use Alpabit\ApiSkeleton\Entity\User;
 use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\Type\UpdateProfileType;
+use Alpabit\ApiSkeleton\Form\UpdateProfileType;
 use Alpabit\ApiSkeleton\Security\Annotation\Permission;
 use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Security\Service\UserService;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @Permission(menu="PROFILE", actions={Permission::EDIT})
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Put extends AbstractFOSRestController
 {

@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class PasswordEncoder implements MessageSubscriberInterface
 {

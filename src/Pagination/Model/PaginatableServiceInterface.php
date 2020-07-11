@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Pagination\Model;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface PaginatableServiceInterface
 {

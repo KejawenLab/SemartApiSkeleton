@@ -12,7 +12,7 @@ use Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class GroupPermissionService implements PermissionInitiatorInterface, PermissionRemoverInterface
 {

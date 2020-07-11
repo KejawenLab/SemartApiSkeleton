@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Setting|null findOneBy(array $criteria, array $orderBy = null)
  * @method Setting[]    findAll()
  * @method Setting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>ss
  */
 final class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {

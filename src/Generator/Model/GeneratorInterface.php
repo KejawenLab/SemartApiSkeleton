@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Generator\Model;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface GeneratorInterface
 {

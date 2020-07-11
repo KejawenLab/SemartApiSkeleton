@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Validator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class PasswordLength extends Constraint
 {

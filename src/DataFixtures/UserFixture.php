@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class UserFixture extends AbstractFixture implements DependentFixtureInterface
 {

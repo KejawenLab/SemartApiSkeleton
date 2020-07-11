@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 abstract class AbstractQueryExtension extends Base
 {

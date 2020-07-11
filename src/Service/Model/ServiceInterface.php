@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\Service\Model;
 use Alpabit\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 interface ServiceInterface extends PaginatableServiceInterface
 {

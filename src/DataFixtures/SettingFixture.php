@@ -7,7 +7,7 @@ namespace Alpabit\ApiSkeleton\DataFixtures;
 use Alpabit\ApiSkeleton\Entity\Setting;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class SettingFixture extends AbstractFixture
 {

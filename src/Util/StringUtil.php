@@ -8,7 +8,7 @@ use Symfony\Component\String\Inflector\EnglishInflector;
 use Symfony\Component\String\UnicodeString;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class StringUtil
 {

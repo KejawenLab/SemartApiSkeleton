@@ -8,7 +8,7 @@ use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
 use Cron\Job\ShellJob as Base;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class ShellJob extends Base
 {

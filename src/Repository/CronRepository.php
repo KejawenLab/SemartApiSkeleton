@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Cron[]    findAll()
  * @method Cron[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@alpabit.com>
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class CronRepository extends AbstractRepository implements CronRepositoryInterface
 {
