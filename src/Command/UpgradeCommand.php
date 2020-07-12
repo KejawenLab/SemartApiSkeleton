@@ -57,11 +57,14 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
+        $output->writeln('<comment>Running upgrade</comment>');
         foreach ($this->upgraders as $upgrader) {
             if ($upgrader->support()) {
                 $upgrader->upgrade();
             }
         }
+
+        $output->writeln('<comment>Upgrade is finished</comment>');
 
         return 0;
     }
