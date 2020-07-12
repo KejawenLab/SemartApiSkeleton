@@ -1,7 +1,7 @@
 <?php
 
-use Alpabit\ApiSkeleton\CachedKernel;
-use Alpabit\ApiSkeleton\Kernel;
+use KejawenLab\ApiSkeleton\CachedKernel;
+use KejawenLab\ApiSkeleton\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

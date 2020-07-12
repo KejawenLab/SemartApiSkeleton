@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Util;
+namespace KejawenLab\ApiSkeleton\Util;
 
 use Symfony\Component\String\Inflector\EnglishInflector;
 use Symfony\Component\String\UnicodeString;

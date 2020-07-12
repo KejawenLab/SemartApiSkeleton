@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron;
+namespace KejawenLab\ApiSkeleton\Cron;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Service\AbstractService;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**

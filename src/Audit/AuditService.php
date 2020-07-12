@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Audit;
+namespace KejawenLab\ApiSkeleton\Audit;
 
-use Alpabit\ApiSkeleton\Setting\SettingService;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use DH\DoctrineAuditBundle\Reader\AuditEntry;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use Psr\Cache\CacheItemPoolInterface;

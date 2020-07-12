@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Cron;
+namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use Alpabit\ApiSkeleton\Cron\CronService;
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Entity\Cron;
-use Alpabit\ApiSkeleton\Form\CronType;
-use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Cron\CronService;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Form\CronType;
+use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

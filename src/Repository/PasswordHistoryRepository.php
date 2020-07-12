@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\PasswordHistory;
-use Alpabit\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
+use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

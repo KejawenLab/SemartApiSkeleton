@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Generator;
+namespace KejawenLab\ApiSkeleton\Generator;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -16,7 +16,7 @@ final class SearchQueryExtensionGenerator extends AbstractGenerator
         $shortName = $class->getShortName();
         $template = $this->twig->render('generator/search_query.php.twig', ['entity' => $shortName]);
 
-        $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\%s\Query\SearchQueryExtension"</info></comment>', $shortName));
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\Query\SearchQueryExtension"</info></comment>', $shortName));
         $this->fileSystem->dumpFile(sprintf('%s/src/%s/Query/SearchQueryExtension.php', $this->kernel->getProjectDir(), $shortName), $template);
     }
 }

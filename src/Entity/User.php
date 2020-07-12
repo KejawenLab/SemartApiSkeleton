@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Repository\UserRepository;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Repository\UserRepository;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;

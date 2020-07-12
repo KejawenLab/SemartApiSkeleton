@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Menu;
+namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
-use Alpabit\ApiSkeleton\Entity\Menu;
-use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Form\MenuType;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Service\MenuService;
+use KejawenLab\ApiSkeleton\Entity\Menu;
+use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Form\MenuType;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

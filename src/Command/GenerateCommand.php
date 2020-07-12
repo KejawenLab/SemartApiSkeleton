@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
-use Alpabit\ApiSkeleton\Generator\GeneratorFactory;
-use Alpabit\ApiSkeleton\Security\Service\MenuService;
+use KejawenLab\ApiSkeleton\Generator\GeneratorFactory;
+use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 final class GenerateCommand extends Command
 {
-    private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
+    private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
 
     private GeneratorFactory $generator;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Generator;
+namespace KejawenLab\ApiSkeleton\Generator;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -18,7 +18,7 @@ final class FormGenerator extends AbstractGenerator
 
         $template = $this->twig->render('generator/form.php.twig', ['entity' => $shortName, 'properties' => $properties]);
 
-        $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\Form\%sType"</info></comment>', $shortName));
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\Form\%sType"</info></comment>', $shortName));
         $this->fileSystem->dumpFile(sprintf('%s/src/Form/%sType.php', $this->kernel->getProjectDir(), $shortName), $template);
     }
 }

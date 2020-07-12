@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Cron\Validator\ConsoleCommand;
-use Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormat;
-use Alpabit\ApiSkeleton\Repository\CronRepository;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Validator\ConsoleCommand;
+use KejawenLab\ApiSkeleton\Cron\Validator\CronScheduleFormat;
+use KejawenLab\ApiSkeleton\Repository\CronRepository;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;

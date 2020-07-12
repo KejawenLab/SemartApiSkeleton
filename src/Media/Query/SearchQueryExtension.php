@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Media\Query;
+namespace KejawenLab\ApiSkeleton\Media\Query;
 
-use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
-use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 

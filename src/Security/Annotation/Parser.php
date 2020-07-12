@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Annotation;
+namespace KejawenLab\ApiSkeleton\Security\Annotation;
 
 use Doctrine\Common\Annotations\Reader;
 

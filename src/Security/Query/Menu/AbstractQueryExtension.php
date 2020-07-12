@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Query\Menu;
+namespace KejawenLab\ApiSkeleton\Security\Query\Menu;
 
-use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

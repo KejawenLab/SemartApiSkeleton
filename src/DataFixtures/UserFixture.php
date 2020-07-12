@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\DataFixtures;
+namespace KejawenLab\ApiSkeleton\DataFixtures;
 
-use Alpabit\ApiSkeleton\Entity\User;
+use KejawenLab\ApiSkeleton\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**

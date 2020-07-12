@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller;
+namespace KejawenLab\ApiSkeleton\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;

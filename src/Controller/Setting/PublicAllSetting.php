@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Setting;
+namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
-use Alpabit\ApiSkeleton\Entity\Setting;
-use Alpabit\ApiSkeleton\Pagination\Paginator;
-use Alpabit\ApiSkeleton\Setting\SettingService;
+use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

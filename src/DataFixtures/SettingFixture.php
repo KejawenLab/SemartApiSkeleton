@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\DataFixtures;
+namespace KejawenLab\ApiSkeleton\DataFixtures;
 
-use Alpabit\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Entity\Setting;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

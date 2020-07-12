@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security;
+namespace KejawenLab\ApiSkeleton\Security;
 
-use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

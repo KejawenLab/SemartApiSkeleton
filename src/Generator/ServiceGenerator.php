@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Generator;
+namespace KejawenLab\ApiSkeleton\Generator;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -16,7 +16,7 @@ final class ServiceGenerator extends AbstractGenerator
         $shortName = $class->getShortName();
         $template = $this->twig->render('generator/service.php.twig', ['entity' => $shortName]);
 
-        $output->writeln(sprintf('<comment>Generating class <info>"Alpabit\ApiSkeleton\%s\%sService"</info></comment>', $shortName, $shortName));
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\%sService"</info></comment>', $shortName, $shortName));
         $this->fileSystem->dumpFile(sprintf('%s/src/%s/%sService.php', $this->kernel->getProjectDir(), $shortName, $shortName), $template);
     }
 }

@@ -1,6 +1,6 @@
 vich_uploader:
     db_driver: orm
-    storage: '@Alpabit\ApiSkeleton\Media\Storage'
+    storage: '@KejawenLab\ApiSkeleton\Media\Storage'
     mappings:
         media:
             uri_prefix: /medias

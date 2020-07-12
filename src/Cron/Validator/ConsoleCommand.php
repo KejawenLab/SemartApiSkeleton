@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron\Validator;
+namespace KejawenLab\ApiSkeleton\Cron\Validator;
 
 use Symfony\Component\Validator\Constraint;
 

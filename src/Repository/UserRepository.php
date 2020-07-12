@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\User;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface as AppUser;
-use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\User;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;

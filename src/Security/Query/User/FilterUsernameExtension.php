@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Query\User;
+namespace KejawenLab\ApiSkeleton\Security\Query\User;
 
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 

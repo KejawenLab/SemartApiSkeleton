@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination\Query;
+namespace KejawenLab\ApiSkeleton\Pagination\Query;
 
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Timestampable\Traits\TimestampableEntity;

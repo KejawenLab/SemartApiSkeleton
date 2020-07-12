@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Group;
+namespace KejawenLab\ApiSkeleton\Controller\Group;
 
-use Alpabit\ApiSkeleton\Entity\Permission as Entity;
-use Alpabit\ApiSkeleton\Pagination\Paginator;
-use Alpabit\ApiSkeleton\Security\Annotation as Semart;
-use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\ApiSkeleton\Entity\Permission as Entity;
+use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
+use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

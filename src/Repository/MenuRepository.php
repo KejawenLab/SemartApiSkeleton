@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\Menu;
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Entity\Menu;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

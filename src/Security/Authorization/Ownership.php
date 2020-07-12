@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Authorization;
+namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
-use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
-use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class Ownership
 {
-    private const NAMESPACE = 'Alpabit\ApiSkeleton\Entity';
+    private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
 
     private ManagerRegistry $doctrine;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;

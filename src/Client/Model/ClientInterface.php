@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Client\Model;
+namespace KejawenLab\ApiSkeleton\Client\Model;
 
-use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

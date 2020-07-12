@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Service;
+namespace KejawenLab\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
-use Alpabit\ApiSkeleton\Entity\PasswordHistory;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
-use Alpabit\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

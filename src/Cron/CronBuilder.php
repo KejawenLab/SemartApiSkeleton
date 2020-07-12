@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron;
+namespace KejawenLab\ApiSkeleton\Cron;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\PhpExecutableFinder;
 

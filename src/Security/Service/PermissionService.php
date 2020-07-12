@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Service;
+namespace KejawenLab\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
-use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionableInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
-use Alpabit\ApiSkeleton\Service\AbstractService;
-use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionableInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron;
+namespace KejawenLab\ApiSkeleton\Cron;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Cron\Model\CronRepositoryInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use Cron\Executor\Executor as Base;
 use Cron\Report\CronReport;
 use Psr\Log\LoggerInterface;

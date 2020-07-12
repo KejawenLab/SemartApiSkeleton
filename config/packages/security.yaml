@@ -1,10 +1,10 @@
 security:
     encoders:
-        Alpabit\ApiSkeleton\Security\User:
+        KejawenLab\ApiSkeleton\Security\User:
             algorithm: auto
     providers:
         user_provider:
-            id: Alpabit\ApiSkeleton\Security\Service\UserProviderFactory
+            id: KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

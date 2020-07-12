@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Generator\Model;
+namespace KejawenLab\ApiSkeleton\Generator\Model;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

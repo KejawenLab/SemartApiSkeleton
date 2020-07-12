@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Query\Group;
+namespace KejawenLab\ApiSkeleton\Security\Query\Group;
 
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 

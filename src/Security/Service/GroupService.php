@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Service;
+namespace KejawenLab\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
-use Alpabit\ApiSkeleton\Service\AbstractService;
-use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**

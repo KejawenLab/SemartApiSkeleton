@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Setting;
+namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
-use Alpabit\ApiSkeleton\Audit\AuditService;
-use Alpabit\ApiSkeleton\Entity\Setting;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Setting\SettingService;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
+use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\EventSubscriber;
+namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use Alpabit\ApiSkeleton\Controller\SecurityController;
+use KejawenLab\ApiSkeleton\Controller\SecurityController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

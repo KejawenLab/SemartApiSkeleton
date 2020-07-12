@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination\Query;
+namespace KejawenLab\ApiSkeleton\Pagination\Query;
 
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

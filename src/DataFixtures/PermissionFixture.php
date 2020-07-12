@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\DataFixtures;
+namespace KejawenLab\ApiSkeleton\DataFixtures;
 
-use Alpabit\ApiSkeleton\Entity\Permission;
+use KejawenLab\ApiSkeleton\Entity\Permission;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**

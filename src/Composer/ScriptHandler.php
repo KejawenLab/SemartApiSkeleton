@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Composer;
+namespace KejawenLab\ApiSkeleton\Composer;
 
-use Alpabit\ApiSkeleton\Util\Encryptor;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
@@ -48,7 +48,7 @@ final class ScriptHandler
         }
 
         $io->write('<comment>===========================================================</comment>');
-        $io->write('<options=bold>Alpabit Core Installation is finished</>');
+        $io->write('<options=bold>KejawenLab Core Installation is finished</>');
         $io->write('<comment>===========================================================</comment>');
         $io->write('<comment>Please create private dan public key use <info>openssl library</info></comment>');
         $io->write('<comment>Visit <info>https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys</info> for more information</comment>');
@@ -73,8 +73,8 @@ final class ScriptHandler
         $dbName = $io->ask('Please enter your database name [default: <info>alpabit_core</info>]: ', 'alpabit_core');
         $dbHost = $io->ask('Please enter your database host [default: <info>localhost</info>]: ', 'localhost');
         $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
-        $appTitle = $io->ask('Please enter your application title [default: <info>Alpabit Core</info>]: ', 'Alpabit Core');
-        $appDescription = $io->ask('Please enter your application description [default: <info>Alpabit Core Application</info>]: ', 'Alpabit Core Application');
+        $appTitle = $io->ask('Please enter your application title [default: <info>KejawenLab Core</info>]: ', 'KejawenLab Core');
+        $appDescription = $io->ask('Please enter your application description [default: <info>KejawenLab Core Application</info>]: ', 'KejawenLab Core Application');
         $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
         $passPhrase = $io->ask('Please enter your PKI pass phrase [default: <info>null</info>]: ', '');
 

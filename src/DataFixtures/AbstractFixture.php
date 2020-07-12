@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\DataFixtures;
+namespace KejawenLab\ApiSkeleton\DataFixtures;
 
-use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
-use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
-use Alpabit\ApiSkeleton\Security\Service\PermissionService;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpKernel\KernelInterface;

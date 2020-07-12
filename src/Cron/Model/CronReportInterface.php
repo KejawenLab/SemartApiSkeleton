@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron\Model;
+namespace KejawenLab\ApiSkeleton\Cron\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

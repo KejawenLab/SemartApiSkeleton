@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\EventSubscriber;
+namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
-use Alpabit\ApiSkeleton\Security\Service\UserService;
-use Alpabit\ApiSkeleton\Util\Encryptor;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

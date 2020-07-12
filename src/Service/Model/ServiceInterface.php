@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Service\Model;
+namespace KejawenLab\ApiSkeleton\Service\Model;
 
-use Alpabit\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
+use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

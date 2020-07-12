@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Cron\Model\CronReportInterface;
-use Alpabit\ApiSkeleton\Repository\CronReportRepository;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
+use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\UuidInterface;

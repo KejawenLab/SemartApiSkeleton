@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Upgrade\Model;
+namespace KejawenLab\ApiSkeleton\Upgrade\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

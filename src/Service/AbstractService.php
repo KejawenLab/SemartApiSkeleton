@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Service;
+namespace KejawenLab\ApiSkeleton\Service;
 
-use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
-use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
-use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Messenger\MessageBusInterface;
 

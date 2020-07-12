@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;

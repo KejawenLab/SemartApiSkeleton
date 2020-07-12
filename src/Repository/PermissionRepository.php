@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\Permission;
-use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
-use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

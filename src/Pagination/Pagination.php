@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination;
+namespace KejawenLab\ApiSkeleton\Pagination;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

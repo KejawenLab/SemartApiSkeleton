@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\Group;
-use Alpabit\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Security\Model\GroupRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

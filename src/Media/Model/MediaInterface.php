@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Media\Model;
+namespace KejawenLab\ApiSkeleton\Media\Model;
 
 use Symfony\Component\HttpFoundation\File\File;
 

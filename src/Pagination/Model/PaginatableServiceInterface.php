@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination\Model;
+namespace KejawenLab\ApiSkeleton\Pagination\Model;
 
 use Doctrine\ORM\QueryBuilder;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Media;
+namespace KejawenLab\ApiSkeleton\Media;
 
-use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
-use Alpabit\ApiSkeleton\Media\Model\MediaRepositoryInterface;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Service\AbstractService;
-use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 

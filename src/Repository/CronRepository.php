@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronRepositoryInterface;
-use Alpabit\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\Cron;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

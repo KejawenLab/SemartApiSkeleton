@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Query\User;
+namespace KejawenLab\ApiSkeleton\Security\Query\User;
 
-use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

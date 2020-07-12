@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Repository\CronReportRepository;
-use Alpabit\ApiSkeleton\Security\Model\PasswordHistoryInterface;
+use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
+use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;

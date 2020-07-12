@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
-use Alpabit\ApiSkeleton\Util\Encryptor;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

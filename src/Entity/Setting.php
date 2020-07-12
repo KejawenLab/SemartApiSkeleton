@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Repository\SettingRepository;
-use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Repository\SettingRepository;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;

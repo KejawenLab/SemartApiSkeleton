@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
-use Alpabit\ApiSkeleton\Repository\MediaRepository;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Repository\MediaRepository;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;

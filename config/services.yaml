@@ -22,13 +22,13 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Alpabit\ApiSkeleton\:
+    KejawenLab\ApiSkeleton\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Alpabit\ApiSkeleton\Controller\:
+    KejawenLab\ApiSkeleton\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
@@ -36,53 +36,53 @@ services:
         Doctrine\Common\EventSubscriber:
             tags:
                 - { name: doctrine.event_subscriber }
-        Alpabit\ApiSkeleton\Security\Model\UserProviderInterface:
+        KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface:
             tags:
                 - { name: semart.user_provider }
-        Alpabit\ApiSkeleton\Pagination\Model\QueryExtensionInterface:
+        KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface:
             tags:
                 - { name: semart.query_extension }
-        Alpabit\ApiSkeleton\Generator\Model\GeneratorInterface:
+        KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface:
             tags:
                 - { name: semart.generator }
-        Alpabit\ApiSkeleton\Security\Model\PermissionInitiatorInterface:
+        KejawenLab\ApiSkeleton\Security\Model\PermissionInitiatorInterface:
             tags:
                 - { name: semart.permission_initiator }
-        Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface:
+        KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface:
             tags:
                 - { name: semart.permission_remover }
-        Alpabit\ApiSkeleton\Upgrade\Model\UpgradeInterface:
+        KejawenLab\ApiSkeleton\Upgrade\Model\UpgradeInterface:
             tags:
                 - { name: semart.upgrader }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    Alpabit\ApiSkeleton\Repository\UserRepository:
+    KejawenLab\ApiSkeleton\Repository\UserRepository:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
-    Alpabit\ApiSkeleton\Security\Authorization\Ownership:
+    KejawenLab\ApiSkeleton\Security\Authorization\Ownership:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
-    Alpabit\ApiSkeleton\Security\Service\GroupService:
+    KejawenLab\ApiSkeleton\Security\Service\GroupService:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
-    Alpabit\ApiSkeleton\Security\Service\UserProvider:
+    KejawenLab\ApiSkeleton\Security\Service\UserProvider:
         arguments:
-            $class: 'Alpabit\ApiSkeleton\Entity\User'
-    Alpabit\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
+            $class: 'KejawenLab\ApiSkeleton\Entity\User'
+    KejawenLab\ApiSkeleton\Cron\Validator\CronScheduleFormatValidator:
         arguments:
             $validator: '@Cron\Validator\CrontabValidator'
-    Alpabit\ApiSkeleton\Security\Service\PermissionService:
+    KejawenLab\ApiSkeleton\Security\Service\PermissionService:
         arguments:
-            $class: 'Alpabit\ApiSkeleton\Entity\Permission'
-    Alpabit\ApiSkeleton\Generator\PermissionGenerator:
+            $class: 'KejawenLab\ApiSkeleton\Entity\Permission'
+    KejawenLab\ApiSkeleton\Generator\PermissionGenerator:
         arguments:
-            $class: 'Alpabit\ApiSkeleton\Entity\Menu'
-    Alpabit\ApiSkeleton\Command\CronRunCommand:
+            $class: 'KejawenLab\ApiSkeleton\Entity\Menu'
+    KejawenLab\ApiSkeleton\Command\CronRunCommand:
         arguments:
-            $reportClass: 'Alpabit\ApiSkeleton\Entity\CronReport'
-    Alpabit\ApiSkeleton\Client\UserProvider:
+            $reportClass: 'KejawenLab\ApiSkeleton\Entity\CronReport'
+    KejawenLab\ApiSkeleton\Client\UserProvider:
         arguments:
-            $class: 'Alpabit\ApiSkeleton\Entity\Client'
+            $class: 'KejawenLab\ApiSkeleton\Entity\Client'
     Cron\Validator\CrontabValidator:

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\Media;
-use Alpabit\ApiSkeleton\Media\Model\MediaRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\Media;
+use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

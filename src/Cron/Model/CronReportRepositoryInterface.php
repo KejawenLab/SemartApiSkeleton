@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron\Model;
+namespace KejawenLab\ApiSkeleton\Cron\Model;
 
-use Alpabit\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
+use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

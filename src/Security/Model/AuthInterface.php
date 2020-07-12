@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Model;
+namespace KejawenLab\ApiSkeleton\Security\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

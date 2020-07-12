@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Media;
+namespace KejawenLab\ApiSkeleton\Media;
 
-use Alpabit\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\PropertyMapping;

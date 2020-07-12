@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Client;
+namespace KejawenLab\ApiSkeleton\Controller\Client;
 
-use Alpabit\ApiSkeleton\Client\Model\ClientInterface;
-use Alpabit\ApiSkeleton\Client\ClientService;
+use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
+use KejawenLab\ApiSkeleton\Client\ClientService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;

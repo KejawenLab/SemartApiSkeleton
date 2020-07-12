@@ -60,12 +60,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Alpabit\\ApiSkeleton\\": "src/"
+            "KejawenLab\\ApiSkeleton\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Alpabit\\ApiSkeleton\\Tests\\": "tests/"
+            "KejawenLab\\ApiSkeleton\\Tests\\": "tests/"
         }
     },
     "replace": {

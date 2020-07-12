@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Service;
+namespace KejawenLab\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
-use Alpabit\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
+use KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Client\Model\ClientInterface;
-use Alpabit\ApiSkeleton\Entity\Client;
-use Alpabit\ApiSkeleton\Client\Model\ClientRepositoryInterface;
+use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
+use KejawenLab\ApiSkeleton\Entity\Client;
+use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

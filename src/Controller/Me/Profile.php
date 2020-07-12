@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Me;
+namespace KejawenLab\ApiSkeleton\Controller\Me;
 
-use Alpabit\ApiSkeleton\Entity\User;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Entity\User;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

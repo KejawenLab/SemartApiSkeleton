@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
-use Alpabit\ApiSkeleton\Upgrade\Model\UpgradeInterface;
+use KejawenLab\ApiSkeleton\Upgrade\Model\UpgradeInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

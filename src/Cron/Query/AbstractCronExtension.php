@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Cron\Query;
+namespace KejawenLab\ApiSkeleton\Cron\Query;
 
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

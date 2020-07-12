@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Client;
+namespace KejawenLab\ApiSkeleton\Client;
 
-use Alpabit\ApiSkeleton\Entity\Client;
-use Alpabit\ApiSkeleton\Pagination\AliasHelper;
-use Alpabit\ApiSkeleton\Client\Model\ClientRepositoryInterface;
-use Alpabit\ApiSkeleton\Service\AbstractService;
-use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
-use Alpabit\ApiSkeleton\Util\Encryptor;
+use KejawenLab\ApiSkeleton\Entity\Client;
+use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
+use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**

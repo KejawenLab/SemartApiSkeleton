@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Form;
+namespace KejawenLab\ApiSkeleton\Form;
 
-use Alpabit\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Entity\Cron;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Alpabit\ApiSkeleton;
+namespace KejawenLab\ApiSkeleton;
 
 use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 

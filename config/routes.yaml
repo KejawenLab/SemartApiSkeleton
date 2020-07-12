@@ -1,8 +1,8 @@
 home:
     path: /
     methods: [GET]
-    controller: Alpabit\ApiSkeleton\Controller\HomeController::__invoke
+    controller: KejawenLab\ApiSkeleton\Controller\HomeController::__invoke
 api:
     path: /api
     methods: [GET]
-    controller: Alpabit\ApiSkeleton\Controller\HomeController::__invoke
+    controller: KejawenLab\ApiSkeleton\Controller\HomeController::__invoke

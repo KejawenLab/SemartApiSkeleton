@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Command;
+namespace KejawenLab\ApiSkeleton\Command;
 
-use Alpabit\ApiSkeleton\Cron\CronBuilder;
-use Alpabit\ApiSkeleton\Cron\CronReportService;
-use Alpabit\ApiSkeleton\Cron\CronService;
-use Alpabit\ApiSkeleton\Cron\Executor;
-use Alpabit\ApiSkeleton\Cron\Model\CronInterface;
-use Alpabit\ApiSkeleton\Cron\Model\CronReportInterface;
-use Alpabit\ApiSkeleton\Cron\ShellJob;
+use KejawenLab\ApiSkeleton\Cron\CronBuilder;
+use KejawenLab\ApiSkeleton\Cron\CronReportService;
+use KejawenLab\ApiSkeleton\Cron\CronService;
+use KejawenLab\ApiSkeleton\Cron\Executor;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
+use KejawenLab\ApiSkeleton\Cron\ShellJob;
 use Cron\Cron;
 use Cron\Report\ReportInterface;
 use Cron\Resolver\ArrayResolver;

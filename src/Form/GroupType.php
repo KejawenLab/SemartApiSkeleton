@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Form;
+namespace KejawenLab\ApiSkeleton\Form;
 
-use Alpabit\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Entity\Group;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

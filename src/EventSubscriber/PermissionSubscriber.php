@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\EventSubscriber;
+namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use Alpabit\ApiSkeleton\Security\Annotation\Parser;
-use Alpabit\ApiSkeleton\Security\Authorization\Ownership;
-use Alpabit\ApiSkeleton\Security\Service\Authorization;
-use Alpabit\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
+use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
+use KejawenLab\ApiSkeleton\Security\Service\Authorization;
+use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

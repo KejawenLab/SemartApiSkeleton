@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Client;
+namespace KejawenLab\ApiSkeleton\Controller\Client;
 
-use Alpabit\ApiSkeleton\Client\ClientService;
-use Alpabit\ApiSkeleton\Entity\Client;
-use Alpabit\ApiSkeleton\Form\FormFactory;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
-use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Client\ClientService;
+use KejawenLab\ApiSkeleton\Entity\Client;
+use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

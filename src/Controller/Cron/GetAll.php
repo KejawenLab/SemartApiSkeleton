@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Cron;
+namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use Alpabit\ApiSkeleton\Cron\CronService;
-use Alpabit\ApiSkeleton\Entity\Cron;
-use Alpabit\ApiSkeleton\Pagination\Paginator;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Cron\CronService;
+use KejawenLab\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;

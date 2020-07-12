@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Validator;
+namespace KejawenLab\ApiSkeleton\Security\Validator;
 
-use Alpabit\ApiSkeleton\Security\Service\PasswordHistoryService;
-use Alpabit\ApiSkeleton\Security\Service\UserProviderFactory;
-use Alpabit\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Security\Service\PasswordHistoryService;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

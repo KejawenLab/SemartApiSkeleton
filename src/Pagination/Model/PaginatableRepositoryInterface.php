@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Pagination\Model;
+namespace KejawenLab\ApiSkeleton\Pagination\Model;
 
-use Alpabit\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
+use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 
 /**

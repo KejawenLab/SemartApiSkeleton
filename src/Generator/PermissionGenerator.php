@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Generator;
+namespace KejawenLab\ApiSkeleton\Generator;
 
-use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
-use Alpabit\ApiSkeleton\Security\Service\GroupService;
-use Alpabit\ApiSkeleton\Security\Service\MenuService;
-use Alpabit\ApiSkeleton\Security\Service\PermissionService;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Service\GroupService;
+use KejawenLab\ApiSkeleton\Security\Service\MenuService;
+use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;

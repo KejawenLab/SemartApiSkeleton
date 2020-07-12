@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Repository;
+namespace KejawenLab\ApiSkeleton\Repository;
 
-use Alpabit\ApiSkeleton\Entity\Setting;
-use Alpabit\ApiSkeleton\Setting\Model\SettingInterface;
-use Alpabit\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Controller\Media;
+namespace KejawenLab\ApiSkeleton\Controller\Media;
 
-use Alpabit\ApiSkeleton\Audit\AuditService;
-use Alpabit\ApiSkeleton\Entity\Media;
-use Alpabit\ApiSkeleton\Media\MediaService;
-use Alpabit\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
+use KejawenLab\ApiSkeleton\Entity\Media;
+use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
