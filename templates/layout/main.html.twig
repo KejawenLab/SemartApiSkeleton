@@ -1,0 +1,15 @@
+{% apply spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'layout/head.html.twig' %}
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'layout/navigation.html.twig' %}
+        {% include 'layout/menu.html.twig' %}
+        {% include 'layout/content.html.twig' %}
+        {% include 'layout/footer.html.twig' %}
+    </div>
+{% include 'layout/javascript.html.twig' %}
+</body>
+</html>
+{% endapply %}

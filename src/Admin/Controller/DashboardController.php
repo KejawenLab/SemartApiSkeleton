@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-final class LoginController extends AbstractController
+final class DashboardController extends AbstractController
 {
     /**
-     * @Route("/login", methods={"GET"})
+     * @Route("/", name="admin_dashboard", methods={"GET"})
      */
     public function __invoke()
     {
-        return $this->render('base.html.twig');
+        return $this->render('layout/main.html.twig');
     }
 }
