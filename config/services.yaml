@@ -82,4 +82,7 @@ services:
     Alpabit\ApiSkeleton\Command\CronRunCommand:
         arguments:
             $reportClass: 'Alpabit\ApiSkeleton\Entity\CronReport'
+    Alpabit\ApiSkeleton\Client\UserProvider:
+        arguments:
+            $class: 'Alpabit\ApiSkeleton\Entity\Client'
     Cron\Validator\CrontabValidator:

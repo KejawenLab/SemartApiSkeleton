@@ -23,7 +23,6 @@ final class MenuType extends AbstractType
         $builder->add('parent', EntityType::class, [
             'required' => false,
             'class' => Menu::class,
-            'choice_label' => 'name',
         ]);
         $builder->add('code', TextType::class, ['required' => true]);
         $builder->add('name', TextType::class, ['required' => true]);

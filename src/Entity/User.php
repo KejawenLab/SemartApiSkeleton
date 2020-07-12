@@ -222,4 +222,19 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getIdentity(): ?string
+    {
+        return $this->getUsername();
+    }
+
+    public function getCredential(): ?string
+    {
+        return $this->getPassword();
+    }
+
+    public function isEncoded(): bool
+    {
+        return true;
+    }
 }

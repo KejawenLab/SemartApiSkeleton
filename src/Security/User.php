@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security;
 
+use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -12,8 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class User implements UserInterface
 {
-    private string $id;
-
     private GroupInterface $group;
 
     private string $username;
@@ -22,20 +21,14 @@ final class User implements UserInterface
 
     private string $class;
 
-    public function __construct(Model\UserInterface $user = null)
+    public function __construct(AuthInterface $user = null)
     {
         if ($user) {
-            $this->id = $user->getId();
             $this->group = $user->getGroup();
-            $this->username = $user->getUsername();
-            $this->password = $user->getPassword();
+            $this->username = $user->getIdentity();
+            $this->password = $user->getCredential();
             $this->class = get_class($user);
         }
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getGroup(): GroupInterface

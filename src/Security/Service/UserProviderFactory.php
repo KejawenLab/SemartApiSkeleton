@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Alpabit\ApiSkeleton\Security\Service;
 
-use Alpabit\ApiSkeleton\Security\Model\UserInterface as Model;
+use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface as Provider;
 use Alpabit\ApiSkeleton\Security\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -21,23 +22,31 @@ final class UserProviderFactory implements UserProviderInterface
      */
     private iterable $providers;
 
-    public function __construct(iterable $providers)
+    private UserPasswordEncoderInterface $passwordEncoder;
+
+    public function __construct(iterable $providers, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->providers = $providers;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function loadUserByUsername(string $username): User
     {
         foreach ($this->providers as $provider) {
             if ($user = $provider->findUsername($username)) {
-                return new User($user);
+                $authUser = new User($user);
+                if (!$user->isEncoded()) {
+                    $authUser->setPassword($this->passwordEncoder->encodePassword($authUser, $authUser->getPassword()));
+                }
+
+                return $authUser;
             }
         }
 
         throw new UsernameNotFoundException();
     }
 
-    public function getRealUser(User $user): Model
+    public function getRealUser(User $user): AuthInterface
     {
         foreach ($this->providers as $provider) {
             if ($provider->support($user->getClass())) {

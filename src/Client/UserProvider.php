@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Security\Service;
+namespace Alpabit\ApiSkeleton\Client;
 
+use Alpabit\ApiSkeleton\Client\Model\ClientRepositoryInterface;
 use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
 use Alpabit\ApiSkeleton\Security\Model\UserProviderInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class UserProvider implements UserProviderInterface
 {
-    private UserRepositoryInterface $repository;
-
     private string $class;
 
-    public function __construct(UserRepositoryInterface $repository, string $class)
+    private ClientRepositoryInterface $repository;
+
+    public function __construct(string $class, ClientRepositoryInterface $repository)
     {
         $this->class = $class;
         $this->repository = $repository;
     }
 
-    public function findUsername(string $username): ?AuthInterface
+    public function findUsername(string $apiKey): ?AuthInterface
     {
-        return $this->repository->findByUsername($username);
+        return $this->repository->findByApiKey($apiKey);
     }
 
     public function support(string $class): bool

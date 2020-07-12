@@ -7,6 +7,7 @@ namespace Alpabit\ApiSkeleton\Security\Service;
 use Alpabit\ApiSkeleton\Entity\Message\EntityPersisted;
 use Alpabit\ApiSkeleton\Entity\Message\EntityRemoved;
 use Alpabit\ApiSkeleton\Pagination\AliasHelper;
+use Alpabit\ApiSkeleton\Security\Model\AuthInterface;
 use Alpabit\ApiSkeleton\Security\Model\GroupInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuInterface;
 use Alpabit\ApiSkeleton\Security\Model\MenuRepositoryInterface;
@@ -15,7 +16,6 @@ use Alpabit\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use Alpabit\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
-use Alpabit\ApiSkeleton\Security\Model\UserInterface;
 use Alpabit\ApiSkeleton\Service\AbstractService;
 use Alpabit\ApiSkeleton\Service\Model\ServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -110,7 +110,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermissions($group, $menus);
     }
 
-    public function getByUser(UserInterface $user): iterable
+    public function getByUser(AuthInterface $user): iterable
     {
         /** @var MenuInterface[] $parents */
         $parents = $this->repository->findAllowedMenusByGroup($user->getGroup(), true);

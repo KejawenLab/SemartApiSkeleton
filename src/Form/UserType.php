@@ -25,12 +25,10 @@ final class UserType extends AbstractType
         $builder->add('group', EntityType::class, [
             'required' => true,
             'class' => Group::class,
-            'choice_label' => 'name',
         ]);
         $builder->add('supervisor', EntityType::class, [
             'required' => true,
             'class' => User::class,
-            'choice_label' => 'username',
         ]);
         $builder->add('fullName', TextType::class, ['required' => true]);
         $builder->add('username', TextType::class, ['required' => true]);
