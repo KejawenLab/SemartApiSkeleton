@@ -38,7 +38,8 @@ final class Paginator
 
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
-        $pagination = $this->pagination($request);
+        $page = (int) $request->query->get($this->pageField, 1);
+        $perPage = (int) $request->query->get($this->perPageField, $this->perPageDefault);
         foreach ($this->queryExtension as $extension) {
             if ($extension->support($class)) {
                 $extension->apply($queryBuilder, $request);
@@ -46,22 +47,22 @@ final class Paginator
         }
 
         return [
-            'page' => $pagination->getPage(),
-            'per_page' => $pagination->getPerPage(),
-            'total_page' => ceil($this->count($queryBuilder) / $pagination->getPerPage()),
+            'page' => $page,
+            'per_page' => $perPage,
+            'total_page' => ceil($this->count($queryBuilder) / $perPage),
             'total_item' => $this->count($queryBuilder),
-            'items' => $this->paging($queryBuilder, $pagination),
+            'items' => $this->paging($queryBuilder, $page, $perPage),
         ];
     }
 
-    private function paging(QueryBuilder $queryBuilder, Pagination $pagination): array
+    private function paging(QueryBuilder $queryBuilder, int $page, int $perPage): array
     {
-        $queryBuilder->setMaxResults($pagination->getPerPage());
-        $queryBuilder->setFirstResult(($pagination->getPage() - 1) * $pagination->getPerPage());
+        $queryBuilder->setMaxResults($perPage);
+        $queryBuilder->setFirstResult(($page - 1) * $perPage);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache($this->cacheLifetime, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $pagination->getPage(), $pagination->getPerPage()));
+        $query->enableResultCache($this->cacheLifetime, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $perPage));
 
         return $query->getResult();
     }
@@ -76,10 +77,5 @@ final class Paginator
         $query->enableResultCache($this->cacheLifetime, sprintf('%s:%s', __CLASS__, __METHOD__));
 
         return (int) $query->getSingleScalarResult();
-    }
-
-    private function pagination(Request $request): Pagination
-    {
-        return new Pagination((int) $request->query->get($this->pageField, 1), (int) $request->query->get($this->perPageField, $this->perPageDefault));
     }
 }
