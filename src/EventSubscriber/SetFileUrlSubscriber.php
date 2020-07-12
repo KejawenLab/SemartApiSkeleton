@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**

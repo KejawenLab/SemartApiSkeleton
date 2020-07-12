@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
-use KejawenLab\ApiSkeleton\Entity\Setting;
-use KejawenLab\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\ApiSkeleton\Setting\SettingService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;

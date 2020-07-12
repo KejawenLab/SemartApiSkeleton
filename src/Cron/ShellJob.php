@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron;
 
-use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Cron\Job\ShellJob as Base;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

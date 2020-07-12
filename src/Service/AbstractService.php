@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Service;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**

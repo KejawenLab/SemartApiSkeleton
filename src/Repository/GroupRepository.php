@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Model\GroupRepositoryInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Group|null find($id, $lockMode = null, $lockVersion = null)

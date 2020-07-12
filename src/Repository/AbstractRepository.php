@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
-use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

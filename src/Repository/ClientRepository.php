@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
-use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
-use KejawenLab\ApiSkeleton\Entity\Client;
-use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
+use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
+use KejawenLab\ApiSkeleton\Entity\Client;
 
 /**
  * @method Client|null find($id, $lockMode = null, $lockVersion = null)

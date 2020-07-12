@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
 use KejawenLab\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method {{ entityHumanize }}|null find($id, $lockMode = null, $lockVersion = null)

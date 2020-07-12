@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Audit;
 
-use KejawenLab\ApiSkeleton\Setting\SettingService;
 use DH\DoctrineAuditBundle\Reader\AuditEntry;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**

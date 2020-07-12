@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Query\Group;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

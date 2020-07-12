@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\DataFixtures;
 
+use Doctrine\Bundle\FixturesBundle\Fixture as Base;
+use Doctrine\Persistence\ObjectManager;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Doctrine\Bundle\FixturesBundle\Fixture as Base;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;

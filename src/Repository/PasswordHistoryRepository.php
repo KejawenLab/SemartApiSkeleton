@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method PasswordHistory|null find($id, $lockMode = null, $lockVersion = null)

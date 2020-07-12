@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use KejawenLab\ApiSkeleton\Entity\Cron;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Cron|null find($id, $lockMode = null, $lockVersion = null)

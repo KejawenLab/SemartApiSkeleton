@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Composer;
 
-use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

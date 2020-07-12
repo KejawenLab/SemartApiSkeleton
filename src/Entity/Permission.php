@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use KejawenLab\ApiSkeleton\Repository\PermissionRepository;
-use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
-use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
-use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use KejawenLab\ApiSkeleton\Repository\PermissionRepository;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use Ramsey\Uuid\UuidInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;

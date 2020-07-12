@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Client;
 
+use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
 use KejawenLab\ApiSkeleton\Entity\Client;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
-use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
@@ -24,7 +24,7 @@ final class ClientService extends AbstractService implements ServiceInterface
 
     public function save(object $object): void
     {
-        /** @var Client $object */
+        /* @var Client $object */
         $object->setApiKey(sha1(date('Y-m-d H:i:s')));
         $object->setSecretKey(Encryptor::hash($object->getApiKey()));
 

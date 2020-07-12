@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingRepositoryInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Setting|null find($id, $lockMode = null, $lockVersion = null)

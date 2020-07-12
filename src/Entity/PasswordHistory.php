@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
-use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
+use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**

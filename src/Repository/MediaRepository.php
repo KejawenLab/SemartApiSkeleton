@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Media|null find($id, $lockMode = null, $lockVersion = null)

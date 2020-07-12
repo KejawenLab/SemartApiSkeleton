@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\DataFixtures;
 
-use KejawenLab\ApiSkeleton\Entity\Permission;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use KejawenLab\ApiSkeleton\Entity\Permission;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
