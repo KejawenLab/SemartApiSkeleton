@@ -31,6 +31,9 @@ services:
     KejawenLab\ApiSkeleton\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+    KejawenLab\ApiSkeleton\Admin\Controller\:
+        resource: '../src/Admin/Controller'
+        tags: ['controller.service_arguments']
 
     _instanceof:
         Doctrine\Common\EventSubscriber:

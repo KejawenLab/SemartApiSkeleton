@@ -49,8 +49,13 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+        frontend:
+            pattern: ^/admin
+            stateless: true
+            anonymous: true
 
     access_control:
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/medias/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
