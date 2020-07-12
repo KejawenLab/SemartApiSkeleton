@@ -284,7 +284,7 @@ php bin/console cron:stop
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Test\Model;
+namespace KejawenLab\ApiSkeleton\Test\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
@@ -305,11 +305,11 @@ interface TestInterface
 
 declare(strict_types=1);
 
-namespace Alpabit\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Entity;
 
-use Alpabit\ApiSkeleton\Repository\TestRepository;
-use Alpabit\ApiSkeleton\Test\Model\TestInterface;
-use Alpabit\ApiSkeleton\Util\StringUtil;
+use KejawenLab\ApiSkeleton\Repository\TestRepository;
+use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -381,7 +381,7 @@ php bin/console semart:generate Test
 #### Update form type
 
 ```php
-//class: Alpabit\ApiSkeleton\Form\Type\TestType 
+//class: KejawenLab\ApiSkeleton\Form\Type\TestType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /**
@@ -393,7 +393,7 @@ php bin/console semart:generate Test
 #### Update search query extension
 
 ```php
-//class: Alpabit\ApiSkeleton\Test\Query\SearchQueryExtension
+//class: KejawenLab\ApiSkeleton\Test\Query\SearchQueryExtension
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');
