@@ -272,6 +272,8 @@ php bin/console cron:stop
 > 
 > * Password History
 >
+> * Api Client/Consumer Management
+>
 
 ## Cara Penggunaan
 
