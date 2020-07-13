@@ -319,6 +319,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Repository\TestRepository;
 use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -329,7 +330,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Auditable()
  */
-final class Test implements TestInterface
+class Test implements TestInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -343,7 +344,7 @@ final class Test implements TestInterface
      *
      * @Groups({"read"})
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -353,7 +354,7 @@ final class Test implements TestInterface
      *
      * @Groups({"read"})
      */
-    private $name;
+    private ?string $name;
 
     public function getId(): ?string
     {

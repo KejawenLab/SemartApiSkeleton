@@ -29,3 +29,13 @@ Bila Anda menggunakan Docker, maka Anda dapat menjalankan perintah:
 ```bash
 docker-compose exec app bash -c "php bin/console semart:generate Test"
 ```
+
+Ketika muncul pertanyaan, Anda cukup memilih `y` maka hasilnya adalah sebagai berikut:
+
+![Semart Generator](assets/semart_generator_test.png)
+
+Dari *output* tersebut terlihat jelas apa saja *file* yang di-*generate*. Selain itu juga, Semart Generator akan mendaftarkan menu baru sesuai dengan *entity* yang di-*generate* sebagai berikut:
+
+![Semart Generator](assets/permission_generate.png)
+
+Sangat mudah sekali, bukan?
