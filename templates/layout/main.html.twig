@@ -5,7 +5,23 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         {% include 'layout/navigation.html.twig' %}
-        {% include 'layout/menu.html.twig' %}
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="{{ path('admin_dashboard') }}" class="brand-link">
+                <img src="{{ asset(sas.admin_logo) }}" alt="Semart Api Skeleton" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">{{ sas.app_title }}</span>
+            </a>
+            <div class="sidebar">
+                {% include 'layout/menu.html.twig' %}
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="{{ asset('img/logo.gif') }}" class="img-circle elevation-2" alt="Semart Api Skeleton">
+                    </div>
+                    <div class="info">
+                        <a href="https://github.com/KejawenLab/SemartApiSkeleton" target="_blank" class="d-block">Semart Api Skeleton</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
         {% include 'layout/content.html.twig' %}
         {% include 'layout/footer.html.twig' %}
     </div>

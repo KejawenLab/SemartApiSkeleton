@@ -95,6 +95,7 @@ services:
                 app_title: '%env(resolve:APP_TITLE)%'
                 app_description: '%env(resolve:APP_DESCRIPTION)%'
                 version: '%env(resolve:APP_VERSION)%'
+                admin_logo: '%env(resolve:APP_ADMIN_LOGO)%'
     KejawenLab\ApiSkeleton\Admin\ArgumentResolver\BaseApiUrlResolver:
         arguments:
             $baseApiUrl: '%env(resolve:APP_API_BASE_URL)%'
