@@ -19,7 +19,7 @@
 ![Setting](doc/assets/setting.png)
 
 #### Media Management
-![Setting](doc/assets/media.png)
+![Media](doc/assets/media.png)
 
 #### Group Management
 ![Group](doc/assets/group.png)
@@ -34,7 +34,7 @@
 ![Profile](doc/assets/profile.png)
 
 #### Client/Api Consumer Management
-![Profile](doc/assets/consumer.png)
+![Consumer](doc/assets/consumer.png)
 
 ## Requirement
 
@@ -310,14 +310,15 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use KejawenLab\ApiSkeleton\Repository\TestRepository;
-use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
+use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use KejawenLab\ApiSkeleton\Repository\TestRepository;
+use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -326,6 +327,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="test_table")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Auditable()
  */
 final class Test implements TestInterface
 {
@@ -384,12 +386,10 @@ php bin/console semart:generate Test
 #### Update form type
 
 ```php
-//class: KejawenLab\ApiSkeleton\Form\Type\TestType 
+//class: KejawenLab\ApiSkeleton\Form\TestType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /**
-         * @todo implement your form here
-         */
+        $builder->add('name');
     }
 ```
 

@@ -15,11 +15,8 @@
 ```yaml
 nelmio_api_doc:
     documentation:
-        servers:
-          - url: http://api.example.com/unsafe
-            description: API over HTTP
-          - url: https://api.example.com/secured
-            description: API over HTTPS
+        host: staging.kejawenlab.com
+        schemes: [http, https]
 ```
 
 ## Menggunakan Sandbox
