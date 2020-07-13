@@ -58,7 +58,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
 </>');
         if (!$input->getOption('force')) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Semart Api Generator will override your file if it exists. Continue?</question> (y/n)', false);
+            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Semart Api Generator will overwrite your file if it exists. Continue?</question> (y/n)', false);
             if (!$helper->ask($input, $output, $question)) {
                 return 0;
             }
@@ -90,7 +90,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful API for class <info>"%s"</info> is generated</comment>', $reflection->getName()));
+        $output->writeln(sprintf('<comment>RESTful API for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
 
         return 0;
     }

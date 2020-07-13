@@ -25,7 +25,7 @@ final class ClientService extends AbstractService implements ServiceInterface
     public function save(object $object): void
     {
         /* @var Client $object */
-        $object->setApiKey(sha1(date('Y-m-d H:i:s')));
+        $object->setApiKey(sha1(date('YmdHis')));
         $object->setSecretKey(Encryptor::hash($object->getApiKey()));
 
         parent::save($object);

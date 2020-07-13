@@ -35,6 +35,10 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
     public function validate(ControllerEvent $event): void
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
         /** @var object $controller */
         $controller = $event->getController();
         if (!is_object($controller)) {

@@ -60,6 +60,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Cron\Validator\CrontabValidator:
     KejawenLab\ApiSkeleton\Repository\UserRepository:
         arguments:
             $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
@@ -88,4 +89,12 @@ services:
     KejawenLab\ApiSkeleton\Client\UserProvider:
         arguments:
             $class: 'KejawenLab\ApiSkeleton\Entity\Client'
-    Cron\Validator\CrontabValidator:
+    KejawenLab\ApiSkeleton\Admin\EventSubscriber\AdminContextSubscriber:
+        arguments:
+            $globals:
+                app_title: '%env(resolve:APP_TITLE)%'
+                app_description: '%env(resolve:APP_DESCRIPTION)%'
+                version: '%env(resolve:APP_VERSION)%'
+    KejawenLab\ApiSkeleton\Admin\ArgumentResolver\BaseApiUrlResolver:
+        arguments:
+            $baseApiUrl: '%env(resolve:APP_API_BASE_URL)%'
