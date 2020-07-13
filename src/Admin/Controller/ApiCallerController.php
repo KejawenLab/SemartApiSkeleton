@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -42,9 +44,20 @@ final class ApiCallerController
             $request->query->remove(AdminContext::ADMIN_ACTION_KEY);
         }
 
-        $response = $client->request($request->getMethod(), $url, $options);
+        try {
+            $response = new JsonResponse($this->processResponse($request, $client->request($request->getMethod(), $url, $options)->getContent()));
+        } catch (ClientException $e) {
+            if ($e->getCode() === Response::HTTP_UNAUTHORIZED) {
+                $session->remove(AdminContext::ADMIN_SESSION_KEY);
+            }
 
-        return new JsonResponse($this->processResponse($request, $response->getContent()));
+            $response = new JsonResponse([
+                'error' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], $e->getCode());
+        }
+
+        return $response;
     }
 
     private static function normalize(array $request): array
