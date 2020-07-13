@@ -4,8 +4,6 @@
 
 Salah satu fitur utama dari Semart Api Skeleton adalah Semart Generator, yaitu sebuah alat bantu (*tool*) untuk membuat RESTApi serta dokumentasinya secara cepat.
 
-![Semart Generator](assets/semart_generator.png)
-
 Fitur utama Semart Generator antara lain:
 
 >
