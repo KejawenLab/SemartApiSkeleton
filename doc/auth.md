@@ -9,13 +9,13 @@
 ## Masuk ke Aplikasi
 
 > 
-> Untuk masuk ke aplikasi Anda bisa menggunakan sandbox pada bagian *Security* seperti gambar dibawah dengan menggunakan user `admin` dan password `admin`.
+> Untuk masuk ke aplikasi Kamu bisa menggunakan sandbox pada bagian *Security* seperti gambar dibawah dengan menggunakan user `admin` dan password `admin`.
 >
 
 ![Api Doc](assets/auth_doc.png)
 
 >
-> Anda akan mendapatkan response berupa JWT token dengan format `{ "token": [TOKEN] }` sebagai berikut:
+> Kamu akan mendapatkan response berupa JWT token dengan format `{ "token": [TOKEN] }` sebagai berikut:
 >
 
 ![Api Doc](assets/jwt_response.png)

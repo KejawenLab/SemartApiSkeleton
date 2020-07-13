@@ -9,7 +9,7 @@
 ## Sandbox URL
 
 >
-> Untuk merubah default sandbox URL, Anda dapat melakukannya dengan mengubah konfigurasi NelmioApiDoc pada file `config/packages/nelmio_api_doc.yaml` sebagai berikut:
+> Untuk merubah default sandbox URL, Kamu dapat melakukannya dengan mengubah konfigurasi NelmioApiDoc pada file `config/packages/nelmio_api_doc.yaml` sebagai berikut:
 >
 
 ```yaml
@@ -24,7 +24,7 @@ nelmio_api_doc:
 > 
 > Untuk menggunakan cukup menekan tombol `Try it out` kemudian mengisikan parameter sesuai dengan yang tercantum pada Sandbox
 >
-> *NB:* Bila menemui kendala `401 Unauthorized` Anda dapat melakukan login terlebih dahulu
+> *NB:* Bila menemui kendala `401 Unauthorized` Kamu dapat melakukan login terlebih dahulu
 >
 
 ## Request Format
@@ -34,7 +34,7 @@ nelmio_api_doc:
 >
 > NelmioApiDoc menggunakan annotation `@Swagger\Annotations\Parameter()` untuk membuat request format pada Sandbox
 >
-> *NB:* Anda dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
+> *NB:* Kamu dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
 >
 
 ## Response Format
@@ -44,13 +44,13 @@ nelmio_api_doc:
 >
 > *NB:* 
 >
-> * Anda dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
+> * Kamu dapat membaca dan melihat penggunaan annotation tersebut pada folder `Controller`
 >
-> * Pastikan response yang Anda berikan sesuai dengan dokumentasi
+> * Pastikan response yang Kamu berikan sesuai dengan dokumentasi
 >
 
 ## Extra
 
 >
-> Bila Anda bingung menggunakan tentang parameter yang tersedia pada masing-masing annotation, coba kunjungi halaman [Spesifkasi OpenApi](https://swagger.io/docs/specification/about/)
+> Bila Kamu bingung menggunakan tentang parameter yang tersedia pada masing-masing annotation, coba kunjungi halaman [Spesifkasi OpenApi](https://swagger.io/docs/specification/about/)
 >

@@ -16,19 +16,19 @@ Fitur utama Semart Generator antara lain:
 
 ## Cara menggunakan Semart Generator
 
-Anggaplah Anda sudah membuat *interface* dan *entity* sebagaimana pada halaman [README.md](../README.md#cara-penggunaan), maka Anda cukup menjalankan perintah sebagai berikut:
+Anggaplah Kamu sudah membuat *interface* dan *entity* sebagaimana pada halaman [README.md](../README.md#cara-penggunaan), maka Kamu cukup menjalankan perintah sebagai berikut:
 
 ```bash
 php bin/console semart:generate Test
 ```
 
-Bila Anda menggunakan Docker, maka Anda dapat menjalankan perintah:
+Bila Kamu menggunakan Docker, maka Kamu dapat menjalankan perintah:
 
 ```bash
 docker-compose exec app bash -c "php bin/console semart:generate Test"
 ```
 
-Ketika muncul pertanyaan, Anda cukup memilih `y` maka hasilnya adalah sebagai berikut:
+Ketika muncul pertanyaan, Kamu cukup memilih `y` maka hasilnya adalah sebagai berikut:
 
 ![Semart Generator](assets/semart_generator_test.png)
 

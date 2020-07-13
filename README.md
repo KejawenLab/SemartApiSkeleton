@@ -38,7 +38,7 @@
 
 ## Requirement
 
-#### Abaikan Requirement jika Anda menggunakan Docker
+#### Abaikan Requirement jika Kamu menggunakan Docker
 
 > 
 > * PHP >= 7.4.0
@@ -414,14 +414,14 @@ php bin/console semart:generate Test
     }
 ```
 
-Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan untuk Anda.
+Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan untuk Kamu.
 
 ## Dokumentasi
 
 >
 > Dokumentasi terletak pada folder [`doc`](doc) pada proyek ini.
 > 
-> Anda juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
+> Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
 
 ## Demo
