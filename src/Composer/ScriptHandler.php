@@ -70,7 +70,7 @@ final class ScriptHandler
         $dbCharset = $io->ask('Please enter your database charset [default: <info>utf8mb4</info>]: ', 'utf8mb4');
         $dbUser = $io->ask('Please enter your database user [default: <info>root</info>]: ', 'root');
         $dbPassword = $io->ask('Please enter your database password [default: <info>null</info>]: ', '');
-        $dbName = $io->ask('Please enter your database name [default: <info>alpabit_core</info>]: ', 'alpabit_core');
+        $dbName = $io->ask('Please enter your database name [default: <info>kejawenlab_core</info>]: ', 'kejawenlab_core');
         $dbHost = $io->ask('Please enter your database host [default: <info>localhost</info>]: ', 'localhost');
         $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
         $appTitle = $io->ask('Please enter your application title [default: <info>KejawenLab Core</info>]: ', 'KejawenLab Core');

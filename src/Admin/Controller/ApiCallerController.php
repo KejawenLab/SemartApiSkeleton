@@ -31,6 +31,10 @@ final class ApiCallerController
         }
 
         $options = [];
+        $session = $request->getSession();
+        if ($session->has(AdminContext::ADMIN_SESSION_KEY)) {
+            $options['headers']['Authorization'] = sprintf('Bearer %s', $session->get(AdminContext::ADMIN_SESSION_KEY));
+        }
         if (in_array($request->getMethod(), [Request::METHOD_PUT, Request::METHOD_POST])) {
             $options = ['json' => static::normalize($request->request->all())];
         } else {
