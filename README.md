@@ -33,6 +33,9 @@
 #### Profile Management
 ![Profile](doc/assets/profile.png)
 
+#### Client/Api Consumer Management
+![Profile](doc/assets/consumer.png)
+
 ## Requirement
 
 #### Abaikan Requirement jika Anda menggunakan Docker
@@ -414,8 +417,10 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Dokumentasi
 
+>
+> Dokumentasi terletak pada folder [`doc`](doc) pada proyek ini.
 > 
-> Kunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk dokumentasi selengkapnya
+> Anda juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
 
 ## Demo
