@@ -13,7 +13,6 @@ security:
             pattern:  ^/api/login
             stateless: true
             anonymous: true
-            lazy: true
             json_login:
                 check_path: /api/login
                 username_path: username
@@ -49,9 +48,6 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-        frontend:
-            pattern: ^/admin
-            security: false
 
     access_control:
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -31,9 +31,6 @@ services:
     KejawenLab\ApiSkeleton\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-    KejawenLab\ApiSkeleton\Admin\Controller\:
-        resource: '../src/Admin/Controller'
-        tags: ['controller.service_arguments']
 
     _instanceof:
         Doctrine\Common\EventSubscriber:
@@ -89,13 +86,3 @@ services:
     KejawenLab\ApiSkeleton\Client\UserProvider:
         arguments:
             $class: 'KejawenLab\ApiSkeleton\Entity\Client'
-    KejawenLab\ApiSkeleton\Admin\EventSubscriber\AdminContextSubscriber:
-        arguments:
-            $globals:
-                app_title: '%env(resolve:APP_TITLE)%'
-                app_description: '%env(resolve:APP_DESCRIPTION)%'
-                version: '%env(resolve:APP_VERSION)%'
-                admin_logo: '%env(resolve:APP_ADMIN_LOGO)%'
-    KejawenLab\ApiSkeleton\Admin\ArgumentResolver\BaseApiUrlResolver:
-        arguments:
-            $baseApiUrl: '%env(resolve:APP_API_BASE_URL)%'

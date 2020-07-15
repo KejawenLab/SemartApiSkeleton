@@ -3,11 +3,6 @@ controllers:
     resource: ../../src/Controller/
     type: annotation
 
-fontend:
-    prefix: /admin
-    resource: ../../src/Admin/Controller/
-    type: annotation
-
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
