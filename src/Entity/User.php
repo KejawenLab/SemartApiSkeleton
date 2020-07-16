@@ -110,7 +110,7 @@ class User implements UserInterface
      */
     private ?string $deviceId;
 
-    private ?string $plainPassword;
+    private ?string $plainPassword = null;
 
     public function __construct()
     {
@@ -120,8 +120,6 @@ class User implements UserInterface
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
-        $this->deviceId = null;
-        $this->plainPassword = null;
     }
 
     public function getId(): ?string
