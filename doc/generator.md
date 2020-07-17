@@ -36,4 +36,6 @@ Dari *output* tersebut terlihat jelas apa saja *file* yang di-*generate*. Selain
 
 ![Semart Generator](assets/permission_generate.png)
 
+Tidak hanya itu, Semart Generator juga secara otomatis membuatkan dokumentasi Api sesuai dengan *entity* yang di-*generate* sebagaimana tampak pada halaman README.
+
 Sangat mudah sekali, bukan?
