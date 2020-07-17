@@ -20,4 +20,6 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     DH\DoctrineAuditBundle\DHDoctrineAuditBundle::class => ['all' => true],
     Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle::class => ['all' => true],
+    Gos\Bundle\PubSubRouterBundle\GosPubSubRouterBundle::class => ['all' => true],
+    Gos\Bundle\WebSocketBundle\GosWebSocketBundle::class => ['all' => true],
 ];
