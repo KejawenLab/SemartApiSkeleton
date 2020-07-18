@@ -156,8 +156,6 @@ APP_TITLE="Semart Api Skeleton"
 APP_DESCRIPTION="Semart Api Skeleton"
 APP_VERSION=1.0@dev
 APP_UPLOAD_DIR=%kernel.project_dir%/storage
-APP_API_BASE_URL="http://localhost"
-APP_ADMIN_LOGO="img/AdminLTELogo.png"
 ###< CUSTOM ###
 
 ###> doctrine/doctrine-bundle ###
