@@ -1,11 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-set -o errexit
-set -o nounset
+GREEN="\033[0;32m"
+RESET="\0033[0m"
 
-IFS=$(printf '\n\t')
-
-# Docker
+echo -e "{$GREEN}Installing Docker${RESET}"
 sudo apt remove --yes docker docker-engine docker.io containerd runc
 sudo apt update
 sudo apt --yes --no-install-recommends install apt-transport-https ca-certificates
@@ -15,14 +13,17 @@ sudo apt update
 sudo apt --yes --no-install-recommends install docker-ce docker-ce-cli containerd.io
 sudo usermod --append --groups docker "$USER"
 sudo systemctl enable docker
-printf '\nDocker installed successfully\n\n'
 
-printf 'Waiting for Docker to start...\n\n'
+echo -e "{$GREEN}Docker installed successfully${RESET}"
+
+echo -e "{$GREEN}Starting Docker${RESET}"
 sleep 5
+echo -e "{$GREEN}Docker started${RESET}"
 
-# Docker Compose
+echo -e "{$GREEN}Installing Docker Compose${RESET}"
 sudo wget --output-document=/usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.26.0/run.sh
 sudo chmod +x /usr/local/bin/docker-compose
 sudo wget --output-document=/etc/bash_completion.d/docker-compose "https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose"
-printf '\nDocker Compose installed successfully\n\n'
-printf '\nLogout and Relogin\n\n'
+echo -e "{$GREEN}Docker Compose installed successfully${RESET}"
+
+echo -e "{$GREEN}Please relogin to make sure all changes applied${RESET}"
