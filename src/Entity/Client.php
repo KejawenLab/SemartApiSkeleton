@@ -14,6 +14,7 @@ use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
 use KejawenLab\ApiSkeleton\Repository\ClientRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -126,6 +127,11 @@ class Client implements ClientInterface
     public function getIdentity(): ?string
     {
         return $this->getApiKey();
+    }
+
+    public function getRecordId(): ?string
+    {
+        return $this->getId();
     }
 
     public function getCredential(): ?string

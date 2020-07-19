@@ -226,6 +226,11 @@ class User implements UserInterface
         return $this->getUsername();
     }
 
+    public function getRecordId(): ?string
+    {
+        return $this->getId();
+    }
+
     public function getCredential(): ?string
     {
         return $this->getPassword();

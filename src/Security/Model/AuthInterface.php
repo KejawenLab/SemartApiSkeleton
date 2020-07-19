@@ -13,6 +13,8 @@ interface AuthInterface
 
     public function getIdentity(): ?string;
 
+    public function getRecordId(): ?string;
+
     public function getCredential(): ?string;
 
     public function isEncoded(): bool;

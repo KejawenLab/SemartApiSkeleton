@@ -15,6 +15,8 @@ final class User implements UserInterface
 {
     private GroupInterface $group;
 
+    private string $id;
+
     private string $username;
 
     private string $password;
@@ -24,6 +26,7 @@ final class User implements UserInterface
     public function __construct(AuthInterface $user = null)
     {
         if ($user) {
+            $this->id = $user->getRecordId();
             $this->group = $user->getGroup();
             $this->username = $user->getIdentity();
             $this->password = $user->getCredential();
@@ -34,6 +37,11 @@ final class User implements UserInterface
     public function getGroup(): GroupInterface
     {
         return $this->group;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getUsername(): string
