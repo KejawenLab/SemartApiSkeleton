@@ -73,9 +73,9 @@ class Media implements MediaInterface
     {
         $this->fileName = null;
         $this->folder = null;
+        $this->public = false;
         $this->fileUrl = null;
         $this->file = null;
-        $this->public = false;
     }
 
     public function getId(): ?string

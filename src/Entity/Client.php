@@ -66,6 +66,13 @@ class Client implements ClientInterface
      */
     private ?string $secretKey;
 
+    public function __construct()
+    {
+        $this->user = null;
+        $this->apiKey = null;
+        $this->secretKey = null;
+    }
+
     public function getId(): ?string
     {
         return (string) $this->id;
