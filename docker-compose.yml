@@ -6,8 +6,6 @@ services:
           - .env
         volumes:
             - .:/semart
-        ports:
-            - 1111:3333
         links:
             - session
             - db

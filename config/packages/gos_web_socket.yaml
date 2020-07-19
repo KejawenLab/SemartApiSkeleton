@@ -1,4 +1,0 @@
-gos_web_socket:
-    server:
-        port: 3333
-        host: 0.0.0.0
