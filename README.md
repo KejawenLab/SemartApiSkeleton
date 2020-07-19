@@ -320,6 +320,7 @@ use KejawenLab\ApiSkeleton\Repository\TestRepository;
 use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -343,6 +344,8 @@ class Test implements TestInterface
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
      * @Groups({"read"})
+     *
+     * @SWG\Property(type="string")
      */
     private UuidInterface $id;
 
