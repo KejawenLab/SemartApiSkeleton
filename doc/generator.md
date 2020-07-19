@@ -38,4 +38,8 @@ Dari *output* tersebut terlihat jelas apa saja *file* yang di-*generate*. Selain
 
 Tidak hanya itu, Semart Generator juga secara otomatis membuatkan dokumentasi Api sesuai dengan *entity* yang di-*generate* sebagaimana tampak pada halaman README.
 
+Untuk lebih jelas, bisa menonton video berikut:
+
+[![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
+
 Sangat mudah sekali, bukan?
