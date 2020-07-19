@@ -358,6 +358,11 @@ class Test implements TestInterface
      * @Groups({"read"})
      */
     private ?string $name;
+    
+    public function __construct()
+    {
+        $this->name = null;
+    }
 
     public function getId(): ?string
     {
