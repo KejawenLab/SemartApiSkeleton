@@ -49,7 +49,7 @@ class Setting implements SettingInterface
     /**
      * @ORM\Column(type="string", length=27)
      *
-     * @Assert\Length(max=7)
+     * @Assert\Length(max=27)
      * @Assert\NotBlank()
      *
      * @Groups({"read"})
