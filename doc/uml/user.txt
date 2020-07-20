@@ -6,17 +6,17 @@ scale 777 width
 
 state "KejawenLab\ApiSkeleton\Security\Service\UserProvider" as userProvider {
   state UserProvider: "findUsername()"
-  UserProvider --> providerFactory: "KejawenLab\ApiSkeleton\Entity\User"
+  UserProvider --> providerFactory: KejawenLab\ApiSkeleton\Entity\User
 }
 
 state "KejawenLab\ApiSkeleton\Client\ClientService" as clientProvider {
   state ClientService: "findUsername()"
-  ClientService --> providerFactory: "KejawenLab\ApiSkeleton\Entity\Client"
+  ClientService --> providerFactory: KejawenLab\ApiSkeleton\Entity\Client
 }
 
 state "KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory" as providerFactory {
   state UserProviderFactory: "loadUserByUsername()"
-  UserProviderFactory --> [*]: "KejawenLab\ApiSkeleton\Security\User"
+  UserProviderFactory --> [*]: KejawenLab\ApiSkeleton\Security\User
 }
 
 providerFactory --> [*]
