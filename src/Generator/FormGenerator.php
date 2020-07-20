@@ -15,10 +15,15 @@ final class FormGenerator extends AbstractGenerator
     {
         $shortName = $class->getShortName();
         $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $formFile = sprintf('%s/src/Form/%sType.php', $this->kernel->getProjectDir(), $shortName);
 
-        $template = $this->twig->render('generator/form.php.twig', ['entity' => $shortName, 'properties' => $properties]);
+        if (!$this->fileSystem->exists($formFile)) {
+            $template = $this->twig->render('generator/form.php.twig', ['entity' => $shortName, 'properties' => $properties]);
 
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\Form\%sType"</info></comment>', $shortName));
-        $this->fileSystem->dumpFile(sprintf('%s/src/Form/%sType.php', $this->kernel->getProjectDir(), $shortName), $template);
+            $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\Form\%sType"</info></comment>', $shortName));
+            $this->fileSystem->dumpFile($formFile, $template);
+        } else {
+            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $formFile));
+        }
     }
 }

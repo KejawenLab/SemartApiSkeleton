@@ -49,16 +49,22 @@ final class PermissionGenerator extends AbstractGenerator
     public function generate(\ReflectionClass $class, OutputInterface $output): void
     {
         $shortName = $class->getShortName();
-        $shortNameUppercase = StringUtil::uppercase($shortName);
+        $shortNameUpper = StringUtil::uppercase($shortName);
+        if ($this->menuService->getMenuByCode($shortNameUpper)) {
+            $output->write(sprintf('<info>Menu for "%s" already exists. Skipped</info>', $shortName));
+
+            return;
+        }
+
         /** @var MenuInterface $menu */
         $menu = new $this->class();
-        $menu->setCode($shortNameUppercase);
-        $menu->setName($shortNameUppercase);
+        $menu->setCode($shortNameUpper);
+        $menu->setName($shortNameUpper);
         $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
 
         $this->menuService->save($menu);
 
-        $output->writeln(sprintf('<comment>Generating permission(s) for menu "<info>%s</info></comment>"', $shortNameUppercase));
+        $output->writeln(sprintf('<comment>Generating permission(s) for menu "<info>%s</info></comment>"', $shortNameUpper));
         $this->permissionService->initiate($menu);
 
         $superGroup = $this->groupService->getSuperAdmin();

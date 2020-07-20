@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -51,6 +52,7 @@ final class Ownership
             return false;
         }
 
+        /** @var UserInterface $user */
         $user = $this->userProviderFactory->getRealUser($token->getUser());
         if ($user->getGroup()->getCode() === $this->superAdmin) {
             return true;

@@ -14,9 +14,14 @@ final class ServiceGenerator extends AbstractGenerator
     public function generate(\ReflectionClass $class, OutputInterface $output): void
     {
         $shortName = $class->getShortName();
-        $template = $this->twig->render('generator/service.php.twig', ['entity' => $shortName]);
 
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\%sService"</info></comment>', $shortName, $shortName));
-        $this->fileSystem->dumpFile(sprintf('%s/src/%s/%sService.php', $this->kernel->getProjectDir(), $shortName, $shortName), $template);
+        $serviceFile = sprintf('%s/src/%s/%sService.php', $this->kernel->getProjectDir(), $shortName, $shortName);
+        if (!$this->fileSystem->exists($serviceFile)) {
+            $template = $this->twig->render('generator/service.php.twig', ['entity' => $shortName]);
+            $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\%sService"</info></comment>', $shortName, $shortName));
+            $this->fileSystem->dumpFile($serviceFile, $template);
+        } else {
+            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $serviceFile));
+        }
     }
 }
