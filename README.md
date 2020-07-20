@@ -447,6 +447,14 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 > **NB:** Data akan direset setiap **15 menit** sekali
 >
 
+## Roadmap
+
+- [ ] Dokumentasi
+
+- [ ] Unit Testing
+
+- [ ] Admin Auto Generate
+
 ## Copyright
 
 Semart Api Skeleton dikembangkan dan dimaintain oleh [KejawenLab](https://github.com/KejawenLab)
