@@ -82,6 +82,32 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         }
     }
 
+    public function findAllowedChildMenusByGroupAndMenu(GroupInterface $group, MenuInterface $menu): iterable
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.group', 'g');
+        $queryBuilder->innerJoin('o.menu', 'm');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('m.id', $queryBuilder->expr()->literal($menu->getId())));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('m.showable', $queryBuilder->expr()->literal(true)));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(
+            $queryBuilder->expr()->eq('o.addable', $queryBuilder->expr()->literal(true)),
+            $queryBuilder->expr()->eq('o.editable', $queryBuilder->expr()->literal(true)),
+            $queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)),
+        ));
+        $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId()));
+
+        /** @var PermissionInterface[] $permissions */
+        $permissions = $query->getResult();
+        foreach ($permissions as $permission) {
+            yield $permission->getMenu();
+        }
+    }
+
     public function removeByGroup(GroupInterface $group): void
     {
         $queryBuilder = $this->createQueryBuilder('o')->update();

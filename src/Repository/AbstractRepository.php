@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements PaginatableRepositoryInterface
 {
-    protected const MICRO_CACHE = 3;
+    protected const MICRO_CACHE = 1;
 
     public function __construct(ManagerRegistry $registry, $entityClass)
     {

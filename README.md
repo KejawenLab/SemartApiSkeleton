@@ -430,10 +430,16 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Dokumentasi
 
->
-> Dokumentasi terletak pada folder [`doc`](doc) pada proyek ini.
+- [Penggunaan Dasar](doc/generator.md)
+
+- [Sandbox](doc/sandbox.md)
+
+- [Authentikasi](doc/auth.md)
+
+- [Modifikasi *Form*](doc/form.md)
+
 > 
-> Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
+> **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
 
 ## Demo
