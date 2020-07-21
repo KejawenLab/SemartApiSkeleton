@@ -436,7 +436,9 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 - [Authentikasi](doc/auth.md)
 
-- [Modifikasi *Form*](doc/form.md)
+- [*Form*](doc/form.md)
+
+- [Pencarian](doc/search.md)
 
 > 
 > **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
