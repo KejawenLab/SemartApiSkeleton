@@ -68,7 +68,7 @@ Untuk mengaktifkannya, kita cukup *uncomment* sebagai berikut:
     }
 ```
 
-Selain itu, kita juga perlu meng-*update* deskripsi dari dokumentasi Api kita pada *controller* `GetAll` sebagai berikut:
+Selain itu, kita juga perlu meng-*update* deskripsi dari dokumentasi Api kita pada *controller* `GetAll` pada *folder* `Controller/Test/GetAll` sebagai berikut:
 
 ```php
      @SWG\Parameter(
