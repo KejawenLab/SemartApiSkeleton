@@ -8,7 +8,7 @@ Untuk mengakomodir kebutuhan tersebut, pada Semart Api Skeleton terdapat fitur p
 
 ## *Search Query Extension*
 
-Semart Api Skeleton mengusung konsep *query extension* yang memungkinkan *developer* mengimplementasi segala macam kasus yang berhubungan dengan *query* mulai dari yang mudah hingga yang sangat kompleks sekalipun.
+Semart Api Skeleton mengusung konsep [*Query Extension*](query_extension.md) yang memungkinkan *developer* mengimplementasi segala macam kasus yang berhubungan dengan *query* mulai dari yang mudah hingga yang sangat kompleks sekalipun.
 
 Ketika menggunakan [Semart Generator](generator.md), secara otomatis, akan dibuatkan sebuah *class* yaitu `QuerySearchExtension` pada *folder* `Query` yang mengimplementasika *Doctrine Query Builder* dengan isi sebagai berikut:
 
