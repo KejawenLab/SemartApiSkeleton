@@ -440,6 +440,8 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 - [Pencarian](doc/search.md)
 
+- [Pengaturan *Permission*](doc/permission.md)
+
 > 
 > **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
