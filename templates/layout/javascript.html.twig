@@ -1,0 +1,19 @@
+{% apply spaceless %}
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery.get('/admin/call?action=me', {}, function (response) {
+                jQuery('#sas_user_hidden').html(response.fullName);
+                jQuery('#sas_user_name').html(response.fullName + '<small>' + response.group.name + '</small>');
+            }).fail(function() {
+                goHome();
+            });
+        });
+
+        function goHome() {
+            window.location.href = '/admin';
+        };
+    </script>
+{% endapply %}
