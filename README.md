@@ -211,9 +211,9 @@ docker-compose exec app bash -c "php bin/console assets:install"
 ```
 
 > 
-> * Aplikasi berjalan pada alamat `http://localhost:9876/api/doc`
+> * Aplikasi berjalan pada alamat `http://localhost:9876/api/doc` dengan username `admin` dan password `admin`
 >
-> * Adminer berjalan pada alamat `http://localhost:6789`
+> * Adminer berjalan pada alamat `http://localhost:6789` dengan host `db`, username `root` dan password `semart`
 >
 
 ## Cron Daemon
