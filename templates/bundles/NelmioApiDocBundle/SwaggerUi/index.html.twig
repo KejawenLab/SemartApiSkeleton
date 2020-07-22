@@ -1,0 +1,12 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block header %}
+    <a id="logo" href="https://github.com/KejawenLab/SemartApiSkeleton" target="_blank"><img style="float:left;margin-top:11px;" src="{{ asset('logo.gif') }}" alt="SemartApiSkeleton">
+        <h2 style="float:right;margin-left:9px;font-size:1.7em;color:#fefefe;font-family:'Ranchers',cursive;">SemartApiSkeleton</h2>
+    </a>
+{% endblock header %}
