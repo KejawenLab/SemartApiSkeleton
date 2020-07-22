@@ -185,7 +185,7 @@ CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 ```
 
 >
-> * Jalankan perintah berikut:
+> * Karena Semart Api Skeleton menggunakan encryption password untuk koneksi ke database, maka kita perlu mengenkripsi password database terlebih dahulu. Pada *file* `docker-compose.yml`, password database adalah `semart`, maka kita perlu menjalankan perintah berikut:
 >
 
 ```bash
