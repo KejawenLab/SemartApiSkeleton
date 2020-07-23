@@ -18,7 +18,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Semart\Permission(menu="GROUP", actions={Semart\Permission::ADD, Semart\Permission::EDIT})
+ * @Semart\Permission(menu="GROUP", actions=Semart\Permission::VIEW)
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */

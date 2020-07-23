@@ -1,0 +1,19 @@
+@startuml
+object Menu
+Menu : id
+
+object Group
+Group : id
+
+object Permission
+Permission : id
+Permission : group_id
+Permission : menu_id
+Permission : view
+Permission : edit
+Permission : add
+Permission : delete
+
+Permission <|-- Group
+Permission <|-- Menu
+@enduml
