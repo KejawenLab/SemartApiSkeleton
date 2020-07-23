@@ -4,7 +4,7 @@
 > Semart Api Skeleton adalah skeleton untuk membangun aplikasi berbasis Api
 >
 
-## Vidoe
+## Video
 
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
