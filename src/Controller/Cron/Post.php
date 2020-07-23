@@ -38,7 +38,7 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/cronjobs")
+     * @Rest\Post("/cronjobs", priority=-7)
      *
      * @SWG\Tag(name="Cron")
      * @SWG\Parameter(

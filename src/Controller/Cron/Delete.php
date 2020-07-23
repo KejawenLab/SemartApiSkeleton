@@ -32,7 +32,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/cronjobs/{id}")
+     * @Rest\Delete("/cronjobs/{id}", priority=-7)
      *
      * @SWG\Tag(name="Cron")
      * @SWG\Response(

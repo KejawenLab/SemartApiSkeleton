@@ -36,7 +36,7 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/cronjobs/{id}/logs")
+     * @Rest\Get("/cronjobs/{id}/logs", priority=-27)
      *
      * @Cache(expires="+1 minute", public=false)
      *
