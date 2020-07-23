@@ -442,6 +442,8 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 - [Pengaturan *Permission*](doc/permission.md)
 
+- [Manajemen Cronjob](doc/cron.md)
+
 > 
 > **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
