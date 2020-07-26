@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Twig\Environment;
@@ -34,7 +35,11 @@ final class AdminContextSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->twig->addGlobal('sas', $this->globals);
+        $this->twig->addGlobal('sas', array_merge($this->globals, [
+            'semart_name' => 'Semart Api Skeleton',
+            'semart_codename' => SemartApiSkeleton::CODENAME,
+            'semart_version' => SemartApiSkeleton::VERSION
+        ]));
     }
 
     public static function getSubscribedEvents(): array

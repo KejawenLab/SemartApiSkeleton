@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,6 +17,6 @@ final class DashboardController extends AbstractController
      */
     public function __invoke()
     {
-        return new Response('a');
+        return $this->render('layout/main.html.twig', ['page_title' => 'Dashboard']);
     }
 }

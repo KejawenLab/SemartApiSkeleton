@@ -13,13 +13,9 @@ final class AdminContext
 {
     public const ADMIN_PATH_PREFIX = '/admin';
 
-    public const ADMIN_CRSF_SESSION_KEY = '__sas__admin__crsf__';
+    public const LOGIN_ROUTE = 'admin_login';
 
-    public const ADMIN_CRSF_REQUEST_KEY = '__crsf_token__';
-
-    public const ADMIN_ACTION_KEY = 'action';
-
-    public const ADMIN_LOGIN_ACTION = 'login';
+    public const ADMIN_ROUTE = 'admin_home';
 
     public static function isAdminContext(Request $request): bool
     {

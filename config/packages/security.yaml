@@ -45,9 +45,8 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
         frontend:
-            pattern: ^/admin
-            lazy: true
-            anonymous: true
+            pattern: ^/admin/login
+            anonymous: lazy
             form_login:
                 login_path: /admin/login
                 check_path: /admin/login
@@ -56,19 +55,17 @@ security:
             logout:
                 path: /admin/logout
                 target: admin_home
-        admin:
-            pattern: ^/admin
             guard:
                 authenticators:
-                    - KejawenLab\ApiSkeleton\Security\UserAuthenticator
+                    - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
 
     access_control:
-        - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['POST'] }
+        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET', 'POST'] }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/medias/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/settings/public, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
         - { path: ^/api/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/admin, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: ROLE_USER }

@@ -17,7 +17,6 @@
             <form id="semartLogin" action="{{ path('admin_login') }}" method="post">
                 <input type="text" id="username" class="fadeIn second" name="_username" value="" placeholder="Nama Pengguna">
                 <input type="password" id="password" class="fadeIn third" name="_password" placeholder="Kata Sandi">
-                <input type="hidden" name="{{ sas_crsf_token_key }}" value="{{ sas_crsf_token_value }}">
                 <input type="submit" class="fadeIn fourth" value="Login">
             </form>
         </div>
