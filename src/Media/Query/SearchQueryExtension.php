@@ -17,16 +17,16 @@ final class SearchQueryExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $query = $request->query->get('q');
-        if (!$query) {
-            return;
-        }
-
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.filePath)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.filePath)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($request->query->get('q'))))
+            )
+        );
     }
 
-    public function support(string $class): bool
+    public function support(string $class, Request $request): bool
     {
-        return in_array(MediaInterface::class, class_implements($class));
+        return in_array(MediaInterface::class, class_implements($class)) && $request->query->get('q');
     }
 }

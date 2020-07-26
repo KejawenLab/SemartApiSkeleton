@@ -39,7 +39,7 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/cronjobs/{id}")
+     * @Rest\Put("/cronjobs/{id}", priority=-7)
      *
      * @SWG\Tag(name="Cron")
      * @SWG\Parameter(

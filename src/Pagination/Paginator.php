@@ -41,7 +41,7 @@ final class Paginator
         $page = (int) $request->query->get($this->pageField, 1);
         $perPage = (int) $request->query->get($this->perPageField, $this->perPageDefault);
         foreach ($this->queryExtension as $extension) {
-            if ($extension->support($class)) {
+            if ($extension->support($class, $request)) {
                 $extension->apply($queryBuilder, $request);
             }
         }

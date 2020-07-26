@@ -41,7 +41,7 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings/{id}/audit")
+     * @Rest\Get("/settings/{id}/audit", priority=-255)
      *
      * @Cache(expires="+17 minute", public=false)
      *

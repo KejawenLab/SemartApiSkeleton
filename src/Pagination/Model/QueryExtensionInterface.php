@@ -14,5 +14,5 @@ interface QueryExtensionInterface
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void;
 
-    public function support(string $class): bool;
+    public function support(string $class, Request $request): bool;
 }

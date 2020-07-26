@@ -4,7 +4,7 @@
 > Semart Api Skeleton adalah skeleton untuk membangun aplikasi berbasis Api
 >
 
-## Vidoe
+## Video
 
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
@@ -430,6 +430,8 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Dokumentasi
 
+#### Dasar
+
 - [Penggunaan Dasar](doc/generator.md)
 
 - [Sandbox](doc/sandbox.md)
@@ -441,6 +443,20 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 - [Pencarian](doc/search.md)
 
 - [Pengaturan *Permission*](doc/permission.md)
+
+- [Manajemen Cronjob](doc/cron.md)
+
+- [Menu](doc/menu.md)
+
+- [Api Publik](doc/public.md)
+
+#### Lanjutan
+
+- [Handel Kompleks Query](doc/query_extension.md)
+
+- [Cara Aman *Upgrade* Aplikasi](doc/upgrade.md)
+
+- [Menambah Tipe *User* Baru](doc/user.md)
 
 > 
 > **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton

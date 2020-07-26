@@ -47,8 +47,6 @@ class Permission implements PermissionInterface
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist", "remove"})
      *
-     * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      **/
     private ?GroupInterface $group;
