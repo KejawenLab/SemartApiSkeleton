@@ -15,11 +15,11 @@ final class CronReportSearchQueryExtension extends AbstractCronReportExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $query = $request->query->get('q');
-        if (!$query) {
-            return;
-        }
-
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.output)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.output)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($request->query->get('q'))))
+            )
+        );
     }
 }

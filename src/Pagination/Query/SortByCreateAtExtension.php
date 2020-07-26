@@ -18,7 +18,7 @@ final class SortByCreateAtExtension extends AbstractQueryExtension
         $queryBuilder->addOrderBy(sprintf('%s.createdAt', $this->aliasHelper->findAlias('root')), 'DESC');
     }
 
-    public function support(string $class): bool
+    public function support(string $class, Request $request): bool
     {
         return in_array(TimestampableEntity::class, (new \ReflectionClass($class))->getTraitNames());
     }

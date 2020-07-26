@@ -24,18 +24,13 @@ final class PermissionJoinExtension implements QueryExtensionInterface
 
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $groupId = $request->attributes->get('id');
-        if (!$groupId) {
-            return;
-        }
-
         $alias = $this->aliasHelper->findAlias('group');
         $queryBuilder->innerJoin(sprintf('%s.group', $this->aliasHelper->findAlias('root')), $alias);
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.id', $alias), $queryBuilder->expr()->literal($groupId)));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.id', $alias), $queryBuilder->expr()->literal($request->attributes->get('id'))));
     }
 
-    public function support(string $class): bool
+    public function support(string $class, Request $request): bool
     {
-        return in_array(PermissionInterface::class, class_implements($class));
+        return in_array(PermissionInterface::class, class_implements($class)) && $request->attributes->get('id');
     }
 }

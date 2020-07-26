@@ -16,9 +16,6 @@ final class CronSearchQueryExtension extends AbstractCronExtension
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');
-        if (!$query) {
-            return;
-        }
 
         $alias = $this->aliasHelper->findAlias('root');
         $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
