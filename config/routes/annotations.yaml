@@ -8,6 +8,9 @@ fontend:
     resource: ../../src/Admin/Controller/
     type: annotation
 
+frontend_logout:
+    path: /admin/logout
+
 kernel:
     resource: ../../src/Kernel.php
     type: annotation

@@ -100,4 +100,9 @@ class Group implements GroupInterface
 
         return $this;
     }
+
+    public function __sleep()
+    {
+        return [];
+    }
 }

@@ -1,6 +1,6 @@
 {% apply spaceless %}
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>{{ sas.app_title }}</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
@@ -14,31 +14,15 @@
             <div class="fadeIn first">
                 <img src="{{ asset('logo.gif') }}" id="icon" alt="{{ sas.app_title }}" />
             </div>
-            <form id="semartLogin" action="#" method="post">
+            <form id="semartLogin" action="{{ path('admin_login') }}" method="post">
                 <input type="text" id="username" class="fadeIn second" name="_username" value="" placeholder="Nama Pengguna">
                 <input type="password" id="password" class="fadeIn third" name="_password" placeholder="Kata Sandi">
+                <input type="hidden" name="{{ sas_crsf_token_key }}" value="{{ sas_crsf_token_value }}">
                 <input type="submit" class="fadeIn fourth" value="Login">
             </form>
         </div>
     </div>
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script>
-        jQuery(document).ready(function () {
-            jQuery(document).on('submit', '#semartLogin', function (e) {
-                e.preventDefault();
-                jQuery.post('/admin/call?action=login', {
-                {{ sas_crsf_token_key }}: '{{ sas_crsf_token_value }}',
-                    username: jQuery('#username').val(),
-                    password: jQuery('#password').val()
-            }, function (response) {
-                    if (response.token) {
-                        window.location.href = '/admin';
-                    }
-                });
-            });
-        });
-    </script>
     </body>
-    </html>
+</html>
 {% endapply %}

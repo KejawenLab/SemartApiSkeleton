@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-final class User implements UserInterface
+final class User implements UserInterface, \Serializable
 {
     private GroupInterface $group;
 
@@ -75,5 +75,20 @@ final class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->group,
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->id, $this->username, $this->password, $this->group) = unserialize($serialized);
     }
 }

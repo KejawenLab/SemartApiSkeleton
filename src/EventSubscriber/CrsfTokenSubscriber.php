@@ -22,11 +22,9 @@ final class CrsfTokenSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        if (AdminContext::ADMIN_LOGIN_ACTION === $request->query->get(AdminContext::ADMIN_ACTION_KEY) && $request->isMethod(Request::METHOD_POST)) {
+        if ($request->isMethod(Request::METHOD_POST)) {
             $session = $request->getSession();
             if ($session->get(AdminContext::ADMIN_CRSF_SESSION_KEY) !== $request->request->get(AdminContext::ADMIN_CRSF_REQUEST_KEY)) {
-                dump($session->get(AdminContext::ADMIN_CRSF_SESSION_KEY));
-                dump($request->request->get(AdminContext::ADMIN_CRSF_REQUEST_KEY));
                 throw new InvalidCsrfTokenException();
             }
         }
@@ -35,7 +33,7 @@ final class CrsfTokenSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            RequestEvent::class => 'validate',
+            RequestEvent::class => [['validate', 10]],
         ];
     }
 }
