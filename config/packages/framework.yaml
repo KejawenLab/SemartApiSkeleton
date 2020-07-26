@@ -10,6 +10,7 @@ framework:
     session:
         cookie_lifetime: 3600
         enabled: true
+        use_cookies: true
         handler_id: snc_redis.session.handler
 
     #esi: true
