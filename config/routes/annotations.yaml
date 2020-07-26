@@ -8,7 +8,7 @@ fontend:
     resource: ../../src/Admin/Controller/
     type: annotation
 
-frontend_logout:
+admin_logout:
     path: /admin/logout
 
 kernel:

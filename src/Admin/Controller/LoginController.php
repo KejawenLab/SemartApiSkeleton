@@ -18,6 +18,10 @@ final class LoginController extends AbstractController
      */
     public function __invoke(Request $request)
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('admin_home');
+        }
+
         return $this->render('layout/login.html.twig');
     }
 }

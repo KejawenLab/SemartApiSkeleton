@@ -9,7 +9,17 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|img|js|lib|fonts|bundles)/
             security: false
-        main:
+        admin:
+            pattern: ^/admin
+            anonymous: true
+            lazy: true
+            provider: user_provider
+            guard:
+                authenticators:
+                    - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
+            logout:
+                path: admin_logout
+        api_login:
             pattern:  ^/api/login
             stateless: true
             anonymous: true
@@ -24,15 +34,15 @@ security:
             pattern: ^/api/doc$
             methods: ['GET']
             security: false
-        media_public:
+        api_public_media:
             pattern: ^/api/medias/public
             methods: ['GET']
             security: false
-        setting_public:
+        api_public_setting:
             pattern: ^/api/settings/public
             methods: ['GET']
             security: false
-        public_api:
+        api_public:
             pattern: ^/api/public
             security: false
         api_home:
@@ -44,20 +54,6 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-        frontend:
-            pattern: ^/admin/login
-            anonymous: lazy
-            form_login:
-                login_path: /admin/login
-                check_path: /admin/login
-                default_target_path: admin_home
-                always_use_default_target_path: true
-            logout:
-                path: /admin/logout
-                target: admin_home
-            guard:
-                authenticators:
-                    - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
 
     access_control:
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['POST'] }

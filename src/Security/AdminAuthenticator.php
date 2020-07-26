@@ -40,7 +40,7 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function supports(Request $request)
     {
-        return AdminContext::ADMIN_ROUTE === $request->attributes->get('_route');
+        return AdminContext::LOGIN_ROUTE === $request->attributes->get('_route') && $request->isMethod(Request::METHOD_POST);
     }
 
     public function getCredentials(Request $request)
@@ -50,10 +50,7 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
             'password' => $request->request->get('_password', ''),
         ];
 
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['username']
-        );
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return $credentials;
     }
