@@ -9,8 +9,8 @@ ADD docker/apt/sources.list /etc/apt/sources.list
 # Install Software
 RUN apt update && apt upgrade -y && apt autoremove -y
 RUN apt install nginx-full supervisor vim wget curl unzip -y
-RUN apt install php php-cli php-curl php-intl php-mbstring php-xml php-zip \
-    php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc \
+RUN apt install php php-cli php-curl php-intl php-mbstring php-xml php-zip php-dev \
+    php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc php-pear \
     php-bz2 php-common php-gd php-ldap php-mysql php-readline php-soap php-tidy php-xsl php-redis -y
 
 ADD docker/php/composer.sh /composer.sh
@@ -31,6 +31,7 @@ ADD docker/nginx/logs/site.error.log /var/log/nginx/site.error.log
 ADD docker/nginx/etc/sysctl.conf /etc/sysctl.conf
 ADD docker/nginx/etc/security/limits.conf /etc/security/limits.conf
 
+RUN pecl install xdebug
 RUN mkdir -p /tmp/nginx/cache
 RUN chmod 777 -R /tmp/nginx
 
@@ -40,6 +41,7 @@ RUN chmod 777 /var/log/nginx/site.error.log
 # PHP Configuration
 ADD docker/php/php.ini /etc/php/7.4/fpm/php.ini
 ADD docker/php/php.ini /etc/php/7.4/cli/php.ini
+ADD docker/php/xdebug.ini /etc/php/7.4/fpm/conf.d/99-xdebug.ini
 ADD docker/php/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 RUN touch /run/php/php7.4-fpm.sock
 RUN chmod 777 /run/php/php7.4-fpm.sock
