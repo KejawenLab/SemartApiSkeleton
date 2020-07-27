@@ -1,6 +1,6 @@
 {% apply spaceless %}
 <li class="nav-item">
-    <a href="{{ menu.adminPath }}" class="nav-link">
+    <a href="{{ menu.adminPath }}" class="nav-link {% if is_active_path(menu.adminPath) %}active{% endif %}">
         {{ menu.extra }}<p>{{ menu.name }}</p>
     </a>
 </li>
