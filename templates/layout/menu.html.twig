@@ -1,11 +1,14 @@
 {% apply spaceless %}
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item has-treeview menu-open">
-                <a href="{{ path('admin_home') }}" class="nav-link active">
-                    <i class="nav-icon fa fa-home"></i><p>Home</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <li class="nav-item has-treeview {% if is_menu_open(menu) %}menu-open{% endif %}">
+        <a href="{% if childs is empty %}{{ menu.adminPath }}{% endif %}" class="nav-link {% if is_active_path(menu.adminPath) %}active{% endif %}">
+            {{ menu.extra }}<p>{{ menu.name | humanize }}{% if childs is not empty %}<i class="right fas fa-angle-left"></i>{% endif %}</p>
+        </a>
+        {% if childs is not empty %}
+            <ul class="nav nav-treeview">
+                {% for child in childs %}
+                    {% include 'layout/child_menu.html.twig' with { menu: child }%}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
 {% endapply %}

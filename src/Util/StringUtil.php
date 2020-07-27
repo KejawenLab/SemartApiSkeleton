@@ -32,6 +32,11 @@ final class StringUtil
         return (new UnicodeString($string))->snake()->toString();
     }
 
+    public static function replace(string $string, string $find, string $replace): string
+    {
+        return (new UnicodeString($string))->replace($find, $replace)->toString();
+    }
+
     public static function camelcase(string $string): string
     {
         return (new UnicodeString($string))->camel()->toString();

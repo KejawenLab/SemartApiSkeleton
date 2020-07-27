@@ -113,7 +113,9 @@ class Menu implements MenuInterface
     /**
      * @Groups({"read"})
      */
-    private ?string $urlPath;
+    private ?string $apiPath;
+
+    private ?string $adminPath;
 
     public function __construct()
     {
@@ -124,7 +126,8 @@ class Menu implements MenuInterface
         $this->routeName = '#';
         $this->extra = null;
         $this->showable = true;
-        $this->urlPath = '#';
+        $this->apiPath = '#';
+        $this->adminPath = '#';
     }
 
     public function getId(): ?string
@@ -192,14 +195,26 @@ class Menu implements MenuInterface
         return $this;
     }
 
-    public function getUrlPath(): ?string
+    public function getApiPath(): ?string
     {
-        return $this->urlPath;
+        return $this->apiPath;
     }
 
-    public function setUrlPath(string $urlPath): MenuInterface
+    public function setApiPath(string $apiPath): MenuInterface
     {
-        $this->urlPath = $urlPath;
+        $this->apiPath = $apiPath;
+
+        return $this;
+    }
+
+    public function getAdminPath(): ?string
+    {
+        return $this->adminPath;
+    }
+
+    public function setAdminPath(?string $adminPath): MenuInterface
+    {
+        $this->adminPath = $adminPath;
 
         return $this;
     }

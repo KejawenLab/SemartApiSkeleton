@@ -27,21 +27,22 @@
             </div>
         </li>
         <li class="nav-item dropdown user user-menu">
+            {% set user = app.user %}
             <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src="{{ asset('dist/img/avatar5.png') }}" class="user-image" alt="{{ sas.app_title }}">
-                <span id="sas_user_hidden" class="hidden-xs">{{ sas.app_title }}</span>
+                <img src="{{ asset('dist/img/avatar5.png') }}" class="user-image" alt="{{ user.username | humanize }}">
+                <span id="sas_user_hidden" class="hidden-xs">{{ user.username | humanize }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">
-                    <img src="{{ asset('dist/img/avatar5.png') }}" class="img-circle" alt="{{ sas.app_title }}">
-                    <p id="sas_user_name">{{ sas.app_title}}<small>{{ sas.app_title }}</small></p>
+                    <img src="{{ asset('dist/img/avatar5.png') }}" class="img-circle" alt="{{ user.username | humanize }}">
+                    <p id="sas_user_name">{{ user.username | humanize }}<small>{{ user.group.name }}</small></p>
                 </li>
                 <li class="user-footer col-md-12">
                     <div class="float-left">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        <a href="#" class="btn btn-default btn-flat">Profil</a>
                     </div>
                     <div class="float-right">
-                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                        <a href="{{ path('admin_logout') }}" class="btn btn-default btn-flat">Keluar</a>
                     </div>
                 </li>
             </ul>
