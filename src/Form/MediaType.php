@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Form;
 
-use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
