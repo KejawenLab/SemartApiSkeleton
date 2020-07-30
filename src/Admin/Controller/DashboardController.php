@@ -17,6 +17,6 @@ final class DashboardController extends AbstractController
      */
     public function __invoke()
     {
-        return $this->render('layout/main.html.twig', ['page_title' => 'Dashboard']);
+        return $this->render('dashboard/layout.html.twig', ['page_title' => 'sas.page.dashboard']);
     }
 }

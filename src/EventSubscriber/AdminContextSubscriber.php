@@ -38,7 +38,7 @@ final class AdminContextSubscriber implements EventSubscriberInterface
         $this->twig->addGlobal('sas', array_merge($this->globals, [
             'semart_name' => 'Semart Api Skeleton',
             'semart_codename' => SemartApiSkeleton::CODENAME,
-            'semart_version' => SemartApiSkeleton::VERSION
+            'semart_version' => SemartApiSkeleton::VERSION,
         ]));
     }
 

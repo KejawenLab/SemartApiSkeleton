@@ -66,8 +66,6 @@ final class MenuService extends AbstractService implements ServiceInterface
     }
 
     /**
-     * @param MenuInterface $menu
-     *
      * @return MenuInterface[]
      */
     public function getChildsMenu(MenuInterface $menu): iterable

@@ -13,8 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class LoginController extends AbstractController
 {
+    public const ROUTE_NAME = 'admin_login';
+
     /**
-     * @Route("/login", name="admin_login", methods={"GET", "POST"})
+     * @Route("/login", name=LoginController::ROUTE_NAME, methods={"GET", "POST"})
      */
     public function __invoke(Request $request)
     {

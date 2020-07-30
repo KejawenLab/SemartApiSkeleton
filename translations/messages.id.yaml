@@ -1,0 +1,21 @@
+sas:
+    page:
+        dashboard: 'Dashboard'
+        media:
+            list: 'Daftar Media'
+            add: 'Tambah Media'
+    form:
+        action:
+            submit: 'Simpan'
+    table:
+        show_records: 'Menampilkan <b>%items%</b> dari <b>%total%</b>'
+        action:
+            search: 'Cari'
+            add: 'Tambah Baru'
+        column:
+            action: 'Pilihan'
+            media:
+                fileName: 'File File'
+                folder: 'Lokasi Folder'
+                fileUrl: 'URL File'
+                public: 'Publik?'

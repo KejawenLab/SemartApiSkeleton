@@ -1,0 +1,22 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+{% block content %}
+    {% apply spaceless %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form role="form" method="post">
+                    <div class="card-body">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans }}</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}
+{% block javascripts %}{% endblock %}
