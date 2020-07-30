@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
+namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,20 +23,20 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/delete", methods={"GET"})
+     * @Route("/groups/{id}/delete", methods={"GET"})
      */
     public function __invoke(Request $request, string $id)
     {
-        if (!$media = $this->service->get($id)) {
-            $this->addFlash('error', 'sas.page.media.not_found');
+        if (!$group = $this->service->get($id)) {
+            $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
         }
 
-        $this->service->remove($media);
+        $this->service->remove($group);
 
-        $this->addFlash('info', 'sas.page.media.deleted');
+        $this->addFlash('info', 'sas.page.group.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
     }
 }

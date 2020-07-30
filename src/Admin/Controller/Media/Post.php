@@ -42,7 +42,7 @@ final class Post extends AbstractController
             }
         }
 
-        return $this->render('media/post.html.twig', [
+        return $this->render('media/form.html.twig', [
             'page_title' => 'sas.page.media.add',
             'form' => $form->createView(),
         ]);

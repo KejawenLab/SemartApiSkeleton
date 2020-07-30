@@ -21,15 +21,15 @@ final class MediaType extends AbstractType
     {
         $builder->add('file', FileType::class, [
             'required' => true,
-            'label' => 'sas.form.field.file',
+            'label' => 'sas.form.field.media.file',
         ]);
         $builder->add('folder', TextType::class, [
             'required' => true,
-            'label' => 'sas.form.field.folder',
+            'label' => 'sas.form.field.media.folder',
         ]);
         $builder->add('public', CheckboxType::class, [
             'required' => false,
-            'label' => 'sas.form.field.public',
+            'label' => 'sas.form.field.media.public',
         ]);
     }
 

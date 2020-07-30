@@ -9,11 +9,23 @@ sas:
             add: 'Tambah Media'
             public: 'Publik'
             non_public: 'Non Publik'
+        group:
+            saved: 'Grup berhasil disimpan'
+            deleted: 'Grup berhasil dihapus'
+            not_found: 'Grup tidak ditemukan'
+            list: 'Daftar Grup'
+            add: 'Tambah Grup'
+            edit: 'Ubah Grup'
+            view: 'Detil Grup'
     form:
         field:
-            file: 'File'
-            folder: 'Folder'
-            public: 'Publik?'
+            media:
+                file: 'File'
+                folder: 'Folder'
+                public: 'Publik?'
+            group:
+                code: 'Kode'
+                name: 'Nama'
         action:
             submit: 'Simpan'
             cancel: 'Batal'
@@ -28,9 +40,14 @@ sas:
         action:
             search: 'Cari'
             add: 'Tambah Baru'
+            view: 'Lihat'
+            edit: 'Ubah'
             delete: 'Hapus'
         column:
             action: 'Pilihan'
+            group:
+                code: 'Kode'
+                name: 'Nama'
             media:
                 fileName: 'File'
                 folder: 'Lokasi Folder'

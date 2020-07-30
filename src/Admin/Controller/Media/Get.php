@@ -32,7 +32,7 @@ final class Get extends AbstractController
     /**
      * @Route("/medias/{path}", methods={"GET"}, requirements={"path"=".+"})
      */
-    public function __invoke(Request $request, string $path, MediaService $service)
+    public function __invoke(Request $request, string $path)
     {
         $path = explode('/', $path);
         if (MediaInterface::PUBLIC_FIELD === $path[0]) {
