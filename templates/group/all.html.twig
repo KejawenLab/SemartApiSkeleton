@@ -46,8 +46,8 @@
                                 <td>{{ group.name }}</td>
                                 <td>
                                     <a href="{{ path('kejawenlab_apiskeleton_admin_group_get__invoke', {id: group.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_group_put__invoke', {id: group.id}) }}" class="btn btn-sm btn-warning ml-3">{{ 'sas.table.action.edit' | trans }}</a>
-                                    <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_group_delete__invoke', {id: group.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': group.name}) }}" class="btn btn-sm btn-danger ml-3 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                    <a href="{{ path('kejawenlab_apiskeleton_admin_group_put__invoke', {id: group.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                    <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_group_delete__invoke', {id: group.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': group.name}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                         {{ 'sas.table.action.delete' | trans }}
                                     </button>
                                 </td>
