@@ -1,6 +1,6 @@
 {% apply spaceless %}
     {% if paginator['total_item'] > 0 %}
-        <span class="float-left">{{ 'sas.table.show_records' | trans({'%items%': (paginator['items'] | length), '%total%': paginator['total_item']}) }}</span>
+        <span class="float-left">{{ 'sas.table.show_records' | trans({'%items%': (paginator['items'] | length), '%total%': paginator['total_item']}) | raw }}</span>
     {% endif %}
     {% set prev = paginator['page'] - 1 %}
     {% set next = paginator['page'] + 1 %}

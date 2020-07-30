@@ -7,6 +7,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    {% for message in app.flashes('info') %}
+                        <h4><span class="float-left badge badge-success">{{ message | trans }}</span></h4>
+                    {% endfor %}
+                    {% for message in app.flashes('error') %}
+                        <h4><span class="float-left badge badge-danger">{{ message | trans }}</span></h4>
+                    {% endfor %}
                     <div class="float-right col-7">
                         <div class="input-group input-group col-10 float-left">
                             <input type="text" name="table_search" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
@@ -33,13 +39,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>183</td>
-                            <td>John Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="tag tag-success">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
+                        {% for key, media in paginator['items'] %}
+                            <tr>
+                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
+                                <td>{{ media.fileName }}</td>
+                                <td>{{ media.folder }}</td>
+                                <td>{{ media.public }}</td>
+                                <td><a href="{{ '/admin' ~ media.fileUrl }}" target="_blank"><img src="{{ '/admin' ~ media.fileUrl }}" width="150px" /></a></td>
+                                <td>
+                                    <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_media_delete__invoke', {id: media.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': media.fileName}) }}" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        {{ 'sas.table.action.delete' | trans }}
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -49,6 +62,35 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <input type="hidden" id="sasPath" value="" />
+                </div>
+                <div class="modal-body" id="sasNotification"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans }}</button>
+                    <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endapply %}
 {% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script>
+        $('.delete').on('click', function() {
+            $('#sasPath').val($(this).data('path'));
+            $('#sasNotification').html($(this).data('notification'));
+        });
+
+        $('#sasDeleteConfirm').on('click', function() {
+            window.location.href = $('#sasPath').val();
+        });
+    </script>
+{% endblock %}

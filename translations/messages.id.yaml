@@ -2,20 +2,35 @@ sas:
     page:
         dashboard: 'Dashboard'
         media:
+            saved: 'Media berhasil disimpan'
+            deleted: 'Media berhasil dihapus'
+            not_found: 'File tidak ditemukan'
             list: 'Daftar Media'
             add: 'Tambah Media'
     form:
+        field:
+            file: 'File'
+            folder: 'Folder'
+            public: 'Publik?'
         action:
             submit: 'Simpan'
+            cancel: 'Batal'
+    notification:
+        delete:
+            title: 'Notifikasi Penghapusan'
+            message: 'Anda yakin akan menghapus <b>"%data%"</b>?'
+            cancel: 'Batal'
+            confirm: 'Hapus'
     table:
         show_records: 'Menampilkan <b>%items%</b> dari <b>%total%</b>'
         action:
             search: 'Cari'
             add: 'Tambah Baru'
+            delete: 'Hapus'
         column:
             action: 'Pilihan'
             media:
-                fileName: 'File File'
+                fileName: 'File'
                 folder: 'Lokasi Folder'
                 fileUrl: 'URL File'
                 public: 'Publik?'

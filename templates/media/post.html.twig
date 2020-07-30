@@ -6,12 +6,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form role="form" method="post">
+                    <form role="form" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         {{ form_widget(form) }}
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans }}</button>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_media_getall__invoke') }}" class="btn btn-warning ml-3">{{ 'sas.form.action.cancel' | trans }}</a>
                     </div>
                     </form>
                 </div>
@@ -19,4 +20,11 @@
         </div>
     {% endapply %}
 {% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script>
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+        });
+    </script>
+{% endblock %}
