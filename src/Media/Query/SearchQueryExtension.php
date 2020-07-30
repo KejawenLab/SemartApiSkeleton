@@ -19,7 +19,7 @@ final class SearchQueryExtension extends AbstractQueryExtension
     {
         $queryBuilder->andWhere(
             $queryBuilder->expr()->like(
-                sprintf('UPPER(%s.filePath)', $this->aliasHelper->findAlias('root')),
+                sprintf('UPPER(%s.fileName)', $this->aliasHelper->findAlias('root')),
                 $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($request->query->get('q'))))
             )
         );

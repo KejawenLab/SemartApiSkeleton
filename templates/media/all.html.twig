@@ -15,9 +15,9 @@
                     {% endfor %}
                     <div class="float-right col-7">
                         <div class="input-group input-group col-10 float-left">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
+                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-default search"><i class="fas fa-search"></i></button>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
                             </div>
                         </div>
                         <div class="float-right col-2">
@@ -84,13 +84,23 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-        $('.delete').on('click', function() {
-            $('#sasPath').val($(this).data('path'));
-            $('#sasNotification').html($(this).data('notification'));
-        });
+        $(document).ready(function () {
+            $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
 
-        $('#sasDeleteConfirm').on('click', function() {
-            window.location.href = $('#sasPath').val();
+            $('.delete').on('click', function() {
+                $('#sasPath').val($(this).data('path'));
+                $('#sasNotification').html($(this).data('notification'));
+            });
+
+            $('#sasDeleteConfirm').on('click', function() {
+                window.location.href = $('#sasPath').val();
+            });
+
+            $('#sasSearch').on('click', function () {
+                localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
+
+                window.location.href = '{{ path('kejawenlab_apiskeleton_admin_media_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+            });
         });
     </script>
 {% endblock %}
