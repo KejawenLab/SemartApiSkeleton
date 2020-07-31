@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
+
+use DH\DoctrineAuditBundle\Reader\AuditReader;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
+use KejawenLab\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Entity\Media;
+use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ */
+final class Audit extends AbstractController
+{
+    private MediaService $service;
+
+    private AuditService $audit;
+
+    private AuditReader $reader;
+
+    public function __construct(MediaService $service, AuditService $audit, AuditReader $reader)
+    {
+        $this->service = $service;
+        $this->audit = $audit;
+        $this->reader = $reader;
+    }
+
+    /**
+     * @Route("/groups/{id}/audit", methods={"GET"})
+     */
+    public function __invoke(Request $request, string $id)
+    {
+        if (!$media = $this->service->get($id)) {
+            $this->addFlash('error', 'sas.page.group.not_found');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+        }
+
+        if (!$this->reader->getConfiguration()->isAuditable(Group::class)) {
+            $this->addFlash('error', 'sas.page.audit.not_found');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+        }
+
+        $class = new \ReflectionClass(Media::class);
+        $audit = $this->audit->getAudits($media, $id)->toArray();
+
+        return $this->render('group/view.html.twig', [
+            'page_title' => 'sas.page.audit.view',
+            'context' => StringUtil::lowercase($class->getShortName()),
+            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'data' => $audit['entity'],
+            'audits' => $audit['items'],
+        ]);
+    }
+}
