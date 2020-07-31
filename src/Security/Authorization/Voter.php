@@ -8,6 +8,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
+use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -18,11 +19,14 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
  */
 final class Voter extends SymfonyVoter
 {
-    private PermissionService $service;
+    private PermissionService $permissionService;
 
-    public function __construct(PermissionService $service)
+    private GroupService $groupService;
+
+    public function __construct(PermissionService $permissionService, GroupService $groupService)
     {
-        $this->service = $service;
+        $this->permissionService = $permissionService;
+        $this->groupService = $groupService;
     }
 
     protected function supports(string $attribute, $subject): bool
@@ -46,7 +50,12 @@ final class Voter extends SymfonyVoter
             return false;
         }
 
-        $permission = $this->service->getPermission($group, $subject);
+        $superAdmin = $this->groupService->getSuperAdmin();
+        if ($superAdmin->getCode() === $group->getCode()) {
+            return true;
+        }
+
+        $permission = $this->permissionService->getPermission($group, $subject);
         if (!$permission instanceof PermissionInterface) {
             return false;
         }

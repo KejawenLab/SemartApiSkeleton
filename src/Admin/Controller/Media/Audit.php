@@ -9,6 +9,7 @@ use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="AUDIT", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Audit extends AbstractController
@@ -34,12 +37,12 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}/audit", methods={"GET"})
+     * @Route("/medias/{id}/audit", methods={"GET"})
      */
     public function __invoke(Request $request, string $id)
     {
         if (!$media = $this->service->get($id)) {
-            $this->addFlash('error', 'sas.page.group.not_found');
+            $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
         }
@@ -53,7 +56,7 @@ final class Audit extends AbstractController
         $class = new \ReflectionClass(Media::class);
         $audit = $this->audit->getAudits($media, $id)->toArray();
 
-        return $this->render('group/view.html.twig', [
+        return $this->render('media/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),

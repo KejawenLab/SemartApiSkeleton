@@ -7,12 +7,15 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="MEDIA", actions={Permission::ADD})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Post extends AbstractController

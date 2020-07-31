@@ -7,12 +7,15 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="MEDIA", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class GetAll extends AbstractController

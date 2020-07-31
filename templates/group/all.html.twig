@@ -5,6 +5,7 @@
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
+    {% set menu = convert_to_menu(context) %}
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -17,7 +18,9 @@
                             </div>
                         </div>
                         <div class="float-right col-2">
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_group_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                            {% if is_granted('add', menu) %}
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_group_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -42,10 +45,14 @@
                                 <td>{{ group.name }}</td>
                                 <td>
                                     <a href="{{ path('kejawenlab_apiskeleton_admin_group_get__invoke', {id: group.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_group_put__invoke', {id: group.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
-                                    <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_group_delete__invoke', {id: group.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': group.name}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
-                                        {{ 'sas.table.action.delete' | trans }}
-                                    </button>
+                                    {% if is_granted('edit', menu) %}
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_put__invoke', {id: group.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                    {% endif %}
+                                    {% if is_granted('delete', menu) %}
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_group_delete__invoke', {id: group.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': group.name}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                            {{ 'sas.table.action.delete' | trans }}
+                                        </button>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

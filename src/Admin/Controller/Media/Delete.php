@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="MEDIA", actions={Permission::DELETE})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Delete extends AbstractController

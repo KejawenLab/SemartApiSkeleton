@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use KejawenLab\ApiSkeleton\Form\GroupType;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="GROUP", actions={Permission::EDIT})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Put extends AbstractController

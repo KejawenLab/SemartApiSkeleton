@@ -16,7 +16,7 @@ final class AuditExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sas_dump', [$this, 'dump']),
+            new TwigFunction('dump_audit_log', [$this, 'dump']),
         ];
     }
 

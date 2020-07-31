@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
 /**
+ * @Permission(menu="MEDIA", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Get extends AbstractController

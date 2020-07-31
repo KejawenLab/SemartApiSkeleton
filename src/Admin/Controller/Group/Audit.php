@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Permission(menu="AUDIT", actions={Permission::VIEW})
+ *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Audit extends AbstractController
