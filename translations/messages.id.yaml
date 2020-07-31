@@ -1,6 +1,9 @@
 sas:
     page:
         dashboard: 'Dashboard'
+        audit:
+            not_found: 'Log audit tidak ditemukan'
+            view: 'Log Audit'
         media:
             saved: 'Media berhasil disimpan'
             deleted: 'Media berhasil dihapus'
@@ -28,7 +31,9 @@ sas:
                 name: 'Nama'
         action:
             submit: 'Simpan'
+            back: 'Kembali'
             cancel: 'Batal'
+            audit: 'Audit'
     notification:
         delete:
             title: 'Notifikasi Penghapusan'
@@ -45,6 +50,12 @@ sas:
             delete: 'Hapus'
         column:
             action: 'Pilihan'
+            audit:
+                type: 'Tipe'
+                userId: 'ID Pengguna'
+                username: 'Pengguna'
+                ipAddress: 'Alamat IP'
+                data: 'Log Audit'
             group:
                 code: 'Kode'
                 name: 'Nama'

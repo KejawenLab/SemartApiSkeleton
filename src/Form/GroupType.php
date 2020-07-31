@@ -17,8 +17,14 @@ final class GroupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('code', TextType::class, ['required' => true]);
-        $builder->add('name', TextType::class, ['required' => true]);
+        $builder->add('code', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.group.code',
+        ]);
+        $builder->add('name', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.group.name',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

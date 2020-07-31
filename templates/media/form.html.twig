@@ -21,10 +21,14 @@
     {% endapply %}
 {% endblock %}
 {% block javascripts %}
-    <script>
-        $('.custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
-        });
-    </script>
+    {% apply spaceless %}
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on('change', function () {
+                    let fileName = $(this).val().split('\\').pop();
+                    $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+                });
+            });
+        </script>
+    {% endapply %}
 {% endblock %}

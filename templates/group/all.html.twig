@@ -1,18 +1,14 @@
 {% extends 'layout/main.html.twig' %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+{% endblock %}
 {% block content %}
     {% apply spaceless %}
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {% for message in app.flashes('info') %}
-                        <h4><span class="float-left badge badge-success">{{ message | trans }}</span></h4>
-                    {% endfor %}
-                    {% for message in app.flashes('error') %}
-                        <h4><span class="float-left badge badge-danger">{{ message | trans }}</span></h4>
-                    {% endfor %}
                     <div class="float-right col-7">
                         <div class="input-group input-group col-10 float-left">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
@@ -35,7 +31,7 @@
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
                                 {% endif %}
                             {% endfor %}
-                            <th>{{ 'sas.table.column.action' | trans }}</th>
+                            <th style="width: 149px;">{{ 'sas.table.column.action' | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,24 +79,52 @@
     {% endapply %}
 {% endblock %}
 {% block javascripts %}
-    <script>
-        $(document).ready(function () {
-            $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+    {% apply spaceless %}
+        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
 
-            $('.delete').on('click', function() {
-                $('#sasPath').val($(this).data('path'));
-                $('#sasNotification').html($(this).data('notification'));
+                $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+
+                $('.delete').on('click', function() {
+                    $('#sasPath').val($(this).data('path'));
+                    $('#sasNotification').html($(this).data('notification'));
+                });
+
+                $('#sasDeleteConfirm').on('click', function() {
+                    window.location.href = $('#sasPath').val();
+                });
+
+                $('#sasSearch').on('click', function () {
+                    localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
+
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                });
+
+                {% for message in app.flashes('info') %}
+                    toastr['success']('{{ message | trans }}');
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    toastr['error']('{{ message | trans }}');
+                {% endfor %}
             });
-
-            $('#sasDeleteConfirm').on('click', function() {
-                window.location.href = $('#sasPath').val();
-            });
-
-            $('#sasSearch').on('click', function () {
-                localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
-
-                window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
-            });
-        });
-    </script>
+        </script>
+    {% endapply %}
 {% endblock %}

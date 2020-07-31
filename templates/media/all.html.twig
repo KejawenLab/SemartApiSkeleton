@@ -1,106 +1,136 @@
 {% extends 'layout/main.html.twig' %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+{% endblock %}
 {% block content %}
     {% apply spaceless %}
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    {% for message in app.flashes('info') %}
-                        <h4><span class="float-left badge badge-success">{{ message | trans }}</span></h4>
-                    {% endfor %}
-                    {% for message in app.flashes('error') %}
-                        <h4><span class="float-left badge badge-danger">{{ message | trans }}</span></h4>
-                    {% endfor %}
-                    <div class="float-right col-7">
-                        <div class="input-group input-group col-10 float-left">
-                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
-                            <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in app.flashes('info') %}
+                            <h4><span class="float-left badge badge-success">{{ message | trans }}</span></h4>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <h4><span class="float-left badge badge-danger">{{ message | trans }}</span></h4>
+                        {% endfor %}
+                        <div class="float-right col-7">
+                            <div class="input-group input-group col-10 float-left">
+                                <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
+                                <div class="input-group-append">
+                                    <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
+                                </div>
+                            </div>
+                            <div class="float-right col-2">
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_media_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
                             </div>
                         </div>
-                        <div class="float-right col-2">
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_media_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
-                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-striped table-hover text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                {% for property in properties %}
+                                    {% if 'id' != property.name and 'file' != property.name %}
+                                        <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                                <th style="width: 149px;">{{ 'sas.table.column.action' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, media in paginator['items'] %}
+                                <tr>
+                                    <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
+                                    <td>{{ media.fileName }}</td>
+                                    <td>{{ media.folder }}</td>
+                                    <td>{% if media.public %}<span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans }}</span>{% endif %}</td>
+                                    <td><a href="{{ '/admin' ~ media.fileUrl }}" target="_blank"><img src="{{ '/admin' ~ media.fileUrl }}" width="150px" /></a></td>
+                                    <td>
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_media_delete__invoke', {id: media.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': media.fileName}) }}" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                            {{ 'sas.table.action.delete' | trans }}
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer clearfix">
+                        {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
                     </div>
                 </div>
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-striped table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            {% for property in properties %}
-                                {% if 'id' != property.name and 'file' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
-                                {% endif %}
-                            {% endfor %}
-                            <th>{{ 'sas.table.column.action' | trans }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for key, media in paginator['items'] %}
-                            <tr>
-                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ media.fileName }}</td>
-                                <td>{{ media.folder }}</td>
-                                <td>{% if media.public %}<span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans }}</span>{% endif %}</td>
-                                <td><a href="{{ '/admin' ~ media.fileUrl }}" target="_blank"><img src="{{ '/admin' ~ media.fileUrl }}" width="150px" /></a></td>
-                                <td>
-                                    <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_media_delete__invoke', {id: media.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': media.fileName}) }}" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#sasDeleteModal">
-                                        {{ 'sas.table.action.delete' | trans }}
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer clearfix">
-                    {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
+            </div>
+        </div>
+        <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <input type="hidden" id="sasPath" value="" />
+                    </div>
+                    <div class="modal-body" id="sasNotification"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans }}</button>
+                        <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans }}</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <input type="hidden" id="sasPath" value="" />
-                </div>
-                <div class="modal-body" id="sasNotification"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans }}</button>
-                    <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
     {% endapply %}
 {% endblock %}
 {% block javascripts %}
-    <script>
-        $(document).ready(function () {
-            $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+    {% apply spaceless %}
+        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
 
-            $('.delete').on('click', function() {
-                $('#sasPath').val($(this).data('path'));
-                $('#sasNotification').html($(this).data('notification'));
+                $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+
+                $('.delete').on('click', function() {
+                    $('#sasPath').val($(this).data('path'));
+                    $('#sasNotification').html($(this).data('notification'));
+                });
+
+                $('#sasDeleteConfirm').on('click', function() {
+                    window.location.href = $('#sasPath').val();
+                });
+
+                $('#sasSearch').on('click', function () {
+                    localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
+
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_media_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                });
+
+                {% for message in app.flashes('info') %}
+                    toastr['success']('{{ message | trans }}');
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    toastr['error']('{{ message | trans }}');
+                {% endfor %}
             });
-
-            $('#sasDeleteConfirm').on('click', function() {
-                window.location.href = $('#sasPath').val();
-            });
-
-            $('#sasSearch').on('click', function () {
-                localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
-
-                window.location.href = '{{ path('kejawenlab_apiskeleton_admin_media_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
-            });
-        });
-    </script>
+        </script>
+    {% endapply %}
 {% endblock %}
