@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,7 +31,8 @@ final class Delete extends AbstractController
      */
     public function __invoke(Request $request, string $id)
     {
-        if (!$media = $this->service->get($id)) {
+        $media = $this->service->get($id);
+        if (!$media instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));

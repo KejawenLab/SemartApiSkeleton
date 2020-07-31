@@ -1,14 +1,18 @@
+{% set entityHumanize = entity | humanize %}
+{% set entityLowerize = entity | lower %}
+{% set entityUpper = entity | upper %}
+{% set entityPluralDash = entity | pluralize | dash %}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
+namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
 
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
-use KejawenLab\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Security\Service\GroupService;
+use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,13 +26,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    private GroupService $service;
+    private {{ entityHumanize }}Service $service;
 
     private AuditService $audit;
 
     private AuditReader $reader;
 
-    public function __construct(GroupService $service, AuditService $audit, AuditReader $reader)
+    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, AuditReader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;
@@ -36,26 +40,26 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}/audit", methods={"GET"})
+     * @Route("/{{ entityPluralDash }}/{id}/audit", methods={"GET"})
      */
     public function __invoke(Request $request, string $id)
     {
         if (!$entity = $this->service->get($id)) {
-            $this->addFlash('error', 'sas.page.group.not_found');
+            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable(Group::class)) {
+        if (!$this->reader->getConfiguration()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Group::class);
+        $class = new \ReflectionClass({{ entityHumanize }}::class);
         $audit = $this->audit->getAudits($entity, $id)->toArray();
 
-        return $this->render('group/view.html.twig', [
+        return $this->render('{{ entityLowerize }}/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),

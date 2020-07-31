@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +37,8 @@ final class Get extends AbstractController
      */
     public function __invoke(Request $request, string $id)
     {
-        if (!$group = $this->service->get($id)) {
+        $group = $this->service->get($id);
+        if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));

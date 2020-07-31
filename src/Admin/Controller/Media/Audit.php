@@ -41,7 +41,7 @@ final class Audit extends AbstractController
      */
     public function __invoke(Request $request, string $id)
     {
-        if (!$media = $this->service->get($id)) {
+        if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
@@ -54,7 +54,7 @@ final class Audit extends AbstractController
         }
 
         $class = new \ReflectionClass(Media::class);
-        $audit = $this->audit->getAudits($media, $id)->toArray();
+        $audit = $this->audit->getAudits($entity, $id)->toArray();
 
         return $this->render('media/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
