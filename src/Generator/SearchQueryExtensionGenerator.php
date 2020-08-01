@@ -20,7 +20,7 @@ final class SearchQueryExtensionGenerator extends AbstractGenerator
             $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\Query\SearchQueryExtension"</info></comment>', $shortName));
             $this->fileSystem->dumpFile($queryFile, $template);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $queryFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $queryFile));
         }
     }
 

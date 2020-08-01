@@ -20,7 +20,7 @@ final class RepositoryGenerator extends AbstractGenerator
             $repository = $this->twig->render('generator/repository.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($repositoryFile, $repository);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $repositoryFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $repositoryFile));
         }
 
         $repositoryModelFile = sprintf('%s/src/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), $shortName, $shortName);
@@ -29,7 +29,7 @@ final class RepositoryGenerator extends AbstractGenerator
             $repositoryModel = $this->twig->render('generator/repository_model.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($repositoryModelFile, $repositoryModel);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $repositoryModelFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $repositoryModelFile));
         }
     }
 

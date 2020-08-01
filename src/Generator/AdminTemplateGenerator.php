@@ -25,9 +25,27 @@ final class AdminTemplateGenerator extends AbstractGenerator
         $projectDir = $this->kernel->getProjectDir();
         $shortName = $entityClass->getShortName();
         $lowercase = StringUtil::lowercase($shortName);
+        $properties = $entityClass->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $deleteField = '';
+        $tableFields = '';
+        foreach ($properties as $property) {
+            if ('id' === $property->getName()) {
+                continue;
+            }
 
-        $search = '{# entity | lower #}';
-        $replace = $lowercase;
+            if (!$deleteField) {
+                $deleteField = sprintf('%s.%s', $lowercase, $property->getName());
+            }
+
+            $tableFields .= sprintf('<td>{{ %s.%s }}</td>', $lowercase, $property->getName());
+        }
+
+        $search = [
+            '{# entity | lower #}',
+            '{# delete_field #}',
+            '{# table_fields #}',
+        ];
+        $replace = [$lowercase, $deleteField, $tableFields];
 
         $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/all.html.stub', $projectDir)));
         $paginationTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/form.html.stub', $projectDir)));

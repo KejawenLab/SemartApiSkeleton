@@ -23,7 +23,7 @@ final class FormGenerator extends AbstractGenerator
             $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\Form\%sType"</info></comment>', $shortName));
             $this->fileSystem->dumpFile($formFile, $template);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $formFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $formFile));
         }
     }
 

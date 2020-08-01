@@ -34,7 +34,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             $getAll = $this->twig->render('generator/api/get_all.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($getAllFile, $getAll);
         } else {
-            $output->write(sprintf('<info>File "%s" is exists. Skipped</info>', $getAllFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $getAllFile));
         }
 
         $getFile = sprintf('%s/src/Controller/%s/Get.php', $this->kernel->getProjectDir(), $shortName);
@@ -43,7 +43,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             $get = $this->twig->render('generator/api/get.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($getFile, $get);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $getFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $getFile));
         }
 
         $deleteFile = sprintf('%s/src/Controller/%s/Delete.php', $this->kernel->getProjectDir(), $shortName);
@@ -52,7 +52,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             $delete = $this->twig->render('generator/api/delete.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($deleteFile, $delete);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $deleteFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $deleteFile));
         }
 
         $postFile = sprintf('%s/src/Controller/%s/Post.php', $this->kernel->getProjectDir(), $shortName);
@@ -61,7 +61,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             $post = $this->twig->render('generator/api/post.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($postFile, $post);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $postFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $postFile));
         }
 
         $putFile = sprintf('%s/src/Controller/%s/Put.php', $this->kernel->getProjectDir(), $shortName);
@@ -70,7 +70,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             $put = $this->twig->render('generator/api/put.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($putFile, $put);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $putFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $putFile));
         }
 
         if ($this->reader->getClassAnnotation($class, Auditable::class)) {
@@ -80,7 +80,7 @@ final class ApiControllerGenerator extends AbstractGenerator
             if (!$this->fileSystem->exists($auditFile)) {
                 $this->fileSystem->dumpFile($auditFile, $audit);
             } else {
-                $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $auditFile));
+                $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $auditFile));
             }
         }
     }

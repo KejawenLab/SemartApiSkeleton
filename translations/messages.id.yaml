@@ -20,6 +20,14 @@ sas:
             add: 'Tambah Grup'
             edit: 'Ubah Grup'
             view: 'Detil Grup'
+        setting:
+            list: 'Daftar Pengaturan'
+            add: 'Tambah Pengaturan'
+            edit: 'Ubah Pengaturan'
+            view: 'Detil Pengaturan'
+            saved: 'Pengaturan berhasil disimpan'
+            deleted: 'Pengaturan berhasil dihapus'
+            not_found: 'Pengaturan tidak ditemukan'
     form:
         field:
             media:
@@ -63,4 +71,8 @@ sas:
                 fileName: 'File'
                 folder: 'Lokasi Folder'
                 fileUrl: 'URL File'
+                public: 'Publik?'
+            setting:
+                parameter: 'Parameter'
+                value: 'Nilai'
                 public: 'Publik?'
