@@ -24,4 +24,9 @@ final class ServiceGenerator extends AbstractGenerator
             $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $serviceFile));
         }
     }
+
+    public function support(string $scope): bool
+    {
+        return static::SCOPE_API === $scope;
+    }
 }

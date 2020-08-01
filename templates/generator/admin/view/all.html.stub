@@ -19,7 +19,7 @@
                         </div>
                         <div class="float-right col-2">
                             {% if is_granted('add', menu) %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_group_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -38,18 +38,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for key, group in paginator['items'] %}
+                        {% for key, {# entity | lower #} in paginator['items'] %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ group.code }}</td>
-                                <td>{{ group.name }}</td>
+                                {# table_fields #}
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_group_get__invoke', {id: group.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
+                                    <a href="{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_get__invoke', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_put__invoke', {id: group.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_put__invoke', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_group_delete__invoke', {id: group.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': group.name}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_delete__invoke', {id: {# entity | lower #}.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': {# delete_field #}}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans }}
                                         </button>
                                     {% endif %}
@@ -122,7 +121,7 @@
                 $('#sasSearch').on('click', function () {
                     localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
 
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
                 });
 
                 {% for message in app.flashes('info') %}

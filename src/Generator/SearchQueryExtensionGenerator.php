@@ -23,4 +23,9 @@ final class SearchQueryExtensionGenerator extends AbstractGenerator
             $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $queryFile));
         }
     }
+
+    public function support(string $scope): bool
+    {
+        return static::SCOPE_API === $scope;
+    }
 }

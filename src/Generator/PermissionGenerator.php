@@ -77,4 +77,9 @@ final class PermissionGenerator extends AbstractGenerator
             $this->permissionService->save($permission);
         }
     }
+
+    public function support(string $scope): bool
+    {
+        return static::SCOPE_API === $scope;
+    }
 }

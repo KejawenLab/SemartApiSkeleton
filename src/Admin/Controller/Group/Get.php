@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
 /**
  * @Permission(menu="GROUP", actions={Permission::VIEW})
@@ -24,12 +23,9 @@ final class Get extends AbstractController
 {
     private GroupService $service;
 
-    private PropertyMappingFactory $mapping;
-
-    public function __construct(GroupService $service, PropertyMappingFactory $mapping)
+    public function __construct(GroupService $service)
     {
         $this->service = $service;
-        $this->mapping = $mapping;
     }
 
     /**

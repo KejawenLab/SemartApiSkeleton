@@ -22,10 +22,16 @@ final class GeneratorFactory
         $this->generators = $generators;
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output): void
+    public function generate(\ReflectionClass $class, string $scope, OutputInterface $output): void
     {
         foreach ($this->generators as $generator) {
-            $generator->generate($class, $output);
+            if (!GeneratorInterface::SCOPE_ALL) {
+                if ($generator->support($scope)) {
+                    $generator->generate($class, $output);
+                }
+            } else {
+                $generator->generate($class, $output);
+            }
         }
     }
 }
