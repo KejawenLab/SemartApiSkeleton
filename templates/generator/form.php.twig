@@ -19,7 +19,10 @@ final class {{ entityHumanize }}Type extends AbstractType
     {
 {% for i, property in properties %}
 {% if 'id' != property.name %}
-        $builder->add('{{ property.name }}');
+        $builder->add('{{ property.name }}', null, [
+            'required' => true,
+            'label' => 'sas.form.field.{{ entity | lower }}.{{ property.name }}',
+        ]);
 {% endif %}
 {% endfor %}
     }
