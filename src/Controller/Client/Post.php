@@ -8,7 +8,8 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Client\ClientService;
-use KejawenLab\ApiSkeleton\Entity\Client;
+use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
+use KejawenLab\ApiSkeleton\Form\ClientType;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
@@ -45,7 +46,7 @@ final class Post extends AbstractFOSRestController
      *     description="Crate new client",
      *     @SWG\Schema(
      *         type="object",
-     *         ref=@Model(type=Client::class, groups={"read"})
+     *         ref=@Model(type=ClientType::class, groups={"read"})
      *     )
      * )
      *
@@ -55,9 +56,13 @@ final class Post extends AbstractFOSRestController
      */
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
     {
-        $client = new Client();
-        $client->setUser($userProviderFactory->getRealUser($this->getUser()));
+        $form = $this->formFactory->submitRequest(ClientType::class, $request);
+        if (!$form->isValid()) {
+            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+        }
 
+        /** @var ClientInterface $client */
+        $client = $form->getData();
         $this->service->save($client);
 
         return $this->view($this->service->get($client->getId()), Response::HTTP_CREATED);

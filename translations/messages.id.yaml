@@ -74,6 +74,12 @@ sas:
             group:
                 code: 'Kode'
                 name: 'Nama'
+            user:
+                group: 'Grup'
+                supervisor: 'Pengawas'
+                username: 'Penguna'
+                fullName: 'Nama Lengkap'
+                email: 'Email'
             menu:
                 parent: 'Induk'
                 code: 'Kode'

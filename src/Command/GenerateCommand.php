@@ -102,7 +102,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful API for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
+        $output->writeln(sprintf('<comment>RESTful Api and Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
 
         return 0;
     }

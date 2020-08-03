@@ -96,11 +96,6 @@ class User implements UserInterface
     private ?string $email;
 
     /**
-     * @ORM\Column(type="json")
-     */
-    private array $roles = [];
-
-    /**
      * @ORM\Column(type="string")
      */
     private ?string $password;

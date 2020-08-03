@@ -19,7 +19,7 @@
                         </div>
                         <div class="float-right col-2">
                             {% if is_granted('add', menu) %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_menu_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_user_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -29,33 +29,30 @@
                         <thead>
                         <tr>
                             <th>No</th>
-                            {% for property in properties %}
-                                {% if 'id' != property.name and 'routeName' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
-                                {% endif %}
-                            {% endfor %}
+                            <th>{{ 'sas.table.column.user.group' | trans }}</th>
+                            <th>{{ 'sas.table.column.user.supervisor' | trans }}</th>
+                            <th>{{ 'sas.table.column.user.username' | trans }}</th>
+                            <th>{{ 'sas.table.column.user.fullName' | trans }}</th>
+                            <th>{{ 'sas.table.column.user.email' | trans }}</th>
                             <th style="width: 149px;">{{ 'sas.table.column.action' | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for key, menu in paginator['items'] %}
+                        {% for key, user in paginator['items'] %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{% if menu.parent is not null %}{{ menu.parent.name ~ ' (' ~ menu.parent.code ~ ')' }}{% endif %}</td>
-                                <td>{{ menu.code }}</td>
-                                <td>{{ menu.name }}</td>
-                                <td>{{ menu.sortOrder }}</td>
-                                <td>{{ menu.extra }}</td>
-                                <td>{% if menu.showable %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans }}</span>{% endif %}</td>
-                                <td>{{ menu.apiPath }}</td>
-                                <td>{{ menu.adminPath }}</td>
+                                <td>{% if user.group is not null %}{{ user.group.name ~ ' (' ~ user.group.code ~ ')' }}{% endif %}</td>
+                                <td>{% if user.supervisor is not null %}{{ user.supervisor.fullName ~ ' (' ~ user.supervisor.username ~ ')' }}{% endif %}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.fullName }}</td>
+                                <td>{{ user.email }}</td>
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_menu_get__invoke', {id: menu.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
+                                    <a href="{{ path('kejawenlab_apiskeleton_admin_user_get__invoke', {id: user.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_menu_put__invoke', {id: menu.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_user_put__invoke', {id: user.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_menu_delete__invoke', {id: menu.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': (menu.name ~ '(' ~ menu.code ~ ')')}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_user_delete__invoke', {id: user.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': user.username}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans }}
                                         </button>
                                     {% endif %}
@@ -128,7 +125,7 @@
                 $('#sasSearch').on('click', function () {
                     localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
 
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_menu_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_user_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
                 });
 
                 {% for message in app.flashes('info') %}
