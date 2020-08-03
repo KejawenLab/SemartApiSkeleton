@@ -28,6 +28,13 @@ sas:
             saved: 'Pengaturan berhasil disimpan'
             deleted: 'Pengaturan berhasil dihapus'
             not_found: 'Pengaturan tidak ditemukan'
+        menu:
+            saved: 'Menu berhasil disimpan'
+            deleted: 'Menu berhasil dihapus'
+            not_found: 'Menu tidak ditemukan'
+            list: 'Daftar Menu'
+            show: 'Ditampilkan'
+            not_show: 'Disembunyikan'
     form:
         field:
             media:
@@ -67,6 +74,15 @@ sas:
             group:
                 code: 'Kode'
                 name: 'Nama'
+            menu:
+                parent: 'Induk'
+                code: 'Kode'
+                name: 'Nama'
+                sortOrder: 'Urutan'
+                extra: 'Ekstra Atribut'
+                showable: 'Ditampilkan'
+                apiPath: 'URL Api'
+                adminPath: 'URL Admin'
             media:
                 fileName: 'File'
                 folder: 'Lokasi Folder'

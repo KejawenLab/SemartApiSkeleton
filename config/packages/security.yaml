@@ -14,6 +14,7 @@ security:
             anonymous: true
             lazy: true
             provider: user_provider
+            switch_user: true
             guard:
                 authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
