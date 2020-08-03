@@ -33,8 +33,19 @@ sas:
             deleted: 'Menu berhasil dihapus'
             not_found: 'Menu tidak ditemukan'
             list: 'Daftar Menu'
+            add: 'Tambah Menu'
+            edit: 'Ubah Menu'
+            view: 'Detil Menu'
             show: 'Ditampilkan'
             not_show: 'Disembunyikan'
+        user:
+            saved: 'Pengguna berhasil disimpan'
+            deleted: 'Pengguna berhasil dihapus'
+            not_found: 'Pengguna tidak ditemukan'
+            list: 'Daftar Pengguna'
+            add: 'Tambah Pengguna'
+            edit: 'Ubah Pengguna'
+            view: 'Detil Pengguna'
     form:
         field:
             media:
@@ -44,6 +55,17 @@ sas:
             group:
                 code: 'Kode'
                 name: 'Nama'
+            setting:
+                parameter: 'Parameter'
+                value: 'Nilai'
+                public: 'Publik?'
+            menu:
+                parent: 'Induk'
+                code: 'Kode'
+                name: 'Nama'
+                routeName: 'Nama Rute'
+                sortOrder: 'Urutan'
+                showable: 'Tampilkan?'
         action:
             submit: 'Simpan'
             back: 'Kembali'

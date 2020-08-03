@@ -22,16 +22,32 @@ final class MenuType extends AbstractType
     {
         $builder->add('parent', EntityType::class, [
             'required' => false,
+            'label' => 'sas.form.field.menu.parent',
             'class' => Menu::class,
             'choice_label' => function ($menu) {
                 return sprintf('%s - %s', $menu->getCode(), $menu->getName());
             },
         ]);
-        $builder->add('code', TextType::class, ['required' => true]);
-        $builder->add('name', TextType::class, ['required' => true]);
-        $builder->add('routeName', TextType::class, ['required' => true]);
-        $builder->add('sortOrder', NumberType::class, ['required' => true]);
-        $builder->add('showable', CheckboxType::class, ['required' => true]);
+        $builder->add('code', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.menu.code',
+        ]);
+        $builder->add('name', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.menu.name',
+        ]);
+        $builder->add('routeName', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.menu.routeName',
+        ]);
+        $builder->add('sortOrder', NumberType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.menu.sortOrder',
+        ]);
+        $builder->add('showable', CheckboxType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.menu.showable',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

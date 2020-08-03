@@ -18,9 +18,18 @@ final class SettingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('parameter', TextType::class, ['required' => true]);
-        $builder->add('value', TextType::class, ['required' => true]);
-        $builder->add('public', CheckboxType::class, ['required' => false]);
+        $builder->add('parameter', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.setting.parameter',
+        ]);
+        $builder->add('value', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.setting.value',
+        ]);
+        $builder->add('public', CheckboxType::class, [
+            'required' => false,
+            'label' => 'sas.form.field.setting.public',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
