@@ -1,6 +1,6 @@
 {% apply spaceless %}
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ preload(asset('plugins/jquery/jquery.min.js'), {as: 'javascript'}) }}"></script>
+    <script src="{{ preload(asset('plugins/bootstrap/js/bootstrap.bundle.min.js'), {as: 'javascript'}) }}"></script>
+    <script src="{{ preload(asset('dist/js/adminlte.min.js'), {as: 'javascript'}) }}"></script>
     {{ javascripts | raw }}
 {% endapply %}
