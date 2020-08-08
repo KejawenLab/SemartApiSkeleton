@@ -55,6 +55,13 @@ sas:
             group:
                 code: 'Kode'
                 name: 'Nama'
+            user:
+                group: 'Grup'
+                supervisor: 'Pengawas'
+                username: 'Penguna'
+                fullName: 'Nama Lengkap'
+                email: 'Email'
+                plainPassword: 'Kata Sandi'
             setting:
                 parameter: 'Parameter'
                 value: 'Nilai'
@@ -102,6 +109,7 @@ sas:
                 username: 'Penguna'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
+                deviceId: 'ID Perangkat'
             menu:
                 parent: 'Induk'
                 code: 'Kode'

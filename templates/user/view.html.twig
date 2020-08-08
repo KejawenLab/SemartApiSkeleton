@@ -10,11 +10,16 @@
                         <table class="table table-bordered table-hover text-nowrap">
                             <tbody>
                                 {% for property in properties %}
-                                    {% if 'id' != property.name %}
+                                    {% if 'id' != property.name and 'password' != property.name and 'plainPassword' != property.name %}
                                         <tr>
                                             <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</td>
                                             <td style="width: 7px;">:</td>
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                    {% if 'group' == property.name %}
+                                        {% set group = attribute(data, property.name) %}
+                                        <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
+                                    {% else %}
+                                        <td>{{ attribute(data, property.name) }}</td>
+                                    {% endif %}
                                         </tr>
                                     {% endif %}
                                 {% endfor %}
