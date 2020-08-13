@@ -46,6 +46,10 @@ final class PasswordHistoryValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, PasswordHistory::class);
         }
 
+        if (!$value) {
+            return;
+        }
+
         if (!$token = $this->tokenStorage->getToken()) {
             throw new UnexpectedValueException($token, TokenInterface::class);
         }

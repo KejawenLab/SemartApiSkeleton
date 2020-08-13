@@ -16,14 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 final class Profile extends AbstractController
 {
     /**
-     * @Route("/me", methods={"GET"})
+     * @Route("/me", methods={"GET"}, priority=-1)
      */
     public function __invoke(UserProviderFactory $userProviderFactory): Response
     {
         $user = $userProviderFactory->getRealUser($this->getUser());
         $class = new \ReflectionClass(get_class($user));
 
-        return $this->render('user/profile.html.twig', [
+        return $this->render('profile/view.html.twig', [
             'page_title' => 'sas.page.profile.view',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),

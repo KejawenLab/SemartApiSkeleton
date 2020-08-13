@@ -3,6 +3,8 @@ sas:
         dashboard: 'Dashboard'
         profile:
             view: 'Detil Profil'
+            update: 'Perbarui Profil'
+            updated: 'Profil berhasil diperbarui'
         audit:
             not_found: 'Log audit tidak ditemukan'
             view: 'Log Audit'
@@ -75,6 +77,8 @@ sas:
                 fullName: 'Nama Lengkap'
                 email: 'Email'
                 plainPassword: 'Kata Sandi'
+                oldPassword: 'Kata Sandi Lama'
+                newPassword: 'Kata Sandi Baru'
             setting:
                 parameter: 'Parameter'
                 value: 'Nilai'

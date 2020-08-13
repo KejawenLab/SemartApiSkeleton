@@ -40,7 +40,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/{id}/audit", methods={"GET"})
+     * @Route("/{{ entityPluralDash }}/{id}/audit", methods={"GET"}, priority=-255)
      */
     public function __invoke(string $id): Response
     {
