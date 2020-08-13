@@ -46,6 +46,16 @@ sas:
             add: 'Tambah Pengguna'
             edit: 'Ubah Pengguna'
             view: 'Detil Pengguna'
+        cron:
+            saved: 'Pekerjaan berhasil disimpan'
+            deleted: 'Pekerjaan berhasil dihapus'
+            not_found: 'Pekerjaan tidak ditemukan'
+            list: 'Daftar Pekerjaan'
+            add: 'Tambah Pekerjaan'
+            edit: 'Ubah Pekerjaan'
+            view: 'Detil Pekerjaan'
+            active: 'ON'
+            inactive: 'OFF'
     form:
         field:
             empty_select: '---PILIH SALAH SATU---'
@@ -74,6 +84,13 @@ sas:
                 routeName: 'Nama Rute'
                 sortOrder: 'Urutan'
                 showable: 'Tampilkan?'
+            cron:
+                name: 'Nama'
+                description: 'Deskripsi'
+                command: 'Perintah'
+                schedule: 'Jadwal'
+                enabled: 'Aktif'
+                symfonyCommand: 'Perintah Symfony'
         action:
             submit: 'Simpan'
             back: 'Kembali'
@@ -129,3 +146,11 @@ sas:
                 parameter: 'Parameter'
                 value: 'Nilai'
                 public: 'Publik?'
+            cron:
+                name: 'Nama'
+                description: 'Deskripsi'
+                command: 'Perintah'
+                schedule: 'Jadwal'
+                enabled: 'Aktif'
+                symfonyCommand: 'Perintah Symfony'
+                running: 'Sedang Berjalan?'

@@ -1,0 +1,4 @@
+sas:
+    validator:
+        command:
+            not_found: 'Perintah "%command%" tidak ditemukan'

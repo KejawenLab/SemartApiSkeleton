@@ -27,6 +27,10 @@ final class MenuType extends AbstractType
             'choice_label' => function ($menu) {
                 return sprintf('%s - %s', $menu->getCode(), $menu->getName());
             },
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
         ]);
         $builder->add('code', TextType::class, [
             'required' => true,

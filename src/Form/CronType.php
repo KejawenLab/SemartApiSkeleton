@@ -18,12 +18,30 @@ final class CronType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['required' => true]);
-        $builder->add('description', TextType::class, ['required' => false]);
-        $builder->add('command', TextType::class, ['required' => true]);
-        $builder->add('schedule', TextType::class, ['required' => true]);
-        $builder->add('enabled', CheckboxType::class, ['required' => true]);
-        $builder->add('symfonyCommand', CheckboxType::class, ['required' => true]);
+        $builder->add('name', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.cron.name',
+        ]);
+        $builder->add('description', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.cron.description',
+        ]);
+        $builder->add('command', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.cron.command',
+        ]);
+        $builder->add('schedule', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.cron.schedule',
+        ]);
+        $builder->add('enabled', CheckboxType::class, [
+            'required' => false,
+            'label' => 'sas.form.field.cron.enabled',
+        ]);
+        $builder->add('symfonyCommand', CheckboxType::class, [
+            'required' => false,
+            'label' => 'sas.form.field.cron.symfonyCommand',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
