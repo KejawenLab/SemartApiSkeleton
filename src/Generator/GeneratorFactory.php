@@ -25,7 +25,7 @@ final class GeneratorFactory
     public function generate(\ReflectionClass $class, string $scope, OutputInterface $output): void
     {
         foreach ($this->generators as $generator) {
-            if ($scope !== GeneratorInterface::SCOPE_ALL) {
+            if (GeneratorInterface::SCOPE_ALL !== $scope) {
                 if ($generator->support($scope)) {
                     $generator->generate($class, $output);
                 }

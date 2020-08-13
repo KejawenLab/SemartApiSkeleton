@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
+use KejawenLab\ApiSkeleton\Cron\CronService;
+use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
-use KejawenLab\ApiSkeleton\Cron\CronService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Put extends AbstractController
     /**
      * @Route("/cra/{id}/edit", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, string $id): Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {

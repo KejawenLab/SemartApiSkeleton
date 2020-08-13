@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Client;
 
+use KejawenLab\ApiSkeleton\Client\ClientService;
 use KejawenLab\ApiSkeleton\Entity\Client;
 use KejawenLab\ApiSkeleton\Form\ClientType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Client\ClientService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Post extends AbstractController
     /**
      * @Route("/clients/add", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);

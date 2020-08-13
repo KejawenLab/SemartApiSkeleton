@@ -9,7 +9,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,7 +29,7 @@ final class Delete extends AbstractController
     /**
      * @Route("/users/{id}/delete", methods={"GET"})
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(string $id): Response
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {

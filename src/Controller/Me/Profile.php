@@ -14,7 +14,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Swagger\Annotations as SWG;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -39,7 +38,7 @@ final class Profile extends AbstractFOSRestController
      *
      * @RateLimit(limit=7, period=1)
      */
-    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
+    public function __invoke(UserProviderFactory $userProviderFactory): View
     {
         return $this->view($userProviderFactory->getRealUser($this->getUser()));
     }

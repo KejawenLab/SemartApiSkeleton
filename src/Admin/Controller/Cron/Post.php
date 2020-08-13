@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
+use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Cron\CronService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Post extends AbstractController
     /**
      * @Route("/cra/add", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $cron = new Cron();
         $form = $this->createForm(CronType::class, $cron);

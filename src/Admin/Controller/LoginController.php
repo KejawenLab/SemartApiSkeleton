@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,7 +19,7 @@ final class LoginController extends AbstractController
     /**
      * @Route("/login", name=LoginController::ROUTE_NAME, methods={"GET", "POST"})
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('admin_home');

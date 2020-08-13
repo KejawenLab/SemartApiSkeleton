@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Client;
 
-use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
 use KejawenLab\ApiSkeleton\Client\ClientService;
+use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,7 +29,7 @@ final class Delete extends AbstractController
     /**
      * @Route("/clients/{id}/delete", methods={"GET"})
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(string $id): Response
     {
         $client = $this->service->get($id);
         if (!$client instanceof ClientInterface) {

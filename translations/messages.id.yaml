@@ -1,6 +1,8 @@
 sas:
     page:
         dashboard: 'Dashboard'
+        profile:
+            view: 'Detil Profil'
         audit:
             not_found: 'Log audit tidak ditemukan'
             view: 'Log Audit'

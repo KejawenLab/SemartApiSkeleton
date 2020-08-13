@@ -11,6 +11,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Post extends AbstractController
     /**
      * @Route("/users/add", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);

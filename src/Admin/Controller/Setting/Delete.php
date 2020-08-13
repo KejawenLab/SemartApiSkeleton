@@ -9,7 +9,7 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,7 +29,7 @@ final class Delete extends AbstractController
     /**
      * @Route("/settings/{id}/delete", methods={"GET"})
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(string $id): Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {

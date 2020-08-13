@@ -11,6 +11,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Put extends AbstractController
     /**
      * @Route("/settings/{id}/edit", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, string $id): Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {

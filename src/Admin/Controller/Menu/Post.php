@@ -11,6 +11,7 @@ use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +31,7 @@ final class Post extends AbstractController
     /**
      * @Route("/menus/add", methods={"GET", "POST"}, priority=1)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $menu = new Menu();
         $form = $this->createForm(MenuType::class, $menu);

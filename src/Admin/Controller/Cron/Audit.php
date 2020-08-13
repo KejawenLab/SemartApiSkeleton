@@ -6,13 +6,13 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
+use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -38,7 +38,7 @@ final class Audit extends AbstractController
     /**
      * @Route("/cra/{id}/audit", methods={"GET"})
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.cron.not_found');
