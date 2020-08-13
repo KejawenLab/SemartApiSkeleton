@@ -24,12 +24,15 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     public function persist(object $object): void
     {
         $this->_em->persist($object);
-        $this->_em->flush();
     }
 
     public function remove(object $object): void
     {
         $this->_em->remove($object);
+    }
+
+    public function commit(): void
+    {
         $this->_em->flush();
     }
 

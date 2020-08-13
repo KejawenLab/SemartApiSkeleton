@@ -11,5 +11,7 @@ interface ServiceableRepositoryInterface
 {
     public function persist(object $object): void;
 
+    public function commit(): void;
+
     public function remove(object $object): void;
 }

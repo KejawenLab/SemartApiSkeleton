@@ -29,6 +29,10 @@ final class UserType extends AbstractType
                 return sprintf('%s - %s', $group->getCode(), $group->getName());
             },
             'label' => 'sas.form.field.user.group',
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
         ]);
         $builder->add('supervisor', EntityType::class, [
             'required' => false,
@@ -37,6 +41,10 @@ final class UserType extends AbstractType
                 return sprintf('%s (%s)', $supervisor->getFullName(), $supervisor->getUsername());
             },
             'label' => 'sas.form.field.user.supervisor',
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
         ]);
         $builder->add('fullName', TextType::class, [
             'required' => true,

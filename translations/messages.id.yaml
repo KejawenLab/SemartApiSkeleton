@@ -48,6 +48,7 @@ sas:
             view: 'Detil Pengguna'
     form:
         field:
+            empty_select: '---PILIH SALAH SATU---'
             media:
                 file: 'File'
                 folder: 'Folder'
