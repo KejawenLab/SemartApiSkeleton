@@ -38,7 +38,7 @@ final class GenerateCommand extends Command
     {
         $this
             ->setName('semart:generate')
-            ->setDescription('Generate RESTful API')
+            ->setDescription('Generate RESTful API and/or Admin Page')
             ->addArgument('entity', InputArgument::REQUIRED)
             ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
             ->addOption('force', 'f', InputOption::VALUE_NONE)
@@ -88,7 +88,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             '--force' => null,
         ]), $output);
 
-        $output->writeln('<info>Generating RESTful API</info>');
+        $output->writeln('<info>Generating RESTful API and/or Admin Page</info>');
         $this->generator->generate($reflection, $scope, $output);
 
         if ($parentCode = $input->getOption('parent')) {
@@ -102,7 +102,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful Api and Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
+        $output->writeln(sprintf('<comment>RESTful Api and/or Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
 
         return 0;
     }
