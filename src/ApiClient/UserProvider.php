@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Client;
+namespace KejawenLab\ApiSkeleton\ApiClient;
 
-use KejawenLab\ApiSkeleton\Client\Model\ClientRepositoryInterface;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface;
 
@@ -15,9 +15,9 @@ final class UserProvider implements UserProviderInterface
 {
     private string $class;
 
-    private ClientRepositoryInterface $repository;
+    private ApiClientRepositoryInterface $repository;
 
-    public function __construct(string $class, ClientRepositoryInterface $repository)
+    public function __construct(string $class, ApiClientRepositoryInterface $repository)
     {
         $this->class = $class;
         $this->repository = $repository;

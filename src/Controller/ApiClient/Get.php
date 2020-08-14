@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Controller\Client;
+namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\ApiSkeleton\Client\ClientService;
-use KejawenLab\ApiSkeleton\Entity\Client;
+use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
+use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
@@ -17,29 +17,29 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Permission(menu="CLIENT", actions={Permission::VIEW})
+ * @Permission(menu="APICLIENT", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Get extends AbstractFOSRestController
 {
-    private ClientService $service;
+    private ApiClientService $service;
 
-    public function __construct(ClientService $service)
+    public function __construct(ApiClientService $service)
     {
         $this->service = $service;
     }
 
     /**
-     * @Rest\Get("/clients/{id}")
+     * @Rest\Get("/api-clients/{id}")
      *
-     * @SWG\Tag(name="Client")
+     * @SWG\Tag(name="Api Client")
      * @SWG\Response(
      *     response=200,
-     *     description="Return client detail",
+     *     description="Return api client detail",
      *     @SWG\Schema(
      *         type="object",
-     *         ref=@Model(type=Client::class, groups={"read"})
+     *         ref=@Model(type=ApiClient::class, groups={"read"})
      *     )
      * )
      * @Security(name="Bearer")

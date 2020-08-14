@@ -10,8 +10,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\ApiSkeleton\Client\Model\ClientInterface;
-use KejawenLab\ApiSkeleton\Repository\ClientRepository;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
+use KejawenLab\ApiSkeleton\Repository\ApiClientRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use Ramsey\Uuid\UuidInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Auditable()
  */
-class Client implements ClientInterface
+class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Client\Model;
+namespace KejawenLab\ApiSkeleton\ApiClient\Model;
 
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-interface ClientInterface extends AuthInterface
+interface ApiClientInterface extends AuthInterface
 {
     public function getUser(): ?UserInterface;
 
