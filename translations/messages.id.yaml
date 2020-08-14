@@ -97,6 +97,9 @@ sas:
                 schedule: 'Jadwal'
                 enabled: 'Aktif'
                 symfonyCommand: 'Perintah Symfony'
+            api_client:
+                user: 'Pengguna'
+                name: 'Nama'
         action:
             submit: 'Simpan'
             back: 'Kembali'

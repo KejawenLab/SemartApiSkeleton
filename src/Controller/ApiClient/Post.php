@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
+use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -41,12 +42,19 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/api-clients")
      *
      * @SWG\Tag(name="Api Client")
+     * @SWG\Parameter(
+     *     name="cron",
+     *     in="body",
+     *     type="object",
+     *     description="Api client form",
+     *     @Model(type=ApiClientType::class)
+     * )
      * @SWG\Response(
      *     response=201,
      *     description="Crate new api client",
      *     @SWG\Schema(
      *         type="object",
-     *         ref=@Model(type=ApiClientType::class, groups={"read"})
+     *         ref=@Model(type=ApiClient::class, groups={"read"})
      *     )
      * )
      *

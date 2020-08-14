@@ -14,13 +14,15 @@ use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Repository\ApiClientRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ORM\Entity(repositoryClass=ApiClientRepository::class)
  * @ORM\Table(name="core_api_client")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
@@ -47,10 +49,22 @@ class ApiClient implements ApiClientInterface
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
      *
+     * @Assert\NotBlank()
+     *
      * @Groups({"read"})
      * @MaxDepth(1)
      */
     private ?UserInterface $user;
+
+    /**
+     * @ORM\Column(type="string", length=27)
+     *
+     * @Assert\Length(max=27)
+     * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
+     */
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=40)
@@ -69,6 +83,7 @@ class ApiClient implements ApiClientInterface
     public function __construct()
     {
         $this->user = null;
+        $this->name = null;
         $this->apiKey = null;
         $this->secretKey = null;
     }
@@ -97,6 +112,18 @@ class ApiClient implements ApiClientInterface
         }
 
         return null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = StringUtil::title($name);
+
+        return $this;
     }
 
     public function getApiKey(): ?string

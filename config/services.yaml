@@ -86,9 +86,9 @@ services:
     KejawenLab\ApiSkeleton\Command\CronRunCommand:
         arguments:
             $reportClass: 'KejawenLab\ApiSkeleton\Entity\CronReport'
-    KejawenLab\ApiSkeleton\Client\UserProvider:
+    KejawenLab\ApiSkeleton\ApiClient\UserProvider:
         arguments:
-            $class: 'KejawenLab\ApiSkeleton\Entity\Client'
+            $class: 'KejawenLab\ApiSkeleton\Entity\ApiClient'
     KejawenLab\ApiSkeleton\EventSubscriber\AdminContextSubscriber:
         arguments:
             $globals:

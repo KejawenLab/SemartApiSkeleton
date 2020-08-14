@@ -14,6 +14,8 @@ interface ApiClientInterface extends AuthInterface
 {
     public function getUser(): ?UserInterface;
 
+    public function getName(): ?string;
+
     public function getApiKey(): ?string;
 
     public function getSecretKey(): ?string;
