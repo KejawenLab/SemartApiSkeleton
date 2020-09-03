@@ -99,7 +99,8 @@ sas:
                 symfonyCommand: 'Perintah Symfony'
             api_client:
                 user: 'Pengguna'
-                name: 'Nama'
+                name: 'Nama
+                '
         action:
             submit: 'Simpan'
             back: 'Kembali'
