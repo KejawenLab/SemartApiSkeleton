@@ -1,0 +1,35 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+{% endblock %}
+{% block content %}
+    {% apply spaceless %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form role="form" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans }}</button>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_menu_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans }}</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+{% endblock %}

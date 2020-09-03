@@ -64,12 +64,6 @@ final class UserProviderFactory implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        foreach ($this->providers as $provider) {
-            if ($provider->support($class)) {
-                return true;
-            }
-        }
-
-        return false;
+        return User::class === $class;
     }
 }

@@ -1,0 +1,64 @@
+{% set entityHumanize = entity | humanize %}
+{% set entityLowerize = entity | lower %}
+{% set entityUpper = entity | upper %}
+{% set entityPluralDash = entity | pluralize | dash %}
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
+
+use KejawenLab\ApiSkeleton\Form\{{ entityHumanize }}Type;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Permission(menu="{{ entityUpper }}", actions={Permission::EDIT})
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ */
+final class Put extends AbstractController
+{
+    private {{ entityHumanize }}Service $service;
+
+    public function __construct({{ entityHumanize }}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @Route("/{{ entityPluralDash }}/{id}/edit", methods={"GET", "POST"}, priority=1)
+     */
+    public function __invoke(Request $request, string $id): Response
+    {
+        ${{ entityLowerize }} = $this->service->get($id);
+        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
+            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+        }
+
+        $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $this->service->save(${{ entityLowerize }});
+
+                $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
+
+                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+            }
+        }
+
+        return $this->render('{{ entityLowerize }}/form.html.twig', [
+            'page_title' => 'sas.page.{{ entityLowerize }}.edit',
+            'form' => $form->createView(),
+        ]);
+    }
+}

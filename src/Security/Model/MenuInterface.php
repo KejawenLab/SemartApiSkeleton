@@ -19,9 +19,13 @@ interface MenuInterface extends PermissionableInterface
 
     public function getRouteName(): ?string;
 
-    public function getUrlPath(): ?string;
+    public function getApiPath(): ?string;
 
-    public function setUrlPath(string $urlPath): self;
+    public function setApiPath(string $apiPath): self;
+
+    public function getAdminPath(): ?string;
+
+    public function setAdminPath(string $adminPath): self;
 
     public function getExtra(): ?string;
 

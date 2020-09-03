@@ -51,7 +51,7 @@ final class PermissionGenerator extends AbstractGenerator
         $shortName = $class->getShortName();
         $shortNameUpper = StringUtil::uppercase($shortName);
         if ($this->menuService->getMenuByCode($shortNameUpper)) {
-            $output->write(sprintf('<info>Menu for "%s" already exists. Skipped</info>', $shortName));
+            $output->writeln(sprintf('<info>Menu for "%s" already exists. Skipped</info>', $shortName));
 
             return;
         }
@@ -76,5 +76,10 @@ final class PermissionGenerator extends AbstractGenerator
 
             $this->permissionService->save($permission);
         }
+    }
+
+    public function support(string $scope): bool
+    {
+        return static::SCOPE_API === $scope;
     }
 }

@@ -1,0 +1,14 @@
+{% apply spaceless %}
+    <li class="nav-item has-treeview {% if is_menu_open(menu) %}menu-open{% endif %}">
+        <a href="{% if childs is empty %}{{ menu.adminPath }}{% endif %}" class="nav-link {% if is_active_path(menu.adminPath) %}active{% endif %}">
+            {{ menu.extra }}<p>{{ menu.name | humanize }}{% if childs is not empty %}<i class="right fas fa-angle-left"></i>{% endif %}</p>
+        </a>
+        {% if childs is not empty %}
+            <ul class="nav nav-treeview">
+                {% for child in childs %}
+                    {% include 'layout/child_menu.html.twig' with { menu: child }%}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endapply %}

@@ -13,6 +13,8 @@ interface MediaInterface
 {
     public const FILE_FIELD = 'file';
 
+    public const PUBLIC_FIELD = 'public';
+
     public function getFile(): ?File;
 
     public function getFileName(): ?string;

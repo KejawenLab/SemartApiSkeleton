@@ -22,17 +22,25 @@ final class UpdateProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fullName', TextType::class, ['required' => true]);
-        $builder->add('email', EmailType::class, ['required' => true]);
+        $builder->add('fullName', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.user.fullName',
+        ]);
+        $builder->add('email', EmailType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.user.email',
+        ]);
         $builder->add('oldPassword', PasswordType::class, [
             'required' => false,
             'mapped' => false,
             'constraints' => [new PasswordMatch()],
+            'label' => 'sas.form.field.user.oldPassword',
         ]);
         $builder->add('newPassword', PasswordType::class, [
             'required' => false,
             'mapped' => false,
             'constraints' => [new PasswordHistory(), new PasswordLength()],
+            'label' => 'sas.form.field.user.newPassword',
         ]);
     }
 

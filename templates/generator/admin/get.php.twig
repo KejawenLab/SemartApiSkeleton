@@ -1,0 +1,56 @@
+{% set entityHumanize = entity | humanize %}
+{% set entityLowerize = entity | lower %}
+{% set entityUpper = entity | upper %}
+{% set entityPluralDash = entity | pluralize | dash %}
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
+
+use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Permission(menu="{{ entityUpper }}", actions={Permission::VIEW})
+ *
+ * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ */
+final class Get extends AbstractController
+{
+    private {{ entityHumanize }}Service $service;
+
+    public function __construct({{ entityHumanize }}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @Route("/{{ entityPluralDash }}/{id}", methods={"GET"})
+     */
+    public function __invoke(string $id): Response
+    {
+        ${{ entityLowerize }} = $this->service->get($id);
+        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
+            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+        }
+
+        $class = new \ReflectionClass({{ entityHumanize }}::class);
+
+        return $this->render('{{ entityLowerize }}/view.html.twig', [
+            'page_title' => 'sas.page.{{ entityLowerize }}.view',
+            'context' => StringUtil::lowercase($class->getShortName()),
+            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'data' => ${{ entityLowerize }},
+        ]);
+    }
+}

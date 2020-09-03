@@ -70,7 +70,7 @@ final class Storage extends FileSystemStorage
         $uploadDir = $this->convertWindowsDirectorySeparator($mapping->getUploadDir($obj));
         $uploadDir = empty($uploadDir) ? '' : $uploadDir;
         if ($obj->isPublic()) {
-            $uploadDir = sprintf('public/%s', $uploadDir);
+            $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
         }
 
         return sprintf('%s/%s%s%s', $mapping->getUriPrefix(), $uploadDir, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);

@@ -131,7 +131,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
             'id' => $menu->getId(),
             'code' => $menu->getCode(),
             'name' => $menu->getName(),
-            'path' => $menu->getUrlPath(),
+            'path' => $menu->getApiPath(),
             'extra' => $menu->getExtra(),
         ];
 

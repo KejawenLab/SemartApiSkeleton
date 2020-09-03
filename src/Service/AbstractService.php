@@ -39,12 +39,14 @@ abstract class AbstractService implements ServiceInterface
     {
         $this->repository->persist($object);
         $this->messageBus->dispatch(new EntityPersisted($object));
+        $this->repository->commit();
     }
 
     public function remove(object $object): void
     {
         $this->repository->remove($object);
         $this->messageBus->dispatch(new EntityRemoved($object));
+        $this->repository->commit();
     }
 
     public function getQueryBuilder(): QueryBuilder

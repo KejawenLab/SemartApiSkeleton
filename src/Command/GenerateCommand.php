@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Command;
 
 use KejawenLab\ApiSkeleton\Generator\GeneratorFactory;
+use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -37,10 +38,12 @@ final class GenerateCommand extends Command
     {
         $this
             ->setName('semart:generate')
-            ->setDescription('Generate RESTful API')
+            ->setDescription('Generate RESTful API and/or Admin Page')
             ->addArgument('entity', InputArgument::REQUIRED)
             ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
             ->addOption('force', 'f', InputOption::VALUE_NONE)
+            ->addOption('admin', 'admin', InputOption::VALUE_NONE)
+            ->addOption('api', 'api', InputOption::VALUE_NONE)
         ;
     }
 
@@ -64,6 +67,15 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
+        $scope = GeneratorInterface::SCOPE_ALL;
+        if ($input->getOption('admin')) {
+            $scope = GeneratorInterface::SCOPE_ADMIN;
+        }
+
+        if ($input->getOption('api')) {
+            $scope = GeneratorInterface::SCOPE_API;
+        }
+
         /** @var string $entity */
         $entity = $input->getArgument('entity');
         $reflection = new \ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
@@ -76,8 +88,8 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             '--force' => null,
         ]), $output);
 
-        $output->writeln('<info>Generating RESTful API</info>');
-        $this->generator->generate($reflection, $output);
+        $output->writeln('<info>Generating RESTful API and/or Admin Page</info>');
+        $this->generator->generate($reflection, $scope, $output);
 
         if ($parentCode = $input->getOption('parent')) {
             $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));
@@ -90,7 +102,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful API for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
+        $output->writeln(sprintf('<comment>RESTful Api and/or Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
 
         return 0;
     }

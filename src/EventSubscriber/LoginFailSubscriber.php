@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\LoginController;
 use KejawenLab\ApiSkeleton\Controller\SecurityController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -62,7 +63,7 @@ final class LoginFailSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (SecurityController::ROUTE_NAME !== $request->attributes->get('_route')) {
+        if (!in_array($request->attributes->get('_route'), [SecurityController::ROUTE_NAME, LoginController::ROUTE_NAME])) {
             return;
         }
 

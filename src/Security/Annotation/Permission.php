@@ -20,11 +20,11 @@ final class Permission
 
     public const DELETE = 'delete';
 
-    private $menu;
+    private string $menu;
 
-    private $actions = [];
+    private array $actions = [];
 
-    private $ownership = false;
+    private bool $ownership = false;
 
     public function __construct(array $configs = [])
     {

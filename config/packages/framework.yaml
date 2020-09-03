@@ -1,16 +1,17 @@
 framework:
     translator:
-        enabled: false
+        enabled: true
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+    csrf_protection: false
     #http_method_override: true
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
-        handler_id: null
-        cookie_secure: auto
-        cookie_samesite: lax
+        cookie_lifetime: 3600
+        enabled: true
+        use_cookies: true
+        handler_id: snc_redis.session.handler
 
     #esi: true
     #fragments: true

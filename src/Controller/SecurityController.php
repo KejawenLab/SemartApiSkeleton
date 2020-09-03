@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
  */
 final class SecurityController extends AbstractFOSRestController
 {
-    public const ROUTE_NAME = 'security_login';
+    public const ROUTE_NAME = 'api_login';
 
     /**
      * @Rest\Post("/login", name=SecurityController::ROUTE_NAME, priority=17)

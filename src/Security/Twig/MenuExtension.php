@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Security\Twig;
 
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -18,13 +19,16 @@ final class MenuExtension extends AbstractExtension
 {
     private Environment $twig;
 
+    private RequestStack $requestStack;
+
     private UrlGeneratorInterface $urlGenerator;
 
     private MenuService $menuService;
 
-    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator, MenuService $menuService)
+    public function __construct(Environment $twig, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, MenuService $menuService)
     {
         $this->twig = $twig;
+        $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->menuService = $menuService;
     }
@@ -32,9 +36,32 @@ final class MenuExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('to_menu', [$this, 'getMenu']),
+            new TwigFunction('convert_to_menu', [$this, 'getMenu']),
             new TwigFunction('render_menu', [$this, 'renderMenu']),
+            new TwigFunction('is_active_path', [$this, 'isActive']),
+            new TwigFunction('is_menu_open', [$this, 'isOpen']),
         ];
+    }
+
+    public function isOpen(MenuInterface $menu): bool
+    {
+        if (!$this->menuService->hasChildMenu($menu)) {
+            return $this->isActive($menu->getAdminPath());
+        }
+
+        $childs = $this->menuService->getChildsMenu($menu);
+        foreach ($childs as $child) {
+            if ($this->isActive($child->getAdminPath())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isActive(string $path): bool
+    {
+        return $this->requestStack->getCurrentRequest()->getPathInfo() === $path;
     }
 
     public function getMenu(string $code): ?MenuInterface
@@ -42,34 +69,22 @@ final class MenuExtension extends AbstractExtension
         return $this->menuService->getMenuByCode($code);
     }
 
-    public function renderMenu(string $menuCode): string
+    public function renderMenu(): string
     {
         $html = '';
         /** @var MenuInterface[] $parentMenus */
         $parentMenus = $this->menuService->getParentMenu();
         foreach ($parentMenus as $menu) {
             if (!$this->menuService->hasChildMenu($menu)) {
-                $html = sprintf('%s%s', $html, $this->buildHtml($menu, $menuCode));
+                $html = sprintf('%s%s', $html, $this->twig->render('layout/child_menu.html.twig', ['menu' => $menu]));
 
                 continue;
             }
 
-            $childs = $this->menuService->getChildsMenu($menu);
-            $html = sprintf('%s%s', $html, $this->twig->render('layout/menu.html.twig', ['childs' => $childs, 'menu_code' => $menuCode]));
+            $childs = iterator_to_array($this->menuService->getChildsMenu($menu));
+            $html = sprintf('%s%s', $html, $this->twig->render('layout/menu.html.twig', ['childs' => $childs, 'menu' => $menu]));
         }
 
         return $html;
-    }
-
-    private function buildHtml(MenuInterface $menu, string $menuCode): string
-    {
-        $url = $menu->getRouteName() ? $this->urlGenerator->generate($menu->getRouteName()) : '#';
-        $active = $menu->getCode() === $menuCode ? 'active' : '';
-
-        return $this->twig->render('layout/child_menu.html.twig', [
-            'menu' => $menu,
-            'url' => $url,
-            'active' => $active,
-        ]);
     }
 }

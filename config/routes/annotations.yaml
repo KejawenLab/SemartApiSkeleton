@@ -3,6 +3,14 @@ controllers:
     resource: ../../src/Controller/
     type: annotation
 
+fontend:
+    prefix: /admin
+    resource: ../../src/Admin/Controller/
+    type: annotation
+
+admin_logout:
+    path: /admin/logout
+
 kernel:
     resource: ../../src/Kernel.php
     type: annotation

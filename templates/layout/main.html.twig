@@ -1,0 +1,37 @@
+{% apply spaceless %}
+    <!DOCTYPE html>
+    <html lang="en">
+    {% include 'layout/head.html.twig' with {stylesheets: block('stylesheets')}  %}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'layout/navigation.html.twig' %}
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="{{ path('admin_home') }}" class="brand-link">
+                <img src="{{ asset('logo.gif') }}" alt="Semart Api Skeleton" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">{{ sas.app_title }}</span>
+            </a>
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="{{ path('admin_home') }}" class="nav-link {% if is_active_path(path('admin_home')) %}active{% endif %}">
+                                <i class="nav-icon fa fa-home"></i><p>Dashboard</p>
+                            </a>
+                        </li>
+                        {{ render_menu() | raw }}
+                        <li class="nav-item">
+                            <a href="{{ path('app.swagger_ui') }}" class="nav-link" target="_blank">
+                                <i class="nav-icon fa fa-book"></i><p>Dokumentasi Api</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        {% include 'layout/content.html.twig' with {content: block('content')} %}
+        {% include 'layout/footer.html.twig' %}
+    </div>
+    {% include 'layout/javascript.html.twig' with {javascripts: block('javascripts')} %}
+    </body>
+    </html>
+{% endapply %}

@@ -1,0 +1,9 @@
+{% apply spaceless %}
+    <footer class="main-footer">
+        {% set year = 2020 %}
+        <strong>Copyright &copy; {{ year ~ ' - ' ~ (date() | date('Y')) }} <a href="https://github.com/KejawenLab" target="_blank">KejawenLab</a>.</strong> All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <strong>{{ sas.semart_name ~ '[' ~ sas.semart_codename ~ '@' ~ sas.semart_version ~ ']' }}</strong>
+        </div>
+    </footer>
+{% endapply %}

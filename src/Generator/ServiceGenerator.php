@@ -21,7 +21,12 @@ final class ServiceGenerator extends AbstractGenerator
             $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\%sService"</info></comment>', $shortName, $shortName));
             $this->fileSystem->dumpFile($serviceFile, $template);
         } else {
-            $output->write(sprintf('<warning>File "%s" is exists. Skipped</warning>', $serviceFile));
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $serviceFile));
         }
+    }
+
+    public function support(string $scope): bool
+    {
+        return static::SCOPE_API === $scope;
     }
 }

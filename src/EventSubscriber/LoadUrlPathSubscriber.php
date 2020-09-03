@@ -8,6 +8,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -16,6 +17,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class LoadUrlPathSubscriber implements EventSubscriber
 {
+    private const ROUTE_NAMESPACE_PREFIX = 'kejawenlab_apiskeleton_';
+
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
@@ -31,6 +34,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
         }
 
         $path = $object->getRouteName();
+        $replece = sprintf('%sadmin_', static::ROUTE_NAMESPACE_PREFIX);
         try {
             if ('#' !== $path) {
                 $path = $this->urlGenerator->generate($object->getRouteName());
@@ -39,7 +43,15 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             $path = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
         }
 
-        $object->setUrlPath($path);
+        $adminPath = '#';
+        $adminRoute = StringUtil::replace($object->getRouteName(), static::ROUTE_NAMESPACE_PREFIX, $replece);
+        try {
+            $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
+        } catch (RouteNotFoundException $exception) {
+        }
+
+        $object->setApiPath($path);
+        $object->setAdminPath($adminPath);
     }
 
     public function getSubscribedEvents(): array

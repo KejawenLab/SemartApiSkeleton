@@ -44,7 +44,7 @@ final class ConsoleCommandValidator extends ConstraintValidator
         try {
             $console->get((string) $command[0]);
         } catch (CommandNotFoundException $exception) {
-            $this->context->buildViolation($constraint->getMessage())->setParameter('[COMMAND]', $command[0])->addViolation();
+            $this->context->buildViolation($constraint->getMessage())->setParameter('%command%', $command[0])->addViolation();
         }
     }
 }

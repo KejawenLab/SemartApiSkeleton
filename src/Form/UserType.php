@@ -25,17 +25,43 @@ final class UserType extends AbstractType
         $builder->add('group', EntityType::class, [
             'required' => true,
             'class' => Group::class,
+            'choice_label' => function ($group) {
+                return sprintf('%s - %s', $group->getCode(), $group->getName());
+            },
+            'label' => 'sas.form.field.user.group',
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
         ]);
         $builder->add('supervisor', EntityType::class, [
-            'required' => true,
+            'required' => false,
             'class' => User::class,
+            'choice_label' => function ($supervisor) {
+                return sprintf('%s (%s)', $supervisor->getFullName(), $supervisor->getUsername());
+            },
+            'label' => 'sas.form.field.user.supervisor',
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
         ]);
-        $builder->add('fullName', TextType::class, ['required' => true]);
-        $builder->add('username', TextType::class, ['required' => true]);
-        $builder->add('email', EmailType::class, ['required' => true]);
+        $builder->add('fullName', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.user.fullName',
+        ]);
+        $builder->add('username', TextType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.user.username',
+        ]);
+        $builder->add('email', EmailType::class, [
+            'required' => true,
+            'label' => 'sas.form.field.user.email',
+        ]);
         $builder->add('plainPassword', PasswordType::class, [
             'required' => false,
             'constraints' => [new PasswordLength()],
+            'label' => 'sas.form.field.user.plainPassword',
         ]);
     }
 

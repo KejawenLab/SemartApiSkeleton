@@ -15,7 +15,7 @@ final class ConsoleCommand extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Command "[COMMAND]" is not found';
+        return 'sas.validator.command.not_found';
     }
 
     public function getTargets()
