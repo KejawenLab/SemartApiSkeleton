@@ -30,7 +30,7 @@ final class SearchQueryExtension extends AbstractQueryExtension
          */
     }
 
-    public function support(string $class): bool
+    public function support(string $class, Request $request): bool
     {
         return in_array({{ entityHumanize }}Interface::class, class_implements($class));
     }
