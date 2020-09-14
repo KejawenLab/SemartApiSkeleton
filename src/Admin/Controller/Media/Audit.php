@@ -37,7 +37,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/medias/{id}/audit", methods={"GET"}, priority=1)
      */
     public function __invoke(string $id): Response
     {
