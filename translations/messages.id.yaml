@@ -50,6 +50,11 @@ sas:
             add: 'Tambah Pengguna'
             edit: 'Ubah Pengguna'
             view: 'Detil Pengguna'
+        permission:
+            list: 'Hak Akses'
+            saved: 'Hak Akses berhasil disimpan'
+            group_not_found: 'Group tidak ditemukan'
+            not_found: 'Hak Akses tidak ditemukan'
         cron:
             saved: 'Pekerjaan berhasil disimpan'
             deleted: 'Pekerjaan berhasil dihapus'
@@ -101,6 +106,7 @@ sas:
                 user: 'Pengguna'
                 name: 'Nama'
         action:
+            permission: 'Hak Akses'
             submit: 'Simpan'
             back: 'Kembali'
             cancel: 'Batal'
@@ -163,3 +169,10 @@ sas:
                 enabled: 'Aktif'
                 symfonyCommand: 'Perintah Symfony'
                 running: 'Sedang Berjalan?'
+            permission:
+                group: 'Group'
+                menu: 'Menu'
+                viewable: 'Hak View'
+                addable: 'Hak Tambah'
+                editable: 'Hak Edit'
+                deletable: 'Hak Hapus'

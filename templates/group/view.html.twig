@@ -48,8 +48,9 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', {id: data.id}) }}" class="btn btn-dark">{{ 'sas.form.action.permission' | trans }}</a>
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_group_audit__invoke', {id: data.id}) }}" class="btn btn-info">{{ 'sas.form.action.audit' | trans }}</a>
+                            <a href="{{ path('kejawenlab_apiskeleton_admin_group_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans }}</a>
                         {% endif %}
                         <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
                     </div>

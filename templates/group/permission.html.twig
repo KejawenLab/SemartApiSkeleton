@@ -1,0 +1,169 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-toggle/css/bootstrap4-toggle.min.css') }}">
+{% endblock %}
+{% block content %}
+    {% apply spaceless %}
+    {% set menu = convert_to_menu(context) %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right col-7">
+                        <div class="input-group input-group col-10 float-left">
+                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
+                            <div class="input-group-append">
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            {% for property in properties %}
+                                {% if 'id' != property.name and 'file' != property.name %}
+                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, permission in paginator['items'] %}
+                            {% set group = permission.group %}
+                            {% set rmenu = permission.menu %}
+                            <tr>
+                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
+                                <td>{{ group.name ~ ' [' ~ group.code ~ ']' }}</td>
+                                <td>{{ rmenu.name ~ ' [' ~ rmenu.code ~ ']' }}</td>
+                                <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer clearfix">
+                    {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}
+{% block javascripts %}
+    {% apply spaceless %}
+        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap4-toggle/js/bootstrap4-toggle.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                $('#toggle-two').bootstrapToggle({
+                    on: 'Yes',
+                    off: 'No'
+                });
+
+                $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+
+                $('#sasSearch').on('click', function () {
+                    localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
+
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                });
+
+                $(document).on('change', '.permission-view', function () {
+                    let url = $(this).data('url');
+                    let viewable = false;
+                    if ($(this).prop('checked')) {
+                        viewable = true;
+                    }
+
+                    redirectPost(url, 'view', viewable);
+                });
+
+                $(document).on('change', '.permission-add', function () {
+                    let url = $(this).data('url');
+                    let addable = false;
+                    if ($(this).prop('checked')) {
+                        addable = true;
+                    }
+
+                    redirectPost(url, 'add', addable);
+                });
+
+                $(document).on('change', '.permission-edit', function () {
+                    let url = $(this).data('url');
+                    let editable = false;
+                    if ($(this).prop('checked')) {
+                        editable = true;
+                    }
+
+                    redirectPost(url, 'edit', editable);
+                });
+
+                $(document).on('change', '.permission-delete', function () {
+                    let url = $(this).data('url');
+                    let deletable = false;
+                    if ($(this).prop('checked')) {
+                        deletable = true;
+                    }
+
+                    redirectPost(url, 'delete', deletable);
+                });
+
+                function redirectPost(url, type, value) {
+                    let form = document.createElement('form');
+                    let valueInput = document.createElement('input');
+                    let typeInput = document.createElement('input');
+
+                    document.body.appendChild(form);
+
+                    form.method = 'post';
+                    form.action = url;
+
+                    valueInput.type = 'hidden';
+                    valueInput.name = 'value';
+                    valueInput.value = value;
+
+                    typeInput.type = 'hidden';
+                    typeInput.name = 'type';
+                    typeInput.value = type;
+
+                    form.appendChild(valueInput);
+                    form.appendChild(typeInput);
+                    form.submit();
+                }
+
+                {% for message in app.flashes('info') %}
+                    toastr['success']('{{ message | trans }}');
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    toastr['error']('{{ message | trans }}');
+                {% endfor %}
+            });
+        </script>
+    {% endapply %}
+{% endblock %}
