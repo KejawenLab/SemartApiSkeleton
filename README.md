@@ -479,7 +479,7 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 - [ ] Unit Testing
 
-- [ ] Admin Auto Generate
+- [X] Admin Auto Generate
 
 ## Copyright
 
