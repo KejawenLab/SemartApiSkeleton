@@ -45,14 +45,14 @@ class Permission implements PermissionInterface
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
      *
      * @Groups({"read"})
      **/
     private ?GroupInterface $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
      *
      * @Assert\NotBlank()
      *

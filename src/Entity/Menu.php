@@ -49,7 +49,7 @@ class Menu implements MenuInterface
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
      *
      * @Groups({"read"})
      * @MaxDepth(1)

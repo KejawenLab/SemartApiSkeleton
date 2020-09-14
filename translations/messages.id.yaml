@@ -65,6 +65,12 @@ sas:
             view: 'Detil Pekerjaan'
             active: 'ON'
             inactive: 'OFF'
+        api_client:
+            list: 'Daftar Token API'
+            saved: 'Token berhasil disimpan'
+            deleted: 'Token berhasil dihapus'
+            not_found: 'Token tidak ditemukan'
+            add: 'Tambah Token API'
     form:
         field:
             empty_select: '---PILIH SALAH SATU---'
@@ -106,6 +112,7 @@ sas:
                 user: 'Pengguna'
                 name: 'Nama'
         action:
+            api_key: 'Daftar Token API'
             permission: 'Hak Akses'
             submit: 'Simpan'
             back: 'Kembali'
@@ -176,3 +183,7 @@ sas:
                 addable: 'Hak Tambah'
                 editable: 'Hak Edit'
                 deletable: 'Hak Hapus'
+            apiclient:
+                name: 'Nama'
+                apiKey: 'Token'
+                secretKey: 'Kunci Rahasia'

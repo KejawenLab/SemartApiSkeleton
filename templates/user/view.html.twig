@@ -53,8 +53,9 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_apiclient_getall__invoke') }}" class="btn btn-dark">{{ 'sas.form.action.api_key' | trans }}</a>
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_user_audit__invoke', {id: data.id}) }}" class="btn btn-info">{{ 'sas.form.action.audit' | trans }}</a>
+                            <a href="{{ path('kejawenlab_apiskeleton_admin_user_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans }}</a>
                         {% endif %}
                         <a href="{{ path('kejawenlab_apiskeleton_admin_user_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
                     </div>

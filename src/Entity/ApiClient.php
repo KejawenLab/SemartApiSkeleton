@@ -7,8 +7,6 @@ namespace KejawenLab\ApiSkeleton\Entity;
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Repository\ApiClientRepository;
@@ -17,6 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
 use Swagger\Annotations as SWG;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,13 +24,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=ApiClientRepository::class)
  * @ORM\Table(name="core_api_client")
  *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @UniqueEntity({"user", "name"})
+ *
  * @Auditable()
  */
 class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
-    use SoftDeleteableEntity;
     use TimestampableEntity;
 
     /**
@@ -47,7 +46,7 @@ class ApiClient implements ApiClientInterface
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      *
      * @Assert\NotBlank()
      *

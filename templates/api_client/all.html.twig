@@ -19,7 +19,7 @@
                         </div>
                         <div class="float-right col-2">
                             {% if is_granted('add', menu) %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_client_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_apiclient_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <tr>
                             <th>No</th>
                             {% for property in properties %}
-                                {% if 'id' != property.name %}
+                                {% if 'id' != property.name and 'user' != property.name %}
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
                                 {% endif %}
                             {% endfor %}
@@ -41,14 +41,15 @@
                         {% for key, client in paginator['items'] %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ client.user }}</td><td>{{ client.apiKey }}</td><td>{{ client.secretKey }}</td>
+                                <td>{{ client.name }}</td>
+                                <td>{{ client.apiKey }}</td>
+                                <td>{{ client.secretKey }}</td>
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_client_get__invoke', {id: client.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
-                                    {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_client_put__invoke', {id: client.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                    {% if can_view_audit() %}
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_apiclient_audit__invoke', {id: client.id}) }}" class="btn btn-sm btn-info">{{ 'sas.form.action.audit' | trans }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_client_delete__invoke', {id: client.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': client.user}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_apiclient_delete__invoke', {id: client.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': client.name}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans }}
                                         </button>
                                     {% endif %}
@@ -121,7 +122,7 @@
                 $('#sasSearch').on('click', function () {
                     localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
 
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_client_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_apiclient_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
                 });
 
                 {% for message in app.flashes('info') %}

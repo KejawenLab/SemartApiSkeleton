@@ -38,12 +38,19 @@
                             {% set rmenu = permission.menu %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ group.name ~ ' [' ~ group.code ~ ']' }}</td>
-                                <td>{{ rmenu.name ~ ' [' ~ rmenu.code ~ ']' }}</td>
-                                <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
+                                <td>{{ rmenu.name ~ ' (' ~ rmenu.code ~ ')' }}</td>
+                                {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
+                                    <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                {% else %}
+                                    <td><input type="checkbox" {% if permission.viewable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" {% if permission.addable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" {% if permission.editable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" {% if permission.deletable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

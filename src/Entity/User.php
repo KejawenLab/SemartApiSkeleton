@@ -58,7 +58,7 @@ class User implements UserInterface
     private ?GroupInterface $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      *
      * @Groups({"read"})
      */
