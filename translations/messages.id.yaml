@@ -189,6 +189,7 @@ sas:
                 editable: 'Hak Edit'
                 deletable: 'Hak Hapus'
             apiclient:
+                user: 'Pengguna'
                 name: 'Nama'
                 apiKey: 'Token'
                 secretKey: 'Kunci Rahasia'

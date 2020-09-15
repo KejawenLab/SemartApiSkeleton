@@ -30,7 +30,7 @@
                         <tr>
                             <th>No</th>
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'user' != property.name %}
+                                {% if 'id' != property.name %}
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
                                 {% endif %}
                             {% endfor %}
