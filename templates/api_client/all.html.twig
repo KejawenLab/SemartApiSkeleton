@@ -39,8 +39,10 @@
                         </thead>
                         <tbody>
                         {% for key, client in paginator['items'] %}
+                            {% set user = client.user %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
+                                <td>{{ user.fullName ~ ' (' ~ user.username ~ ')' }}</td>
                                 <td>{{ client.name }}</td>
                                 <td>{{ client.apiKey }}</td>
                                 <td>{{ client.secretKey }}</td>
