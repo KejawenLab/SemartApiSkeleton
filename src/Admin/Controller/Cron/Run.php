@@ -6,12 +6,15 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
-use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -23,13 +26,16 @@ final class Run extends AbstractController
 {
     private CronService $service;
 
-    public function __construct(CronService $service)
+    private KernelInterface $kernel;
+
+    public function __construct(CronService $service, KernelInterface $kernel)
     {
         $this->service = $service;
+        $this->kernel = $kernel;
     }
 
     /**
-     * @Route("/cron/{id}/run", methods={"POST"}, priority=-17)
+     * @Route("/cron/{id}/run", methods={"GET"}, priority=-17)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -40,21 +46,22 @@ final class Run extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
         }
 
-        $form = $this->createForm(CronType::class, $cron);
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save($cron);
+        $application = new Application($this->kernel);
+        $application->setAutoExit(false);
 
-                $this->addFlash('info', 'sas.page.cron.saved');
+        $input = new ArrayInput([
+            'command' => 'semart:cron:run',
+            'job' => $cron->getId(),
+            '--schedule_now' => null,
+        ]);
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
-            }
+        $return = $application->run($input, new NullOutput());
+        if (0 === $return) {
+            $this->addFlash('info', 'sas.page.cron.run_success');
+        } else {
+            $this->addFlash('error', 'sas.page.cron.run_failed');
         }
 
-        return $this->render('cron/form.html.twig', [
-            'page_title' => 'sas.page.cron.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
     }
 }

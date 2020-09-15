@@ -67,12 +67,9 @@ final class Run extends AbstractFOSRestController
 
         $input = new ArrayInput([
             'command' => 'semart:cron:run',
-            'job' => $cron->getName(),
+            'job' => $cron->getId(),
             '--schedule_now' => null,
         ]);
-
-        $cron->setRunning(true);
-        $this->service->save($cron);
 
         $return = $application->run($input, new NullOutput());
         $message = 'Job running successfully';
