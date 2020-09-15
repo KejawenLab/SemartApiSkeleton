@@ -12,12 +12,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-right col-7">
-                        <div class="input-group input-group col-10 float-left">
+                        <div class="input-group input-group col-12 float-left">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
                             <div class="input-group-append">
                                 <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="float-left col-2">
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -98,7 +101,7 @@
                 $('#sasSearch').on('click', function () {
                     localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
 
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', { id: group.id }) }}?q=' + localStorage.getItem('sas_search_value');
                 });
 
                 $(document).on('change', '.permission-view', function () {

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
-use KejawenLab\ApiSkeleton\Cron\CronService;
+use KejawenLab\ApiSkeleton\Cron\CronReportService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Entity\CronReport;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -19,30 +20,30 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-final class GetAll extends AbstractController
+final class Report extends AbstractController
 {
-    private CronService $service;
+    private CronReportService $service;
 
     private Paginator $paginator;
 
-    public function __construct(CronService $service, Paginator $paginator)
+    public function __construct(CronReportService $service, Paginator $paginator)
     {
         $this->service = $service;
         $this->paginator = $paginator;
     }
 
     /**
-     * @Route("/cron", methods={"GET"})
+     * @Route("/cron/{id}/logs", methods={"GET"}, priority=-27)
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(Cron::class);
+        $class = new \ReflectionClass(CronReport::class);
 
-        return $this->render('cron/all.html.twig', [
-            'page_title' => 'sas.page.cron.list',
+        return $this->render('cron/report.html.twig', [
+            'page_title' => 'sas.page.cron_report.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
-            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Cron::class),
+            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, CronReport::class),
         ]);
     }
 }

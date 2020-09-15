@@ -1,0 +1,54 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-toggle/css/bootstrap4-toggle.min.css') }}">
+{% endblock %}
+{% block content %}
+    {% apply spaceless %}
+    {% set menu = convert_to_menu(context) %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-left col-2">
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            {% for property in properties %}
+                                {% if 'id' != property.name %}
+                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, report in paginator['items'] %}
+                            {% set cron = report.cron %}
+                            <tr>
+                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
+                                <td>{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</td>
+                                <td>{{ report.runAt | date('Y-m-d H:i:s') }}</td>
+                                <td>{{ report.runtime | number_format(2, ',', '.') }} detik</td>
+                                <td>{{ dump_cron_log(report.output) }}</td>
+                                <td>{% if report.exitCode == 0 %}<span class="btn btn-success disabled">{{ 'sas.page.cron_report.success' | trans }}</span>{% else %}<span class="btn btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans }}</span>{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer clearfix">
+                    {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('plugins/bootstrap4-toggle/js/bootstrap4-toggle.min.js') }}"></script>
+{% endblock %}
