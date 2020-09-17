@@ -6,33 +6,34 @@
     {% set next = paginator['page'] + 1 %}
     {% set prevLink = false %}
     {% set nextLink = false %}
+    {% set setting = setting('page_field') %}
     {% if paginator['page'] - prev > 2 %}
         {% set prevLink = true %}
     {% endif %}
     {% if paginator['total_page'] - next > 2 %}
         {% set nextLink = true %}
     {% endif %}
-<ul class="pagination m-0 float-right">
-    {% if paginator['page'] != 1 %}
-        <li class="page-item"><a class="page-link" href="#"><<</a></li>
-    {% endif %}
-    {% if prevLink %}
-        <li class="page-item"><a class="page-link" href="#"><</a></li>
-    {% endif %}
-    {% if prev > 0 %}
-        <li class="page-item"><a class="page-link" href="#">{{ prev }}</a></li>
-    {% endif %}
-    {% if paginator['total_page'] > 1 %}
-        <li class="page-item"><span class="page-link"><b>{{ paginator['page'] }}</b></span></li>
-    {% endif %}
-    {% if next < paginator['total_page'] %}
-        <li class="page-item"><a class="page-link" href="#">{{ next }}</a></li>
-    {% endif %}
-    {% if nextLink %}
-        <li class="page-item"><a class="page-link" href="#">></a></li>
-    {% endif %}
-    {% if paginator['page'] < paginator['total_page'] %}
-        <li class="page-item"><a class="page-link" href="#">>></a></li>
-    {% endif %}
-</ul>
+    <ul class="pagination m-0 float-right">
+        {% if paginator['page'] != 1 %}
+            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (setting ? setting.value : 'page') ~ '=1' }}"><<</a></li>
+        {% endif %}
+        {% if prevLink %}
+            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (setting ? setting.value : 'page') ~ '=' ~ prev }}"><</a></li>
+        {% endif %}
+        {% if prev > 0 %}
+            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (setting ? setting.value : 'page') ~ '=' ~ prev }}">{{ prev }}</a></li>
+        {% endif %}
+        {% if paginator['total_page'] > 1 %}
+            <li class="page-item"><span class="page-link"><b>{{ paginator['page'] }}</b></span></li>
+        {% endif %}
+        {% if next < paginator['total_page'] %}
+            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (setting ? setting.value : 'page') ~ '=' ~ next }}">{{ next }}</a></li>
+        {% endif %}
+        {% if nextLink %}
+            <li class="page-item"><a class="page-link" href="#">></a></li>
+        {% endif %}
+        {% if paginator['page'] < paginator['total_page'] %}
+            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (setting ? setting.value : 'page') ~ '=' ~ paginator['total_page'] }}">>></a></li>
+        {% endif %}
+    </ul>
 {% endapply %}
