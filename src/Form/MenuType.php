@@ -49,7 +49,7 @@ final class MenuType extends AbstractType
             'label' => 'sas.form.field.menu.sortOrder',
         ]);
         $builder->add('showable', CheckboxType::class, [
-            'required' => true,
+            'required' => false,
             'label' => 'sas.form.field.menu.showable',
         ]);
     }
