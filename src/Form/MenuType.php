@@ -52,6 +52,10 @@ final class MenuType extends AbstractType
             'required' => false,
             'label' => 'sas.form.field.menu.showable',
         ]);
+        $builder->add('adminOnly', CheckboxType::class, [
+            'required' => false,
+            'label' => 'sas.form.field.menu.adminOnly',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

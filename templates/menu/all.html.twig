@@ -30,7 +30,7 @@
                         <tr>
                             <th>No</th>
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'routeName' != property.name %}
+                                {% if 'id' != property.name and 'routeName' != property.name and 'adminOnly' != property.name and 'extra' != property.name %}
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
                                 {% endif %}
                             {% endfor %}
@@ -45,7 +45,6 @@
                                 <td>{{ menu.code }}</td>
                                 <td>{{ menu.name }}</td>
                                 <td>{{ menu.sortOrder }}</td>
-                                <td>{{ menu.extra }}</td>
                                 <td>{% if menu.showable %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans }}</span>{% endif %}</td>
                                 <td>{{ menu.apiPath }}</td>
                                 <td>{{ menu.adminPath }}</td>

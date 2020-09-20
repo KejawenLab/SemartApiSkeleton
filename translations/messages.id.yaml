@@ -42,6 +42,8 @@ sas:
             view: 'Detil Menu'
             show: 'Ditampilkan'
             not_show: 'Disembunyikan'
+            admin_only: 'Ya'
+            both: 'Tidak'
         user:
             saved: 'Pengguna berhasil disimpan'
             deleted: 'Pengguna berhasil dihapus'
@@ -105,6 +107,7 @@ sas:
                 routeName: 'Nama Rute'
                 sortOrder: 'Urutan'
                 showable: 'Tampilkan?'
+                adminOnly: 'Khusus Admin?'
             cron:
                 name: 'Nama'
                 description: 'Deskripsi'
@@ -162,6 +165,7 @@ sas:
                 sortOrder: 'Urutan'
                 extra: 'Ekstra Atribut'
                 showable: 'Ditampilkan'
+                adminOnly: 'Khusus Admin'
                 apiPath: 'URL Api'
                 adminPath: 'URL Admin'
             media:

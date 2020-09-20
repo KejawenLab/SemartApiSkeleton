@@ -9,30 +9,32 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-bordered table-hover text-nowrap">
                             <tbody>
-                                {% for property in properties %}
-                                    {% if 'id' != property.name and 'routeName' != property.name %}
-                                        <tr>
-                                            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</td>
-                                            <td style="width: 7px;">:</td>
-                                            {% if 'parent' == property.name %}
-                                                {% if attribute(data, property.name) is not null %}
-                                                    {% set parent = attribute(data, property.name) %}
-                                                    <td>{{ parent.name ~ '(' ~ parent.code ~ ')' }}</td>
-                                                {% endif %}
-                                            {% elseif 'showable' == property.name %}
-                                                <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans }}</span>{% endif %}</td>
-                                            {% else %}
-                                                <td>{{ attribute(data, property.name) }}</td>
+                            {% for property in properties %}
+                                {% if 'id' != property.name and 'routeName' != property.name %}
+                                    <tr>
+                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</td>
+                                        <td style="width: 7px;">:</td>
+                                        {% if 'parent' == property.name %}
+                                            {% if attribute(data, property.name) is not null %}
+                                                {% set parent = attribute(data, property.name) %}
+                                                <td>{{ parent.name ~ '(' ~ parent.code ~ ')' }}</td>
                                             {% endif %}
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
+                                        {% elseif 'showable' == property.name %}
+                                            <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans }}</span>{% endif %}</td>
+                                        {% elseif 'adminOnly' == property.name %}
+                                            <td>{% if attribute(data, property.name) %}{{ 'sas.page.menu.admin_only' | trans }}{% else %}{{ 'sas.page.menu.both' | trans }}{% endif %}</td>
+                                        {% else %}
+                                            <td>{{ attribute(data, property.name) }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
                             </tbody>
                         </table>
                         {% if audits is defined %}
-                        <div class="row mt-5">
-                            <table class="table table-striped table-hover text-nowrap">
-                                <thead>
+                            <div class="row mt-5">
+                                <table class="table table-striped table-hover text-nowrap">
+                                    <thead>
                                     <tr>
                                         <th>{{ 'sas.table.column.audit.type' | trans }}</th>
                                         <th>{{ 'sas.table.column.audit.userId' | trans }}</th>
@@ -40,20 +42,20 @@
                                         <th>{{ 'sas.table.column.audit.ipAddress' | trans }}</th>
                                         <th>{{ 'sas.table.column.audit.data' | trans }}</th>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                {% for key, audit in audits %}
-                                    <tr>
-                                        <td>{{ audit['type'] | upper }}</td>
-                                        <td>{{ audit['user_id'] }}</td>
-                                        <td>{{ audit['username'] }}</td>
-                                        <td>{{ audit['ip_address'] }}</td>
-                                        <td>{{ dump_audit_log(audit['data']) }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                    {% for key, audit in audits %}
+                                        <tr>
+                                            <td>{{ audit['type'] | upper }}</td>
+                                            <td>{{ audit['user_id'] }}</td>
+                                            <td>{{ audit['username'] }}</td>
+                                            <td>{{ audit['ip_address'] }}</td>
+                                            <td>{{ dump_audit_log(audit['data']) }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="card-footer">
