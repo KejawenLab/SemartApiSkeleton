@@ -10,7 +10,7 @@ use Twig\TwigFunction;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-class SettingExtension extends AbstractExtension
+final class SettingExtension extends AbstractExtension
 {
     private SettingService $service;
 

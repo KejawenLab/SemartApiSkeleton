@@ -11,5 +11,5 @@ final class SemartApiSkeleton
 {
     public const CODENAME = 'Borobudur';
 
-    public const VERSION = '3.0';
+    public const VERSION = '3.1';
 }
