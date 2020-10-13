@@ -189,8 +189,8 @@ CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 >
 
 ```bash
-docker-compose build && docker-compose up
-docker-compose exec app bash -c "php bin/console semart:encrypt semart"
+docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console semart:encrypt semart"
 ```
 
 > 

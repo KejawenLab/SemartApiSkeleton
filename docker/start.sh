@@ -15,9 +15,9 @@ if [[ ! -d "/semart/var" ]]; then
     cd /semart && mkdir var
 fi
 
-if [[ "prod" == APP_ENV ]]; then
+if [[ "prod" == "${APP_ENV}" ]]; then
     composer dump-autoload --no-dev --classmap-authoritative
-    rm -f /etc/php/7.4/fpm/conf.d/99-xdebug.ini
+    php /semart/bin/console cache:clear --env=prod
 fi
 
 chmod 777 -R var/
