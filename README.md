@@ -12,7 +12,7 @@
 
 #### Halaman Admin
 
-[!Admin](doc/assets/admin.png)
+![Admin](doc/assets/admin.png)
 
 #### Api Doc
 ![Api Doc](doc/assets/full.png)
