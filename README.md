@@ -200,12 +200,12 @@ docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console semar
 >
 
 ```bash
-docker-compose exec app bash -c "php bin/console cache:clear"
-docker-compose exec app bash -c "chmod 777 -R var"
-docker-compose exec app bash -c "php bin/console doctrine:database:create"
-docker-compose exec app bash -c "php bin/console doctrine:schema:update --force"
-docker-compose exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
-docker-compose exec app bash -c "php bin/console assets:install"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console cache:clear"
+docker-compose -f docker-compose.dev.yml exec app bash -c "chmod 777 -R var"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:database:create"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:schema:update --force"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console assets:install"
 ```
 
 > 
