@@ -1,7 +1,7 @@
 # Semart Api Skeleton
 
 >
-> Semart Api Skeleton adalah skeleton untuk membangun aplikasi berbasis Api
+> Semart Api Skeleton adalah skeleton untuk membangun aplikasi secara sangat cepat untuk aplikasi berbasis Admin maupun Api
 >
 
 ## Video
@@ -9,6 +9,10 @@
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
 ## Screenshot
+
+#### Halaman Admin
+
+[!Admin](doc/assets/admin.png)
 
 #### Api Doc
 ![Api Doc](doc/assets/full.png)
@@ -89,12 +93,6 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
 
 ### Non Docker Install
-
->
-> Install menggunakan metode Non Docker secara default akan menggunakan secure connection configuration
->
-> Ini artinya password database akan dienkripsi sehingga lebih aman
->
 
 ```bash
 composer update --prefer-dist -vvv
@@ -218,13 +216,13 @@ docker-compose exec app bash -c "php bin/console assets:install"
 
 ## Cron Daemon
 
-#### Start Cron Daemon
+#### Start Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
 
 ```bash
 php bin/console cron:start
 ```
 
-#### Stop Cron Daemon
+#### Stop Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
 
 ```bash
 php bin/console cron:stop
@@ -234,6 +232,8 @@ php bin/console cron:stop
 
 >
 > * RESTful Api Generator
+>
+> * Admin Generator
 >
 > * Api Documentation
 >
