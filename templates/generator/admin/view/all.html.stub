@@ -107,7 +107,7 @@
                     "hideMethod": "fadeOut"
                 };
 
-                $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+                $('#sasSearchValue').val(getParameterByName('q'));
 
                 $('.delete').on('click', function() {
                     $('#sasPath').val($(this).data('path'));
@@ -119,9 +119,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
-
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_getall__invoke') }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_{# entity | lower #}_getall__invoke') }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}

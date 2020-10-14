@@ -96,12 +96,10 @@
                     off: 'No'
                 });
 
-                $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
+                $('#sasSearchValue').val(getParameterByName('q'));
 
                 $('#sasSearch').on('click', function () {
-                    localStorage.setItem('sas_search_value', $('#sasSearchValue').val());
-
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', { id: group.id }) }}?q=' + localStorage.getItem('sas_search_value');
+                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', { id: group.id }) }}?q=' + $('#sasSearchValue').val();
                 });
 
                 $(document).on('change', '.permission-view', function () {

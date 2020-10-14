@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+# shellcheck disable=SC2043
 for name in NGINX_WEBROOT
 do
     eval value=\$$name
+    # shellcheck disable=SC2154
     sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
 done
 
@@ -18,6 +20,11 @@ fi
 if [[ "prod" == "${APP_ENV}" ]]; then
     composer dump-autoload --no-dev --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
+fi
+
+if [[ "dev" == "${APP_ENV}" ]]; then
+    composer dump-autoload
+    php /semart/bin/console cache:clear --env=dev
 fi
 
 chmod 777 -R var/

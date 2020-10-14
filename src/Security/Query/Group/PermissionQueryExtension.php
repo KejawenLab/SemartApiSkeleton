@@ -36,7 +36,13 @@ final class PermissionQueryExtension implements QueryExtensionInterface
 
         $menuAlias = $this->aliasHelper->findAlias('menu');
         $queryBuilder->innerJoin(sprintf('%s.menu', $this->aliasHelper->findAlias('root')), $menuAlias);
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $menuAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(
+
+            $queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $groupAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
+            $queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $groupAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
+            $queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $menuAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
+            $queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $menuAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
+        ));
     }
 
     public function support(string $class, Request $request): bool
