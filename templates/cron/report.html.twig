@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-left col-2">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -21,7 +21,7 @@
                             <th>No</th>
                             {% for property in properties %}
                                 {% if 'id' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
+                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
                                 {% endif %}
                             {% endfor %}
                         </tr>
@@ -35,7 +35,7 @@
                                 <td>{{ report.runAt | date('Y-m-d H:i:s') }}</td>
                                 <td>{{ report.runtime | number_format(2, ',', '.') }} detik</td>
                                 <td>{{ dump_cron_log(report.output) }}</td>
-                                <td>{% if report.exitCode == 0 %}<span class="btn btn-success disabled">{{ 'sas.page.cron_report.success' | trans }}</span>{% else %}<span class="btn btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans }}</span>{% endif %}</td>
+                                <td>{% if report.exitCode == 0 %}<span class="btn btn-success disabled">{{ 'sas.page.cron_report.success' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans({}, 'pages') }}</span>{% endif %}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

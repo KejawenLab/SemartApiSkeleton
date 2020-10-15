@@ -13,14 +13,14 @@
                 <div class="card-header">
                     <div class="float-right col-7">
                         <div class="input-group input-group col-12 float-left">
-                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
+                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
                             </div>
                         </div>
                     </div>
                     <div class="float-left col-2">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -30,7 +30,7 @@
                             <th>No</th>
                             {% for property in properties %}
                                 {% if 'id' != property.name and 'file' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</th>
+                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
                                 {% endif %}
                             {% endfor %}
                         </tr>
@@ -166,10 +166,10 @@
                 }
 
                 {% for message in app.flashes('info') %}
-                    toastr['success']('{{ message | trans }}');
+                    toastr['success']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    toastr['error']('{{ message | trans }}');
+                    toastr['error']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
             });
         </script>

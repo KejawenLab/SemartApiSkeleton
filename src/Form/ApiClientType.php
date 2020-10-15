@@ -27,6 +27,7 @@ final class ApiClientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ApiClient::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

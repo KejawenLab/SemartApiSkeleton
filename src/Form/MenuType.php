@@ -62,6 +62,7 @@ final class MenuType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Menu::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

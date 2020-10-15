@@ -11,8 +11,8 @@
                         {{ form_widget(form) }}
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans }}</button>
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans }}</a>
+                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans ({}, 'forms')}}</button>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</a>
                     </div>
                     </form>
                 </div>
