@@ -12,14 +12,14 @@
                 <div class="card-header">
                     <div class="float-right col-7">
                         <div class="input-group input-group col-10 float-left">
-                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans }}">
+                            <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans }}</button>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
                             </div>
                         </div>
                         <div class="float-right col-2">
                             {% if is_granted('add', menu) %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_user_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans }}</a>
+                                <a href="{{ path('kejawenlab_apiskeleton_admin_user_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -29,12 +29,12 @@
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>{{ 'sas.table.column.user.group' | trans }}</th>
-                            <th>{{ 'sas.table.column.user.supervisor' | trans }}</th>
-                            <th>{{ 'sas.table.column.user.username' | trans }}</th>
-                            <th>{{ 'sas.table.column.user.fullName' | trans }}</th>
-                            <th>{{ 'sas.table.column.user.email' | trans }}</th>
-                            <th style="width: 149px;">{{ 'sas.table.column.action' | trans }}</th>
+                            <th>{{ 'sas.table.column.user.group' | trans({}, 'tables') }}</th>
+                            <th>{{ 'sas.table.column.user.supervisor' | trans({}, 'tables') }}</th>
+                            <th>{{ 'sas.table.column.user.username' | trans({}, 'tables') }}</th>
+                            <th>{{ 'sas.table.column.user.fullName' | trans({}, 'tables') }}</th>
+                            <th>{{ 'sas.table.column.user.email' | trans({}, 'tables') }}</th>
+                            <th style="width: 149px;">{{ 'sas.table.column.action' | trans({}, 'tables') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,13 +47,13 @@
                                 <td>{{ user.fullName }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_user_get__invoke', {id: user.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans }}</a>
+                                    <a href="{{ path('kejawenlab_apiskeleton_admin_user_get__invoke', {id: user.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_user_put__invoke', {id: user.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans }}</a>
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_user_put__invoke', {id: user.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_user_delete__invoke', {id: user.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': user.username}) }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
-                                            {{ 'sas.table.action.delete' | trans }}
+                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_user_delete__invoke', {id: user.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': user.username}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                            {{ 'sas.table.action.delete' | trans({}, 'tables') }}
                                         </button>
                                     {% endif %}
                                 </td>
@@ -72,7 +72,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans }}</h5>
+                    <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans({}, 'notifications') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -80,8 +80,8 @@
                 </div>
                 <div class="modal-body" id="sasNotification"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans }}</button>
-                    <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans({}, 'notifications') }}</button>
+                    <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans({}, 'notifications') }}</button>
                 </div>
             </div>
         </div>
@@ -127,10 +127,10 @@
                 });
 
                 {% for message in app.flashes('info') %}
-                    toastr['success']('{{ message | trans }}');
+                    toastr['success']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    toastr['error']('{{ message | trans }}');
+                    toastr['error']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
             });
         </script>
