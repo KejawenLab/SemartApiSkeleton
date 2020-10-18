@@ -36,6 +36,7 @@ final class SettingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Setting::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -31,6 +31,7 @@ final class GroupType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Group::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -12,10 +12,10 @@
                                 {% for property in properties %}
                                     {% if 'id' != property.name %}
                                         <tr>
-                                            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</td>
+                                            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
                                             <td style="width: 7px;">:</td>
                                             {% if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name %}
-                                                <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans }}</span>{% endif %}</td>
+                                                <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>{% endif %}</td>
                                             {% else %}
                                                 <td>{{ attribute(data, property.name) }}</td>
                                             {% endif %}
@@ -29,11 +29,11 @@
                             <table class="table table-striped table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>{{ 'sas.table.column.audit.type' | trans }}</th>
-                                        <th>{{ 'sas.table.column.audit.userId' | trans }}</th>
-                                        <th>{{ 'sas.table.column.audit.username' | trans }}</th>
-                                        <th>{{ 'sas.table.column.audit.ipAddress' | trans }}</th>
-                                        <th>{{ 'sas.table.column.audit.data' | trans }}</th>
+                                        <th>{{ 'sas.table.column.audit.type' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.username' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.data' | trans({}, 'tables') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,12 +52,12 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_run__invoke', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans }}</a>
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_report__invoke', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.logs' | trans }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_run__invoke', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_report__invoke', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.logs' | trans({}, 'forms') }}</a>
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_cron_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans }}</a>
+                            <a href="{{ path('kejawenlab_apiskeleton_admin_cron_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                         {% endif %}
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

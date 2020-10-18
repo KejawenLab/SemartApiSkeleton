@@ -14,7 +14,7 @@
                             {% for property in properties %}
                                 {% if 'id' != property.name and 'password' != property.name and 'plainPassword' != property.name %}
                                     <tr>
-                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans }}</td>
+                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
                                         <td style="width: 7px;">:</td>
                                         {% if 'group' == property.name %}
                                             {% set group = attribute(data, property.name) %}
@@ -29,7 +29,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_me_put__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.page.profile.update' | trans }}</a>
+                        <a href="{{ path('kejawenlab_apiskeleton_admin_me_put__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.page.profile.update' | trans({}, 'pages') }}</a>
                     </div>
                 </div>
             </div>
@@ -60,10 +60,10 @@
                 };
 
                 {% for message in app.flashes('info') %}
-                    toastr['success']('{{ message | trans }}');
+                    toastr['success']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    toastr['error']('{{ message | trans }}');
+                    toastr['error']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
             });
         </script>
