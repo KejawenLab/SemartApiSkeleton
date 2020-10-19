@@ -15,12 +15,19 @@ Sebelum membahas lebih jauh, untuk menambahkan menu pada Semart Api Skeleton. An
 Cara menambahkan menu :
 
 1. Login ke aplikasi  https://localhost:8000/admin atau sesuai alamat yang tertera ketika menjalankan perintah symfony server:start.
+
 2. Klik Administrator.
+
 3. Klik Menu.
+
 4. Klik Tambah Baru.
+
 5. Pilih menu Induk jika ada.
+
 6. Masukkan kode menu.
+
 7. Masukkan nama menu (nama menu yang akan ditampilkan).
+
 8. Masukkan nama rute, khusus untuk nama rute, jika dicentang *Khusus Admin?*, maka yang dipilih route admin bukan route api. Untuk melihat daftar route dapat menggunakan.
 
 ```bash
@@ -43,7 +50,9 @@ Nama rute yang digunakan *kejawenlab_apiskeleton_admin_user_getall__invoke*, sam
 Contoh, ubah menu USER, maka nama rute yang Anda temukan adalah *kejawenlab_apiskeleton_user_getall*, jika ingin *Khusus Admin?* dicentang atau diaktifkan. Maka diganti dengan *kejawenlab_apiskeleton_admin_user_getall__invoke*.
  
  9. Pilih urutan, ini akan mempengaruhi tata letak atau urutan menu.
+ 
  10. Centang *Tampilkan?*, jika ingin menonaktifkan menu tinggal centang dihilangkan.
+ 
  11. Simpan.
  
 ![Menu](https://i.ibb.co/GTvK008/1.png "Menu") 
