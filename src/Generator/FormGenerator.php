@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class FormGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
     {
         $shortName = $class->getShortName();
         $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);

@@ -25,7 +25,7 @@ final class ApiControllerGenerator extends AbstractGenerator
         $this->reader = $reader;
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
     {
         $shortName = $class->getShortName();
         $getAllFile = sprintf('%s/src/Controller/%s/GetAll.php', $this->kernel->getProjectDir(), $shortName);

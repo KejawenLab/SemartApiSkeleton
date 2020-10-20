@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class RepositoryGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
     {
         $shortName = $class->getShortName();
         $repositoryFile = sprintf('%s/src/Repository/%sRepository.php', $this->kernel->getProjectDir(), $shortName);
@@ -23,8 +23,8 @@ final class RepositoryGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $repositoryFile));
         }
 
-        $repositoryModelFile = sprintf('%s/src/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), $shortName, $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\Model\%sRepositoryInterface"</info></comment>', $shortName, $shortName));
+        $repositoryModelFile = sprintf('%s/src/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder? $folder: $shortName), $shortName);
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\ApiSkeleton\%s\Model\%sRepositoryInterface"</info></comment>', ($folder? $folder: $shortName), $shortName));
         if (!$this->fileSystem->exists($repositoryModelFile)) {
             $repositoryModel = $this->twig->render('generator/repository_model.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($repositoryModelFile, $repositoryModel);

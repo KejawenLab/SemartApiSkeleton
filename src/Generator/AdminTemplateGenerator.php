@@ -20,7 +20,7 @@ final class AdminTemplateGenerator extends AbstractGenerator
         parent::__construct($twig, $fileSystem, $kernel);
     }
 
-    public function generate(\ReflectionClass $entityClass, OutputInterface $output): void
+    public function generate(\ReflectionClass $entityClass, OutputInterface $output, ?string $folder): void
     {
         $projectDir = $this->kernel->getProjectDir();
         $shortName = $entityClass->getShortName();

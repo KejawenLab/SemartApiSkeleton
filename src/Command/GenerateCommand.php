@@ -44,6 +44,7 @@ final class GenerateCommand extends Command
             ->addOption('force', 'f', InputOption::VALUE_NONE)
             ->addOption('admin', 'admin', InputOption::VALUE_NONE)
             ->addOption('api', 'api', InputOption::VALUE_NONE)
+            ->addOption('folder', 'folder', InputOption::VALUE_NONE)
         ;
     }
 
@@ -89,7 +90,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
         ]), $output);
 
         $output->writeln('<info>Generating RESTful API and/or Admin Page</info>');
-        $this->generator->generate($reflection, $scope, $output);
+        $this->generator->generate($reflection, $scope, $output, $input->getOption('folder'));
 
         if ($parentCode = $input->getOption('parent')) {
             $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));

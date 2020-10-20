@@ -17,7 +17,7 @@ interface GeneratorInterface
 
     public const SCOPE_ALL = 'all';
 
-    public function generate(\ReflectionClass $class, OutputInterface $output): void;
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void;
 
     public function support(string $scope): bool;
 }
