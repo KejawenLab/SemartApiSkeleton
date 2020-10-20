@@ -18,6 +18,7 @@ if [[ ! -d "/semart/var" ]]; then
 fi
 
 if [[ "prod" == "${APP_ENV}" ]]; then
+    cd /semart && composer update --prefer-dist -vvv
     composer dump-autoload --no-dev --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
 fi
