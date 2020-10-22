@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class SearchQueryExtensionGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $queryFile = sprintf('%s/src/%s/Query/%sQueryExtension.php', $this->kernel->getProjectDir(), ($folder? $folder: $shortName), $shortName);

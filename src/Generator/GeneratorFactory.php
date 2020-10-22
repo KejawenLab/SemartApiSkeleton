@@ -22,7 +22,7 @@ final class GeneratorFactory
         $this->generators = $generators;
     }
 
-    public function generate(\ReflectionClass $class, string $scope, OutputInterface $output, ?string $folder): void
+    public function generate(\ReflectionClass $class, string $scope, OutputInterface $output, ?string $folder = null): void
     {
         foreach ($this->generators as $generator) {
             if (GeneratorInterface::SCOPE_ALL !== $scope) {

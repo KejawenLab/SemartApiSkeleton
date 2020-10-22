@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class RepositoryGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $repositoryFile = sprintf('%s/src/Repository/%sRepository.php', $this->kernel->getProjectDir(), $shortName);

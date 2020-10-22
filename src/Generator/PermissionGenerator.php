@@ -46,7 +46,7 @@ final class PermissionGenerator extends AbstractGenerator
         parent::__construct($twig, $fileSystem, $kernel);
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $shortNameUpper = StringUtil::uppercase($shortName);
