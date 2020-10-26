@@ -1,5 +1,5 @@
-deb http://buaya.klas.or.id/ubuntu/ focal main restricted universe multiverse
-deb http://buaya.klas.or.id/ubuntu/ focal-updates main restricted universe multiverse
-deb http://buaya.klas.or.id/ubuntu/ focal-security main restricted universe multiverse
-deb http://buaya.klas.or.id/ubuntu/ focal-backports main restricted universe multiverse
-deb http://buaya.klas.or.id/ubuntu/ focal-proposed main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt focal main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt focal-proposed main restricted universe multiverse

@@ -15,7 +15,7 @@ RUN apt install php php-cli php-curl php-intl php-mbstring php-xml php-zip php-d
 
 # Install Composer
 ADD docker/php/composer.sh /composer.sh
-RUN chmod +x /composer.sh
+RUN chmod a+x /composer.sh
 RUN /composer.sh && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN rm -f /composer.sh
 
