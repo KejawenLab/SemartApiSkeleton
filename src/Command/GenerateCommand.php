@@ -90,7 +90,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
         ]), $output);
 
         $output->writeln('<info>Generating RESTful API and/or Admin Page</info>');
-        $this->generator->generate($reflection, $scope, $output, $input->getOption('folder'));
+        $this->generator->generate($reflection, $scope, $output, $input->getOption('folder')?: '');
 
         if ($parentCode = $input->getOption('parent')) {
             $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));
