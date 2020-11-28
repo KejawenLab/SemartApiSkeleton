@@ -17,5 +17,5 @@ final class SemartApiSkeleton
 
     public const VERSION_MINOR = 400;
 
-    public const VERSION_PATCH = 1;
+    public const VERSION_PATCH = 2;
 }
