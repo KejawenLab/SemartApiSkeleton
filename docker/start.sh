@@ -21,14 +21,15 @@ if [[ "prod" == "${APP_ENV}" ]]; then
     cd /semart && composer update --prefer-dist -vvv
     composer dump-autoload --no-dev --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
+    chmod 777 -R var/
 fi
 
 if [[ "dev" == "${APP_ENV}" ]]; then
     composer dump-autoload
     php /semart/bin/console cache:clear --env=dev
+    chmod 777 -R var/
 fi
 
-chmod 777 -R var/
 chmod 777 -R storage/
 chmod 755 -R config/
 chmod 755 -R vendor/
