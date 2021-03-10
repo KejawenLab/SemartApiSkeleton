@@ -111,7 +111,7 @@
         "version": "1.0.1"
     },
     "exsyst/swagger": {
-        "version": "v0.4.1"
+        "version": "v0.4.2"
     },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
@@ -251,6 +251,9 @@
         "files": [
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
+    },
+    "react/promise": {
+        "version": "v2.8.0"
     },
     "seld/jsonlint": {
         "version": "1.8.0"
