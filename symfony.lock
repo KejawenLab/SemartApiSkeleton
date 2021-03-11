@@ -23,16 +23,20 @@
     "cron/cron": {
         "version": "1.4.2"
     },
-    "damienharper/doctrine-audit-bundle": {
-        "version": "1.0",
+    "damienharper/auditor": {
+        "version": "1.2.0"
+    },
+    "damienharper/auditor-bundle": {
+        "version": "4.0",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
-            "version": "1.0",
-            "ref": "ab8b371ee4206c79a144f3617d8eef3d6e7b87be"
+            "version": "4.0",
+            "ref": "694b129ef686d68a4c9ca6b3cafbeb3dec0c9c2d"
         },
         "files": [
-            "config/packages/dh_doctrine_audit.yaml"
+            "config/packages/dh_auditor.yaml",
+            "config/routes/dh_auditor.yaml"
         ]
     },
     "doctrine/annotations": {

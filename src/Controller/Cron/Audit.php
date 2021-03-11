@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use DH\DoctrineAuditBundle\Reader\AuditReader;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -31,9 +31,9 @@ final class Audit extends AbstractFOSRestController
 
     private AuditService $audit;
 
-    private AuditReader $reader;
+    private Reader $reader;
 
-    public function __construct(CronService $service, AuditService $audit, AuditReader $reader)
+    public function __construct(CronService $service, AuditService $audit, Reader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;
@@ -83,7 +83,7 @@ final class Audit extends AbstractFOSRestController
             throw new NotFoundHttpException();
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable(Cron::class)) {
+        if (!$this->reader->getProvider()->isAuditable(Cron::class)) {
             return $this->view([]);
         }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
-use DH\DoctrineAuditBundle\Reader\AuditReader;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Entity\Media;
@@ -27,9 +27,9 @@ final class Audit extends AbstractController
 
     private AuditService $audit;
 
-    private AuditReader $reader;
+    private Reader $reader;
 
-    public function __construct(MediaService $service, AuditService $audit, AuditReader $reader)
+    public function __construct(MediaService $service, AuditService $audit, Reader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;
@@ -47,7 +47,7 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable(Group::class)) {
+        if (!$this->reader->getProvider()->isAuditable(Group::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));

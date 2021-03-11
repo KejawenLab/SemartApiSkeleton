@@ -13,7 +13,7 @@
         "ext-redis": "*",
         "composer/composer": ">=2.0",
         "cron/cron": ">=1.4",
-        "damienharper/doctrine-audit-bundle": "^3.4",
+        "damienharper/auditor-bundle": ">=4.0",
         "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
         "friendsofsymfony/rest-bundle": ">=3.0",
