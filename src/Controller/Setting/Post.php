@@ -42,11 +42,15 @@ final class Post extends AbstractFOSRestController
      *
      * @SWG\Tag(name="Setting")
      * @SWG\RequestBody(
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=SettingType::class)
-     *     ),
-     *     description="Setting form"
+     *     content={
+     *         @SWG\MediaType(
+     *             mediaType="application/json",
+     *             @SWG\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=SettingType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @SWG\Response(
      *     response=201,

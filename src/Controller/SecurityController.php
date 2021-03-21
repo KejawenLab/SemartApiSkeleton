@@ -22,10 +22,15 @@ final class SecurityController extends AbstractFOSRestController
      *
      * @SWG\Tag(name="Security")
      * @SWG\RequestBody(
-     *     @SWG\Schema(
-     *         @SWG\Property(property="username", type="string"),
-     *         @SWG\Property(property="password", type="string")
-     *     )
+     *     content={
+     *         @SWG\MediaType(
+     *             mediaType="application/json",
+     *             @SWG\Schema(
+     *                 @SWG\Property(property="username", type="string"),
+     *                 @SWG\Property(property="password", type="string")
+     *             )
+     *         )
+     *     }
      * )
      * @SWG\Response(
      *     response=200,
