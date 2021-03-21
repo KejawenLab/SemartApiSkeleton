@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,12 +41,12 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/groups")
      *
      * @SWG\Tag(name="Group")
-     * @SWG\Parameter(
-     *     name="group",
-     *     in="body",
-     *     type="object",
-     *     description="Group form",
-     *     @Model(type=GroupType::class)
+     * @SWG\RequestBody(
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=GroupType::class)
+     *     ),
+     *     description="Group form"
      * )
      * @SWG\Response(
      *     response=201,

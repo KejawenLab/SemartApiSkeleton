@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

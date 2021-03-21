@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,12 +41,12 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/menus")
      *
      * @SWG\Tag(name="Menu")
-     * @SWG\Parameter(
-     *     name="menu",
-     *     in="body",
-     *     type="object",
-     *     description="Menu form",
-     *     @Model(type=MenuType::class)
+     * @SWG\RequestBody(
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=MenuType::class)
+     *     ),
+     *     description="Menu form"
      * )
      * @SWG\Response(
      *     response=201,

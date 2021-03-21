@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,12 +41,12 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/settings")
      *
      * @SWG\Tag(name="Setting")
-     * @SWG\Parameter(
-     *     name="setting",
-     *     in="body",
-     *     type="object",
-     *     description="Setting form",
-     *     @Model(type=SettingType::class)
+     * @SWG\RequestBody(
+     *     @SWG\Schema(
+     *         type="object",
+     *         ref=@Model(type=SettingType::class)
+     *     ),
+     *     description="Setting form"
      * )
      * @SWG\Response(
      *     response=201,

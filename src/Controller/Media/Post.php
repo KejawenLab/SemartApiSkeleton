@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -39,25 +39,6 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/medias")
      *
      * @SWG\Tag(name="Media")
-     * @SWG\Post(consumes={"multipart/form-data"})
-     * @SWG\Parameter(
-     *     name="file",
-     *     in="formData",
-     *     type="file",
-     *     description="File to upload"
-     * )
-     * @SWG\Parameter(
-     *     name="folder",
-     *     in="formData",
-     *     type="string",
-     *     description="Folder path"
-     * )
-     * @SWG\Parameter(
-     *     name="public",
-     *     in="formData",
-     *     type="boolean",
-     *     description="Is public"
-     * )
      * @SWG\Response(
      *     response=201,
      *     description="Crate new media",

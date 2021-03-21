@@ -114,9 +114,6 @@
     "doctrine/sql-formatter": {
         "version": "1.0.1"
     },
-    "exsyst/swagger": {
-        "version": "v0.4.2"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {

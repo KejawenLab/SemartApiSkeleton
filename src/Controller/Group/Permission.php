@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -41,13 +41,19 @@ final class Permission extends AbstractFOSRestController
      * @SWG\Parameter(
      *     name="page",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Page indicator"
      * )
      * @SWG\Parameter(
      *     name="limit",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Records per page"
      * )
      * @SWG\Response(

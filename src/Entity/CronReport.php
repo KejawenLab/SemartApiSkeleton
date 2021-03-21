@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
 use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
 use Ramsey\Uuid\UuidInterface;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**

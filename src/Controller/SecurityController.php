@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Controller;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
@@ -21,9 +21,7 @@ final class SecurityController extends AbstractFOSRestController
      * @Rest\Post("/login", name=SecurityController::ROUTE_NAME, priority=17)
      *
      * @SWG\Tag(name="Security")
-     * @SWG\Parameter(
-     *     name="login",
-     *     in="body",
+     * @SWG\RequestBody(
      *     @SWG\Schema(
      *         @SWG\Property(property="username", type="string"),
      *         @SWG\Property(property="password", type="string")

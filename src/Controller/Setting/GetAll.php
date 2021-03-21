@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -41,25 +41,37 @@ final class GetAll extends AbstractFOSRestController
      * @SWG\Parameter(
      *     name="page",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Page indicator"
      * )
      * @SWG\Parameter(
      *     name="limit",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Records per page"
      * )
      * @SWG\Parameter(
      *     name="q",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Search setting by parameter"
      * )
      * @SWG\Parameter(
      *     name="parameter",
      *     in="query",
-     *     type="string",
+     *     @SWG\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Filter setting by parameter"
      * )
      * @SWG\Response(
