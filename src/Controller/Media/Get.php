@@ -41,12 +41,18 @@ final class Get extends AbstractFOSRestController
      * @OA\Tag(name="Media")
      * @OA\Response(
      *     response=200,
-     *     description="Return file",
-     *     @OA\Schema(
-     *          type="file",
-     *          format="binary"
-     *     )
+     *     description= "Api client detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="*",
+     *             @OA\Schema(
+     *                 type="string",
+     *                 format="binary"
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=77, period=1)

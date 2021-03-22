@@ -36,12 +36,18 @@ final class Get extends AbstractFOSRestController
      * @OA\Tag(name="Group")
      * @OA\Response(
      *     response=200,
-     *     description="Return group detail",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Group::class, groups={"read"})
-     *     )
+     *     description= "Api client detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Group::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

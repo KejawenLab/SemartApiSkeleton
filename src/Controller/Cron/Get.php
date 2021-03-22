@@ -36,12 +36,18 @@ final class Get extends AbstractFOSRestController
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=200,
-     *     description="Return cron detail",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Cron::class, groups={"read"})
-     *     )
+     *     description= "Api client detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Cron::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

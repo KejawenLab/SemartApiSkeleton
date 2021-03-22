@@ -76,11 +76,16 @@ final class GetAll extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return user list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=User::class, groups={"read"}))
-     *     )
+     *     description= "User list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=User::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

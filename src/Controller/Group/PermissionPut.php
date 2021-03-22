@@ -48,19 +48,28 @@ final class PermissionPut extends AbstractFOSRestController
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=PermissionType::class)
-     *     ),
-     *     description="Permission form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=PermissionType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Update permission",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Permission::class, groups={"read"})
-     *     )
+     *     description= "Permission updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Permission::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

@@ -67,11 +67,16 @@ final class GetAll extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return media list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=Media::class, groups={"read"}))
-     *     )
+     *     description= "Media list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Media::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

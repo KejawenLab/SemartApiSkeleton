@@ -41,7 +41,7 @@ final class Delete extends AbstractFOSRestController
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Response(
      *     response=204,
-     *     description="Delete {{ entityLowerize }}"
+     *     description="{{ entityHumanize }} deleted"
      * )
      *
      * @Security(name="Bearer")

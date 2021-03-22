@@ -50,11 +50,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new user",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *     description= "User created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

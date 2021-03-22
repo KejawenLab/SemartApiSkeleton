@@ -54,11 +54,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new setting",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Setting::class, groups={"read"})
-     *     )
+     *     description= "Setting created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Setting::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

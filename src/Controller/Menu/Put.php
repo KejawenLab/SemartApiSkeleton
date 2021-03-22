@@ -55,11 +55,16 @@ final class Put extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Update menu",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Menu::class, groups={"read"})
-     *     )
+     *     description= "Menu updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Menu::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

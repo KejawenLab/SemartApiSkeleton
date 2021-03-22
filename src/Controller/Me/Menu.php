@@ -36,11 +36,16 @@ final class Menu extends AbstractFOSRestController
      * @OA\Tag(name="Profile")
      * @OA\Response(
      *     response=200,
-     *     description="Return menu list for logged user",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
-     *     )
+     *     description= "Menu list for logged user",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      * @Security(name="Bearer")
      *

@@ -36,12 +36,18 @@ final class Get extends AbstractFOSRestController
      * @OA\Tag(name="User")
      * @OA\Response(
      *     response=200,
-     *     description="Return user detail",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *     description= "User detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

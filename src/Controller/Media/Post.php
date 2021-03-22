@@ -53,11 +53,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new media",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Media::class, groups={"read"})
-     *     )
+     *     description= "Media created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Media::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

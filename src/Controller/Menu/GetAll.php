@@ -76,11 +76,16 @@ final class GetAll extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return menu list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=Menu::class, groups={"read"}))
-     *     )
+     *     description= "Menu list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Menu::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

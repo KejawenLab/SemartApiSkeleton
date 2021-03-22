@@ -40,12 +40,18 @@ final class Get extends AbstractFOSRestController
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Response(
      *     response=200,
-     *     description="Return {{ entityLowerize }} detail",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
-     *     )
+     *     description= "{{ entityHumanize }} detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

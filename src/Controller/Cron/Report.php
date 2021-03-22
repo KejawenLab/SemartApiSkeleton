@@ -43,12 +43,18 @@ final class Report extends AbstractFOSRestController
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=200,
-     *     description="Return cron job report",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=CronReport::class, groups={"read"})
-     *     )
+     *     description= "Cron report list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=CronReport::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

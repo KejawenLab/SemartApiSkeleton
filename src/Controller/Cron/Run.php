@@ -43,12 +43,20 @@ final class Run extends AbstractFOSRestController
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=200,
-     *     description="Job status",
-     *     @OA\Schema(
-     *         @OA\Property(property="code", type="integer"),
-     *         @OA\Property(property="message", type="string")
-     *     )
+     *     description= "Job status",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 properties={
+     *                     @OA\Property(property="code", type="integer"),
+     *                     @OA\Property(property="message", type="string")
+     *                 }
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

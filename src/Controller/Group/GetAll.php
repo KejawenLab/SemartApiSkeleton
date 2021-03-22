@@ -76,11 +76,16 @@ final class GetAll extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return group list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=Group::class, groups={"read"}))
-     *     )
+     *     description= "Api client list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Group::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @RateLimit(limit=7, period=1)

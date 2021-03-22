@@ -47,6 +47,7 @@ final class Get extends AbstractFOSRestController
      *         )
      *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

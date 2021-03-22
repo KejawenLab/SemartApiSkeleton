@@ -54,11 +54,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new menu",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Menu::class, groups={"read"})
-     *     )
+     *     description= "Menu created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Menu::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

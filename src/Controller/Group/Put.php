@@ -55,11 +55,16 @@ final class Put extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Update group",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Group::class, groups={"read"})
-     *     )
+     *     description= "Group updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Group::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

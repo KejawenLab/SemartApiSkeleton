@@ -54,12 +54,18 @@ final class Put extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Update profile",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *     description= "User profile",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

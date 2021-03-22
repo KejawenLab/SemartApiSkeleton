@@ -48,29 +48,7 @@ final class Audit extends AbstractFOSRestController
      * @OA\Tag(name="Media")
      * @OA\Response(
      *     response=200,
-     *     description="Return audit list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(
-     *             @OA\Property(type="object", property="entity", ref=@Model(type=Media::class, groups={"read"})),
-     *             @OA\Property(type="array", property="items", @OA\Items(
-     *                 @OA\Property(type="string", property="type"),
-     *                 @OA\Property(type="string", property="user_id"),
-     *                 @OA\Property(type="string", property="username"),
-     *                 @OA\Property(type="string", property="ip_address"),
-     *                 @OA\Property(type="array", property="data", @OA\Items(
-     *                     @OA\Property(type="array", property="field1", @OA\Items(
-     *                         @OA\Property(type="string", property="new"),
-     *                         @OA\Property(type="string", property="old"),
-     *                     )),
-     *                     @OA\Property(type="array", property="field2", @OA\Items(
-     *                         @OA\Property(type="string", property="new"),
-     *                         @OA\Property(type="string", property="old"),
-     *                     ))
-     *                 ))
-     *             ))
-     *         )
-     *     )
+     *     description="Audit list"
      * )
      *
      * @Security(name="Bearer")

@@ -54,11 +54,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new group",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Group::class, groups={"read"})
-     *     )
+     *     description= "Group created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Group::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

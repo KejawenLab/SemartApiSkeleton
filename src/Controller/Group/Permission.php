@@ -44,8 +44,7 @@ final class Permission extends AbstractFOSRestController
      *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Page indicator"
+     *     )
      * )
      * @OA\Parameter(
      *     name="limit",
@@ -53,16 +52,20 @@ final class Permission extends AbstractFOSRestController
      *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Records per page"
+     *     )
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return permission list of group",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
-     *     )
+     *     description= "Permission list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")
