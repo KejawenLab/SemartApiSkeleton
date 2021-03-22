@@ -55,11 +55,16 @@ final class Put extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Update cron",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Cron::class, groups={"read"})
-     *     )
+     *     description= "Cron updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Cron::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

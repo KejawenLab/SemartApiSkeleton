@@ -40,27 +40,32 @@ final class GetAll extends AbstractFOSRestController
      * @OA\Tag(name="Api Client")
      * @OA\Parameter(
      *     name="page",
-     *     in="query",     *     @OA\Schema(
+     *     in="query",
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Page indicator"
+     *     )
      * )
      * @OA\Parameter(
      *     name="limit",
-     *     in="query",     *     @OA\Schema(
+     *     in="query",
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Records per page"
+     *     )
      * )
      * @OA\Response(
      *     response=200,
-     *     description="Return api client list",
-     *     @OA\Schema(
-     *         type="array",
-     *         @OA\Items(ref=@Model(type=ApiClient::class, groups={"read"}))
-     *     )
+     *     description= "Api client list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=ApiClient::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

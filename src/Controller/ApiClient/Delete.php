@@ -37,7 +37,7 @@ final class Delete extends AbstractFOSRestController
      * @OA\Tag(name="Api Client")
      * @OA\Response(
      *     response=204,
-     *     description="Delete api client"
+     *     description="Api client deletec"
      * )
      *
      * @Security(name="Bearer")

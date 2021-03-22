@@ -55,11 +55,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new api client",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=ApiClient::class, groups={"read"})
-     *     )
+     *     description= "Api client created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=ApiClient::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

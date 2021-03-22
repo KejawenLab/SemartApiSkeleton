@@ -54,11 +54,16 @@ final class Post extends AbstractFOSRestController
      * )
      * @OA\Response(
      *     response=201,
-     *     description="Crate new cron",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=Cron::class, groups={"read"})
-     *     )
+     *     description= "Cron created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Cron::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

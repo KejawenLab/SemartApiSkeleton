@@ -18,7 +18,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -41,31 +41,31 @@ final class GetAll extends AbstractFOSRestController
     /**
      * @Rest\Get("/{{ entityPluralDash }}")
      *
-     * @SWG\Tag(name="{{ entityHumanize }}")
-     * @SWG\Parameter(
+     * @OA\Tag(name="{{ entityHumanize }}")
+     * @OA\Parameter(
      *     name="page",
      *     in="query",
      *     type="string",
      *     description="Page indicator"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="limit",
      *     in="query",
      *     type="string",
      *     description="Records per page"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="q",
      *     in="query",
      *     type="string",
      *     description="Search {{ entityLowerize }} by [change me]"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="Return {{ entityLowerize }} list",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type={{ entityHumanize }}::class, groups={"read"}))
+     *         @OA\Items(ref=@Model(type={{ entityHumanize }}::class, groups={"read"}))
      *     )
      * )
      *
