@@ -43,11 +43,15 @@ final class Post extends AbstractFOSRestController
      *
      * @OA\Tag(name="Api Client")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=ApiClientType::class)
-     *     ),
-     *     description="Api client form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=ApiClientType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=201,

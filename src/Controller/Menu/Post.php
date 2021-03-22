@@ -42,11 +42,15 @@ final class Post extends AbstractFOSRestController
      *
      * @OA\Tag(name="Menu")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=MenuType::class)
-     *     ),
-     *     description="Menu form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=MenuType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=201,

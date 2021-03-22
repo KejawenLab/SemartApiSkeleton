@@ -42,11 +42,15 @@ final class Post extends AbstractFOSRestController
      *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=CronType::class)
-     *     ),
-     *     description="Cron form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=CronType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=201,

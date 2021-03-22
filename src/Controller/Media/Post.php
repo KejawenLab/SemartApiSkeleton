@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -39,6 +40,17 @@ final class Post extends AbstractFOSRestController
      * @Rest\Post("/medias")
      *
      * @OA\Tag(name="Media")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=MediaType::class)
+     *             )
+     *         )
+     *     }
+     * )
      * @OA\Response(
      *     response=201,
      *     description="Crate new media",

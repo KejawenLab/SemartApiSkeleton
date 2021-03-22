@@ -42,11 +42,15 @@ final class Post extends AbstractFOSRestController
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=GroupType::class)
-     *     ),
-     *     description="Group form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=GroupType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=201,

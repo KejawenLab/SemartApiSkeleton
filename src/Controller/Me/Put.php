@@ -42,11 +42,15 @@ final class Put extends AbstractFOSRestController
      *
      * @OA\Tag(name="Profile")
      * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=UpdateProfileType::class)
-     *     ),
-     *     description="Profile form"
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=UpdateProfileType::class)
+     *             )
+     *         )
+     *     }
      * )
      * @OA\Response(
      *     response=200,
