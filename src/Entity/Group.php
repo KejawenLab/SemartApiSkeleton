@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Repository\GroupRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"code"})
  */
-class Group implements GroupInterface
+class Group implements GroupInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -104,5 +104,10 @@ class Group implements GroupInterface
     public function __sleep()
     {
         return [];
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getName();
     }
 }

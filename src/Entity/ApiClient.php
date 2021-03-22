@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Auditable()
  */
-class ApiClient implements ApiClientInterface
+class ApiClient implements ApiClientInterface, EntityInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -167,5 +167,10 @@ class ApiClient implements ApiClientInterface
     public function isEncoded(): bool
     {
         return false;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getName();
     }
 }

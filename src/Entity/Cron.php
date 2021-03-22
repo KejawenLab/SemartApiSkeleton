@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Cron\Validator\CronScheduleFormat;
 use KejawenLab\ApiSkeleton\Repository\CronRepository;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"name"})
  * @ConsoleCommand()
  */
-class Cron implements CronInterface
+class Cron implements CronInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -208,5 +208,10 @@ class Cron implements CronInterface
         $this->running = $running;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getName();
     }
 }

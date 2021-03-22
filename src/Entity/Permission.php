@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Auditable()
  */
-class Permission implements PermissionInterface
+class Permission implements PermissionInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -173,5 +173,10 @@ class Permission implements PermissionInterface
         $this->deletable = (bool) $deletable;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return null;
     }
 }

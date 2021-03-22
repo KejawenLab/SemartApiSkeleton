@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Validator\Route;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"code"})
  */
-class Menu implements MenuInterface
+class Menu implements MenuInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -261,5 +261,10 @@ class Menu implements MenuInterface
         $this->adminOnly = $adminOnly;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getName();
     }
 }

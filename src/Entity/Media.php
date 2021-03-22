@@ -11,7 +11,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Repository\MediaRepository;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -27,7 +27,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @Vich\Uploadable
  */
-class Media implements MediaInterface
+class Media implements MediaInterface, EntityInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -141,5 +141,10 @@ class Media implements MediaInterface
         $this->file = $file;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getFileUrl();
     }
 }

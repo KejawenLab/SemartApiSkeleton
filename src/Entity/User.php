@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class User implements UserInterface
+class User implements UserInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -234,5 +234,10 @@ class User implements UserInterface
     public function isEncoded(): bool
     {
         return true;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getFullName();
     }
 }
