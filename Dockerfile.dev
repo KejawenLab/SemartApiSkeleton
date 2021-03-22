@@ -4,14 +4,15 @@ MAINTAINER Muhammad Surya Ihsanuddin<surya.kejawen@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD docker/apt/sources.list /etc/apt/sources.list
-
 # Install Software
 RUN apt update && apt upgrade -y && apt autoremove -y
+RUN apt install software-properties-common locales -y
+RUN locale-gen en_US.UTF-8 && export LANG=en_US.UTF-8
+RUN add-apt-repository ppa:ondrej/php -y
 RUN apt install nginx-full supervisor vim wget curl unzip -y
-RUN apt install php php-cli php-curl php-intl php-mbstring php-xml php-zip php-dev \
-    php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc php-pear \
-    php-bz2 php-common php-gd php-ldap php-mysql php-readline php-soap php-tidy php-xsl php-redis -y
+RUN apt install php8.0 php8.0-cli php8.0-curl php8.0-intl php8.0-mbstring php8.0-xml php8.0-zip php8.0-dev \
+    php8.0-bcmath php8.0-cli php8.0-fpm php8.0-imap php8.0-opcache php8.0-xmlrpc php-pear \
+    php8.0-bz2 php8.0-common php8.0-gd php8.0-ldap php8.0-mysql php8.0-readline php8.0-soap php8.0-tidy php8.0-xsl php8.0-redis -y
 
 # Install Composer
 ADD docker/php/composer.sh /composer.sh
@@ -33,7 +34,7 @@ ADD docker/nginx/logs/site.error.log /var/log/nginx/site.error.log
 ADD docker/nginx/etc/sysctl.conf /etc/sysctl.conf
 ADD docker/nginx/etc/security/limits.conf /etc/security/limits.conf
 
-RUN pecl install xdebug
+RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
 RUN mkdir -p /tmp/nginx/cache
 RUN chmod 777 -R /tmp/nginx
 
@@ -41,12 +42,12 @@ RUN chmod 777 /var/log/nginx/site.access.log
 RUN chmod 777 /var/log/nginx/site.error.log
 
 # PHP Configuration
-ADD docker/php/php.dev.ini /etc/php/7.4/fpm/php.ini
-ADD docker/php/php.dev.ini /etc/php/7.4/cli/php.ini
-ADD docker/php/xdebug.ini /etc/php/7.4/fpm/conf.d/99-xdebug.ini
-ADD docker/php/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-RUN touch /run/php/php7.4-fpm.sock
-RUN chmod 777 /run/php/php7.4-fpm.sock
+ADD docker/php/php.dev.ini /etc/php/8.0/fpm/php.ini
+ADD docker/php/php.dev.ini /etc/php/8.0/cli/php.ini
+ADD docker/php/php-fpm.conf /etc/php/8.0/fpm/php-fpm.conf
+RUN mkdir -p /run/php
+RUN touch /run/php/php8.0-fpm.sock
+RUN chmod 777 /run/php/php8.0-fpm.sock
 
 # Supervisor Configuration
 ADD docker/supervisor/supervisor.conf /etc/supervisord.conf

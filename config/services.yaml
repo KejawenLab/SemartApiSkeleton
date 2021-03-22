@@ -89,9 +89,3 @@ services:
     KejawenLab\ApiSkeleton\ApiClient\UserProvider:
         arguments:
             $class: 'KejawenLab\ApiSkeleton\Entity\ApiClient'
-    KejawenLab\ApiSkeleton\EventSubscriber\AdminContextSubscriber:
-        arguments:
-            $globals:
-                app_title: '%env(resolve:APP_TITLE)%'
-                app_description: '%env(resolve:APP_DESCRIPTION)%'
-                version: '%env(resolve:APP_VERSION)%'

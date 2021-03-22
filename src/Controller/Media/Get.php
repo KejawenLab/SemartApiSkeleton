@@ -9,9 +9,8 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,8 +53,6 @@ final class Get extends AbstractFOSRestController
      * )
      *
      * @Security(name="Bearer")
-     *
-     * @RateLimit(limit=77, period=1)
      */
     public function __invoke(Request $request, string $path): Response
     {

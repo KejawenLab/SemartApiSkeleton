@@ -11,7 +11,6 @@ use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,8 +40,6 @@ final class Delete extends AbstractFOSRestController
      * )
      *
      * @Security(name="Bearer")
-     *
-     * @RateLimit(limit=7, period=1)
      */
     public function __invoke(Request $request, string $id): View
     {

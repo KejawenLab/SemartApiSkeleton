@@ -23,7 +23,10 @@ final class CronBuilder
     public function build(CronInterface $cron): string
     {
         if ($cron->isSymfonyCommand()) {
-            return sprintf('%s %s %s --env=%s', (new PhpExecutableFinder())->find(), $_SERVER['SCRIPT_NAME'], $cron->getCommand(), $this->kernel->getEnvironment());
+            $docRoot = explode('/', $_SERVER['NGINX_WEBROOT']);
+            array_pop($docRoot);
+
+            return sprintf('%s %s/bin/console %s --env=%s', (new PhpExecutableFinder())->find(), implode('/', $docRoot), $cron->getCommand(), $this->kernel->getEnvironment());
         }
 
         return $cron->getCommand();

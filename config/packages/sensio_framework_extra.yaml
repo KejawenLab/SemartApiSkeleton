@@ -4,4 +4,3 @@ sensio_framework_extra:
     view: { annotations: true }
     cache: { annotations: true }
     security: { annotations: false }
-    psr_message: { enabled: false }

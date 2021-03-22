@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
@@ -39,8 +38,6 @@ final class SecurityController extends AbstractFOSRestController
      *         @OA\Property(property="token", type="string")
      *     )
      * )
-     *
-     * @RateLimit(limit=7, period=1)
      */
     public function __invoke()
     {

@@ -13,7 +13,6 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -87,8 +86,6 @@ final class GetAll extends AbstractFOSRestController
      *         )
      *     }
      * )
-     *
-     * @RateLimit(limit=7, period=1)
      *
      * @Security(name="Bearer")
      */

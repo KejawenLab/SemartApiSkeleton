@@ -19,9 +19,11 @@
                                         {% if 'group' == property.name %}
                                             {% set group = attribute(data, property.name) %}
                                             <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
-                                        {% if 'supervisor' == property.name %}
+                                        {% elseif 'supervisor' == property.name %}
                                             {% set supervisor = attribute(data, property.name) %}
-                                            <td>{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</td>
+                                            {% if supervisor %}
+                                                <td>{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</td>
+                                            {% endif %}
                                         {% else %}
                                             <td>{{ attribute(data, property.name) }}</td>
                                         {% endif %}
