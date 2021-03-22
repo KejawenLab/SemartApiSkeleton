@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 
-use DH\DoctrineAuditBundle\Reader\AuditReader;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -26,9 +26,9 @@ final class Audit extends AbstractController
 
     private AuditService $audit;
 
-    private AuditReader $reader;
+    private Reader $reader;
 
-    public function __construct(MenuService $service, AuditService $audit, AuditReader $reader)
+    public function __construct(MenuService $service, AuditService $audit, Reader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;
@@ -46,7 +46,7 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable(Menu::class)) {
+        if (!$this->reader->getProvider()->isAuditable(Menu::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));

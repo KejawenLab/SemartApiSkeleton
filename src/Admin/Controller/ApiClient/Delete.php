@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="CLIENT", actions={Permission::DELETE})
+ * @Permission(menu="APICLIENT", actions={Permission::DELETE})
  *
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */

@@ -33,24 +33,37 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             return;
         }
 
+        $apiPath = '#';
         $path = $object->getRouteName();
-        $replece = sprintf('%sadmin_', static::ROUTE_NAMESPACE_PREFIX);
-        try {
-            if ('#' !== $path) {
-                $path = $this->urlGenerator->generate($object->getRouteName());
+        if (!$object->isAdminOnly()) {
+            try {
+                if ('#' !== $path) {
+                    $apiPath = $this->urlGenerator->generate($object->getRouteName());
+                }
+            } catch (RouteNotFoundException $exception) {
+                $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
             }
-        } catch (RouteNotFoundException $exception) {
-            $path = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
         }
 
         $adminPath = '#';
-        $adminRoute = StringUtil::replace($object->getRouteName(), static::ROUTE_NAMESPACE_PREFIX, $replece);
-        try {
-            $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
-        } catch (RouteNotFoundException $exception) {
+        if ($object->isAdminOnly()) {
+            $adminRoute = $object->getRouteName();
+            try {
+                if ('#' !== $adminRoute) {
+                    $adminPath = $this->urlGenerator->generate($adminRoute);
+                }
+            } catch (RouteNotFoundException $exception) {
+            }
+        } else {
+            $replece = sprintf('%sadmin_', static::ROUTE_NAMESPACE_PREFIX);
+            $adminRoute = StringUtil::replace($object->getRouteName(), static::ROUTE_NAMESPACE_PREFIX, $replece);
+            try {
+                $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
+            } catch (RouteNotFoundException $exception) {
+            }
         }
 
-        $object->setApiPath($path);
+        $object->setApiPath($apiPath);
         $object->setAdminPath($adminPath);
     }
 

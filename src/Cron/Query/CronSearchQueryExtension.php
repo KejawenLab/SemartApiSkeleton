@@ -18,7 +18,7 @@ final class CronSearchQueryExtension extends AbstractCronExtension
         $query = $request->query->get('q');
 
         $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.command)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.command)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
     }
 }

@@ -10,4 +10,14 @@ Secara *state diagram*, kondisi saat ini dapat digambarkan sebagai berikut:
 
 ## Menambah Tipe User Baru
 
+ Untuk menambahkan tipe user baru, langkah-langkahnya adalah sebagai berikut:
  
+ - Buat class User dengan implement dari `KejawenLab\ApiSkeleton\Security\Model\AuthInterface`
+ 
+ - Buat class UserProvider dengan implement dari `KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface`
+ 
+ - Daftarkan class UserProvider ke `services.yaml`
+ 
+## Contoh
+
+Untuk melihat contoh penggunaannya, kamu dapat melihat class `KejawenLab\ApiSkeleton\Entity\ApiClient` dan `KejawenLab\ApiSkeleton\ApiClient\UserProvider` serta bagaimana cara mendaftarkannya pada `services.yaml`

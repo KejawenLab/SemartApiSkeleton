@@ -32,7 +32,7 @@ final class GetAll extends AbstractController
     }
 
     /**
-     * @Route("/cra", methods={"GET"})
+     * @Route("/cron", methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {

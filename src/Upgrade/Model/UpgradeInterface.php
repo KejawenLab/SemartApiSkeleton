@@ -11,5 +11,5 @@ interface UpgradeInterface
 {
     public function upgrade(): void;
 
-    public function support(): bool;
+    public function support(int $version): bool;
 }

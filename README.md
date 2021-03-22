@@ -1,7 +1,7 @@
 # Semart Api Skeleton
 
 >
-> Semart Api Skeleton adalah skeleton untuk membangun aplikasi berbasis Api
+> Semart Api Skeleton adalah skeleton untuk membangun aplikasi secara sangat cepat untuk aplikasi berbasis Admin maupun Api
 >
 
 ## Video
@@ -9,6 +9,10 @@
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
 ## Screenshot
+
+#### Halaman Admin
+
+![Admin](doc/assets/admin.png)
 
 #### Api Doc
 ![Api Doc](doc/assets/full.png)
@@ -89,12 +93,6 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
 
 ### Non Docker Install
-
->
-> Install menggunakan metode Non Docker secara default akan menggunakan secure connection configuration
->
-> Ini artinya password database akan dienkripsi sehingga lebih aman
->
 
 ```bash
 composer update --prefer-dist -vvv
@@ -189,8 +187,8 @@ CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 >
 
 ```bash
-docker-compose build && docker-compose up
-docker-compose exec app bash -c "php bin/console semart:encrypt semart"
+docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console semart:encrypt semart"
 ```
 
 > 
@@ -202,12 +200,12 @@ docker-compose exec app bash -c "php bin/console semart:encrypt semart"
 >
 
 ```bash
-docker-compose exec app bash -c "php bin/console cache:clear"
-docker-compose exec app bash -c "chmod 777 -R var"
-docker-compose exec app bash -c "php bin/console doctrine:database:create"
-docker-compose exec app bash -c "php bin/console doctrine:schema:update --force"
-docker-compose exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
-docker-compose exec app bash -c "php bin/console assets:install"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console cache:clear"
+docker-compose -f docker-compose.dev.yml exec app bash -c "chmod 777 -R var"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:database:create"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:schema:update --force"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console assets:install"
 ```
 
 > 
@@ -218,13 +216,13 @@ docker-compose exec app bash -c "php bin/console assets:install"
 
 ## Cron Daemon
 
-#### Start Cron Daemon
+#### Start Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
 
 ```bash
 php bin/console cron:start
 ```
 
-#### Stop Cron Daemon
+#### Stop Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
 
 ```bash
 php bin/console cron:stop
@@ -234,6 +232,8 @@ php bin/console cron:stop
 
 >
 > * RESTful Api Generator
+>
+> * Admin Generator
 >
 > * Api Documentation
 >
@@ -462,24 +462,13 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 > **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
 >
 
-## Demo
-
->
-> Kunjungi [Demo](https://arsiteknologi.com:8080/api/doc)
->
-> * Username: `admin`
-> * Password: `admin`
->
-> **NB:** Data akan direset setiap **15 menit** sekali
->
-
 ## Roadmap
 
 - [ ] Dokumentasi
 
 - [ ] Unit Testing
 
-- [ ] Admin Auto Generate
+- [X] Admin Auto Generate
 
 ## Copyright
 

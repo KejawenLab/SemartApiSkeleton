@@ -48,6 +48,7 @@ final class CronType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cron::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

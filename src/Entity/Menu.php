@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use DH\DoctrineAuditBundle\Annotation\Auditable;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -49,7 +49,7 @@ class Menu implements MenuInterface
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
      *
      * @Groups({"read"})
      * @MaxDepth(1)
@@ -111,6 +111,13 @@ class Menu implements MenuInterface
     private bool $showable;
 
     /**
+     * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
+     */
+    private bool $adminOnly;
+
+    /**
      * @Groups({"read"})
      */
     private ?string $apiPath;
@@ -126,6 +133,7 @@ class Menu implements MenuInterface
         $this->routeName = '#';
         $this->extra = null;
         $this->showable = true;
+        $this->adminOnly = false;
         $this->apiPath = '#';
         $this->adminPath = '#';
     }
@@ -239,6 +247,18 @@ class Menu implements MenuInterface
     public function setShowable(bool $showable): self
     {
         $this->showable = $showable;
+
+        return $this;
+    }
+
+    public function isAdminOnly(): bool
+    {
+        return $this->adminOnly;
+    }
+
+    public function setAdminOnly(bool $adminOnly): self
+    {
+        $this->adminOnly = $adminOnly;
 
         return $this;
     }

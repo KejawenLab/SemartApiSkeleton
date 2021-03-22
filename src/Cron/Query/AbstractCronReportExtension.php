@@ -15,6 +15,6 @@ abstract class AbstractCronReportExtension extends Base
 {
     public function support(string $class, Request $request): bool
     {
-        return in_array(CronReportInterface::class, class_implements($class)) && $request->query->get('q');
+        return in_array(CronReportInterface::class, class_implements($class));
     }
 }

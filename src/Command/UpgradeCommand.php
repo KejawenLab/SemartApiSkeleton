@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Upgrade\Model\UpgradeInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,8 +59,9 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
         }
 
         $output->writeln('<comment>Running upgrade</comment>');
+        $version = SemartApiSkeleton::VERSION_MAYOR + SemartApiSkeleton::VERSION_MINOR + SemartApiSkeleton::VERSION_PATCH;
         foreach ($this->upgraders as $upgrader) {
-            if ($upgrader->support()) {
+            if ($upgrader->support($version)) {
                 $upgrader->upgrade();
             }
         }

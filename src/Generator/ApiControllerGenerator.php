@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
-use DH\DoctrineAuditBundle\Annotation\Auditable;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -25,7 +25,7 @@ final class ApiControllerGenerator extends AbstractGenerator
         $this->reader = $reader;
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $getAllFile = sprintf('%s/src/Controller/%s/GetAll.php', $this->kernel->getProjectDir(), $shortName);

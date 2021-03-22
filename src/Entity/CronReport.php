@@ -34,7 +34,7 @@ class CronReport implements CronReportInterface
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cron::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Cron::class, cascade={"persist"})
      *
      * @Groups({"read"})
      */

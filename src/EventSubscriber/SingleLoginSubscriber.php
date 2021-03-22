@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class SingleLoginSubscriber implements EventSubscriberInterface
 {
+    private const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
+
     private RequestStack $requestStack;
 
     private UserService $service;
@@ -41,6 +44,10 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if (static::API_CLIENT_DEVICE_ID === $payload['deviceId']) {
+            return;
+        }
+
         $user = $this->service->getByDeviceId($payload['deviceId']);
         if (!$user) {
             $event->markAsInvalid();
@@ -58,8 +65,12 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         $deviceId = Encryptor::hash(date('YmdHis'));
         $payload['deviceId'] = $deviceId;
 
-        $user->setDeviceId($deviceId);
-        $this->service->save($user);
+        if ($user instanceof UserInterface) {
+            $user->setDeviceId($deviceId);
+            $this->service->save($user);
+        } else {
+            $payload['deviceId'] = static::API_CLIENT_DEVICE_ID;
+        }
 
         $event->setData($payload);
     }

@@ -33,6 +33,7 @@ final class PermissionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Permission::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

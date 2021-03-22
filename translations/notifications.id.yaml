@@ -1,0 +1,7 @@
+sas:
+    notification:
+        delete:
+            title: 'Notifikasi Penghapusan'
+            message: 'Anda yakin akan menghapus <b>"%data%"</b>?'
+            cancel: 'Batal'
+            confirm: 'Hapus'

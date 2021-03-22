@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use DH\DoctrineAuditBundle\Annotation\Auditable;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -58,7 +58,7 @@ class User implements UserInterface
     private ?GroupInterface $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      *
      * @Groups({"read"})
      */

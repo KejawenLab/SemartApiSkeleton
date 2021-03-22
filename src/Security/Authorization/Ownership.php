@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;

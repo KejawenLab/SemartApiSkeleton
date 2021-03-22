@@ -1,7 +1,9 @@
 version: '3.8'
 services:
     app:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
         env_file:
           - .env
         volumes:

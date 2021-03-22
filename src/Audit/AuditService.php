@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Audit;
 
-use DH\DoctrineAuditBundle\Reader\AuditEntry;
-use DH\DoctrineAuditBundle\Reader\AuditReader;
+use DH\Auditor\Model\Entry;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -14,13 +15,13 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 final class AuditService
 {
-    private AuditReader $auditReader;
+    private Reader $auditReader;
 
     private int $cacheLifetime;
 
     private CacheItemPoolInterface $cache;
 
-    public function __construct(AuditReader $auditReader, SettingService $setting, CacheItemPoolInterface $cache)
+    public function __construct(Reader $auditReader, SettingService $setting, CacheItemPoolInterface $cache)
     {
         $this->auditReader = $auditReader;
         $this->cacheLifetime = (int) $setting->getSetting('CACHE_LIFETIME')->getValue();
@@ -32,7 +33,7 @@ final class AuditService
         $key = sha1(sprintf('%s_%s', get_class($entity), $id));
         $cache = $this->cache->getItem($key);
         if (!$cache->isHit()) {
-            $audits = serialize($this->auditReader->getAudits(get_class($entity), $id, 1, 17));
+            $audits = serialize($this->auditReader->createQuery(get_class($entity), ['page' => 1, 'page_size' => 9])->addFilter(Query::OBJECT_ID, $id)->execute());
             $cache->set($audits);
             $cache->expiresAfter($this->cacheLifetime);
             $this->cache->save($cache);
@@ -41,7 +42,7 @@ final class AuditService
         $audits = unserialize($cache->get());
 
         $record = new Audit($entity);
-        /** @var AuditEntry[] $audits */
+        /** @var Entry[] $audits */
         foreach ($audits as $audit) {
             $record->addItem(new AuditItem($audit->getType(), $audit->getDiffs(), $audit->getUserId(), $audit->getUsername(), $audit->getIp()));
         }
