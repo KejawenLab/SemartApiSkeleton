@@ -10,14 +10,14 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
 use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
 use Ramsey\Uuid\UuidInterface;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CronReportRepository::class)
  * @ORM\Table(name="core_cronjob_report")
  */
-class CronReport implements CronReportInterface
+class CronReport implements CronReportInterface, EntityInterface
 {
     use TimestampableEntity;
 
@@ -29,7 +29,7 @@ class CronReport implements CronReportInterface
      *
      * @Groups({"read"})
      *
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     private UuidInterface $id;
 
@@ -141,5 +141,10 @@ class CronReport implements CronReportInterface
     public function isError(): bool
     {
         return !$this->isSuccessful();
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getOutput();
     }
 }

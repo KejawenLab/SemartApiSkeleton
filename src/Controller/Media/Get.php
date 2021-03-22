@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,33 +38,21 @@ final class Get extends AbstractFOSRestController
      *
      * @Cache(expires="+2 week", public=true)
      *
-     * @SWG\Tag(name="Media")
-     * @SWG\Get(produces={
-     *     "image/png",
-     *     "image/gif",
-     *     "image/jpeg",
-     *     "application/pdf",
-     *     "application/zip",
-     *     "application/gzip",
-     *     "application/vnd.rar",
-     *     "application/x-tar",
-     *     "application/x-7z-compressed",
-     *     "audio/mpeg",
-     *     "video/mpeg",
-     *     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-     *     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-     *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-     *     "text/csv",
-     *     "text/plain"
-     * })
-     * @SWG\Response(
+     * @OA\Tag(name="Media")
+     * @OA\Response(
      *     response=200,
-     *     description="Return file",
-     *     @SWG\Schema(
-     *          type="file",
-     *          format="binary"
-     *     )
+     *     description= "Api client detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="*",
+     *             @OA\Schema(
+     *                 type="string",
+     *                 format="binary"
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=77, period=1)

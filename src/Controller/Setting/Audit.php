@@ -16,7 +16,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -45,32 +45,42 @@ final class Audit extends AbstractFOSRestController
      *
      * @Cache(expires="+17 minute", public=false)
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Response(
+     * @OA\Tag(name="Setting")
+     * @OA\Response(
      *     response=200,
-     *     description="Return audit list",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(
-     *             @SWG\Property(type="object", property="entity", ref=@Model(type=Setting::class, groups={"read"})),
-     *             @SWG\Property(type="array", property="items", @SWG\Items(
-     *                 @SWG\Property(type="string", property="type"),
-     *                 @SWG\Property(type="string", property="user_id"),
-     *                 @SWG\Property(type="string", property="username"),
-     *                 @SWG\Property(type="string", property="ip_address"),
-     *                 @SWG\Property(type="array", property="data", @SWG\Items(
-     *                     @SWG\Property(type="array", property="field1", @SWG\Items(
-     *                         @SWG\Property(type="string", property="new"),
-     *                         @SWG\Property(type="string", property="old"),
-     *                     )),
-     *                     @SWG\Property(type="array", property="field2", @SWG\Items(
-     *                         @SWG\Property(type="string", property="new"),
-     *                         @SWG\Property(type="string", property="old"),
-     *                     ))
-     *                 ))
-     *             ))
+     *     description= "Audit list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(
+     *                     properties={
+     *                         @OA\Property(
+     *                             property="entity",
+     *                             type="object",
+     *                             @OA\Schema(
+     *                                 type="object",
+     *                                 ref=@Model(type=Setting::class, groups={"read"})
+     *                             )
+     *                         ),
+     *                         @OA\Property(type="string", property="type"),
+     *                         @OA\Property(type="string", property="user_id"),
+     *                         @OA\Property(type="string", property="username"),
+     *                         @OA\Property(type="string", property="ip_address"),
+     *                         @OA\Property(
+     *                             type="array",
+     *                             property="data",
+     *                             @OA\Items(
+     *                                 @OA\Property(type="string", property="new"),
+     *                                 @OA\Property(type="string", property="old"),
+     *                             )
+     *                         )
+     *                     }
+     *                 )
+     *             )
      *         )
-     *     )
+     *     }
      * )
      *
      * @Security(name="Bearer")

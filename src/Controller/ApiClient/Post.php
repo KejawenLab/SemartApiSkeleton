@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,21 +41,30 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/api-clients")
      *
-     * @SWG\Tag(name="Api Client")
-     * @SWG\Parameter(
-     *     name="cron",
-     *     in="body",
-     *     type="object",
-     *     description="Api client form",
-     *     @Model(type=ApiClientType::class)
+     * @OA\Tag(name="Api Client")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=ApiClientType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
-     *     description="Crate new api client",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=ApiClient::class, groups={"read"})
-     *     )
+     *     description= "Api client created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=ApiClient::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

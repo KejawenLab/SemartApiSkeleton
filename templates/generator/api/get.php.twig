@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -37,15 +37,21 @@ final class Get extends AbstractFOSRestController
     /**
      * @Rest\Get("/{{ entityPluralDash }}/{id}")
      *
-     * @SWG\Tag(name="{{ entityHumanize }}")
-     * @SWG\Response(
+     * @OA\Tag(name="{{ entityHumanize }}")
+     * @OA\Response(
      *     response=200,
-     *     description="Return {{ entityLowerize }} detail",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
-     *     )
+     *     description= "{{ entityHumanize }} detail",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

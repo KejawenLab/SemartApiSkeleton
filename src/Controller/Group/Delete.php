@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,8 +34,8 @@ final class Delete extends AbstractFOSRestController
     /**
      * @Rest\Delete("/groups/{id}")
      *
-     * @SWG\Tag(name="Group")
-     * @SWG\Response(
+     * @OA\Tag(name="Group")
+     * @OA\Response(
      *     response=204,
      *     description="Delete group"
      * )

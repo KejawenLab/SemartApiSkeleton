@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,21 +40,26 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/users")
      *
-     * @SWG\Tag(name="User")
-     * @SWG\Parameter(
-     *     name="user",
-     *     in="body",
-     *     type="object",
-     *     description="User form",
-     *     @Model(type=UserType::class)
-     * )
-     * @SWG\Response(
-     *     response=201,
-     *     description="Crate new user",
-     *     @SWG\Schema(
+     * @OA\Tag(name="User")
+     * @OA\RequestBody(
+     *     @OA\Schema(
      *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *         ref=@Model(type=UserType::class)
+     *     ),
+     *     description="User form"
+     * )
+     * @OA\Response(
+     *     response=201,
+     *     description= "User created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

@@ -18,7 +18,7 @@ use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -46,21 +46,30 @@ final class PermissionPut extends AbstractFOSRestController
     /**
      * @Rest\Put("/groups/{id}/permissions")
      *
-     * @SWG\Tag(name="Group")
-     * @SWG\Parameter(
-     *     name="group",
-     *     in="body",
-     *     type="object",
-     *     description="Permission form",
-     *     @Model(type=PermissionType::class)
+     * @OA\Tag(name="Group")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=PermissionType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
-     *     description="Update permission",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Permission::class, groups={"read"})
-     *     )
+     *     description= "Permission updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Permission::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

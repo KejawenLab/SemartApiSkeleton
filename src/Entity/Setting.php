@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Repository\SettingRepository;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"parameter"})
  */
-class Setting implements SettingInterface
+class Setting implements SettingInterface, EntityInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -42,7 +42,7 @@ class Setting implements SettingInterface
      *
      * @Groups({"read"})
      *
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     private UuidInterface $id;
 
@@ -116,5 +116,10 @@ class Setting implements SettingInterface
         $this->public = $public;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return sprintf('%s: %s', $this->getParameter(), $this->getValue());
     }
 }

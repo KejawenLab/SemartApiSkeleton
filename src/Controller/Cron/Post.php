@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,21 +40,30 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/cronjobs", priority=-7)
      *
-     * @SWG\Tag(name="Cron")
-     * @SWG\Parameter(
-     *     name="cron",
-     *     in="body",
-     *     type="object",
-     *     description="Cron form",
-     *     @Model(type=CronType::class)
+     * @OA\Tag(name="Cron")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=CronType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
-     *     description="Crate new cron",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Cron::class, groups={"read"})
-     *     )
+     *     description= "Cron created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Cron::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

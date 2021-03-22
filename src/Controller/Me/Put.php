@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,22 +40,32 @@ final class Put extends AbstractFOSRestController
     /**
      * @Rest\Put("/me")
      *
-     * @SWG\Tag(name="Profile")
-     * @SWG\Parameter(
-     *     name="profile",
-     *     in="body",
-     *     type="object",
-     *     description="Profile form",
-     *     @Model(type=UpdateProfileType::class)
+     * @OA\Tag(name="Profile")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=UpdateProfileType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
-     *     description="Update profile",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *     description= "User profile",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

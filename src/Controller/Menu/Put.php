@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,21 +41,30 @@ final class Put extends AbstractFOSRestController
     /**
      * @Rest\Put("/menus/{id}")
      *
-     * @SWG\Tag(name="Menu")
-     * @SWG\Parameter(
-     *     name="menu",
-     *     in="body",
-     *     type="object",
-     *     description="Menu form",
-     *     @Model(type=MenuType::class)
+     * @OA\Tag(name="Menu")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=MenuType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
-     *     description="Update menu",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Menu::class, groups={"read"})
-     *     )
+     *     description= "Menu updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Menu::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

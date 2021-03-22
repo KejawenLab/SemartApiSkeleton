@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,21 +41,30 @@ final class Put extends AbstractFOSRestController
     /**
      * @Rest\Put("/settings/{id}")
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Parameter(
-     *     name="setting",
-     *     in="body",
-     *     type="object",
-     *     description="Setting form",
-     *     @Model(type=SettingType::class)
+     * @OA\Tag(name="Setting")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=SettingType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
-     *     description="Update setting",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Setting::class, groups={"read"})
-     *     )
+     *     description= "Setting updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Setting::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

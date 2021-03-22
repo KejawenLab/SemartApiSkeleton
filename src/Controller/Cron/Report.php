@@ -15,7 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -40,15 +40,21 @@ final class Report extends AbstractFOSRestController
      *
      * @Cache(expires="+1 minute", public=false)
      *
-     * @SWG\Tag(name="Cron")
-     * @SWG\Response(
+     * @OA\Tag(name="Cron")
+     * @OA\Response(
      *     response=200,
-     *     description="Return cron job report",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=CronReport::class, groups={"read"})
-     *     )
+     *     description= "Cron report list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=CronReport::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
+     *
      * @Security(name="Bearer")
      *
      * @RateLimit(limit=7, period=1)

@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,8 +34,8 @@ final class Delete extends AbstractFOSRestController
     /**
      * @Rest\Delete("/settings/{id}")
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Response(
+     * @OA\Tag(name="Setting")
+     * @OA\Response(
      *     response=204,
      *     description="Delete setting"
      * )

@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,10 +34,10 @@ final class Delete extends AbstractFOSRestController
     /**
      * @Rest\Delete("/api-clients/{id}")
      *
-     * @SWG\Tag(name="Api Client")
-     * @SWG\Response(
+     * @OA\Tag(name="Api Client")
+     * @OA\Response(
      *     response=204,
-     *     description="Delete api client"
+     *     description="Api client deletec"
      * )
      *
      * @Security(name="Bearer")

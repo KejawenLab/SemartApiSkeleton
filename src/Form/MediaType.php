@@ -22,6 +22,10 @@ final class MediaType extends AbstractType
         $builder->add('file', FileType::class, [
             'required' => true,
             'label' => 'sas.form.field.media.file',
+            'documentation' => [
+                'type' => 'string',
+                'format' => 'binary',
+            ],
         ]);
         $builder->add('folder', TextType::class, [
             'required' => true,

@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,38 +33,55 @@ final class PublicAllSetting extends AbstractFOSRestController
     /**
      * @Rest\Get("/settings/public", priority=1)
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Parameter(
+     * @OA\Tag(name="Setting")
+     * @OA\Parameter(
      *     name="page",
      *     in="query",
-     *     type="string",
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Page indicator"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="limit",
      *     in="query",
-     *     type="string",
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Records per page"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="q",
      *     in="query",
-     *     type="string",
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Search setting by parameter"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="parameter",
      *     in="query",
-     *     type="string",
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     ),
      *     description="Filter setting by parameter"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
-     *     description="Return setting list",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *     )
+     *     description= "Setting list",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref=@Model(type=Setting::class, groups={"read"}))
+     *             )
+     *         )
+     *     }
      * )
      *
      * @RateLimit(limit=17, period=1)

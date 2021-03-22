@@ -9,12 +9,13 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,33 +39,30 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/medias")
      *
-     * @SWG\Tag(name="Media")
-     * @SWG\Post(consumes={"multipart/form-data"})
-     * @SWG\Parameter(
-     *     name="file",
-     *     in="formData",
-     *     type="file",
-     *     description="File to upload"
+     * @OA\Tag(name="Media")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=MediaType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Parameter(
-     *     name="folder",
-     *     in="formData",
-     *     type="string",
-     *     description="Folder path"
-     * )
-     * @SWG\Parameter(
-     *     name="public",
-     *     in="formData",
-     *     type="boolean",
-     *     description="Is public"
-     * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
-     *     description="Crate new media",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Media::class, groups={"read"})
-     *     )
+     *     description= "Media created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Media::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

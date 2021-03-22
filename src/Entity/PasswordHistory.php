@@ -15,7 +15,7 @@ use Ramsey\Uuid\UuidInterface;
  * @ORM\Entity(repositoryClass=CronReportRepository::class)
  * @ORM\Table(name="core_user_password_history")
  */
-class PasswordHistory implements PasswordHistoryInterface
+class PasswordHistory implements PasswordHistoryInterface, EntityInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -82,5 +82,10 @@ class PasswordHistory implements PasswordHistoryInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return null;
     }
 }

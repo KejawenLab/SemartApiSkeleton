@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,21 +41,26 @@ final class Put extends AbstractFOSRestController
     /**
      * @Rest\Put("/users/{id}")
      *
-     * @SWG\Tag(name="User")
-     * @SWG\Parameter(
-     *     name="user",
-     *     in="body",
-     *     type="object",
-     *     description="User form",
-     *     @Model(type=UpdateUserType::class)
-     * )
-     * @SWG\Response(
-     *     response=200,
-     *     description="Update user",
-     *     @SWG\Schema(
+     * @OA\Tag(name="User")
+     * @OA\RequestBody(
+     *     @OA\Schema(
      *         type="object",
-     *         ref=@Model(type=User::class, groups={"read"})
-     *     )
+     *         ref=@Model(type=UpdateUserType::class)
+     *     ),
+     *     description="User form"
+     * )
+     * @OA\Response(
+     *     response=200,
+     *     description= "User updated",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=User::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")

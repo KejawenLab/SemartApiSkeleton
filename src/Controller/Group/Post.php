@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,21 +40,30 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/groups")
      *
-     * @SWG\Tag(name="Group")
-     * @SWG\Parameter(
-     *     name="group",
-     *     in="body",
-     *     type="object",
-     *     description="Group form",
-     *     @Model(type=GroupType::class)
+     * @OA\Tag(name="Group")
+     * @OA\RequestBody(
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=GroupType::class)
+     *             )
+     *         )
+     *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
-     *     description="Crate new group",
-     *     @SWG\Schema(
-     *         type="object",
-     *         ref=@Model(type=Group::class, groups={"read"})
-     *     )
+     *     description= "Group created",
+     *     content={
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref=@Model(type=Group::class, groups={"read"})
+     *             )
+     *         )
+     *     }
      * )
      *
      * @Security(name="Bearer")
