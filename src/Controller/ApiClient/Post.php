@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,18 +41,18 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/api-clients")
      *
-     * @SWG\Tag(name="Api Client")
-     * @SWG\RequestBody(
-     *     @SWG\Schema(
+     * @OA\Tag(name="Api Client")
+     * @OA\RequestBody(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=ApiClientType::class)
      *     ),
      *     description="Api client form"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
      *     description="Crate new api client",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=ApiClient::class, groups={"read"})
      *     )

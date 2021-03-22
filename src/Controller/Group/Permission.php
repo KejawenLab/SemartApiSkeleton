@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -37,31 +37,31 @@ final class Permission extends AbstractFOSRestController
     /**
      * @Rest\Get("/groups/{id}/permissions")
      *
-     * @SWG\Tag(name="Group")
-     * @SWG\Parameter(
+     * @OA\Tag(name="Group")
+     * @OA\Parameter(
      *     name="page",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Page indicator"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="limit",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Records per page"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="Return permission list of group",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=Entity::class, groups={"read"}))
+     *         @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
      *     )
      * )
      *

@@ -6,3 +6,7 @@ api:
     path: /api
     methods: [GET]
     controller: KejawenLab\ApiSkeleton\Controller\HomeController::__invoke
+health:
+    path: /health
+    methods: [ GET ]
+    controller: KejawenLab\ApiSkeleton\Controller\HealthController::__invoke

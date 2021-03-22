@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,8 +34,8 @@ final class Delete extends AbstractFOSRestController
     /**
      * @Rest\Delete("/medias/{id}")
      *
-     * @SWG\Tag(name="Media")
-     * @SWG\Response(
+     * @OA\Tag(name="Media")
+     * @OA\Response(
      *     response=204,
      *     description="Delete media"
      * )

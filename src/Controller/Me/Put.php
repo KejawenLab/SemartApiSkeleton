@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,18 +40,18 @@ final class Put extends AbstractFOSRestController
     /**
      * @Rest\Put("/me")
      *
-     * @SWG\Tag(name="Profile")
-     * @SWG\RequestBody(
-     *     @SWG\Schema(
+     * @OA\Tag(name="Profile")
+     * @OA\RequestBody(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=UpdateProfileType::class)
      *     ),
      *     description="Profile form"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="Update profile",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=User::class, groups={"read"})
      *     )

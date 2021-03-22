@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -40,13 +40,13 @@ final class Run extends AbstractFOSRestController
     /**
      * @Rest\Post("/cronjobs/{id}/run", priority=-17)
      *
-     * @SWG\Tag(name="Cron")
-     * @SWG\Response(
+     * @OA\Tag(name="Cron")
+     * @OA\Response(
      *     response=200,
      *     description="Job status",
-     *     @SWG\Schema(
-     *         @SWG\Property(property="code", type="integer"),
-     *         @SWG\Property(property="message", type="string")
+     *     @OA\Schema(
+     *         @OA\Property(property="code", type="integer"),
+     *         @OA\Property(property="message", type="string")
      *     )
      * )
      * @Security(name="Bearer")

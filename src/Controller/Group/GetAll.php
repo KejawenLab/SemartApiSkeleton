@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -37,49 +37,49 @@ final class GetAll extends AbstractFOSRestController
     /**
      * @Rest\Get("/groups")
      *
-     * @SWG\Tag(name="Group")
-     * @SWG\Parameter(
+     * @OA\Tag(name="Group")
+     * @OA\Parameter(
      *     name="page",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Page indicator"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="limit",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Records per page"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="q",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Search group by code or name"
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="code",
      *     in="query",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="integer",
      *         format="int32"
      *     ),
      *     description="Filter group by code"
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="Return group list",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=Group::class, groups={"read"}))
+     *         @OA\Items(ref=@Model(type=Group::class, groups={"read"}))
      *     )
      * )
      *

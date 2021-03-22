@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -33,13 +33,13 @@ final class Menu extends AbstractFOSRestController
     /**
      * @Rest\Get("/me/menus", priority=1)
      *
-     * @SWG\Tag(name="Profile")
-     * @SWG\Response(
+     * @OA\Tag(name="Profile")
+     * @OA\Response(
      *     response=200,
      *     description="Return menu list for logged user",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=Entity::class, groups={"read"}))
+     *         @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
      *     )
      * )
      * @Security(name="Bearer")

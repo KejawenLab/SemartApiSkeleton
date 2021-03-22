@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,11 +33,11 @@ final class Get extends AbstractFOSRestController
     /**
      * @Rest\Get("/menus/{id}")
      *
-     * @SWG\Tag(name="Menu")
-     * @SWG\Response(
+     * @OA\Tag(name="Menu")
+     * @OA\Response(
      *     response=200,
      *     description="Return menu detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=Menu::class, groups={"read"})
      *     )

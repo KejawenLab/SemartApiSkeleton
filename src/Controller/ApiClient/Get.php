@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,11 +33,11 @@ final class Get extends AbstractFOSRestController
     /**
      * @Rest\Get("/api-clients/{id}")
      *
-     * @SWG\Tag(name="Api Client")
-     * @SWG\Response(
+     * @OA\Tag(name="Api Client")
+     * @OA\Response(
      *     response=200,
      *     description="Return api client detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=ApiClient::class, groups={"read"})
      *     )

@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,11 +33,11 @@ final class Get extends AbstractFOSRestController
     /**
      * @Rest\Get("/settings/{id}")
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Response(
+     * @OA\Tag(name="Setting")
+     * @OA\Response(
      *     response=200,
      *     description="Return setting detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=Setting::class, groups={"read"})
      *     )

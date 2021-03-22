@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,11 +33,11 @@ final class PublicGetSetting extends AbstractFOSRestController
     /**
      * @Rest\Get("/settings/public/{id}", priority=1)
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\Response(
+     * @OA\Tag(name="Setting")
+     * @OA\Response(
      *     response=200,
      *     description="Return setting detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=Setting::class, groups={"read"})
      *     )

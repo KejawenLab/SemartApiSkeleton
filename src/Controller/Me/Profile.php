@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -25,11 +25,11 @@ final class Profile extends AbstractFOSRestController
     /**
      * @Rest\Get("/me", priority=1)
      *
-     * @SWG\Tag(name="Profile")
-     * @SWG\Response(
+     * @OA\Tag(name="Profile")
+     * @OA\Response(
      *     response=200,
      *     description="Return profile detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=User::class, groups={"read"})
      *     )

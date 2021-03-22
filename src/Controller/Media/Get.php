@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,11 +38,11 @@ final class Get extends AbstractFOSRestController
      *
      * @Cache(expires="+2 week", public=true)
      *
-     * @SWG\Tag(name="Media")
-     * @SWG\Response(
+     * @OA\Tag(name="Media")
+     * @OA\Response(
      *     response=200,
      *     description="Return file",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *          type="file",
      *          format="binary"
      *     )

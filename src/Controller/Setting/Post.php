@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,22 +40,22 @@ final class Post extends AbstractFOSRestController
     /**
      * @Rest\Post("/settings")
      *
-     * @SWG\Tag(name="Setting")
-     * @SWG\RequestBody(
+     * @OA\Tag(name="Setting")
+     * @OA\RequestBody(
      *     content={
-     *         @SWG\MediaType(
+     *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @SWG\Schema(
+     *             @OA\Schema(
      *                 type="object",
      *                 ref=@Model(type=SettingType::class)
      *             )
      *         )
      *     }
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=201,
      *     description="Crate new setting",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=Setting::class, groups={"read"})
      *     )

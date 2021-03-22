@@ -44,7 +44,7 @@ class User implements UserInterface
      *
      * @Groups({"read"})
      *
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     private UuidInterface $id;
 

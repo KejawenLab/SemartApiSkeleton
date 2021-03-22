@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use OpenApi\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,11 +33,11 @@ final class Get extends AbstractFOSRestController
     /**
      * @Rest\Get("/cronjobs/{id}", priority=-7)
      *
-     * @SWG\Tag(name="Cron")
-     * @SWG\Response(
+     * @OA\Tag(name="Cron")
+     * @OA\Response(
      *     response=200,
      *     description="Return cron detail",
-     *     @SWG\Schema(
+     *     @OA\Schema(
      *         type="object",
      *         ref=@Model(type=Cron::class, groups={"read"})
      *     )
