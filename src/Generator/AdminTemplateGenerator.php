@@ -37,7 +37,7 @@ final class AdminTemplateGenerator extends AbstractGenerator
                 $deleteField = sprintf('%s.%s', $lowercase, $property->getName());
             }
 
-            $tableFields .= sprintf('<td>{{ %s.%s }}</td>', $lowercase, $property->getName());
+            $tableFields .= sprintf('<td>{{ semart_print(%s.%s) }}</td>', $lowercase, $property->getName());
         }
 
         $search = [
