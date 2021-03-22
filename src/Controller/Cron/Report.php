@@ -13,9 +13,8 @@ use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -56,8 +55,6 @@ final class Report extends AbstractFOSRestController
      * )
      *
      * @Security(name="Bearer")
-     *
-     * @RateLimit(limit=7, period=1)
      */
     public function __invoke(Request $request, string $id): View
     {

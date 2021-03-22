@@ -54,5 +54,15 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         }
 
         $definition->replaceArgument(0, $argument);
+
+        $definition = $container->getDefinition('twig');
+        $definition->addMethodCall('addGlobal', ['sas', [
+            'app_title' => $_SERVER['APP_TITLE'],
+            'app_description' => $_SERVER['APP_DESCRIPTION'],
+            'version' => $_SERVER['APP_VERSION'],
+            'semart_name' => 'Semart Api Skeleton',
+            'semart_codename' => SemartApiSkeleton::CODENAME,
+            'semart_version' => SemartApiSkeleton::VERSION,
+        ]]);
     }
 }

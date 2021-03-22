@@ -11,7 +11,6 @@ use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -58,8 +57,6 @@ final class Run extends AbstractFOSRestController
      * )
      *
      * @Security(name="Bearer")
-     *
-     * @RateLimit(limit=7, period=1)
      *
      * @throws \Exception
      */

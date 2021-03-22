@@ -70,6 +70,7 @@ sas:
             view: 'Detil Pekerjaan'
             active: 'ON'
             inactive: 'OFF'
+            run_success: 'Cron berhasil dijalankan'
         api_client:
             list: 'Daftar Token API'
             saved: 'Token berhasil disimpan'
