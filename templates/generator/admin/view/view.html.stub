@@ -14,7 +14,7 @@
                                         <tr>
                                             <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
                                             <td style="width: 7px;">:</td>
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                            <td>{{ semart_print(attribute(data, property.name)) }}</td>
                                         </tr>
                                     {% endif %}
                                 {% endfor %}
