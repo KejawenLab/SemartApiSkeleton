@@ -44,7 +44,7 @@ final class AuditService
         $record = new Audit($entity);
         /** @var Entry[] $audits */
         foreach ($audits as $audit) {
-            $record->addItem(new AuditItem($audit->getType(), $audit->getDiffs(), $audit->getUserId(), $audit->getUsername(), $audit->getIp()));
+            $record->addItem(new AuditItem($audit->getType(), $audit->getDiffs(), $audit->getCreatedAt(), $audit->getUserId(), $audit->getUsername(), $audit->getIp()));
         }
 
         return $record;

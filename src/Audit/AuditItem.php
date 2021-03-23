@@ -13,16 +13,19 @@ final class AuditItem
 
     private array $data;
 
+    private ?string $logTime;
+
     private ?string $userId;
 
     private ?string $username;
 
     private ?string $ip;
 
-    public function __construct(string $type, array $data, ?string $userId, ?string $username, ?string $ip)
+    public function __construct(string $type, array $data, ?string $logTime, ?string $userId, ?string $username, ?string $ip)
     {
         $this->type = $type;
         $this->data = $data;
+        $this->logTime = $logTime;
         $this->userId = $userId;
         $this->username = $username;
         $this->ip = $ip;
@@ -32,6 +35,7 @@ final class AuditItem
     {
         return [
             'type' => $this->type,
+            'log_time' => $this->logTime,
             'user_id' => $this->userId,
             'username' => $this->username,
             'ip_address' => $this->ip,

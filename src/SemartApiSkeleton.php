@@ -9,13 +9,13 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    public const CODENAME = 'Prambanan';
+    public const CODENAME = 'Menara Kudus';
 
-    public const VERSION = '3.4.1';
+    public const VERSION = '4.0.3';
 
-    public const VERSION_MAYOR = 3000;
+    public const VERSION_MAYOR = 4000;
 
-    public const VERSION_MINOR = 400;
+    public const VERSION_MINOR = 000;
 
-    public const VERSION_PATCH = 2;
+    public const VERSION_PATCH = 3;
 }
