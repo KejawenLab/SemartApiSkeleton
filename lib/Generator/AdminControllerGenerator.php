@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
-use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
-use Doctrine\Common\Annotations\Reader;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -84,7 +83,7 @@ final class AdminControllerGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $downloadFile));
         }
 
-        if ($this->reader->getClassAnnotation($class, Auditable::class)) {
+        if ($this->reader->getProvider()->isAuditable($class->getName())) {
             $audit = $this->twig->render('generator/admin/audit.php.twig', ['entity' => $shortName]);
             $auditFile = sprintf('%s/app/Admin/Controller/%s/Audit.php', $this->kernel->getProjectDir(), $shortName);
             $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\Audit"</info></comment>', static::CONTROLLER_PREFIX, $shortName));

@@ -12,3 +12,12 @@ dh_auditor:
                 - createdAt
                 - deletedAt
                 - updatedAt
+            entities:
+                KejawenLab\ApiSkeleton\Entity\ApiClient: ~
+                KejawenLab\ApiSkeleton\Entity\Cron: ~
+                KejawenLab\ApiSkeleton\Entity\Group: ~
+                KejawenLab\ApiSkeleton\Entity\Media: ~
+                KejawenLab\ApiSkeleton\Entity\Menu: ~
+                KejawenLab\ApiSkeleton\Entity\Permission: ~
+                KejawenLab\ApiSkeleton\Entity\Setting: ~
+                KejawenLab\ApiSkeleton\Entity\User: ~
