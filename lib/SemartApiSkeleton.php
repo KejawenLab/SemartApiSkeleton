@@ -17,7 +17,7 @@ final class SemartApiSkeleton
 
     public const VERSION_MINOR = 0;
 
-    public const VERSION_PATCH = 2;
+    public const VERSION_PATCH = 3;
 
     public static function getVersionNumber(): int
     {
