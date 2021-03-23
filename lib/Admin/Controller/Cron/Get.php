@@ -29,7 +29,7 @@ final class Get extends AbstractController
     }
 
     /**
-     * @Route("/cron/{id}", methods={"GET"})
+     * @Route("/crons/{id}", methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

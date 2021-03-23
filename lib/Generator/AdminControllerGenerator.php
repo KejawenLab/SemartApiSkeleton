@@ -75,6 +75,15 @@ final class AdminControllerGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $putFile));
         }
 
+        $downloadFile = sprintf('%s/app/Admin/Controller/%s/Download.php', $this->kernel->getProjectDir(), $shortName);
+        $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\Download"</info></comment>', static::CONTROLLER_PREFIX, $shortName));
+        if (!$this->fileSystem->exists($downloadFile)) {
+            $put = $this->twig->render('generator/admin/download.php.twig', ['entity' => $shortName]);
+            $this->fileSystem->dumpFile($downloadFile, $put);
+        } else {
+            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $downloadFile));
+        }
+
         if ($this->reader->getClassAnnotation($class, Auditable::class)) {
             $audit = $this->twig->render('generator/admin/audit.php.twig', ['entity' => $shortName]);
             $auditFile = sprintf('%s/app/Admin/Controller/%s/Audit.php', $this->kernel->getProjectDir(), $shortName);

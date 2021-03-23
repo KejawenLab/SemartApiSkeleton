@@ -30,6 +30,11 @@ abstract class AbstractService implements ServiceInterface
         $this->aliasHelper = $aliasHelper;
     }
 
+    public function all(): array
+    {
+        return $this->repository->findAll();
+    }
+
     public function get(string $id)
     {
         return $this->repository->find($id);

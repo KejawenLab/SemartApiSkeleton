@@ -27,7 +27,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/cron/{id}/delete", methods={"GET"})
+     * @Route("/crons/{id}/delete", methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

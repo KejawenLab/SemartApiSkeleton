@@ -17,10 +17,16 @@
                                     <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
                                 </div>
                             </div>
-                            <div class="float-right col-2">
-                                {% if is_granted('add', menu) %}
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_media_post__invoke') }}" class="btn btn-success float-right">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
-                                {% endif %}
+                            <div class="float-right dropdown col-2">
+                                <button class="btn btn-warning dropdown-toggle float-lg-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ 'sas.table.action.label' | trans({}, 'tables') }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {% if is_granted('add', menu) %}
+                                        <a href="{{ path('kejawenlab_apiskeleton_admin_media_post__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
+                                    {% endif %}
+                                    <a href="{{ path('kejawenlab_apiskeleton_admin_media_download__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -66,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

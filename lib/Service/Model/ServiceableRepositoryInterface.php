@@ -9,6 +9,8 @@ namespace KejawenLab\ApiSkeleton\Service\Model;
  */
 interface ServiceableRepositoryInterface
 {
+    public function findAll();
+
     public function persist(object $object): void;
 
     public function commit(): void;

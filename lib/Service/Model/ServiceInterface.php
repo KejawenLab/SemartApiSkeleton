@@ -11,6 +11,8 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
  */
 interface ServiceInterface extends PaginatableServiceInterface
 {
+    public function all(): array;
+
     public function get(string $id);
 
     public function save(object $object): void;

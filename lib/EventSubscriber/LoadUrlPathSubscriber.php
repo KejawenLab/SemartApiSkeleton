@@ -19,6 +19,17 @@ final class LoadUrlPathSubscriber implements EventSubscriber
 {
     private const ROUTE_NAMESPACE_PREFIX = 'kejawenlab_apiskeleton_application_';
 
+    private array $reservedRoutes = [
+        'kejawenlab_apiskeleton_me_profile',
+        'kejawenlab_apiskeleton_user_getall',
+        'kejawenlab_apiskeleton_group_getall',
+        'kejawenlab_apiskeleton_menu_getall',
+        'kejawenlab_apiskeleton_setting_getall',
+        'kejawenlab_apiskeleton_apiclient_getall',
+        'kejawenlab_apiskeleton_cron_getall',
+        'kejawenlab_apiskeleton_media_getall',
+    ];
+
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
@@ -35,16 +46,6 @@ final class LoadUrlPathSubscriber implements EventSubscriber
 
         $apiPath = '#';
         $path = $object->getRouteName();
-        if (!$object->isAdminOnly()) {
-            try {
-                if ('#' !== $path) {
-                    $apiPath = $this->urlGenerator->generate($object->getRouteName());
-                }
-            } catch (RouteNotFoundException $exception) {
-                $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
-            }
-        }
-
         $adminPath = '#';
         if ($object->isAdminOnly()) {
             $adminRoute = $object->getRouteName();
@@ -55,8 +56,21 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             } catch (RouteNotFoundException $exception) {
             }
         } else {
-            $replece = sprintf('%sadmin_', static::ROUTE_NAMESPACE_PREFIX);
-            $adminRoute = StringUtil::replace($object->getRouteName(), static::ROUTE_NAMESPACE_PREFIX, $replece);
+            try {
+                if ('#' !== $path) {
+                    $apiPath = $this->urlGenerator->generate($object->getRouteName());
+                }
+            } catch (RouteNotFoundException $exception) {
+                $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
+            }
+
+            $placeHolder = static::ROUTE_NAMESPACE_PREFIX;
+            if (in_array($object->getRouteName(), $this->reservedRoutes)) {
+                $placeHolder = StringUtil::replace($placeHolder, 'application_', '');
+            }
+
+            $replece = sprintf('%sadmin_', $placeHolder);
+            $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replece);
             try {
                 $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
             } catch (RouteNotFoundException $exception) {

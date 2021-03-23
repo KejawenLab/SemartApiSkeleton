@@ -32,7 +32,7 @@ final class Report extends AbstractController
     }
 
     /**
-     * @Route("/cron/{id}/logs", methods={"GET"}, priority=-27)
+     * @Route("/crons/{id}/logs", methods={"GET"}, priority=-27)
      */
     public function __invoke(Request $request): Response
     {

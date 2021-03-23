@@ -29,7 +29,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/cron/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/crons/add", methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {

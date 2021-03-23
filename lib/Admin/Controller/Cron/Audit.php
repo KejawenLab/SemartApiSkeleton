@@ -36,7 +36,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/cron/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/crons/{id}/audit", methods={"GET"}, priority=-255)
      */
     public function __invoke(string $id): Response
     {
