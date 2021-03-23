@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
 
-use DH\DoctrineAuditBundle\Reader\AuditReader;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -30,9 +30,9 @@ final class Audit extends AbstractController
 
     private AuditService $audit;
 
-    private AuditReader $reader;
+    private Reader $reader;
 
-    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, AuditReader $reader)
+    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, Reader $reader)
     {
         $this->service = $service;
         $this->audit = $audit;

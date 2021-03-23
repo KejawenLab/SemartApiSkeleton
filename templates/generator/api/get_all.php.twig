@@ -44,20 +44,18 @@ final class GetAll extends AbstractFOSRestController
      * @OA\Parameter(
      *     name="page",
      *     in="query",
-     *     type="string",
-     *     description="Page indicator"
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     )
      * )
      * @OA\Parameter(
      *     name="limit",
      *     in="query",
-     *     type="string",
-     *     description="Records per page"
-     * )
-     * @OA\Parameter(
-     *     name="q",
-     *     in="query",
-     *     type="string",
-     *     description="Search {{ entityLowerize }} by [change me]"
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int32"
+     *     )
      * )
      * @OA\Response(
      *     response=200,
