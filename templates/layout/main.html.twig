@@ -15,13 +15,13 @@
                     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="{{ path('admin_home') }}" class="nav-link {% if is_active_path(path('admin_home')) %}active{% endif %}">
-                                <i class="nav-icon fa fa-home"></i><p>Dashboard</p>
+                                <i class="nav-icon cil-home"></i><p>Dashboard</p>
                             </a>
                         </li>
                         {{ render_menu() | raw }}
                         <li class="nav-item">
                             <a href="{{ path('app.swagger_ui') }}" class="nav-link" target="_blank">
-                                <i class="nav-icon fa fa-book"></i><p>Dokumentasi Api</p>
+                                <i class="nav-icon cil-book"></i><p>Dokumentasi Api</p>
                             </a>
                         </li>
                     </ul>
