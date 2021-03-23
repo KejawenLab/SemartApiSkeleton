@@ -282,6 +282,8 @@ php bin/console cron:stop
 > * Api Client/Consumer Management
 > 
 > * Health Check
+> 
+> * Export to CSV
 >
 
 ## Cara Penggunaan
