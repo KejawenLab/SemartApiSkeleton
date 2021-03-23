@@ -20,20 +20,29 @@ services:
             iterable $upgraders: !tagged_iterator semart.upgrader
             Redis $redis: '@snc_redis.default'
 
-    # makes classes in src/ available to be used as services
+    # makes classes in lib/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     KejawenLab\ApiSkeleton\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        resource: '../lib/*'
+        exclude: '../lib/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    KejawenLab\ApiSkeleton\Application\:
+        resource: '../app/*'
+        exclude: '../app/{Entity,Migrations,Tests}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     KejawenLab\ApiSkeleton\Controller\:
-        resource: '../src/Controller'
+        resource: '../lib/Controller'
         tags: ['controller.service_arguments']
     KejawenLab\ApiSkeleton\Admin\Controller\:
-        resource: '../src/Admin/Controller'
+        resource: '../lib/Admin/Controller'
         tags: ['controller.service_arguments']
+    KejawenLab\ApiSkeleton\Application\Controller\:
+        resource: '../app/Controller'
+        tags: [ 'controller.service_arguments' ]
+    KejawenLab\ApiSkeleton\Application\Admin\Controller\:
+        resource: '../app/Admin/Controller'
+        tags: [ 'controller.service_arguments' ]
 
     _instanceof:
         Doctrine\Common\EventSubscriber:

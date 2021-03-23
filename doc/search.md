@@ -17,10 +17,10 @@ Ketika menggunakan [Semart Generator](generator.md), secara otomatis, akan dibua
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Test\Query;
+namespace KejawenLab\ApiSkeleton\Application\Test\Query;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
+use KejawenLab\ApiSkeleton\Application\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,11 +71,12 @@ Untuk mengaktifkannya, kita cukup *uncomment* sebagai berikut:
 Selain itu, kita juga perlu meng-*update* deskripsi dari dokumentasi Api kita pada *controller* `GetAll` pada *folder* `Controller/Test/GetAll` sebagai berikut:
 
 ```php
-     @SWG\Parameter(
-          name="q",
-          in="query",
-          type="string",
-          description="Search test by name"
+     @OA\Parameter(
+         name="q",
+         in="query",
+         @OA\Schema(
+              type="string"
+         )
      )
 ```
 

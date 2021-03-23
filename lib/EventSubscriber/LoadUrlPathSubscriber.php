@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class LoadUrlPathSubscriber implements EventSubscriber
 {
-    private const ROUTE_NAMESPACE_PREFIX = 'kejawenlab_apiskeleton_';
+    private const ROUTE_NAMESPACE_PREFIX = 'kejawenlab_apiskeleton_application_';
 
     private UrlGeneratorInterface $urlGenerator;
 

@@ -280,6 +280,8 @@ php bin/console cron:stop
 > * Password History
 >
 > * Api Client/Consumer Management
+> 
+> * Health Check
 >
 
 ## Cara Penggunaan
@@ -291,7 +293,7 @@ php bin/console cron:stop
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Test\Model;
+namespace KejawenLab\ApiSkeleton\Application\Test\Model;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
@@ -312,7 +314,7 @@ interface TestInterface
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Entity;
+namespace KejawenLab\ApiSkeleton\Application\Entity;
 
 use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
@@ -320,11 +322,11 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\ApiSkeleton\Repository\TestRepository;
-use KejawenLab\ApiSkeleton\Test\Model\TestInterface;
+use KejawenLab\ApiSkeleton\Application\Repository\TestRepository;
+use KejawenLab\ApiSkeleton\Application\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -349,7 +351,7 @@ class Test implements TestInterface
      *
      * @Groups({"read"})
      *
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     private UuidInterface $id;
 
@@ -399,7 +401,7 @@ php bin/console semart:generate Test
 #### Update form type
 
 ```php
-//class: KejawenLab\ApiSkeleton\Form\TestType 
+//class: KejawenLab\ApiSkeleton\Application\Form\TestType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name');
@@ -409,7 +411,7 @@ php bin/console semart:generate Test
 #### Update search query extension
 
 ```php
-//class: KejawenLab\ApiSkeleton\Test\Query\SearchQueryExtension
+//class: KejawenLab\ApiSkeleton\Application\Test\Query\SearchQueryExtension
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');

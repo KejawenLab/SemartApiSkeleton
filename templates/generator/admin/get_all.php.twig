@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

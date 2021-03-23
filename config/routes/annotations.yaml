@@ -1,16 +1,26 @@
-controllers:
+semart_api:
     prefix: /api
-    resource: ../../src/Controller/
+    resource: ../../lib/Controller/
     type: annotation
 
-fontend:
+semart_admin:
     prefix: /admin
-    resource: ../../src/Admin/Controller/
+    resource: ../../lib/Admin/Controller/
+    type: annotation
+
+app_api:
+    prefix: /api
+    resource: ../../app/Controller/
+    type: annotation
+
+app_admin:
+    prefix: /admin
+    resource: ../../app/Admin/Controller/
     type: annotation
 
 admin_logout:
     path: /admin/logout
 
 kernel:
-    resource: ../../src/Kernel.php
+    resource: ../../lib/Kernel.php
     type: annotation
