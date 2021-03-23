@@ -1,0 +1,4 @@
+label:
+    login:
+        error_title: 'Autentikasi Gagal'
+        error_message: 'Nama Pengguna atau Password Salah'
