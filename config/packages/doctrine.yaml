@@ -25,9 +25,15 @@ doctrine:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
         mappings:
+            Semart:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/lib/Entity'
+                prefix: 'KejawenLab\ApiSkeleton\Entity'
+                alias: Semart
             App:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
+                dir: '%kernel.project_dir%/app/Entity'
                 prefix: 'KejawenLab\ApiSkeleton\Entity'
                 alias: App

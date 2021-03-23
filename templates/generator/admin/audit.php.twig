@@ -6,13 +6,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize }};
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
-use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,13 +47,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
         }
 
         if (!$this->reader->getConfiguration()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
         }
 
         $class = new \ReflectionClass({{ entityHumanize }}::class);

@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\ApiSkeleton\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
-use KejawenLab\ApiSkeleton\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,7 +41,7 @@ final class Get extends AbstractController
         if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
         }
 
         $class = new \ReflectionClass({{ entityHumanize }}::class);
