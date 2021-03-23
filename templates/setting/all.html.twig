@@ -131,10 +131,10 @@
                 });
 
                 {% for message in app.flashes('info') %}
-                    toastr['success']('{{ message | trans({}, 'notifications') }}');
+                    toastr['success']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    toastr['error']('{{ message | trans({}, 'notifications') }}');
+                    toastr['error']('{{ message | trans({}, 'pages') }}');
                 {% endfor %}
             });
         </script>
