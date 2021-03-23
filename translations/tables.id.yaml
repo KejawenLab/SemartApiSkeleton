@@ -11,6 +11,7 @@ sas:
             action: 'Pilihan'
             audit:
                 type: 'Tipe'
+                logTime: 'Tanggal'
                 userId: 'ID Pengguna'
                 username: 'Pengguna'
                 ipAddress: 'Alamat IP'

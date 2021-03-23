@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-class CronCleanCommand extends Command
+final class CronCleanCommand extends Command
 {
     private CronReportService $service;
 

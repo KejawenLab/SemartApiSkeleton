@@ -32,6 +32,7 @@
                                 <thead>
                                     <tr>
                                         <th>{{ 'sas.table.column.audit.type' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}</th>
                                         <th>{{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}</th>
                                         <th>{{ 'sas.table.column.audit.username' | trans({}, 'tables') }}</th>
                                         <th>{{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}</th>
@@ -42,6 +43,7 @@
                                 {% for key, audit in audits %}
                                     <tr>
                                         <td>{{ audit['type'] | upper }}</td>
+                                        <td>{{ audit['log_time'] }}</td>
                                         <td>{{ audit['user_id'] }}</td>
                                         <td>{{ audit['username'] }}</td>
                                         <td>{{ audit['ip_address'] }}</td>
