@@ -9,7 +9,7 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    public const CODENAME = 'Menara Kudus';
+    public const CODENAME = 'Apem Comal';
 
     public const VERSION = '5.0.0';
 
