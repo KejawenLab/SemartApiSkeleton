@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
 use KejawenLab\ApiSkeleton\Cron\CronReportService;
-use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Entity\CronReport;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;

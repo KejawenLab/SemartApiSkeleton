@@ -18,7 +18,7 @@
         "doctrine/orm": "*",
         "friendsofsymfony/rest-bundle": ">=3.0",
         "lexik/jwt-authentication-bundle": ">=2.11",
-        "nelmio/api-doc-bundle": ">=3.6",
+        "nelmio/api-doc-bundle": ">=4.0",
         "nelmio/cors-bundle": ">=2.0",
         "ramsey/uuid-doctrine": ">=1.6",
         "sensio/framework-extra-bundle": ">=5.5",
