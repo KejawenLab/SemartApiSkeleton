@@ -3,6 +3,8 @@ sas:
         dashboard: 'Dashboard'
         login: 'Masuk'
         logout: 'Keluar'
+        error:
+            too_many_records: 'Data yang diunduh terlalu besar. Gunakan mekanisme lain untuk mengunduh data.'
         profile:
             title: 'Profil'
             view: 'Detil Profil'

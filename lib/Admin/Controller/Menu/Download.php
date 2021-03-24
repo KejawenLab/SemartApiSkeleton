@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -33,6 +34,13 @@ final class Download extends AbstractController
      */
     public function __invoke(): Response
     {
+        $records = $this->service->count();
+        if (10000 < $records) {
+            $this->addFlash('error', 'sas.page.error.too_many_records');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+        }
+
         $response = new Response();
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');

@@ -1,4 +1,5 @@
 {% set entityHumanize = entity | humanize %}
+{% set entityLowerize = entity | lower %}
 {% set entityUpper = entity | upper %}
 {% set entityPluralDash = entity | pluralize | dash %}
 <?php
@@ -36,6 +37,13 @@ final class Download extends AbstractController
      */
     public function __invoke(): Response
     {
+        $records = $this->service->count();
+        if (10000 < $records) {
+            $this->addFlash('error', 'sas.page.error.too_many_records');
+
+            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+        }
+
         $response = new Response();
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
