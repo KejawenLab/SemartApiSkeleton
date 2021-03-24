@@ -156,7 +156,6 @@ NGINX_WEBROOT=/semart/public
 APP_SUPER_ADMIN=SPRADM
 APP_TITLE="Semart Api Skeleton"
 APP_DESCRIPTION="Semart Api Skeleton"
-APP_VERSION=1.0@dev
 APP_UPLOAD_DIR=%kernel.project_dir%/storage
 ###< CUSTOM ###
 
