@@ -35,5 +35,5 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/app/Entity'
-                prefix: 'KejawenLab\ApiSkeleton\Entity'
+                prefix: 'KejawenLab\ApiSkeleton\Application\Entity'
                 alias: App
