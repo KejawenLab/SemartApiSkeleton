@@ -33,7 +33,7 @@ final class TwigExtension extends AbstractExtension
         if ($data instanceof EntityInterface) {
             return (string) $data->getNullOrString();
         } else {
-            return $data;
+            return $data ?: '';
         }
     }
 }
