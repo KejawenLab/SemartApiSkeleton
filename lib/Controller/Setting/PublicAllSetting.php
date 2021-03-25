@@ -60,10 +60,7 @@ final class PublicAllSetting extends AbstractFOSRestController
      *     name="parameter",
      *     in="query",
      *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     ),
-     *     description="Filter setting by parameter"
+     *         type="string"
      * )
      * @OA\Response(
      *     response=200,
