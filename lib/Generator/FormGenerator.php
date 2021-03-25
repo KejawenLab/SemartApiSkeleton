@@ -18,7 +18,10 @@ final class FormGenerator extends AbstractGenerator
         $formFile = sprintf('%s/app/Form/%sType.php', $this->kernel->getProjectDir(), $shortName);
 
         if (!$this->fileSystem->exists($formFile)) {
-            $template = $this->twig->render('generator/form.php.twig', ['entity' => $shortName, 'properties' => $properties]);
+            $template = $this->twig->render('generator/form.php.twig', [
+                'entity' => $class,
+                'properties' => $properties,
+            ]);
 
             $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\Form\\%sType"</info></comment>', $shortName));
             $this->fileSystem->dumpFile($formFile, $template);

@@ -1,4 +1,4 @@
-{% set entityHumanize = entity | humanize %}
+{% set entityHumanize = entity.shortName | humanize %}
 <?php
 
 declare(strict_types=1);
@@ -19,10 +19,24 @@ final class {{ entityHumanize }}Type extends AbstractType
     {
 {% for i, property in properties %}
 {% if 'id' != property.name %}
+{% if semart_association(entity, property) %}
+        $builder->add('{{ property.name }}', null, [
+            'required' => false,
+            'label' => 'sas.form.field.{{ entity.shortName | lower }}.{{ property.name }}',
+            'choice_label' => function (${{ property.name }}) {
+                return ${{ property.name }}->getNullOrString();
+            },
+            'attr' => [
+                'class' => 'select2',
+            ],
+            'placeholder' => 'sas.form.field.empty_select',
+        ]);
+{% else %}
         $builder->add('{{ property.name }}', null, [
             'required' => true,
-            'label' => 'sas.form.field.{{ entity | lower }}.{{ property.name }}',
+            'label' => 'sas.form.field.{{ entity.shortName | lower }}.{{ property.name }}',
         ]);
+{% endif %}
 {% endif %}
 {% endfor %}
     }
