@@ -17,6 +17,7 @@
         "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
         "friendsofsymfony/rest-bundle": ">=3.0",
+        "k911/swoole-bundle": "^0.9.0",
         "lexik/jwt-authentication-bundle": ">=2.11",
         "nelmio/api-doc-bundle": ">=4.0",
         "nelmio/cors-bundle": ">=2.0",

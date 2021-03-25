@@ -50,14 +50,14 @@ RUN touch /run/php/php8.0-fpm.sock
 RUN chmod 777 /run/php/php8.0-fpm.sock
 
 # Supervisor Configuration
-ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
+ADD docker/supervisor/supervisor.dev.conf /etc/supervisord.conf
 
 # Here we go
-ADD docker/start.sh /start.sh
+ADD docker/start.dev.sh /start.sh
 RUN chmod +x /start.sh
 
 WORKDIR /semart
 
-EXPOSE 443 80
+EXPOSE 80
 
 CMD ["/start.sh"]
