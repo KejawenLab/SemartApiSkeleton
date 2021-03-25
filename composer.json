@@ -11,6 +11,7 @@
         "ext-pdo": "*",
         "ext-posix": "*",
         "ext-redis": "*",
+        "ext-swoole": "*",
         "composer/composer": ">=2.0",
         "cron/cron": ">=1.4",
         "damienharper/auditor-bundle": ">=4.0",
