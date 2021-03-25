@@ -43,8 +43,7 @@ final class GetAll extends AbstractFOSRestController
      *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Page indicator"
+     *     )
      * )
      * @OA\Parameter(
      *     name="limit",
@@ -52,17 +51,14 @@ final class GetAll extends AbstractFOSRestController
      *     @OA\Schema(
      *         type="integer",
      *         format="int32"
-     *     ),
-     *     description="Records per page"
+     *     )
      * )
      * @OA\Parameter(
      *     name="q",
      *     in="query",
      *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     ),
-     *     description="Search setting by parameter"
+     *         type="string"
+     *     )
      * )
      * @OA\Parameter(
      *     name="parameter",

@@ -30,13 +30,14 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
 # PHP Configuration
 RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
-ADD docker/php/php.prod.ini /etc/php/8.0/cli/php.ini
+RUN pecl install inotify
+ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
 
 # Supervisor Configuration
-ADD docker/supervisor/supervisor.prod.conf /etc/supervisord.conf
+ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
 
 # Here we go
-ADD docker/start.prod.sh /start.sh
+ADD docker/start.sh /start.sh
 RUN chmod +x /start.sh
 
 WORKDIR /semart
