@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Generator;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -19,9 +20,9 @@ final class AdminControllerGenerator extends AbstractGenerator
 
     private Reader $reader;
 
-    public function __construct(Reader $reader, Environment $twig, Filesystem $fileSystem, KernelInterface $kernel)
+    public function __construct(Reader $reader, Environment $twig, Filesystem $fileSystem, KernelInterface $kernel, EntityManagerInterface $entityManager)
     {
-        parent::__construct($twig, $fileSystem, $kernel);
+        parent::__construct($twig, $fileSystem, $kernel, $entityManager);
 
         $this->reader = $reader;
     }

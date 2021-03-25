@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
@@ -36,6 +37,7 @@ final class PermissionGenerator extends AbstractGenerator
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,
+        EntityManagerInterface $entityManager,
         string $class
     ) {
         $this->permissionService = $permissionService;
@@ -43,7 +45,7 @@ final class PermissionGenerator extends AbstractGenerator
         $this->groupService = $groupService;
         $this->class = $class;
 
-        parent::__construct($twig, $fileSystem, $kernel);
+        parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 
     public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
