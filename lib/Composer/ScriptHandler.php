@@ -75,6 +75,7 @@ final class ScriptHandler
         $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
         $appTitle = $io->ask('Please enter your application title [default: <info>KejawenLab Core</info>]: ', 'KejawenLab Core');
         $appDescription = $io->ask('Please enter your application description [default: <info>KejawenLab Core Application</info>]: ', 'KejawenLab Core Application');
+        $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
         $passPhrase = $io->ask('Please enter your PKI pass phrase [default: <info>null</info>]: ', '');
 
         $search = [
@@ -91,11 +92,12 @@ final class ScriptHandler
             '{{DB_PORT}}',
             '{{APP_TITLE}}',
             '{{APP_DESCRIPTION}}',
+            '{{APP_VERSION}}',
             '{{JWT_PASSPHRASE}}',
         ];
 
         $secret = Encryptor::encrypt(date('YmdHis'), sha1(date('YmdHis')));
-        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appTitle, $appDescription, $passPhrase];
+        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appTitle, $appDescription, $appVersion, $passPhrase];
 
         $envString = str_replace($search, $replace, $template);
 

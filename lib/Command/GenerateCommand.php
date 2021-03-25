@@ -20,7 +20,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 final class GenerateCommand extends Command
 {
-    private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
+    private const NAMESPACE = 'KejawenLab\\ApiSkeleton\\Application\\Entity';
 
     private GeneratorFactory $generator;
 

@@ -9,9 +9,9 @@ RUN apt update && apt upgrade -y && apt autoremove -y
 RUN apt install software-properties-common locales -y
 RUN locale-gen en_US.UTF-8 && export LANG=en_US.UTF-8
 RUN add-apt-repository ppa:ondrej/php -y
-RUN apt install nginx-full supervisor vim wget curl unzip -y
+RUN apt install supervisor vim wget curl unzip -y
 RUN apt install php8.0 php8.0-cli php8.0-curl php8.0-intl php8.0-mbstring php8.0-xml php8.0-zip php8.0-dev \
-    php8.0-bcmath php8.0-cli php8.0-fpm php8.0-imap php8.0-opcache php8.0-xmlrpc php-pear \
+    php8.0-bcmath php8.0-cli php8.0-imap php8.0-opcache php8.0-xmlrpc php-pear \
     php8.0-bz2 php8.0-common php8.0-gd php8.0-ldap php8.0-mysql php8.0-readline php8.0-soap php8.0-tidy php8.0-xsl php8.0-redis -y
 
 # Install Composer
@@ -28,40 +28,19 @@ RUN mv cachetool.phar /usr/local/bin/cachetool && chmod a+x /usr/local/bin/cache
 RUN apt autoremove -y && apt clean && apt autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
-# Nginx Configuration
-ADD docker/nginx/sites-enabled/site.conf /etc/nginx/conf.d/default.conf
-ADD docker/nginx/sites-enabled/php-fpm.conf /etc/nginx/conf.d/php-fpm.conf
-ADD docker/nginx/nginx.conf /etc/nginx/nginx.conf
-ADD docker/nginx/fastcgi_cache /etc/nginx/fastcgi_cache
-ADD docker/nginx/logs/site.access.log /var/log/nginx/site.access.log
-ADD docker/nginx/logs/site.error.log /var/log/nginx/site.error.log
-ADD docker/nginx/etc/sysctl.conf /etc/sysctl.conf
-ADD docker/nginx/etc/security/limits.conf /etc/security/limits.conf
-
-RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
-RUN mkdir -p /tmp/nginx/cache
-RUN chmod 777 -R /tmp/nginx
-
-RUN chmod 777 /var/log/nginx/site.access.log
-RUN chmod 777 /var/log/nginx/site.error.log
-
 # PHP Configuration
-ADD docker/php/php.prod.ini /etc/php/8.0/fpm/php.ini
+RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
 ADD docker/php/php.prod.ini /etc/php/8.0/cli/php.ini
-ADD docker/php/php-fpm.conf /etc/php/8.0/fpm/php-fpm.conf
-RUN mkdir -p /run/php
-RUN touch /run/php/php8.0-fpm.sock
-RUN chmod 777 /run/php/php8.0-fpm.sock
 
 # Supervisor Configuration
-ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
+ADD docker/supervisor/supervisor.prod.conf /etc/supervisord.conf
 
 # Here we go
-ADD docker/start.sh /start.sh
+ADD docker/start.prod.sh /start.sh
 RUN chmod +x /start.sh
 
 WORKDIR /semart
 
-EXPOSE 443 80
+EXPOSE 9501
 
 CMD ["/start.sh"]

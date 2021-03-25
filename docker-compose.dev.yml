@@ -8,6 +8,8 @@ services:
           - .env
         volumes:
             - .:/semart
+        ports:
+            - 80:9501
         links:
             - session
             - db
