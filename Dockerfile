@@ -30,6 +30,7 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
 # PHP Configuration
 RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
+RUN pecl install inotify
 ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
 
 # Supervisor Configuration

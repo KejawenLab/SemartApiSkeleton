@@ -61,6 +61,7 @@ final class PublicAllSetting extends AbstractFOSRestController
      *     in="query",
      *     @OA\Schema(
      *         type="string"
+     *     )
      * )
      * @OA\Response(
      *     response=200,
