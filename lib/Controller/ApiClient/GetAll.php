@@ -49,8 +49,7 @@ final class GetAll extends AbstractFOSRestController
      *     name="limit",
      *     in="query",
      *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
+     *         type="string"
      *     )
      * )
      * @OA\Response(
