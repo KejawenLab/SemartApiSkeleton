@@ -189,8 +189,8 @@ CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 >
 
 ```bash
-docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console semart:encrypt semart"
+docker-compose -f docker-compose.yml build && docker-compose -f docker-compose.yml up
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt semart"
 ```
 
 > 
@@ -202,12 +202,12 @@ docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console semar
 >
 
 ```bash
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console cache:clear"
-docker-compose -f docker-compose.dev.yml exec app bash -c "chmod 777 -R var"
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:database:create"
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:schema:update --force"
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
-docker-compose -f docker-compose.dev.yml exec app bash -c "php bin/console assets:install"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
+docker-compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
 ```
 
 > 
@@ -473,8 +473,6 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 - [ ] Dokumentasi
 
 - [ ] Unit Testing
-
-- [X] Admin Auto Generate
 
 ## Copyright
 
