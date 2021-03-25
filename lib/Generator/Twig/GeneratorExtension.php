@@ -63,6 +63,6 @@ final class GeneratorExtension extends AbstractExtension
 
     public function hasAssociation(\ReflectionClass $class, \ReflectionProperty $property): bool
     {
-        return $this->entityManager->getClassMetadata($class->getName())->hasAssociation($property);
+        return $this->entityManager->getClassMetadata($class->getName())->hasAssociation($property->getName());
     }
 }

@@ -34,9 +34,9 @@ abstract class AbstractGenerator implements GeneratorInterface
     public function hasAssociation(\ReflectionClass $class): bool
     {
         $metadata = $this->entityManager->getClassMetadata($class->getName());
-        $association = false;
+        $association = 0;
         foreach ($class->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
-            if ($metadata->hasAssociation($property)) {
+            if ($metadata->hasAssociation($property->getName())) {
                 ++$association;
             }
         }
