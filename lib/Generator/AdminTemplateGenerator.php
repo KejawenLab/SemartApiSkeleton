@@ -6,26 +6,18 @@ namespace KejawenLab\ApiSkeleton\Generator;
 
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Twig\Environment;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class AdminTemplateGenerator extends AbstractGenerator
 {
-    public function __construct(Environment $twig, Filesystem $fileSystem, KernelInterface $kernel)
-    {
-        parent::__construct($twig, $fileSystem, $kernel);
-    }
-
-    public function generate(\ReflectionClass $entityClass, OutputInterface $output, ?string $folder = null): void
+    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $projectDir = $this->kernel->getProjectDir();
-        $shortName = $entityClass->getShortName();
+        $shortName = $class->getShortName();
         $lowercase = StringUtil::lowercase($shortName);
-        $properties = $entityClass->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
         $deleteField = '';
         $tableFields = '';
         foreach ($properties as $property) {
@@ -46,15 +38,19 @@ final class AdminTemplateGenerator extends AbstractGenerator
             '{# table_fields #}',
         ];
         $replace = [$lowercase, $deleteField, $tableFields];
+        $form = 'templates/generator/admin/view/form.html.stub';
+        if ($this->hasAssociation($class)) {
+            $form = 'templates/generator/admin/view/form.select2.html.stub';
+        }
 
         $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/all.html.stub', $projectDir)));
-        $paginationTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/form.html.stub', $projectDir)));
+        $formTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/%s', $projectDir, $form)));
         $tableTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/view.html.stub', $projectDir)));
 
         $output->writeln(sprintf('<comment>Generating template <info>"%s/all.html.twig"</info></comment>', $lowercase));
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/all.html.twig', $projectDir, $lowercase), $indexTemplate);
         $output->writeln(sprintf('<comment>Generating template <info>"%s/form.html.twig"</info></comment>', $lowercase));
-        $this->fileSystem->dumpFile(sprintf('%s/templates/%s/form.html.twig', $projectDir, $lowercase), $paginationTemplate);
+        $this->fileSystem->dumpFile(sprintf('%s/templates/%s/form.html.twig', $projectDir, $lowercase), $formTemplate);
         $output->writeln(sprintf('<comment>Generating template <info>"%s/view.html.twig"</info></comment>', $lowercase));
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/view.html.twig', $projectDir, $lowercase), $tableTemplate);
     }

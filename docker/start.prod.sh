@@ -11,7 +11,7 @@ if [[ ! -d "/semart/var" ]]; then
 fi
 
 cd /semart && composer update --prefer-dist -vvv
-composer dump-autoload --no-dev --classmap-authoritative
+composer dump-autoload --classmap-authoritative
 php /semart/bin/console cache:clear --env=prod
 php /semart/bin/console assets:install --env=prod
 chmod 777 -R var/
