@@ -13,6 +13,8 @@ use Twig\TwigFilter;
  */
 final class GeneratorExtension extends AbstractExtension
 {
+    private const SEMART_PREFIX = 'KejawenLab\\ApiSkeleton\\Application\\Entity';
+
     public function getFilters(): iterable
     {
         yield new TwigFilter('pluralize', [$this, 'pluralize']);
@@ -20,6 +22,7 @@ final class GeneratorExtension extends AbstractExtension
         yield new TwigFilter('underscore', [$this, 'underscore']);
         yield new TwigFilter('dash', [$this, 'dash']);
         yield new TwigFilter('camelcase', [$this, 'camelcase']);
+        yield new TwigFilter('is_semart', [$this, 'isSemart']);
     }
 
     public function pluralize(string $value): string
@@ -45,5 +48,15 @@ final class GeneratorExtension extends AbstractExtension
     public function camelcase(string $value): string
     {
         return StringUtil::camelcase($value);
+    }
+
+    public function isSemart(\ReflectionProperty $property): bool
+    {
+        $type = $property->getType();
+        if (strpos($type, static::SEMART_PREFIX)) {
+            return true;
+        }
+
+        return false;
     }
 }
