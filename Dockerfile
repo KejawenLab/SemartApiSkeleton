@@ -28,11 +28,8 @@ RUN mv cachetool.phar /usr/local/bin/cachetool && chmod a+x /usr/local/bin/cache
 RUN apt autoremove -y && apt clean && apt autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
-# PHP Configuration
-RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
+# Configuring
 ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
-
-# Supervisor Configuration
 ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
 
 # Here we go
