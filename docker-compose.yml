@@ -9,7 +9,7 @@ services:
         volumes:
             - .:/semart
         ports:
-            - 80:9501
+            - 80:8080
         links:
             - session
             - db

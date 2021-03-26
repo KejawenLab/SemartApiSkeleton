@@ -1,6 +1,15 @@
 {
-    "beberlei/assert": {
-        "version": "v3.3.0"
+    "baldinof/roadrunner-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "47c159c44eb9e6902828da4acbb4199757dd378f"
+        },
+        "files": [
+            "config/packages/baldinof_road_runner.yaml"
+        ]
     },
     "behat/transliterator": {
         "version": "v1.3.0"
@@ -41,6 +50,9 @@
             "config/packages/dh_auditor.yaml",
             "config/routes/dh_auditor.yaml"
         ]
+    },
+    "dflydev/fig-cookies": {
+        "version": "v3.0.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -144,14 +156,20 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
+    "jean85/pretty-package-versions": {
+        "version": "2.0.3"
+    },
     "jms/metadata": {
         "version": "2.2.0"
     },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
     },
-    "k911/swoole-bundle": {
-        "version": "v0.9.0"
+    "laminas/laminas-diactoros": {
+        "version": "2.5.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.2.0"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -214,6 +232,9 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "php-http/discovery": {
+        "version": "1.13.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
     },
@@ -231,6 +252,18 @@
     },
     "psr/event-dispatcher": {
         "version": "1.0.0"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
+    "psr/http-server-handler": {
+        "version": "1.0.1"
+    },
+    "psr/http-server-middleware": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -288,6 +321,12 @@
         "files": [
             "config/packages/snc_redis.yaml"
         ]
+    },
+    "spiral/goridge": {
+        "version": "v2.4.5"
+    },
+    "spiral/roadrunner": {
+        "version": "v1.9.2"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
@@ -494,6 +533,9 @@
     },
     "symfony/property-info": {
         "version": "v5.0.8"
+    },
+    "symfony/psr-http-message-bridge": {
+        "version": "v2.1.0"
     },
     "symfony/redis-messenger": {
         "version": "v5.1.0"
