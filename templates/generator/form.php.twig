@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Application\Form;
 
 use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,11 @@ final class {{ entityHumanize }}Type extends AbstractType
             'required' => false,
             'label' => 'sas.form.field.{{ entity.shortName | lower }}.{{ property.name }}',
             'choice_label' => function (${{ property.name }}) {
-                return ${{ property.name }}->getNullOrString();
+                if (${{ property.name }} instanceof EntityInterface) {
+                    return ${{ property.name }}->getNullOrString();
+                }
+
+                return (string) ${{ property.name }};
             },
             'attr' => [
                 'class' => 'select2',
