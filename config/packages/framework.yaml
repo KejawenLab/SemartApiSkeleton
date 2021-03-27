@@ -1,4 +1,6 @@
 framework:
+    trusted_proxies: '192.0.0.1,172.0.0.0/8,10.0.0.0/8'
+    trusted_headers: [ 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port' ]
     translator:
         enabled: true
     secret: '%env(APP_SECRET)%'

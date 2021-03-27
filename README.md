@@ -67,8 +67,6 @@
 >
 > * Extension Redis
 >
-> * Extension Swoole
->
 > * RDBMS (MySQL/MariaDB/PostgreSQL/OracleDB/SQLServer)
 >
 > * Redis Server >= 4.0

@@ -7,6 +7,6 @@ namespace KejawenLab\ApiSkeleton\Setting;
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-final class SettingNotFoundException extends \Exception
+final class SettingNotFoundException extends \InvalidArgumentException
 {
 }

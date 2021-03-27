@@ -34,4 +34,24 @@ final class SettingService extends AbstractService implements ServiceInterface
     {
         return $this->repository->findOneBy(['id' => $id, 'public' => true]);
     }
+
+    public function getCacheLifetime(): int
+    {
+        return (int) $this->getSetting('CACHE_LIFETIME')->getValue();
+    }
+
+    public function getPageField(): string
+    {
+        return $this->getSetting('PAGE_FIELD')->getValue();
+    }
+
+    public function getPerPageField(): string
+    {
+        return $this->getSetting('PER_PAGE_FIELD')->getValue();
+    }
+
+    public function getRecordPerPage(): int
+    {
+        return (int) $this->getSetting('PER_PAGE')->getValue();
+    }
 }
