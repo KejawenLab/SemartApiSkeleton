@@ -24,7 +24,7 @@ final class AuditService
     public function __construct(Reader $auditReader, SettingService $setting, CacheItemPoolInterface $cache)
     {
         $this->auditReader = $auditReader;
-        $this->cacheLifetime = (int) $setting->getSetting('CACHE_LIFETIME')->getValue();
+        $this->cacheLifetime = $setting->getCacheLifetime();
         $this->cache = $cache;
     }
 
