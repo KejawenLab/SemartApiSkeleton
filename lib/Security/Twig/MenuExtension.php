@@ -33,14 +33,12 @@ final class MenuExtension extends AbstractExtension
         $this->menuService = $menuService;
     }
 
-    public function getFunctions(): array
+    public function getFunctions(): iterable
     {
-        return [
-            new TwigFunction('convert_to_menu', [$this, 'getMenu']),
-            new TwigFunction('render_menu', [$this, 'renderMenu']),
-            new TwigFunction('is_active_path', [$this, 'isActive']),
-            new TwigFunction('is_menu_open', [$this, 'isOpen']),
-        ];
+        yield new TwigFunction('convert_to_menu', [$this, 'getMenu']);
+        yield new TwigFunction('render_menu', [$this, 'renderMenu']);
+        yield new TwigFunction('is_active_path', [$this, 'isActive']);
+        yield new TwigFunction('is_menu_open', [$this, 'isOpen']);
     }
 
     public function isOpen(MenuInterface $menu): bool

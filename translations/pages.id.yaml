@@ -74,6 +74,7 @@ sas:
             inactive: 'OFF'
             run_success: 'Cron berhasil dijalankan'
         api_client:
+            report: 'Log Klien API'
             list: 'Daftar Token API'
             saved: 'Token berhasil disimpan'
             deleted: 'Token berhasil dihapus'

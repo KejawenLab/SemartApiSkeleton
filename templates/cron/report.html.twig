@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-toggle/css/bootstrap4-toggle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
@@ -34,7 +35,7 @@
                                 <td>{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</td>
                                 <td>{{ report.runAt | date('Y-m-d H:i:s') }}</td>
                                 <td>{{ report.runtime | number_format(2, ',', '.') }} detik</td>
-                                <td>{{ dump_cron_log(report.output) }}</td>
+                                <td><pre class="json-viewer" data-json="{{ normalize_cron_log(report.output) | json_encode() }}"></pre></td>
                                 <td>{% if report.exitCode == 0 %}<span class="btn btn-success disabled">{{ 'sas.page.cron_report.success' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans({}, 'pages') }}</span>{% endif %}</td>
                             </tr>
                         {% endfor %}
@@ -51,4 +52,13 @@
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('plugins/bootstrap4-toggle/js/bootstrap4-toggle.min.js') }}"></script>
+    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.json-viewer').each(function() {
+                let me = $(this);
+                me.jsonViewer(me.data('json'), {collapsed: true, withQuotes: true, withLinks: false});
+            });
+        });
+    </script>
 {% endblock %}

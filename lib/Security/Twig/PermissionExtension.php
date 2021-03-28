@@ -30,12 +30,10 @@ final class PermissionExtension extends AbstractExtension
         $this->authorization = $authorization;
     }
 
-    public function getFunctions(): array
+    public function getFunctions(): iterable
     {
-        return [
-            new TwigFunction('is_super_admin', [$this, 'isSuperAdmin']),
-            new TwigFunction('can_view_audit', [$this, 'canViewAudit']),
-        ];
+        yield new TwigFunction('is_super_admin', [$this, 'isSuperAdmin']);
+        yield new TwigFunction('can_view_audit', [$this, 'canViewAudit']);
     }
 
     public function canViewAudit(): bool

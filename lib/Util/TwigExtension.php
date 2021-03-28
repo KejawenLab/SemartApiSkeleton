@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Util;
 
+use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
-use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -14,18 +14,17 @@ use Twig\TwigFunction;
  */
 final class TwigExtension extends AbstractExtension
 {
-    private Environment $twig;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(Environment $twig)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->twig = $twig;
+        $this->entityManager = $entityManager;
     }
 
-    public function getFunctions(): array
+    public function getFunctions(): iterable
     {
-        return [
-            new TwigFunction('semart_print', [$this, 'toString']),
-        ];
+        yield new TwigFunction('semart_print', [$this, 'toString']);
+        yield new TwigFunction('semart_association', [$this, 'hasAssociation']);
     }
 
     public function toString($data): string
@@ -35,5 +34,10 @@ final class TwigExtension extends AbstractExtension
         } else {
             return $data ?: '';
         }
+    }
+
+    public function hasAssociation(\ReflectionClass $class, \ReflectionProperty $property): bool
+    {
+        return $this->entityManager->getClassMetadata($class->getName())->hasAssociation($property->getName());
     }
 }

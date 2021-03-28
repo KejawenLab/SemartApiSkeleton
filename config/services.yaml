@@ -98,3 +98,6 @@ services:
     KejawenLab\ApiSkeleton\ApiClient\UserProvider:
         arguments:
             $class: 'KejawenLab\ApiSkeleton\Entity\ApiClient'
+    KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService:
+        arguments:
+            $class: 'KejawenLab\ApiSkeleton\Entity\ApiClientRequest'

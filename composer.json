@@ -41,7 +41,6 @@
         "symfony/string": ">=5.2",
         "symfony/twig-pack": ">=1.0",
         "symfony/validator": ">=5.2",
-        "symfony/var-dumper": ">=5.2",
         "symfony/web-link": ">=5.2",
         "symfony/yaml": ">=5.2",
         "vich/uploader-bundle": ">=1.13"
@@ -49,6 +48,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": ">=3.3",
         "friendsofphp/php-cs-fixer": ">=2.16",
+        "symfony/debug-bundle": ">=5.2",
         "symfony/maker-bundle": ">=1.19",
         "symfony/stopwatch": ">=5.2",
         "symfony/twig-bundle": ">=5.2",

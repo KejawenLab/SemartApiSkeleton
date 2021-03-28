@@ -24,10 +24,8 @@ final class SettingExtension extends AbstractExtension
         return $this->service->getSetting($key);
     }
 
-    public function getFunctions(): array
+    public function getFunctions(): iterable
     {
-        return [
-            new TwigFunction('setting', [$this, 'getSetting']),
-        ];
+        yield new TwigFunction('setting', [$this, 'getSetting']);
     }
 }

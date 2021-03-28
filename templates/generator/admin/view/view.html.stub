@@ -1,6 +1,8 @@
 {% extends 'layout/main.html.twig' %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
+{% endblock %}
 {% block content %}
     {% apply spaceless %}
         <div class="row">
@@ -41,7 +43,7 @@
                                         <td>{{ audit['user_id'] }}</td>
                                         <td>{{ audit['username'] }}</td>
                                         <td>{{ audit['ip_address'] }}</td>
-                                        <td>{{ dump_audit_log(audit['data']) }}</td>
+                                        <td><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -60,4 +62,14 @@
         </div>
     {% endapply %}
 {% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.json-viewer').each(function() {
+                let me = $(this);
+                me.jsonViewer(me.data('json'), {collapsed: true, withQuotes: true, withLinks: false});
+            });
+        });
+    </script>
+{% endblock %}
