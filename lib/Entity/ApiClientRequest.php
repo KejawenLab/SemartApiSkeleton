@@ -62,6 +62,8 @@ class ApiClientRequest implements ApiClientRequestInterface, EntityInterface
      * @Groups({"read"})
      *
      * @ORM\Column(type="json")
+     *
+     * @OA\Property(type="array", @OA\Items(type="string"))
      */
     private array $headers;
 
@@ -69,6 +71,8 @@ class ApiClientRequest implements ApiClientRequestInterface, EntityInterface
      * @Groups({"read"})
      *
      * @ORM\Column(type="json")
+     *
+     * @OA\Property(type="array", @OA\Items(type="string"))
      */
     private array $queries;
 
@@ -76,6 +80,8 @@ class ApiClientRequest implements ApiClientRequestInterface, EntityInterface
      * @Groups({"read"})
      *
      * @ORM\Column(type="json")
+     *
+     * @OA\Property(type="array", @OA\Items(type="string"))
      */
     private array $requests;
 
@@ -83,6 +89,8 @@ class ApiClientRequest implements ApiClientRequestInterface, EntityInterface
      * @Groups({"read"})
      *
      * @ORM\Column(type="json")
+     *
+     * @OA\Property(type="array", @OA\Items(type="string"))
      */
     private array $files;
 

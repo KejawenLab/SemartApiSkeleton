@@ -30,7 +30,7 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
         $this->userProvider = $userProvider;
     }
 
-    public function requestLog(ControllerEvent $event): void
+    public function log(ControllerEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -60,7 +60,7 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            ControllerEvent::class => 'requestLog',
+            ControllerEvent::class => 'log',
         ];
     }
 }

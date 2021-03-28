@@ -6,6 +6,8 @@ namespace KejawenLab\ApiSkeleton\Security;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,14 +27,17 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 {
     use TargetPathTrait;
 
+    private UserService $userService;
+
     private UserProviderFactory $userProviderFactory;
 
     private UrlGeneratorInterface $urlGenerator;
 
     private UserPasswordEncoderInterface $passwordEncoder;
 
-    public function __construct(UserProviderFactory $userProviderFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserService $userService, UserProviderFactory $userProviderFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $this->userService = $userService;
         $this->userProviderFactory = $userProviderFactory;
         $this->urlGenerator = $urlGenerator;
         $this->passwordEncoder = $passwordEncoder;
@@ -72,7 +77,17 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        $session = $request->getSession();
+        $user = $this->userProviderFactory->getRealUser($token->getUser());
+        if ($user instanceof Model\UserInterface) {
+            $deviceId = Encryptor::hash(date('YmdHis'));
+            $user->setDeviceId($deviceId);
+
+            $session->set(AdminContext::USER_DEVICE_ID, $deviceId);
+            $this->userService->save($user);
+        }
+
+        if ($targetPath = $this->getTargetPath($session, $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
