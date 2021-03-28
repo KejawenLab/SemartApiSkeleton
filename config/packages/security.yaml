@@ -13,7 +13,6 @@ security:
             pattern: ^/admin
             anonymous: true
             lazy: true
-            provider: user_provider
             switch_user: true
             guard:
                 authenticators:
@@ -25,6 +24,7 @@ security:
             stateless: true
             anonymous: true
             lazy: true
+            provider: user_provider
             json_login:
                 check_path: /api/login
                 username_path: username

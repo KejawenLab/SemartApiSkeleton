@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -12,7 +13,10 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
@@ -23,18 +27,45 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
     private RequestStack $requestStack;
 
+    private UrlGeneratorInterface $urlGenerator;
+
     private UserService $service;
 
     private UserProviderFactory $userProviderFactory;
 
-    public function __construct(RequestStack $requestStack, UserService $service, UserProviderFactory $userProviderFactory)
+    public function __construct(RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, UserService $service, UserProviderFactory $userProviderFactory)
     {
         $this->requestStack = $requestStack;
+        $this->urlGenerator = $urlGenerator;
         $this->service = $service;
         $this->userProviderFactory = $userProviderFactory;
     }
 
-    public function validate(JWTDecodedEvent $event): void
+    public function validate(RequestEvent $event): void
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        if (!AdminContext::isAdminContext($request)) {
+            return;
+        }
+
+        $session = $request->getSession();
+        if (!$deviceId = $session->get(AdminContext::USER_DEVICE_ID)) {
+            return;
+        }
+
+        $user = $this->service->getByDeviceId($deviceId);
+        if ($user) {
+            return;
+        }
+
+        $event->setResponse(new RedirectResponse($this->urlGenerator->generate('admin_logout')));
+    }
+
+    public function decode(JWTDecodedEvent $event): void
     {
         $payload = $event->getPayload();
         if (!isset($payload['deviceId'])) {
@@ -49,15 +80,15 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         }
 
         $user = $this->service->getByDeviceId($payload['deviceId']);
-        if (!$user) {
-            $event->markAsInvalid();
-            $event->stopPropagation();
-
+        if ($user) {
             return;
         }
+
+        $event->markAsInvalid();
+        $event->stopPropagation();
     }
 
-    public function sign(JWTCreatedEvent $event): void
+    public function create(JWTCreatedEvent $event): void
     {
         $user = $this->userProviderFactory->getRealUser($event->getUser());
         $payload = $event->getData();
@@ -78,10 +109,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            JWTCreatedEvent::class => 'sign',
-            JWTDecodedEvent::class => 'validate',
-            Events::JWT_CREATED => 'sign',
-            Events::JWT_DECODED => 'validate',
+            RequestEvent::class => [['validate', -255]],
+            JWTCreatedEvent::class => 'create',
+            JWTDecodedEvent::class => 'decode',
+            Events::JWT_CREATED => 'create',
+            Events::JWT_DECODED => 'decode',
         ];
     }
 }

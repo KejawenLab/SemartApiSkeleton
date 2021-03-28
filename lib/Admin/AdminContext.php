@@ -17,6 +17,8 @@ final class AdminContext
 
     public const ADMIN_ROUTE = 'admin_home';
 
+    public const USER_DEVICE_ID = 'USER_DEVICE_ID';
+
     public static function isAdminContext(Request $request): bool
     {
         if (static::ADMIN_PATH_PREFIX === substr($request->getPathInfo(), 0, strlen(static::ADMIN_PATH_PREFIX))) {

@@ -30,7 +30,8 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
 # Configuring
 ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
-ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
+ADD docker/supervisor/supervisor.dev.conf /etc/supervisord.dev.conf
+ADD docker/supervisor/supervisor.prod.conf /etc/supervisord.prod.conf
 
 # Here we go
 ADD docker/start.sh /start.sh

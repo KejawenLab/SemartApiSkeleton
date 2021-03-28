@@ -7,12 +7,12 @@ namespace KejawenLab\ApiSkeleton\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
+use KejawenLab\ApiSkeleton\Repository\PasswordHistoryRepository;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass=CronReportRepository::class)
+ * @ORM\Entity(repositoryClass=PasswordHistoryRepository::class)
  * @ORM\Table(name="core_user_password_history")
  */
 class PasswordHistory implements PasswordHistoryInterface, EntityInterface

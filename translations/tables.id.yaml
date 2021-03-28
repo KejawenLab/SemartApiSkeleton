@@ -73,3 +73,11 @@ sas:
                 runtime: 'Lama Eksekusi'
                 output: 'Log'
                 exitCode: 'Status'
+            apiclientrequest:
+                apiClient: 'Api Client'
+                path: 'URL'
+                method: 'Method'
+                headers: 'Headers'
+                queries: 'Queries'
+                requests: 'Post Data'
+                files: 'Files'

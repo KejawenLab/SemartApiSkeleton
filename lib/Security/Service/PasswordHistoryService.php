@@ -27,6 +27,6 @@ final class PasswordHistoryService extends AbstractService implements ServiceInt
      */
     public function getPasswords(UserInterface $user): array
     {
-        return $this->repository->findPassword($user);
+        return $this->repository->findPasswords($user);
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron;
 
-use Symfony\Component\VarDumper\VarDumper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -13,24 +12,21 @@ use Twig\TwigFunction;
  */
 final class CronExtension extends AbstractExtension
 {
-    public function getFunctions(): array
+    public function getFunctions(): iterable
     {
-        return [
-            new TwigFunction('dump_cron_log', [$this, 'dump']),
-        ];
+        yield new TwigFunction('normalize_cron_log', [$this, 'normalize']);
     }
 
-    public function dump($variable)
+    public function normalize($log)
     {
-        $temps = explode(PHP_EOL, $variable);
+        $temps = explode(PHP_EOL, $log);
         $vars = [];
-        $vars['logs'] = [];
         foreach ($temps as $temp) {
             if ($temp) {
-                $vars['logs'][] = $temp;
+                $vars[] = $temp;
             }
         }
 
-        return VarDumper::dump($vars);
+        return $vars;
     }
 }

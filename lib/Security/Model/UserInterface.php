@@ -20,4 +20,8 @@ interface UserInterface extends AuthInterface
     public function getPlainPassword(): ?string;
 
     public function getPassword(): ?string;
+
+    public function getDeviceId(): ?string;
+
+    public function setDeviceId(string $deviceId): void;
 }
