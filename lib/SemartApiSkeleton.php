@@ -11,13 +11,13 @@ final class SemartApiSkeleton
 {
     public const CODENAME = 'Apem Comal';
 
-    public const VERSION = '5.2.1';
+    public const VERSION = '5.3.0';
 
     public const VERSION_MAYOR = 50000;
 
-    public const VERSION_MINOR = 2;
+    public const VERSION_MINOR = 3;
 
-    public const VERSION_PATCH = 1;
+    public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {
