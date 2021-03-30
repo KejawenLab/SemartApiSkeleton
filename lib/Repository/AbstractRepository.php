@@ -21,7 +21,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         parent::__construct($registry, $entityClass);
     }
 
-    public function totalRecords(): int
+    public function countRecords(): int
     {
         return $this->count([]);
     }
