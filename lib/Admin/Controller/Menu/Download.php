@@ -34,7 +34,7 @@ final class Download extends AbstractController
      */
     public function __invoke(): Response
     {
-        $records = $this->service->count();
+        $records = $this->service->total();
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 

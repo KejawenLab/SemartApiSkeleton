@@ -11,7 +11,7 @@ interface ServiceableRepositoryInterface
 {
     public function findAll();
 
-    public function totalRecords(): int;
+    public function countRecords(): int;
 
     public function persist(object $object): void;
 

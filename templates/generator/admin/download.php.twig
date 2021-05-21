@@ -11,6 +11,7 @@ namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize 
 use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -37,7 +38,7 @@ final class Download extends AbstractController
      */
     public function __invoke(): Response
     {
-        $records = $this->service->count();
+        $records = $this->service->total();
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 

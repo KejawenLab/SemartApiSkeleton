@@ -23,6 +23,9 @@
     "composer/composer": {
         "version": "1.10.6"
     },
+    "composer/metadata-minifier": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -50,9 +53,6 @@
             "config/packages/dh_auditor.yaml",
             "config/routes/dh_auditor.yaml"
         ]
-    },
-    "dflydev/fig-cookies": {
-        "version": "v3.0.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -156,20 +156,11 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
-    "jean85/pretty-package-versions": {
-        "version": "2.0.3"
-    },
     "jms/metadata": {
         "version": "2.2.0"
     },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
-    },
-    "laminas/laminas-diactoros": {
-        "version": "2.5.0"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.2.0"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -232,9 +223,6 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
-    "php-http/discovery": {
-        "version": "1.13.0"
-    },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
     },
@@ -257,12 +245,6 @@
         "version": "1.0.1"
     },
     "psr/http-message": {
-        "version": "1.0.1"
-    },
-    "psr/http-server-handler": {
-        "version": "1.0.1"
-    },
-    "psr/http-server-middleware": {
         "version": "1.0.1"
     },
     "psr/link": {
@@ -327,6 +309,15 @@
     },
     "spiral/roadrunner": {
         "version": "v1.9.2"
+    },
+    "spiral/roadrunner-cli": {
+        "version": "v2.0.4"
+    },
+    "spiral/roadrunner-http": {
+        "version": "v2.0.0"
+    },
+    "spiral/roadrunner-worker": {
+        "version": "v2.0.3"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",

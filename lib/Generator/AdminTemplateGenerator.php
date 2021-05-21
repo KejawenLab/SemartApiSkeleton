@@ -18,15 +18,11 @@ final class AdminTemplateGenerator extends AbstractGenerator
         $shortName = $class->getShortName();
         $lowercase = StringUtil::lowercase($shortName);
         $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
-        $deleteField = '';
+        $deleteField = sprintf('semart_print(%s)', $shortName);
         $tableFields = '';
         foreach ($properties as $property) {
             if ('id' === $property->getName()) {
                 continue;
-            }
-
-            if (!$deleteField) {
-                $deleteField = sprintf('%s.%s', $lowercase, $property->getName());
             }
 
             $tableFields .= sprintf('<td>{{ semart_print(%s.%s) }}</td>', $lowercase, $property->getName());

@@ -35,9 +35,9 @@ abstract class AbstractService implements ServiceInterface
         return $this->repository->findAll();
     }
 
-    public function count(): int
+    public function total(): int
     {
-        return $this->repository->totalRecords();
+        return $this->repository->countRecords();
     }
 
     public function get(string $id)

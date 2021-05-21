@@ -32,6 +32,10 @@ final class TwigExtension extends AbstractExtension
         if ($data instanceof EntityInterface) {
             return (string) $data->getNullOrString();
         } else {
+            if ($data instanceof \DateTimeInterface) {
+                return $data->format('Y-m-d');
+            }
+
             return $data ?: '';
         }
     }
