@@ -23,6 +23,9 @@
     "composer/composer": {
         "version": "1.10.6"
     },
+    "composer/metadata-minifier": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
