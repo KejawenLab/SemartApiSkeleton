@@ -4,34 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "adbace5f31ac0dc84a83ef4d106e3e73",
+    "content-hash": "16985393ca9f2229253ff4c64249959d",
     "packages": [
         {
             "name": "baldinof/roadrunner-bundle",
-            "version": "1.5.3",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Baldinof/roadrunner-bundle.git",
-                "reference": "541bfe21cf76233f70b2b840b8f8260c6b779d83"
+                "reference": "1f57a258e827ea9c1348fb0bbbcf9c17faf71f6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Baldinof/roadrunner-bundle/zipball/541bfe21cf76233f70b2b840b8f8260c6b779d83",
-                "reference": "541bfe21cf76233f70b2b840b8f8260c6b779d83",
+                "url": "https://api.github.com/repos/Baldinof/roadrunner-bundle/zipball/1f57a258e827ea9c1348fb0bbbcf9c17faf71f6f",
+                "reference": "1f57a258e827ea9c1348fb0bbbcf9c17faf71f6f",
                 "shasum": ""
             },
             "require": {
-                "dflydev/fig-cookies": "^3.0",
-                "jean85/pretty-package-versions": "^1.5 || ^2.0",
-                "php": ">=7.3",
-                "php-http/discovery": "^1.9",
-                "psr/http-factory": "^1.0",
-                "psr/http-factory-implementation": "1.0.0",
-                "psr/http-server-handler": "^1.0",
-                "psr/http-server-middleware": "^1.0",
+                "php": ">=7.4",
                 "psr/log": "^1.1",
-                "spiral/goridge": "^2.0.2",
-                "spiral/roadrunner": "^1.5",
+                "spiral/goridge": "^3.0",
+                "spiral/roadrunner": "^2.0.2",
+                "spiral/roadrunner-worker": ">=2.0.3",
                 "symfony/config": "^4.4 || ^5.0",
                 "symfony/dependency-injection": "^4.4 || ^5.0",
                 "symfony/http-kernel": "^4.4 || ^5.0",
@@ -39,7 +33,9 @@
                 "symfony/yaml": "^4.4 || ^5.0"
             },
             "conflict": {
-                "doctrine/doctrine-bundle": "<2.1.1"
+                "doctrine/doctrine-bundle": "<2.1.1",
+                "sentry/sentry-symfony": "<4.0.0",
+                "spiral/roadrunner-metrics": "<2.0.1"
             },
             "require-dev": {
                 "blackfire/php-sdk": "^1.21",
@@ -47,13 +43,15 @@
                 "doctrine/mongodb-odm": "^2.2",
                 "doctrine/orm": "^2.7.3",
                 "friendsofphp/php-cs-fixer": "^2.16",
+                "mikey179/vfsstream": "^1.6.8",
                 "nyholm/psr7": "^1.2",
-                "ocramius/package-versions": "^1.10 || ^2.0",
+                "pestphp/pest-plugin-expectations": "^1.0",
                 "phpspec/prophecy": "^1.11",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/phpstan": "^0.12.2",
+                "phpstan/phpstan": "0.12.80",
                 "phpunit/phpunit": "^9.1",
-                "sentry/sentry-symfony": "^3.4||^4.0",
+                "sentry/sentry-symfony": "^4.0",
+                "spiral/roadrunner-metrics": "^2.0.1",
                 "symfony/framework-bundle": "^4.0||^5.0",
                 "symfony/proxy-manager-bridge": "^4.0 || ^5.0",
                 "symfony/var-dumper": "^4.0||^5.0"
@@ -85,7 +83,7 @@
             "description": "A RoadRunner worker as a Symfony Bundle",
             "support": {
                 "issues": "https://github.com/Baldinof/roadrunner-bundle/issues",
-                "source": "https://github.com/Baldinof/roadrunner-bundle/tree/1.5.3"
+                "source": "https://github.com/Baldinof/roadrunner-bundle/tree/2.0.1"
             },
             "funding": [
                 {
@@ -93,7 +91,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-30T07:23:57+00:00"
+            "time": "2021-04-16T21:00:04+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -944,68 +942,6 @@
                 "source": "https://github.com/DamienHarper/auditor-bundle/tree/4.1.0"
             },
             "time": "2021-02-02T17:49:28+00:00"
-        },
-        {
-            "name": "dflydev/fig-cookies",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dflydev/dflydev-fig-cookies.git",
-                "reference": "ea6934204b1b34ffdf5130dc7e0928d18ced2498"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-fig-cookies/zipball/ea6934204b1b34ffdf5130dc7e0928d18ced2498",
-                "reference": "ea6934204b1b34ffdf5130dc7e0928d18ced2498",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pcre": "*",
-                "php": "^7.2 || ^8.0",
-                "psr/http-message": "^1"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^8",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12.16",
-                "phpunit/phpunit": "^7.2.6 || ^9",
-                "scrutinizer/ocular": "^1.8",
-                "squizlabs/php_codesniffer": "^3.3",
-                "vimeo/psalm": "^4.4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dflydev\\FigCookies\\": "src/Dflydev/FigCookies"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Beau Simensen",
-                    "email": "beau@dflydev.com"
-                }
-            ],
-            "description": "Cookies for PSR-7 HTTP Message Interface.",
-            "keywords": [
-                "cookies",
-                "psr-7",
-                "psr7"
-            ],
-            "support": {
-                "issues": "https://github.com/dflydev/dflydev-fig-cookies/issues",
-                "source": "https://github.com/dflydev/dflydev-fig-cookies/tree/v3.0.0"
-            },
-            "time": "2021-01-22T02:53:56+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1937,16 +1873,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.8.4",
+            "version": "2.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "a588555ecd837b8d7e89355d9a13902e54d529c7"
+                "reference": "a6577b89a2b028b79550ef58d9f272debdd75da4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/a588555ecd837b8d7e89355d9a13902e54d529c7",
-                "reference": "a588555ecd837b8d7e89355d9a13902e54d529c7",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/a6577b89a2b028b79550ef58d9f272debdd75da4",
+                "reference": "a6577b89a2b028b79550ef58d9f272debdd75da4",
                 "shasum": ""
             },
             "require": {
@@ -1960,17 +1896,18 @@
                 "doctrine/inflector": "^1.4|^2.0",
                 "doctrine/instantiator": "^1.3",
                 "doctrine/lexer": "^1.0",
-                "doctrine/persistence": "^2.0",
+                "doctrine/persistence": "^2.2",
                 "ext-pdo": "*",
                 "php": "^7.2|^8.0",
-                "symfony/console": "^3.0|^4.0|^5.0"
+                "symfony/console": "^3.0|^4.0|^5.0|^6.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^8.0",
-                "phpstan/phpstan": "^0.12.18",
+                "doctrine/coding-standard": "^9.0",
+                "phpstan/phpstan": "^0.12.83",
                 "phpunit/phpunit": "^8.5|^9.4",
-                "symfony/yaml": "^3.4|^4.0|^5.0",
-                "vimeo/psalm": "4.1.1"
+                "squizlabs/php_codesniffer": "3.6.0",
+                "symfony/yaml": "^3.4|^4.0|^5.0|^6.0",
+                "vimeo/psalm": "4.7.0"
             },
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
@@ -2018,9 +1955,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.8.4"
+                "source": "https://github.com/doctrine/orm/tree/2.8.5"
             },
-            "time": "2021-04-05T18:38:36+00:00"
+            "time": "2021-05-20T05:58:49+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2370,65 +2307,6 @@
             "time": "2021-04-23T09:16:01+00:00"
         },
         {
-            "name": "jean85/pretty-package-versions",
-            "version": "2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "b2c4ec2033a0196317a467cb197c7c843b794ddf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/b2c4ec2033a0196317a467cb197c7c843b794ddf",
-                "reference": "b2c4ec2033a0196317a467cb197c7c843b794ddf",
-                "shasum": ""
-            },
-            "require": {
-                "composer-runtime-api": "^2.0.0",
-                "php": "^7.1|^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.17",
-                "jean85/composer-provided-replaced-stub-package": "^1.0",
-                "phpstan/phpstan": "^0.12.66",
-                "phpunit/phpunit": "^7.5|^8.5|^9.4",
-                "vimeo/psalm": "^4.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jean85\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alessandro Lai",
-                    "email": "alessandro.lai85@gmail.com"
-                }
-            ],
-            "description": "A library to get pretty versions strings of installed dependencies",
-            "keywords": [
-                "composer",
-                "package",
-                "release",
-                "versions"
-            ],
-            "support": {
-                "issues": "https://github.com/Jean85/pretty-package-versions/issues",
-                "source": "https://github.com/Jean85/pretty-package-versions/tree/2.0.3"
-            },
-            "time": "2021-02-22T10:52:38+00:00"
-        },
-        {
             "name": "jms/metadata",
             "version": "2.5.0",
             "source": {
@@ -2561,170 +2439,6 @@
                 "source": "https://github.com/justinrainbow/json-schema/tree/5.2.10"
             },
             "time": "2020-05-27T16:41:55+00:00"
-        },
-        {
-            "name": "laminas/laminas-diactoros",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "7d2034110ae18afe05050b796a3ee4b3fe177876"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/7d2034110ae18afe05050b796a3ee4b3fe177876",
-                "reference": "7d2034110ae18afe05050b796a3ee4b3fe177876",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0"
-            },
-            "conflict": {
-                "phpspec/prophecy": "<1.9.0"
-            },
-            "provide": {
-                "psr/http-factory-implementation": "1.0",
-                "psr/http-message-implementation": "1.0"
-            },
-            "replace": {
-                "zendframework/zend-diactoros": "^2.2.1"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "ext-dom": "*",
-                "ext-gd": "*",
-                "ext-libxml": "*",
-                "http-interop/http-factory-tests": "^0.8.0",
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "php-http/psr7-integration-tests": "^1.1",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.1",
-                "psalm/plugin-phpunit": "^0.14.0",
-                "vimeo/psalm": "^4.3"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "config-provider": "Laminas\\Diactoros\\ConfigProvider",
-                    "module": "Laminas\\Diactoros"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions/create_uploaded_file.php",
-                    "src/functions/marshal_headers_from_sapi.php",
-                    "src/functions/marshal_method_from_sapi.php",
-                    "src/functions/marshal_protocol_version_from_sapi.php",
-                    "src/functions/marshal_uri_from_sapi.php",
-                    "src/functions/normalize_server.php",
-                    "src/functions/normalize_uploaded_files.php",
-                    "src/functions/parse_cookie_header.php",
-                    "src/functions/create_uploaded_file.legacy.php",
-                    "src/functions/marshal_headers_from_sapi.legacy.php",
-                    "src/functions/marshal_method_from_sapi.legacy.php",
-                    "src/functions/marshal_protocol_version_from_sapi.legacy.php",
-                    "src/functions/marshal_uri_from_sapi.legacy.php",
-                    "src/functions/normalize_server.legacy.php",
-                    "src/functions/normalize_uploaded_files.legacy.php",
-                    "src/functions/parse_cookie_header.legacy.php"
-                ],
-                "psr-4": {
-                    "Laminas\\Diactoros\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "PSR HTTP Message implementations",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "http",
-                "laminas",
-                "psr",
-                "psr-17",
-                "psr-7"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-diactoros/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-diactoros/issues",
-                "rss": "https://github.com/laminas/laminas-diactoros/releases.atom",
-                "source": "https://github.com/laminas/laminas-diactoros"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2021-05-18T14:41:54+00:00"
-        },
-        {
-            "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6cccbddfcfc742eb02158d6137ca5687d92cee32",
-                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1 || ^9.3",
-                "psalm/plugin-phpunit": "^0.15.1",
-                "squizlabs/php_codesniffer": "^3.5",
-                "vimeo/psalm": "^4.6"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "module": "Laminas\\ZendFrameworkBridge"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/autoload.php"
-                ],
-                "psr-4": {
-                    "Laminas\\ZendFrameworkBridge\\": "src//"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Alias legacy ZF class names to Laminas Project equivalents.",
-            "keywords": [
-                "ZendFramework",
-                "autoloading",
-                "laminas",
-                "zf"
-            ],
-            "support": {
-                "forum": "https://discourse.laminas.dev/",
-                "issues": "https://github.com/laminas/laminas-zendframework-bridge/issues",
-                "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
-                "source": "https://github.com/laminas/laminas-zendframework-bridge"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2021-02-25T21:54:58+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -3291,75 +3005,6 @@
             "time": "2021-04-20T08:27:05+00:00"
         },
         {
-            "name": "php-http/discovery",
-            "version": "1.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-http/discovery.git",
-                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/788f72d64c43dc361e7fcc7464c3d947c64984a7",
-                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "conflict": {
-                "nyholm/psr7": "<1.0"
-            },
-            "require-dev": {
-                "graham-campbell/phpspec-skip-example-extension": "^5.0",
-                "php-http/httplug": "^1.0 || ^2.0",
-                "php-http/message-factory": "^1.0",
-                "phpspec/phpspec": "^5.1 || ^6.1",
-                "puli/composer-plugin": "1.0.0-beta10"
-            },
-            "suggest": {
-                "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories",
-                "puli/composer-plugin": "Sets up Puli which is recommended for Discovery to work. Check http://docs.php-http.org/en/latest/discovery.html for more details."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Http\\Discovery\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                }
-            ],
-            "description": "Finds installed HTTPlug implementations and PSR-7 message factories",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "adapter",
-                "client",
-                "discovery",
-                "factory",
-                "http",
-                "message",
-                "psr7"
-            ],
-            "support": {
-                "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.13.0"
-            },
-            "time": "2020-11-27T14:49:42+00:00"
-        },
-        {
             "name": "phpdocumentor/reflection-common",
             "version": "2.2.0",
             "source": {
@@ -3771,120 +3416,6 @@
                 "source": "https://github.com/php-fig/http-message/tree/master"
             },
             "time": "2016-08-06T14:39:51+00:00"
-        },
-        {
-            "name": "psr/http-server-handler",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-server-handler.git",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Server\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP server-side request handler",
-            "keywords": [
-                "handler",
-                "http",
-                "http-interop",
-                "psr",
-                "psr-15",
-                "psr-7",
-                "request",
-                "response",
-                "server"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/http-server-handler/issues",
-                "source": "https://github.com/php-fig/http-server-handler/tree/master"
-            },
-            "time": "2018-10-30T16:46:14+00:00"
-        },
-        {
-            "name": "psr/http-server-middleware",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-server-middleware.git",
-                "reference": "2296f45510945530b9dceb8bcedb5cb84d40c5f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-server-middleware/zipball/2296f45510945530b9dceb8bcedb5cb84d40c5f5",
-                "reference": "2296f45510945530b9dceb8bcedb5cb84d40c5f5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "psr/http-message": "^1.0",
-                "psr/http-server-handler": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Server\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP server-side middleware",
-            "keywords": [
-                "http",
-                "http-interop",
-                "middleware",
-                "psr",
-                "psr-15",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/http-server-middleware/issues",
-                "source": "https://github.com/php-fig/http-server-middleware/tree/master"
-            },
-            "time": "2018-10-30T17:12:04+00:00"
         },
         {
             "name": "psr/link",
@@ -4534,35 +4065,34 @@
         },
         {
             "name": "spiral/goridge",
-            "version": "v2.4.5",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/goridge-php.git",
-                "reference": "a7373de7f86a5452f8ad61bd1340dc158626f7f8"
+                "reference": "3258892afd1d0a9cb889eb21ddd353dd06ba774d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/goridge-php/zipball/a7373de7f86a5452f8ad61bd1340dc158626f7f8",
-                "reference": "a7373de7f86a5452f8ad61bd1340dc158626f7f8",
+                "url": "https://api.github.com/repos/spiral/goridge-php/zipball/3258892afd1d0a9cb889eb21ddd353dd06ba774d",
+                "reference": "3258892afd1d0a9cb889eb21ddd353dd06ba774d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2"
+                "ext-sockets": "*",
+                "php": ">=7.4"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.12.23",
+                "phpstan/phpstan": "~0.12.34",
                 "phpunit/phpunit": "~8.0",
+                "rybakit/msgpack": "^0.7.1",
                 "spiral/code-style": "^1.0"
             },
             "type": "goridge",
             "autoload": {
                 "psr-4": {
                     "Spiral\\Goridge\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4577,45 +4107,155 @@
             "description": "High-performance PHP-to-Golang RPC bridge",
             "support": {
                 "issues": "https://github.com/spiral/goridge-php/issues",
-                "source": "https://github.com/spiral/goridge-php/tree/v2.4.5"
+                "source": "https://github.com/spiral/goridge-php/tree/v3.0.1"
             },
-            "time": "2020-08-14T14:28:30+00:00"
+            "time": "2021-03-11T14:28:29+00:00"
         },
         {
             "name": "spiral/roadrunner",
-            "version": "v1.9.2",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/roadrunner.git",
-                "reference": "b934cc5e46e8b8ce92cacc4fe0094603992706f2"
+                "reference": "e1ff9daead5033b537296ffb071e551b95af91ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/roadrunner/zipball/b934cc5e46e8b8ce92cacc4fe0094603992706f2",
-                "reference": "b934cc5e46e8b8ce92cacc4fe0094603992706f2",
+                "url": "https://api.github.com/repos/spiral/roadrunner/zipball/e1ff9daead5033b537296ffb071e551b95af91ab",
+                "reference": "e1ff9daead5033b537296ffb071e551b95af91ab",
                 "shasum": ""
             },
             "require": {
-                "composer/package-versions-deprecated": "^1.8",
-                "ext-curl": "*",
+                "spiral/roadrunner-cli": "^2.0",
+                "spiral/roadrunner-http": "^2.0",
+                "spiral/roadrunner-worker": "^2.0"
+            },
+            "type": "metapackage",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov / Wolfy-J",
+                    "email": "wolfy.jd@gmail.com"
+                },
+                {
+                    "name": "RoadRunner Community",
+                    "homepage": "https://github.com/spiral/roadrunner/graphs/contributors"
+                }
+            ],
+            "description": "RoadRunner: High-performance PHP application server, load-balancer and process manager written in Golang",
+            "support": {
+                "issues": "https://github.com/spiral/roadrunner/issues",
+                "source": "https://github.com/spiral/roadrunner/tree/v2.2.1"
+            },
+            "time": "2021-05-13T17:15:00+00:00"
+        },
+        {
+            "name": "spiral/roadrunner-cli",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiral/roadrunner-cli.git",
+                "reference": "81dcec5c2d94481dedace488c27d433414726654"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiral/roadrunner-cli/zipball/81dcec5c2d94481dedace488c27d433414726654",
+                "reference": "81dcec5c2d94481dedace488c27d433414726654",
+                "shasum": ""
+            },
+            "require": {
+                "composer/semver": "^3.2",
                 "ext-json": "*",
-                "laminas/laminas-diactoros": "^1.3.6 || ^2.0",
-                "php": "^7.2 || ^8.0",
-                "psr/http-factory": "^1.0.1",
-                "psr/http-message": "^1.0.1",
-                "spiral/goridge": "^2.4.2",
-                "symfony/console": "^2.5.0 || ^3.0.0 || ^4.0.0 || ^5.0.0"
+                "php": ">=7.4",
+                "spiral/roadrunner-worker": ">=2.0.2",
+                "symfony/console": "^4.4|^5.0",
+                "symfony/http-client": "^4.4|^5.0",
+                "symfony/polyfill-php80": "^1.22"
             },
             "require-dev": {
-                "phpstan/phpstan": "~0.12.34"
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "symfony/var-dumper": "^4.4|^5.0",
+                "vimeo/psalm": "^4.4"
             },
             "bin": [
                 "bin/rr"
             ],
-            "type": "server",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Spiral\\RoadRunner\\": "src/"
+                    "Spiral\\RoadRunner\\Console\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                },
+                {
+                    "name": "RoadRunner Community",
+                    "homepage": "https://github.com/spiral/roadrunner/graphs/contributors"
+                }
+            ],
+            "description": "RoadRunner: Command Line Interface",
+            "support": {
+                "issues": "https://github.com/spiral/roadrunner-cli/issues",
+                "source": "https://github.com/spiral/roadrunner-cli/tree/v2.0.4"
+            },
+            "time": "2021-05-12T15:49:01+00:00"
+        },
+        {
+            "name": "spiral/roadrunner-http",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiral/roadrunner-http.git",
+                "reference": "0eb0bc93f16ff8130fd0aaf31f6d87000bf2a605"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiral/roadrunner-http/zipball/0eb0bc93f16ff8130fd0aaf31f6d87000bf2a605",
+                "reference": "0eb0bc93f16ff8130fd0aaf31f6d87000bf2a605",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.4",
+                "psr/http-factory": "^1.0.1",
+                "psr/http-message": "^1.0.1",
+                "spiral/roadrunner-worker": "^2.0"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "nyholm/psr7": "^1.3",
+                "phpstan/phpstan": "~0.12",
+                "phpunit/phpunit": "~8.0",
+                "symfony/var-dumper": "^5.1",
+                "vimeo/psalm": "^4.4"
+            },
+            "suggest": {
+                "spiral/roadrunner-cli": "Provides RoadRunner installation and management CLI tools"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spiral\\RoadRunner\\Http\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4632,12 +4272,74 @@
                     "homepage": "https://github.com/spiral/roadrunner/graphs/contributors"
                 }
             ],
-            "description": "High-performance PHP application server, load-balancer and process manager written in Golang",
+            "description": "RoadRunner: HTTP and PSR-7 worker",
             "support": {
-                "issues": "https://github.com/spiral/roadrunner/issues",
-                "source": "https://github.com/spiral/roadrunner/tree/v1.9.2"
+                "issues": "https://github.com/spiral/roadrunner-http/issues",
+                "source": "https://github.com/spiral/roadrunner-http/tree/v2.0.0"
             },
-            "time": "2021-01-14T16:04:43+00:00"
+            "time": "2021-02-18T11:09:37+00:00"
+        },
+        {
+            "name": "spiral/roadrunner-worker",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiral/roadrunner-worker.git",
+                "reference": "1a10a7641ff045fff2570b5ec1a265713e5a1bd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiral/roadrunner-worker/zipball/1a10a7641ff045fff2570b5ec1a265713e5a1bd5",
+                "reference": "1a10a7641ff045fff2570b5ec1a265713e5a1bd5",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.0",
+                "ext-json": "*",
+                "ext-sockets": "*",
+                "php": ">=7.4",
+                "psr/log": "^1.0",
+                "spiral/goridge": "^3.0"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "symfony/var-dumper": "^5.1",
+                "vimeo/psalm": "^4.4"
+            },
+            "suggest": {
+                "spiral/roadrunner-cli": "Provides RoadRunner installation and management CLI tools"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spiral\\RoadRunner\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                },
+                {
+                    "name": "RoadRunner Community",
+                    "homepage": "https://github.com/spiral/roadrunner/graphs/contributors"
+                }
+            ],
+            "description": "RoadRunner: PHP worker",
+            "support": {
+                "issues": "https://github.com/spiral/roadrunner-worker/issues",
+                "source": "https://github.com/spiral/roadrunner-worker/tree/v2.0.3"
+            },
+            "time": "2021-02-19T13:15:37+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",

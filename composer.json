@@ -11,7 +11,7 @@
         "ext-pdo": "*",
         "ext-posix": "*",
         "ext-redis": "*",
-        "baldinof/roadrunner-bundle": "^1.5",
+        "baldinof/roadrunner-bundle": "^2.0",
         "composer/composer": ">=2.0",
         "cron/cron": ">=1.4",
         "damienharper/auditor-bundle": ">=4.0",
