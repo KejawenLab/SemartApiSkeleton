@@ -20,10 +20,7 @@ chmod 777 -R var/
 chmod 777 -R storage/
 chmod 755 -R config/
 chmod 755 -R vendor/
+chmod 755 -R public/
 
-if [[ "prod" == "${APP_ENV}" ]]; then
-    /usr/bin/supervisord -n -c /etc/supervisord.prod.conf
-else
-    /usr/bin/supervisord -n -c /etc/supervisord.dev.conf
-fi
+/usr/bin/supervisord -n -c /etc/supervisord.conf
 

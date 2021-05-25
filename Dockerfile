@@ -29,9 +29,9 @@ RUN apt autoremove -y && apt clean && apt autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
 
 # Configuring
+RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
 ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
-ADD docker/supervisor/supervisor.dev.conf /etc/supervisord.dev.conf
-ADD docker/supervisor/supervisor.prod.conf /etc/supervisord.prod.conf
+ADD docker/supervisor/supervisord.conf /etc/supervisord.conf
 
 # Here we go
 ADD docker/start.sh /start.sh
@@ -39,6 +39,6 @@ RUN chmod +x /start.sh
 
 WORKDIR /semart
 
-EXPOSE 8080
+EXPOSE 9501
 
 CMD ["/start.sh"]

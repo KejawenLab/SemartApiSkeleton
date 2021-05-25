@@ -1,9 +1,0 @@
-baldinof_road_runner:
-    # The kernel is preserved between requests. Change this to `true`
-    # if you want to reboot it, and use a fresh container on each request.
-    kernel_reboot:
-        strategy: false
-
-    # Integrations are automatically detected, depending on installed bundle & current configuration
-    # See https://github.com/baldinof/roadrunner-bundle#integrations
-    default_integrations: true
