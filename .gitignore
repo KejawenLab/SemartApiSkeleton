@@ -23,7 +23,3 @@ Caddyfile
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
-
-###> baldinof/roadrunner-bundle ###
-/bin/rr
-###< baldinof/roadrunner-bundle ###
