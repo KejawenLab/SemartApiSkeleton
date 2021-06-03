@@ -424,9 +424,6 @@
     "symfony/inflector": {
         "version": "v5.0.8"
     },
-    "symfony/intl": {
-        "version": "v5.0.8"
-    },
     "symfony/lock": {
         "version": "v5.1.0"
     },
@@ -477,6 +474,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.8"
     },
+    "symfony/password-hasher": {
+        "version": "v5.3.0"
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.0"
     },
@@ -497,6 +497,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
+    },
+    "symfony/polyfill-php81": {
+        "version": "v1.23.0"
     },
     "symfony/process": {
         "version": "v5.0.8"
