@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Validator;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -17,11 +17,11 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class PasswordMatchValidator extends ConstraintValidator
 {
-    private UserPasswordEncoderInterface $encoder;
+    private UserPasswordHasherInterface $encoder;
 
     private TokenStorageInterface $tokenStorage;
 
-    public function __construct(UserPasswordEncoderInterface $encoder, TokenStorageInterface $tokenStorage)
+    public function __construct(UserPasswordHasherInterface $encoder, TokenStorageInterface $tokenStorage)
     {
         $this->encoder = $encoder;
         $this->tokenStorage = $tokenStorage;

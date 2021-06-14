@@ -1,5 +1,6 @@
 security:
-    encoders:
+    enable_authenticator_manager: true
+    password_hashers:
         KejawenLab\ApiSkeleton\Security\User:
             algorithm: auto
     providers:
@@ -11,9 +12,11 @@ security:
             security: false
         admin:
             pattern: ^/admin
-            anonymous: true
             lazy: true
             switch_user: true
+            login_throttling:
+                max_attempts: 5
+                interval: '5 minutes'
             guard:
                 authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
@@ -22,9 +25,11 @@ security:
         api_login:
             pattern:  ^/api/login
             stateless: true
-            anonymous: true
             lazy: true
             provider: user_provider
+            login_throttling:
+                max_attempts: 5
+                interval: '5 minutes'
             json_login:
                 check_path: /api/login
                 username_path: username

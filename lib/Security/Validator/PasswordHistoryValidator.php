@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Validator;
 
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\PasswordHistoryService;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -20,7 +22,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class PasswordHistoryValidator extends ConstraintValidator
 {
-    private UserPasswordEncoderInterface $encoder;
+    private UserPasswordHasherInterface $encoder;
 
     private TokenStorageInterface $tokenStorage;
 
@@ -29,7 +31,7 @@ final class PasswordHistoryValidator extends ConstraintValidator
     private UserProviderFactory $userProviderFactory;
 
     public function __construct(
-        UserPasswordEncoderInterface $encoder,
+        UserPasswordHasherInterface $encoder,
         TokenStorageInterface $tokenStorage,
         PasswordHistoryService $service,
         UserProviderFactory $userProviderFactory
@@ -54,7 +56,17 @@ final class PasswordHistoryValidator extends ConstraintValidator
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 
-        $passwords = $this->service->getPasswords($this->userProviderFactory->getRealUser($token->getUser()));
+        $user = $token->getUser();
+        if (!$user instanceof User) {
+            throw new UnexpectedValueException($user, User::class);
+        }
+
+        $object = $this->userProviderFactory->getRealUser($user);
+        if (!$object instanceof UserInterface) {
+            throw new UnexpectedValueException($token, UserInterface::class);
+        }
+
+        $passwords = $this->service->getPasswords($object);
         $invalid = count($passwords);
         $user = new User();
         foreach ($passwords as $password) {
