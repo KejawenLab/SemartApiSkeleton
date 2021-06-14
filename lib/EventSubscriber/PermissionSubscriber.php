@@ -17,17 +17,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class PermissionSubscriber implements EventSubscriberInterface
 {
-    private PermissionService $service;
-
     private Parser $parser;
 
     private Authorization $authorization;
 
     private Ownership $ownership;
 
-    public function __construct(PermissionService $service, Parser $parser, Authorization $authorization, Ownership $ownership)
+    public function __construct(Parser $parser, Authorization $authorization, Ownership $ownership)
     {
-        $this->service = $service;
         $this->parser = $parser;
         $this->authorization = $authorization;
         $this->ownership = $ownership;
@@ -35,7 +32,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
     public function validate(ControllerEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 

@@ -50,16 +50,16 @@ final class LoginFailSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $key = sprintf('%s_%s_%s', static::FAILURE_KEY, $event->getAuthenticationToken()->getUsername(), $request->getClientIp());
+        $key = sprintf('%s_%s_%s', self::FAILURE_KEY, $event->getAuthenticationToken()->getUserIdentifier(), $request->getClientIp());
 
         $this->redis->incr($key);
-        $this->redis->expire($key, static::FAILURE_TTL);
+        $this->redis->expire($key, self::FAILURE_TTL);
     }
 
     public function ban(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        if (!($event->isMasterRequest() && $request->isMethod(Request::METHOD_POST))) {
+        if (!($event->isMainRequest() && $request->isMethod(Request::METHOD_POST))) {
             return;
         }
 
@@ -68,9 +68,9 @@ final class LoginFailSubscriber implements EventSubscriberInterface
         }
 
         $clientIp = $request->getClientIp();
-        $key = sprintf('%s_%s_%s', static::FAILURE_KEY, $request->request->get('username'), $clientIp);
-        if ((int) $this->redis->get($key) >= static::MAX_LOGIN_FAILURE && !$this->kernel->isDebug()) {
-            $this->logger->critical(sprintf('IP "%s" banned due to %d login attempts failures.', $clientIp, static::MAX_LOGIN_FAILURE));
+        $key = sprintf('%s_%s_%s', self::FAILURE_KEY, $request->request->get('username'), $clientIp);
+        if ((int) $this->redis->get($key) >= self::MAX_LOGIN_FAILURE && !$this->kernel->isDebug()) {
+            $this->logger->critical(sprintf('IP "%s" banned due to %d login attempts failures.', $clientIp, self::MAX_LOGIN_FAILURE));
 
             throw new HttpException(Response::HTTP_TOO_MANY_REQUESTS);
         }

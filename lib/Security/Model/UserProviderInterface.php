@@ -9,7 +9,7 @@ namespace KejawenLab\ApiSkeleton\Security\Model;
  */
 interface UserProviderInterface
 {
-    public function findUsername(string $username): ?AuthInterface;
+    public function findByIdentifier(string $identifier): ?AuthInterface;
 
     public function support(string $class): bool;
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -64,7 +65,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
                 $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
             }
 
-            $placeHolder = static::ROUTE_NAMESPACE_PREFIX;
+            $placeHolder = self::ROUTE_NAMESPACE_PREFIX;
             if (in_array($object->getRouteName(), $this->reservedRoutes)) {
                 $placeHolder = StringUtil::replace($placeHolder, 'application_', '');
             }

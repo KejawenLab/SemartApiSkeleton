@@ -23,9 +23,9 @@ final class UserProvider implements UserProviderInterface
         $this->repository = $repository;
     }
 
-    public function findUsername(string $apiKey): ?AuthInterface
+    public function findByIdentifier(string $identifier): ?AuthInterface
     {
-        return $this->repository->findByApiKey($apiKey);
+        return $this->repository->findByApiKey($identifier);
     }
 
     public function support(string $class): bool

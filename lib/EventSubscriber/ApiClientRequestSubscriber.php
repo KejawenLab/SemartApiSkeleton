@@ -32,7 +32,7 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
 
     public function log(ControllerEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 

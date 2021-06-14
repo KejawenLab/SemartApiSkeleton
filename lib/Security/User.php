@@ -6,14 +6,15 @@ namespace KejawenLab\ApiSkeleton\Security;
 
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
-final class User implements UserInterface
+final class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    private GroupInterface $group;
+    private ?GroupInterface $group;
 
     private string $id;
 
@@ -26,17 +27,22 @@ final class User implements UserInterface
     public function __construct(AuthInterface $user = null)
     {
         if ($user) {
-            $this->id = $user->getRecordId();
+            $this->id = (string) $user->getRecordId();
             $this->group = $user->getGroup();
-            $this->username = $user->getIdentity();
-            $this->password = $user->getCredential();
+            $this->username = (string) $user->getIdentity();
+            $this->password = (string) $user->getCredential();
             $this->class = get_class($user);
         }
     }
 
-    public function getGroup(): GroupInterface
+    public function getGroup(): ?GroupInterface
     {
         return $this->group;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
     }
 
     public function getId(): string
@@ -46,7 +52,7 @@ final class User implements UserInterface
 
     public function getUsername(): string
     {
-        return $this->username;
+        return $this->getUserIdentifier();
     }
 
     public function getPassword(): string
