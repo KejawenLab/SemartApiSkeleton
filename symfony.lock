@@ -45,6 +45,9 @@
             "config/routes/dh_auditor.yaml"
         ]
     },
+    "dg/bypass-finals": {
+        "version": "v1.3.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -663,6 +666,9 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
+    },
+    "symfony/runtime": {
+        "version": "v5.3.0"
     },
     "symfony/security-bundle": {
         "version": "4.4",

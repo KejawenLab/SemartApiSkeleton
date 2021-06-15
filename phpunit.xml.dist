@@ -29,6 +29,7 @@
         <exclude>
             <directory>lib/Admin</directory>
             <directory>lib/ApiClient/Model</directory>
+            <directory>lib/Command</directory>
             <directory>lib/Composer</directory>
             <directory>lib/Controller</directory>
             <directory>lib/DataFixutes</directory>
