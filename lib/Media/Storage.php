@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Media;
 
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use LogicException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
@@ -23,7 +24,7 @@ final class Storage extends FileSystemStorage
 
         $file = $mapping->getFile($obj);
         if (null === $file || !($file instanceof UploadedFile)) {
-            throw new \LogicException('No uploadable file found');
+            throw new LogicException('No uploadable file found');
         }
 
         $name = $mapping->getUploadName($obj);
@@ -32,7 +33,11 @@ final class Storage extends FileSystemStorage
         $mapping->writeProperty($obj, 'mimeType', $file->getMimeType());
         $mapping->writeProperty($obj, 'originalName', $file->getClientOriginalName());
 
-        if (false !== strpos($file->getMimeType(), 'image/') && 'image/svg+xml' !== $file->getMimeType() && false !== $dimensions = @getimagesize($file->getRealPath())) {
+        if (
+            str_contains($file->getMimeType(), 'image/') &&
+            'image/svg+xml' !== $file->getMimeType() &&
+            false !== $dimensions = @getimagesize($file->getRealPath())
+        ) {
             $mapping->writeProperty($obj, 'dimensions', array_splice($dimensions, 0, 2));
         }
 
@@ -73,7 +78,12 @@ final class Storage extends FileSystemStorage
             $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
         }
 
-        return sprintf('%s/%s%s%s', $mapping->getUriPrefix(), $uploadDir, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
+        return sprintf('%s/%s%s%s',
+            $mapping->getUriPrefix(),
+            $uploadDir,
+            $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '',
+            $name
+        );
     }
 
     private function convertWindowsDirectorySeparator(string $string): string

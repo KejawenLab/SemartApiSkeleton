@@ -11,6 +11,8 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,21 +26,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Permission extends AbstractController
 {
-    private PermissionService $service;
-
-    private GroupService $groupService;
-
-    private Paginator $paginator;
-
-    public function __construct(PermissionService $service, GroupService $groupService, Paginator $paginator)
+    public function __construct(private PermissionService $service, private GroupService $groupService, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->groupService = $groupService;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Route("/groups/{id}/permissions", methods={"GET"})
+     * @Route("/groups/{id}/permissions", name=Permission::class, methods={"GET"})
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -46,16 +39,16 @@ final class Permission extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $class = new \ReflectionClass(Entity::class);
+        $class = new ReflectionClass(Entity::class);
 
         return $this->render('group/permission.html.twig', [
             'page_title' => 'sas.page.permission.list',
             'group' => $group,
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Entity::class),
         ]);
     }

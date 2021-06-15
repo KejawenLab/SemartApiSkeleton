@@ -23,18 +23,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private SettingService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(SettingService $service, Paginator $paginator)
+    public function __construct(private SettingService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/settings")
+     * @Rest\Get("/settings", name=GetAll::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(

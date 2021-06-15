@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
@@ -16,26 +17,31 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 {
     protected const MICRO_CACHE = 1;
 
-    public function __construct(ManagerRegistry $registry, $entityClass)
-    {
-        parent::__construct($registry, $entityClass);
-    }
-
     public function countRecords(): int
     {
         return $this->count([]);
     }
 
+    /**
+     * @throws ORMException
+     */
     public function persist(object $object): void
     {
         $this->_em->persist($object);
     }
 
+    /**
+     * @throws ORMException
+     */
     public function remove(object $object): void
     {
         $this->_em->remove($object);
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function commit(): void
     {
         $this->_em->flush();

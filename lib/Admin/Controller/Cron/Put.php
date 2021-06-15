@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/crons/{id}/edit", methods={"GET", "POST"}, priority=1)
+     * @Route("/crons/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,7 +34,7 @@ final class Put extends AbstractController
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm(CronType::class, $cron);
@@ -48,7 +45,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.cron.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Menu;
  */
 final class MenuFixture extends AbstractFixture
 {
-    protected function createNew()
+    protected function createNew(): Menu
     {
         return new Menu();
     }

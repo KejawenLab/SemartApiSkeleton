@@ -6,13 +6,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Application\Controller\{{ entityHumanize }};
+namespace Kejawenlab\ApiSkeleton\Application\Controller\{{ entityHumanize }};
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
-use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use Kejawenlab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use Kejawenlab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
@@ -34,7 +34,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/{{ entityPluralDash }}/{id}")
+     * @Rest\Get("/{{ entityPluralDash }}/{id}", name=Get::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Response(

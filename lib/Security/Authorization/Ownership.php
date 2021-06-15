@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -18,32 +20,15 @@ final class Ownership
 {
     private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
 
-    private ManagerRegistry $doctrine;
-
-    private UserRepositoryInterface $userRepository;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private string $superAdmin;
-
-    private string $ownershipProperty;
-
-    private UserProviderFactory $userProviderFactory;
-
     public function __construct(
-        ManagerRegistry $doctrine,
-        UserRepositoryInterface $userRepository,
-        TokenStorageInterface $tokenStorage,
-        UserProviderFactory $userProviderFactory,
-        string $superAdmin,
-        string $ownershipProperty
-    ) {
-        $this->doctrine = $doctrine;
-        $this->userRepository = $userRepository;
-        $this->tokenStorage = $tokenStorage;
-        $this->userProviderFactory = $userProviderFactory;
-        $this->superAdmin = $superAdmin;
-        $this->ownershipProperty = $ownershipProperty;
+        private ManagerRegistry $doctrine,
+        private UserRepositoryInterface $userRepository,
+        private TokenStorageInterface $tokenStorage,
+        private UserProviderFactory $userProviderFactory,
+        private string $superAdmin,
+        private string $ownershipProperty
+    )
+    {
     }
 
     public function isOwner(string $id, string $entity): bool
@@ -52,13 +37,21 @@ final class Ownership
             return false;
         }
 
-        /** @var UserInterface $user */
-        $user = $this->userProviderFactory->getRealUser($token->getUser());
+        $user = $token->getUser();
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         if ($user->getGroup()->getCode() === $this->superAdmin) {
             return true;
         }
 
-        if (!class_exists($entity = sprintf('%s\%s', static::NAMESPACE, $entity))) {
+        if (!$user instanceof UserInterface) {
+            return false;
+        }
+
+        if (!class_exists($entity = sprintf('%s\%s', self::NAMESPACE, $entity))) {
             return false;
         }
 
@@ -78,8 +71,8 @@ final class Ownership
                 return true;
             }
 
-            return $creator === $token->getUsername();
-        } catch (\Exception $e) {
+            return $creator === $token->getUserIdentifier();
+        } catch (Exception) {
         }
 
         return false;

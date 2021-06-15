@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="float-left col-2">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -44,10 +44,10 @@
                                 <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
                                 <td>{{ rmenu.name ~ ' (' ~ rmenu.code ~ ')' }}</td>
                                 {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
-                                    <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('kejawenlab_apiskeleton_admin_group_permissionput__invoke', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
                                 {% else %}
                                     <td><input type="checkbox" {% if permission.viewable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
                                     <td><input type="checkbox" {% if permission.addable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
@@ -99,7 +99,7 @@
                 $('#sasSearchValue').val(getParameterByName('q'));
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', { id: group.id }) }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Permission', { id: group.id }) }}?q=' + $('#sasSearchValue').val();
                 });
 
                 $(document).on('change', '.permission-view', function () {

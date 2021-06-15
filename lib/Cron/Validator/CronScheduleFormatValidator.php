@@ -16,11 +16,8 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class CronScheduleFormatValidator extends ConstraintValidator
 {
-    private CrontabValidator $validator;
-
-    public function __construct(CrontabValidator $validator)
+    public function __construct(private CrontabValidator $validator)
     {
-        $this->validator = $validator;
     }
 
     public function validate($value, Constraint $constraint): void

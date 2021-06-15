@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Group;
  */
 final class GroupFixture extends AbstractFixture
 {
-    protected function createNew()
+    protected function createNew(): Group
     {
         return new Group();
     }

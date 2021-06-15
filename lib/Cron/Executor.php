@@ -9,6 +9,7 @@ use Cron\Report\CronReport;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use Psr\Log\LoggerInterface;
+use Redis;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\RedisStore;
 
@@ -17,24 +18,13 @@ use Symfony\Component\Lock\Store\RedisStore;
  */
 final class Executor extends Base
 {
-    private \Redis $redis;
-
-    private CronRepositoryInterface $repository;
-
-    private CronService $service;
-
-    private LoggerInterface $logger;
-
     public function __construct(
-        \Redis $redis,
-        CronRepositoryInterface $repository,
-        CronService $service,
-        LoggerInterface $cronLogger
-    ) {
-        $this->redis = $redis;
-        $this->repository = $repository;
-        $this->service = $service;
-        $this->logger = $cronLogger;
+        private Redis $redis,
+        private CronRepositoryInterface $repository,
+        private CronService $service,
+        private LoggerInterface $logger
+    )
+    {
     }
 
     protected function startProcesses(CronReport $report): void

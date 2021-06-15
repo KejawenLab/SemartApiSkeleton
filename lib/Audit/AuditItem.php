@@ -9,26 +9,15 @@ namespace KejawenLab\ApiSkeleton\Audit;
  */
 final class AuditItem
 {
-    private string $type;
-
-    private array $data;
-
-    private ?string $logTime;
-
-    private ?string $userId;
-
-    private ?string $username;
-
-    private ?string $ip;
-
-    public function __construct(string $type, array $data, ?string $logTime, ?string $userId, ?string $username, ?string $ip)
+    public function __construct(
+        private string $type,
+        private array $data,
+        private ?string $logTime,
+        private ?string $userId,
+        private ?string $username,
+        private ?string $ip
+    )
     {
-        $this->type = $type;
-        $this->data = $data;
-        $this->logTime = $logTime;
-        $this->userId = $userId;
-        $this->username = $username;
-        $this->ip = $ip;
     }
 
     public function toArray(): array

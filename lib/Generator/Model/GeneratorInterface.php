@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator\Model;
 
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -17,7 +18,7 @@ interface GeneratorInterface
 
     public const SCOPE_ALL = 'all';
 
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void;
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void;
 
     public function support(string $scope): bool;
 }

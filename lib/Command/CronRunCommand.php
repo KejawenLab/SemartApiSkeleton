@@ -8,6 +8,8 @@ use Cron\Cron;
 use Cron\Report\ReportInterface;
 use Cron\Resolver\ArrayResolver;
 use Cron\Schedule\CrontabSchedule;
+use DateTime;
+use InvalidArgumentException;
 use KejawenLab\ApiSkeleton\Cron\CronBuilder;
 use KejawenLab\ApiSkeleton\Cron\CronReportService;
 use KejawenLab\ApiSkeleton\Cron\CronService;
@@ -26,33 +28,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronRunCommand extends Command
 {
-    private CronService $cronService;
-
-    private CronReportService $reportService;
-
-    private CronBuilder $builder;
-
-    private Executor $executor;
-
-    private string $reportClass;
-
     public function __construct(
-        CronService $cronService,
-        CronReportService $reportService,
-        CronBuilder $builder,
-        Executor $executor,
-        string $reportClass
+        private CronService $cronService,
+        private CronReportService $reportService,
+        private CronBuilder $builder,
+        private Executor $executor,
+        private string $reportClass
     ) {
-        $this->cronService = $cronService;
-        $this->reportService = $reportService;
-        $this->builder = $builder;
-        $this->executor = $executor;
-        $this->reportClass = $reportClass;
-
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('semart:cron:run')
             ->setDescription('Runs any currently schedule cron jobs')
@@ -62,12 +48,16 @@ final class CronRunCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $cron = new Cron();
         $cron->setExecutor($this->executor);
         if ($input->getArgument('job')) {
-            $resolver = $this->getResolver($input->getArgument('job'), false !== $input->getParameterOption('--force'), false !== $input->getParameterOption('--schedule_now'));
+            $resolver = $this->getResolver(
+                $input->getArgument('job'),
+                false !== $input->getParameterOption('--force'),
+                false !== $input->getParameterOption('--schedule_now')
+            );
         } else {
             $resolver = $this->cronService;
         }
@@ -76,9 +66,6 @@ final class CronRunCommand extends Command
         $time = microtime(true);
         /** @var ReportInterface $outputs */
         $outputs = $cron->run();
-
-        while ($cron->isRunning()) {
-        }
 
         $output->writeln(sprintf('time: %s', (microtime(true) - $time)));
         foreach ($outputs->getReports() as $value) {
@@ -92,8 +79,12 @@ final class CronRunCommand extends Command
             $report = new $this->reportClass();
             $report->setCron($cron);
             $report->setOutput(implode("\n", (array) $value->getOutput()));
-            $report->setExitCode($value->getJob()->getProcess()->getExitCode());
-            $report->setRunAt(\DateTime::createFromFormat('U.u', number_format($value->getStartTime(), 6, '.', '')));
+            $report->setExitCode((int) $value->getJob()->getProcess()->getExitCode());
+            $report->setRunAt(
+                DateTime::createFromFormat(
+                    'U.u', number_format($value->getStartTime(), 6, '.', '')
+                )
+            );
             $report->setRunTime($value->getEndTime() - $value->getStartTime());
 
             $this->reportService->save($report);
@@ -102,15 +93,15 @@ final class CronRunCommand extends Command
         return 0;
     }
 
-    private function getResolver(string $id, $force = false, $schedule_now = false)
+    private function getResolver(string $id, $force = false, $schedule_now = false): ArrayResolver
     {
         $cron = $this->cronService->get($id);
         if (!$cron) {
-            throw new \InvalidArgumentException('Unknown job.');
+            throw new InvalidArgumentException('Unknown job.');
         }
 
         if (!$cron->isEnabled() && !$force) {
-            throw new \InvalidArgumentException('Job is disabled, run with --force to force schedule it.');
+            throw new InvalidArgumentException('Job is disabled, run with --force to force schedule it.');
         }
 
         $job = new ShellJob($cron);

@@ -13,6 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -22,7 +23,7 @@ use OpenApi\Annotations as OA;
 final class Profile extends AbstractFOSRestController
 {
     /**
-     * @Rest\Get("/me", priority=1)
+     * @Rest\Get("/me", name=Profile::class, priority=1)
      *
      * @OA\Tag(name="Profile")
      * @OA\Response(
@@ -43,6 +44,11 @@ final class Profile extends AbstractFOSRestController
      */
     public function __invoke(UserProviderFactory $userProviderFactory): View
     {
-        return $this->view($userProviderFactory->getRealUser($this->getUser()));
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException('User not found.');
+        }
+
+        return $this->view($userProviderFactory->getRealUser($user));
     }
 }

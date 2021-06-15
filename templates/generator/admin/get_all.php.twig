@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize }};
+namespace Kejawenlab\ApiSkeleton\Application\Controller\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
-use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use Kejawenlab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use Kejawenlab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -36,7 +36,7 @@ final class GetAll extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}", methods={"GET"})
+     * @Route("/{{ entityPluralDash }}", name=GetAll::class, methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {

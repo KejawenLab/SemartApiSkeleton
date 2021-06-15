@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator\Twig;
 
-use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -14,13 +13,6 @@ use Twig\TwigFilter;
  */
 final class GeneratorExtension extends AbstractExtension
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function getFilters(): iterable
     {
         yield new TwigFilter('pluralize', [$this, 'pluralize']);

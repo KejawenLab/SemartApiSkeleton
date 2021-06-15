@@ -56,12 +56,12 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_run__invoke', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_report__invoke', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.logs' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.logs' | trans({}, 'forms') }}</a>
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_cron_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                         {% endif %}
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_cron_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

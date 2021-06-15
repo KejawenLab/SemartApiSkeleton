@@ -17,12 +17,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class ApiClientRequestService extends AbstractService implements ServiceInterface
 {
-    private string $class;
-
-    public function __construct(MessageBusInterface $messageBus, ApiClientRequestRepositoryInterface $repository, AliasHelper $aliasHelper, string $class)
+    public function __construct(
+        MessageBusInterface $messageBus,
+        ApiClientRequestRepositoryInterface $repository,
+        AliasHelper $aliasHelper,
+        private string $class
+    )
     {
-        $this->class = $class;
-
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 

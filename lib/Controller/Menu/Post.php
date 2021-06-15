@@ -26,18 +26,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private MenuService $service;
-
-    public function __construct(FormFactory $formFactory, MenuService $service)
+    public function __construct(private FormFactory $formFactory, private MenuService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Post("/menus")
+     * @Rest\Post("/menus", name=Post::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\RequestBody(

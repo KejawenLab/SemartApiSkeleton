@@ -17,24 +17,21 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class LoadUrlPathSubscriber implements EventSubscriber
 {
-    private const ROUTE_NAMESPACE_PREFIX = 'kejawenlab_apiskeleton_application_';
+    private const ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\ApiSkeleton\\Application\\Controller\\';
 
     private array $reservedRoutes = [
-        'kejawenlab_apiskeleton_me_profile',
-        'kejawenlab_apiskeleton_user_getall',
-        'kejawenlab_apiskeleton_group_getall',
-        'kejawenlab_apiskeleton_menu_getall',
-        'kejawenlab_apiskeleton_setting_getall',
-        'kejawenlab_apiskeleton_apiclient_getall',
-        'kejawenlab_apiskeleton_cron_getall',
-        'kejawenlab_apiskeleton_media_getall',
+        'KejawenLab\\ApiSkeleton\\Controller\\Me\\Profile',
+        'KejawenLab\\ApiSkeleton\\Controller\\User\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\Group\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\Menu\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\Setting\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\ApiClient\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\Cron\\GetAll',
+        'KejawenLab\\ApiSkeleton\\Controller\\Media\\GetAll',
     ];
 
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function postLoad(LifecycleEventArgs $args): void
@@ -53,27 +50,26 @@ final class LoadUrlPathSubscriber implements EventSubscriber
                 if ('#' !== $adminRoute) {
                     $adminPath = $this->urlGenerator->generate($adminRoute);
                 }
-            } catch (RouteNotFoundException $exception) {
+            } catch (RouteNotFoundException $e) {
             }
         } else {
             try {
                 if ('#' !== $path) {
                     $apiPath = $this->urlGenerator->generate($object->getRouteName());
                 }
-            } catch (RouteNotFoundException $exception) {
-                $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
+            } catch (RouteNotFoundException $e) {
             }
 
-            $placeHolder = static::ROUTE_NAMESPACE_PREFIX;
+            $placeHolder = self::ROUTE_NAMESPACE_PREFIX;
             if (in_array($object->getRouteName(), $this->reservedRoutes)) {
-                $placeHolder = StringUtil::replace($placeHolder, 'application_', '');
+                $placeHolder = StringUtil::replace($placeHolder, 'Application\\', '');
             }
 
-            $replece = sprintf('%sadmin_', $placeHolder);
+            $replece = StringUtil::replace($placeHolder, 'Controller\\', 'Admin\\Controller\\');
             $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replece);
             try {
-                $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
-            } catch (RouteNotFoundException $exception) {
+                $adminPath = $this->urlGenerator->generate($adminRoute);
+            } catch (RouteNotFoundException $e) {
             }
         }
 

@@ -24,18 +24,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Run extends AbstractController
 {
-    private CronService $service;
-
-    private KernelInterface $kernel;
-
-    public function __construct(CronService $service, KernelInterface $kernel)
+    public function __construct(private CronService $service, private KernelInterface $kernel)
     {
-        $this->service = $service;
-        $this->kernel = $kernel;
     }
 
     /**
-     * @Route("/crons/{id}/run", methods={"GET"}, priority=-17)
+     * @Route("/crons/{id}/run", name=Run::class, methods={"GET"}, priority=-17)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -43,7 +37,7 @@ final class Run extends AbstractController
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $application = new Application($this->kernel);
@@ -62,6 +56,6 @@ final class Run extends AbstractController
             $this->addFlash('error', 'sas.page.cron.run_failed');
         }
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

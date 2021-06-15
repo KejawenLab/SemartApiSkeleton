@@ -20,6 +20,11 @@ final class SearchQueryExtension extends AbstractQueryExtension
             return;
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.parameter)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.parameter)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))
+            )
+        );
     }
 }

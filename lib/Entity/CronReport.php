@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -45,7 +46,7 @@ class CronReport implements CronReportInterface, EntityInterface
      *
      * @Groups({"read"})
      */
-    private \DateTime $runAt;
+    private DateTime $runAt;
 
     /**
      * @ORM\Column(type="float")
@@ -85,12 +86,12 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this;
     }
 
-    public function getRunAt(): \DateTime
+    public function getRunAt(): DateTime
     {
         return $this->runAt;
     }
 
-    public function setRunAt(\DateTime $runAt): self
+    public function setRunAt(DateTime $runAt): self
     {
         $this->runAt = $runAt;
 
@@ -99,7 +100,7 @@ class CronReport implements CronReportInterface, EntityInterface
 
     public function getRuntime(): float
     {
-        return (float) $this->runtime;
+        return $this->runtime;
     }
 
     public function setRuntime(float $runtime): self
@@ -123,7 +124,7 @@ class CronReport implements CronReportInterface, EntityInterface
 
     public function getExitCode(): int
     {
-        return (int) $this->exitCode;
+        return $this->exitCode;
     }
 
     public function setExitCode(int $exitCode): self

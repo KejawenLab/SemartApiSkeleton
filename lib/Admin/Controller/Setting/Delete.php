@@ -19,15 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private SettingService $service;
-
-    public function __construct(SettingService $service)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/settings/{id}/delete", methods={"GET"})
+     * @Route("/settings/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -35,13 +32,13 @@ final class Delete extends AbstractController
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($setting);
 
         $this->addFlash('info', 'sas.page.setting.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Application\Admin\Controller\{{ entityHumanize }};
+namespace Kejawenlab\ApiSkeleton\Application\Controller\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
-use KejawenLab\ApiSkeleton\Application\Form\{{ entityHumanize }}Type;
-use KejawenLab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use Kejawenlab\ApiSkeleton\Application\Entity\{{ entityHumanize }};
+use Kejawenlab\ApiSkeleton\Application\Form\{{ entityHumanize }}Type;
+use Kejawenlab\ApiSkeleton\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,7 +33,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/{{ entityPluralDash }}/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -46,7 +46,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

@@ -19,15 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/users/{id}/delete", methods={"GET"})
+     * @Route("/users/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -35,13 +32,13 @@ final class Delete extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($user);
 
         $this->addFlash('info', 'sas.page.user.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

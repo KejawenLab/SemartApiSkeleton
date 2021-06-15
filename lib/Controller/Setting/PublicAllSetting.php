@@ -19,18 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class PublicAllSetting extends AbstractFOSRestController
 {
-    private SettingService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(SettingService $service, Paginator $paginator)
+    public function __construct(private SettingService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/settings/public", priority=1)
+     * @Rest\Get("/settings/public", name=PublicAllSetting::class, priority=1)
      *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(

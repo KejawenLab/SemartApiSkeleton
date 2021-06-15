@@ -6,6 +6,8 @@ namespace KejawenLab\ApiSkeleton\Pagination\Query;
 
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,8 +20,11 @@ final class SortByCreateAtExtension extends AbstractQueryExtension
         $queryBuilder->addOrderBy(sprintf('%s.createdAt', $this->aliasHelper->findAlias('root')), 'DESC');
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function support(string $class, Request $request): bool
     {
-        return in_array(TimestampableEntity::class, (new \ReflectionClass($class))->getTraitNames());
+        return in_array(TimestampableEntity::class, (new ReflectionClass($class))->getTraitNames());
     }
 }

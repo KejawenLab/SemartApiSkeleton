@@ -22,18 +22,12 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
  */
 final class Get extends AbstractController
 {
-    private MediaService $service;
-
-    private PropertyMappingFactory $mapping;
-
-    public function __construct(MediaService $service, PropertyMappingFactory $mapping)
+    public function __construct(private MediaService $service, private PropertyMappingFactory $mapping)
     {
-        $this->service = $service;
-        $this->mapping = $mapping;
     }
 
     /**
-     * @Route("/medias/{path}", methods={"GET"}, requirements={"path"=".+"})
+     * @Route("/medias/{path}", name=Get::class, methods={"GET"}, requirements={"path"=".+"})
      */
     public function __invoke(Request $request, string $path): Response
     {
@@ -47,7 +41,7 @@ final class Get extends AbstractController
         if (!$media) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $response = new Response();

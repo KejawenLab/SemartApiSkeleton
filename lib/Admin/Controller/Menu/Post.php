@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    private MenuService $service;
-
-    public function __construct(MenuService $service)
+    public function __construct(private MenuService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/menus/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/menus/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -42,7 +39,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.menu.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

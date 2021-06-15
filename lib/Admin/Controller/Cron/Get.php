@@ -9,6 +9,8 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +23,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/crons/{id}", methods={"GET"})
+     * @Route("/crons/{id}", name=Get::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -37,15 +36,15 @@ final class Get extends AbstractController
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $class = new \ReflectionClass(Cron::class);
+        $class = new ReflectionClass(Cron::class);
 
         return $this->render('cron/view.html.twig', [
             'page_title' => 'sas.page.cron.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $cron,
         ]);
     }

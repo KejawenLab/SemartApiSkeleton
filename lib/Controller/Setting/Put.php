@@ -27,18 +27,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private SettingService $service;
-
-    public function __construct(FormFactory $formFactory, SettingService $service)
+    public function __construct(private FormFactory $formFactory, private SettingService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Put("/settings/{id}")
+     * @Rest\Put("/settings/{id}", name=Put::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\RequestBody(

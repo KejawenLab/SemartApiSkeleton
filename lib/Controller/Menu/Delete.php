@@ -23,15 +23,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    private MenuService $service;
-
-    public function __construct(MenuService $service)
+    public function __construct(private MenuService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Delete("/menus/{id}")
+     * @Rest\Delete("/menus/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Response(

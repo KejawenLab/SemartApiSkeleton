@@ -9,31 +9,34 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class AuditService
 {
-    private Reader $auditReader;
-
     private int $cacheLifetime;
 
-    private CacheItemPoolInterface $cache;
-
-    public function __construct(Reader $auditReader, SettingService $setting, CacheItemPoolInterface $cache)
+    public function __construct(private Reader $auditReader, SettingService $setting, private CacheItemPoolInterface $cache)
     {
-        $this->auditReader = $auditReader;
         $this->cacheLifetime = $setting->getCacheLifetime();
-        $this->cache = $cache;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getAudits(object $entity, string $id): Audit
     {
-        $key = sha1(sprintf('%s_%s', get_class($entity), $id));
+        $key = sha1(sprintf('%s_%s', $entity::class, $id));
         $cache = $this->cache->getItem($key);
         if (!$cache->isHit()) {
-            $audits = serialize($this->auditReader->createQuery(get_class($entity), ['page' => 1, 'page_size' => 9])->addFilter(Query::OBJECT_ID, $id)->execute());
+            $audits = serialize($this->auditReader->createQuery(
+                    $entity::class,
+                    ['page' => 1, 'page_size' => 9]
+                )
+                ->addFilter(Query::OBJECT_ID, $id)->execute()
+            );
             $cache->set($audits);
             $cache->expiresAfter($this->cacheLifetime);
             $this->cache->save($cache);

@@ -9,6 +9,8 @@ use KejawenLab\ApiSkeleton\Entity\CronReport;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +23,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    private CronReportService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(CronReportService $service, Paginator $paginator)
+    public function __construct(private CronReportService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Route("/crons/{id}/logs", methods={"GET"}, priority=-27)
+     * @Route("/crons/{id}/logs", name=Report::class, methods={"GET"}, priority=-27)
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(CronReport::class);
+        $class = new ReflectionClass(CronReport::class);
 
         return $this->render('cron/report.html.twig', [
             'page_title' => 'sas.page.cron_report.list',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, CronReport::class),
         ]);
     }

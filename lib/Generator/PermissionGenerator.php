@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -20,35 +21,22 @@ use Twig\Environment;
  */
 final class PermissionGenerator extends AbstractGenerator
 {
-    private const ROUTE_PLACEHOLDER = 'kejawenlab_apiskeleton_application_%s_getall';
-
-    private PermissionService $permissionService;
-
-    private MenuService $menuService;
-
-    private GroupService $groupService;
-
-    private string $class;
+    private const ROUTE_PLACEHOLDER = 'KejawenLab\\ApiSkeleton\\Application\\Controller\\%s\\GetAll';
 
     public function __construct(
-        PermissionService $permissionService,
-        MenuService $menuService,
-        GroupService $groupService,
+        private PermissionService $permissionService,
+        private MenuService $menuService,
+        private GroupService $groupService,
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,
         EntityManagerInterface $entityManager,
-        string $class
+        private string $class
     ) {
-        $this->permissionService = $permissionService;
-        $this->menuService = $menuService;
-        $this->groupService = $groupService;
-        $this->class = $class;
-
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $shortNameUpper = StringUtil::uppercase($shortName);
@@ -62,7 +50,7 @@ final class PermissionGenerator extends AbstractGenerator
         $menu = new $this->class();
         $menu->setCode($shortNameUpper);
         $menu->setName($shortNameUpper);
-        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
+        $menu->setRouteName(sprintf(self::ROUTE_PLACEHOLDER, $shortName));
 
         $this->menuService->save($menu);
 
@@ -82,6 +70,6 @@ final class PermissionGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_API === $scope;
+        return self::SCOPE_API === $scope;
     }
 }

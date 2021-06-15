@@ -11,9 +11,11 @@ use KejawenLab\ApiSkeleton\Entity\Menu as Entity;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -22,15 +24,12 @@ use OpenApi\Annotations as OA;
  */
 final class Menu extends AbstractFOSRestController
 {
-    private PermissionService $service;
-
-    public function __construct(PermissionService $service)
+    public function __construct(private PermissionService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Get("/me/menus", priority=1)
+     * @Rest\Get("/me/menus", name=Menu::class, priority=1)
      *
      * @OA\Tag(name="Profile")
      * @OA\Response(
@@ -50,6 +49,11 @@ final class Menu extends AbstractFOSRestController
      */
     public function __invoke(UserProviderFactory $userProviderFactory): View
     {
-        return $this->view($this->service->getByUser($userProviderFactory->getRealUser($this->getUser())));
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException('User not found.');
+        }
+
+        return $this->view($this->service->getByUser($userProviderFactory->getRealUser($user)));
     }
 }

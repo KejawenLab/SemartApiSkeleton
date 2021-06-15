@@ -9,11 +9,8 @@ namespace KejawenLab\ApiSkeleton\Entity\Message;
  */
 class EntityPersisted
 {
-    private object $entity;
-
-    public function __construct(object $entity)
+    public function __construct(private object $entity)
     {
-        $this->entity = $entity;
     }
 
     public function getEntity(): object

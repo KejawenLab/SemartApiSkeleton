@@ -40,7 +40,7 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/api-clients/{id}/audit", priority=-255)
+     * @Rest\Get("/api-clients/{id}/audit", name=Audit::class, priority=-255)
      *
      * @Cache(expires="+17 minute", public=false)
      *

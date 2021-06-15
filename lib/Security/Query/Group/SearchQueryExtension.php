@@ -21,7 +21,21 @@ final class SearchQueryExtension extends AbstractQueryExtension
         }
 
         $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.code)', $alias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            )
+        );
+        $queryBuilder->orWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.name)', $alias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            )
+        );
     }
 }

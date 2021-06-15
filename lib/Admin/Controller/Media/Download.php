@@ -19,18 +19,12 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    private MediaService $service;
-
-    private SerializerInterface $serializer;
-
-    public function __construct(MediaService $service, SerializerInterface $serializer)
+    public function __construct(private MediaService $service, private SerializerInterface $serializer)
     {
-        $this->service = $service;
-        $this->serializer = $serializer;
     }
 
     /**
-     * @Route("/medias/download", methods={"GET"})
+     * @Route("/medias/download", name=Download::class, methods={"GET"})
      */
     public function __invoke(): Response
     {
@@ -38,7 +32,7 @@ final class Download extends AbstractController
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $response = new Response();

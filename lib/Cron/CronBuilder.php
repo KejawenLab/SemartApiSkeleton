@@ -13,11 +13,8 @@ use Symfony\Component\Process\PhpExecutableFinder;
  */
 final class CronBuilder
 {
-    private KernelInterface $kernel;
-
-    public function __construct(KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     public function build(CronInterface $cron): string
@@ -26,7 +23,12 @@ final class CronBuilder
             $docRoot = explode('/', $_SERVER['NGINX_WEBROOT']);
             array_pop($docRoot);
 
-            return sprintf('%s %s/bin/console %s --env=%s', (new PhpExecutableFinder())->find(), implode('/', $docRoot), $cron->getCommand(), $this->kernel->getEnvironment());
+            return sprintf('%s %s/bin/console %s --env=%s',
+                (new PhpExecutableFinder())->find(),
+                implode('/', $docRoot),
+                $cron->getCommand(),
+                $this->kernel->getEnvironment()
+            );
         }
 
         return $cron->getCommand();

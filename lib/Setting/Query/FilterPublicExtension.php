@@ -14,10 +14,15 @@ final class FilterPublicExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        if (false === strpos($request->getPathInfo(), '/settings/public')) {
+        if (!str_contains($request->getPathInfo(), '/settings/public')) {
             return;
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.public', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(true)));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('%s.public', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(true)
+            )
+        );
     }
 }

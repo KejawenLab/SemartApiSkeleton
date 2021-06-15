@@ -16,16 +16,10 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
  */
 final class GroupPermissionService implements PermissionInitiatorInterface, PermissionRemoverInterface
 {
-    private MenuRepositoryInterface $menuRepository;
-
-    private PermissionRepositoryInterface $permissionRepository;
-
     private string $class;
 
-    public function __construct(MenuRepositoryInterface $menuRepository, PermissionRepositoryInterface $permissionRepository)
+    public function __construct(private MenuRepositoryInterface $menuRepository, private PermissionRepositoryInterface $permissionRepository)
     {
-        $this->menuRepository = $menuRepository;
-        $this->permissionRepository = $permissionRepository;
     }
 
     public function initiate(PermissionableInterface $object): void

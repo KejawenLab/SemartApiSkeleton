@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Security\Twig;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -17,20 +16,12 @@ use Twig\TwigFunction;
  */
 final class MenuExtension extends AbstractExtension
 {
-    private Environment $twig;
-
-    private RequestStack $requestStack;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private MenuService $menuService;
-
-    public function __construct(Environment $twig, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, MenuService $menuService)
+    public function __construct(
+        private Environment $twig,
+        private RequestStack $requestStack,
+        private MenuService $menuService
+    )
     {
-        $this->twig = $twig;
-        $this->requestStack = $requestStack;
-        $this->urlGenerator = $urlGenerator;
-        $this->menuService = $menuService;
     }
 
     public function getFunctions(): iterable

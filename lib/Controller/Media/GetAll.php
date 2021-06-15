@@ -23,18 +23,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private MediaService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(MediaService $service, Paginator $paginator)
+    public function __construct(private MediaService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/medias")
+     * @Rest\Get("/medias", name=GetAll::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Parameter(

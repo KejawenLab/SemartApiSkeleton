@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
-use KejawenLab\ApiSkeleton\Form\FormFactory;
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,22 +20,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    private FormFactory $formFactory;
-
-    private UserService $service;
-
-    public function __construct(FormFactory $formFactory, UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Route("/me/edit", methods={"GET", "POST"}, priority=-1)
+     * @Route("/me/edit", name=Put::class, methods={"GET", "POST"}, priority=-1)
      */
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): Response
     {
-        $user = $userProviderFactory->getRealUser($this->getUser());
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
+        }
+
+        $user = $userProviderFactory->getRealUser($user);
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -47,7 +47,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.profile.updated');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_me_profile__invoke'));
+                return new RedirectResponse($this->generateUrl(Profile::class));
             }
         }
 

@@ -26,6 +26,6 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
 
     public function findPasswords(UserInterface $user): array
     {
-        return $this->findBy(['source' => get_class($user), 'identifier' => $user->getId()], ['createdAt' => 'DESC'], 17);
+        return $this->findBy(['source' => $user::class, 'identifier' => $user->getId()], ['createdAt' => 'DESC'], 17);
     }
 }

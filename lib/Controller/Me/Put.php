@@ -18,6 +18,7 @@ use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::EDIT})
@@ -26,18 +27,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Put extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private UserService $service;
-
-    public function __construct(FormFactory $formFactory, UserService $service)
+    public function __construct(private FormFactory $formFactory, private UserService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Put("/me")
+     * @Rest\Put("/me", name=Put::class)
      *
      * @OA\Tag(name="Profile")
      * @OA\RequestBody(
@@ -69,7 +64,12 @@ final class Put extends AbstractFOSRestController
      */
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
     {
-        $user = $userProviderFactory->getRealUser($this->getUser());
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException('User not found.');
+        }
+
+        $user = $userProviderFactory->getRealUser($user);
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);

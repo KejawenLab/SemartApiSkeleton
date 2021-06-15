@@ -20,6 +20,11 @@ final class FilterParameterExtension extends AbstractQueryExtension
             return;
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('UPPER(%s.parameter)', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(StringUtil::uppercase($filter))));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('UPPER(%s.parameter)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(StringUtil::uppercase($filter))
+            )
+        );
     }
 }

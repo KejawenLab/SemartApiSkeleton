@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Generator;
 
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -12,12 +14,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class AdminTemplateGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $projectDir = $this->kernel->getProjectDir();
         $shortName = $class->getShortName();
         $lowercase = StringUtil::lowercase($shortName);
-        $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);
         $deleteField = sprintf('semart_print(%s)', $shortName);
         $tableFields = '';
         foreach ($properties as $property) {
@@ -53,6 +55,6 @@ final class AdminTemplateGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_ADMIN === $scope;
+        return self::SCOPE_ADMIN === $scope;
     }
 }

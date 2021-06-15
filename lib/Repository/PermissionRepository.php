@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -49,7 +50,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), serialize($ids)));
+        $query->enableResultCache(
+            self::MICRO_CACHE,
+            sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), serialize($ids))
+        );
 
         return $query->getResult();
     }
@@ -73,7 +77,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%d', __CLASS__, __METHOD__, $group->getId(), (int) $parentOnly));
+        $query->enableResultCache(
+            self::MICRO_CACHE,
+            sprintf('%s:%s:%s:%d', __CLASS__, __METHOD__, $group->getId(), (int) $parentOnly)
+        );
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
@@ -100,7 +107,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId()));
+        $query->enableResultCache(
+            self::MICRO_CACHE,
+            sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId())
+        );
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
@@ -114,7 +124,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder = $this->createQueryBuilder('o')->update();
         $queryBuilder->set('o.deletedAt', ':now');
         $queryBuilder->where('o.group = :group');
-        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->setParameter('now', new DateTime());
         $queryBuilder->setParameter('group', $group);
         $queryBuilder->getQuery()->execute();
     }
@@ -125,7 +135,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->set('o.deletedAt', ':now');
         $queryBuilder->where('o.menu= :menu');
         $queryBuilder->setParameter('menu', $menu);
-        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->setParameter('now', new DateTime());
         $queryBuilder->getQuery()->execute();
     }
 }

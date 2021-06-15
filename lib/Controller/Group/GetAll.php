@@ -23,18 +23,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private GroupService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(GroupService $service, Paginator $paginator)
+    public function __construct(private GroupService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/groups")
+     * @Rest\Get("/groups", name=GetAll::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Parameter(

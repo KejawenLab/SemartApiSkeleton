@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/users/{id}/edit", methods={"GET", "POST"}, priority=1)
+     * @Route("/users/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,7 +34,7 @@ final class Put extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm(UserType::class, $user);
@@ -48,7 +45,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.user.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

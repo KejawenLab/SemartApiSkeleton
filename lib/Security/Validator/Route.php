@@ -18,8 +18,8 @@ final class Route extends Constraint
         return 'Route "[ROUTE]" ia not found';
     }
 
-    public function getTargets()
+    public function getTargets(): array|string
     {
-        return static::PROPERTY_CONSTRAINT;
+        return self::PROPERTY_CONSTRAINT;
     }
 }

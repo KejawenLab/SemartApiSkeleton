@@ -6,6 +6,8 @@ namespace KejawenLab\ApiSkeleton\Generator;
 
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
@@ -15,27 +17,20 @@ use Twig\Environment;
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {
-    protected Environment $twig;
-
-    protected Filesystem $fileSystem;
-
-    protected KernelInterface $kernel;
-
-    protected EntityManagerInterface $entityManager;
-
-    public function __construct(Environment $twig, Filesystem $fileSystem, KernelInterface $kernel, EntityManagerInterface $entityManager)
+    public function __construct(
+        protected Environment $twig,
+        protected Filesystem $fileSystem,
+        protected KernelInterface $kernel,
+        protected EntityManagerInterface $entityManager
+    )
     {
-        $this->twig = $twig;
-        $this->fileSystem = $fileSystem;
-        $this->kernel = $kernel;
-        $this->entityManager = $entityManager;
     }
 
-    public function hasAssociation(\ReflectionClass $class): bool
+    public function hasAssociation(ReflectionClass $class): bool
     {
         $metadata = $this->entityManager->getClassMetadata($class->getName());
         $association = 0;
-        foreach ($class->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
+        foreach ($class->getProperties(ReflectionProperty::IS_PRIVATE) as $property) {
             if ($metadata->hasAssociation($property->getName())) {
                 ++$association;
             }

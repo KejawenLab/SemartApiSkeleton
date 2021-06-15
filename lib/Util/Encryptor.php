@@ -15,17 +15,17 @@ final class Encryptor
 
     public static function encrypt(string $plainText, string $key): string
     {
-        $key = hash(static::HASH_METHOD, $key);
+        $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);
 
-        return openssl_encrypt($plainText, static::ENCRYPTION_METHOD, $key, 0, $iv);
+        return openssl_encrypt($plainText, self::ENCRYPTION_METHOD, $key, 0, $iv);
     }
 
     public static function decrypt(string $cipherText, string $key): string
     {
-        $key = hash(static::HASH_METHOD, $key);
+        $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);
-        if (false === $plainText = openssl_decrypt($cipherText, static::ENCRYPTION_METHOD, $key, 0, $iv)) {
+        if (false === $plainText = openssl_decrypt($cipherText, self::ENCRYPTION_METHOD, $key, 0, $iv)) {
             return '';
         }
 
@@ -34,6 +34,6 @@ final class Encryptor
 
     public static function hash(string $plainText): string
     {
-        return hash(static::HASH_METHOD, $plainText);
+        return hash(self::HASH_METHOD, $plainText);
     }
 }

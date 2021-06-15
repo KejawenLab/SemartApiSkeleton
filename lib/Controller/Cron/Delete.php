@@ -23,15 +23,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Delete("/cronjobs/{id}", priority=-7)
+     * @Rest\Delete("/cronjobs/{id}", name=Delete::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(

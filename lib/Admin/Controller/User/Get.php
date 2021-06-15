@@ -9,6 +9,8 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +23,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/users/{id}", methods={"GET"})
+     * @Route("/users/{id}", name=Get::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -37,15 +36,15 @@ final class Get extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $class = new \ReflectionClass(User::class);
+        $class = new ReflectionClass(User::class);
 
         return $this->render('user/view.html.twig', [
             'page_title' => 'sas.page.user.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $user,
         ]);
     }

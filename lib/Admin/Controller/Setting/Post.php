@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    private SettingService $service;
-
-    public function __construct(SettingService $service)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/settings/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/settings/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -42,7 +39,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.setting.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

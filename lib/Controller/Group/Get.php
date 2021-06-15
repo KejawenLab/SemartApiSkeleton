@@ -22,15 +22,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    private GroupService $service;
-
-    public function __construct(GroupService $service)
+    public function __construct(private GroupService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Get("/groups/{id}")
+     * @Rest\Get("/groups/{id}", name=Get::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Response(

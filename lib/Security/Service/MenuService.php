@@ -20,21 +20,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class MenuService extends AbstractService implements ServiceInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private PermissionRepositoryInterface $permissionRepository;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        PermissionRepositoryInterface $permissionRepository,
+        private TokenStorageInterface $tokenStorage,
+        private PermissionRepositoryInterface $permissionRepository,
         MessageBusInterface $messageBus,
         MenuRepositoryInterface $repository,
         AliasHelper $aliasHelper
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
-
-        $this->tokenStorage = $tokenStorage;
-        $this->permissionRepository = $permissionRepository;
     }
 
     public function getMenuByCode(string $code): ?MenuInterface

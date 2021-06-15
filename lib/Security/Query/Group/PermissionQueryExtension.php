@@ -16,18 +16,20 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class PermissionQueryExtension implements QueryExtensionInterface
 {
-    protected AliasHelper $aliasHelper;
-
-    public function __construct(AliasHelper $aliasHelper)
+    public function __construct(protected AliasHelper $aliasHelper)
     {
-        $this->aliasHelper = $aliasHelper;
     }
 
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $groupAlias = $this->aliasHelper->findAlias('group');
         $queryBuilder->innerJoin(sprintf('%s.group', $this->aliasHelper->findAlias('root')), $groupAlias);
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.id', $groupAlias), $queryBuilder->expr()->literal($request->attributes->get('id'))));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('%s.id', $groupAlias),
+                $queryBuilder->expr()->literal($request->attributes->get('id'))
+            )
+        );
 
         $query = $request->query->get('q');
         if (!$query) {
@@ -37,11 +39,30 @@ final class PermissionQueryExtension implements QueryExtensionInterface
         $menuAlias = $this->aliasHelper->findAlias('menu');
         $queryBuilder->innerJoin(sprintf('%s.menu', $this->aliasHelper->findAlias('root')), $menuAlias);
         $queryBuilder->andWhere($queryBuilder->expr()->orX(
-
-            $queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $groupAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
-            $queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $groupAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
-            $queryBuilder->expr()->like(sprintf('UPPER(%s.code)', $menuAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
-            $queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $menuAlias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))),
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.code)', $groupAlias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            ),
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.name)', $groupAlias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            ),
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.code)', $menuAlias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            ),
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.name)', $menuAlias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            ),
         ));
     }
 

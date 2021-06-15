@@ -9,6 +9,8 @@ use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +23,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    private ApiClientRequestService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(ApiClientRequestService $service, Paginator $paginator)
+    public function __construct(private ApiClientRequestService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Route("/api-clients/{id}/logs", methods={"GET"})
+     * @Route("/api-clients/{id}/logs", name=Report::class, methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(ApiClientRequest::class);
+        $class = new ReflectionClass(ApiClientRequest::class);
 
         return $this->render('api_client/report.html.twig', [
             'page_title' => 'sas.page.api_client.report',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClientRequest::class),
         ]);
     }

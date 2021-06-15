@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Security\Annotation;
 
 use Doctrine\Common\Annotations\Reader;
+use ReflectionClass;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class Parser
 {
-    private Reader $reader;
-
-    public function __construct(Reader $reader)
+    public function __construct(private Reader $reader)
     {
-        $this->reader = $reader;
     }
 
-    public function parse(\ReflectionClass $metadata): ?Permission
+    public function parse(ReflectionClass $metadata): ?Permission
     {
         /** @var Permission|null $class */
         $class = $this->reader->getClassAnnotation($metadata, Permission::class);

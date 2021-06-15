@@ -13,14 +13,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 final class Authorization
 {
-    private MenuRepositoryInterface $menuRepository;
-
-    private AuthorizationCheckerInterface $checker;
-
-    public function __construct(MenuRepositoryInterface $menuRepository, AuthorizationCheckerInterface $checker)
+    public function __construct(private MenuRepositoryInterface $menuRepository, private AuthorizationCheckerInterface $checker)
     {
-        $this->menuRepository = $menuRepository;
-        $this->checker = $checker;
     }
 
     public function authorize(Annotation $permission): bool

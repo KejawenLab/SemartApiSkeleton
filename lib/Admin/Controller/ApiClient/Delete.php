@@ -19,15 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private ApiClientService $service;
-
-    public function __construct(ApiClientService $service)
+    public function __construct(private ApiClientService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/api-clients/{id}/delete", methods={"GET"})
+     * @Route("/api-clients/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -35,13 +32,13 @@ final class Delete extends AbstractController
         if (!$client instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($client);
 
         $this->addFlash('info', 'sas.page.api_client.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

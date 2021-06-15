@@ -19,20 +19,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class CronService extends AbstractService implements ServiceInterface, ResolverInterface
 {
-    private KernelInterface $kernel;
-
-    private CronBuilder $builder;
-
     public function __construct(
         MessageBusInterface $messageBus,
         CronRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        KernelInterface $kernel,
-        CronBuilder $builder
+        private KernelInterface $kernel,
+        private CronBuilder $builder
     ) {
-        $this->kernel = $kernel;
-        $this->builder = $builder;
-
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 

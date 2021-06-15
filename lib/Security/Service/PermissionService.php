@@ -29,38 +29,22 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 {
     private const FILTER_NAME = 'semart_softdeletable';
 
-    private EntityManagerInterface $entityManager;
-
-    private MenuRepositoryInterface $menuRepository;
-
-    /**
-     * @var PermissionInitiatorInterface[]
-     */
-    private iterable $initiators;
-
-    /**
-     * @var PermissionRemoverInterface[]
-     */
-    private iterable $removers;
-
-    private string $class;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
+        private EntityManagerInterface $entityManager,
         MessageBusInterface $messageBus,
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        MenuRepositoryInterface $menuRepository,
-        iterable $initiators,
-        iterable $removers,
-        string $class
+        private MenuRepositoryInterface $menuRepository,
+        /**
+         * @var PermissionInitiatorInterface[]
+         */
+        private iterable $initiators,
+        /**
+         * @var PermissionRemoverInterface[]
+         */
+        private iterable $removers,
+        private string $class
     ) {
-        $this->entityManager = $entityManager;
-        $this->menuRepository = $menuRepository;
-        $this->initiators = $initiators;
-        $this->removers = $removers;
-        $this->class = $class;
-
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
@@ -71,7 +55,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
             return;
         }
 
-        if (EntityPersisted::class === get_class($message)) {
+        if (EntityPersisted::class === $message::class) {
             $this->initiate($entity);
         } else {
             $this->revoke($entity);
@@ -80,7 +64,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     public function initiate(PermissionableInterface $object): void
     {
-        $this->entityManager->getFilters()->disable(static::FILTER_NAME);
+        $this->entityManager->getFilters()->disable(self::FILTER_NAME);
         foreach ($this->initiators as $initiator) {
             if ($initiator->support($object)) {
                 $initiator->setClass($this->class);
@@ -88,7 +72,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
             }
         }
 
-        $this->entityManager->getFilters()->enable(static::FILTER_NAME);
+        $this->entityManager->getFilters()->enable(self::FILTER_NAME);
     }
 
     public function revoke(PermissionableInterface $object): void
@@ -114,7 +98,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     {
         /** @var MenuInterface[] $parents */
         $parents = $this->repository->findAllowedMenusByGroup($user->getGroup(), true);
-        foreach ($parents as $key => $parent) {
+        foreach ($parents as $parent) {
             yield $this->buildMenu($parent, $user->getGroup());
         }
     }

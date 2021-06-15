@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
@@ -22,22 +24,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    private string $superAdmin;
-
-    public function __construct(ManagerRegistry $registry, string $superAdmin)
+    public function __construct(ManagerRegistry $registry, private string $superAdmin)
     {
-        $this->superAdmin = $superAdmin;
-
         parent::__construct($registry, User::class);
     }
 
-    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function upgradePassword(UserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
-        $user->setPassword($newEncodedPassword);
+        $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
     }

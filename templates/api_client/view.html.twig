@@ -38,9 +38,9 @@
                     </div>
                     <div class="card-footer">
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_apiclient_audit__invoke', {id: data.id}) }}" class="btn btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Audit', {id: data.id}) }}" class="btn btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                         {% endif %}
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_apiclient_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

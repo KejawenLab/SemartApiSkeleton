@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 final class ScriptHandler
 {
-    public static function preInstall(Event $event)
+    public static function preInstall(Event $event): void
     {
         $composer = $event->getComposer();
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
@@ -31,20 +31,20 @@ final class ScriptHandler
 
             $template = (string) file_get_contents(sprintf('%s/.env.template', $rootPath));
 
-            static::createEnvironment($io, $envPath, $template);
+            self::createEnvironment($io, $envPath, $template);
         } else {
             $io->write('<info>Environment variable file is already exist</info>');
         }
     }
 
-    public static function postInstall(Event $event)
+    public static function postInstall(Event $event): void
     {
         $composer = $event->getComposer();
         $io = $event->getIO();
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
         $lock = sprintf('%s/.semart', $rootPath);
         if (file_exists($lock) && 1 === (int) file_get_contents($lock)) {
-            return 0;
+            return;
         }
 
         $io->write('<comment>===========================================================</comment>');
@@ -97,7 +97,23 @@ final class ScriptHandler
         ];
 
         $secret = Encryptor::encrypt(date('YmdHis'), sha1(date('YmdHis')));
-        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appTitle, $appDescription, $appVersion, $passPhrase];
+        $replace = [
+            $environment,
+            $secret,
+            $redisUlr,
+            $dbDriver,
+            $dbVersion,
+            $dbCharset,
+            $dbUser,
+            Encryptor::encrypt((string) $dbPassword, $secret),
+            $dbName,
+            $dbHost,
+            $dbPort,
+            $appTitle,
+            $appDescription,
+            $appVersion,
+            $passPhrase
+        ];
 
         $envString = str_replace($search, $replace, $template);
 

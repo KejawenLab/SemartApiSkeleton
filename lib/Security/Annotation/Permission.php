@@ -49,7 +49,7 @@ final class Permission
 
     public function getMenu(): string
     {
-        return (string) $this->menu;
+        return $this->menu;
     }
 
     public function getActions(): array
@@ -57,8 +57,8 @@ final class Permission
         return $this->actions;
     }
 
-    public function isOwnership()
+    public function isOwnership(): bool
     {
-        return (bool) $this->ownership;
+        return $this->ownership;
     }
 }

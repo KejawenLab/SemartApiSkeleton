@@ -23,18 +23,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private MenuService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(MenuService $service, Paginator $paginator)
+    public function __construct(private MenuService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/menus")
+     * @Rest\Get("/menus", name=GetAll::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Parameter(

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Util;
 
+use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+use ReflectionClass;
+use ReflectionProperty;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -14,11 +17,8 @@ use Twig\TwigFunction;
  */
 final class TwigExtension extends AbstractExtension
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function getFunctions(): iterable
@@ -32,7 +32,7 @@ final class TwigExtension extends AbstractExtension
         if ($data instanceof EntityInterface) {
             return (string) $data->getNullOrString();
         } else {
-            if ($data instanceof \DateTimeInterface) {
+            if ($data instanceof DateTimeInterface) {
                 return $data->format('Y-m-d');
             }
 
@@ -40,7 +40,7 @@ final class TwigExtension extends AbstractExtension
         }
     }
 
-    public function hasAssociation(\ReflectionClass $class, \ReflectionProperty $property): bool
+    public function hasAssociation(ReflectionClass $class, ReflectionProperty $property): bool
     {
         return $this->entityManager->getClassMetadata($class->getName())->hasAssociation($property->getName());
     }

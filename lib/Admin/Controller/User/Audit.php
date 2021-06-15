@@ -10,6 +10,9 @@ use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Psr\Cache\InvalidArgumentException;
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,43 +25,36 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    private UserService $service;
-
-    private AuditService $audit;
-
-    private Reader $reader;
-
-    public function __construct(UserService $service, AuditService $audit, Reader $reader)
+    public function __construct(private UserService $service, private AuditService $audit, private Reader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**
-     * @Route("/users/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/users/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
+     *
+     * @throws InvalidArgumentException
      */
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(User::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $class = new \ReflectionClass(User::class);
+        $class = new ReflectionClass(User::class);
         $audit = $this->audit->getAudits($entity, $id)->toArray();
 
         return $this->render('user/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $audit['entity'],
             'audits' => $audit['items'],
         ]);

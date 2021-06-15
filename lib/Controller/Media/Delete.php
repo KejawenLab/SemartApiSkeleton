@@ -23,15 +23,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    private MediaService $service;
-
-    public function __construct(MediaService $service)
+    public function __construct(private MediaService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Delete("/medias/{id}")
+     * @Rest\Delete("/medias/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Response(

@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\EventSubscriber;
 use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
 use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
-use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
+use ReflectionObject;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -17,25 +17,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class PermissionSubscriber implements EventSubscriberInterface
 {
-    private PermissionService $service;
-
-    private Parser $parser;
-
-    private Authorization $authorization;
-
-    private Ownership $ownership;
-
-    public function __construct(PermissionService $service, Parser $parser, Authorization $authorization, Ownership $ownership)
+    public function __construct(private Parser $parser, private Authorization $authorization, private Ownership $ownership)
     {
-        $this->service = $service;
-        $this->parser = $parser;
-        $this->authorization = $authorization;
-        $this->ownership = $ownership;
     }
 
     public function validate(ControllerEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -45,7 +33,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $controllerReflection = new \ReflectionObject($controller);
+        $controllerReflection = new ReflectionObject($controller);
         $permission = $this->parser->parse($controllerReflection);
         if (!$permission) {
             return;

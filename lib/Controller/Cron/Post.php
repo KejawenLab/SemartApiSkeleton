@@ -26,18 +26,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private CronService $service;
-
-    public function __construct(FormFactory $formFactory, CronService $service)
+    public function __construct(private FormFactory $formFactory, private CronService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Post("/cronjobs", priority=-7)
+     * @Rest\Post("/cronjobs", name=Post::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(

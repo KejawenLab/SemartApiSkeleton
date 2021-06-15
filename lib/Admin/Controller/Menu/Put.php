@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    private MenuService $service;
-
-    public function __construct(MenuService $service)
+    public function __construct(private MenuService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/menus/{id}/edit", methods={"GET", "POST"}, priority=1)
+     * @Route("/menus/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,7 +34,7 @@ final class Put extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm(MenuType::class, $menu);
@@ -48,7 +45,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.menu.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

@@ -23,15 +23,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Delete("/users/{id}")
+     * @Rest\Delete("/users/{id}", name=Delete::class)
      *
      * @OA\Tag(name="User")
      * @OA\Response(

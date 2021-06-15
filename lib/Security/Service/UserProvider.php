@@ -13,19 +13,13 @@ use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
  */
 final class UserProvider implements UserProviderInterface
 {
-    private UserRepositoryInterface $repository;
-
-    private string $class;
-
-    public function __construct(UserRepositoryInterface $repository, string $class)
+    public function __construct(private UserRepositoryInterface $repository, private string $class)
     {
-        $this->class = $class;
-        $this->repository = $repository;
     }
 
-    public function findUsername(string $username): ?AuthInterface
+    public function findByIdentifier(string $identifier): ?AuthInterface
     {
-        return $this->repository->findByUsername($username);
+        return $this->repository->findByUsername($identifier);
     }
 
     public function support(string $class): bool

@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -27,28 +28,16 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 {
     use TargetPathTrait;
 
-    private UserService $userService;
-
-    private UserProviderFactory $userProviderFactory;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private UserPasswordEncoderInterface $passwordEncoder;
-
-    public function __construct(UserService $userService, UserProviderFactory $userProviderFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(private UserService $userService, private UserProviderFactory $userProviderFactory, private UrlGeneratorInterface $urlGenerator, private UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->userService = $userService;
-        $this->userProviderFactory = $userProviderFactory;
-        $this->urlGenerator = $urlGenerator;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return AdminContext::LOGIN_ROUTE === $request->attributes->get('_route') && $request->isMethod(Request::METHOD_POST);
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('_username', ''),
@@ -60,12 +49,12 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface|User|null
     {
         return $this->userProviderFactory->loadUserByUsername($credentials['username']);
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
@@ -75,10 +64,16 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
         return $credentials['password'];
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         $session = $request->getSession();
-        $user = $this->userProviderFactory->getRealUser($token->getUser());
+        $user = $token->getUser();
+
+        if (!$user instanceof User) {
+            return $this->redirect($session, $providerKey);
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         if ($user instanceof Model\UserInterface) {
             $deviceId = Encryptor::hash(date('YmdHis'));
             $user->setDeviceId($deviceId);
@@ -87,15 +82,20 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
             $this->userService->save($user);
         }
 
+        return $this->redirect($session, $providerKey);
+    }
+
+    protected function getLoginUrl(): string
+    {
+        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
+    }
+
+    private function redirect(SessionInterface $session, string $providerKey): RedirectResponse
+    {
         if ($targetPath = $this->getTargetPath($session, $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE));
-    }
-
-    protected function getLoginUrl()
-    {
-        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
     }
 }

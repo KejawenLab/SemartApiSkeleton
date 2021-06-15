@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Cron;
  */
 final class CronFixture extends AbstractFixture
 {
-    protected function createNew()
+    protected function createNew(): Cron
     {
         return new Cron();
     }

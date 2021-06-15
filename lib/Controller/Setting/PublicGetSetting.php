@@ -8,7 +8,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Setting;
-use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
@@ -19,18 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class PublicGetSetting extends AbstractFOSRestController
 {
-    private SettingService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(SettingService $service, Paginator $paginator)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/settings/public/{id}", priority=1)
+     * @Rest\Get("/settings/public/{id}", name=PublicGetSetting::class, priority=1)
      *
      * @OA\Tag(name="Setting")
      * @OA\Response(

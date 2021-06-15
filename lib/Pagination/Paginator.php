@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Pagination;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -22,18 +24,15 @@ final class Paginator
 
     private int $cacheLifetime;
 
-    /**
+    public function __construct(SettingService $setting, /**
      * @var QueryExtensionInterface[]
      */
-    private iterable $queryExtension;
-
-    public function __construct(SettingService $setting, iterable $queryExtension)
+    private iterable $queryExtension)
     {
         $this->pageField = $setting->getPageField();
         $this->perPageField = $setting->getPerPageField();
         $this->perPageDefault = $setting->getRecordPerPage();
         $this->cacheLifetime = $setting->getCacheLifetime();
-        $this->queryExtension = $queryExtension;
     }
 
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
@@ -67,6 +66,10 @@ final class Paginator
         return $query->getResult();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     private function count(QueryBuilder $queryBuilder): int
     {
         $count = clone $queryBuilder;

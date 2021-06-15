@@ -12,11 +12,8 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
  */
 final class ShellJob extends Base
 {
-    private CronInterface $cron;
-
-    public function __construct(CronInterface $cron)
+    public function __construct(private CronInterface $cron)
     {
-        $this->cron = $cron;
     }
 
     public function getCron(): CronInterface

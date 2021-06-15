@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
-use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\Admin\Controller\Group\Permission as GetPermission;
 use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
@@ -22,21 +22,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PermissionPut extends AbstractController
 {
-    private GroupService $groupService;
-
-    private PermissionService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(GroupService $groupService, PermissionService $service, Paginator $paginator)
+    public function __construct(private GroupService $groupService, private PermissionService $service)
     {
-        $this->groupService = $groupService;
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Route("/groups/{groupId}/permissions/{id}", methods={"POST"})
+     * @Route("/groups/{groupId}/permissions/{id}", name=PermissionPut::class, methods={"POST"})
      */
     public function __invoke(Request $request, string $groupId, string $id): Response
     {
@@ -44,7 +35,7 @@ final class PermissionPut extends AbstractController
         if (!$group) {
             $this->addFlash('error', 'sas.page.permission.group_not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_permission__invoke', ['id' => $groupId]));
+            return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
         }
 
         /** @var \KejawenLab\ApiSkeleton\Entity\Permission $permission */
@@ -52,7 +43,7 @@ final class PermissionPut extends AbstractController
         if (!$permission) {
             $this->addFlash('error', 'sas.page.permission.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_permission__invoke', ['id' => $groupId]));
+            return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
         }
 
         $type = $request->request->get('type');
@@ -80,6 +71,6 @@ final class PermissionPut extends AbstractController
 
         $this->addFlash('info', 'sas.page.permission.saved');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_permission__invoke', ['id' => $groupId]));
+        return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
     }
 }

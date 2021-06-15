@@ -22,15 +22,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    private MenuService $service;
-
-    public function __construct(MenuService $service)
+    public function __construct(private MenuService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Get("/menus/{id}")
+     * @Rest\Get("/menus/{id}", name=Get::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Response(

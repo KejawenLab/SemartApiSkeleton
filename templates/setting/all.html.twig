@@ -23,9 +23,9 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {% if is_granted('add', menu) %}
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_setting_post__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
                                 {% endif %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_setting_download__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
                             </div>
                         </div>
                     </div>
@@ -51,12 +51,12 @@
                                 <td>{{ setting.value }}</td>
                                 <td>{% if setting.public %}<span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>{% endif %}</td>
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_setting_get__invoke', {id: setting.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Get', {id: setting.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_setting_put__invoke', {id: setting.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
+                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Put', {id: setting.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_setting_delete__invoke', {id: setting.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': setting.parameter}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Delete', {id: setting.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': setting.parameter}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans({}, 'tables') }}
                                         </button>
                                     {% endif %}
@@ -127,7 +127,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_setting_getall__invoke') }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\GetAll') }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}

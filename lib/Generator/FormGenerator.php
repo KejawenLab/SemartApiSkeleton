@@ -4,17 +4,27 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Component\Console\Output\OutputInterface;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class FormGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    /**
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws LoaderError
+     */
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
-        $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);
         $formFile = sprintf('%s/app/Form/%sType.php', $this->kernel->getProjectDir(), $shortName);
 
         if (!$this->fileSystem->exists($formFile)) {
@@ -32,6 +42,6 @@ final class FormGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_API === $scope;
+        return self::SCOPE_API === $scope;
     }
 }

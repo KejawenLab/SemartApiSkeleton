@@ -132,7 +132,7 @@ class Permission implements PermissionInterface, EntityInterface
 
     public function setAddable(bool $addable): self
     {
-        $this->addable = (bool) $addable;
+        $this->addable = $addable;
 
         return $this;
     }
@@ -144,7 +144,7 @@ class Permission implements PermissionInterface, EntityInterface
 
     public function setEditable(bool $editable): self
     {
-        $this->editable = (bool) $editable;
+        $this->editable = $editable;
 
         return $this;
     }
@@ -156,7 +156,7 @@ class Permission implements PermissionInterface, EntityInterface
 
     public function setViewable(bool $viewable): self
     {
-        $this->viewable = (bool) $viewable;
+        $this->viewable = $viewable;
 
         return $this;
     }
@@ -168,7 +168,7 @@ class Permission implements PermissionInterface, EntityInterface
 
     public function setDeletable(bool $deletable): self
     {
-        $this->deletable = (bool) $deletable;
+        $this->deletable = $deletable;
 
         return $this;
     }

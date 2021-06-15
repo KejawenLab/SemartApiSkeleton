@@ -52,11 +52,11 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_permission__invoke', {id: data.id}) }}" class="btn btn-dark">{{ 'sas.form.action.permission' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Permission', {id: data.id}) }}" class="btn btn-dark">{{ 'sas.form.action.permission' | trans({}, 'forms') }}</a>
                         {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('kejawenlab_apiskeleton_admin_group_audit__invoke', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                         {% endif %}
-                        <a href="{{ path('kejawenlab_apiskeleton_admin_group_getall__invoke') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

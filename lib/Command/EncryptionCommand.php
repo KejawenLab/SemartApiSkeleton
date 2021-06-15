@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class EncryptionCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('semart:encrypt')
@@ -24,7 +24,7 @@ final class EncryptionCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf('<info>%s</info>', Encryptor::encrypt($input->getArgument('text'), $_SERVER['APP_SECRET'])));
 

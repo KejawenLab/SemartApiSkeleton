@@ -8,13 +8,14 @@ use KejawenLab\ApiSkeleton\Application\App;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class HealthController extends AbstractController
 {
-    public function __invoke()
+    public function __invoke(): Response
     {
         return new JsonResponse([
             'semart' => [

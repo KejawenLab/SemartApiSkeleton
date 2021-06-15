@@ -17,6 +17,6 @@ final class App
 
     public static function getVersionNumber(): int
     {
-        return static::VERSION_MAYOR + static::VERSION_MINOR + static::VERSION_PATCH;
+        return self::VERSION_MAYOR + self::VERSION_MINOR + self::VERSION_PATCH;
     }
 }

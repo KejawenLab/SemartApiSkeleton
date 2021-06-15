@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
@@ -25,6 +26,9 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
         parent::__construct($registry, Setting::class);
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function findByParameter(string $parameter): ?SettingInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -33,7 +37,7 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(static::MICRO_CACHE, sprintf('%s:%s:%s', __CLASS__, __METHOD__, $parameter));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', __CLASS__, __METHOD__, $parameter));
 
         return $query->getOneOrNullResult();
     }

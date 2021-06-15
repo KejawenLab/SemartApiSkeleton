@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,26 +25,27 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    private UserProviderFactory $userProviderFactory;
-
-    private ApiClientService $service;
-
-    public function __construct(UserProviderFactory $userProviderFactory, ApiClientService $service)
+    public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service)
     {
-        $this->userProviderFactory = $userProviderFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Route("/api-clients/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/api-clients/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
-        $user = $this->userProviderFactory->getRealUser($this->getUser());
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            $this->addFlash('error', 'sas.page.user.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
         }
 
         $client = new ApiClient();
@@ -55,7 +58,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.api_client.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

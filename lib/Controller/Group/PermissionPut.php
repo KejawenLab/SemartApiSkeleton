@@ -29,21 +29,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class PermissionPut extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private GroupService $groupService;
-
-    private PermissionService $permissionService;
-
-    public function __construct(FormFactory $formFactory, GroupService $groupService, PermissionService $permissionService)
+    public function __construct(private FormFactory $formFactory, private GroupService $groupService, private PermissionService $permissionService)
     {
-        $this->formFactory = $formFactory;
-        $this->groupService = $groupService;
-        $this->permissionService = $permissionService;
     }
 
     /**
-     * @Rest\Put("/groups/{id}/permissions")
+     * @Rest\Put("/groups/{id}/permissions", name=PermissionPut::class)
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(

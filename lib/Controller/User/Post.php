@@ -26,18 +26,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private UserService $service;
-
-    public function __construct(FormFactory $formFactory, UserService $service)
+    public function __construct(private FormFactory $formFactory, private UserService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Post("/users")
+     * @Rest\Post("/users", name=Post::class)
      *
      * @OA\Tag(name="User")
      * @OA\RequestBody(

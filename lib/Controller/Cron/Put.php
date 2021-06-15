@@ -27,18 +27,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private CronService $service;
-
-    public function __construct(FormFactory $formFactory, CronService $service)
+    public function __construct(private FormFactory $formFactory, private CronService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**
-     * @Rest\Put("/cronjobs/{id}", priority=-7)
+     * @Rest\Put("/cronjobs/{id}", name=Put::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(

@@ -21,15 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**
-     * @Route("/crons/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/crons/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -42,7 +39,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.cron.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

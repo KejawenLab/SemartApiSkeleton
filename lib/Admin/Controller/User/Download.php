@@ -19,18 +19,12 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    private UserService $service;
-
-    private SerializerInterface $serializer;
-
-    public function __construct(UserService $service, SerializerInterface $serializer)
+    public function __construct(private UserService $service, private SerializerInterface $serializer)
     {
-        $this->service = $service;
-        $this->serializer = $serializer;
     }
 
     /**
-     * @Route("/users/download", methods={"GET"})
+     * @Route("/users/download", name=Download::class, methods={"GET"})
      */
     public function __invoke(): Response
     {
@@ -38,7 +32,7 @@ final class Download extends AbstractController
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $response = new Response();

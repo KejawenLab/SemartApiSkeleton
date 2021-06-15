@@ -24,18 +24,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Report extends AbstractFOSRestController
 {
-    private CronReportService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(CronReportService $service, Paginator $paginator)
+    public function __construct(private CronReportService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
-     * @Rest\Get("/cronjobs/{id}/logs", priority=-27)
+     * @Rest\Get("/cronjobs/{id}/logs", name=Report::class, priority=-27)
      *
      * @Cache(expires="+1 minute", public=false)
      *

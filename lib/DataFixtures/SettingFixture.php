@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Setting;
  */
 final class SettingFixture extends AbstractFixture
 {
-    protected function createNew()
+    protected function createNew(): Setting
     {
         return new Setting();
     }
