@@ -23,3 +23,13 @@ Caddyfile
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
