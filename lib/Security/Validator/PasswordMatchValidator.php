@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Validator;
 
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -35,7 +36,12 @@ final class PasswordMatchValidator extends ConstraintValidator
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 
-        if (!$this->encoder->isPasswordValid($token->getUser(), $value)) {
+        $user = $token->getUser();
+        if (!$user instanceof User) {
+            throw new UnexpectedValueException($token, User::class);
+        }
+
+        if (!$this->encoder->isPasswordValid($user, $value)) {
             $this->context->buildViolation($constraint->getMessage())->addViolation();
         }
     }

@@ -6,12 +6,20 @@ namespace KejawenLab\ApiSkeleton\Generator;
 
 use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
  */
 final class RepositoryGenerator extends AbstractGenerator
 {
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
@@ -24,8 +32,11 @@ final class RepositoryGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $repositoryFile));
         }
 
-        $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder ? $folder : $shortName), $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>', ($folder ? $folder : $shortName), $shortName));
+        $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder ?: $shortName), $shortName);
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
+            ($folder ?: $shortName),
+            $shortName
+        ));
         if (!$this->fileSystem->exists($repositoryModelFile)) {
             $repositoryModel = $this->twig->render('generator/repository_model.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($repositoryModelFile, $repositoryModel);
@@ -36,6 +47,6 @@ final class RepositoryGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_API === $scope;
+        return self::SCOPE_API === $scope;
     }
 }

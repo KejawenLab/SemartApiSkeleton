@@ -50,7 +50,7 @@ final class PermissionGenerator extends AbstractGenerator
         $menu = new $this->class();
         $menu->setCode($shortNameUpper);
         $menu->setName($shortNameUpper);
-        $menu->setRouteName(sprintf(static::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
+        $menu->setRouteName(sprintf(self::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
 
         $this->menuService->save($menu);
 
@@ -70,6 +70,6 @@ final class PermissionGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_API === $scope;
+        return self::SCOPE_API === $scope;
     }
 }

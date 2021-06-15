@@ -25,11 +25,7 @@ final class Voter extends SymfonyVoter
 
     protected function supports(string $attribute, $subject): bool
     {
-        if ($subject instanceof MenuInterface) {
-            return true;
-        }
-
-        return false;
+        return $subject instanceof MenuInterface;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool

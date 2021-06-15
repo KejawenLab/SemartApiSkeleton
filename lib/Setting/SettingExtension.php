@@ -16,7 +16,7 @@ final class SettingExtension extends AbstractExtension
     {
     }
 
-    public function getSetting(string $key)
+    public function getSetting(string $key): Model\SettingInterface
     {
         return $this->service->getSetting($key);
     }

@@ -18,6 +18,11 @@ final class FilterPublicExtension extends AbstractQueryExtension
             return;
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.public', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(true)));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('%s.public', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(true)
+            )
+        );
     }
 }

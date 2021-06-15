@@ -17,7 +17,12 @@ use Vich\UploaderBundle\Storage\StorageInterface;
  */
 final class MediaService extends AbstractService implements ServiceInterface
 {
-    public function __construct(private StorageInterface $storage, MessageBusInterface $messageBus, MediaRepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(
+        private StorageInterface $storage,
+        MessageBusInterface $messageBus,
+        MediaRepositoryInterface $repository,
+        AliasHelper $aliasHelper
+    )
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

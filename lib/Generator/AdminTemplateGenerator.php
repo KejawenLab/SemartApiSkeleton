@@ -55,6 +55,6 @@ final class AdminTemplateGenerator extends AbstractGenerator
 
     public function support(string $scope): bool
     {
-        return static::SCOPE_ADMIN === $scope;
+        return self::SCOPE_ADMIN === $scope;
     }
 }

@@ -15,7 +15,7 @@ interface PermissionRepositoryInterface extends PaginatableRepositoryInterface
 
     public function findPermissions(GroupInterface $group, array $menus): iterable;
 
-    public function findAllowedMenusByGroup(GroupInterface $user, bool $parentOnly = false): iterable;
+    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): iterable;
 
     public function findAllowedChildMenusByGroupAndMenu(GroupInterface $group, MenuInterface $menu): iterable;
 

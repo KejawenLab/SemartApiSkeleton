@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -66,7 +67,13 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         $session = $request->getSession();
-        $user = $this->userProviderFactory->getRealUser($token->getUser());
+        $user = $token->getUser();
+
+        if (!$user instanceof User) {
+            return $this->redirect($session, $providerKey);
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         if ($user instanceof Model\UserInterface) {
             $deviceId = Encryptor::hash(date('YmdHis'));
             $user->setDeviceId($deviceId);
@@ -75,15 +82,20 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
             $this->userService->save($user);
         }
 
-        if ($targetPath = $this->getTargetPath($session, $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
-
-        return new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE));
+        return $this->redirect($session, $providerKey);
     }
 
     protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
+    }
+
+    private function redirect(SessionInterface $session, string $providerKey): RedirectResponse
+    {
+        if ($targetPath = $this->getTargetPath($session, $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE));
     }
 }

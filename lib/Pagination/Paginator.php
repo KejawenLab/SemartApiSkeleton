@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Pagination;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -64,6 +66,10 @@ final class Paginator
         return $query->getResult();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     private function count(QueryBuilder $queryBuilder): int
     {
         $count = clone $queryBuilder;

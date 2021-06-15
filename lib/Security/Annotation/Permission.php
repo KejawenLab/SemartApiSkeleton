@@ -57,7 +57,7 @@ final class Permission
         return $this->actions;
     }
 
-    public function isOwnership()
+    public function isOwnership(): bool
     {
         return $this->ownership;
     }

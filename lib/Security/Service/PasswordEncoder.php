@@ -16,7 +16,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 final class PasswordEncoder implements MessageSubscriberInterface
 {
-    public function __construct(private UserPasswordEncoderInterface $service, private PasswordHistoryService $history, private UserProviderFactory $userProviderFactory)
+    public function __construct(
+        private UserPasswordEncoderInterface $service,
+        private PasswordHistoryService $history
+    )
     {
     }
 

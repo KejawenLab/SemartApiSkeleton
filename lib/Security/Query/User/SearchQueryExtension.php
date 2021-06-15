@@ -21,8 +21,29 @@ final class SearchQueryExtension extends AbstractQueryExtension
         }
 
         $alias = $this->aliasHelper->findAlias('root');
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.username)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.fullName)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.email)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
+        $queryBuilder->orWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.username)', $alias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            )
+        );
+        $queryBuilder->orWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.fullName)', $alias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            )
+        );
+        $queryBuilder->orWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.email)', $alias),
+                $queryBuilder->expr()->literal(
+                    sprintf('%%%s%%', StringUtil::uppercase($query))
+                )
+            )
+        );
     }
 }

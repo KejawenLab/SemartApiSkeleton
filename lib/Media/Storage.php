@@ -33,7 +33,11 @@ final class Storage extends FileSystemStorage
         $mapping->writeProperty($obj, 'mimeType', $file->getMimeType());
         $mapping->writeProperty($obj, 'originalName', $file->getClientOriginalName());
 
-        if (str_contains($file->getMimeType(), 'image/') && 'image/svg+xml' !== $file->getMimeType() && false !== $dimensions = @getimagesize($file->getRealPath())) {
+        if (
+            str_contains($file->getMimeType(), 'image/') &&
+            'image/svg+xml' !== $file->getMimeType() &&
+            false !== $dimensions = @getimagesize($file->getRealPath())
+        ) {
             $mapping->writeProperty($obj, 'dimensions', array_splice($dimensions, 0, 2));
         }
 
@@ -74,7 +78,12 @@ final class Storage extends FileSystemStorage
             $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
         }
 
-        return sprintf('%s/%s%s%s', $mapping->getUriPrefix(), $uploadDir, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
+        return sprintf('%s/%s%s%s',
+            $mapping->getUriPrefix(),
+            $uploadDir,
+            $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '',
+            $name
+        );
     }
 
     private function convertWindowsDirectorySeparator(string $string): string

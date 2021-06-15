@@ -64,7 +64,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     public function initiate(PermissionableInterface $object): void
     {
-        $this->entityManager->getFilters()->disable(static::FILTER_NAME);
+        $this->entityManager->getFilters()->disable(self::FILTER_NAME);
         foreach ($this->initiators as $initiator) {
             if ($initiator->support($object)) {
                 $initiator->setClass($this->class);
@@ -72,7 +72,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
             }
         }
 
-        $this->entityManager->getFilters()->enable(static::FILTER_NAME);
+        $this->entityManager->getFilters()->enable(self::FILTER_NAME);
     }
 
     public function revoke(PermissionableInterface $object): void
