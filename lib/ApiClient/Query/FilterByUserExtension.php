@@ -17,12 +17,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class FilterByUserExtension extends AbstractQueryExtension
 {
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(TokenStorageInterface $tokenStorage, AliasHelper $aliasHelper)
+    public function __construct(private TokenStorageInterface $tokenStorage, AliasHelper $aliasHelper)
     {
-        $this->tokenStorage = $tokenStorage;
-
         parent::__construct($aliasHelper);
     }
 

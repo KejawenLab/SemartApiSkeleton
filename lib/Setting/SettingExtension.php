@@ -12,11 +12,8 @@ use Twig\TwigFunction;
  */
 final class SettingExtension extends AbstractExtension
 {
-    private SettingService $service;
-
-    public function __construct(SettingService $service)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
     }
 
     public function getSetting(string $key)

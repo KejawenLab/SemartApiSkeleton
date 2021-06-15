@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -21,14 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    private GroupService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(GroupService $service, Paginator $paginator)
+    public function __construct(private GroupService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
@@ -36,12 +32,12 @@ final class GetAll extends AbstractController
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(Group::class);
+        $class = new ReflectionClass(Group::class);
 
         return $this->render('group/all.html.twig', [
             'page_title' => 'sas.page.group.list',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Group::class),
         ]);
     }

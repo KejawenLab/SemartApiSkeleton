@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\User;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
@@ -21,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(private UserService $service)
     {
-        $this->service = $service;
     }
 
     /**
@@ -40,12 +39,12 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(User::class);
+        $class = new ReflectionClass(User::class);
 
         return $this->render('user/view.html.twig', [
             'page_title' => 'sas.page.user.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $user,
         ]);
     }

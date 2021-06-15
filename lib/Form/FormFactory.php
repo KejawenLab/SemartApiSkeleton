@@ -13,11 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class FormFactory
 {
-    private FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory)
+    public function __construct(private FormFactoryInterface $formFactory)
     {
-        $this->formFactory = $formFactory;
     }
 
     public function submitRequest(string $formType, Request $request, $data = null): FormInterface

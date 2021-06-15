@@ -9,13 +9,10 @@ namespace KejawenLab\ApiSkeleton\Audit;
  */
 final class Audit
 {
-    private object $entity;
-
     private array $items;
 
-    public function __construct(object $entity)
+    public function __construct(private object $entity)
     {
-        $this->entity = $entity;
     }
 
     public function addItem(AuditItem $item): void

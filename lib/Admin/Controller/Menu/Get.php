@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
@@ -21,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private MenuService $service;
-
-    public function __construct(MenuService $service)
+    public function __construct(private MenuService $service)
     {
-        $this->service = $service;
     }
 
     /**
@@ -40,12 +39,12 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Menu::class);
+        $class = new ReflectionClass(Menu::class);
 
         return $this->render('menu/view.html.twig', [
             'page_title' => 'sas.page.menu.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $menu,
         ]);
     }

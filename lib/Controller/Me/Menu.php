@@ -22,11 +22,8 @@ use OpenApi\Annotations as OA;
  */
 final class Menu extends AbstractFOSRestController
 {
-    private PermissionService $service;
-
-    public function __construct(PermissionService $service)
+    public function __construct(private PermissionService $service)
     {
-        $this->service = $service;
     }
 
     /**

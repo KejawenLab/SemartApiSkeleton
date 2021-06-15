@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
@@ -21,14 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    private MediaService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(MediaService $service, Paginator $paginator)
+    public function __construct(private MediaService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
@@ -36,12 +32,12 @@ final class GetAll extends AbstractController
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(Media::class);
+        $class = new ReflectionClass(Media::class);
 
         return $this->render('media/all.html.twig', [
             'page_title' => 'sas.page.media.list',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Media::class),
         ]);
     }

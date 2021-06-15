@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron;
 
+use DateTime;
+use DateInterval;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
@@ -21,7 +23,7 @@ final class CronReportService extends AbstractService
 
     public function countStale(): int
     {
-        $stale = (new \DateTime())->sub(new \DateInterval('P3M'));
+        $stale = (new DateTime())->sub(new DateInterval('P3M'));
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->select('COUNT(1)');
@@ -37,7 +39,7 @@ final class CronReportService extends AbstractService
 
     public function clean(): void
     {
-        $stale = (new \DateTime())->sub(new \DateInterval('P3M'));
+        $stale = (new DateTime())->sub(new DateInterval('P3M'));
 
         $queryBuilder = $this->getQueryBuilder()->delete();
         $queryBuilder->andWhere(

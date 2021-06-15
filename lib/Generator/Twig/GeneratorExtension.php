@@ -14,11 +14,8 @@ use Twig\TwigFilter;
  */
 final class GeneratorExtension extends AbstractExtension
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function getFilters(): iterable

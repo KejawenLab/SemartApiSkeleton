@@ -19,11 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private MediaService $service;
-
-    public function __construct(MediaService $service)
+    public function __construct(private MediaService $service)
     {
-        $this->service = $service;
     }
 
     /**

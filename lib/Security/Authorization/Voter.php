@@ -19,14 +19,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter as SymfonyVoter;
  */
 final class Voter extends SymfonyVoter
 {
-    private PermissionService $permissionService;
-
-    private GroupService $groupService;
-
-    public function __construct(PermissionService $permissionService, GroupService $groupService)
+    public function __construct(private PermissionService $permissionService, private GroupService $groupService)
     {
-        $this->permissionService = $permissionService;
-        $this->groupService = $groupService;
     }
 
     protected function supports(string $attribute, $subject): bool
@@ -59,22 +53,12 @@ final class Voter extends SymfonyVoter
         if (!$permission instanceof PermissionInterface) {
             return false;
         }
-
-        switch ($attribute) {
-            case Permission::ADD:
-                return $permission->isAddable();
-                break;
-            case Permission::EDIT:
-                return $permission->isEditable();
-                break;
-            case Permission::VIEW:
-                return $permission->isAddable() || $permission->isEditable() || $permission->isViewable();
-                break;
-            case Permission::DELETE:
-                return $permission->isDeletable();
-                break;
-        }
-
-        return false;
+        return match ($attribute) {
+            Permission::ADD => $permission->isAddable(),
+            Permission::EDIT => $permission->isEditable(),
+            Permission::VIEW => $permission->isAddable() || $permission->isEditable() || $permission->isViewable(),
+            Permission::DELETE => $permission->isDeletable(),
+            default => false,
+        };
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
@@ -21,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private SettingService $service;
-
-    public function __construct(SettingService $service)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
     }
 
     /**
@@ -40,12 +39,12 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Setting::class);
+        $class = new ReflectionClass(Setting::class);
 
         return $this->render('setting/view.html.twig', [
             'page_title' => 'sas.page.setting.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $setting,
         ]);
     }

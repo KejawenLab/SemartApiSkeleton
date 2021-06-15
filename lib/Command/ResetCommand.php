@@ -19,13 +19,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class ResetCommand extends Command
 {
-    private KernelInterface $kernel;
-
     private string $semart;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
         $this->semart = sprintf('%s%s.semart', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
 
         parent::__construct();

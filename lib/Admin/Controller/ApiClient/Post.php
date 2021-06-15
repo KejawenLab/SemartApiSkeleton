@@ -23,14 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    private UserProviderFactory $userProviderFactory;
-
-    private ApiClientService $service;
-
-    public function __construct(UserProviderFactory $userProviderFactory, ApiClientService $service)
+    public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service)
     {
-        $this->userProviderFactory = $userProviderFactory;
-        $this->service = $service;
     }
 
     /**

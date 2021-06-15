@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\User;
 
+use ReflectionClass;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -21,14 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    private UserService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(UserService $service, Paginator $paginator)
+    public function __construct(private UserService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**
@@ -36,7 +31,7 @@ final class GetAll extends AbstractController
      */
     public function __invoke(Request $request): Response
     {
-        $class = new \ReflectionClass(User::class);
+        $class = new ReflectionClass(User::class);
 
         return $this->render('user/all.html.twig', [
             'page_title' => 'sas.page.user.list',

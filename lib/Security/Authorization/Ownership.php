@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
+use Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
@@ -18,32 +19,8 @@ final class Ownership
 {
     private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
 
-    private ManagerRegistry $doctrine;
-
-    private UserRepositoryInterface $userRepository;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private string $superAdmin;
-
-    private string $ownershipProperty;
-
-    private UserProviderFactory $userProviderFactory;
-
-    public function __construct(
-        ManagerRegistry $doctrine,
-        UserRepositoryInterface $userRepository,
-        TokenStorageInterface $tokenStorage,
-        UserProviderFactory $userProviderFactory,
-        string $superAdmin,
-        string $ownershipProperty
-    ) {
-        $this->doctrine = $doctrine;
-        $this->userRepository = $userRepository;
-        $this->tokenStorage = $tokenStorage;
-        $this->userProviderFactory = $userProviderFactory;
-        $this->superAdmin = $superAdmin;
-        $this->ownershipProperty = $ownershipProperty;
+    public function __construct(private ManagerRegistry $doctrine, private UserRepositoryInterface $userRepository, private TokenStorageInterface $tokenStorage, private UserProviderFactory $userProviderFactory, private string $superAdmin, private string $ownershipProperty)
+    {
     }
 
     public function isOwner(string $id, string $entity): bool
@@ -79,7 +56,7 @@ final class Ownership
             }
 
             return $creator === $token->getUsername();
-        } catch (\Exception $e) {
+        } catch (Exception) {
         }
 
         return false;

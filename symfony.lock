@@ -226,6 +226,9 @@
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.88"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -261,6 +264,9 @@
     },
     "react/promise": {
         "version": "v2.8.0"
+    },
+    "rector/rector": {
+        "version": "0.11.20"
     },
     "seld/jsonlint": {
         "version": "1.8.0"

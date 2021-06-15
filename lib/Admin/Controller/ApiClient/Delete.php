@@ -19,11 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private ApiClientService $service;
-
-    public function __construct(ApiClientService $service)
+    public function __construct(private ApiClientService $service)
     {
-        $this->service = $service;
     }
 
     /**

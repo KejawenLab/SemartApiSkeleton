@@ -31,7 +31,7 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->group = $user->getGroup();
             $this->username = (string) $user->getIdentity();
             $this->password = (string) $user->getCredential();
-            $this->class = get_class($user);
+            $this->class = $user::class;
         }
     }
 

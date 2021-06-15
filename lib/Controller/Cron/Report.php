@@ -24,14 +24,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Report extends AbstractFOSRestController
 {
-    private CronReportService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(CronReportService $service, Paginator $paginator)
+    public function __construct(private CronReportService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

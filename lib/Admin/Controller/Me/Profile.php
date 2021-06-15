@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,12 +23,12 @@ final class Profile extends AbstractController
     public function __invoke(UserProviderFactory $userProviderFactory): Response
     {
         $user = $userProviderFactory->getRealUser($this->getUser());
-        $class = new \ReflectionClass(get_class($user));
+        $class = new ReflectionClass($user::class);
 
         return $this->render('profile/view.html.twig', [
             'page_title' => 'sas.page.profile.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $user,
         ]);
     }

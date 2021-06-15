@@ -22,17 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PermissionPut extends AbstractController
 {
-    private GroupService $groupService;
-
-    private PermissionService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(GroupService $groupService, PermissionService $service, Paginator $paginator)
+    public function __construct(private GroupService $groupService, private PermissionService $service, private Paginator $paginator)
     {
-        $this->groupService = $groupService;
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

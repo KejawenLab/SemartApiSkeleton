@@ -27,14 +27,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    private FormFactory $formFactory;
-
-    private ApiClientService $service;
-
-    public function __construct(FormFactory $formFactory, ApiClientService $service)
+    public function __construct(private FormFactory $formFactory, private ApiClientService $service)
     {
-        $this->formFactory = $formFactory;
-        $this->service = $service;
     }
 
     /**

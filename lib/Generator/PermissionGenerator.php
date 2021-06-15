@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use ReflectionClass;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
@@ -22,33 +23,20 @@ final class PermissionGenerator extends AbstractGenerator
 {
     private const ROUTE_PLACEHOLDER = 'kejawenlab_apiskeleton_application_%s_getall';
 
-    private PermissionService $permissionService;
-
-    private MenuService $menuService;
-
-    private GroupService $groupService;
-
-    private string $class;
-
     public function __construct(
-        PermissionService $permissionService,
-        MenuService $menuService,
-        GroupService $groupService,
+        private PermissionService $permissionService,
+        private MenuService $menuService,
+        private GroupService $groupService,
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,
         EntityManagerInterface $entityManager,
-        string $class
+        private string $class
     ) {
-        $this->permissionService = $permissionService;
-        $this->menuService = $menuService;
-        $this->groupService = $groupService;
-        $this->class = $class;
-
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $shortNameUpper = StringUtil::uppercase($shortName);

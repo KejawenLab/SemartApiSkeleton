@@ -17,17 +17,14 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 final class UserProviderFactory implements UserProviderInterface
 {
-    /**
-     * @var Provider[]
-     */
-    private iterable $providers;
-
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(iterable $providers, UserPasswordHasherInterface $passwordHasher)
+    public function __construct(
+        /**
+         * @var Provider[]
+         */
+        private iterable $providers,
+        private UserPasswordHasherInterface $passwordHasher
+    )
     {
-        $this->providers = $providers;
-        $this->passwordHasher = $passwordHasher;
     }
 
     public function loadUserByUsername(string $username): User

@@ -15,11 +15,8 @@ use Vich\UploaderBundle\Storage\StorageInterface;
  */
 final class SetFileUrlSubscriber implements EventSubscriber
 {
-    private StorageInterface $storage;
-
-    public function __construct(StorageInterface $storage)
+    public function __construct(private StorageInterface $storage)
     {
-        $this->storage = $storage;
     }
 
     public function postLoad(LifecycleEventArgs $args): void

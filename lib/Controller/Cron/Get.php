@@ -22,11 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**

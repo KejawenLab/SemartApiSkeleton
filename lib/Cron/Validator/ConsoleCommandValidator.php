@@ -18,11 +18,8 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class ConsoleCommandValidator extends ConstraintValidator
 {
-    private KernelInterface $kernel;
-
-    public function __construct(KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -42,8 +39,8 @@ final class ConsoleCommandValidator extends ConstraintValidator
         $console = new Application($this->kernel);
         $command = explode(' ', $value->getCommand());
         try {
-            $console->get((string) $command[0]);
-        } catch (CommandNotFoundException $exception) {
+            $console->get($command[0]);
+        } catch (CommandNotFoundException) {
             $this->context->buildViolation($constraint->getMessage())->setParameter('%command%', $command[0])->addViolation();
         }
     }

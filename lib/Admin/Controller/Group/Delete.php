@@ -19,11 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private GroupService $service;
-
-    public function __construct(GroupService $service)
+    public function __construct(private GroupService $service)
     {
-        $this->service = $service;
     }
 
     /**

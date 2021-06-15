@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -11,10 +13,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class FormGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
-        $properties = $class->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);
         $formFile = sprintf('%s/app/Form/%sType.php', $this->kernel->getProjectDir(), $shortName);
 
         if (!$this->fileSystem->exists($formFile)) {

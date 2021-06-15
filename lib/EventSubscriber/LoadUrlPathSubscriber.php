@@ -31,11 +31,8 @@ final class LoadUrlPathSubscriber implements EventSubscriber
         'kejawenlab_apiskeleton_media_getall',
     ];
 
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function postLoad(LifecycleEventArgs $args): void
@@ -74,7 +71,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replece);
             try {
                 $adminPath = $this->urlGenerator->generate(sprintf('%s__invoke', $adminRoute));
-            } catch (RouteNotFoundException $exception) {
+            } catch (RouteNotFoundException) {
             }
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -11,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class RepositoryGenerator extends AbstractGenerator
 {
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $repositoryFile = sprintf('%s/app/Repository/%sRepository.php', $this->kernel->getProjectDir(), $shortName);

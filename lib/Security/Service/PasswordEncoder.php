@@ -16,20 +16,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 final class PasswordEncoder implements MessageSubscriberInterface
 {
-    private UserPasswordEncoderInterface $service;
-
-    private PasswordHistoryService $history;
-
-    private UserProviderFactory $userProviderFactory;
-
-    public function __construct(
-        UserPasswordEncoderInterface $service,
-        PasswordHistoryService $history,
-        UserProviderFactory $userProviderFactory
-    ) {
-        $this->service = $service;
-        $this->history = $history;
-        $this->userProviderFactory = $userProviderFactory;
+    public function __construct(private UserPasswordEncoderInterface $service, private PasswordHistoryService $history, private UserProviderFactory $userProviderFactory)
+    {
     }
 
     public function __invoke(EntityPersisted $message): void
@@ -44,7 +32,7 @@ final class PasswordEncoder implements MessageSubscriberInterface
             $user->setPassword($password);
 
             $passwordHistory = new PasswordHistory();
-            $passwordHistory->setSource(get_class($user));
+            $passwordHistory->setSource($user::class);
             $passwordHistory->setIdentifier($user->getId());
             $passwordHistory->setPassword($password);
 

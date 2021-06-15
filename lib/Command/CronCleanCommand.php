@@ -14,12 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronCleanCommand extends Command
 {
-    private CronReportService $service;
-
-    public function __construct(CronReportService $service)
+    public function __construct(private CronReportService $service)
     {
-        $this->service = $service;
-
         parent::__construct();
     }
 

@@ -23,14 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private CronService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(CronService $service, Paginator $paginator)
+    public function __construct(private CronService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

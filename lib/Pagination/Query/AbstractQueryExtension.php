@@ -12,10 +12,7 @@ use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
  */
 abstract class AbstractQueryExtension implements QueryExtensionInterface
 {
-    protected AliasHelper $aliasHelper;
-
-    public function __construct(AliasHelper $aliasHelper)
+    public function __construct(protected AliasHelper $aliasHelper)
     {
-        $this->aliasHelper = $aliasHelper;
     }
 }

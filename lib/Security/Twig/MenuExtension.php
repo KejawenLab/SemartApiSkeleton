@@ -17,20 +17,8 @@ use Twig\TwigFunction;
  */
 final class MenuExtension extends AbstractExtension
 {
-    private Environment $twig;
-
-    private RequestStack $requestStack;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private MenuService $menuService;
-
-    public function __construct(Environment $twig, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, MenuService $menuService)
+    public function __construct(private Environment $twig, private RequestStack $requestStack, private UrlGeneratorInterface $urlGenerator, private MenuService $menuService)
     {
-        $this->twig = $twig;
-        $this->requestStack = $requestStack;
-        $this->urlGenerator = $urlGenerator;
-        $this->menuService = $menuService;
     }
 
     public function getFunctions(): iterable

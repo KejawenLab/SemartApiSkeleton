@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -114,7 +115,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder = $this->createQueryBuilder('o')->update();
         $queryBuilder->set('o.deletedAt', ':now');
         $queryBuilder->where('o.group = :group');
-        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->setParameter('now', new DateTime());
         $queryBuilder->setParameter('group', $group);
         $queryBuilder->getQuery()->execute();
     }
@@ -125,7 +126,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->set('o.deletedAt', ':now');
         $queryBuilder->where('o.menu= :menu');
         $queryBuilder->setParameter('menu', $menu);
-        $queryBuilder->setParameter('now', new \DateTime());
+        $queryBuilder->setParameter('now', new DateTime());
         $queryBuilder->getQuery()->execute();
     }
 }

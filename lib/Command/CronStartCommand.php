@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use RuntimeException;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -36,10 +37,10 @@ final class CronStartCommand extends Command
 
         $pidFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.CronInterface::PID_FILE;
         if (-1 === $pid = pcntl_fork()) {
-            throw new \RuntimeException('Unable to start the cron process');
+            throw new RuntimeException('Unable to start the cron process');
         } elseif (0 !== $pid) {
             if (false === file_put_contents($pidFile, $pid)) {
-                throw new \RuntimeException('Unable to create process file');
+                throw new RuntimeException('Unable to create process file');
             }
 
             $output->writeln('<info>Cron scheduler started in non-blocking mode</info>');
@@ -48,7 +49,7 @@ final class CronStartCommand extends Command
         }
 
         if (-1 === posix_setsid()) {
-            throw new \RuntimeException('Unable to set the child process as session leader');
+            throw new RuntimeException('Unable to set the child process as session leader');
         }
 
         $this->scheduler(new NullOutput(), $pidFile);

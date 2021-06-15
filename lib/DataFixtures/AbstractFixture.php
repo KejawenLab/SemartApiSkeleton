@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\DataFixtures;
 
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
@@ -22,17 +23,8 @@ abstract class AbstractFixture extends Base
 {
     protected const REF_KEY = 'ref:';
 
-    private PermissionService $service;
-
-    private MessageBusInterface $messageBus;
-
-    protected KernelInterface $kernel;
-
-    public function __construct(PermissionService $service, KernelInterface $kernel, MessageBusInterface $messageBus)
+    public function __construct(private PermissionService $service, protected KernelInterface $kernel, private MessageBusInterface $messageBus)
     {
-        $this->service = $service;
-        $this->kernel = $kernel;
-        $this->messageBus = $messageBus;
     }
 
     public function load(ObjectManager $manager)
@@ -45,12 +37,12 @@ abstract class AbstractFixture extends Base
                 if (static::REF_KEY === sprintf('%s:', $key)) {
                     $this->setReference(StringUtil::uppercase(sprintf('%s#%s', $this->getReferenceKey(), $value)), $entity);
                 } else {
-                    if (\is_string($value) && false !== strpos($value, static::REF_KEY)) {
+                    if (\is_string($value) && str_contains($value, static::REF_KEY)) {
                         $value = $this->getReference(StringUtil::uppercase(str_replace('ref:', '', $value)));
                     }
 
-                    if (\is_string($value) && false !== strpos($value, 'date:')) {
-                        $value = \DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
+                    if (\is_string($value) && str_contains($value, 'date:')) {
+                        $value = DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
                     }
 
                     $accessor->setValue($entity, $key, $value);

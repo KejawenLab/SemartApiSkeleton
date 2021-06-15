@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
+use ReflectionClass;
+use ReflectionProperty;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Setting;
@@ -22,17 +24,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    private SettingService $service;
-
-    private AuditService $audit;
-
-    private Reader $reader;
-
-    public function __construct(SettingService $service, AuditService $audit, Reader $reader)
+    public function __construct(private SettingService $service, private AuditService $audit, private Reader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**
@@ -52,13 +45,13 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Setting::class);
+        $class = new ReflectionClass(Setting::class);
         $audit = $this->audit->getAudits($entity, $id)->toArray();
 
         return $this->render('setting/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $audit['entity'],
             'audits' => $audit['items'],
         ]);

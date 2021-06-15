@@ -17,17 +17,8 @@ use Twig\TwigFunction;
  */
 final class PermissionExtension extends AbstractExtension
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private GroupService $groupService;
-
-    private Authorization $authorization;
-
-    public function __construct(TokenStorageInterface $tokenStorage, GroupService $groupService, Authorization $authorization)
+    public function __construct(private TokenStorageInterface $tokenStorage, private GroupService $groupService, private Authorization $authorization)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->groupService = $groupService;
-        $this->authorization = $authorization;
     }
 
     public function getFunctions(): iterable

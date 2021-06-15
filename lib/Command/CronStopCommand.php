@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use RuntimeException;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +29,7 @@ final class CronStopCommand extends Command
 
         if (!posix_kill((int) file_get_contents($pidFile), SIGINT)) {
             if (!unlink($pidFile)) {
-                throw new \RuntimeException('Unable to stop scheduler.');
+                throw new RuntimeException('Unable to stop scheduler.');
             }
 
             $output->writeln('<comment>Unable to kill cron scheduler process. Scheduler will be stopped before the next run</comment>');

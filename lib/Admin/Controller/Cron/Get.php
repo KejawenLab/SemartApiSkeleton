@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Entity\Cron;
@@ -21,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**
@@ -40,12 +39,12 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Cron::class);
+        $class = new ReflectionClass(Cron::class);
 
         return $this->render('cron/view.html.twig', [
             'page_title' => 'sas.page.cron.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $cron,
         ]);
     }

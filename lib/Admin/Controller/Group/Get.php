@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -21,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private GroupService $service;
-
-    public function __construct(GroupService $service)
+    public function __construct(private GroupService $service)
     {
-        $this->service = $service;
     }
 
     /**
@@ -40,12 +39,12 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Group::class);
+        $class = new ReflectionClass(Group::class);
 
         return $this->render('group/view.html.twig', [
             'page_title' => 'sas.page.group.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $group,
         ]);
     }

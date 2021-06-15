@@ -16,11 +16,6 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 {
     protected const MICRO_CACHE = 1;
 
-    public function __construct(ManagerRegistry $registry, $entityClass)
-    {
-        parent::__construct($registry, $entityClass);
-    }
-
     public function countRecords(): int
     {
         return $this->count([]);

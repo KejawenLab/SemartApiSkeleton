@@ -17,17 +17,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class ApiClientRequestSubscriber implements EventSubscriberInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private ApiClientRequestService $apiClientRequestService;
-
-    private UserProviderFactory $userProvider;
-
-    public function __construct(TokenStorageInterface $tokenStorage, ApiClientRequestService $apiClientRequestService, UserProviderFactory $userProvider)
+    public function __construct(private TokenStorageInterface $tokenStorage, private ApiClientRequestService $apiClientRequestService, private UserProviderFactory $userProvider)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->apiClientRequestService = $apiClientRequestService;
-        $this->userProvider = $userProvider;
     }
 
     public function log(ControllerEvent $event): void

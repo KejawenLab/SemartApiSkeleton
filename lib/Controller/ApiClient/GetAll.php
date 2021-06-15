@@ -23,14 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private ApiClientService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(ApiClientService $service, Paginator $paginator)
+    public function __construct(private ApiClientService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

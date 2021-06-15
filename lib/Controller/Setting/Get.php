@@ -22,11 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    private SettingService $service;
-
-    public function __construct(SettingService $service)
+    public function __construct(private SettingService $service)
     {
-        $this->service = $service;
     }
 
     /**

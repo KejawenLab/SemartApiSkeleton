@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use ReflectionClass;
+use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Entity\Permission as Entity;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
@@ -24,17 +26,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Permission extends AbstractController
 {
-    private PermissionService $service;
-
-    private GroupService $groupService;
-
-    private Paginator $paginator;
-
-    public function __construct(PermissionService $service, GroupService $groupService, Paginator $paginator)
+    public function __construct(private PermissionService $service, private GroupService $groupService, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->groupService = $groupService;
-        $this->paginator = $paginator;
     }
 
     /**
@@ -49,13 +42,13 @@ final class Permission extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(Entity::class);
+        $class = new ReflectionClass(Entity::class);
 
         return $this->render('group/permission.html.twig', [
             'page_title' => 'sas.page.permission.list',
             'group' => $group,
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Entity::class),
         ]);
     }

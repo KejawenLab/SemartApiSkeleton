@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron;
 
+use Redis;
 use Cron\Executor\Executor as Base;
 use Cron\Report\CronReport;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -17,24 +18,8 @@ use Symfony\Component\Lock\Store\RedisStore;
  */
 final class Executor extends Base
 {
-    private \Redis $redis;
-
-    private CronRepositoryInterface $repository;
-
-    private CronService $service;
-
-    private LoggerInterface $logger;
-
-    public function __construct(
-        \Redis $redis,
-        CronRepositoryInterface $repository,
-        CronService $service,
-        LoggerInterface $cronLogger
-    ) {
-        $this->redis = $redis;
-        $this->repository = $repository;
-        $this->service = $service;
-        $this->logger = $cronLogger;
+    public function __construct(private Redis $redis, private CronRepositoryInterface $repository, private CronService $service, private LoggerInterface $logger)
+    {
     }
 
     protected function startProcesses(CronReport $report): void

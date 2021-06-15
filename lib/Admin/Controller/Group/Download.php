@@ -19,14 +19,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    private GroupService $service;
-
-    private SerializerInterface $serializer;
-
-    public function __construct(GroupService $service, SerializerInterface $serializer)
+    public function __construct(private GroupService $service, private SerializerInterface $serializer)
     {
-        $this->service = $service;
-        $this->serializer = $serializer;
     }
 
     /**

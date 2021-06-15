@@ -19,11 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private CronService $service;
-
-    public function __construct(CronService $service)
+    public function __construct(private CronService $service)
     {
-        $this->service = $service;
     }
 
     /**

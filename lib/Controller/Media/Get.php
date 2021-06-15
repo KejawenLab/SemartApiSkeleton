@@ -22,14 +22,8 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
  */
 final class Get extends AbstractFOSRestController
 {
-    private MediaService $service;
-
-    private PropertyMappingFactory $mapping;
-
-    public function __construct(MediaService $service, PropertyMappingFactory $mapping)
+    public function __construct(private MediaService $service, private PropertyMappingFactory $mapping)
     {
-        $this->service = $service;
-        $this->mapping = $mapping;
     }
 
     /**

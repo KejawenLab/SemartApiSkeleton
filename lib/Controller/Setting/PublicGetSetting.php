@@ -19,14 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class PublicGetSetting extends AbstractFOSRestController
 {
-    private SettingService $service;
-
-    private Paginator $paginator;
-
-    public function __construct(SettingService $service, Paginator $paginator)
+    public function __construct(private SettingService $service, private Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use ReflectionClass;
+use ReflectionProperty;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
@@ -23,17 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    private ApiClientService $service;
-
-    private AuditService $audit;
-
-    private Reader $reader;
-
-    public function __construct(ApiClientService $service, AuditService $audit, Reader $reader)
+    public function __construct(private ApiClientService $service, private AuditService $audit, private Reader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**
@@ -53,13 +46,13 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
         }
 
-        $class = new \ReflectionClass(ApiClient::class);
+        $class = new ReflectionClass(ApiClient::class);
         $audit = $this->audit->getAudits($entity, $id)->toArray();
 
         return $this->render('api_client/view.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $audit['entity'],
             'audits' => $audit['items'],
         ]);

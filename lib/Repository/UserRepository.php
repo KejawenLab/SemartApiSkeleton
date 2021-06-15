@@ -22,19 +22,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    private string $superAdmin;
-
-    public function __construct(ManagerRegistry $registry, string $superAdmin)
+    public function __construct(ManagerRegistry $registry, private string $superAdmin)
     {
-        $this->superAdmin = $superAdmin;
-
         parent::__construct($registry, User::class);
     }
 
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
         $user->setPassword($newEncodedPassword);

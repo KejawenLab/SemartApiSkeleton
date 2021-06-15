@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use ReflectionClass;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,16 +19,12 @@ final class ApiControllerGenerator extends AbstractGenerator
 {
     private const CONTROLLER_PREFIX = 'KejawenLab\\ApiSkeleton\\Application\\Controller';
 
-    private Reader $reader;
-
-    public function __construct(Reader $reader, Environment $twig, Filesystem $fileSystem, KernelInterface $kernel, EntityManagerInterface $entityManager)
+    public function __construct(private Reader $reader, Environment $twig, Filesystem $fileSystem, KernelInterface $kernel, EntityManagerInterface $entityManager)
     {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
-
-        $this->reader = $reader;
     }
 
-    public function generate(\ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
+    public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
         $getAllFile = sprintf('%s/app/Controller/%s/GetAll.php', $this->kernel->getProjectDir(), $shortName);

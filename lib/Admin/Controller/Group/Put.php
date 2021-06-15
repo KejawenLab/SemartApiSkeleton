@@ -21,11 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    private GroupService $service;
-
-    public function __construct(GroupService $service)
+    public function __construct(private GroupService $service)
     {
-        $this->service = $service;
     }
 
     /**

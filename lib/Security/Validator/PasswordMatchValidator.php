@@ -17,14 +17,8 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class PasswordMatchValidator extends ConstraintValidator
 {
-    private UserPasswordHasherInterface $encoder;
-
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(UserPasswordHasherInterface $encoder, TokenStorageInterface $tokenStorage)
+    public function __construct(private UserPasswordHasherInterface $encoder, private TokenStorageInterface $tokenStorage)
     {
-        $this->encoder = $encoder;
-        $this->tokenStorage = $tokenStorage;
     }
 
     public function validate($value, Constraint $constraint): void

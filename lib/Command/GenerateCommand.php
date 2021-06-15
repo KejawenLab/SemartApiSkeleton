@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use ReflectionClass;
 use KejawenLab\ApiSkeleton\Generator\GeneratorFactory;
 use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
@@ -22,15 +23,8 @@ final class GenerateCommand extends Command
 {
     private const NAMESPACE = 'KejawenLab\\ApiSkeleton\\Application\\Entity';
 
-    private GeneratorFactory $generator;
-
-    private MenuService $menuService;
-
-    public function __construct(GeneratorFactory $generator, MenuService $menuService)
+    public function __construct(private GeneratorFactory $generator, private MenuService $menuService)
     {
-        $this->generator = $generator;
-        $this->menuService = $menuService;
-
         parent::__construct();
     }
 
@@ -79,7 +73,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
 
         /** @var string $entity */
         $entity = $input->getArgument('entity');
-        $reflection = new \ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
+        $reflection = new ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
         $application = $this->getApplication();
 
         $output->writeln('<info>Running Schema Updater</info>');

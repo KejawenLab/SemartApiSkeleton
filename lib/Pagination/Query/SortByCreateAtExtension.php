@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Pagination\Query;
 
+use ReflectionClass;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,6 @@ final class SortByCreateAtExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(TimestampableEntity::class, (new \ReflectionClass($class))->getTraitNames());
+        return in_array(TimestampableEntity::class, (new ReflectionClass($class))->getTraitNames());
     }
 }
