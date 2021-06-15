@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
-use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
@@ -22,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PermissionPut extends AbstractController
 {
-    public function __construct(private GroupService $groupService, private PermissionService $service, private Paginator $paginator)
+    public function __construct(private GroupService $groupService, private PermissionService $service)
     {
     }
 

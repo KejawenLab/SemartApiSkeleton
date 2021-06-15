@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use ReflectionObject;
 use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
 use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
-use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
+use ReflectionObject;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

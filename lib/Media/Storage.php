@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Media;
 
-use LogicException;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use LogicException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\PropertyMapping;

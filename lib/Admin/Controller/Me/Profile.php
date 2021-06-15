@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
-use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,7 +28,12 @@ final class Profile extends AbstractController
      */
     public function __invoke(UserProviderFactory $userProviderFactory): Response
     {
-        $user = $userProviderFactory->getRealUser($this->getUser());
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
+        }
+
+        $user = $userProviderFactory->getRealUser($user);
         $class = new ReflectionClass($user::class);
 
         return $this->render('profile/view.html.twig', [

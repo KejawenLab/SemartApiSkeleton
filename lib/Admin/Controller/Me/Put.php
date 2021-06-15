@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -30,7 +31,7 @@ final class Put extends AbstractController
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
-            return new RedirectResponse($this->generateUrl('admin_home'));
+            return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
 
         $user = $userProviderFactory->getRealUser($user);

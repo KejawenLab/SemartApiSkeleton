@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
-use ReflectionClass;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Doctrine\ORM\EntityManagerInterface;
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;

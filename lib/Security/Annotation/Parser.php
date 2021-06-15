@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Annotation;
 
-use ReflectionClass;
 use Doctrine\Common\Annotations\Reader;
+use ReflectionClass;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>

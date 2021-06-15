@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**

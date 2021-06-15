@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator;
 
-use ReflectionClass;
 use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**

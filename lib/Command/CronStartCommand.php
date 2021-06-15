@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Command;
 
 use Exception;
-use RuntimeException;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;

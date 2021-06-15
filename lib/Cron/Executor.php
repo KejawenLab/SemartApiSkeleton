@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron;
 
-use Redis;
 use Cron\Executor\Executor as Base;
 use Cron\Report\CronReport;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use Psr\Log\LoggerInterface;
+use Redis;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\RedisStore;
 
