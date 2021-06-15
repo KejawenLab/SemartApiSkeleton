@@ -21,10 +21,6 @@ final class LoginController extends AbstractController
      */
     public function __invoke(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute(AdminContext::ADMIN_ROUTE);
-        }
-
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

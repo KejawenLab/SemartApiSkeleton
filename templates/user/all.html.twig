@@ -23,9 +23,9 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {% if is_granted('add', menu) %}
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_user_post__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
                                 {% endif %}
-                                <a href="{{ path('kejawenlab_apiskeleton_admin_user_download__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
                             </div>
                         </div>
                     </div>
@@ -53,12 +53,12 @@
                                 <td>{{ user.fullName }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_user_get__invoke', {id: user.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: user.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_user_put__invoke', {id: user.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
+                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Put', {id: user.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_user_delete__invoke', {id: user.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': user.username}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Delete', {id: user.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': user.username}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans({}, 'tables') }}
                                         </button>
                                     {% endif %}
@@ -129,7 +129,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_user_getall__invoke') }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\GetAll') }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}

@@ -79,7 +79,7 @@ final class CronRunCommand extends Command
             $report = new $this->reportClass();
             $report->setCron($cron);
             $report->setOutput(implode("\n", (array) $value->getOutput()));
-            $report->setExitCode($value->getJob()->getProcess()->getExitCode());
+            $report->setExitCode((int) $value->getJob()->getProcess()->getExitCode());
             $report->setRunAt(
                 DateTime::createFromFormat(
                     'U.u', number_format($value->getStartTime(), 6, '.', '')

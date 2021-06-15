@@ -23,9 +23,9 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('add', menu) %}
-                                        <a href="{{ path('kejawenlab_apiskeleton_admin_media_post__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
+                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
                                     {% endif %}
-                                    <a href="{{ path('kejawenlab_apiskeleton_admin_media_download__invoke') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -49,14 +49,14 @@
                                     <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
                                     <td>{{ media.fileName }}</td>
                                     <td>{{ media.folder }}</td>
-                                    <td>{% if media.public %}<span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>{% endif %}</td>
+                                    <td>{% if media.public %}<span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>{% endif %}</td>
                                     <td><a href="{{ '/admin' ~ media.fileUrl }}" target="_blank"><img src="{{ '/admin' ~ media.fileUrl }}" width="150px" /></a></td>
                                     <td>
                                         {% if can_view_audit() %}
-                                            <a href="{{ path('kejawenlab_apiskeleton_admin_media_audit__invoke', {id: media.id}) }}" class="btn btn-sm btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Audit', {id: media.id}) }}" class="btn btn-sm btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                                         {% endif %}
                                         {% if is_granted('delete', menu) %}
-                                            <button type="button" data-path="{{ path('kejawenlab_apiskeleton_admin_media_delete__invoke', {id: media.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': media.fileName}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                            <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Delete', {id: media.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': media.fileName}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                                 {{ 'sas.table.action.delete' | trans({}, 'tables') }}
                                             </button>
                                         {% endif %}
@@ -127,7 +127,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('kejawenlab_apiskeleton_admin_media_getall__invoke') }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\GetAll') }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}
