@@ -27,6 +27,9 @@ final class CronStartCommand extends Command
         ;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('blocking')) {
