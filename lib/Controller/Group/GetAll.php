@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups")
+     * @Rest\Get("/groups", name=GetAll::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Parameter(

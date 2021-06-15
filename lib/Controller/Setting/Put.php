@@ -32,7 +32,7 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/settings/{id}")
+     * @Rest\Put("/settings/{id}", name=Put::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\RequestBody(

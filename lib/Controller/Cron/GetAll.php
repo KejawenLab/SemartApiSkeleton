@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/cronjobs", priority=-7)
+     * @Rest\Get("/cronjobs", name=GetAll::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\Parameter(

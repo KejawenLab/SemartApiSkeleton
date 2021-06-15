@@ -28,7 +28,7 @@ final class Permission extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups/{id}/permissions")
+     * @Rest\Get("/groups/{id}/permissions", name=Permission::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Parameter(

@@ -32,7 +32,7 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/api-clients")
+     * @Rest\Post("/api-clients", name=Post::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\RequestBody(

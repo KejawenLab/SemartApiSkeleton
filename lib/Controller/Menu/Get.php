@@ -27,7 +27,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/menus/{id}")
+     * @Rest\Get("/menus/{id}", name=Get::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Response(

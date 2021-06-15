@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings")
+     * @Rest\Get("/settings", name=GetAll::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(

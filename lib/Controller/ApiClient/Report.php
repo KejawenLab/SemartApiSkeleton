@@ -29,7 +29,7 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/api-clients/{id}/logs", priority=-27)
+     * @Rest\Get("/api-clients/{id}/logs", name=Report::class, priority=-27)
      *
      * @Cache(expires="+1 minute", public=false)
      *

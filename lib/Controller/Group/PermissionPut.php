@@ -34,7 +34,7 @@ final class PermissionPut extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/groups/{id}/permissions")
+     * @Rest\Put("/groups/{id}/permissions", name=PermissionPut::class)
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(

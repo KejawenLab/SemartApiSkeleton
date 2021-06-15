@@ -27,7 +27,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/medias/{path}", requirements={"path"=".+"})
+     * @Rest\Get("/medias/{path}", name=Get::class, requirements={"path"=".+"})
      *
      * @Cache(expires="+2 week", public=true)
      *

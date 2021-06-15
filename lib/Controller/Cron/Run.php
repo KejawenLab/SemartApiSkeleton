@@ -32,7 +32,7 @@ final class Run extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/cronjobs/{id}/run", priority=-17)
+     * @Rest\Post("/cronjobs/{id}/run", name=Run::class, priority=-17)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(

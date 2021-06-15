@@ -27,7 +27,7 @@ final class Get extends AbstractController
     }
 
     /**
-     * @Route("/medias/{path}", methods={"GET"}, requirements={"path"=".+"})
+     * @Route("/medias/{path}", name=Get::class, methods={"GET"}, requirements={"path"=".+"})
      */
     public function __invoke(Request $request, string $path): Response
     {

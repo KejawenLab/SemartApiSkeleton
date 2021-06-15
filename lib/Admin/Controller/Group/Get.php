@@ -28,7 +28,7 @@ final class Get extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}", methods={"GET"})
+     * @Route("/groups/{id}", name=Get::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

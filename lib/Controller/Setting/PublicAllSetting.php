@@ -24,7 +24,7 @@ final class PublicAllSetting extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings/public", priority=1)
+     * @Rest\Get("/settings/public", name=PublicAllSetting::class, priority=1)
      *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(

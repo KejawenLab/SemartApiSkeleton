@@ -28,7 +28,7 @@ final class GetAll extends AbstractController
     }
 
     /**
-     * @Route("/crons", methods={"GET"})
+     * @Route("/crons", name=GetAll::class, methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {

@@ -27,7 +27,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/api-clients/{id}")
+     * @Rest\Get("/api-clients/{id}", name=Get::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\Response(

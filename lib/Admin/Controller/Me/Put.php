@@ -25,7 +25,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/me/edit", methods={"GET", "POST"}, priority=-1)
+     * @Route("/me/edit", name=Put::class, methods={"GET", "POST"}, priority=-1)
      */
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): Response
     {
@@ -47,7 +47,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.profile.updated');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_me_profile__invoke'));
+                return new RedirectResponse($this->generateUrl(Profile::class));
             }
         }
 

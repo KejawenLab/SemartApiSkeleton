@@ -31,7 +31,7 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/cronjobs", priority=-7)
+     * @Rest\Post("/cronjobs", name=Post::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(

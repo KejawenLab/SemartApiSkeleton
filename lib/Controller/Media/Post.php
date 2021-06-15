@@ -8,7 +8,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Media;
-use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -25,12 +24,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private MediaService $service)
+    public function __construct(private MediaService $service)
     {
     }
 
     /**
-     * @Rest\Post("/medias")
+     * @Rest\Post("/medias", name=Post::class)
      *
      * @OA\Tag(name="Media")
      * @OA\RequestBody(

@@ -28,7 +28,7 @@ final class Get extends AbstractController
     }
 
     /**
-     * @Route("/crons/{id}", methods={"GET"})
+     * @Route("/crons/{id}", name=Get::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

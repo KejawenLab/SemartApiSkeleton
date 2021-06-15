@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/menus")
+     * @Rest\Get("/menus", name=GetAll::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Parameter(

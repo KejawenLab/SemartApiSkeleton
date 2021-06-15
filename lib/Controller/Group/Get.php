@@ -27,7 +27,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups/{id}")
+     * @Rest\Get("/groups/{id}", name=Get::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Response(

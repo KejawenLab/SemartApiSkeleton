@@ -31,7 +31,7 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/groups")
+     * @Rest\Post("/groups", name=Post::class)
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(

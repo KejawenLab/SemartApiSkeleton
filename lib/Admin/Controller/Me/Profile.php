@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class Profile extends AbstractController
 {
     /**
-     * @Route("/me", methods={"GET"}, priority=-1)
+     * @Route("/me", name=Profile::class, methods={"GET"}, priority=-1)
      *
      * @throws ReflectionException
      */

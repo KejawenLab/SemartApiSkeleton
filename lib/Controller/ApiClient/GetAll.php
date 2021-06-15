@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/api-clients")
+     * @Rest\Get("/api-clients", name=GetAll::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\Parameter(

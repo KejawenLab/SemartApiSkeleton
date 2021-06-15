@@ -27,7 +27,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings/{id}")
+     * @Rest\Get("/settings/{id}", name=Get::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Response(

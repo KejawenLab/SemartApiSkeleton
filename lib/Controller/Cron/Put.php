@@ -32,7 +32,7 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/cronjobs/{id}", priority=-7)
+     * @Rest\Put("/cronjobs/{id}", name=Put::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(

@@ -28,7 +28,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/medias")
+     * @Rest\Get("/medias", name=GetAll::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Parameter(

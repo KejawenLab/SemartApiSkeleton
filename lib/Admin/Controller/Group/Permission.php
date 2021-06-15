@@ -31,7 +31,7 @@ final class Permission extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}/permissions", methods={"GET"})
+     * @Route("/groups/{id}/permissions", name=Permission::class, methods={"GET"})
      */
     public function __invoke(Request $request, string $id): Response
     {

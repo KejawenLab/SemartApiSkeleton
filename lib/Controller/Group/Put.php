@@ -32,7 +32,7 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/groups/{id}")
+     * @Rest\Put("/groups/{id}", name=Put::class)
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(

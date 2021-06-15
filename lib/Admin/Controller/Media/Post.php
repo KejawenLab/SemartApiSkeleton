@@ -26,7 +26,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/medias/add", methods={"GET", "POST"}, priority=1)
+     * @Route("/medias/add", name=Post::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
