@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/api-clients/{id}")
+     * @Rest\Delete("/api-clients/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\Response(

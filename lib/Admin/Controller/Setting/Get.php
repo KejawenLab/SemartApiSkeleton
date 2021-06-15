@@ -36,7 +36,7 @@ final class Get extends AbstractController
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(Setting::class);

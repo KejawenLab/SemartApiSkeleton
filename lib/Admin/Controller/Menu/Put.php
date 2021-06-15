@@ -34,7 +34,7 @@ final class Put extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm(MenuType::class, $menu);
@@ -45,7 +45,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.menu.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

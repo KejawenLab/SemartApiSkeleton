@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/groups/{id}")
+     * @Rest\Delete("/groups/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Response(

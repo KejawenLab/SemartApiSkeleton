@@ -36,7 +36,7 @@ final class Get extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(User::class);

@@ -36,7 +36,7 @@ final class Get extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(Group::class);

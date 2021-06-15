@@ -31,7 +31,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/{id}/delete", methods={"GET"})
+     * @Route("/{{ entityPluralDash }}/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -39,13 +39,13 @@ final class Delete extends AbstractController
         if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove(${{ entityLowerize }});
 
         $this->addFlash('info', 'sas.page.{{ entityLowerize }}.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

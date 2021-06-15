@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/menus/{id}/delete", methods={"GET"})
+     * @Route("/menus/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($menu);
 
         $this->addFlash('info', 'sas.page.menu.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

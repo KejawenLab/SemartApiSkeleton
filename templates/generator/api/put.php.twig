@@ -42,7 +42,7 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/{{ entityPluralDash }}/{id}")
+     * @Rest\Put("/{{ entityPluralDash }}/{id}", name=Put::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\RequestBody(

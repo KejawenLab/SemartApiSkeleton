@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/menus/{id}")
+     * @Rest\Delete("/menus/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Menu")
      * @OA\Response(

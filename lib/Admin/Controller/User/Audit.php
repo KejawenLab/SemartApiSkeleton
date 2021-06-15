@@ -30,7 +30,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/users/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
      *
      * @throws InvalidArgumentException
      */
@@ -39,13 +39,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(User::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_user_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(User::class);

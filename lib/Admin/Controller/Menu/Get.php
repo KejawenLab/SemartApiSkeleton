@@ -36,7 +36,7 @@ final class Get extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_menu_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(Menu::class);

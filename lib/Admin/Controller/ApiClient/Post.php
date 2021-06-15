@@ -57,7 +57,7 @@ final class Post extends AbstractController
 
                 $this->addFlash('info', 'sas.page.api_client.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

@@ -38,7 +38,7 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/{{ entityPluralDash }}")
+     * @Rest\Get("/{{ entityPluralDash }}", name=GetAll::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Parameter(

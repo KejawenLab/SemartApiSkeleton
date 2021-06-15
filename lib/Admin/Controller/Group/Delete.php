@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}/delete", methods={"GET"})
+     * @Route("/groups/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($group);
 
         $this->addFlash('info', 'sas.page.group.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_group_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

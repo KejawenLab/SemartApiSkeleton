@@ -35,7 +35,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/{{ entityPluralDash }}/{id}")
+     * @Rest\Delete("/{{ entityPluralDash }}/{id}", name=Delete::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Response(

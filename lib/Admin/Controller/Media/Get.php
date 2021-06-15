@@ -41,7 +41,7 @@ final class Get extends AbstractController
         if (!$media) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $response = new Response();

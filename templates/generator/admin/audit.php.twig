@@ -40,20 +40,20 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/{{ entityPluralDash }}/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
      */
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         if (!$this->reader->getConfiguration()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new \ReflectionClass({{ entityHumanize }}::class);

@@ -41,7 +41,7 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/{{ entityPluralDash }}")
+     * @Rest\Post("/{{ entityPluralDash }}", name=Post::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\RequestBody(

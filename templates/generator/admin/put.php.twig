@@ -33,7 +33,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/{id}/edit", methods={"GET", "POST"}, priority=1)
+     * @Route("/{{ entityPluralDash }}/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -41,7 +41,7 @@ final class Put extends AbstractController
         if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
@@ -52,7 +52,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_application_admin_{{ entityLowerize }}_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

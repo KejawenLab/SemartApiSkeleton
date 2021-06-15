@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/cronjobs/{id}", priority=-7)
+     * @Rest\Delete("/cronjobs/{id}", name=Delete::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(

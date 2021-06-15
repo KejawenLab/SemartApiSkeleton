@@ -36,7 +36,7 @@ final class Get extends AbstractController
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_cron_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(Cron::class);

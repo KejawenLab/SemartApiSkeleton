@@ -34,7 +34,7 @@ final class Put extends AbstractController
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $form = $this->createForm(SettingType::class, $setting);
@@ -45,7 +45,7 @@ final class Put extends AbstractController
 
                 $this->addFlash('info', 'sas.page.setting.saved');
 
-                return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_setting_getall__invoke'));
+                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 

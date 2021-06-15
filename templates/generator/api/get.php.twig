@@ -34,7 +34,7 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/{{ entityPluralDash }}/{id}")
+     * @Rest\Get("/{{ entityPluralDash }}/{id}", name=Get::class)
      *
      * @OA\Tag(name="{{ entityHumanize }}")
      * @OA\Response(

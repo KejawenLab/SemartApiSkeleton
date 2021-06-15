@@ -31,7 +31,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/api-clients/{id}/audit", methods={"GET"}, priority=-255)
+     * @Route("/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
      *
      * @throws InvalidArgumentException
      */
@@ -40,13 +40,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(Group::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_apiclient_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(ApiClient::class);

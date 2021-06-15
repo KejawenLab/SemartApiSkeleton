@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/settings/{id}")
+     * @Rest\Delete("/settings/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Response(

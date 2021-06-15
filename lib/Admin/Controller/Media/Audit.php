@@ -31,7 +31,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/audit", methods={"GET"}, priority=1)
+     * @Route("/medias/{id}/audit", name=Audit::class, methods={"GET"}, priority=1)
      *
      * @throws InvalidArgumentException
      */
@@ -40,13 +40,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(Group::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $class = new ReflectionClass(Media::class);

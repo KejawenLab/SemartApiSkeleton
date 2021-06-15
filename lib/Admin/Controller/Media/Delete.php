@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/delete", methods={"GET"})
+     * @Route("/medias/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {
@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$media instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
         $this->service->remove($media);
 
         $this->addFlash('info', 'sas.page.media.deleted');
 
-        return new RedirectResponse($this->generateUrl('kejawenlab_apiskeleton_admin_media_getall__invoke'));
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

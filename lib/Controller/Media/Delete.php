@@ -28,7 +28,7 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/medias/{id}")
+     * @Rest\Delete("/medias/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Response(
