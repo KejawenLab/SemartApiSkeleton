@@ -8,6 +8,7 @@ use ReflectionClass;
 use KejawenLab\ApiSkeleton\Generator\GeneratorFactory;
 use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
+use ReflectionException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -28,7 +29,7 @@ final class GenerateCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('semart:generate')
@@ -42,6 +43,9 @@ final class GenerateCommand extends Command
         ;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->write('<fg=green;options=bold>
@@ -73,7 +77,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
 
         /** @var string $entity */
         $entity = $input->getArgument('entity');
-        $reflection = new ReflectionClass(sprintf('%s\%s', static::NAMESPACE, $entity));
+        $reflection = new ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $entity));
         $application = $this->getApplication();
 
         $output->writeln('<info>Running Schema Updater</info>');
@@ -87,7 +91,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.kejawen@gmail.com</comme
         $this->generator->generate($reflection, $scope, $output, $input->getOption('folder')?: '');
 
         if ($parentCode = $input->getOption('parent')) {
-            $output->writeln(sprintf('<comment>Applying parent to menu</comment>'));
+            $output->writeln('<comment>Applying parent to menu</comment>');
             $menu = $this->menuService->getMenuByCode($reflection->getShortName());
             $parent = $this->menuService->getMenuByCode($parentCode);
             if ($menu && $parent) {

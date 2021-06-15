@@ -51,14 +51,14 @@ final class LoadUrlPathSubscriber implements EventSubscriber
                 if ('#' !== $adminRoute) {
                     $adminPath = $this->urlGenerator->generate($adminRoute);
                 }
-            } catch (RouteNotFoundException $exception) {
+            } catch (RouteNotFoundException) {
             }
         } else {
             try {
                 if ('#' !== $path) {
                     $apiPath = $this->urlGenerator->generate($object->getRouteName());
                 }
-            } catch (RouteNotFoundException $exception) {
+            } catch (RouteNotFoundException) {
                 $apiPath = $this->urlGenerator->generate(sprintf('%s__invoke', $object->getRouteName()));
             }
 

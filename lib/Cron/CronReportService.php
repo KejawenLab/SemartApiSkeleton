@@ -6,6 +6,8 @@ namespace KejawenLab\ApiSkeleton\Cron;
 
 use DateTime;
 use DateInterval;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
@@ -21,6 +23,10 @@ final class CronReportService extends AbstractService
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function countStale(): int
     {
         $stale = (new DateTime())->sub(new DateInterval('P3M'));

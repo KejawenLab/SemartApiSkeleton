@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
+use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
@@ -31,6 +32,8 @@ final class Audit extends AbstractController
 
     /**
      * @Route("/medias/{id}/audit", methods={"GET"}, priority=1)
+     *
+     * @throws InvalidArgumentException
      */
     public function __invoke(string $id): Response
     {

@@ -20,7 +20,7 @@ final class CronStopCommand extends Command
         $this->setName('semart:cron:stop')->setDescription('Stops cron scheduler');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $pidFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.CronInterface::PID_FILE;
         if (!file_exists($pidFile)) {

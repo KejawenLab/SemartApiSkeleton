@@ -19,7 +19,7 @@ final class LogoutSubscriber implements EventSubscriberInterface
     {
     }
 
-    public function redirect(LogoutEvent $event)
+    public function redirect(LogoutEvent $event): void
     {
         if (!AdminContext::isAdminContext($event->getRequest())) {
             return;

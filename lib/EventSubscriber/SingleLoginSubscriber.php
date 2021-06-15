@@ -8,6 +8,7 @@ use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
@@ -24,7 +25,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 {
     private const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator, private UserService $service, private UserProviderFactory $userProviderFactory)
+    public function __construct(
+        private UrlGeneratorInterface $urlGenerator,
+        private UserService $service,
+        private UserProviderFactory $userProviderFactory
+    )
     {
     }
 
@@ -77,7 +82,12 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
     public function create(JWTCreatedEvent $event): void
     {
-        $user = $this->userProviderFactory->getRealUser($event->getUser());
+        $user = $event->getUser();
+        if (!$user instanceof User) {
+            return;
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         $payload = $event->getData();
 
         $deviceId = Encryptor::hash(date('YmdHis'));

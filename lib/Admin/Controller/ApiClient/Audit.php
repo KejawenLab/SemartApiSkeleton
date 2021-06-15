@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
@@ -31,6 +32,8 @@ final class Audit extends AbstractController
 
     /**
      * @Route("/api-clients/{id}/audit", methods={"GET"}, priority=-255)
+     *
+     * @throws InvalidArgumentException
      */
     public function __invoke(string $id): Response
     {

@@ -9,6 +9,7 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
@@ -22,12 +23,20 @@ final class AuditService
         $this->cacheLifetime = $setting->getCacheLifetime();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getAudits(object $entity, string $id): Audit
     {
         $key = sha1(sprintf('%s_%s', $entity::class, $id));
         $cache = $this->cache->getItem($key);
         if (!$cache->isHit()) {
-            $audits = serialize($this->auditReader->createQuery($entity::class, ['page' => 1, 'page_size' => 9])->addFilter(Query::OBJECT_ID, $id)->execute());
+            $audits = serialize($this->auditReader->createQuery(
+                    $entity::class,
+                    ['page' => 1, 'page_size' => 9]
+                )
+                ->addFilter(Query::OBJECT_ID, $id)->execute()
+            );
             $cache->set($audits);
             $cache->expiresAfter($this->cacheLifetime);
             $this->cache->save($cache);

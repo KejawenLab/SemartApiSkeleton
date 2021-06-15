@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
-use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    public function __construct(private FormFactory $formFactory, private UserService $service)
+    public function __construct(private UserService $service)
     {
     }
 
@@ -28,7 +28,12 @@ final class Put extends AbstractController
      */
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): Response
     {
-        $user = $userProviderFactory->getRealUser($this->getUser());
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            return new RedirectResponse($this->generateUrl('admin_home'));
+        }
+
+        $user = $userProviderFactory->getRealUser($user);
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);

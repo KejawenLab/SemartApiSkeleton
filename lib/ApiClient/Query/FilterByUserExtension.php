@@ -32,7 +32,12 @@ final class FilterByUserExtension extends AbstractQueryExtension
             return;
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.user', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal($user->getId())));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('%s.user', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal($user->getId())
+            )
+        );
     }
 
     public function support(string $class, Request $request): bool

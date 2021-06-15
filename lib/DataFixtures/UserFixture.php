@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Entity\User;
  */
 final class UserFixture extends AbstractFixture implements DependentFixtureInterface
 {
-    protected function createNew()
+    protected function createNew(): User
     {
         return new User();
     }
@@ -22,7 +22,7 @@ final class UserFixture extends AbstractFixture implements DependentFixtureInter
         return 'user';
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GroupFixture::class,

@@ -18,7 +18,12 @@ use Symfony\Component\Lock\Store\RedisStore;
  */
 final class Executor extends Base
 {
-    public function __construct(private Redis $redis, private CronRepositoryInterface $repository, private CronService $service, private LoggerInterface $logger)
+    public function __construct(
+        private Redis $redis,
+        private CronRepositoryInterface $repository,
+        private CronService $service,
+        private LoggerInterface $logger
+    )
     {
     }
 

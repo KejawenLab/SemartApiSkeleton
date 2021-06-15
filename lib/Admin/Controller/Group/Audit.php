@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
@@ -30,6 +31,8 @@ final class Audit extends AbstractController
 
     /**
      * @Route("/groups/{id}/audit", methods={"GET"}, priority=-255)
+     *
+     * @throws InvalidArgumentException
      */
     public function __invoke(string $id): Response
     {

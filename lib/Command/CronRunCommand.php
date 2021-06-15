@@ -38,7 +38,7 @@ final class CronRunCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('semart:cron:run')
             ->setDescription('Runs any currently schedule cron jobs')
@@ -48,12 +48,16 @@ final class CronRunCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $cron = new Cron();
         $cron->setExecutor($this->executor);
         if ($input->getArgument('job')) {
-            $resolver = $this->getResolver($input->getArgument('job'), false !== $input->getParameterOption('--force'), false !== $input->getParameterOption('--schedule_now'));
+            $resolver = $this->getResolver(
+                $input->getArgument('job'),
+                false !== $input->getParameterOption('--force'),
+                false !== $input->getParameterOption('--schedule_now')
+            );
         } else {
             $resolver = $this->cronService;
         }
@@ -76,7 +80,11 @@ final class CronRunCommand extends Command
             $report->setCron($cron);
             $report->setOutput(implode("\n", (array) $value->getOutput()));
             $report->setExitCode($value->getJob()->getProcess()->getExitCode());
-            $report->setRunAt(DateTime::createFromFormat('U.u', number_format($value->getStartTime(), 6, '.', '')));
+            $report->setRunAt(
+                DateTime::createFromFormat(
+                    'U.u', number_format($value->getStartTime(), 6, '.', '')
+                )
+            );
             $report->setRunTime($value->getEndTime() - $value->getStartTime());
 
             $this->reportService->save($report);
@@ -85,7 +93,7 @@ final class CronRunCommand extends Command
         return 0;
     }
 
-    private function getResolver(string $id, $force = false, $schedule_now = false)
+    private function getResolver(string $id, $force = false, $schedule_now = false): ArrayResolver
     {
         $cron = $this->cronService->get($id);
         if (!$cron) {

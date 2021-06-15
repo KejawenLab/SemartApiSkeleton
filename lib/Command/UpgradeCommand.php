@@ -17,7 +17,8 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 final class UpgradeCommand extends Command
 {
-    public function __construct(/**
+    public function __construct(
+    /**
      * @var UpgradeInterface[]
      */
     private iterable $upgraders)
@@ -25,7 +26,7 @@ final class UpgradeCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('semart:upgrade')

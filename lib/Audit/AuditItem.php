@@ -9,7 +9,14 @@ namespace KejawenLab\ApiSkeleton\Audit;
  */
 final class AuditItem
 {
-    public function __construct(private string $type, private array $data, private ?string $logTime, private ?string $userId, private ?string $username, private ?string $ip)
+    public function __construct(
+        private string $type,
+        private array $data,
+        private ?string $logTime,
+        private ?string $userId,
+        private ?string $username,
+        private ?string $ip
+    )
     {
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use Exception;
 use RuntimeException;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronStartCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('semart:cron:start')
             ->setDescription('Starts cron scheduler')
@@ -26,7 +27,7 @@ final class CronStartCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('blocking')) {
             $output->writeln('<info>Starting cron scheduler in blocking mode</info>');
@@ -57,7 +58,10 @@ final class CronStartCommand extends Command
         return 0;
     }
 
-    private function scheduler(OutputInterface $output, $pidFile)
+    /**
+     * @throws Exception
+     */
+    private function scheduler(OutputInterface $output, $pidFile): void
     {
         $input = new ArrayInput([]);
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
 use ReflectionClass;
+use ReflectionException;
 use ReflectionProperty;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -19,6 +20,8 @@ final class Profile extends AbstractController
 {
     /**
      * @Route("/me", methods={"GET"}, priority=-1)
+     *
+     * @throws ReflectionException
      */
     public function __invoke(UserProviderFactory $userProviderFactory): Response
     {
