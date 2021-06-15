@@ -21,7 +21,7 @@ use Twig\Environment;
  */
 final class PermissionGenerator extends AbstractGenerator
 {
-    private const ROUTE_PLACEHOLDER = 'kejawenlab_apiskeleton_application_%s_getall';
+    private const ROUTE_PLACEHOLDER = 'KejawenLab\\ApiSkeleton\\Application\\Controller\\%s\\GetAll';
 
     public function __construct(
         private PermissionService $permissionService,
@@ -50,7 +50,7 @@ final class PermissionGenerator extends AbstractGenerator
         $menu = new $this->class();
         $menu->setCode($shortNameUpper);
         $menu->setName($shortNameUpper);
-        $menu->setRouteName(sprintf(self::ROUTE_PLACEHOLDER, StringUtil::lowercase($shortName)));
+        $menu->setRouteName(sprintf(self::ROUTE_PLACEHOLDER, $shortName));
 
         $this->menuService->save($menu);
 
