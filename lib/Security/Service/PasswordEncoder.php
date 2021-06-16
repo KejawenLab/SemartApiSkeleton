@@ -19,8 +19,7 @@ final class PasswordEncoder implements MessageSubscriberInterface
     public function __construct(
         private UserPasswordEncoderInterface $service,
         private PasswordHistoryService $history
-    )
-    {
+    ) {
     }
 
     public function __invoke(EntityPersisted $message): void

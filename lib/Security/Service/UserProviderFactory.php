@@ -23,8 +23,7 @@ final class UserProviderFactory implements UserProviderInterface
          */
         private iterable $providers,
         private UserPasswordHasherInterface $passwordHasher
-    )
-    {
+    ) {
     }
 
     public function loadUserByUsername(string $username): User

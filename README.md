@@ -49,7 +49,7 @@
 #### Abaikan Requirement jika Kamu menggunakan Docker
 
 > 
-> * PHP >= 7.4.0
+> * PHP >= 8.0
 >
 > * Extension Ctype 
 >
@@ -66,6 +66,8 @@
 > * Extension Posix
 >
 > * Extension Redis
+> 
+> * Extension Swoole
 >
 > * RDBMS (MySQL/MariaDB/PostgreSQL/OracleDB/SQLServer)
 >
@@ -241,7 +243,7 @@ php bin/console cron:stop
 >
 > * JWT Authentication
 >
-> * Login Failure Limiter
+> * Rate Limiter
 >
 > * Single Sign In
 >
@@ -275,7 +277,7 @@ php bin/console cron:stop
 >
 > * Upgrade Management
 >
-> * House Keeping
+> * Housekeeping
 > 
 > * Password History
 >
@@ -468,9 +470,11 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Roadmap
 
-- [ ] Dokumentasi
-
 - [ ] Unit Testing
+
+- [ ] Backup Manager
+
+- [ ] Query Runner
 
 ## Copyright
 

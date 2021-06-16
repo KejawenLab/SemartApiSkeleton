@@ -21,8 +21,7 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
         private TokenStorageInterface $tokenStorage,
         private ApiClientRequestService $apiClientRequestService,
         private UserProviderFactory $userProvider
-    )
-    {
+    ) {
     }
 
     public function log(ControllerEvent $event): void

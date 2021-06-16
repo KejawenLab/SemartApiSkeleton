@@ -22,8 +22,7 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         ApiClientRequestRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private string $class
-    )
-    {
+    ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 

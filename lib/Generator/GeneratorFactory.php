@@ -18,8 +18,7 @@ final class GeneratorFactory
          * @var GeneratorInterface[]
          */
         private iterable $generators
-    )
-    {
+    ) {
     }
 
     public function generate(ReflectionClass $class, string $scope, OutputInterface $output, ?string $folder = null): void

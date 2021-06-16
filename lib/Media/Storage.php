@@ -78,7 +78,8 @@ final class Storage extends FileSystemStorage
             $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
         }
 
-        return sprintf('%s/%s%s%s',
+        return sprintf(
+            '%s/%s%s%s',
             $mapping->getUriPrefix(),
             $uploadDir,
             $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '',

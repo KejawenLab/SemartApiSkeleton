@@ -27,8 +27,7 @@ final class Ownership
         private UserProviderFactory $userProviderFactory,
         private string $superAdmin,
         private string $ownershipProperty
-    )
-    {
+    ) {
     }
 
     public function isOwner(string $id, string $entity): bool

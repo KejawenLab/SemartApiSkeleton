@@ -31,7 +31,8 @@ final class AuditService
         $key = sha1(sprintf('%s_%s', $entity::class, $id));
         $cache = $this->cache->getItem($key);
         if (!$cache->isHit()) {
-            $audits = serialize($this->auditReader->createQuery(
+            $audits = serialize(
+                $this->auditReader->createQuery(
                     $entity::class,
                     ['page' => 1, 'page_size' => 9]
                 )
@@ -47,7 +48,14 @@ final class AuditService
         $record = new Audit($entity);
         /** @var Entry[] $audits */
         foreach ($audits as $audit) {
-            $record->addItem(new AuditItem($audit->getType(), $audit->getDiffs(), $audit->getCreatedAt(), $audit->getUserId(), $audit->getUsername(), $audit->getIp()));
+            $record->addItem(new AuditItem(
+                $audit->getType(),
+                $audit->getDiffs(),
+                $audit->getCreatedAt(),
+                $audit->getUserId(),
+                $audit->getUsername(),
+                $audit->getIp()
+            ));
         }
 
         return $record;

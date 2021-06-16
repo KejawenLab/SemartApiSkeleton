@@ -21,7 +21,8 @@ final class UpgradeCommand extends Command
     /**
      * @var UpgradeInterface[]
      */
-    private iterable $upgraders)
+    private iterable $upgraders
+    )
     {
         parent::__construct();
     }
