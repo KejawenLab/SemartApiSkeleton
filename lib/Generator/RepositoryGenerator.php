@@ -33,7 +33,8 @@ final class RepositoryGenerator extends AbstractGenerator
         }
 
         $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder ?: $shortName), $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
+        $output->writeln(sprintf(
+            '<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
             ($folder ?: $shortName),
             $shortName
         ));

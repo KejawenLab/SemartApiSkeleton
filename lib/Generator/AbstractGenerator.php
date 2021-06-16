@@ -22,8 +22,7 @@ abstract class AbstractGenerator implements GeneratorInterface
         protected Filesystem $fileSystem,
         protected KernelInterface $kernel,
         protected EntityManagerInterface $entityManager
-    )
-    {
+    ) {
     }
 
     public function hasAssociation(ReflectionClass $class): bool

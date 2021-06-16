@@ -21,8 +21,7 @@ abstract class AbstractService implements ServiceInterface
         private MessageBusInterface $messageBus,
         protected ServiceableRepositoryInterface $repository,
         protected AliasHelper $aliasHelper
-    )
-    {
+    ) {
     }
 
     public function all(): array

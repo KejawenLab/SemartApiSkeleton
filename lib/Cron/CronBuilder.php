@@ -23,7 +23,8 @@ final class CronBuilder
             $docRoot = explode('/', $_SERVER['NGINX_WEBROOT']);
             array_pop($docRoot);
 
-            return sprintf('%s %s/bin/console %s --env=%s',
+            return sprintf(
+                '%s %s/bin/console %s --env=%s',
                 (new PhpExecutableFinder())->find(),
                 implode('/', $docRoot),
                 $cron->getCommand(),

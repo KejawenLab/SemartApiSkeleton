@@ -21,8 +21,7 @@ final class Executor extends Base
         private Redis $redis,
         private CronService $service,
         private LoggerInterface $logger
-    )
-    {
+    ) {
     }
 
     protected function startProcesses(CronReport $report): void

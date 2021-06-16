@@ -16,8 +16,7 @@ final class AuditItem
         private ?string $userId,
         private ?string $username,
         private ?string $ip
-    )
-    {
+    ) {
     }
 
     public function toArray(): array

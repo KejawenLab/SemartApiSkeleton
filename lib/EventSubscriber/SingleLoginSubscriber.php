@@ -29,8 +29,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         private UrlGeneratorInterface $urlGenerator,
         private UserService $service,
         private UserProviderFactory $userProviderFactory
-    )
-    {
+    ) {
     }
 
     public function validate(RequestEvent $event): void

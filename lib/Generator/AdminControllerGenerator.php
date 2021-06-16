@@ -28,8 +28,7 @@ final class AdminControllerGenerator extends AbstractGenerator
         Filesystem $fileSystem,
         KernelInterface $kernel,
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 

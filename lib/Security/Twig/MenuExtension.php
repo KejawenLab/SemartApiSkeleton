@@ -20,8 +20,7 @@ final class MenuExtension extends AbstractExtension
         private Environment $twig,
         private RequestStack $requestStack,
         private MenuService $menuService
-    )
-    {
+    ) {
     }
 
     public function getFunctions(): iterable
