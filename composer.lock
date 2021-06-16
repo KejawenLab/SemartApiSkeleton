@@ -2948,12 +2948,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "187f55941c5fdf8a5fd206b6813aa032e532c888"
+                "reference": "2df454c0c31b0baaef05ebbd12722ba4281227bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/187f55941c5fdf8a5fd206b6813aa032e532c888",
-                "reference": "187f55941c5fdf8a5fd206b6813aa032e532c888",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/2df454c0c31b0baaef05ebbd12722ba4281227bb",
+                "reference": "2df454c0c31b0baaef05ebbd12722ba4281227bb",
                 "shasum": ""
             },
             "require": {
@@ -2979,6 +2979,7 @@
             },
             "require-dev": {
                 "api-platform/core": "^2.4",
+                "composer/package-versions-deprecated": "1.11.99.1",
                 "friendsofsymfony/rest-bundle": "^2.8|^3.0",
                 "jms/serializer": "^1.14|^3.0",
                 "jms/serializer-bundle": "^2.3|^3.0",
@@ -3052,7 +3053,7 @@
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
                 "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/master"
             },
-            "time": "2021-06-14T11:28:23+00:00"
+            "time": "2021-06-16T07:59:06+00:00"
         },
         {
             "name": "nelmio/cors-bundle",

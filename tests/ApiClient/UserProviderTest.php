@@ -37,7 +37,7 @@ class UserProviderTest extends TestCase
         $client = new ApiClient();
         $client->setApiKey($secret);
 
-        $this->repository->method('findByApiKey')->with($secret)->willReturn($client);
+        $this->repository->expects($this->once())->method('findByApiKey')->with($secret)->willReturn($client);
 
         $provider = new UserProvider($this->class, $this->repository);
 

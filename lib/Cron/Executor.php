@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Cron;
 use Cron\Executor\Executor as Base;
 use Cron\Report\CronReport;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
-use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Redis;
 use Symfony\Component\Lock\LockFactory;
@@ -20,7 +19,6 @@ final class Executor extends Base
 {
     public function __construct(
         private Redis $redis,
-        private CronRepositoryInterface $repository,
         private CronService $service,
         private LoggerInterface $logger
     )
@@ -41,7 +39,7 @@ final class Executor extends Base
             }
 
             $this->logger->info(sprintf('Locking "%s" schedule', $cron->getName()));
-            $cron = $this->repository->find($cron->getId());
+            $cron = $this->service->get($cron->getId());
             if ($cron->isRunning()) {
                 $this->logger->info(sprintf('"%s" schedule is already running in other machine', $cron->getName()));
 
