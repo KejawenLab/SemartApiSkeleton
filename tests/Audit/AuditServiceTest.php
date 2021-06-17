@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
@@ -29,9 +30,9 @@ class AuditServiceTest extends TestCase
         $setting = $this->createMock(SettingService::class);
 
         $entry = $this->createMock(Entry::class);
-        $entry->method('getType')->willReturn('INSERT');
-        $entry->method('getCreatedAt')->willReturn('2021-04-03');
-        $entry->method('getDiffs')->willReturn([]);
+        $entry->expects($this->any())->method('getType')->willReturn('INSERT');
+        $entry->expects($this->any())->method('getCreatedAt')->willReturn('2021-04-03');
+        $entry->expects($this->any())->method('getDiffs')->willReturn([]);
 
         $item = $this->createMock(CacheItemInterface::class);
         $item->expects($this->once())->method('get')->willReturn(serialize([$entry]));
@@ -41,9 +42,8 @@ class AuditServiceTest extends TestCase
 
         $service = new AuditService($reader, $setting, $cache);
 
-        $id = '4e435184-a0a7-4848-8381-82abe0dbd752';
         $entity = $this->createMock(EntityInterface::class);
 
-        $this->assertSame(Audit::class, $service->getAudits($entity, $id)::class);
+        $this->assertSame(Audit::class, $service->getAudits($entity, Uuid::uuid4()->toString())::class);
     }
 }
