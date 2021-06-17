@@ -26,11 +26,11 @@ class ExecutorTest extends TestCase
         $redis = $this->createMock(Redis::class);
 
         $service = $this->createMock(CronService::class);
-        $service->expects($this->any())->method('get')->withAnyParameters();
-        $service->expects($this->any())->method('save')->withAnyParameters();
+        $service->expects($this->any())->method('get');
+        $service->expects($this->any())->method('save');
 
         $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects($this->any())->method('info')->withAnyParameters();
+        $logger->expects($this->any())->method('info');
 
         $report = new CronReport();
 
