@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f136a3404a94e18a157809ca86530151",
+    "content-hash": "d6573b7f47fa7ddae8dabdf8008c914f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3860,6 +3860,57 @@
                 "source": "https://github.com/reactphp/promise/tree/v2.8.0"
             },
             "time": "2020-05-12T15:16:56+00:00"
+        },
+        {
+            "name": "runtime/swoole",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-runtime/swoole.git",
+                "reference": "caafeb08da141e05b8b8be3cd98fce2076658929"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-runtime/swoole/zipball/caafeb08da141e05b8b8be3cd98fce2076658929",
+                "reference": "caafeb08da141e05b8b8be3cd98fce2076658929",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/runtime": "^5.3 || ^6.0"
+            },
+            "require-dev": {
+                "swoole/ide-helper": "^4.6",
+                "symfony/http-foundation": "^4.4 || ^5.2 || ^6.0",
+                "symfony/http-kernel": "^4.4 || ^5.2 || ^6.0",
+                "symfony/phpunit-bridge": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Runtime\\Swoole\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                }
+            ],
+            "description": "Swoole runtime",
+            "support": {
+                "source": "https://github.com/php-runtime/swoole/tree/0.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-11T07:33:28+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -12974,5 +13025,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

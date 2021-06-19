@@ -41,7 +41,7 @@ sas:
             media:
                 fileName: 'File'
                 folder: 'Lokasi Folder'
-                fileUrl: 'URL File'
+                fileUrl: 'File'
                 public: 'Publik?'
             setting:
                 parameter: 'Parameter'

@@ -315,6 +315,9 @@
     "rector/rector": {
         "version": "0.11.20"
     },
+    "runtime/swoole": {
+        "version": "0.1.1"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
