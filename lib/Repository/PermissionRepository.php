@@ -18,7 +18,7 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
  * @method Permission[]    findAll()
  * @method Permission[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class PermissionRepository extends AbstractRepository implements PermissionRepositoryInterface
 {

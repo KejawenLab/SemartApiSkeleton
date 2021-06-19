@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class HomeController extends AbstractController
 {

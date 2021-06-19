@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class LoadUrlPathSubscriber implements EventSubscriber
 {

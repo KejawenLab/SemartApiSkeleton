@@ -8,7 +8,7 @@ use KejawenLab\ApiSkeleton\Cron\Validator\CronScheduleFormat;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class CronScheduleFormatTest extends TestCase
 {

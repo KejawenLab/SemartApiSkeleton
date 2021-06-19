@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @Permission(menu="MEDIA", actions={Permission::ADD})
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class Post extends AbstractFOSRestController
 {

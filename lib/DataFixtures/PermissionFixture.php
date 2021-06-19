@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use KejawenLab\ApiSkeleton\Entity\Permission;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class PermissionFixture extends AbstractFixture implements DependentFixtureInterface
 {

@@ -17,7 +17,7 @@ use Psr\Cache\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class AuditServiceTest extends TestCase
 {

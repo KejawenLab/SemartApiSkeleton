@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Cron\Model;
 use DateTime;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface CronReportInterface
 {

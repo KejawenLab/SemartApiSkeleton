@@ -9,7 +9,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class UserProvider implements UserProviderInterface
 {

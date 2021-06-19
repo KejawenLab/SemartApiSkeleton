@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Security\Validator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class PasswordHistory extends Constraint
 {

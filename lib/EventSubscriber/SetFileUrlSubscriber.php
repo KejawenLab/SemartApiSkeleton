@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class SetFileUrlSubscriber implements EventSubscriber
 {

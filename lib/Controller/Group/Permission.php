@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @Semart\Permission(menu="GROUP", actions=Semart\Permission::VIEW)
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class Permission extends AbstractFOSRestController
 {

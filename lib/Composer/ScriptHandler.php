@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class ScriptHandler
 {

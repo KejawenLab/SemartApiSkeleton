@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class MenuPermissionService implements PermissionInitiatorInterface, PermissionRemoverInterface
 {

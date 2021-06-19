@@ -8,7 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface PaginatableRepositoryInterface extends ServiceableRepositoryInterface
 {

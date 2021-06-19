@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Service\Model;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface ServiceInterface extends PaginatableServiceInterface
 {

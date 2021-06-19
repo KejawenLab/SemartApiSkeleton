@@ -8,7 +8,7 @@ use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface ApiClientInterface extends AuthInterface
 {
