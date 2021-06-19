@@ -275,8 +275,6 @@ php bin/console cron:stop
 >
 > * Public & Private Api Support
 >
-> * Upgrade Management
->
 > * Housekeeping
 > 
 > * Password History
