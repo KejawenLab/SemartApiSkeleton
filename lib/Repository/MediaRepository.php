@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
  * @method Media[]    findAll()
  * @method Media[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
 {

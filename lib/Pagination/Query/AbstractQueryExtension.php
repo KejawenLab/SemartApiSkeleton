@@ -8,7 +8,7 @@ use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 abstract class AbstractQueryExtension implements QueryExtensionInterface
 {

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {

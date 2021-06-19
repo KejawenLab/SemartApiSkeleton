@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class UserProviderTest extends TestCase
 {

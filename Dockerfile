@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-MAINTAINER Muhammad Surya Ihsanuddin<surya.kejawen@gmail.com>
+MAINTAINER Muhammad Surya Ihsanuddin<surya.iksanudin@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 

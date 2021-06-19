@@ -8,7 +8,7 @@ use KejawenLab\ApiSkeleton\Audit\AuditItem;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class AuditItemTest extends TestCase
 {

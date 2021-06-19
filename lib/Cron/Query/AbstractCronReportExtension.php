@@ -9,7 +9,7 @@ use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension as Base;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 abstract class AbstractCronReportExtension extends Base
 {

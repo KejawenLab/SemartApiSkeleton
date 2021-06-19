@@ -21,6 +21,7 @@ sas:
             add: 'Tambah Media'
             public: 'Publik'
             non_public: 'Non Publik'
+            download: 'Unduh'
         group:
             saved: 'Grup berhasil disimpan'
             deleted: 'Grup berhasil dihapus'

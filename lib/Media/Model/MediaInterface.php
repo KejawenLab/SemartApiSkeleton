@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Media\Model;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface MediaInterface
 {

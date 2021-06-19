@@ -9,24 +9,12 @@ services:
         volumes:
             - .:/semart
         ports:
-            - 80:9501
+            - 9876:9501
         links:
             - session
             - db
         depends_on:
             - session
-
-    balancer:
-        image: dockercloud/haproxy:latest
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-        ports:
-            - 9876:80
-        links:
-            - app
-        depends_on:
-            - app
-
     db:
         image: mysql:latest
         command: --default-authentication-plugin=mysql_native_password

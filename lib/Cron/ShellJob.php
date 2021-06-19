@@ -8,7 +8,7 @@ use Cron\Job\ShellJob as Base;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class ShellJob extends Base
 {

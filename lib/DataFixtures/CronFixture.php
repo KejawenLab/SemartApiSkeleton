@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\DataFixtures;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class CronFixture extends AbstractFixture
 {

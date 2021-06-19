@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @Permission(menu="GROUP", actions={Permission::VIEW})
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class Download extends AbstractController
 {

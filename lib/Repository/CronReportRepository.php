@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Entity\CronReport;
  * @method CronReport[]    findAll()
  * @method CronReport[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class CronReportRepository extends AbstractRepository implements CronReportRepositoryInterface
 {

@@ -9,7 +9,7 @@ use KejawenLab\ApiSkeleton\Cron\ShellJob;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class ShellJobTest extends TestCase
 {

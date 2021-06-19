@@ -14,7 +14,7 @@ use ReflectionException;
 use ReflectionObject;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 class ExecutorTest extends TestCase
 {

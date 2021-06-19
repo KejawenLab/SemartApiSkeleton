@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class Paginator
 {

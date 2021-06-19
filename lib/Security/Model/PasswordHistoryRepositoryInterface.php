@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Security\Model;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 
 /**
- * @author Muhamad Surya Iksanudin<surya.kejawen@gmail.com>
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface PasswordHistoryRepositoryInterface extends ServiceableRepositoryInterface
 {
