@@ -11,9 +11,9 @@ Secara otomatis, Semart Generator akan men-*generate* semua *property* yang ada 
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Application\Form;
+namespace KejawenLab\Application\Form;
 
-use KejawenLab\ApiSkeleton\Application\Entity\Test;
+use KejawenLab\Application\Entity\Test;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

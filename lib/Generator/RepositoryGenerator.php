@@ -24,7 +24,7 @@ final class RepositoryGenerator extends AbstractGenerator
     {
         $shortName = $class->getShortName();
         $repositoryFile = sprintf('%s/app/Repository/%sRepository.php', $this->kernel->getProjectDir(), $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\Repository\\%sRepository"</info></comment>', $shortName));
+        $output->writeln(sprintf('<comment>Generating class <info>"KejawenLab\\Application\\Repository\\%sRepository"</info></comment>', $shortName));
         if (!$this->fileSystem->exists($repositoryFile)) {
             $repository = $this->twig->render('generator/repository.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($repositoryFile, $repository);
@@ -34,7 +34,7 @@ final class RepositoryGenerator extends AbstractGenerator
 
         $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder ?: $shortName), $shortName);
         $output->writeln(sprintf(
-            '<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
+            '<comment>Generating class <info>"KejawenLab\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
             ($folder ?: $shortName),
             $shortName
         ));

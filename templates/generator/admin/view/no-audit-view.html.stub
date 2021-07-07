@@ -52,9 +52,6 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
-                        {% if audits is not defined and can_view_audit() %}
-                            <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Audit', {id: data.id}) }}" class="btn btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
-                        {% endif %}
                         <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>

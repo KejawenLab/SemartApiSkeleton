@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use Exception;
 use KejawenLab\ApiSkeleton\Generator\GeneratorFactory;
 use KejawenLab\ApiSkeleton\Generator\Model\GeneratorInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
@@ -22,7 +23,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 final class GenerateCommand extends Command
 {
-    private const NAMESPACE = 'KejawenLab\\ApiSkeleton\\Application\\Entity';
+    private const NAMESPACE = 'KejawenLab\\Application\\Entity';
 
     public function __construct(private GeneratorFactory $generator, private MenuService $menuService)
     {
@@ -45,6 +46,7 @@ final class GenerateCommand extends Command
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -102,6 +104,12 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
         }
 
         $output->writeln(sprintf('<comment>RESTful Api and/or Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
+
+        $output->writeln('<info>Clearing Cache</info>');
+        $update = $application->find('cache:clear');
+        $update->run(new ArrayInput([
+            'command' => 'cache:clear',
+        ]), $output);
 
         return 0;
     }

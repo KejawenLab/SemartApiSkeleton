@@ -73,12 +73,13 @@
     "autoload": {
         "psr-4": {
             "KejawenLab\\ApiSkeleton\\": "lib/",
-            "KejawenLab\\ApiSkeleton\\Application\\": "app/"
+            "KejawenLab\\Application\\": "app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KejawenLab\\ApiSkeleton\\Tests\\": "tests/"
+            "KejawenLab\\ApiSkeleton\\Tests\\": "tests/lib",
+            "KejawenLab\\Application\\Tests\\": "tests/app"
         }
     },
     "replace": {

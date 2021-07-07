@@ -20,7 +20,7 @@ use Twig\Error\SyntaxError;
  */
 final class AdminControllerGenerator extends AbstractGenerator
 {
-    private const CONTROLLER_PREFIX = 'KejawenLab\\ApiSkeleton\\Application\\Admin\\Controller';
+    private const CONTROLLER_PREFIX = 'KejawenLab\\Application\\Admin\\Controller';
 
     public function __construct(
         private Reader $reader,

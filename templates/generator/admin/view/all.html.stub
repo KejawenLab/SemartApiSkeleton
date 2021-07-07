@@ -23,9 +23,9 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {% if is_granted('add', menu) %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
                                 {% endif %}
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
                             </div>
                         </div>
                     </div>
@@ -49,12 +49,12 @@
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
                                 {# table_fields #}
                                 <td>
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\Get', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
+                                    <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Get', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\Put', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
+                                        <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Put', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\Delete', {id: {# entity | lower #}.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': {# delete_field #}}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
+                                        <button type="button" data-path="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Delete', {id: {# entity | lower #}.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': {# delete_field #}}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans({}, 'tables') }}
                                         </button>
                                     {% endif %}
@@ -125,7 +125,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Application\\Controller\\Admin\\{# entity #}\\GetAll') }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\GetAll') }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}
