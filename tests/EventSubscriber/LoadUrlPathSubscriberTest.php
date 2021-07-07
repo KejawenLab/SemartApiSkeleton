@@ -45,7 +45,7 @@ class LoadUrlPathSubscriberTest extends TestCase
         $subscriber->postLoad($event);
     }
 
-    public function testNotFoundRoute(): void
+    public function testAdminNotFoundRoute(): void
     {
         $menu = new Menu();
         $menu->setAdminOnly(true);
@@ -56,6 +56,42 @@ class LoadUrlPathSubscriberTest extends TestCase
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator->expects($this->once())->method('generate')->willThrowException(new RouteNotFoundException());
+
+        $subscriber = new LoadUrlPathSubscriber($urlGenerator);
+
+        $subscriber->postLoad($event);
+        $this->assertSame('#', $menu->getAdminPath());
+    }
+
+    public function testNonAdmin(): void
+    {
+        $menu = new Menu();
+        $menu->setAdminOnly(false);
+        $menu->setRouteName('#');
+
+        $event = $this->createMock(LifecycleEventArgs::class);
+        $event->expects($this->once())->method('getObject')->willReturn($menu);
+
+        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
+        $urlGenerator->expects($this->once())->method('generate')->willThrowException(new RouteNotFoundException());
+
+        $subscriber = new LoadUrlPathSubscriber($urlGenerator);
+
+        $subscriber->postLoad($event);
+        $this->assertSame('#', $menu->getAdminPath());
+    }
+
+    public function testNonAdminNotFound(): void
+    {
+        $menu = new Menu();
+        $menu->setAdminOnly(false);
+        $menu->setRouteName('fake_route');
+
+        $event = $this->createMock(LifecycleEventArgs::class);
+        $event->expects($this->once())->method('getObject')->willReturn($menu);
+
+        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
+        $urlGenerator->expects($this->exactly(2))->method('generate')->willThrowException(new RouteNotFoundException());
 
         $subscriber = new LoadUrlPathSubscriber($urlGenerator);
 
