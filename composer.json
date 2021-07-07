@@ -78,7 +78,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "KejawenLab\\ApiSkeleton\\Tests\\": "tests/"
+            "KejawenLab\\ApiSkeleton\\Tests\\": "tests/lib",
+            "KejawenLab\\Application\\Tests\\": "tests/app"
         }
     },
     "replace": {

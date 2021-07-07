@@ -17,10 +17,10 @@ Ketika menggunakan [Semart Generator](generator.md), secara otomatis, akan dibua
 
 declare(strict_types=1);
 
-namespace Kejawenlab\Application\Test\Query;
+namespace KejawenLab\Application\Test\Query;
 
 use Doctrine\ORM\QueryBuilder;
-use Kejawenlab\Application\Test\Model\TestInterface;
+use KejawenLab\Application\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;

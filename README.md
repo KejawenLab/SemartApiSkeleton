@@ -295,12 +295,14 @@ php bin/console cron:stop
 
 declare(strict_types=1);
 
-namespace Kejawenlab\Application\Test\Model;
+namespace KejawenLab\Application\Test\Model;
+
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface TestInterface
+interface TestInterface extends EntityInterface
 {
     public function getId(): ?string;
 
@@ -316,16 +318,15 @@ interface TestInterface
 
 declare(strict_types=1);
 
-namespace Kejawenlab\Application\Entity;
+namespace KejawenLab\Application\Entity;
 
-use DH\DoctrineAuditBundle\Annotation\Auditable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Kejawenlab\Application\Repository\TestRepository;
-use Kejawenlab\Application\Test\Model\TestInterface;
+use KejawenLab\Application\Repository\TestRepository;
+use KejawenLab\Application\Test\Model\TestInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
 use OpenApi\Annotations as OA;
@@ -337,7 +338,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="test_table")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- * @Auditable()
  */
 class Test implements TestInterface
 {
@@ -403,7 +403,7 @@ php bin/console semart:generate Test
 #### Update form type
 
 ```php
-//class: Kejawenlab\Application\Form\TestType 
+//class: KejawenLab\Application\Form\TestType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name');
@@ -413,7 +413,7 @@ php bin/console semart:generate Test
 #### Update search query extension
 
 ```php
-//class: Kejawenlab\Application\Test\Query\SearchQueryExtension
+//class: KejawenLab\Application\Test\Query\SearchQueryExtension
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');

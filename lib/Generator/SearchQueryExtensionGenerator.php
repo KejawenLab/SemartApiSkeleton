@@ -27,7 +27,7 @@ final class SearchQueryExtensionGenerator extends AbstractGenerator
         if (!$this->fileSystem->exists($queryFile)) {
             $template = $this->twig->render('generator/search_query.php.twig', ['entity' => $shortName]);
             $output->writeln(sprintf(
-                '<comment>Generating class <info>"KejawenLab\\ApiSkeleton\\Application\\%s\\Query\\%sQueryExtension"</info></comment>',
+                '<comment>Generating class <info>"KejawenLab\\Application\\%s\\Query\\%sQueryExtension"</info></comment>',
                 ($folder ?: $shortName),
                 $shortName
             ));

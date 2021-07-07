@@ -21,7 +21,7 @@ use Twig\Environment;
  */
 final class PermissionGenerator extends AbstractGenerator
 {
-    private const ROUTE_PLACEHOLDER = 'KejawenLab\\ApiSkeleton\\Application\\Controller\\%s\\GetAll';
+    private const ROUTE_PLACEHOLDER = 'KejawenLab\\Application\\Controller\\%s\\GetAll';
 
     public function __construct(
         private PermissionService $permissionService,

@@ -24,7 +24,7 @@ services:
     KejawenLab\ApiSkeleton\:
         resource: '../lib/*'
         exclude: '../lib/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-    Kejawenlab\Application\:
+    KejawenLab\Application\:
         resource: '../app/*'
         exclude: '../app/{Entity,Migrations,Tests}'
 
@@ -36,10 +36,10 @@ services:
     KejawenLab\ApiSkeleton\Admin\Controller\:
         resource: '../lib/Admin/Controller'
         tags: ['controller.service_arguments']
-    Kejawenlab\Application\Controller\:
+    KejawenLab\Application\Controller\:
         resource: '../app/Controller'
         tags: [ 'controller.service_arguments' ]
-    Kejawenlab\Application\Admin\Controller\:
+    KejawenLab\Application\Admin\Controller\:
         resource: '../app/Admin/Controller'
         tags: [ 'controller.service_arguments' ]
 
