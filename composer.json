@@ -113,10 +113,6 @@
         "symfony": {
             "allow-contrib": true,
             "require": ">=5.3"
-        },
-        "runtime": {
-            "document_root": "/semart/public",
-            "enable_static_handler": true
         }
     }
 }

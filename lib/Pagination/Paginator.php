@@ -35,6 +35,10 @@ final class Paginator
         $this->cacheLifetime = $setting->getCacheLifetime();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
         $page = (int) $request->query->get($this->pageField, 1);
@@ -45,11 +49,13 @@ final class Paginator
             }
         }
 
+        $total = $this->count($queryBuilder);
+
         return [
             'page' => $page,
             'per_page' => $perPage,
-            'total_page' => ceil($this->count($queryBuilder) / $perPage),
-            'total_item' => $this->count($queryBuilder),
+            'total_page' => ceil($total / $perPage),
+            'total_item' => $total,
             'items' => $this->paging($queryBuilder, $page, $perPage),
         ];
     }

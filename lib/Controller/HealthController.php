@@ -31,10 +31,7 @@ final class HealthController extends AbstractController
             'app' => [
                 'name' => $_SERVER['APP_TITLE'],
                 'description' => $_SERVER['APP_DESCRIPTION'],
-                'version' => [
-                    'alias' => $_SERVER['APP_VERSION'],
-                    'number' => App::getVersionNumber(),
-                ],
+                'version' => $_SERVER['APP_VERSION'],
             ],
         ]);
     }
