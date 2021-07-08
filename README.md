@@ -441,6 +441,7 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 ## Digunakan Oleh
 
 ![Kementrian Pariwisata](doc/assets/kemenpar.png)
+
 (Last checked: 8 Juli 2021)
 
 ## Copyright
