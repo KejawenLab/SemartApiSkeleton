@@ -440,9 +440,20 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 ## Digunakan Oleh
 
-![Kementrian Pariwisata](doc/assets/kemenpar.png)
-
-(Last checked: 8 Juli 2021)
+<table>
+  <tbody width="100%">
+    <tr valign="top">
+      <td width="50%" align="center" style="padding-bottom: 17px">
+        <span>Kementrian Pariwisata - checked: 8-7-2021</span><br><br> 
+        <img height="64px" src="./doc/assets/kemenpar.png">
+      </td>
+      <td width="50%" align="center">
+        <span>Pemprov DKI Jakarta</span><br><br> 
+        <img height="64px" src="./doc/assets/dki.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Copyright
 
