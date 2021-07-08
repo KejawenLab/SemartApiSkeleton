@@ -29,6 +29,9 @@ final class SetFileUrlSubscriber implements EventSubscriber
         $object->setFileUrl($this->storage->resolveUri($object, MediaInterface::FILE_FIELD));
     }
 
+    /**
+     * @return string[]
+     */
     public function getSubscribedEvents(): array
     {
         return [

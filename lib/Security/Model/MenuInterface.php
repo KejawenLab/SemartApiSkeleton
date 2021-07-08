@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Model;
 
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface MenuInterface extends PermissionableInterface
+interface MenuInterface extends PermissionableInterface, EntityInterface
 {
     public function getParent(): ?self;
 
@@ -21,11 +23,11 @@ interface MenuInterface extends PermissionableInterface
 
     public function getApiPath(): ?string;
 
-    public function setApiPath(string $apiPath): self;
+    public function setApiPath(string $apiPath): void;
 
     public function getAdminPath(): ?string;
 
-    public function setAdminPath(string $adminPath): self;
+    public function setAdminPath(string $adminPath): void;
 
     public function getExtra(): ?string;
 

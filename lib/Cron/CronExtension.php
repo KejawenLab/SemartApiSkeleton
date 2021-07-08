@@ -17,6 +17,9 @@ final class CronExtension extends AbstractExtension
         yield new TwigFunction('normalize_cron_log', [$this, 'normalize']);
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function normalize(string $log): array
     {
         $temps = explode(PHP_EOL, $log);

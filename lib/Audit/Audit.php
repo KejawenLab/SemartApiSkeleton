@@ -9,6 +9,9 @@ namespace KejawenLab\ApiSkeleton\Audit;
  */
 final class Audit
 {
+    /**
+     * @var array<int, array<string, mixed>>
+     */
     private array $items;
 
     public function __construct(private object $entity)
@@ -20,6 +23,9 @@ final class Audit
         $this->items[] = $item->toArray();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

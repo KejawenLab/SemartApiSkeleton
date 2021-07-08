@@ -25,7 +25,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @Vich\Uploadable
  */
-class Media implements MediaInterface, EntityInterface
+class Media implements MediaInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -86,11 +86,9 @@ class Media implements MediaInterface, EntityInterface
         return $this->fileName;
     }
 
-    public function setFileName(?string $fileName): self
+    public function setFileName(?string $fileName): void
     {
         $this->fileName = $fileName;
-
-        return $this;
     }
 
     public function getFolder(): ?string
@@ -98,11 +96,9 @@ class Media implements MediaInterface, EntityInterface
         return $this->folder;
     }
 
-    public function setFolder(string $folder): self
+    public function setFolder(string $folder): void
     {
         $this->folder = $folder;
-
-        return $this;
     }
 
     public function isPublic(): bool
@@ -110,11 +106,9 @@ class Media implements MediaInterface, EntityInterface
         return $this->public;
     }
 
-    public function setPublic(bool $public): self
+    public function setPublic(bool $public): void
     {
         $this->public = $public;
-
-        return $this;
     }
 
     public function getFileUrl(): ?string
@@ -122,11 +116,9 @@ class Media implements MediaInterface, EntityInterface
         return $this->fileUrl;
     }
 
-    public function setFileUrl(?string $fileUrl): self
+    public function setFileUrl(?string $fileUrl): void
     {
         $this->fileUrl = $fileUrl;
-
-        return $this;
     }
 
     public function getFile(): ?File
@@ -134,11 +126,9 @@ class Media implements MediaInterface, EntityInterface
         return $this->file;
     }
 
-    public function setFile(File $file): self
+    public function setFile(File $file): void
     {
         $this->file = $file;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

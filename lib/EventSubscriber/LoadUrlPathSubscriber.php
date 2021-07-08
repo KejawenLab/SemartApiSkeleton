@@ -77,6 +77,9 @@ final class LoadUrlPathSubscriber implements EventSubscriber
         $object->setAdminPath($adminPath);
     }
 
+    /**
+     * @return string[]
+     */
     public function getSubscribedEvents(): array
     {
         return [

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron\Model;
 
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface CronInterface
+interface CronInterface extends EntityInterface
 {
     public const PID_FILE = '.semart.pid';
 

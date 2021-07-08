@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"name"})
  * @ConsoleCommand()
  */
-class Cron implements CronInterface, EntityInterface
+class Cron implements CronInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -129,11 +129,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = StringUtil::title($name);
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -141,11 +139,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     public function getCommand(): ?string
@@ -153,11 +149,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->command;
     }
 
-    public function setCommand(string $command): self
+    public function setCommand(string $command): void
     {
         $this->command = $command;
-
-        return $this;
     }
 
     public function getSchedule(): ?string
@@ -165,11 +159,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->schedule;
     }
 
-    public function setSchedule(string $schedule): self
+    public function setSchedule(string $schedule): void
     {
         $this->schedule = $schedule;
-
-        return $this;
     }
 
     public function isEnabled(): bool
@@ -177,11 +169,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->enabled;
     }
 
-    public function setEnabled(bool $enabled): self
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
-
-        return $this;
     }
 
     public function isSymfonyCommand(): bool
@@ -189,11 +179,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->symfonyCommand;
     }
 
-    public function setSymfonyCommand(bool $symfonyCommand): self
+    public function setSymfonyCommand(bool $symfonyCommand): void
     {
         $this->symfonyCommand = $symfonyCommand;
-
-        return $this;
     }
 
     public function isRunning(): bool
@@ -201,11 +189,9 @@ class Cron implements CronInterface, EntityInterface
         return $this->running;
     }
 
-    public function setRunning(bool $running): self
+    public function setRunning(bool $running): void
     {
         $this->running = $running;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\ApiClient\Model;
 
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface ApiClientRequestInterface
+interface ApiClientRequestInterface extends EntityInterface
 {
     public function getApiClient(): ?ApiClientInterface;
 

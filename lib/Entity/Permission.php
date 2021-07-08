@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
-class Permission implements PermissionInterface, EntityInterface
+class Permission implements PermissionInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -106,11 +106,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->group;
     }
 
-    public function setGroup(?GroupInterface $group): PermissionInterface
+    public function setGroup(?GroupInterface $group): void
     {
         $this->group = $group;
-
-        return $this;
     }
 
     public function getMenu(): ?MenuInterface
@@ -118,11 +116,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->menu;
     }
 
-    public function setMenu(?MenuInterface $menu): PermissionInterface
+    public function setMenu(?MenuInterface $menu): void
     {
         $this->menu = $menu;
-
-        return $this;
     }
 
     public function isAddable(): bool
@@ -130,11 +126,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->addable;
     }
 
-    public function setAddable(bool $addable): self
+    public function setAddable(bool $addable): void
     {
         $this->addable = $addable;
-
-        return $this;
     }
 
     public function isEditable(): bool
@@ -142,11 +136,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->editable;
     }
 
-    public function setEditable(bool $editable): self
+    public function setEditable(bool $editable): void
     {
         $this->editable = $editable;
-
-        return $this;
     }
 
     public function isViewable(): bool
@@ -154,11 +146,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->viewable;
     }
 
-    public function setViewable(bool $viewable): self
+    public function setViewable(bool $viewable): void
     {
         $this->viewable = $viewable;
-
-        return $this;
     }
 
     public function isDeletable(): bool
@@ -166,11 +156,9 @@ class Permission implements PermissionInterface, EntityInterface
         return $this->deletable;
     }
 
-    public function setDeletable(bool $deletable): self
+    public function setDeletable(bool $deletable): void
     {
         $this->deletable = $deletable;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

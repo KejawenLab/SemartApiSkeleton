@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"parameter"})
  */
-class Setting implements SettingInterface, EntityInterface
+class Setting implements SettingInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -85,11 +85,9 @@ class Setting implements SettingInterface, EntityInterface
         return $this->parameter;
     }
 
-    public function setParameter(string $parameter): self
+    public function setParameter(string $parameter): void
     {
         $this->parameter = StringUtil::uppercase($parameter);
-
-        return $this;
     }
 
     public function getValue(): ?string
@@ -97,11 +95,9 @@ class Setting implements SettingInterface, EntityInterface
         return $this->value;
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $value): void
     {
         $this->value = $value;
-
-        return $this;
     }
 
     public function isPublic(): bool
@@ -109,11 +105,9 @@ class Setting implements SettingInterface, EntityInterface
         return $this->public;
     }
 
-    public function setPublic(bool $public): self
+    public function setPublic(bool $public): void
     {
         $this->public = $public;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

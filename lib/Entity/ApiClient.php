@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity({"user", "name"})
  */
-class ApiClient implements ApiClientInterface, EntityInterface
+class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -94,11 +94,9 @@ class ApiClient implements ApiClientInterface, EntityInterface
         return $this->user;
     }
 
-    public function setUser(UserInterface $user): self
+    public function setUser(UserInterface $user): void
     {
         $this->user = $user;
-
-        return $this;
     }
 
     public function getGroup(): ?GroupInterface
@@ -115,11 +113,9 @@ class ApiClient implements ApiClientInterface, EntityInterface
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(?string $name): void
     {
         $this->name = StringUtil::title($name);
-
-        return $this;
     }
 
     public function getApiKey(): ?string
@@ -127,11 +123,9 @@ class ApiClient implements ApiClientInterface, EntityInterface
         return $this->apiKey;
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): void
     {
         $this->apiKey = $apiKey;
-
-        return $this;
     }
 
     public function getSecretKey(): ?string
@@ -139,11 +133,9 @@ class ApiClient implements ApiClientInterface, EntityInterface
         return $this->secretKey;
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): void
     {
         $this->secretKey = $secretKey;
-
-        return $this;
     }
 
     public function getIdentity(): ?string
