@@ -40,18 +40,21 @@ final class PermissionSubscriber implements EventSubscriberInterface
         }
 
         $namespaceArray = explode('\\', $controllerReflection->getNamespaceName());
-        $namespace = array_pop($namespaceArray);
+        $entity = array_pop($namespaceArray);
         $authorize = $this->authorization->authorize($permission);
         if (!$authorize) {
             throw new AccessDeniedException();
         }
 
         $id = $event->getRequest()->attributes->get('id');
-        if ($permission->isOwnership() && $id && !$this->ownership->isOwner($id, $namespace)) {
+        if ($permission->isOwnership() && $id && !$this->ownership->isOwner($id, $entity)) {
             throw new AccessDeniedException();
         }
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getSubscribedEvents(): array
     {
         return [

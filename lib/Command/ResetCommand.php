@@ -94,7 +94,7 @@ final class ResetCommand extends Command
         $fixtures = $application->find('doctrine:fixtures:load');
         $fixtures->run($input, $output);
 
-        $fileSystem->dumpFile($this->semart, 1);
+        $fileSystem->dumpFile($this->semart, '1');
 
         return 0;
     }

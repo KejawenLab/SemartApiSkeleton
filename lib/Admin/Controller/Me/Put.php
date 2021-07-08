@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
@@ -35,6 +36,10 @@ final class Put extends AbstractController
         }
 
         $user = $userProviderFactory->getRealUser($user);
+        if (!$user instanceof UserInterface) {
+            return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
+        }
+
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);

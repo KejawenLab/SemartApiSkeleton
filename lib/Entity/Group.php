@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"code"})
  */
-class Group implements GroupInterface, EntityInterface
+class Group implements GroupInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -80,11 +80,9 @@ class Group implements GroupInterface, EntityInterface
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code): void
     {
         $this->code = StringUtil::uppercase($code);
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -92,11 +90,9 @@ class Group implements GroupInterface, EntityInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = StringUtil::title($name);
-
-        return $this;
     }
 
     public function __sleep()

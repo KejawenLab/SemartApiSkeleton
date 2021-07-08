@@ -11,6 +11,9 @@ final class AuditItem
 {
     public function __construct(
         private string $type,
+        /**
+         * @var array<string, mixed>
+         */
         private array $data,
         private ?string $logTime,
         private ?string $userId,
@@ -19,6 +22,9 @@ final class AuditItem
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

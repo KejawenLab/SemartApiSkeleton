@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Model;
 
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface UserInterface extends AuthInterface
+interface UserInterface extends AuthInterface, EntityInterface
 {
     public function getSupervisor(): ?self;
 
@@ -16,6 +18,8 @@ interface UserInterface extends AuthInterface
     public function getUsername(): ?string;
 
     public function getEmail(): ?string;
+
+    public function setPlainPassword(string $plainPassword): void;
 
     public function getPlainPassword(): ?string;
 

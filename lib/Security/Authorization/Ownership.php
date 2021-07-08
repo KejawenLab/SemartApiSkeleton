@@ -18,7 +18,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 final class Ownership
 {
-    private const NAMESPACE = 'KejawenLab\ApiSkeleton\Entity';
+    private const SKELETON_NAMESPACE = 'KejawenLab\\ApiSkeleton\\Entity';
+    private const APPLICATION_NAMESPACE = 'KejawenLab\\Application\\Entity';
 
     public function __construct(
         private ManagerRegistry $doctrine,
@@ -50,7 +51,7 @@ final class Ownership
             return false;
         }
 
-        if (!class_exists($entity = sprintf('%s\%s', self::NAMESPACE, $entity))) {
+        if (!$entity = $this->getEntity($entity)) {
             return false;
         }
 
@@ -75,5 +76,18 @@ final class Ownership
         }
 
         return false;
+    }
+
+    private function getEntity(string $entity): ?string
+    {
+        if (class_exists($entity = sprintf('%s\\%s', self::SKELETON_NAMESPACE, $entity))) {
+            return $entity;
+        }
+
+        if (class_exists($entity = sprintf('%s\\%s', self::APPLICATION_NAMESPACE, $entity))) {
+            return $entity;
+        }
+
+        return null;
     }
 }

@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=CronReportRepository::class)
  * @ORM\Table(name="core_cronjob_report")
  */
-class CronReport implements CronReportInterface, EntityInterface
+class CronReport implements CronReportInterface
 {
     use TimestampableEntity;
 
@@ -79,11 +79,9 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this->cron;
     }
 
-    public function setCron(CronInterface $cron): self
+    public function setCron(CronInterface $cron): void
     {
         $this->cron = $cron;
-
-        return $this;
     }
 
     public function getRunAt(): DateTime
@@ -91,11 +89,9 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this->runAt;
     }
 
-    public function setRunAt(DateTime $runAt): self
+    public function setRunAt(DateTime $runAt): void
     {
         $this->runAt = $runAt;
-
-        return $this;
     }
 
     public function getRuntime(): float
@@ -103,11 +99,9 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this->runtime;
     }
 
-    public function setRuntime(float $runtime): self
+    public function setRuntime(float $runtime): void
     {
         $this->runtime = $runtime;
-
-        return $this;
     }
 
     public function getOutput(): ?string
@@ -115,11 +109,9 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this->output;
     }
 
-    public function setOutput(string $output): self
+    public function setOutput(string $output): void
     {
         $this->output = $output;
-
-        return $this;
     }
 
     public function getExitCode(): int
@@ -127,11 +119,9 @@ class CronReport implements CronReportInterface, EntityInterface
         return $this->exitCode;
     }
 
-    public function setExitCode(int $exitCode): self
+    public function setExitCode(int $exitCode): void
     {
         $this->exitCode = $exitCode;
-
-        return $this;
     }
 
     public function isSuccessful(): bool
