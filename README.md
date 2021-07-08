@@ -8,42 +8,6 @@
 
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
-## Screenshot
-
-#### Halaman Admin
-
-![Admin](doc/assets/admin.png)
-
-#### Api Doc
-![Api Doc](doc/assets/full.png)
-
-#### Sandbox
-![Sandbox](doc/assets/sandbox.png)
-
-#### Cronjob Management
-![Cronjob](doc/assets/cron.png)
-
-#### Setting Management
-![Setting](doc/assets/setting.png)
-
-#### Media Management
-![Media](doc/assets/media.png)
-
-#### Group Management
-![Group](doc/assets/group.png)
-
-#### Menu Management
-![Menu](doc/assets/menu.png)
-
-#### User Management
-![User](doc/assets/user.png)
-
-#### Profile Management
-![Profile](doc/assets/profile.png)
-
-#### Client/Api Consumer Management
-![Consumer](doc/assets/consumer.png)
-
 ## Requirement
 
 #### Abaikan Requirement jika Kamu menggunakan Docker
@@ -474,6 +438,11 @@ Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan un
 
 - [ ] Query Runner
 
+## Digunakan Oleh
+
+![Kementrian Pariwisata](doc/assets/kemenpar.png)
+(Last checked: 8 Juli 2021)
+
 ## Copyright
 
 Semart Api Skeleton dikembangkan dan dimaintain oleh [KejawenLab](https://github.com/KejawenLab)
@@ -481,3 +450,39 @@ Semart Api Skeleton dikembangkan dan dimaintain oleh [KejawenLab](https://github
 ## Lisensi
 
 Lisensi dari Semart Api Skeleton adalah [MIT License](LICENSE) namun proyek yang dibangun menyeseuaikan dengan kebijakan masing-masing
+
+## Screenshot
+
+#### Halaman Admin
+
+![Admin](doc/assets/admin.png)
+
+#### Api Doc
+![Api Doc](doc/assets/full.png)
+
+#### Sandbox
+![Sandbox](doc/assets/sandbox.png)
+
+#### Cronjob Management
+![Cronjob](doc/assets/cron.png)
+
+#### Setting Management
+![Setting](doc/assets/setting.png)
+
+#### Media Management
+![Media](doc/assets/media.png)
+
+#### Group Management
+![Group](doc/assets/group.png)
+
+#### Menu Management
+![Menu](doc/assets/menu.png)
+
+#### User Management
+![User](doc/assets/user.png)
+
+#### Profile Management
+![Profile](doc/assets/profile.png)
+
+#### Client/Api Consumer Management
+![Consumer](doc/assets/consumer.png)
