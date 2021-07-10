@@ -2952,12 +2952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "2df454c0c31b0baaef05ebbd12722ba4281227bb"
+                "reference": "d107dc6dd683a94b43a74810aa4b1047ad891b0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/2df454c0c31b0baaef05ebbd12722ba4281227bb",
-                "reference": "2df454c0c31b0baaef05ebbd12722ba4281227bb",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/d107dc6dd683a94b43a74810aa4b1047ad891b0e",
+                "reference": "d107dc6dd683a94b43a74810aa4b1047ad891b0e",
                 "shasum": ""
             },
             "require": {
@@ -3057,7 +3057,7 @@
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
                 "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/master"
             },
-            "time": "2021-06-16T07:59:06+00:00"
+            "time": "2021-07-09T17:03:13+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
