@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\ApiClient\Query\FilterByUserExtension;
+use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\User;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +37,7 @@ class FilterByUserExtensionTest extends TestCase
     {
         $filter = new FilterByUserExtension($this->tokenStorage, $this->aliasHelper);
 
-        $user = $this->createMock(User::class);
+        $user = $this->createMock(ApiClient::class);
         $user->expects($this->once())->method('getId')->willReturn(Uuid::uuid4()->toString());
 
         $token = $this->createMock(TokenInterface::class);
