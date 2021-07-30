@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class User implements UserInterface, EntityInterface
+class User implements UserInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -125,11 +125,9 @@ class User implements UserInterface, EntityInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): void
     {
         $this->username = StringUtil::lowercase($username);
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -137,11 +135,9 @@ class User implements UserInterface, EntityInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
     public function getGroup(): ?GroupInterface
@@ -149,11 +145,9 @@ class User implements UserInterface, EntityInterface
         return $this->group;
     }
 
-    public function setGroup(?GroupInterface $group): self
+    public function setGroup(?GroupInterface $group): void
     {
         $this->group = $group;
-
-        return $this;
     }
 
     public function getSupervisor(): ?UserInterface
@@ -161,11 +155,9 @@ class User implements UserInterface, EntityInterface
         return $this->supervisor;
     }
 
-    public function setSupervisor(?UserInterface $supervisor): self
+    public function setSupervisor(?UserInterface $supervisor): void
     {
         $this->supervisor = $supervisor;
-
-        return $this;
     }
 
     public function getFullName(): ?string
@@ -173,11 +165,9 @@ class User implements UserInterface, EntityInterface
         return $this->fullName;
     }
 
-    public function setFullName(string $fullName): self
+    public function setFullName(string $fullName): void
     {
         $this->fullName = StringUtil::title($fullName);
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -185,11 +175,9 @@ class User implements UserInterface, EntityInterface
         return $this->email;
     }
 
-    public function setEmail($email): self
+    public function setEmail($email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     public function getDeviceId(): ?string
@@ -207,11 +195,9 @@ class User implements UserInterface, EntityInterface
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(string $plainPassword): self
+    public function setPlainPassword(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
-
-        return $this;
     }
 
     public function getIdentity(): ?string

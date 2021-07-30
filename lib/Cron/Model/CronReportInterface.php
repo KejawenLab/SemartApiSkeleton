@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Cron\Model;
 
 use DateTime;
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface CronReportInterface
+interface CronReportInterface extends EntityInterface
 {
     public function getCron(): ?CronInterface;
 

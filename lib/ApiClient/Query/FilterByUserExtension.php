@@ -32,6 +32,10 @@ final class FilterByUserExtension extends AbstractQueryExtension
             return;
         }
 
+        if (!$user instanceof ApiClientInterface) {
+            return;
+        }
+
         $queryBuilder->andWhere(
             $queryBuilder->expr()->eq(
                 sprintf('%s.user', $this->aliasHelper->findAlias('root')),

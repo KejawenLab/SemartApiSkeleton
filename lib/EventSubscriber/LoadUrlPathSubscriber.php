@@ -62,7 +62,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
 
             $placeHolder = self::ROUTE_NAMESPACE_PREFIX;
             if (in_array($object->getRouteName(), $this->reservedRoutes)) {
-                $placeHolder = StringUtil::replace($placeHolder, 'Application\\', '');
+                $placeHolder = 'KejawenLab\\ApiSkeleton\\Controller\\';
             }
 
             $replece = StringUtil::replace($placeHolder, 'Controller\\', 'Admin\\Controller\\');
@@ -77,6 +77,9 @@ final class LoadUrlPathSubscriber implements EventSubscriber
         $object->setAdminPath($adminPath);
     }
 
+    /**
+     * @return string[]
+     */
     public function getSubscribedEvents(): array
     {
         return [

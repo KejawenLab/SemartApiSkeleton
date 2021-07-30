@@ -9,5 +9,7 @@ namespace KejawenLab\ApiSkeleton\Entity;
  */
 interface EntityInterface
 {
+    public function getId(): ?string;
+
     public function getNullOrString(): ?string;
 }

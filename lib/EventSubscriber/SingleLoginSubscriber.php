@@ -102,6 +102,9 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         $event->setData($payload);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function getSubscribedEvents(): array
     {
         return [

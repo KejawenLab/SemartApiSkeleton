@@ -51,6 +51,9 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
         $this->apiClientRequestService->save($apiClientRequest);
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getSubscribedEvents(): array
     {
         return [

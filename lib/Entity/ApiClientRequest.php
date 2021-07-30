@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * @ORM\Entity(repositoryClass=ApiClientRequestRepository::class)
  * @ORM\Table(name="core_api_client_request")
  */
-class ApiClientRequest implements ApiClientRequestInterface, EntityInterface
+class ApiClientRequest implements ApiClientRequestInterface
 {
     use BlameableEntity;
     use TimestampableEntity;

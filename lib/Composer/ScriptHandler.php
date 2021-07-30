@@ -54,7 +54,7 @@ final class ScriptHandler
         $io->write('<comment>Visit <info>https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys</info> for more information</comment>');
 
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile($lock, 1);
+        $fileSystem->dumpFile($lock, '1');
     }
 
     private static function createEnvironment(IOInterface $io, string $envPath, string $template): void

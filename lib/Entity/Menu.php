@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"code"})
  */
-class Menu implements MenuInterface, EntityInterface
+class Menu implements MenuInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -146,11 +146,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->parent;
     }
 
-    public function setParent(?MenuInterface $parent): MenuInterface
+    public function setParent(?MenuInterface $parent): void
     {
         $this->parent = $parent;
-
-        return $this;
     }
 
     public function getCode(): ?string
@@ -158,11 +156,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code): void
     {
         $this->code = StringUtil::uppercase($code);
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -170,11 +166,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = StringUtil::title($name);
-
-        return $this;
     }
 
     public function getSortOrder(): ?int
@@ -182,11 +176,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->sortOrder;
     }
 
-    public function setSortOrder(int $sortOrder): self
+    public function setSortOrder(int $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
-
-        return $this;
     }
 
     public function getRouteName(): ?string
@@ -194,11 +186,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->routeName;
     }
 
-    public function setRouteName(string $routeName): self
+    public function setRouteName(string $routeName): void
     {
         $this->routeName = $routeName;
-
-        return $this;
     }
 
     public function getApiPath(): ?string
@@ -206,11 +196,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->apiPath;
     }
 
-    public function setApiPath(string $apiPath): MenuInterface
+    public function setApiPath(string $apiPath): void
     {
         $this->apiPath = $apiPath;
-
-        return $this;
     }
 
     public function getAdminPath(): ?string
@@ -218,11 +206,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->adminPath;
     }
 
-    public function setAdminPath(?string $adminPath): MenuInterface
+    public function setAdminPath(?string $adminPath): void
     {
         $this->adminPath = $adminPath;
-
-        return $this;
     }
 
     public function getExtra(): ?string
@@ -230,11 +216,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->extra;
     }
 
-    public function setExtra(string $extra): self
+    public function setExtra(string $extra): void
     {
         $this->extra = $extra;
-
-        return $this;
     }
 
     public function isShowable(): ?bool
@@ -242,11 +226,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->showable;
     }
 
-    public function setShowable(bool $showable): self
+    public function setShowable(bool $showable): void
     {
         $this->showable = $showable;
-
-        return $this;
     }
 
     public function isAdminOnly(): bool
@@ -254,11 +236,9 @@ class Menu implements MenuInterface, EntityInterface
         return $this->adminOnly;
     }
 
-    public function setAdminOnly(bool $adminOnly): self
+    public function setAdminOnly(bool $adminOnly): void
     {
         $this->adminOnly = $adminOnly;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

@@ -15,7 +15,7 @@ use Ramsey\Uuid\UuidInterface;
  * @ORM\Entity(repositoryClass=PasswordHistoryRepository::class)
  * @ORM\Table(name="core_user_password_history")
  */
-class PasswordHistory implements PasswordHistoryInterface, EntityInterface
+class PasswordHistory implements PasswordHistoryInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -53,11 +53,9 @@ class PasswordHistory implements PasswordHistoryInterface, EntityInterface
         return $this->source;
     }
 
-    public function setSource(?string $source): self
+    public function setSource(?string $source): void
     {
         $this->source = $source;
-
-        return $this;
     }
 
     public function getIdentifier(): ?string
@@ -65,11 +63,9 @@ class PasswordHistory implements PasswordHistoryInterface, EntityInterface
         return $this->identifier;
     }
 
-    public function setIdentifier(?string $identifier): self
+    public function setIdentifier(?string $identifier): void
     {
         $this->identifier = $identifier;
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -77,11 +73,9 @@ class PasswordHistory implements PasswordHistoryInterface, EntityInterface
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
+    public function setPassword(?string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
     public function getNullOrString(): ?string

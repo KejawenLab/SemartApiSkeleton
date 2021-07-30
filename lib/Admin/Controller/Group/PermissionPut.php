@@ -38,7 +38,7 @@ final class PermissionPut extends AbstractController
             return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
         }
 
-        /** @var \KejawenLab\ApiSkeleton\Entity\Permission $permission */
+        /** @var \KejawenLab\ApiSkeleton\Entity\Permission|null $permission */
         $permission = $this->service->get($id);
         if (!$permission) {
             $this->addFlash('error', 'sas.page.permission.not_found');
