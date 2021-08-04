@@ -2,13 +2,24 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenGlobals;
+use NunoMaduro\PhpInsights\Domain\Metrics\Complexity\Complexity;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ObjectOperatorIndentSniff;
+use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
+use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowShortTernaryOperatorSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
+use SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff;
 use SlevomatCodingStandard\Sniffs\Functions\StaticClosureSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
@@ -52,7 +63,7 @@ return [
     |
     */
 
-    'ide' => "phpstorm",
+    'ide' => 'phpstorm',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,10 +78,13 @@ return [
 
     'exclude' => [
         'lib/DataFixtures',
+        'lib/Composer/',
         'lib/Entity',
         '*Repository.php',
         'lib/Kernel.php',
-        'lib/SemartApiSkeleton.php'
+        'lib/SemartApiSkeleton.php',
+        'phpinsights.php',
+        'rector.php',
     ],
 
     'add' => [
@@ -94,12 +108,23 @@ return [
         UnusedParameterSniff::class,
         StaticClosureSniff::class,
         ForbiddenGlobals::class,
+        SuperfluousInterfaceNamingSniff::class,
+        SuperfluousAbstractClassNamingSniff::class,
+        SuperfluousExceptionNamingSniff::class,
+        LineLengthSniff::class,
+        SpaceAfterNotSniff::class,
+        DocCommentSpacingSniff::class,
+        MethodChainingIndentationFixer::class,
+        ObjectOperatorIndentSniff::class,
     ],
 
     'config' => [
-        //  ExampleInsight::class => [
-        //      'key' => 'value',
-        //  ],
+        CyclomaticComplexityIsHigh::class => [
+            'maxComplexity' => 17,
+        ],
+        FunctionLengthSniff::class => [
+            'maxLinesLength' => 77,
+        ],
     ],
 
     /*

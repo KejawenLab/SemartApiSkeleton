@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller;
 
-use KejawenLab\Application\App;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
