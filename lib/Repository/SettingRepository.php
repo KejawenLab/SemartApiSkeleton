@@ -37,7 +37,7 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', __CLASS__, __METHOD__, $parameter));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $parameter));
 
         return $query->getOneOrNullResult();
     }

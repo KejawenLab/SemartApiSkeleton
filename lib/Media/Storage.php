@@ -23,7 +23,7 @@ final class Storage extends FileSystemStorage
         }
 
         $file = $mapping->getFile($obj);
-        if (null === $file || !($file instanceof UploadedFile)) {
+        if (!($file instanceof UploadedFile)) {
             throw new LogicException('No uploadable file found');
         }
 
@@ -36,7 +36,7 @@ final class Storage extends FileSystemStorage
         if (
             str_contains($file->getMimeType(), 'image/') &&
             'image/svg+xml' !== $file->getMimeType() &&
-            false !== $dimensions = @getimagesize($file->getRealPath())
+            false !== $dimensions = getimagesize($file->getRealPath())
         ) {
             $mapping->writeProperty($obj, 'dimensions', array_splice($dimensions, 0, 2));
         }
@@ -68,12 +68,12 @@ final class Storage extends FileSystemStorage
         }
 
         [$mapping, $name] = $this->getFilename($obj, $fieldName, $className);
-        if (empty($name)) {
+        if (!$name) {
             return null;
         }
 
         $uploadDir = $this->convertWindowsDirectorySeparator($mapping->getUploadDir($obj));
-        $uploadDir = empty($uploadDir) ? '' : $uploadDir;
+        $uploadDir = !$uploadDir ? '' : $uploadDir;
         if ($obj->isPublic()) {
             $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
         }

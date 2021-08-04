@@ -51,7 +51,7 @@ final class MenuService extends AbstractService implements ServiceInterface
         }
 
         $childMenus = $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
-        if (!empty($childMenus)) {
+        if (0 < count($childMenus)) {
             return true;
         }
 
@@ -82,6 +82,6 @@ final class MenuService extends AbstractService implements ServiceInterface
             return null;
         }
 
-        return $user->getGroup();
+        return $group;
     }
 }

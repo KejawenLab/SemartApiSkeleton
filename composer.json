@@ -53,6 +53,7 @@
         "dg/bypass-finals": ">=1.3",
         "doctrine/doctrine-fixtures-bundle": ">=3.3",
         "friendsofphp/php-cs-fixer": ">=2.16",
+        "nunomaduro/phpinsights": "^2.0",
         "phpstan/phpstan": "0.12.90",
         "phpunit/phpunit": ">=9.5",
         "rector/rector": ">=0.11.20",

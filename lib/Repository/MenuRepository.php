@@ -39,7 +39,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', __CLASS__, __METHOD__, $menu->getId()));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $menu->getId()));
 
         return $query->getResult();
     }

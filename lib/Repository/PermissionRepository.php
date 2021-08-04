@@ -52,7 +52,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query->useQueryCache(true);
         $query->enableResultCache(
             self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), serialize($ids))
+            sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), serialize($ids))
         );
 
         return $query->getResult();
@@ -79,7 +79,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query->useQueryCache(true);
         $query->enableResultCache(
             self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%d', __CLASS__, __METHOD__, $group->getId(), (int) $parentOnly)
+            sprintf('%s:%s:%s:%d', self::class, __METHOD__, $group->getId(), (int) $parentOnly)
         );
 
         /** @var PermissionInterface[] $permissions */
@@ -109,7 +109,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query->useQueryCache(true);
         $query->enableResultCache(
             self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId())
+            sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), $menu->getId())
         );
 
         /** @var PermissionInterface[] $permissions */
