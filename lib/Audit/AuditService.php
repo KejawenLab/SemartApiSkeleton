@@ -43,10 +43,10 @@ final class AuditService
             $this->cache->save($cache);
         }
 
+        /** @var Entry[] $audits */
         $audits = unserialize($cache->get());
 
         $record = new Audit($entity);
-        /** @var Entry[] $audits */
         foreach ($audits as $audit) {
             $record->addItem(new AuditItem(
                 $audit->getType(),

@@ -22,9 +22,11 @@ final class ApiClientService extends AbstractService implements ServiceInterface
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
+    /**
+     * @param ApiClient $object
+     */
     public function save(object $object): void
     {
-        /* @var ApiClient $object */
         $object->setApiKey(sha1(date('YmdHis')));
         $object->setSecretKey(Encryptor::hash($object->getApiKey()));
 

@@ -42,7 +42,9 @@ final class CronStartCommand extends Command
         $pidFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.CronInterface::PID_FILE;
         if (-1 === $pid = pcntl_fork()) {
             throw new RuntimeException('Unable to start the cron process');
-        } elseif (0 !== $pid) {
+        }
+
+        if (0 !== $pid) {
             if (false === file_put_contents($pidFile, $pid)) {
                 throw new RuntimeException('Unable to create process file');
             }

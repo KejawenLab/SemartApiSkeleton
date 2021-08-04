@@ -22,9 +22,11 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     {
     }
 
+    /**
+     * @param GroupInterface $object
+     */
     public function initiate(PermissionableInterface $object): void
     {
-        /* @var GroupInterface $object */
         foreach ($this->menuRepository->findAll() as $menu) {
             $permission = $this->permissionRepository->findPermission($object, $menu);
             if (!$permission) {
@@ -38,9 +40,11 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
         }
     }
 
+    /**
+     * @param GroupInterface $object
+     */
     public function remove(PermissionableInterface $object): void
     {
-        /* @var GroupInterface $object */
         $this->permissionRepository->removeByGroup($object);
     }
 

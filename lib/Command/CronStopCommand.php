@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CronStopCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('semart:cron:stop')->setDescription('Stops cron scheduler');
     }

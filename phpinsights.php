@@ -2,10 +2,20 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenGlobals;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowShortTernaryOperatorSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
+use SlevomatCodingStandard\Sniffs\Functions\StaticClosureSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff;
 
 return [
 
@@ -74,6 +84,16 @@ return [
         EmptyStatementSniff::class,
         UselessOverridingMethodSniff::class,
         AssignmentInConditionSniff::class,
+        DisallowShortTernaryOperatorSniff::class,
+        DisallowYodaComparisonSniff::class,
+        DisallowArrayTypeHintSyntaxSniff::class,
+        DisallowMixedTypeHintSniff::class,
+        ParameterTypeHintSniff::class,
+        PropertyTypeHintSniff::class,
+        ReturnTypeHintSniff::class,
+        UnusedParameterSniff::class,
+        StaticClosureSniff::class,
+        ForbiddenGlobals::class,
     ],
 
     'config' => [

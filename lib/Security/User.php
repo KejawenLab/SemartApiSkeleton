@@ -24,7 +24,7 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private string $class;
 
-    public function __construct(AuthInterface $user = null)
+    public function __construct(?AuthInterface $user = null)
     {
         if ($user) {
             $this->id = (string) $user->getRecordId();
@@ -75,11 +75,12 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->class;
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
+        return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 }
