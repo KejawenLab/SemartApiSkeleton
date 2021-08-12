@@ -92,6 +92,5 @@ class PermissionSubscriberTest extends TestCase
 
         $this->assertCount(1, $events);
         $this->assertArrayHasKey(ControllerEvent::class, $events);
-
     }
 }
