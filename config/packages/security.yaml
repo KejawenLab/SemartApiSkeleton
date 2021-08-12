@@ -14,9 +14,9 @@ security:
             pattern: ^/admin
             lazy: true
             switch_user: true
-            login_throttling:
-                max_attempts: 5
-                interval: '5 minutes'
+#            login_throttling:
+#                max_attempts: 5
+#                interval: '5 minutes'
             guard:
                 authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator

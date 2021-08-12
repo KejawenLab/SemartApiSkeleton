@@ -10,7 +10,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="{% if data.profileImage %}{{ '/admin' ~ data.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" alt="{{ data.username | humanize }}" />
+                            <img class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" alt="{{ data.username | humanize }}" />
                         </div>
                         <h3 class="profile-username text-center">{{ data.fullName }}</h3>
                         {% set group = data.group %}

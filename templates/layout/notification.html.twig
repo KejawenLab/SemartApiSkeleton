@@ -3,7 +3,7 @@
         <li class="nav-item dropdown user user-menu">
             {% set user = app.user %}
             <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src="{% if user.profileImage %}{{ '/admin' ~ user.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" class="user-image" alt="{{ user.username | humanize }}">
+                <img src="{{ asset('dist/img/avatar5.png') }}" class="user-image" alt="{{ user.username | humanize }}">
                 <span id="sas_user_hidden" class="hidden-xs">{{ user.username | humanize }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
