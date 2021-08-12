@@ -17,6 +17,7 @@ final class SearchQueryExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.hidden', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(false)));
         $queryBuilder->andWhere(
             $queryBuilder->expr()->like(
                 sprintf('UPPER(%s.fileName)', $this->aliasHelper->findAlias('root')),

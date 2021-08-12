@@ -7,33 +7,34 @@
     {% apply spaceless %}
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="{% if data.profileImage %}{{ '/admin' ~ data.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" alt="{{ data.username | humanize }}" />
+                        </div>
+                        <h3 class="profile-username text-center">{{ data.fullName }}</h3>
+                        {% set group = data.group %}
+                        <p class="text-muted text-center">{{ group.code ~ ' - ' ~ group.name }}</p>
+                        <ul class="list-group list-group-unbordered mb-3">
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'password' != property.name and 'plainPassword' != property.name %}
-                                    <tr>
-                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                        <td style="width: 7px;">:</td>
+                                {% if 'id' != property.name and 'password' != property.name and 'plainPassword' != property.name and 'devideId' != property.name %}
+                                    <li class="list-group-item">
+                                        <b>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</b>
                                         {% if 'group' == property.name %}
                                             {% set group = attribute(data, property.name) %}
-                                            <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
+                                            <a class="float-right">{{ group.code ~ ' - ' ~ group.name }}</a>
                                         {% elseif 'supervisor' == property.name %}
                                             {% set supervisor = attribute(data, property.name) %}
                                             {% if supervisor %}
-                                                <td>{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</td>
+                                                <a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a>
                                             {% endif %}
                                         {% else %}
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
                                         {% endif %}
-                                    </tr>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
+                        </ul>
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\Put') }}" class="btn btn-warning ml-1">{{ 'sas.page.profile.update' | trans({}, 'pages') }}</a>
                     </div>
                 </div>

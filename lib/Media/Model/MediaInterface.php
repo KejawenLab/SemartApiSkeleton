@@ -25,4 +25,6 @@ interface MediaInterface extends EntityInterface
     public function getFileUrl(): ?string;
 
     public function isPublic(): bool;
+
+    public function isHidden(): bool;
 }

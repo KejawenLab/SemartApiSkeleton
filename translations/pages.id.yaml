@@ -7,7 +7,7 @@ sas:
             too_many_records: 'Data yang diunduh terlalu besar. Gunakan mekanisme lain untuk mengunduh data.'
         profile:
             title: 'Profil'
-            view: 'Detil Profil'
+            view: 'Profil'
             update: 'Perbarui Profil'
             updated: 'Profil berhasil diperbarui'
         audit:

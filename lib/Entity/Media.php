@@ -58,6 +58,11 @@ class Media implements MediaInterface
     private bool $public;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $hidden;
+
+    /**
      * @Groups({"read"})
      */
     private ?string $fileUrl;
@@ -72,6 +77,7 @@ class Media implements MediaInterface
         $this->fileName = null;
         $this->folder = null;
         $this->public = false;
+        $this->hidden = false;
         $this->fileUrl = null;
         $this->file = null;
     }
@@ -109,6 +115,16 @@ class Media implements MediaInterface
     public function setPublic(bool $public): void
     {
         $this->public = $public;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
     }
 
     public function getFileUrl(): ?string

@@ -73,6 +73,16 @@ class User implements UserInterface
     private ?string $username;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
+     */
+    private ?string $profileImage;
+
+    /**
      * @ORM\Column(type="string", length=55)
      *
      * @Assert\Length(max=55)
@@ -110,6 +120,7 @@ class User implements UserInterface
         $this->group = null;
         $this->supervisor = null;
         $this->username = null;
+        $this->profileImage = null;
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
@@ -158,6 +169,16 @@ class User implements UserInterface
     public function setSupervisor(?UserInterface $supervisor): void
     {
         $this->supervisor = $supervisor;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(string $profileImage): void
+    {
+        $this->profileImage = $profileImage;
     }
 
     public function getFullName(): ?string

@@ -13,6 +13,8 @@ interface UserInterface extends AuthInterface, EntityInterface
 {
     public function getSupervisor(): ?self;
 
+    public function getProfileImage(): ?string;
+
     public function getFullName(): ?string;
 
     public function getUsername(): ?string;
