@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-toggle/css/bootstrap4-toggle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-toggle/css/bootstrap-toggle.min.css') }}">
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
@@ -70,7 +70,7 @@
 {% block javascripts %}
     {% apply spaceless %}
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
-        <script src="{{ asset('plugins/bootstrap4-toggle/js/bootstrap4-toggle.min.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap4-toggle/js/bootstrap-toggle.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 toastr.options = {

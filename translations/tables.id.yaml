@@ -28,7 +28,6 @@ sas:
                 profileImage: 'Foto Profil'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
-                deviceId: 'ID Perangkat'
             menu:
                 parent: 'Induk'
                 code: 'Kode'
