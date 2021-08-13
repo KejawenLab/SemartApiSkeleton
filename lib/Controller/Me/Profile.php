@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User as AuthUser;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
@@ -45,7 +46,7 @@ final class Profile extends AbstractFOSRestController
     public function __invoke(UserProviderFactory $userProviderFactory): View
     {
         $user = $this->getUser();
-        if (!$user instanceof User) {
+        if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException('User not found.');
         }
 
