@@ -16,6 +16,7 @@ sas:
                 group: 'Grup'
                 supervisor: 'Pengawas'
                 username: 'Penguna'
+                profileImage: 'Foto Profil'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
                 plainPassword: 'Kata Sandi'

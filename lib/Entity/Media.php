@@ -14,6 +14,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -69,6 +70,8 @@ class Media implements MediaInterface
 
     /**
      * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
+     *
+     * @Assert\NotBlank()
      */
     private ?File $file;
 

@@ -17,7 +17,14 @@
                         <p class="text-muted text-center">{{ group.code ~ ' - ' ~ group.name }}</p>
                         <ul class="list-group list-group-unbordered mb-3">
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'password' != property.name and 'plainPassword' != property.name and 'devideId' != property.name %}
+                                {% if
+                                    'profileImage' != property.name and
+                                    'id' != property.name and
+                                    'password' != property.name and
+                                    'plainPassword' != property.name and
+                                    'deviceId' != property.name and
+                                    'file' != property.name
+                                %}
                                     <li class="list-group-item">
                                         <b>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</b>
                                         {% if 'group' == property.name %}

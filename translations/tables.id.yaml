@@ -25,6 +25,7 @@ sas:
                 group: 'Grup'
                 supervisor: 'Pengawas'
                 username: 'Penguna'
+                profileImage: 'Foto Profil'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
                 deviceId: 'ID Perangkat'

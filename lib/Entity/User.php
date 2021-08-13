@@ -16,6 +16,7 @@ use KejawenLab\ApiSkeleton\Util\StringUtil;
 use OpenApi\Annotations as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,9 +76,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
     private ?string $profileImage;
@@ -113,6 +111,8 @@ class User implements UserInterface
      */
     private ?string $deviceId;
 
+    private ?File $file;
+
     private ?string $plainPassword = null;
 
     public function __construct()
@@ -124,6 +124,7 @@ class User implements UserInterface
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
+        $this->file = null;
     }
 
     public function getId(): ?string
@@ -239,6 +240,16 @@ class User implements UserInterface
     public function isEncoded(): bool
     {
         return true;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(File $file): void
+    {
+        $this->file = $file;
     }
 
     public function getNullOrString(): ?string

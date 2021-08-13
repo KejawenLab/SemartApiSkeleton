@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Security\Model;
 
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 interface UserInterface extends AuthInterface, EntityInterface
 {
+    public const PROFILE_MEDIA_FOLDER = 'profiles';
+
     public function getSupervisor(): ?self;
 
     public function getProfileImage(): ?string;
+
+    public function setProfileImage(string $profileImage): void;
 
     public function getFullName(): ?string;
 
@@ -30,4 +35,6 @@ interface UserInterface extends AuthInterface, EntityInterface
     public function getDeviceId(): ?string;
 
     public function setDeviceId(string $deviceId): void;
+
+    public function getFile(): ?File;
 }
