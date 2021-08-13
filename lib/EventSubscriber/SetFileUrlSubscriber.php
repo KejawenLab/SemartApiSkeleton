@@ -8,6 +8,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
@@ -22,11 +23,9 @@ final class SetFileUrlSubscriber implements EventSubscriber
     public function postLoad(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
-        if (!$object instanceof MediaInterface) {
-            return;
+        if ($object instanceof MediaInterface) {
+            $object->setFileUrl($this->storage->resolveUri($object, MediaInterface::FILE_FIELD));
         }
-
-        $object->setFileUrl($this->storage->resolveUri($object, MediaInterface::FILE_FIELD));
     }
 
     /**

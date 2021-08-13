@@ -73,7 +73,7 @@ class Media implements MediaInterface
      *
      * @Assert\NotBlank()
      */
-    private ?File $file;
+    private ?File $file = null;
 
     public function __construct()
     {
@@ -82,7 +82,6 @@ class Media implements MediaInterface
         $this->public = false;
         $this->hidden = false;
         $this->fileUrl = null;
-        $this->file = null;
     }
 
     public function getId(): ?string

@@ -3,6 +3,6 @@ vich_uploader:
     storage: '@KejawenLab\ApiSkeleton\Media\Storage'
     mappings:
         media:
-            uri_prefix: /medias
+            uri_prefix: '%env(resolve:APP_UPLOAD_DIR)%'
             upload_destination: '%env(resolve:APP_UPLOAD_DIR)%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

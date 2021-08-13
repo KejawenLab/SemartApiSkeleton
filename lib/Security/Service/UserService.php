@@ -50,7 +50,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
 
             $this->mediaService->save($media);
 
-            $user->setProfileImage($media->getFileName());
+            $user->setProfileImage(sprintf('%s/%s', UserInterface::PROFILE_MEDIA_FOLDER, $media->getFileUrl()));
         }
 
         if ($plainPassword = $user->getPlainPassword()) {

@@ -111,7 +111,7 @@ class User implements UserInterface
      */
     private ?string $deviceId;
 
-    private ?File $file;
+    private ?File $file = null;
 
     private ?string $plainPassword = null;
 
@@ -124,7 +124,6 @@ class User implements UserInterface
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
-        $this->file = null;
     }
 
     public function getId(): ?string
@@ -174,7 +173,7 @@ class User implements UserInterface
 
     public function getProfileImage(): ?string
     {
-        return $this->profileImage;
+        return sprintf('/%s/%s', self::PROFILE_MEDIA_FOLDER, $this->profileImage);
     }
 
     public function setProfileImage(string $profileImage): void

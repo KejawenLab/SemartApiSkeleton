@@ -4,12 +4,12 @@
             {% set user = app.user %}
             {% set group = user.group %}
             <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src="{{ asset('dist/img/avatar5.png') }}" class="user-image" alt="{{ user.username }}">
+                <img src="{% if user.profileImage %}{{ '/admin' ~ sas.media_prefix ~ user.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" class="user-image" alt="{{ user.username }}">
                 <span id="sas_user_hidden" class="hidden-xs">{{ user.username | humanize }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">
-                    <img src="{% if user.profileImage %}{{ '/admin' ~ user.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" class="img-circle" alt="{{ user.username }}">
+                    <img src="{% if user.profileImage %}{{ '/admin' ~ sas.media_prefix ~ user.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" class="img-circle" alt="{{ user.username }}">
                     <p id="sas_user_name">{{ user.username }}<small>{{ group.code ~ ' - ' ~ group.name }}</small></p>
                 </li>
                 <li class="user-footer col-md-12">

@@ -62,6 +62,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
             'app_title' => $_SERVER['APP_TITLE'],
             'app_description' => $_SERVER['APP_DESCRIPTION'],
             'version' => $_SERVER['APP_VERSION'],
+            'media_prefix' => $_SERVER['APP_MEDIA_PREFIX'],
             'semart_name' => 'Semart Api Skeleton',
             'semart_codename' => SemartApiSkeleton::CODENAME,
             'semart_version' => SemartApiSkeleton::VERSION,
