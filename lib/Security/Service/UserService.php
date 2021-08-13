@@ -8,6 +8,7 @@ use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
@@ -17,6 +18,7 @@ use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -30,6 +32,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         private UserPasswordEncoderInterface $service,
         private PasswordHistoryService $history,
         private MediaService $mediaService,
+        private StorageInterface $storage,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
@@ -50,7 +53,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
 
             $this->mediaService->save($media);
 
-            $user->setProfileImage(sprintf('%s/%s', UserInterface::PROFILE_MEDIA_FOLDER, $media->getFileUrl()));
+            $user->setProfileImage(sprintf('%s/%s', UserInterface::PROFILE_MEDIA_FOLDER, $this->storage->resolveUri($media, MediaInterface::FILE_FIELD)));
         }
 
         if ($plainPassword = $user->getPlainPassword()) {
