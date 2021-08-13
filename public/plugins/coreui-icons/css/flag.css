@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*!
  * CoreUI Icons - Flag Icons
- * @version v2.0.0-beta.4
+ * @version v2.0.0-beta.5
  * @link https://coreui.io/icons/flag/
  * Copyright (c) 2020 creativeLabs Łukasz Holeczek
  * Licensed under CC0 1.0 Universal
@@ -150,6 +150,10 @@
 
 .cif-ci {
   background-image: url(../svg/flag/cif-CI.svg);
+}
+
+.cif-ck {
+  background-image: url(../svg/flag/cif-CK.svg);
 }
 
 .cif-cl {
@@ -774,6 +778,10 @@
 
 .cif-ve {
   background-image: url(../svg/flag/cif-VE.svg);
+}
+
+.cif-vg {
+  background-image: url(../svg/flag/cif-VG.svg);
 }
 
 .cif-vn {
