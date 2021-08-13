@@ -13,6 +13,7 @@ use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User as AuthUser;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
@@ -65,7 +66,7 @@ final class Put extends AbstractFOSRestController
     public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
     {
         $user = $this->getUser();
-        if (!$user instanceof User) {
+        if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException('User not found.');
         }
 
