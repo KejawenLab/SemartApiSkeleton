@@ -1,12 +1,16 @@
-# Semart Api Skeleton
+# SemartApiSkeleton
 
 >
-> Semart Api Skeleton adalah solusi untuk membangun aplikasi secara cepat, fleksibel dan mudah untuk aplikasi berbasis Admin maupun Api
+> SemartApiSkeleton adalah solusi untuk membangun aplikasi secara super cepat, sangat fleksibel dan luar biasa mudah untuk aplikasi berbasis Admin maupun Api
+> 
+> SemartApiSkeleton menggunakan `swoole` sebagai PHP Runtime untuk menjalankan PHP dengan model long pooling sebagaimana NodeJs, Golang atau sejenisnya.
 >
 
-## Video
+## Requirement
 
-[![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
+- [Docker](https://docs.docker.com/engine)
+
+- [Docker Compose](https://docs.docker.com/compose)
 
 ## Install
 
@@ -131,68 +135,12 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:in
 > * Adminer berjalan pada alamat `http://localhost:6789` dengan host `db`, username `root` dan password `semart`
 >
 
-## Fitur
-
->
-> * RESTful Api Generator
->
-> * Admin Generator
->
-> * Api Documentation
->
-> * Sandbox
->
-> * JWT Authentication
->
-> * Rate Limiter
->
-> * Single Sign In
->
-> * Query Extension
->
-> * Soft Deletable
->
-> * Audit Trail
->
-> * User Management
->
-> * Profile Management
->
-> * Group Management
-> 
-> * Menu Management
->
-> * Permission Management
->
-> * Setting Management
->
-> * Cronjob Management
->
-> * Cache Management
->
-> * Media Management
->
-> * Public & Private Media Support
->
-> * Public & Private Api Support
->
-> * Housekeeping
-> 
-> * Password History
->
-> * Api Client/Consumer Management
-> 
-> * Health Check
-> 
-> * Export to CSV
->
-
 ## Cara Penggunaan
 
 #### Buat Folder `Todo/Model` pada `app`
 
 ```bash
-cd <your_installation_dir> && mkdir -p Todo/Model
+cd <your_installation_dir> && mkdir -p app/Todo/Model
 ```
 
 #### Buat Interface `TodoInterface` pada folder `Todo/Model`
@@ -313,6 +261,11 @@ class Todo implements TodoInterface
     {
         $this->done = $done;
     }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getTask();
+    }
 }
 
 ```
@@ -325,23 +278,104 @@ Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundl
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
 ```
 
+![Generate Command](doc/assets/generate_command.png)
+
 Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menjadi seperti berikut:
+
+![After Generate](doc/assets/after_generate.png)
+
+Dan jika kamu login ke Semart Api Skeleton maka akan muncul menu `Todo` pada sidebar sebagai berikut:
+
+![After Generate](doc/assets/sidebar_todo.png)
+
+Dan ketika membuka menu `Menu` maka record `Todo` pun akan muncul sebagai berikut:
+
+![Menu](doc/assets/menu_todo.png)
+
+Dan pastinya kamu juga bisa set permission untuk `Todo` pada menu Hak Akses (`Group` -> `Lihat` -> `Hak Akses`) sebagai berikut:
+
+![Todo Permission](doc/assets/rbac_todo.png)
+
+Dan jika kamu mengakses halaman Api Documentation maka akan muncul section `Todo` sebagai berikut:
+
+![Api Doc](doc/assets/api_todo.png)
+
+Sangat mudah sekali bukan? Selanjutnya kamu harus restart dulu docker-nya agar class-class yang tadi digenerate dan didaftarkan sebagai service. Hal ini perlu dilakukan karena kita menggunakan swoole. 
+
+#### Update translation
+
+Ketika kamu mengetik menu `Todo` pada sidebar, maka akan muncul tampilan sebagai berikut:
+
+![Todo List](doc/assets/todo_list.png)
+
+Terdapat beberapa text yang aneh? Santai, kamu cukup buka file `translations/pages.id.yaml` dan tambahkan baris berikut:
+
+```yaml
+        todo:
+            saved: 'Todo berhasil disimpan'
+            deleted: 'Todo berhasil dihapus'
+            not_found: 'Todo tidak ditemukan'
+            list: 'Daftar Todo'
+            add: 'Tambah Todo'
+            edit: 'Ubah Todo'
+            view: 'Detil Todo'
+```
+
+Selanjut, kamu juga perlu mengubah translasi pada file `translations/tables.id.yaml` sebagai berikut:
+
+```yaml
+
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'
+```
+
+Dan ketika kamu mengeklik menu pilihan `Tambah Baru` pun akan muncul hal yang sama:
+
+![Todo Add](doc/assets/todo_add.png)
+
+Kamu bisa mengubahnya pada file `translations/forms.id.yaml` dan tambahkan baris berikut:
+
+```yaml
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'
+```
+
+Ketika kamu berusaha menambahkan task, maka akan kamu harus mengeklik check box `done`, untuk memodifikasi itu, kamu harus mengubah definisi form (akan dibahas selanjutnya).
+
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+Untuk lebih jelas tentang translasi pada Symfony, kamu dapat membaca dokumentasi resmi tentang [Symfony Translation](https://symfony.com/doc/current/translation.html)
 
 #### Update form type
 
+Secara default, semua field yang ada pada form adalah `required` sehingga kita wajib mengisinya. Untuk mengubahnya, ubah config file `Form/TodoType` pada fungsi `buildForm` sebagai berikut:
+
 ```php
-//class: KejawenLab\Application\Form\TodoType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('task');
-        $builder->add('done');
+        $builder->add('task', null, [
+            'required' => true,
+            'label' => 'sas.form.field.todo.task',
+        ]);
+        $builder->add('done', null, [
+            'required' => false,
+            'label' => 'sas.form.field.todo.done',
+        ]);
     }
 ```
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
-#### Update search query extension
+Perubahan ini akan berlaku pada halaman Admin maupun Rest Api.
+
+#### Mengaktifkan fungsi pencarian
+
+Secara default, SemartApiSkeleton telah menyiapkan class untuk menghandle kustomasi query, namun SemartApiSkeleton tidak memberikan logic apapun pada class tersebut. Kamu sendiri yang perlu memberikut logic pada class tersebut.
+
+Sebagai contoh, kita akan coba mengaktifkan fungsi pencarian Todo berdasarkan field `task`, maka kita mengubah file `Todo/Query/SearchQueryExtension` pada fungsi `apply` sebagai berikut:
 
 ```php
-//class: KejawenLab\Application\Test\Query\SearchQueryExtension
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');
@@ -349,16 +383,116 @@ Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menja
             return;
         }
 
-        /**
-        * Uncomment to implement your own search logic
-        *
-        * $alias = $this->aliasHelper->findAlias('root');
-        * $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        */
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.task)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))
+            )
+        );
     }
 ```
 
-Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan untuk Kamu.
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+#### Update Template
+
+Secara default, SemartApiSkeleton akan mengubah `bool` menjadi `string` (direpresentasikan dengan `0` dan `1`) seperti pada daftar todo berikut:
+
+![Todo List](doc/assets/todo_template.png)
+
+Kita dapat mengubahnya melalui file `templates/todo/all.html.twig` sebagai berikut:
+
+```twig
+{% for property in properties %}
+    {% if 'id' != property.name %}
+        <tr>
+            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 7px;">:</td>
+            {% if 'done' == property.name %}
+                <td>{% if todo.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
+            {% else %}
+                <td>{{ semart_print(attribute(data, property.name)) }}</td>
+            {% endif %}
+        </tr>
+    {% endif %}
+{% endfor %}
+```
+
+Selain itu, kita juga perlu mengubah file `templates/todo/view.html.twig` sebagai berikut:
+
+```twig
+{% for property in properties %}
+    {% if 'id' != property.name %}
+        <tr>
+            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 7px;">:</td>
+            {% if 'done' == property.name %}
+                <td>{% if data.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
+            {% else %}
+                <td>{{ semart_print(attribute(data, property.name)) }}</td>
+            {% endif %}
+        </tr>
+    {% endif %}
+{% endfor %}
+```
+
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+## Fitur
+
+>
+> * RESTful Api Generator
+>
+> * Admin Generator
+>
+> * Api Documentation
+>
+> * Sandbox
+>
+> * JWT Authentication
+>
+> * Rate Limiter
+>
+> * Single Sign In
+>
+> * Query Extension
+>
+> * Soft Deletable
+>
+> * Audit Trail
+>
+> * User Management
+>
+> * Profile Management
+>
+> * Group Management
+>
+> * Menu Management
+>
+> * Permission Management
+>
+> * Setting Management
+>
+> * Cronjob Management
+>
+> * Cache Management
+>
+> * Media Management
+>
+> * Public & Private Media Support
+>
+> * Public & Private Api Support
+>
+> * Housekeeping
+>
+> * Password History
+>
+> * Api Client/Consumer Management
+>
+> * Health Check
+>
+> * Export to CSV
+>
 
 ## Dokumentasi
 

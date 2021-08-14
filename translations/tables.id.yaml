@@ -81,3 +81,6 @@ sas:
                 queries: 'Queries'
                 requests: 'Post Data'
                 files: 'Files'
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'

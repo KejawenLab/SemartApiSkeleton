@@ -43,6 +43,9 @@ sas:
                 symfonyCommand: 'Perintah Symfony'
             api_client:
                 name: 'Nama'
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'
         action:
             run: 'Jalankan'
             logs: 'Data Log'
