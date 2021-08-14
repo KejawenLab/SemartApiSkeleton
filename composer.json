@@ -1,6 +1,20 @@
 {
+    "name": "kejawenlab/semartapiskeleton",
+    "description": "Blazing fast application skeleton for building admin and api based application",
+    "keywords": ["semartapiskeleton", "semart api skeleton", "kejawenlab"],
+    "license": "MIT",
+    "homepage": "https://github.com/KejawenLab/SemartApiSkeleton",
+    "support": {
+        "issues": "https://github.com/KejawenLab/SemartApiSkeleton/issues",
+        "source": "https://github.com/KejawenLab/SemartApiSkeleton"
+    },
+    "authors": [
+        {
+            "name": "Muhamad Surya Iksanudin",
+            "email": "surya.iksanudin@gmail.com"
+        }
+    ],
     "type": "project",
-    "license": "proprietary",
     "require": {
         "php": ">=8.0",
         "ext-ctype": "*",
@@ -100,14 +114,10 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "KejawenLab\\ApiSkeleton\\Composer\\ScriptHandler::preInstall",
-            "@auto-scripts",
-            "KejawenLab\\ApiSkeleton\\Composer\\ScriptHandler::postInstall"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "KejawenLab\\ApiSkeleton\\Composer\\ScriptHandler::preInstall",
-            "@auto-scripts",
-            "KejawenLab\\ApiSkeleton\\Composer\\ScriptHandler::postInstall"
+            "@auto-scripts"
         ]
     },
     "conflict": {
