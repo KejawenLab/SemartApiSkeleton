@@ -130,7 +130,9 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:in
 ```
 
 > 
-> * Aplikasi berjalan pada alamat `http://localhost:9876/api/doc` dengan username `admin` dan password `admin`
+> * Swagger berjalan pada alamat `http://localhost:9876/api/doc` dengan username `admin` dan password `admin`
+>
+> * Admin berjalan pada alamat `http://localhost:9876/admin` dengan username `admin` dan password `admin` sama seperti pada Swagger
 >
 > * Adminer berjalan pada alamat `http://localhost:6789` dengan host `db`, username `root` dan password `semart`
 >
@@ -144,6 +146,8 @@ cd <your_installation_dir> && mkdir -p app/Todo/Model
 ```
 
 #### Buat Interface `TodoInterface` pada folder `Todo/Model`
+
+Model harus extends `KejawenLab\ApiSkeleton\Entity\EntityInterface` interface
 
 ```php
 <?php
@@ -169,6 +173,10 @@ interface TodoInterface extends EntityInterface
 ```
 
 #### Buat Entity pada folder `app/Entity`
+
+Entity harus implement `KejawenLab\Application\Todo\Model\TodoInterface`. 
+
+Kamu dapat merujuk pada dokumentasi resmi tentang [Mapping Entity](https://symfony.com/doc/current/doctrine.html#creating-an-entity-class), namun sangat tidak disarankan menggunakan Symfony Maker untuk membuat entity pada SemartApiSkeleton
 
 ```php
 <?php
@@ -270,7 +278,7 @@ class Todo implements TodoInterface
 
 ```
 
-Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) untuk membuat entity lalu kemudian memodifikasinya sesuai dengan spek dari Semart Api Skeleton.
+Class `KejawenLab\Application\Repository\TodoRepository` untuk sekarang belum ada, namun jangan khawatir, SemartApiSkeleton akan mengenerate class tersebut nanti.
 
 #### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
 
@@ -365,6 +373,9 @@ Secara default, semua field yang ada pada form adalah `required` sehingga kita w
         ]);
     }
 ```
+
+Untuk lebih jelas tentang Symfony Form, kamu dapat membaca dokumentasi resmi tentang [Symfony Form](https://symfony.com/doc/current/forms.html)
+
 Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 Perubahan ini akan berlaku pada halaman Admin maupun Rest Api.
@@ -391,6 +402,8 @@ Sebagai contoh, kita akan coba mengaktifkan fungsi pencarian Todo berdasarkan fi
         );
     }
 ```
+
+SemartApiSkeleton menggunakan [Doctrine Query Builder](https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/query-builder.html) untuk melakukan kustomasi query pada query extension.
 
 Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
@@ -520,13 +533,7 @@ Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 - [Handel Kompleks Query](doc/query_extension.md)
 
-- [Cara Aman *Upgrade* Aplikasi](doc/upgrade.md)
-
 - [Menambah Tipe *User* Baru](doc/user.md)
-
-> 
-> **NB**: Kamu juga bisa mengunjungi [Arsiteknologi[dot]Com](https://arsiteknologi.com/category/symfony/semartapiskeleton) untuk mengetahui tips dan trik dari Semart Api Skeleton
->
 
 ## Roadmap
 
