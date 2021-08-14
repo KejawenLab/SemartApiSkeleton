@@ -36,7 +36,7 @@
                             <tr>
                                 <th>No</th>
                                 {% for property in properties %}
-                                    {% if 'id' != property.name and 'file' != property.name %}
+                                    {% if 'id' != property.name and 'file' != property.name and 'hidden' != property.name %}
                                         <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
                                     {% endif %}
                                 {% endfor %}

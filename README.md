@@ -1,46 +1,16 @@
-# Semart Api Skeleton
+# SemartApiSkeleton
 
 >
-> Semart Api Skeleton adalah skeleton untuk membangun aplikasi secara sangat cepat untuk aplikasi berbasis Admin maupun Api
+> SemartApiSkeleton adalah solusi untuk membangun aplikasi secara super cepat, sangat fleksibel dan luar biasa mudah untuk aplikasi berbasis Admin maupun Api
+> 
+> SemartApiSkeleton menggunakan `swoole` sebagai PHP Runtime untuk menjalankan PHP dengan model long pooling sebagaimana NodeJs, Golang atau sejenisnya.
 >
-
-## Video
-
-[![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
 
 ## Requirement
 
-#### Abaikan Requirement jika Kamu menggunakan Docker
+- [Docker](https://docs.docker.com/engine)
 
-> 
-> * PHP >= 8.0
->
-> * Extension Ctype 
->
-> * Extension Iconv
->
-> * Extension Json
->
-> * Extension Openssl
->
-> * Extension Pcntl
->
-> * Extension Pdo
->
-> * Extension Posix
->
-> * Extension Redis
-> 
-> * Extension Swoole
->
-> * RDBMS (MySQL/MariaDB/PostgreSQL/OracleDB/SQLServer)
->
-> * Redis Server >= 4.0
->
-> * Composer
->
-> * Symfony Console 
->
+- [Docker Compose](https://docs.docker.com/compose)
 
 ## Install
 
@@ -57,22 +27,6 @@ mkdir -p config/jwt
 openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
 openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
-
-### Non Docker Install
-
-```bash
-composer update --prefer-dist -vvv
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load --no-interaction
-php bin/console assets:install
-php bin/console cron:start
-symfony server:start
-```
-
-> 
-> Buka browser pada halaman https://localhost:8000/api/doc atau sesuai alamat yang tertera ketika menjalankan perintah `symfony server:start`
->
 
 ### Docker Install
 
@@ -181,19 +135,308 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:in
 > * Adminer berjalan pada alamat `http://localhost:6789` dengan host `db`, username `root` dan password `semart`
 >
 
-## Cron Daemon
+## Cara Penggunaan
 
-#### Start Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
-
-```bash
-php bin/console cron:start
-```
-
-#### Stop Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
+#### Buat Folder `Todo/Model` pada `app`
 
 ```bash
-php bin/console cron:stop
+cd <your_installation_dir> && mkdir -p app/Todo/Model
 ```
+
+#### Buat Interface `TodoInterface` pada folder `Todo/Model`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Application\Todo\Model;
+
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
+
+/**
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
+ */
+interface TodoInterface extends EntityInterface
+{
+    public function getId(): ?string;
+
+    public function getTask(): ?string;
+
+    public function isDone(): bool;
+}
+
+```
+
+#### Buat Entity pada folder `app/Entity`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Blameable\Traits\BlameableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use KejawenLab\Application\Repository\TodoRepository;
+use KejawenLab\Application\Todo\Model\TodoInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Ramsey\Uuid\UuidInterface;
+use OpenApi\Annotations as OA;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass=TodoRepository::class)
+ * @ORM\Table(name="todos")
+ *
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ */
+class Todo implements TodoInterface
+{
+    use BlameableEntity;
+    use SoftDeleteableEntity;
+    use TimestampableEntity;
+
+    /**
+     * @ORM\Id()
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Groups({"read"})
+     *
+     * @OA\Property(type="string")
+     */
+    private UuidInterface $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
+     */
+    private ?string $task;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
+     */
+    private bool $done;
+    
+    public function __construct()
+    {
+        $this->task = null;
+        $this->done = false;
+    }
+
+    public function getId(): ?string
+    {
+        return (string) $this->id;
+    }
+
+    public function getTask(): ?string
+    {
+        return $this->task;
+    }
+
+    public function setTask(string $task): void
+    {
+        $this->task = StringUtil::title($task);
+    }
+
+    public function isDone(): bool
+    {
+        return $this->done;
+    }
+
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
+    }
+
+    public function getNullOrString(): ?string
+    {
+        return $this->getTask();
+    }
+}
+
+```
+
+Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) untuk membuat entity lalu kemudian memodifikasinya sesuai dengan spek dari Semart Api Skeleton.
+
+#### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
+
+```bash
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
+```
+
+![Generate Command](doc/assets/generate_command.png)
+
+Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menjadi seperti berikut:
+
+![After Generate](doc/assets/after_generate.png)
+
+Dan jika kamu login ke Semart Api Skeleton maka akan muncul menu `Todo` pada sidebar sebagai berikut:
+
+![After Generate](doc/assets/sidebar_todo.png)
+
+Dan ketika membuka menu `Menu` maka record `Todo` pun akan muncul sebagai berikut:
+
+![Menu](doc/assets/menu_todo.png)
+
+Dan pastinya kamu juga bisa set permission untuk `Todo` pada menu Hak Akses (`Group` -> `Lihat` -> `Hak Akses`) sebagai berikut:
+
+![Todo Permission](doc/assets/rbac_todo.png)
+
+Dan jika kamu mengakses halaman Api Documentation maka akan muncul section `Todo` sebagai berikut:
+
+![Api Doc](doc/assets/api_todo.png)
+
+Sangat mudah sekali bukan? Selanjutnya kamu harus restart dulu docker-nya agar class-class yang tadi digenerate dan didaftarkan sebagai service. Hal ini perlu dilakukan karena kita menggunakan swoole. 
+
+#### Update translation
+
+Ketika kamu mengetik menu `Todo` pada sidebar, maka akan muncul tampilan sebagai berikut:
+
+![Todo List](doc/assets/todo_list.png)
+
+Terdapat beberapa text yang aneh? Santai, kamu cukup buka file `translations/pages.id.yaml` dan tambahkan baris berikut:
+
+```yaml
+        todo:
+            saved: 'Todo berhasil disimpan'
+            deleted: 'Todo berhasil dihapus'
+            not_found: 'Todo tidak ditemukan'
+            list: 'Daftar Todo'
+            add: 'Tambah Todo'
+            edit: 'Ubah Todo'
+            view: 'Detil Todo'
+```
+
+Selanjut, kamu juga perlu mengubah translasi pada file `translations/tables.id.yaml` sebagai berikut:
+
+```yaml
+
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'
+```
+
+Dan ketika kamu mengeklik menu pilihan `Tambah Baru` pun akan muncul hal yang sama:
+
+![Todo Add](doc/assets/todo_add.png)
+
+Kamu bisa mengubahnya pada file `translations/forms.id.yaml` dan tambahkan baris berikut:
+
+```yaml
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'
+```
+
+Ketika kamu berusaha menambahkan task, maka akan kamu harus mengeklik check box `done`, untuk memodifikasi itu, kamu harus mengubah definisi form (akan dibahas selanjutnya).
+
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+Untuk lebih jelas tentang translasi pada Symfony, kamu dapat membaca dokumentasi resmi tentang [Symfony Translation](https://symfony.com/doc/current/translation.html)
+
+#### Update form type
+
+Secara default, semua field yang ada pada form adalah `required` sehingga kita wajib mengisinya. Untuk mengubahnya, ubah config file `Form/TodoType` pada fungsi `buildForm` sebagai berikut:
+
+```php
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('task', null, [
+            'required' => true,
+            'label' => 'sas.form.field.todo.task',
+        ]);
+        $builder->add('done', null, [
+            'required' => false,
+            'label' => 'sas.form.field.todo.done',
+        ]);
+    }
+```
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+Perubahan ini akan berlaku pada halaman Admin maupun Rest Api.
+
+#### Mengaktifkan fungsi pencarian
+
+Secara default, SemartApiSkeleton telah menyiapkan class untuk menghandle kustomasi query, namun SemartApiSkeleton tidak memberikan logic apapun pada class tersebut. Kamu sendiri yang perlu memberikut logic pada class tersebut.
+
+Sebagai contoh, kita akan coba mengaktifkan fungsi pencarian Todo berdasarkan field `task`, maka kita mengubah file `Todo/Query/SearchQueryExtension` pada fungsi `apply` sebagai berikut:
+
+```php
+    public function apply(QueryBuilder $queryBuilder, Request $request): void
+    {
+        $query = $request->query->get('q');
+        if (!$query) {
+            return;
+        }
+
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.task)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))
+            )
+        );
+    }
+```
+
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
+
+#### Update Template
+
+Secara default, SemartApiSkeleton akan mengubah `bool` menjadi `string` (direpresentasikan dengan `0` dan `1`) seperti pada daftar todo berikut:
+
+![Todo List](doc/assets/todo_template.png)
+
+Kita dapat mengubahnya melalui file `templates/todo/all.html.twig` sebagai berikut:
+
+```twig
+{% for property in properties %}
+    {% if 'id' != property.name %}
+        <tr>
+            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 7px;">:</td>
+            {% if 'done' == property.name %}
+                <td>{% if todo.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
+            {% else %}
+                <td>{{ semart_print(attribute(data, property.name)) }}</td>
+            {% endif %}
+        </tr>
+    {% endif %}
+{% endfor %}
+```
+
+Selain itu, kita juga perlu mengubah file `templates/todo/view.html.twig` sebagai berikut:
+
+```twig
+{% for property in properties %}
+    {% if 'id' != property.name %}
+        <tr>
+            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 7px;">:</td>
+            {% if 'done' == property.name %}
+                <td>{% if data.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
+            {% else %}
+                <td>{{ semart_print(attribute(data, property.name)) }}</td>
+            {% endif %}
+        </tr>
+    {% endif %}
+{% endfor %}
+```
+
+Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 ## Fitur
 
@@ -223,7 +466,7 @@ php bin/console cron:stop
 > * Profile Management
 >
 > * Group Management
-> 
+>
 > * Menu Management
 >
 > * Permission Management
@@ -241,161 +484,15 @@ php bin/console cron:stop
 > * Public & Private Api Support
 >
 > * Housekeeping
-> 
+>
 > * Password History
 >
 > * Api Client/Consumer Management
-> 
+>
 > * Health Check
-> 
+>
 > * Export to CSV
 >
-
-## Cara Penggunaan
-
-#### Buat Interface Model
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace KejawenLab\Application\Test\Model;
-
-use KejawenLab\ApiSkeleton\Entity\EntityInterface;
-
-/**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
- */
-interface TestInterface extends EntityInterface
-{
-    public function getId(): ?string;
-
-    public function getName(): ?string;
-}
-
-```
-
-#### Buat Class Entity
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace KejawenLab\Application\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\BlameableEntity;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\Application\Repository\TestRepository;
-use KejawenLab\Application\Test\Model\TestInterface;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as OA;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
-
-/**
- * @ORM\Entity(repositoryClass=TestRepository::class)
- * @ORM\Table(name="test_table")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- */
-class Test implements TestInterface
-{
-    use BlameableEntity;
-    use SoftDeleteableEntity;
-    use TimestampableEntity;
-
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
-    private UuidInterface $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
-    private ?string $name;
-    
-    public function __construct()
-    {
-        $this->name = null;
-    }
-
-    public function getId(): ?string
-    {
-        return (string) $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = StringUtil::title($name);
-
-        return $this;
-    }
-}
-
-```
-
-Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) untuk membuat entity lalu kemudian memodifikasinya sesuai dengan spek dari Semart Api Skeleton.
-
-#### Generate RESTful Api
-
-```bash
-php bin/console semart:generate Test
-```
-
-#### Update form type
-
-```php
-//class: KejawenLab\Application\Form\TestType 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('name');
-    }
-```
-
-#### Update search query extension
-
-```php
-//class: KejawenLab\Application\Test\Query\SearchQueryExtension
-    public function apply(QueryBuilder $queryBuilder, Request $request): void
-    {
-        $query = $request->query->get('q');
-        if (!$query) {
-            return;
-        }
-
-        /**
-        * Uncomment to implement your own search logic
-        *
-        * $alias = $this->aliasHelper->findAlias('root');
-        * $queryBuilder->andWhere($queryBuilder->expr()->like(sprintf('UPPER(%s.name)', $alias), $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))));
-        */
-    }
-```
-
-Dan walllaaaaaaa **Api + Dokumentasi + Permission** secara otomatis dibuatkan untuk Kamu.
 
 ## Dokumentasi
 

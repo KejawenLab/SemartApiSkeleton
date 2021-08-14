@@ -85,3 +85,11 @@ sas:
             list: 'Log Cronjob'
             success: 'Sukses'
             failed: 'Gagal'
+        todo:
+            saved: 'Todo berhasil disimpan'
+            deleted: 'Todo berhasil dihapus'
+            not_found: 'Todo tidak ditemukan'
+            list: 'Daftar Todo'
+            add: 'Tambah Todo'
+            edit: 'Ubah Todo'
+            view: 'Detil Todo'

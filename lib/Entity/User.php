@@ -173,7 +173,13 @@ class User implements UserInterface
 
     public function getProfileImage(): ?string
     {
-        return sprintf('/%s/%s', self::PROFILE_MEDIA_FOLDER, $this->profileImage);
+        if (!$this->profileImage) {
+            return $this->profileImage;
+        }
+
+        $slice = explode('/', $this->profileImage);
+
+        return sprintf('/%s/%s', self::PROFILE_MEDIA_FOLDER, array_pop($slice));
     }
 
     public function setProfileImage(string $profileImage): void

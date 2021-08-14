@@ -28,7 +28,6 @@ sas:
                 profileImage: 'Foto Profil'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
-                deviceId: 'ID Perangkat'
             menu:
                 parent: 'Induk'
                 code: 'Kode'
@@ -82,3 +81,6 @@ sas:
                 queries: 'Queries'
                 requests: 'Post Data'
                 files: 'Files'
+            todo:
+                task: 'Tugas'
+                done: 'Selesai?'

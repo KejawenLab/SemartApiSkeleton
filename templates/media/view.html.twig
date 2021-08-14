@@ -12,7 +12,7 @@
                         <table class="table table-bordered table-hover text-nowrap">
                             <tbody>
                                 {% for property in properties %}
-                                    {% if 'id' != property.name and 'file' != property.name %}
+                                    {% if 'id' != property.name and 'file' != property.name and 'hidden' != property.name %}
                                         <tr>
                                             <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
                                             <td style="width: 7px;">:</td>
