@@ -189,30 +189,38 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:in
 
 ## Cara Penggunaan
 
-#### Buat Interface Model
+#### Buat Folder `Todo/Model` pada `app`
+
+```bash
+cd <your_installation_dir> && mkdir -p Todo/Model
+```
+
+#### Buat Interface `TodoInterface` pada folder `Todo/Model`
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Test\Model;
+namespace KejawenLab\Application\Todo\Model;
 
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface TestInterface extends EntityInterface
+interface TodoInterface extends EntityInterface
 {
     public function getId(): ?string;
 
-    public function getName(): ?string;
+    public function getTask(): ?string;
+
+    public function isDone(): bool;
 }
 
 ```
 
-#### Buat Class Entity
+#### Buat Entity pada folder `app/Entity`
 
 ```php
 <?php
@@ -226,8 +234,8 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use KejawenLab\Application\Repository\TestRepository;
-use KejawenLab\Application\Test\Model\TestInterface;
+use KejawenLab\Application\Repository\TodoRepository;
+use KejawenLab\Application\Todo\Model\TodoInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Ramsey\Uuid\UuidInterface;
 use OpenApi\Annotations as OA;
@@ -235,12 +243,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=TestRepository::class)
- * @ORM\Table(name="test_table")
+ * @ORM\Entity(repositoryClass=TodoRepository::class)
+ * @ORM\Table(name="todos")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
-class Test implements TestInterface
+class Todo implements TodoInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
@@ -266,11 +274,19 @@ class Test implements TestInterface
      *
      * @Groups({"read"})
      */
-    private ?string $name;
+    private ?string $task;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
+     */
+    private bool $done;
     
     public function __construct()
     {
-        $this->name = null;
+        $this->task = null;
+        $this->done = false;
     }
 
     public function getId(): ?string
@@ -278,16 +294,24 @@ class Test implements TestInterface
         return (string) $this->id;
     }
 
-    public function getName(): ?string
+    public function getTask(): ?string
     {
-        return $this->name;
+        return $this->task;
     }
 
-    public function setName(string $name): self
+    public function setTask(string $task): void
     {
-        $this->name = StringUtil::title($name);
+        $this->task = StringUtil::title($task);
+    }
 
-        return $this;
+    public function isDone(): bool
+    {
+        return $this->done;
+    }
+
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
     }
 }
 
@@ -295,19 +319,22 @@ class Test implements TestInterface
 
 Kamu bisa juga menggunakan [Symfony Maker](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) untuk membuat entity lalu kemudian memodifikasinya sesuai dengan spek dari Semart Api Skeleton.
 
-#### Generate RESTful Api
+#### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
 
 ```bash
-php bin/console semart:generate Test
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
 ```
+
+Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menjadi seperti berikut:
 
 #### Update form type
 
 ```php
-//class: KejawenLab\Application\Form\TestType 
+//class: KejawenLab\Application\Form\TodoType 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder->add('task');
+        $builder->add('done');
     }
 ```
 
