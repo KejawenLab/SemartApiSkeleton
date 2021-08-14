@@ -1,46 +1,12 @@
 # Semart Api Skeleton
 
 >
-> Semart Api Skeleton adalah skeleton untuk membangun aplikasi secara sangat cepat untuk aplikasi berbasis Admin maupun Api
+> Semart Api Skeleton adalah solusi untuk membangun aplikasi secara cepat, fleksibel dan mudah untuk aplikasi berbasis Admin maupun Api
 >
 
 ## Video
 
 [![Semart Youtube](http://img.youtube.com/vi/-PvoMagr4JM/0.jpg)](https://www.youtube.com/watch?v=-PvoMagr4JM)
-
-## Requirement
-
-#### Abaikan Requirement jika Kamu menggunakan Docker
-
-> 
-> * PHP >= 8.0
->
-> * Extension Ctype 
->
-> * Extension Iconv
->
-> * Extension Json
->
-> * Extension Openssl
->
-> * Extension Pcntl
->
-> * Extension Pdo
->
-> * Extension Posix
->
-> * Extension Redis
-> 
-> * Extension Swoole
->
-> * RDBMS (MySQL/MariaDB/PostgreSQL/OracleDB/SQLServer)
->
-> * Redis Server >= 4.0
->
-> * Composer
->
-> * Symfony Console 
->
 
 ## Install
 
@@ -57,22 +23,6 @@ mkdir -p config/jwt
 openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
 openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
-
-### Non Docker Install
-
-```bash
-composer update --prefer-dist -vvv
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load --no-interaction
-php bin/console assets:install
-php bin/console cron:start
-symfony server:start
-```
-
-> 
-> Buka browser pada halaman https://localhost:8000/api/doc atau sesuai alamat yang tertera ketika menjalankan perintah `symfony server:start`
->
 
 ### Docker Install
 
@@ -180,20 +130,6 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:in
 >
 > * Adminer berjalan pada alamat `http://localhost:6789` dengan host `db`, username `root` dan password `semart`
 >
-
-## Cron Daemon
-
-#### Start Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
-
-```bash
-php bin/console cron:start
-```
-
-#### Stop Cron Daemon secara manual (bila menggunakan docker maka cron daemon secara otomatis aktif)
-
-```bash
-php bin/console cron:stop
-```
 
 ## Fitur
 
