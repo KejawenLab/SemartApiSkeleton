@@ -12,7 +12,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -20,12 +19,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class ResetCommand extends Command
 {
-    private string $semart;
-
     public function __construct(private KernelInterface $kernel)
     {
-        $this->semart = sprintf('%s%s.semart', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
-
         parent::__construct();
     }
 
@@ -48,11 +43,6 @@ final class ResetCommand extends Command
         }
 
         if (!$this->kernel->isDebug()) {
-            return 0;
-        }
-
-        $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($this->semart)) {
             return 0;
         }
 
@@ -93,8 +83,6 @@ final class ResetCommand extends Command
         $input->setInteractive(false);
         $fixtures = $application->find('doctrine:fixtures:load');
         $fixtures->run($input, $output);
-
-        $fileSystem->dumpFile($this->semart, '1');
 
         return 0;
     }
