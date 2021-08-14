@@ -449,6 +449,8 @@ Selain itu, kita juga perlu mengubah file `templates/todo/view.html.twig` sebaga
 {% endfor %}
 ```
 
+Untuk lebih jelas tentang Twig Template, kamu dapat membaca dokumentasi resmi [Twig Template](https://twig.symfony.com)
+
 Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 ## Fitur
