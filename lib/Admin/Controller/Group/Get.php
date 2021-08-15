@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private GroupService $service)
+    public function __construct(private GroupService $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -39,6 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
+        $audit = ['items' => []];
+        if ($this->reader->getProvider()->isAuditable(Group::class)) {
+            $audit = $this->audit->getAudits($group, $id, 3)->toArray();
+        }
+
         $class = new ReflectionClass(Group::class);
 
         return $this->render('group/view.html.twig', [
@@ -46,6 +53,7 @@ final class Get extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $group,
+            'audits' => $audit['items'],
         ]);
     }
 }

@@ -51,7 +51,7 @@ final class Audit extends AbstractController
         $class = new ReflectionClass(Group::class);
         $audit = $this->audit->getAudits($entity, $id)->toArray();
 
-        return $this->render('group/view.html.twig', [
+        return $this->render('group/audit.html.twig', [
             'page_title' => 'sas.page.audit.view',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),

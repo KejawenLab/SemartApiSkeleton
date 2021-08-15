@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private MenuService $service)
+    public function __construct(private MenuService $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -39,6 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
+        $audit = ['items' => []];
+        if ($this->reader->getProvider()->isAuditable(Menu::class)) {
+            $audit = $this->audit->getAudits($menu, $id, 3)->toArray();
+        }
+
         $class = new ReflectionClass(Menu::class);
 
         return $this->render('menu/view.html.twig', [
@@ -46,6 +53,7 @@ final class Get extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $menu,
+            'audits' => $audit['items'],
         ]);
     }
 }
