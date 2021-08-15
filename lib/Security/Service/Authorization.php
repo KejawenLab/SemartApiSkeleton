@@ -25,18 +25,12 @@ final class Authorization
         }
 
         $actions = $permission->getActions();
-        $count = count($actions);
-        $granted = 0;
         foreach ($actions as $value) {
-            if ($this->checker->isGranted($value, $menu)) {
-                ++$granted;
+            if (!$this->checker->isGranted($value, $menu)) {
+                return false;
             }
         }
 
-        if ($count === $granted) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }
