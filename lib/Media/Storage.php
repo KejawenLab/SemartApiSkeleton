@@ -72,22 +72,10 @@ final class Storage extends FileSystemStorage
             return null;
         }
 
-        $uploadDir = $this->convertWindowsDirectorySeparator($mapping->getUploadDir($obj));
-        $uploadDir = !$uploadDir ? '' : $uploadDir;
         if ($obj->isPublic()) {
-            $uploadDir = sprintf('%s/%s', MediaInterface::PUBLIC_FIELD, $uploadDir);
+            return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
         }
 
-        return sprintf(
-            '%s/%s%s',
-            $mapping->getUriPrefix(),
-            $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '',
-            $name
-        );
-    }
-
-    private function convertWindowsDirectorySeparator(string $string): string
-    {
-        return str_replace('\\', '/', $string);
+        return sprintf('%s/%s%s', $mapping->getUriPrefix(), $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
     }
 }
