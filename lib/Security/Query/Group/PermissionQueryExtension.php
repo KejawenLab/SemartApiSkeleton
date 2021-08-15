@@ -40,18 +40,6 @@ final class PermissionQueryExtension implements QueryExtensionInterface
         $queryBuilder->innerJoin(sprintf('%s.menu', $this->aliasHelper->findAlias('root')), $menuAlias);
         $queryBuilder->andWhere($queryBuilder->expr()->orX(
             $queryBuilder->expr()->like(
-                sprintf('UPPER(%s.code)', $groupAlias),
-                $queryBuilder->expr()->literal(
-                    sprintf('%%%s%%', StringUtil::uppercase($query))
-                )
-            ),
-            $queryBuilder->expr()->like(
-                sprintf('UPPER(%s.name)', $groupAlias),
-                $queryBuilder->expr()->literal(
-                    sprintf('%%%s%%', StringUtil::uppercase($query))
-                )
-            ),
-            $queryBuilder->expr()->like(
                 sprintf('UPPER(%s.code)', $menuAlias),
                 $queryBuilder->expr()->literal(
                     sprintf('%%%s%%', StringUtil::uppercase($query))

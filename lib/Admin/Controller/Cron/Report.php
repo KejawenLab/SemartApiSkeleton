@@ -36,6 +36,7 @@ final class Report extends AbstractController
 
         return $this->render('cron/report.html.twig', [
             'page_title' => 'sas.page.cron_report.list',
+            'id' => $request->attributes->get('id'),
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, CronReport::class),

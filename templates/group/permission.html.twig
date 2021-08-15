@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="float-left col-2">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Get', {id: group.id}) }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-1">
@@ -29,7 +29,7 @@
                         <tr>
                             <th>No</th>
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'file' != property.name %}
+                                {% if 'id' != property.name and 'group' != property.name %}
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
                                 {% endif %}
                             {% endfor %}
@@ -37,11 +37,9 @@
                         </thead>
                         <tbody>
                         {% for key, permission in paginator['items'] %}
-                            {% set group = permission.group %}
                             {% set rmenu = permission.menu %}
                             <tr>
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
                                 <td>{{ rmenu.name ~ ' (' ~ rmenu.code ~ ')' }}</td>
                                 {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
                                     <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>

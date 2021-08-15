@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Entity\Cron;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private CronService $service)
+    public function __construct(private CronService $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -39,6 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
+        $audit = ['items' => []];
+        if ($this->reader->getProvider()->isAuditable(CronØ::class)) {
+            $audit = $this->audit->getAudits($cron, $id, 3)->toArray();
+        }
+
         $class = new ReflectionClass(Cron::class);
 
         return $this->render('cron/view.html.twig', [
@@ -46,6 +53,7 @@ final class Get extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $cron,
+            'audits' => $audit['items'],
         ]);
     }
 }
