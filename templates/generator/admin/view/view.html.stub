@@ -6,7 +6,7 @@
 {% block content %}
     {% apply spaceless %}
         <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="{% if can_view_audit() %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-body table-responsive p-1">
                         <table class="table table-bordered table-hover text-nowrap">
@@ -28,50 +28,48 @@
                     </div>
                 </div>
             </div>
+            {% if can_view_audit() %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-2">
                         <h4>{{ 'sas.page.audit.last_changes' | trans({}, 'pages') }}</h4>
                     </div>
                     <div class="card-body p-0">
-                        {% if can_view_audit() %}
-                            {% for key, audit in audits %}
-                                <ul class="list-group p-1">
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.type' | trans({}, 'tables') }}
-                                        <a class="float-right">{{ audit['type'] | upper }}</a>
-                                    </li>
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}
-                                        <a class="float-right">{{ audit['log_time'] | upper }}</a>
-                                    </li>
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}
-                                        <a class="float-right">{{ audit['user_id'] | upper }}</a>
-                                    </li>
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.username' | trans({}, 'tables') }}
-                                        <a class="float-right">{{ audit['username'] | upper }}</a>
-                                    </li>
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}
-                                        <a class="float-right">{{ audit['ip_address'] | upper }}</a>
-                                    </li>
-                                    <li class="list-group-item text-primary">
-                                        {{ 'sas.table.column.audit.data' | trans({}, 'tables') }}
-                                        <a class="float-right"><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></a>
-                                    </li>
-                                </ul>
-                            {% endfor %}
-                        {% endif %}
+                        {% for key, audit in audits %}
+                            <ul class="list-group p-1">
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.type' | trans({}, 'tables') }}
+                                    <a class="float-right">{{ audit['type'] | upper }}</a>
+                                </li>
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}
+                                    <a class="float-right">{{ audit['log_time'] | upper }}</a>
+                                </li>
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}
+                                    <a class="float-right">{{ audit['user_id'] | upper }}</a>
+                                </li>
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.username' | trans({}, 'tables') }}
+                                    <a class="float-right">{{ audit['username'] | upper }}</a>
+                                </li>
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}
+                                    <a class="float-right">{{ audit['ip_address'] | upper }}</a>
+                                </li>
+                                <li class="list-group-item text-primary">
+                                    {{ 'sas.table.column.audit.data' | trans({}, 'tables') }}
+                                    <a class="float-right"><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></a>
+                                </li>
+                            </ul>
+                        {% endfor %}
                     </div>
                     <div class="card-footer">
-                        {% if can_view_audit() %}
-                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
-                        {% endif %}
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     {% endapply %}
 {% endblock %}
