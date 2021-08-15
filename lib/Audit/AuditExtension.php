@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Audit;
 
+use Iterator;
+use ReflectionObject;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -17,6 +19,9 @@ final class AuditExtension extends AbstractExtension
     {
     }
 
+    /**
+     * @return Iterator<TwigFunction>
+     */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('is_auditable', [$this, 'isAuditable']);
@@ -24,7 +29,7 @@ final class AuditExtension extends AbstractExtension
 
     public function isAuditable(object $entity): bool
     {
-        $class = new \ReflectionObject($entity);
+        $class = new ReflectionObject($entity);
 
         return $this->reader->getProvider()->isAuditable($class->getName());
     }
