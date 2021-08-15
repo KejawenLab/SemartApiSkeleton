@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
-use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -26,7 +25,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/settings/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/settings/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,21 +36,8 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $form = $this->createForm(SettingType::class, $setting);
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save($setting);
+        $this->addFlash('form_data', $setting);
 
-                $this->addFlash('info', 'sas.page.setting.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
-            }
-        }
-
-        return $this->render('setting/form.html.twig', [
-            'page_title' => 'sas.page.setting.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

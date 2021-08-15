@@ -7,7 +7,7 @@
     {% apply spaceless %}
     {% set menu = convert_to_menu(context) %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <div class="float-right col-7">
@@ -69,6 +69,19 @@
                 <div class="card-footer clearfix">
                     {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
                 </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Post') }}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
+                        <button type="reset" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

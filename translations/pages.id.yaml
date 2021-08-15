@@ -8,7 +8,6 @@ sas:
         profile:
             title: 'Profil'
             view: 'Profil'
-            update: 'Perbarui Profil'
             updated: 'Profil berhasil diperbarui'
         audit:
             not_found: 'Audit tidak ditemukan'

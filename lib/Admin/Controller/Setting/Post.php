@@ -31,6 +31,13 @@ final class Post extends AbstractController
     public function __invoke(Request $request): Response
     {
         $setting = new Setting();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $setting = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(SettingType::class, $setting);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);

@@ -21,21 +21,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    public function __construct(private UserService $service)
+    public function __construct(private UserService $service, private UserProviderFactory $userProviderFactory)
     {
     }
 
     /**
-     * @Route("/me/edit", name=Put::class, methods={"GET", "POST"}, priority=-1)
+     * @Route("/me/edit", name=Put::class, methods={"POST"}, priority=-1)
      */
-    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
 
-        $user = $userProviderFactory->getRealUser($user);
+        $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
@@ -51,14 +51,9 @@ final class Put extends AbstractController
                 $this->service->save($user);
 
                 $this->addFlash('info', 'sas.page.profile.updated');
-
-                return new RedirectResponse($this->generateUrl(Profile::class));
             }
         }
 
-        return $this->render('profile/update.html.twig', [
-            'page_title' => 'sas.page.profile.update',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(Profile::class));
     }
 }

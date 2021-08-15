@@ -8,24 +8,30 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
+                    <div class="card-header">
+                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                    </div>
+                    <div class="card-body p-1">
+                        <ul class="list-group">
                             {% for property in properties %}
                                 {% if 'id' != property.name %}
-                                    <tr>
-                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                        <td style="width: 7px;">:</td>
+                                    <li class="list-group-item text-primary">
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                         {% if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name %}
-                                            <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>{% endif %}</td>
+                                            <a class="float-right">
+                                                {% if attribute(data, property.name) %}
+                                                    <span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
+                                                {% else %}
+                                                    <span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
+                                                {% endif %}
+                                            </a>
                                         {% else %}
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
                                         {% endif %}
-                                    </tr>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </ul>
                     </div>
                 </div>
             </div>

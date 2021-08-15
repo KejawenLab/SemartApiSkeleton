@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -41,6 +42,7 @@ final class Profile extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $user,
+            'form' => $this->createForm(UpdateProfileType::class, $user)->createView(),
         ]);
     }
 }

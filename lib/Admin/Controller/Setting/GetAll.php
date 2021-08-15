@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
 use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
@@ -33,12 +35,24 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new ReflectionClass(Setting::class);
+        $setting = new Setting();
+        $flashs = $request->getSession()->getFlashBag()->get('form_data');
+        foreach ($flashs as $flash) {
+            if ($flash instanceof SettingInterface) {
+                $setting = $flash;
+
+                $this->addFlash('id', $setting->getId());
+
+                break;
+            }
+        }
 
         return $this->render('setting/all.html.twig', [
             'page_title' => 'sas.page.setting.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class),
+            'form' => $this->createForm(SettingType::class, $setting)->createView(),
         ]);
     }
 }

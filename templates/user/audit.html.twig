@@ -8,9 +8,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
+                    <div class="card-header">
+                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                    </div>
+                    <div class="card-body p-1">
+                        <ul class="list-group">
                             {% for property in properties %}
                                 {% if
                                     'id' != property.name and
@@ -20,20 +22,18 @@
                                     'deviceId' != property.name and
                                     'file' != property.name
                                 %}
-                                    <tr>
-                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                        <td style="width: 7px;">:</td>
+                                    <li class="list-group-item text-primary">
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                         {% if 'group' == property.name %}
                                             {% set group = attribute(data, property.name) %}
-                                            <td>{{ group.name ~ ' (' ~ group.code ~ ')' }}</td>
+                                            <a class="float-right">{{ group.name ~ ' (' ~ group.code ~ ')' }}</a>
                                         {% else %}
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
                                         {% endif %}
-                                    </tr>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </ul>
                     </div>
                 </div>
             </div>
