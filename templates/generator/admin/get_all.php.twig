@@ -25,14 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    private {{ entityHumanize }}Service $service;
-
-    private Paginator $paginator;
-
     public function __construct({{ entityHumanize }}Service $service, Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

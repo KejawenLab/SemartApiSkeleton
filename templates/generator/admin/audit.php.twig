@@ -26,17 +26,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    private {{ entityHumanize }}Service $service;
-
-    private AuditService $audit;
-
-    private Reader $reader;
-
     public function __construct({{ entityHumanize }}Service $service, AuditService $audit, Reader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**

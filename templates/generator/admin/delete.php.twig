@@ -23,11 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    private {{ entityHumanize }}Service $service;
-
     public function __construct({{ entityHumanize }}Service $service)
     {
-        $this->service = $service;
     }
 
     /**

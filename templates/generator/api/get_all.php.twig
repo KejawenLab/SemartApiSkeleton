@@ -27,14 +27,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    private {{ entityHumanize }}Service $service;
-
-    private Paginator $paginator;
-
     public function __construct({{ entityHumanize }}Service $service, Paginator $paginator)
     {
-        $this->service = $service;
-        $this->paginator = $paginator;
     }
 
     /**

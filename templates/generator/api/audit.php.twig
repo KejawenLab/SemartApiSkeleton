@@ -29,17 +29,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Audit extends AbstractFOSRestController
 {
-    private {{ entityHumanize }}Service $service;
-
-    private AuditService $audit;
-
-    private AuditReader $reader;
-
     public function __construct({{ entityHumanize }}Service $service, AuditService $audit, AuditReader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**

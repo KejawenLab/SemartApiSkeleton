@@ -25,11 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    private {{ entityHumanize }}Service $service;
-
-    public function __construct({{ entityHumanize }}Service $service)
+    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, Reader $reader)
     {
-        $this->service = $service;
     }
 
     /**
@@ -44,6 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
+        $audit = ['items' => []];
+        if ($this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
+            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 3)->toArray();
+        }
+
         $class = new \ReflectionClass({{ entityHumanize }}::class);
 
         return $this->render('{{ entityLowerize }}/view.html.twig', [
@@ -51,6 +53,7 @@ final class Get extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
             'data' => ${{ entityLowerize }},
+            'audits' => $audit['items'],
         ]);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private SettingService $service)
+    public function __construct(private SettingService $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -39,6 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
+        $audit = ['items' => []];
+        if ($this->reader->getProvider()->isAuditable(Setting::class)) {
+            $audit = $this->audit->getAudits($setting, $id, 3)->toArray();
+        }
+
         $class = new ReflectionClass(Setting::class);
 
         return $this->render('setting/view.html.twig', [
@@ -46,6 +53,7 @@ final class Get extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $setting,
+            'audits' => $audit['items'],
         ]);
     }
 }
