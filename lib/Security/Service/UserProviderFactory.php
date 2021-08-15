@@ -31,7 +31,7 @@ final class UserProviderFactory implements UserProviderInterface
         return $this->loadUserByIdentifier($username);
     }
 
-    public function getRealUser(User $user): AuthInterface
+    public function getRealUser(User $user): ?AuthInterface
     {
         foreach ($this->providers as $provider) {
             if ($provider->support($user->getClass())) {

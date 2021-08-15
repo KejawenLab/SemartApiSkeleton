@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Twig;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
@@ -21,6 +22,9 @@ final class PermissionExtension extends AbstractExtension
     {
     }
 
+    /**
+     * @return Iterator<TwigFunction>
+     */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('is_super_admin', [$this, 'isSuperAdmin']);

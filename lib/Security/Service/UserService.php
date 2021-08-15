@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Service;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
@@ -74,6 +75,9 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         return $this->repository->findOneBy(['deviceId' => $deviceId]);
     }
 
+    /**
+     * @return Iterator<string>
+     */
     public static function getHandledMessages(): iterable
     {
         yield EntityPersisted::class;

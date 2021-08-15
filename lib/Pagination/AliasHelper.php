@@ -23,7 +23,7 @@ final class AliasHelper
     private function getAlias(array $exclude = []): string
     {
         $list = 'abcdefghijklmnopqrstuvwxyz';
-        $alias = $list[rand(0, \strlen($list) - 1)];
+        $alias = $list[random_int(0, \strlen($list) - 1)];
         if (\in_array($alias, $exclude)) {
             return $this->getAlias($exclude);
         }

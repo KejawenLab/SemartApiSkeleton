@@ -74,7 +74,7 @@ final class CronStartCommand extends Command
         $command = $console->find('semart:cron:run');
         while (true) {
             $now = microtime(true);
-            usleep((int) ((60 - ($now % 60) + (int) $now - $now) * 1e6));
+            usleep((int) ((60 - ($now % 60) + (int) $now - $now) * 1_000_000.0));
 
             if (null !== $pidFile && !file_exists($pidFile)) {
                 break;

@@ -11,6 +11,9 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableServiceInterface;
  */
 interface ServiceInterface extends PaginatableServiceInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function all(): array;
 
     public function get(string $id);

@@ -22,6 +22,9 @@ final class PermissionFixture extends AbstractFixture implements DependentFixtur
         return 'permission';
     }
 
+    /**
+     * @return class-string<GroupFixture>[]|class-string<MenuFixture>[]
+     */
     public function getDependencies(): array
     {
         return [

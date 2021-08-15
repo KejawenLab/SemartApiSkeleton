@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Twig;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -23,6 +24,9 @@ final class MenuExtension extends AbstractExtension
     ) {
     }
 
+    /**
+     * @return Iterator<TwigFunction>
+     */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('convert_to_menu', [$this, 'getMenu']);

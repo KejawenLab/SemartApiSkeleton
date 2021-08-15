@@ -26,17 +26,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Audit extends AbstractFOSRestController
 {
-    private MenuService $service;
-
-    private AuditService $audit;
-
-    private Reader $reader;
-
-    public function __construct(MenuService $service, AuditService $audit, Reader $reader)
+    public function __construct(private MenuService $service, private AuditService $audit, private Reader $reader)
     {
-        $this->service = $service;
-        $this->audit = $audit;
-        $this->reader = $reader;
     }
 
     /**

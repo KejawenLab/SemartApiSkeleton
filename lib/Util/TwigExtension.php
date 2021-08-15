@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Util;
 
+use Iterator;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
@@ -21,6 +22,9 @@ final class TwigExtension extends AbstractExtension
     {
     }
 
+    /**
+     * @return Iterator<TwigFunction>
+     */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('semart_print', [$this, 'toString']);

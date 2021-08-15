@@ -29,9 +29,12 @@ final class CronService extends AbstractService implements ServiceInterface, Res
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
+    /**
+     * @return ShellJob[]
+     */
     public function resolve(): array
     {
-        return array_map(function (CronInterface $cron) {
+        return array_map(function (CronInterface $cron): ShellJob {
             $job = new ShellJob($cron);
             $job->setCommand($this->builder->build($cron), $this->kernel->getProjectDir());
             $job->setSchedule(new CrontabSchedule($cron->getSchedule()));

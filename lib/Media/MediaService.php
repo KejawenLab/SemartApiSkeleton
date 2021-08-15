@@ -26,9 +26,9 @@ final class MediaService extends AbstractService implements ServiceInterface
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
-    public function get(string $id)
+    public function get(string $id): ?MediaInterface
     {
-        /** @var MediaInterface $media */
+        /** @var MediaInterface|null $media */
         $media = parent::get($id);
         if ($media && !$media->getFileUrl()) {
             $media->setFileUrl($this->storage->resolveUri($media, MediaInterface::FILE_FIELD));

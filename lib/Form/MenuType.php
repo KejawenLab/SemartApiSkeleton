@@ -24,9 +24,7 @@ final class MenuType extends AbstractType
             'required' => false,
             'label' => 'sas.form.field.menu.parent',
             'class' => Menu::class,
-            'choice_label' => function ($menu) {
-                return sprintf('%s - %s', $menu->getCode(), $menu->getName());
-            },
+            'choice_label' => fn($menu) => sprintf('%s - %s', $menu->getCode(), $menu->getName()),
             'attr' => [
                 'class' => 'select2',
             ],

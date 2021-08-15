@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Service;
 
+use Iterator;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
@@ -94,6 +95,9 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermissions($group, $menus);
     }
 
+    /**
+     * @return Iterator<mixed[]>
+     */
     public function getByUser(AuthInterface $user): iterable
     {
         /** @var MenuInterface[] $parents */
@@ -103,12 +107,18 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         }
     }
 
+    /**
+     * @return Iterator<string>
+     */
     public static function getHandledMessages(): iterable
     {
         yield EntityPersisted::class;
         yield EntityRemoved::class;
     }
 
+    /**
+     * @return array<string, string>|array<string, null>|array<string, array<int|string, mixed[]>>
+     */
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
     {
         $tree = [
