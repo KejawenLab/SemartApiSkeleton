@@ -30,13 +30,13 @@ final class Report extends AbstractController
     /**
      * @Route("/api-clients/{id}/logs", name=Report::class, methods={"GET"})
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $class = new ReflectionClass(ApiClientRequest::class);
 
         return $this->render('api_client/report.html.twig', [
             'page_title' => 'sas.page.api_client.report',
-            'id' => $request->attributes->get('id'),
+            'id' => $id,
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClientRequest::class),

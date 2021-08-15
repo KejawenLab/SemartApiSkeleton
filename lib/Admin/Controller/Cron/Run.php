@@ -56,6 +56,6 @@ final class Run extends AbstractController
             $this->addFlash('error', 'sas.page.cron.run_failed');
         }
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Get::class, ['id' => $id]));
     }
 }
