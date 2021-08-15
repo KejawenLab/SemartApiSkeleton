@@ -17,7 +17,7 @@ final class CronBuilder
     {
     }
 
-    public function build(CronInterface $cron): string
+    public function build(CronInterface $cron): ?string
     {
         if ($cron->isSymfonyCommand()) {
             $docRoot = explode('/', $_SERVER['NGINX_WEBROOT']);

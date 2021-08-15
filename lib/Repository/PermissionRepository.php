@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Iterator;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Permission;
@@ -58,6 +59,9 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $query->getResult();
     }
 
+    /**
+     * @return Iterator<MenuInterface|null>
+     */
     public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -89,6 +93,9 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         }
     }
 
+    /**
+     * @return Iterator<MenuInterface|null>
+     */
     public function findAllowedChildMenusByGroupAndMenu(GroupInterface $group, MenuInterface $menu): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');

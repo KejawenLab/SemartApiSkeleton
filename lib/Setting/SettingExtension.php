@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Setting;
 
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
+use Iterator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,11 +18,14 @@ final class SettingExtension extends AbstractExtension
     {
     }
 
-    public function getSetting(string $key): Model\SettingInterface
+    public function getSetting(string $key): SettingInterface
     {
         return $this->service->getSetting($key);
     }
 
+    /**
+     * @return Iterator<TwigFunction>
+     */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('setting', [$this, 'getSetting']);

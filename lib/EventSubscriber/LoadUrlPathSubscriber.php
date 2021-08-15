@@ -69,7 +69,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replece);
             try {
                 $adminPath = $this->urlGenerator->generate($adminRoute);
-            } catch (RouteNotFoundException $e) {
+            } catch (RouteNotFoundException) {
             }
         }
 

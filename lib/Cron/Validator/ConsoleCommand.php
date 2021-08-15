@@ -18,7 +18,7 @@ final class ConsoleCommand extends Constraint
         return 'sas.validator.command.not_found';
     }
 
-    public function getTargets(): array|string
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }

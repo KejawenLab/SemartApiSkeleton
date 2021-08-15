@@ -41,7 +41,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         }
     }
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
         $argument = $definition->getArgument(0);

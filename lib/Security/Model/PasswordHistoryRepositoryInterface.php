@@ -11,5 +11,8 @@ use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
  */
 interface PasswordHistoryRepositoryInterface extends ServiceableRepositoryInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function findPasswords(UserInterface $user): array;
 }

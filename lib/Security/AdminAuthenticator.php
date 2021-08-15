@@ -49,7 +49,7 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface|User|null
+    public function getUser($credentials, UserProviderInterface $userProvider): User
     {
         return $this->userProviderFactory->loadUserByUsername($credentials['username']);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Generator\Twig;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -13,6 +14,9 @@ use Twig\TwigFilter;
  */
 final class GeneratorExtension extends AbstractExtension
 {
+    /**
+     * @return Iterator<TwigFilter>
+     */
     public function getFilters(): iterable
     {
         yield new TwigFilter('pluralize', [$this, 'pluralize']);

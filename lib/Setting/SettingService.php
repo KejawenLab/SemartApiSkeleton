@@ -40,12 +40,12 @@ final class SettingService extends AbstractService implements ServiceInterface
         return (int) $this->getSetting('CACHE_LIFETIME')->getValue();
     }
 
-    public function getPageField(): string
+    public function getPageField(): ?string
     {
         return $this->getSetting('PAGE_FIELD')->getValue();
     }
 
-    public function getPerPageField(): string
+    public function getPerPageField(): ?string
     {
         return $this->getSetting('PER_PAGE_FIELD')->getValue();
     }

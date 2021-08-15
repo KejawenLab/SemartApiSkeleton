@@ -26,7 +26,7 @@ final class MediaService extends AbstractService implements ServiceInterface
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
-    public function get(string $id)
+    public function get(string $id): MediaInterface
     {
         /** @var MediaInterface $media */
         $media = parent::get($id);

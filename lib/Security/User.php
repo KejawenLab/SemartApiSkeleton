@@ -81,6 +81,9 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
     }
 
+    /**
+     * @return string[]
+     */
     public function getRoles(): array
     {
         return ['ROLE_USER'];

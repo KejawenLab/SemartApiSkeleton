@@ -31,17 +31,17 @@ class PasswordHistory implements PasswordHistoryInterface
     /**
      * @ORM\Column(type="string")
      */
-    private ?string $source;
+    private ?string $source = null;
 
     /**
      * @ORM\Column(type="string", length=49)
      */
-    private ?string $identifier;
+    private ?string $identifier = null;
 
     /**
      * @ORM\Column(type="string")
      */
-    private ?string $password;
+    private ?string $password = null;
 
     public function getId(): ?string
     {

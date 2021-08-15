@@ -109,7 +109,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $deviceId;
+    private ?string $deviceId = null;
 
     private ?File $file = null;
 
@@ -202,7 +202,7 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail($email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }

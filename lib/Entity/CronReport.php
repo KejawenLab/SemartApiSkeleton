@@ -39,7 +39,7 @@ class CronReport implements CronReportInterface
      *
      * @Groups({"read"})
      */
-    private ?CronInterface $cron;
+    private ?CronInterface $cron = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,7 +60,7 @@ class CronReport implements CronReportInterface
      *
      * @Groups({"read"})
      */
-    private ?string $output;
+    private ?string $output = null;
 
     /**
      * @ORM\Column(type="smallint")
