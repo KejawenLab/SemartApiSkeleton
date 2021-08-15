@@ -42,7 +42,7 @@ final class Get extends AbstractController
         }
 
         $audit = ['items' => []];
-        if ($this->reader->getProvider()->isAuditable(CronØ::class)) {
+        if ($this->reader->getProvider()->isAuditable(Cron::class)) {
             $audit = $this->audit->getAudits($cron, $id, 3)->toArray();
         }
 

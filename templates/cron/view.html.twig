@@ -6,7 +6,7 @@
 {% block content %}
     {% apply spaceless %}
         <div class="row">
-            <div class="{% if can_view_audit() %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
+            <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-body table-responsive p-1">
                         <table class="table table-bordered table-hover text-nowrap">
@@ -29,12 +29,12 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.logs' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-dark ml-1">{{ 'sas.form.action.cron_logs' | trans({}, 'forms') }}</a>
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>
-            {% if can_view_audit() %}
+            {% if is_auditable(data) %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-2">

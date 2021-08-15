@@ -6,7 +6,7 @@
 {% block content %}
     {% apply spaceless %}
         <div class="row">
-            <div class="{% if can_view_audit() %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
+            <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-body table-responsive p-1">
                         <table class="table table-bordered table-hover text-nowrap">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            {% if can_view_audit() %}
+            {% if is_auditable(data) %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-2">

@@ -56,7 +56,7 @@
                                     {% if can_view_audit() %}
                                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Audit', {id: client.id}) }}" class="btn btn-sm btn-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                                     {% endif %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Report', {id: client.id}) }}" class="btn btn-sm btn-dark ml-1">{{ 'sas.form.action.logs' | trans({}, 'forms') }}</a>
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Report', {id: client.id}) }}" class="btn btn-sm btn-dark ml-1">{{ 'sas.form.action.api_request_logs' | trans({}, 'forms') }}</a>
                                     {% if is_granted('delete', menu) %}
                                         <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Delete', {id: client.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': client.name}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
                                             {{ 'sas.table.action.delete' | trans({}, 'tables') }}

@@ -17,7 +17,7 @@ sas:
                 userId: 'ID Pengguna'
                 username: 'Pengguna'
                 ipAddress: 'Alamat IP'
-                data: 'Log Audit'
+                data: 'Riwayat Data'
             group:
                 code: 'Kode'
                 name: 'Nama'
@@ -68,10 +68,10 @@ sas:
                 apiKey: 'Token'
                 secretKey: 'Kunci Rahasia'
             cronreport:
-                cron: 'Cron'
+                cron: 'Perintah'
                 runAt: 'Waktu Eksekusi'
                 runtime: 'Lama Eksekusi'
-                output: 'Log'
+                output: 'Keluaran'
                 exitCode: 'Status'
             apiclientrequest:
                 apiClient: 'Api Client'
@@ -81,6 +81,3 @@ sas:
                 queries: 'Queries'
                 requests: 'Post Data'
                 files: 'Files'
-            todo:
-                task: 'Tugas'
-                done: 'Selesai?'
