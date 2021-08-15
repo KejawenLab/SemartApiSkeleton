@@ -6,8 +6,11 @@
 {% block content %}
     {% apply spaceless %}
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
+                    <div class="card-header p-2">
+                        <h3>{{ page_title | trans({}, 'pages') }}</h3>
+                    </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-bordered table-hover text-nowrap">
                             <tbody>
@@ -34,34 +37,6 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        {% if audits is defined %}
-                        <div class="row mt-5">
-                            <table class="table table-striped table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>{{ 'sas.table.column.audit.type' | trans({}, 'tables') }}</th>
-                                        <th>{{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}</th>
-                                        <th>{{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}</th>
-                                        <th>{{ 'sas.table.column.audit.username' | trans({}, 'tables') }}</th>
-                                        <th>{{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}</th>
-                                        <th>{{ 'sas.table.column.audit.data' | trans({}, 'tables') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for key, audit in audits %}
-                                    <tr>
-                                        <td>{{ audit['type'] | upper }}</td>
-                                        <td>{{ audit['log_time'] }}</td>
-                                        <td>{{ audit['user_id'] }}</td>
-                                        <td>{{ audit['username'] }}</td>
-                                        <td>{{ audit['ip_address'] }}</td>
-                                        <td><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        {% endif %}
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}" class="btn btn-dark">{{ 'sas.form.action.api_key' | trans({}, 'forms') }}</a>
@@ -69,6 +44,50 @@
                             <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                         {% endif %}
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <h3>Perubahan Data Terakhir</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if audits is defined and can_view_audit() %}
+                            {% for key, audit in audits %}
+                                <ul class="list-group mb-3">
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.type' | trans({}, 'tables') }}
+                                        <a class="float-right">{{ audit['type'] | upper }}</a>
+                                    </li>
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}
+                                        <a class="float-right">{{ audit['log_time'] | upper }}</a>
+                                    </li>
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}
+                                        <a class="float-right">{{ audit['user_id'] | upper }}</a>
+                                    </li>
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.username' | trans({}, 'tables') }}
+                                        <a class="float-right">{{ audit['username'] | upper }}</a>
+                                    </li>
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}
+                                        <a class="float-right">{{ audit['ip_address'] | upper }}</a>
+                                    </li>
+                                    <li class="list-group-item text-primary">
+                                        {{ 'sas.table.column.audit.data' | trans({}, 'tables') }}
+                                        <a class="float-right"><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></a>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        {% if can_view_audit() %}
+                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

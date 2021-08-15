@@ -26,7 +26,7 @@ final class AuditService
     /**
      * @throws InvalidArgumentException
      */
-    public function getAudits(object $entity, string $id): Audit
+    public function getAudits(object $entity, string $id, int $limit = 9): Audit
     {
         $key = sha1(sprintf('%s_%s', $entity::class, $id));
         $cache = $this->cache->getItem($key);
@@ -34,7 +34,7 @@ final class AuditService
             $audits = serialize(
                 $this->auditReader->createQuery(
                     $entity::class,
-                    ['page' => 1, 'page_size' => 9]
+                    ['page' => 1, 'page_size' => $limit]
                 )
                 ->addFilter(Query::OBJECT_ID, $id)->execute()
             );
