@@ -54,4 +54,4 @@ sas:
             submit: 'Simpan'
             back: 'Kembali'
             cancel: 'Batal'
-            audit: 'Audit'
+            audit: 'Tampilkan Perubahan'

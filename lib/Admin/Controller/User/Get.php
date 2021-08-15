@@ -43,7 +43,7 @@ final class Get extends AbstractController
 
         $audit = ['items' => []];
         if ($this->reader->getProvider()->isAuditable(User::class)) {
-            $audit = $this->audit->getAudits($user, $id, 1)->toArray();
+            $audit = $this->audit->getAudits($user, $id, 3)->toArray();
         }
 
         $class = new ReflectionClass(User::class);

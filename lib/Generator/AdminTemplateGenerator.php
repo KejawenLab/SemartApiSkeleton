@@ -60,6 +60,9 @@ final class AdminTemplateGenerator extends AbstractGenerator
         $template = 'no-audit-view.html.stub';
         if ($this->reader->getProvider()->isAuditable($class->getName())) {
             $template = 'view.html.stub';
+
+            $auditTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/audit.html.stub', $projectDir)));
+            $this->fileSystem->dumpFile(sprintf('%s/templates/%s/audit.html.twig', $projectDir, $lowercase), $auditTemplate);
         }
 
         $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/all.html.stub', $projectDir)));

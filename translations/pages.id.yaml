@@ -11,8 +11,9 @@ sas:
             update: 'Perbarui Profil'
             updated: 'Profil berhasil diperbarui'
         audit:
-            not_found: 'Log audit tidak ditemukan'
-            view: 'Log Audit'
+            not_found: 'Audit tidak ditemukan'
+            view: 'Data Perubahan'
+            last_changes: 'Perubahan Terakhir'
         media:
             saved: 'Media berhasil disimpan'
             deleted: 'Media berhasil dihapus'

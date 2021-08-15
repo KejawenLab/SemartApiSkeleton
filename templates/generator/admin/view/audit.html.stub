@@ -22,6 +22,32 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                        <div class="row mt-3 table-responsive">
+                            <table class="table table-bordered table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'sas.table.column.audit.type' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.username' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}</th>
+                                        <th>{{ 'sas.table.column.audit.data' | trans({}, 'tables') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for key, audit in audits %}
+                                    <tr>
+                                        <td>{{ audit['type'] | upper }}</td>
+                                        <td>{{ audit['log_time'] }}</td>
+                                        <td>{{ audit['user_id'] }}</td>
+                                        <td>{{ audit['username'] }}</td>
+                                        <td>{{ audit['ip_address'] }}</td>
+                                        <td><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
