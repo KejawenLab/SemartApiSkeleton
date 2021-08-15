@@ -72,10 +72,10 @@ final class Storage extends FileSystemStorage
             return null;
         }
 
-        if ($obj->isPublic()) {
-            return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
+        if (!$obj->isPublic()) {
+            return sprintf('%s/%s%s', $mapping->getUriPrefix(), $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
         }
 
-        return sprintf('%s/%s%s', $mapping->getUriPrefix(), $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
+        return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
     }
 }
