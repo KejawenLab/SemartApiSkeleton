@@ -8,31 +8,40 @@
         <div class="row">
             <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
+                    <div class="card-body p-1">
+                        <ul class="list-group">
                             {% for property in properties %}
                                 {% if 'id' != property.name and 'routeName' != property.name %}
-                                    <tr>
-                                        <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                        <td style="width: 7px;">:</td>
+                                    <li class="list-group-item text-primary">
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                         {% if 'parent' == property.name %}
                                             {% if attribute(data, property.name) is not null %}
                                                 {% set parent = attribute(data, property.name) %}
-                                                <td>{{ parent.name ~ '(' ~ parent.code ~ ')' }}</td>
+                                                <a class="float-right">{{ parent.name ~ '(' ~ parent.code ~ ')' }}</a>
                                             {% endif %}
                                         {% elseif 'showable' == property.name %}
-                                            <td>{% if attribute(data, property.name) %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans({}, 'pages') }}</span>{% endif %}</td>
+                                            <a class="float-right">
+                                                {% if attribute(data, property.name) %}
+                                                    <span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans({}, 'pages') }}</span>
+                                                {% else %}
+                                                    <span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans({}, 'pages') }}</span>
+                                                {% endif %}
+                                            </a>
                                         {% elseif 'adminOnly' == property.name %}
-                                            <td>{% if attribute(data, property.name) %}{{ 'sas.page.menu.admin_only' | trans({}, 'pages') }}{% else %}{{ 'sas.page.menu.both' | trans({}, 'pages') }}{% endif %}</td>
+                                            <a class="float-right">
+                                                {% if attribute(data, property.name) %}
+                                                    <span class="btn btn-success disabled">{{ 'sas.page.menu.admin_only' | trans({}, 'pages') }}</span>
+                                                {% else %}
+                                                    <span class="btn btn-warning disabled">{{ 'sas.page.menu.both' | trans({}, 'pages') }}</span>
+                                                {% endif %}
+                                            </a>
                                         {% else %}
-                                            <td>{{ attribute(data, property.name) }}</td>
+                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
                                         {% endif %}
-                                    </tr>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </ul>
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>

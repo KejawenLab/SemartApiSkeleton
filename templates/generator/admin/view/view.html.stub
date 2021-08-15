@@ -8,20 +8,17 @@
         <div class="row">
             <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
-                                {% for property in properties %}
-                                    {% if 'id' != property.name %}
-                                        <tr>
-                                            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                            <td style="width: 7px;">:</td>
-                                            <td>{{ semart_print(attribute(data, property.name)) }}</td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card-body p-1">
+                        <ul class="list-group">
+                            {% for property in properties %}
+                                {% if 'id' != property.name %}
+                                    <li class="list-group-item text-primary">
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                        <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
