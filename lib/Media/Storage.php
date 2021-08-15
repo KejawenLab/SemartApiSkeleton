@@ -79,9 +79,8 @@ final class Storage extends FileSystemStorage
         }
 
         return sprintf(
-            '%s/%s%s%s',
+            '%s/%s%s',
             $mapping->getUriPrefix(),
-            $uploadDir,
             $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '',
             $name
         );
