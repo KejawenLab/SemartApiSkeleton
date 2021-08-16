@@ -11,6 +11,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
+use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,7 @@ final class GetAll extends AbstractController
         return $this->render('user/all.html.twig', [
             'page_title' => 'sas.page.user.list',
             'context' => StringUtil::lowercase($class->getShortName()),
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, User::class),
             'form' => $this->createForm(UserType::class, $user)->createView(),
         ]);

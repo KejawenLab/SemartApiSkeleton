@@ -27,6 +27,9 @@
                                     {% if 'group' == property.name %}
                                         {% set group = attribute(data, property.name) %}
                                         <a class="float-right">{{ group.name ~ ' (' ~ group.code ~ ')' }}</a>
+                                    {% elseif 'supervisor' == property.name %}
+                                        {% set supervisor = attribute(data, property.name) %}
+                                        <a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a>
                                     {% else %}
                                         <a class="float-right">{{ attribute(data, property.name) }}</a>
                                     {% endif %}
