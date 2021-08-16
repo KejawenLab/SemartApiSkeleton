@@ -51,7 +51,7 @@
                         {% endfor %}
                         <li class="list-group-item p-1">
                             <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Get', {id: data.id}) }}" class="btn btn-sm btn-outline-dark">
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Get', {id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
                                     {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                 </a>
                                 {% if is_granted('edit', menu) %}
@@ -108,8 +108,8 @@
                 </div>
                 <div class="modal-body" id="sasNotification"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans({}, 'notifications') }}</button>
-                    <button type="button" id="sasDeleteConfirm" class="btn btn-primary">{{ 'sas.notification.delete.confirm' | trans({}, 'notifications') }}</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans({}, 'notifications') }}</button>
+                    <button type="button" id="sasDeleteConfirm" class="btn btn-outline-primary">{{ 'sas.notification.delete.confirm' | trans({}, 'notifications') }}</button>
                 </div>
             </div>
         </div>
