@@ -26,11 +26,18 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/groups/add", name=Post::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/groups/add", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
         $group = new Group();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $group = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(GroupType::class, $group);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -38,14 +45,9 @@ final class Post extends AbstractController
                 $this->service->save($group);
 
                 $this->addFlash('info', 'sas.page.group.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('group/form.html.twig', [
-            'page_title' => 'sas.page.group.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

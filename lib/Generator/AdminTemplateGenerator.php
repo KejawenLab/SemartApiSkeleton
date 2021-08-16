@@ -34,24 +34,11 @@ final class AdminTemplateGenerator extends AbstractGenerator
         $projectDir = $this->kernel->getProjectDir();
         $shortName = $class->getShortName();
         $lowercase = StringUtil::lowercase($shortName);
-        $properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);
-        $deleteField = sprintf('semart_print(%s)', $lowercase);
-        $tableFields = '';
-        foreach ($properties as $property) {
-            if ('id' === $property->getName()) {
-                continue;
-            }
-
-            $tableFields .= sprintf('<td>{{ semart_print(%s.%s) }}</td>', $lowercase, $property->getName());
-        }
-
         $search = [
             '{# entity #}',
             '{# entity | lower #}',
-            '{# delete_field #}',
-            '{# table_fields #}',
         ];
-        $replace = [$shortName, $lowercase, $deleteField, $tableFields];
+        $replace = [$shortName, $lowercase];
         $form = 'templates/generator/admin/view/form.html.stub';
         if ($this->hasAssociation($class)) {
             $form = 'templates/generator/admin/view/form.select2.html.stub';

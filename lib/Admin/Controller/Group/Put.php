@@ -26,7 +26,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/groups/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/groups/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,21 +37,8 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $form = $this->createForm(GroupType::class, $group);
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save($group);
+        $this->addFlash('id', $group->getId());
 
-                $this->addFlash('info', 'sas.page.group.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
-            }
-        }
-
-        return $this->render('group/form.html.twig', [
-            'page_title' => 'sas.page.group.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

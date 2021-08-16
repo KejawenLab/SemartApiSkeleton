@@ -9,55 +9,58 @@
     <div class="row">
         <div class="{% if is_granted('add', menu) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
             <div class="card">
-                <div class="card-header p-1">
-                    <div class="col-lg-12 col-md-12 col-sm-12 p-0">
-                        <div class="float-left input-group col-lg-10 col-md-10 col-sm-10">
+                <div class="card-header p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-1">
+                        <div class="float-left input-group col-lg-12 col-md-12 col-sm-12 p-0">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
+                                <button type="submit" id="sasSearch" class="btn btn-default">
+                                    <i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}
+                                </button>
+                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Download') }}">
+                                    <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
+                                </a>
                             </div>
                         </div>
-                        <div class="float-right dropdown col-lg-2 col-md-2 col-sm-2 pr-2">
-                            <a class="btn btn-warning float-right" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Download') }}">
-                                <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>
-                                <span class="align-middle">{{ 'sas.table.action.download' | trans({}, 'tables') }}</span>
-                            </a>
-                        </div>
                     </div>
-                </div>
-                <div class="card-body table-responsive p-1">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            {% for property in properties %}
-                                {% if 'id' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
-                                {% endif %}
-                            {% endfor %}
-                            <th style="width: 149px;">{{ 'sas.table.column.action' | trans({}, 'tables') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for key, {# entity | lower #} in paginator['items'] %}
-                            <tr>
-                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                {# table_fields #}
-                                <td>
-                                    <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Get', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
-                                    {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Put', {id: {# entity | lower #}.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
-                                    {% endif %}
-                                    {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Delete', {id: {# entity | lower #}.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': {# delete_field #}}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
-                                            {{ 'sas.table.action.delete' | trans({}, 'tables') }}
-                                        </button>
-                                    {% endif %}
-                                </td>
-                            </tr>
+                    {% for key, data in paginator['items'] %}
+                    <ul class="list-group p-1">
+                        <li class="list-group-item text-primary">
+                            No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                        </li>
+                        {% for property in properties %}
+                            {% if 'id' != property.name %}
+                                <li class="list-group-item text-primary">
+                                    {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                </li>
+                            {% endif %}
                         {% endfor %}
-                        </tbody>
-                    </table>
+                        <li class="list-group-item p-1">
+                            <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Get', {id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
+                                    {{ 'sas.table.action.view' | trans({}, 'tables') }}
+                                </a>
+                                {% if is_granted('edit', menu) %}
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Put', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
+                                        {{ 'sas.table.action.edit' | trans({}, 'tables') }}
+                                    </a>
+                                {% endif %}
+                                {% if is_granted('delete', menu) %}
+                                    <button type="button"
+                                            data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Delete', {id: data.id}) }}"
+                                            data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': semart_print(data)}, 'notifications') }}"
+                                            class="btn btn-sm btn-outline-danger delete"
+                                            data-toggle="modal"
+                                            data-target="#sasDeleteModal"
+                                    >
+                                        {{ 'sas.table.action.delete' | trans({}, 'tables') }}
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
                 </div>
                 <div class="card-footer clearfix">
                     {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
@@ -73,7 +76,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-outline-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
-                        <button type="reset" class="btn btn-outline-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                        <button type="reset" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
                     </div>
                 </form>
             </div>

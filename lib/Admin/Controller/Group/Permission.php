@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
@@ -26,8 +27,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Permission extends AbstractController
 {
-    public function __construct(private PermissionService $service, private GroupService $groupService, private Paginator $paginator)
-    {
+    public function __construct(
+        private PermissionService $service,
+        private GroupService $groupService,
+        private Paginator $paginator,
+        private SettingService $settingService
+    ) {
     }
 
     /**
@@ -41,6 +46,8 @@ final class Permission extends AbstractController
 
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
+
+        $request->query->set($this->settingService->getPerPageField(), 27);
 
         $class = new ReflectionClass(Entity::class);
 

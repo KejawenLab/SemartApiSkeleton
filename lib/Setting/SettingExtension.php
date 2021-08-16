@@ -18,16 +18,16 @@ final class SettingExtension extends AbstractExtension
     {
     }
 
-    public function getSetting(string $key): SettingInterface
-    {
-        return $this->service->getSetting($key);
-    }
-
     /**
      * @return Iterator<TwigFunction>
      */
     public function getFunctions(): iterable
     {
         yield new TwigFunction('setting', [$this, 'getSetting']);
+    }
+
+    public function getSetting(string $key): SettingInterface
+    {
+        return $this->service->getSetting($key);
     }
 }

@@ -6,7 +6,7 @@
 {% block content %}
     {% apply spaceless %}
         <div class="row">
-            <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
+            <div class="{% if is_auditable(data) and can_view_audit() %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>{{ page_title | trans({}, 'pages') }}</h4>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            {% if is_auditable(data) %}
+            {% if is_auditable(data) and can_view_audit() %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-2">
