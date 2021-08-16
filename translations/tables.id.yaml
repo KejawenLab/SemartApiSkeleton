@@ -37,7 +37,7 @@ sas:
                 apiPath: 'URL Api'
                 adminPath: 'URL Admin'
             media:
-                fileName: 'File'
+                fileName: 'Nama File'
                 folder: 'Lokasi Folder'
                 fileUrl: 'File'
                 public: 'Publik?'

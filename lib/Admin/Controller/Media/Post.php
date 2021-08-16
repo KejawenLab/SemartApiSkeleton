@@ -26,11 +26,18 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/medias/add", name=Post::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/medias/add", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
         $media = new Media();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $media = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(MediaType::class, $media);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -38,14 +45,9 @@ final class Post extends AbstractController
                 $this->service->save($media);
 
                 $this->addFlash('info', 'sas.page.media.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('media/form.html.twig', [
-            'page_title' => 'sas.page.media.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

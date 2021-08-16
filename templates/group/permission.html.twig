@@ -8,7 +8,7 @@
     {% apply spaceless %}
     {% set menu = convert_to_menu(context) %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <div class="float-right col-7">
@@ -42,15 +42,15 @@
                                 <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
                                 <td>{{ rmenu.name ~ ' (' ~ rmenu.code ~ ')' }}</td>
                                 {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
-                                    <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" class="permission-view" {% if permission.viewable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" class="permission-add" {% if permission.addable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" class="permission-edit" {% if permission.editable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" class="permission-delete" {% if permission.deletable %}checked{% endif%} data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: permission.id }) }}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
                                 {% else %}
-                                    <td><input type="checkbox" {% if permission.viewable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" {% if permission.addable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" {% if permission.editable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
-                                    <td><input type="checkbox" {% if permission.deletable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+                                    <td><input type="checkbox" {% if permission.viewable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" {% if permission.addable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" {% if permission.editable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
+                                    <td><input type="checkbox" {% if permission.deletable %}checked{% endif%} disabled data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small"></td>
                                 {% endif %}
                             </tr>
                         {% endfor %}

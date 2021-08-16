@@ -64,7 +64,7 @@
                             {% endif %}
                         {% endfor %}
                         <li class="list-group-item p-1">
-                            <div class="btn-group btn-group-toggle col-lg-12 col-md-12 col-sm-12" data-toggle="buttons">
+                            <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
                                 <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Get', {id: data.id}) }}" class="btn btn-sm btn-dark">
                                     {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                 </a>

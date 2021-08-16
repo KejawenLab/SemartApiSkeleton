@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
 use KejawenLab\ApiSkeleton\Entity\Media;
+use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -33,12 +34,23 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new ReflectionClass(Media::class);
+        $media = new Media();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $media = $this->service->get($flash);
+            if ($media) {
+                $this->addFlash('id', $media->getId());
+
+                break;
+            }
+        }
 
         return $this->render('media/all.html.twig', [
             'page_title' => 'sas.page.media.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Media::class),
+            'form' => $this->createForm(MediaType::class, $media)->createView(),
         ]);
     }
 }
