@@ -6,7 +6,10 @@ if [[ ! -d "/semart/var" ]]; then
     cd /semart && mkdir var
 fi
 
-cd /semart && composer update --prefer-dist -vvv
+if [[ ! -d "/semart/vendor/composer" ]]; then
+    cd /semart && composer update --prefer-dist -vvv
+fi
+
 if [[ "prod" == "${APP_ENV}" ]]; then
     composer dump-autoload  --optimize --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod

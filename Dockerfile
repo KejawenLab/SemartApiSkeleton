@@ -20,10 +20,6 @@ RUN chmod a+x /composer.sh
 RUN /composer.sh && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN rm -f /composer.sh
 
-# Install Cachetool
-RUN curl -sLO https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar
-RUN mv cachetool.phar /usr/local/bin/cachetool && chmod a+x /usr/local/bin/cachetool
-
 # Cleaning
 RUN apt autoremove -y && apt clean && apt autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer

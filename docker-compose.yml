@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
     app:
         build:
@@ -7,9 +8,11 @@ services:
         env_file:
           - .env
         volumes:
-            - .:/semart
+            - .:/semart:cached
+            - cache:/semart/var/cache
+            - vendor:/semart/vendor
         ports:
-            - 9876:9501
+            - "9876:9501"
         links:
             - session
             - db
@@ -24,9 +27,13 @@ services:
     adminer:
         image: adminer:latest
         ports:
-            - 6789:8080
+            - "6789:8080"
         links:
             - db
 
     session:
         image: redis:alpine
+
+volumes:
+    cache:
+    vendor:

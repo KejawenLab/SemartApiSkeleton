@@ -35,7 +35,17 @@
                             {% if 'id' != property.name %}
                                 <li class="list-group-item text-primary">
                                     {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                    {% if 'public' == property.name %}
+                                        <a class="float-right">
+                                            {% if attribute(data, property.name) %}
+                                                <span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
+                                            {% else %}
+                                                <span class="btn btn-default disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
+                                            {% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                    {% endif %}
                                 </li>
                             {% endif %}
                         {% endfor %}
