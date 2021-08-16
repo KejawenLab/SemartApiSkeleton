@@ -20,9 +20,9 @@
                                         {% if 'public' == property.name %}
                                             <a class="float-right">
                                                 {% if attribute(data, property.name) %}
-                                                    <span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
                                                 {% else %}
-                                                    <span class="btn btn-warning disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
                                                 {% endif %}
                                             </a>
                                         {% else %}

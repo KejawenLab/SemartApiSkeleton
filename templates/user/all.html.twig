@@ -2,6 +2,8 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
@@ -61,7 +63,7 @@
                             {% endfor %}
                             <li class="list-group-item p-1">
                                 <div class="btn-group btn-group-toggle col-lg-12 col-md-12 col-sm-12" data-toggle="buttons">
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: data.id}) }}" class="btn btn-sm btn-default">
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: data.id}) }}" class="btn btn-sm btn-dark">
                                         {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                     </a>
                                     {% if is_granted('edit', menu) %}
@@ -129,6 +131,7 @@
 {% block javascripts %}
     {% apply spaceless %}
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 toastr.options = {
@@ -148,6 +151,10 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
+
+                $('.select2').select2({
+                    theme: 'bootstrap4'
+                });
 
                 $('#sasSearchValue').val(getParameterByName('q'));
 

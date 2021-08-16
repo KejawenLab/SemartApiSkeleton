@@ -31,6 +31,13 @@ final class Post extends AbstractController
     public function __invoke(Request $request): Response
     {
         $menu = new Menu();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $menu = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(MenuType::class, $menu);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -38,14 +45,9 @@ final class Post extends AbstractController
                 $this->service->save($menu);
 
                 $this->addFlash('info', 'sas.page.menu.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('menu/form.html.twig', [
-            'page_title' => 'sas.page.menu.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

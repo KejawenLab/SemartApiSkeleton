@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 
 use KejawenLab\ApiSkeleton\Entity\Menu;
+use KejawenLab\ApiSkeleton\Form\MenuType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
@@ -33,12 +34,23 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new ReflectionClass(Menu::class);
+        $menu = new Menu();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $menu = $this->service->get($flash);
+            if ($menu) {
+                $this->addFlash('id', $menu->getId());
+
+                break;
+            }
+        }
 
         return $this->render('menu/all.html.twig', [
             'page_title' => 'sas.page.menu.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Menu::class),
+            'form' => $this->createForm(MenuType::class, $menu)->createView(),
         ]);
     }
 }

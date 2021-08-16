@@ -38,9 +38,9 @@
                                     {% if 'public' == property.name %}
                                         <a class="float-right">
                                             {% if attribute(data, property.name) %}
-                                                <span class="btn btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
+                                                <span class="btn btn-sm btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
                                             {% else %}
-                                                <span class="btn btn-default disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
+                                                <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
                                             {% endif %}
                                         </a>
                                     {% else %}
@@ -51,7 +51,7 @@
                         {% endfor %}
                         <li class="list-group-item p-1">
                             <div class="btn-group btn-group-toggle col-lg-12 col-md-12 col-sm-12" data-toggle="buttons">
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Get', {id: data.id}) }}" class="btn btn-sm btn-default">
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Get', {id: data.id}) }}" class="btn btn-sm btn-dark">
                                     {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                 </a>
                                 {% if is_granted('edit', menu) %}

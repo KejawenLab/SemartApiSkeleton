@@ -43,16 +43,10 @@ final class Post extends AbstractController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save($user);
-
                 $this->addFlash('info', 'sas.page.user.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('user/form.html.twig', [
-            'page_title' => 'sas.page.user.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

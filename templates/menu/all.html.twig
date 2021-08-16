@@ -2,79 +2,113 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
     {% set menu = convert_to_menu(context) %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="{% if is_granted('add', menu) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="float-right col-7">
-                        <div class="input-group input-group col-10 float-left">
+                    <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-1">
+                        <div class="float-left input-group col-lg-12 col-md-12 col-sm-12 p-0">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
-                            </div>
-                        </div>
-                        <div class="float-right dropdown col-2">
-                            <button class="btn btn-warning dropdown-toggle float-lg-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ 'sas.table.action.label' | trans({}, 'tables') }}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {% if is_granted('add', menu) %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
-                                {% endif %}
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
+                                <button type="submit" id="sasSearch" class="btn btn-default">
+                                    <i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}
+                                </button>
+                                <a class="btn btn-primary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
+                                    <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body table-responsive p-1">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            {% for property in properties %}
-                                {% if 'id' != property.name and 'routeName' != property.name and 'adminOnly' != property.name and 'extra' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
-                                {% endif %}
-                            {% endfor %}
-                            <th style="width: 149px;">{{ 'sas.table.column.action' | trans({}, 'tables') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for key, menu in paginator['items'] %}
-                            <tr>
-                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{% if menu.parent is not null %}{{ menu.parent.name ~ ' (' ~ menu.parent.code ~ ')' }}{% endif %}</td>
-                                <td>{{ menu.code }}</td>
-                                <td>{{ menu.name }}</td>
-                                <td>{{ menu.sortOrder }}</td>
-                                <td>{% if menu.showable %}<span class="btn btn-success disabled">{{ 'sas.page.menu.show' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-warning disabled">{{ 'sas.page.menu.not_show' | trans({}, 'pages') }}</span>{% endif %}</td>
-                                <td>{{ menu.apiPath }}</td>
-                                <td>{{ menu.adminPath }}</td>
-                                <td>
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Get', {id: menu.id}) }}" class="btn btn-sm btn-default">{{ 'sas.table.action.view' | trans({}, 'tables') }}</a>
-                                    {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Put', {id: menu.id}) }}" class="btn btn-sm btn-warning ml-1">{{ 'sas.table.action.edit' | trans({}, 'tables') }}</a>
+                    {% for key, data in paginator['items'] %}
+                    <ul class="list-group p-1">
+                        <li class="list-group-item text-primary">
+                            No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                        </li>
+                        {% for property in properties %}
+                            {% if
+                                'id' != property.name and
+                                'routeName' != property.name and
+                                'adminOnly' != property.name and
+                                'extra' != property.name
+                            %}
+                                <li class="list-group-item text-primary">
+                                    {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                    {% if 'parent' == property.name %}
+                                        {% set parent = attribute(data, property.name) %}
+                                        {% if parent %}
+                                            <a class="float-right">{{ parent.name ~ ' (' ~ parent.code ~ ')' }}</a>
+                                        {% else %}
+                                            <a class="float-right">-</a>
+                                        {% endif %}
+                                    {% elseif 'showable' == property.name %}
+                                        <a class="float-right">
+                                            {% if attribute(data, property.name) %}
+                                                <span class="btn btn-sm btn-success disabled">{{ 'sas.page.menu.show' | trans({}, 'pages') }}</span>
+                                            {% else %}
+                                                <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.menu.not_show' | trans({}, 'pages') }}</span>
+                                            {% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a class="float-right">{{ attribute(data, property.name) }}</a>
                                     {% endif %}
-                                    {% if is_granted('delete', menu) %}
-                                        <button type="button" data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Delete', {id: menu.id}) }}" data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': (menu.name ~ '(' ~ menu.code ~ ')')}, 'notifications') }}" class="btn btn-sm btn-danger ml-1 delete" data-toggle="modal" data-target="#sasDeleteModal">
-                                            {{ 'sas.table.action.delete' | trans({}, 'tables') }}
-                                        </button>
-                                    {% endif %}
-                                </td>
-                            </tr>
+                                </li>
+                            {% endif %}
                         {% endfor %}
-                        </tbody>
-                    </table>
+                        <li class="list-group-item p-1">
+                            <div class="btn-group btn-group-toggle col-lg-12 col-md-12 col-sm-12" data-toggle="buttons">
+                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Get', {id: data.id}) }}" class="btn btn-sm btn-dark">
+                                    {{ 'sas.table.action.view' | trans({}, 'tables') }}
+                                </a>
+                                {% if is_granted('edit', menu) %}
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Put', {id: data.id}) }}" class="btn btn-sm btn-warning">
+                                        {{ 'sas.table.action.edit' | trans({}, 'tables') }}
+                                    </a>
+                                {% endif %}
+                                {% if is_granted('delete', menu) %}
+                                    <button type="button"
+                                            data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Delete', {id: data.id}) }}"
+                                            data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': data.name}, 'notifications') }}"
+                                            class="btn btn-sm btn-danger delete"
+                                            data-toggle="modal"
+                                            data-target="#sasDeleteModal"
+                                    >
+                                        {{ 'sas.table.action.delete' | trans({}, 'tables') }}
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
                 </div>
                 <div class="card-footer clearfix">
                     {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
                 </div>
             </div>
         </div>
+        {% if is_granted('add', menu) %}
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Post') }}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
+                        <button type="reset" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
     </div>
     <div class="modal fade" id="sasDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -99,6 +133,7 @@
 {% block javascripts %}
     {% apply spaceless %}
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 toastr.options = {
@@ -118,6 +153,10 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
+
+                $('.select2').select2({
+                    theme: 'bootstrap4'
+                });
 
                 $('#sasSearchValue').val(localStorage.getItem('sas_search_value'));
 
