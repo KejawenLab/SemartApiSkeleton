@@ -9,9 +9,12 @@
     <div class="row">
         <div class="{% if is_granted('add', menu) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
             <div class="card">
-                <div class="card-header p-1">
-                    <div class="col-lg-12 col-md-12 col-sm-12 p-0">
-                        <div class="float-left input-group col-lg-12 col-md-12 col-sm-12">
+                <div class="card-header">
+                    <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-1">
+                        <div class="float-left input-group col-lg-12 col-md-12 col-sm-12 p-0">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
                                 <button type="submit" id="sasSearch" class="btn btn-default">
@@ -23,8 +26,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body table-responsive p-0">
                     {% for key, data in paginator['items'] %}
                         <ul class="list-group p-1">
                             <li class="list-group-item text-primary">

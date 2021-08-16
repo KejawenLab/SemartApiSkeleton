@@ -1,4 +1,4 @@
 - { parameter: 'PAGE_FIELD', value: 'page' }
 - { parameter: 'PER_PAGE_FIELD', value: 'limit' }
-- { parameter: 'PER_PAGE', value: '7' }
+- { parameter: 'PER_PAGE', value: '3' }
 - { parameter: 'CACHE_LIFETIME', value: '1' }
