@@ -8,7 +8,6 @@ use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
@@ -36,11 +35,10 @@ final class GetAll extends AbstractController
     {
         $class = new ReflectionClass(Setting::class);
         $setting = new Setting();
-        $flashs = $request->getSession()->getFlashBag()->get('form_data');
+        $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
-            if ($flash instanceof SettingInterface) {
-                $setting = $flash;
-
+            $setting = $this->service->get($flash);
+            if ($setting) {
                 $this->addFlash('id', $setting->getId());
 
                 break;

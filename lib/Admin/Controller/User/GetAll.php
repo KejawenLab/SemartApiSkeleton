@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\User;
 
 use KejawenLab\ApiSkeleton\Entity\User;
+use KejawenLab\ApiSkeleton\Form\UserType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -32,11 +33,22 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new ReflectionClass(User::class);
+        $user = new User();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $user = $this->service->get($flash);
+            if ($user) {
+                $this->addFlash('id', $user->getId());
+
+                break;
+            }
+        }
 
         return $this->render('user/all.html.twig', [
             'page_title' => 'sas.page.user.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, User::class),
+            'form' => $this->createForm(UserType::class, $user)->createView(),
         ]);
     }
 }

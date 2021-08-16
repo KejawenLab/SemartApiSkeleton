@@ -36,7 +36,7 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $this->addFlash('form_data', $setting);
+        $this->addFlash('id', $setting->getId());
 
         return new RedirectResponse($this->generateUrl(GetAll::class));
     }

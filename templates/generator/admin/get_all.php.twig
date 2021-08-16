@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
 
 use KejawenLab\Application\Entity\{{ entityHumanize }};
+use KejawenLab\Application\Form\{{ entityHumanize }}Type;
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -35,12 +36,23 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new \ReflectionClass({{ entityHumanize }}::class);
+        ${{ entityLowerize }} = new {{ entityHumanize }}();
+        $flashs = $request->getSession()->getFlashBag()->get('form_data');
+        foreach ($flashs as $flash) {
+            ${{ entityLowerize }} = $this->service->get($flash);
+            if (${{ entityLowerize }}) {
+                $this->addFlash('id', ${{ entityLowerize }}->getId());
+
+                break;
+            }
+        }
 
         return $this->render('{{ entityLowerize }}/all.html.twig', [
             'page_title' => 'sas.page.{{ entityLowerize }}.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, {{ entityHumanize }}::class),
+            'form' => $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }})->createView(),
         ]);
     }
 }

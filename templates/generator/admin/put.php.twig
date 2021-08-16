@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\Application\Form\{{ entityHumanize }}Type;
 use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -30,7 +29,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/{{ entityPluralDash }}/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -41,21 +40,8 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save(${{ entityLowerize }});
+        $this->addFlash('id', ${{ entityLowerize }}->getId());
 
-                $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
-            }
-        }
-
-        return $this->render('{{ entityLowerize }}/form.html.twig', [
-            'page_title' => 'sas.page.{{ entityLowerize }}.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

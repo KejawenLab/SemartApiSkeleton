@@ -18,15 +18,10 @@
                             </div>
                         </div>
                         <div class="float-right dropdown col-lg-2 col-md-2 col-sm-2 pr-2">
-                            <button class="btn btn-warning dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ 'sas.table.action.label' | trans({}, 'tables') }}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {% if is_granted('add', menu) %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Post') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.add' | trans({}, 'tables') }}</a>
-                                {% endif %}
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}" class="dropdown-item pl-2 pr-2">{{ 'sas.table.action.download' | trans({}, 'tables') }}</a>
-                            </div>
+                            <a class="btn btn-warning float-right" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
+                                <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>
+                                <span class="align-middle">{{ 'sas.table.action.download' | trans({}, 'tables') }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +31,7 @@
                         <tr>
                             <th>No</th>
                             {% for property in properties %}
-                                {% if 'id' != property.name and 'file' != property.name %}
+                                {% if 'id' != property.name %}
                                     <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
                                 {% endif %}
                             {% endfor %}

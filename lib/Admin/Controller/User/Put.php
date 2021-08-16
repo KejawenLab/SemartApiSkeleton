@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\User;
 
-use KejawenLab\ApiSkeleton\Form\UserType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -26,7 +25,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/users/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
@@ -37,21 +36,8 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $form = $this->createForm(UserType::class, $user);
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save($user);
+        $this->addFlash('id', $user->getId());
 
-                $this->addFlash('info', 'sas.page.user.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
-            }
-        }
-
-        return $this->render('user/form.html.twig', [
-            'page_title' => 'sas.page.user.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

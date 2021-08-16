@@ -26,7 +26,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/settings/add", name=Post::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/settings/add", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -45,14 +45,9 @@ final class Post extends AbstractController
                 $this->service->save($setting);
 
                 $this->addFlash('info', 'sas.page.setting.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('setting/form.html.twig', [
-            'page_title' => 'sas.page.setting.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

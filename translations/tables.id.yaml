@@ -2,10 +2,8 @@ sas:
     table:
         show_records: 'Menampilkan <b>%items%</b> dari <b>%total%</b>'
         action:
-            label: 'Pilihan'
             download: 'Unduh'
             search: 'Cari'
-            add: 'Tambah Baru'
             view: 'Lihat'
             edit: 'Ubah'
             delete: 'Hapus'

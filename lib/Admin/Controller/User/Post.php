@@ -26,11 +26,18 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/users/add", name=Post::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/users/add", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
         $user = new User();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $user = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(UserType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
