@@ -14,10 +14,9 @@
                         <div class="float-left input-group col-lg-12 col-md-12 col-sm-12">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
-                                <a class="btn btn-warning float-right" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
-                                    <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>
-                                    <span class="align-middle">{{ 'sas.table.action.download' | trans({}, 'tables') }}</span>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
+                                <a class="btn btn-primary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
+                                    <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
                                 </a>
                             </div>
                         </div>

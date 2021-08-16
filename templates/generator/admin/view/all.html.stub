@@ -14,7 +14,7 @@
                         <div class="float-left input-group col-lg-10 col-md-10 col-sm-10">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
                             </div>
                         </div>
                         <div class="float-right dropdown col-lg-2 col-md-2 col-sm-2 pr-2">

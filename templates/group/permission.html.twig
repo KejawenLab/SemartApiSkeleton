@@ -15,12 +15,12 @@
                         <div class="input-group input-group col-lg-12 float-left">
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
-                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="fas fa-search"></i> {{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
+                                <button type="submit" id="sasSearch" class="btn btn-default"><i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}</button>
                             </div>
                         </div>
                     </div>
                     <div class="float-left col-2">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Get', {id: group.id}) }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Get', {id: group.id}) }}" class="btn btn-default">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-1">
