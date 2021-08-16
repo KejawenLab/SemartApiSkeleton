@@ -43,8 +43,8 @@
                         </ul>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}" class="btn btn-primary">{{ 'sas.form.action.api_key' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\GetAll') }}" class="btn btn-default ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}" class="btn btn-outline-primary">{{ 'sas.form.action.api_key' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\GetAll') }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                         {% endfor %}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Audit', {id: data.id}) }}" class="btn btn-info ml-1">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Audit', {id: data.id}) }}" class="btn btn-outline-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

@@ -72,8 +72,8 @@
                         {{ form_widget(form) }}
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
-                        <button type="reset" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                        <button type="submit" class="btn btn-outline-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
+                        <button type="reset" class="btn btn-outline-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
                     </div>
                 </form>
             </div>

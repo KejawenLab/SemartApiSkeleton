@@ -20,7 +20,7 @@
                                 <button type="submit" id="sasSearch" class="btn btn-default">
                                     <i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}
                                 </button>
-                                <a class="btn btn-primary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
+                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Download') }}">
                                     <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
                                 </a>
                             </div>
@@ -88,8 +88,8 @@
                         {{ form_widget(form) }}
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
-                        <button type="reset" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                        <button type="submit" class="btn btn-outline-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
+                        <button type="reset" class="btn btn-outline-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
                     </div>
                 </form>
             </div>

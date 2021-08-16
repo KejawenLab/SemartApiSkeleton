@@ -14,7 +14,7 @@
                         {{ form_widget(form) }}
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
+                        <button type="submit" class="btn btn-outline-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
                         <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</a>
                     </div>
                     </form>
