@@ -30,7 +30,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/api-clients/add", name=Post::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/api-clients/add", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
@@ -57,14 +57,9 @@ final class Post extends AbstractController
                 $this->service->save($client);
 
                 $this->addFlash('info', 'sas.page.api_client.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('api_client/form.html.twig', [
-            'page_title' => 'sas.page.api_client.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

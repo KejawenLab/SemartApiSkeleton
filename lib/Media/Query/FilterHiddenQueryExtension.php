@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Media\Query;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

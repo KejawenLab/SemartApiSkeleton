@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Setting;
 
-use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use Iterator;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

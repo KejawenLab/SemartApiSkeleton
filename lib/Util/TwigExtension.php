@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Util;
 
-use Iterator;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use ReflectionClass;
 use ReflectionProperty;

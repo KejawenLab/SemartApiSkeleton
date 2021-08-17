@@ -75,11 +75,9 @@
                                                             {% set cron = attribute(data, property.name) %}
                                                             <a class="float-right">{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</a>
                                                         {% elseif 'runAt' == property.name %}
-                                                            <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}
-                                                            </a>
+                                                            <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}</a>
                                                         {% elseif 'runtime' == property.name %}
-                                                            <a class="float-right">{{ attribute(data, property.name) | number_format(2, ',', '.') }}
-                                                            </a>
+                                                            <a class="float-right">{{ attribute(data, property.name) | number_format(2, ',', '.') }}</a>
                                                         {% elseif 'output' == property.name %}
                                                             <a class="float-right">
                                                                 <pre class="json-viewer" data-json="{{ normalize_cron_log(attribute(data, property.name)) | json_encode() }}"></pre>

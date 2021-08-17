@@ -11,37 +11,77 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left col-2">
-                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll', {id: id}) }}" class="btn btn-outline-dark ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                         </div>
                     </div>
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                {% for property in properties %}
-                                    {% if 'id' != property.name %}
-                                        <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
-                                    {% endif %}
-                                {% endfor %}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for key, report in paginator['items'] %}
-                                {% set client = report.apiClient %}
-                                <tr>
-                                    <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                    <td>{{ client.name }}</td>
-                                    <td>{{ report.path }}</td>
-                                    <td>{{ report.method }}</td>
-                                    <td><pre class="json-viewer" data-json="{{ report.headers | json_encode() }}"></pre></td>
-                                    <td><pre class="json-viewer" data-json="{{ report.queries | json_encode() }}"></pre></td>
-                                    <td><pre class="json-viewer" data-json="{{ report.requests | json_encode() }}"></pre></td>
-                                    <td><pre class="json-viewer" data-json="{{ report.files | json_encode() }}"></pre></td>
-                                </tr>
+                    <div class="card-body p-1">
+                        <div class="row">
+                            {% for key, data in paginator['items'] %}
+                                {% if 0 == key % 2%}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="card mt-1 ml-1 mb-1 mr-0">
+                                            <div class="card-body p-0">
+                                                <ul class="list-group p-0">
+                                                    <li class="list-group-item text-primary">
+                                                        No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                                    </li>
+                                                    {% for property in properties %}
+                                                        {% if 'id' != property.name %}
+                                                            <li class="list-group-item text-primary">
+                                                                {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                                                {% if
+                                                                    'headers' == property.name or
+                                                                    'queries' == property.name or
+                                                                    'requests' == property.name or
+                                                                    'files' == property.name
+                                                                %}
+                                                                    <a class="float-right">
+                                                                        <pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre>
+                                                                    </a>
+                                                                {% else %}
+                                                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                                {% endif %}
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="card mt-1 ml-0 mb-1 mr-1">
+                                            <div class="card-body p-0">
+                                                <ul class="list-group p-0">
+                                                    <li class="list-group-item text-primary">
+                                                        No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                                    </li>
+                                                    {% for property in properties %}
+                                                        {% if 'id' != property.name %}
+                                                            <li class="list-group-item text-primary">
+                                                                {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                                                {% if
+                                                                    'headers' == property.name or
+                                                                    'queries' == property.name or
+                                                                    'requests' == property.name or
+                                                                    'files' == property.name
+                                                                %}
+                                                                    <a class="float-right">
+                                                                        <pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre>
+                                                                    </a>
+                                                                {% else %}
+                                                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                                {% endif %}
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                     <div class="card-footer clearfix">
                         {% include 'layout/pagination.html.twig' with {paginator: paginator} %}

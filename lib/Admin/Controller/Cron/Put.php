@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
-use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

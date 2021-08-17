@@ -8,7 +8,6 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -39,27 +38,21 @@ final class AdminTemplateGenerator extends AbstractGenerator
             '{# entity | lower #}',
         ];
         $replace = [$shortName, $lowercase];
-        $form = 'templates/generator/admin/view/form.html.stub';
+        $all = 'templates/generator/admin/view/all.html.stub';
         if ($this->hasAssociation($class)) {
-            $form = 'templates/generator/admin/view/form.select2.html.stub';
+            $all = 'templates/generator/admin/view/select2-all.html.stub';
         }
 
-        $template = 'no-audit-view.html.stub';
         if ($this->reader->getProvider()->isAuditable($class->getName())) {
-            $template = 'view.html.stub';
-
             $auditTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/audit.html.stub', $projectDir)));
             $this->fileSystem->dumpFile(sprintf('%s/templates/%s/audit.html.twig', $projectDir, $lowercase), $auditTemplate);
         }
 
-        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/all.html.stub', $projectDir)));
-        $formTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/%s', $projectDir, $form)));
-        $viewTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/%s', $projectDir, $template)));
+        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/%s.html.stub', $projectDir, $all)));
+        $viewTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/view.html.stub', $projectDir)));
 
         $output->writeln(sprintf('<comment>Generating template <info>"%s/all.html.twig"</info></comment>', $lowercase));
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/all.html.twig', $projectDir, $lowercase), $indexTemplate);
-        $output->writeln(sprintf('<comment>Generating template <info>"%s/form.html.twig"</info></comment>', $lowercase));
-        $this->fileSystem->dumpFile(sprintf('%s/templates/%s/form.html.twig', $projectDir, $lowercase), $formTemplate);
         $output->writeln(sprintf('<comment>Generating template <info>"%s/view.html.twig"</info></comment>', $lowercase));
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/view.html.twig', $projectDir, $lowercase), $viewTemplate);
     }
