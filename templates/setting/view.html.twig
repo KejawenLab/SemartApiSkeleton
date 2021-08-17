@@ -45,32 +45,18 @@
                         <h4>{{ 'sas.page.audit.last_changes' | trans({}, 'pages') }}</h4>
                     </div>
                     <div class="card-body p-0">
-                        {% for key, audit in audits %}
+                        {% for key, data in audits %}
                             <ul class="list-group p-1">
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.type' | trans({}, 'tables') }}
-                                    <a class="float-right">{{ audit['type'] | upper }}</a>
-                                </li>
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}
-                                    <a class="float-right">{{ audit['log_time'] | upper }}</a>
-                                </li>
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}
-                                    <a class="float-right">{{ audit['user_id'] | upper }}</a>
-                                </li>
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.username' | trans({}, 'tables') }}
-                                    <a class="float-right">{{ audit['username'] | upper }}</a>
-                                </li>
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}
-                                    <a class="float-right">{{ audit['ip_address'] | upper }}</a>
-                                </li>
-                                <li class="list-group-item text-primary">
-                                    {{ 'sas.table.column.audit.data' | trans({}, 'tables') }}
-                                    <a class="float-right"><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></a>
-                                </li>
+                                {% for property in data | keys %}
+                                    <li class="list-group-item text-primary">
+                                        {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
+                                        {% if 'data' == property %}
+                                            <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
+                                        {% else %}
+                                            <a class="float-right">{{ data[property] }}</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
                             </ul>
                         {% endfor %}
                     </div>

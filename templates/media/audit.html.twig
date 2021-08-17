@@ -8,69 +8,80 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-bordered table-hover text-nowrap">
-                            <tbody>
-                                {% for property in properties %}
-                                    {% if 'id' != property.name and 'file' != property.name and 'hidden' != property.name %}
-                                        <tr>
-                                            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
-                                            <td style="width: 7px;">:</td>
-                                            {% if 'public' == property.name %}
-                                                <td>
-                                                    {% if attribute(data, property.name) %}
-                                                        <span class="btn btn-sm btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
-                                                    {% else %}
-                                                        <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
-                                                    {% endif %}
-                                                </td>
-                                            {% elseif 'fileUrl' == property.name %}
-                                                <td>
-                                                    <a class="btn btn-sm btn-primary" href="{{ '/admin' ~ attribute(data, property.name) }}" target="_blank">
-                                                        {{ 'sas.page.media.download' | trans({}, 'pages') }}
-                                                    </a>
-                                                </td>
-                                            {% else %}
-                                                <td>{{ attribute(data, property.name) }}</td>
-                                            {% endif %}
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card-header">
+                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-body table-responsive p-1">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>{{ 'sas.table.column.audit.type' | trans({}, 'tables') }}</th>
-                                <th>{{ 'sas.table.column.audit.logTime' | trans({}, 'tables') }}</th>
-                                <th>{{ 'sas.table.column.audit.userId' | trans({}, 'tables') }}</th>
-                                <th>{{ 'sas.table.column.audit.username' | trans({}, 'tables') }}</th>
-                                <th>{{ 'sas.table.column.audit.ipAddress' | trans({}, 'tables') }}</th>
-                                <th>{{ 'sas.table.column.audit.data' | trans({}, 'tables') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for key, audit in audits %}
-                                <tr>
-                                    <td>{{ audit['type'] | upper }}</td>
-                                    <td>{{ audit['log_time'] }}</td>
-                                    <td>{{ audit['user_id'] }}</td>
-                                    <td>{{ audit['username'] }}</td>
-                                    <td>{{ audit['ip_address'] }}</td>
-                                    <td><pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre></td>
-                                </tr>
+                    <div class="card-body p-1">
+                        <ul class="list-group mb-1">
+                            {% for property in properties %}
+                                {% if 'id' != property.name and 'file' != property.name and 'hidden' != property.name %}
+                                    <li class="list-group-item list-group-item-dark">
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                        {% if 'public' == property.name %}
+                                            <a class="float-right">
+                                                {% if attribute(data, property.name) %}
+                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
+                                                {% else %}
+                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
+                                                {% endif %}
+                                            </a>
+                                        {% elseif 'fileUrl' == property.name %}
+                                            <a class="btn btn-sm btn-primary float-right" href="{{ '/admin' ~ attribute(data, property.name) }}" target="_blank">
+                                                {{ 'sas.page.media.download' | trans({}, 'pages') }}
+                                            </a>
+                                        {% else %}
+                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </ul>
+                        <div class="row">
+                            {% for key, data in audits %}
+                                {% if 0 == key % 2 %}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="card mt-1 ml-1 mb-1 mr-0">
+                                            <div class="card-body p-0">
+                                                <ul class="list-group p-0">
+                                                    {% for property in data | keys %}
+                                                        <li class="list-group-item text-primary">
+                                                            {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
+                                                            {% if 'data' == property %}
+                                                                <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
+                                                            {% else %}
+                                                                <a class="float-right">{{ data[property] }}</a>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="card mt-1 ml-0 mb-1 mr-1">
+                                            <div class="card-body p-0">
+                                                <ul class="list-group p-0">
+                                                    {% for property in data | keys %}
+                                                        <li class="list-group-item text-primary">
+                                                            {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
+                                                            {% if 'data' == property %}
+                                                                <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
+                                                            {% else %}
+                                                                <a class="float-right">{{ data[property] }}</a>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\GetAll') }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\GetAll', {id: data.id}) }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
             </div>

@@ -11,10 +11,10 @@ sas:
             action: 'Pilihan'
             audit:
                 type: 'Tipe'
-                logTime: 'Tanggal'
-                userId: 'ID Pengguna'
+                log_time: 'Tanggal'
+                user_id: 'ID Pengguna'
                 username: 'Pengguna'
-                ipAddress: 'Alamat IP'
+                ip_address: 'Alamat IP'
                 data: 'Riwayat Data'
             group:
                 code: 'Kode'
