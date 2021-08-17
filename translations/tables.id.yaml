@@ -31,7 +31,7 @@ sas:
                 code: 'Kode'
                 name: 'Nama'
                 sortOrder: 'Urutan'
-                extra: 'Ekstra Atribut'
+                iconClass: 'CSS Icon Class'
                 showable: 'Ditampilkan'
                 adminOnly: 'Khusus Admin'
                 apiPath: 'URL Api'

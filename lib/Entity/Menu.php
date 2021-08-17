@@ -93,13 +93,13 @@ class Menu implements MenuInterface
     private ?string $routeName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=27, nullable=true)
      *
-     * @Assert\Length(max=255)
+     * @Assert\Length(max=27)
      *
      * @Groups({"read"})
      */
-    private ?string $extra;
+    private ?string $iconClass;
 
     /**
      * @ORM\Column(type="boolean")
@@ -129,7 +129,7 @@ class Menu implements MenuInterface
         $this->name = null;
         $this->sortOrder = 0;
         $this->routeName = '#';
-        $this->extra = null;
+        $this->iconClass = null;
         $this->showable = true;
         $this->adminOnly = false;
         $this->apiPath = '#';
@@ -211,14 +211,14 @@ class Menu implements MenuInterface
         $this->adminPath = $adminPath;
     }
 
-    public function getExtra(): ?string
+    public function getIconClass(): ?string
     {
-        return $this->extra;
+        return $this->iconClass;
     }
 
-    public function setExtra(string $extra): void
+    public function setIconClass(?string $iconClass): void
     {
-        $this->extra = $extra;
+        $this->iconClass = $iconClass;
     }
 
     public function isShowable(): ?bool

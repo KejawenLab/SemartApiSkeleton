@@ -42,6 +42,10 @@ final class MenuType extends AbstractType
             'required' => true,
             'label' => 'sas.form.field.menu.routeName',
         ]);
+        $builder->add('iconClass', TextType::class, [
+            'required' => false,
+            'label' => 'sas.form.field.menu.iconClass',
+        ]);
         $builder->add('sortOrder', NumberType::class, [
             'required' => true,
             'label' => 'sas.form.field.menu.sortOrder',
