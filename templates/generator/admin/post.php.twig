@@ -47,16 +47,10 @@ final class Post extends AbstractController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save(${{ entityLowerize }});
-
                 $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('{{ entityLowerize }}/form.html.twig', [
-            'page_title' => 'sas.page.{{ entityLowerize }}.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

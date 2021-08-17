@@ -56,7 +56,7 @@
                             <li class="list-group-item p-1">
                                 <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
                                     {% if is_auditable(data) and can_view_audit() %}
-                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Audit', {id: data.id}) }}" class="btn btn-sm btn-info">
+                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Audit', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
                                             {{ 'sas.form.action.audit' | trans({}, 'forms') }}
                                         </a>
                                     {% endif %}

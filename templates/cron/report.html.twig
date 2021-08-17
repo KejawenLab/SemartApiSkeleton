@@ -12,35 +12,99 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-left col-2">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Get', {id: id}) }}" class="btn btn-warning ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Get', {id: id}) }}" class="btn btn-outline-dark ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>
-                <div class="card-body table-responsive p-1">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            {% for property in properties %}
-                                {% if 'id' != property.name %}
-                                    <th>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</th>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for key, report in paginator['items'] %}
-                            {% set cron = report.cron %}
-                            <tr>
-                                <td>{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</td>
-                                <td>{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</td>
-                                <td>{{ report.runAt | date('Y-m-d H:i:s') }}</td>
-                                <td>{{ report.runtime | number_format(2, ',', '.') }} detik</td>
-                                <td><pre class="json-viewer" data-json="{{ normalize_cron_log(report.output) | json_encode() }}"></pre></td>
-                                <td>{% if report.exitCode == 0 %}<span class="btn btn-success disabled">{{ 'sas.page.cron_report.success' | trans({}, 'pages') }}</span>{% else %}<span class="btn btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans({}, 'pages') }}</span>{% endif %}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="card-body p-1">
+                    <div class="row">
+                    {% for key, data in paginator['items'] %}
+                        {% if 0 == key % 2%}
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="card mt-1 ml-1 mb-1 mr-0">
+                                    <div class="card-body p-0">
+                                        <ul class="list-group p-0">
+                                            <li class="list-group-item text-primary">
+                                                No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                            </li>
+                                            {% for property in properties %}
+                                                {% if 'id' != property.name %}
+                                                    <li class="list-group-item text-primary">
+                                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                                        {% if 'cron' == property.name %}
+                                                            {% set cron = attribute(data, property.name) %}
+                                                            <a class="float-right">{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</a>
+                                                        {% elseif 'runAt' == property.name %}
+                                                            <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}</a>
+                                                        {% elseif 'runtime' == property.name %}
+                                                            <a class="float-right">{{ attribute(data, property.name) | number_format(2, ',', '.') }} ms</a>
+                                                        {% elseif 'output' == property.name %}
+                                                            <a class="float-right">
+                                                                <pre class="json-viewer" data-json="{{ normalize_cron_log(attribute(data, property.name)) | json_encode() }}"></pre>
+                                                            </a>
+                                                        {% elseif 'exitCode' == property.name %}
+                                                            <a class="float-right">
+                                                            {% if attribute(data, property.name) == 0 %}
+                                                                <span class="btn btn-sm btn-success disabled">{{ 'sas.page.cron_report.success' | trans({}, 'pages') }}</span>
+                                                            {% else %}
+                                                                <span class="btn btn-sm btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans({}, 'pages') }}</span>
+                                                            {% endif %}
+                                                            </a>
+                                                        {% else %}
+                                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                        {% endif %}
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="card mt-1 ml-0 mb-1 mr-1">
+                                    <div class="card-body p-0">
+                                        <ul class="list-group p-0">
+                                            <li class="list-group-item text-primary">
+                                                No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                            </li>
+                                            {% for property in properties %}
+                                                {% if 'id' != property.name %}
+                                                    <li class="list-group-item text-primary">
+                                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                                        {% if 'cron' == property.name %}
+                                                            {% set cron = attribute(data, property.name) %}
+                                                            <a class="float-right">{{ cron.name ~ ' [' ~ cron.command ~ ']' }}</a>
+                                                        {% elseif 'runAt' == property.name %}
+                                                            <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}
+                                                            </a>
+                                                        {% elseif 'runtime' == property.name %}
+                                                            <a class="float-right">{{ attribute(data, property.name) | number_format(2, ',', '.') }}
+                                                            </a>
+                                                        {% elseif 'output' == property.name %}
+                                                            <a class="float-right">
+                                                                <pre class="json-viewer" data-json="{{ normalize_cron_log(attribute(data, property.name)) | json_encode() }}"></pre>
+                                                            </a>
+                                                        {% elseif 'exitCode' == property.name %}
+                                                            <a class="float-right">
+                                                            {% if attribute(data, property.name) == 0 %}
+                                                                <span class="btn btn-sm btn-success disabled">{{ 'sas.page.cron_report.success' | trans({}, 'pages') }}</span>
+                                                            {% else %}
+                                                                <span class="btn btn-sm btn-danger disabled">{{ 'sas.page.cron_report.failed' | trans({}, 'pages') }}</span>
+                                                            {% endif %}
+                                                            </a>
+                                                        {% else %}
+                                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                        {% endif %}
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
                 </div>
                 <div class="card-footer clearfix">
                     {% include 'layout/pagination.html.twig' with {paginator: paginator} %}

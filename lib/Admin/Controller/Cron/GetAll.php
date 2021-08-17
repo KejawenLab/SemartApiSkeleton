@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -33,12 +34,23 @@ final class GetAll extends AbstractController
     public function __invoke(Request $request): Response
     {
         $class = new ReflectionClass(Cron::class);
+        $cron = new Cron();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $cron = $this->service->get($flash);
+            if ($cron) {
+                $this->addFlash('id', $cron->getId());
+
+                break;
+            }
+        }
 
         return $this->render('cron/all.html.twig', [
             'page_title' => 'sas.page.cron.list',
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Cron::class),
+            'form' => $this->createForm(CronType::class, $cron)->createView(),
         ]);
     }
 }

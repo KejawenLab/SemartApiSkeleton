@@ -43,7 +43,6 @@ final class Post extends AbstractController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save($media);
-
                 $this->addFlash('info', 'sas.page.media.saved');
             }
         }

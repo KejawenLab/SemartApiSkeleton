@@ -26,32 +26,17 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/crons/{id}/edit", name=Put::class, methods={"GET", "POST"}, priority=1)
+     * @Route("/crons/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(Request $request, string $id): Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
-
-            return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $form = $this->createForm(CronType::class, $cron);
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->service->save($cron);
+        $this->addFlash('id', $cron->getId());
 
-                $this->addFlash('info', 'sas.page.cron.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
-            }
-        }
-
-        return $this->render('cron/form.html.twig', [
-            'page_title' => 'sas.page.cron.edit',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }

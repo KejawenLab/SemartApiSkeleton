@@ -20,9 +20,9 @@
                                         {% if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name %}
                                             <a class="float-right">
                                                 {% if attribute(data, property.name) %}
-                                                    <span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
                                                 {% else %}
-                                                    <span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
                                                 {% endif %}
                                             </a>
                                         {% else %}

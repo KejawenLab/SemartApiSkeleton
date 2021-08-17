@@ -47,7 +47,7 @@ final class Permission extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $request->query->set($this->settingService->getPerPageField(), 27);
+        $request->query->set($this->settingService->getPerPageField(), 10);
 
         $class = new ReflectionClass(Entity::class);
 

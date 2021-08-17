@@ -8,6 +8,7 @@ use KejawenLab\ApiSkeleton\Cron\CronReportService;
 use KejawenLab\ApiSkeleton\Entity\CronReport;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
@@ -23,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    public function __construct(private CronReportService $service, private Paginator $paginator)
+    public function __construct(private CronReportService $service, private Paginator $paginator, private SettingService $settingService)
     {
     }
 
@@ -33,6 +34,8 @@ final class Report extends AbstractController
     public function __invoke(Request $request, string $id): Response
     {
         $class = new ReflectionClass(CronReport::class);
+
+        $request->query->set($this->settingService->getPerPageField(), 10);
 
         return $this->render('cron/report.html.twig', [
             'page_title' => 'sas.page.cron_report.list',

@@ -20,9 +20,9 @@
                                         {% if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name %}
                                             <a class="float-right">
                                                 {% if attribute(data, property.name) %}
-                                                    <span class="btn btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
                                                 {% else %}
-                                                    <span class="btn btn-warning disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
+                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
                                                 {% endif %}
                                             </a>
                                         {% else %}
@@ -34,8 +34,8 @@
                         </ul>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) }}" class="btn btn-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-primary ml-1">{{ 'sas.form.action.cron_logs' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) }}" class="btn btn-outline-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
+                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-outline-info ml-1">{{ 'sas.form.action.cron_logs' | trans({}, 'forms') }}</a>
                         <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\GetAll') }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
                     </div>
                 </div>

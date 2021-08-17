@@ -31,21 +31,22 @@ final class Post extends AbstractController
     public function __invoke(Request $request): Response
     {
         $cron = new Cron();
+        $flashs = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashs as $flash) {
+            $cron = $this->service->get($flash);
+
+            break;
+        }
+
         $form = $this->createForm(CronType::class, $cron);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save($cron);
-
                 $this->addFlash('info', 'sas.page.cron.saved');
-
-                return new RedirectResponse($this->generateUrl(GetAll::class));
             }
         }
 
-        return $this->render('cron/form.html.twig', [
-            'page_title' => 'sas.page.cron.add',
-            'form' => $form->createView(),
-        ]);
+        return new RedirectResponse($this->generateUrl(GetAll::class));
     }
 }
