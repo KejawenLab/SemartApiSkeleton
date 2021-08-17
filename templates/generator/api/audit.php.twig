@@ -29,7 +29,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Audit extends AbstractFOSRestController
 {
-    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, AuditReader $reader)
+    public function __construct(private {{ entityHumanize }}Service $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -90,7 +90,7 @@ final class Audit extends AbstractFOSRestController
             throw new NotFoundHttpException();
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable({{ entityHumanize }}::class)) {
+        if (!$this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
             return $this->view([]);
         }
 

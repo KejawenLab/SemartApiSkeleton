@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(FormFactory $formFactory, {{ entityHumanize }}Service $service)
+    public function __construct(private FormFactory $formFactory, private {{ entityHumanize }}Service $service)
     {
     }
 

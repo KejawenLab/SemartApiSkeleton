@@ -38,9 +38,9 @@ final class AdminTemplateGenerator extends AbstractGenerator
             '{# entity | lower #}',
         ];
         $replace = [$shortName, $lowercase];
-        $all = 'templates/generator/admin/view/all.html.stub';
+        $all = 'all.html.stub';
         if ($this->hasAssociation($class)) {
-            $all = 'templates/generator/admin/view/select2-all.html.stub';
+            $all = 'select2-all.html.stub';
         }
 
         if ($this->reader->getProvider()->isAuditable($class->getName())) {
@@ -48,7 +48,7 @@ final class AdminTemplateGenerator extends AbstractGenerator
             $this->fileSystem->dumpFile(sprintf('%s/templates/%s/audit.html.twig', $projectDir, $lowercase), $auditTemplate);
         }
 
-        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/%s.html.stub', $projectDir, $all)));
+        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/%s', $projectDir, $all)));
         $viewTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/view.html.stub', $projectDir)));
 
         $output->writeln(sprintf('<comment>Generating template <info>"%s/all.html.twig"</info></comment>', $lowercase));

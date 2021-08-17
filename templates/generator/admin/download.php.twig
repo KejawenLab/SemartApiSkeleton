@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    public function __construct({{ entityHumanize }}Service $service, SerializerInterface $serializer)
+    public function __construct(private {{ entityHumanize }}Service $service, private SerializerInterface $serializer)
     {
     }
 

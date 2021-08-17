@@ -17,7 +17,7 @@
                                 <button type="submit" id="sasSearch" class="btn btn-default">
                                     <i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}
                                 </button>
-                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Download') }}">
+                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Download') }}">
                                     <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
                                 </a>
                             </div>
@@ -38,17 +38,17 @@
                         {% endfor %}
                         <li class="list-group-item p-1">
                             <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
-                                <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Get', {id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
+                                <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Get', {id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
                                     {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                 </a>
                                 {% if is_granted('edit', menu) %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Put', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
+                                    <a href="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Put', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
                                         {{ 'sas.table.action.edit' | trans({}, 'tables') }}
                                     </a>
                                 {% endif %}
                                 {% if is_granted('delete', menu) %}
                                     <button type="button"
-                                            data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Delete', {id: data.id}) }}"
+                                            data-path="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Delete', {id: data.id}) }}"
                                             data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': semart_print(data)}, 'notifications') }}"
                                             class="btn btn-sm btn-outline-danger delete"
                                             data-toggle="modal"
@@ -70,7 +70,7 @@
         {% if is_granted('add', menu) %}
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
-                <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\{# entity #}\\Post') }}" enctype="multipart/form-data">
+                <form role="form" method="post" action="{{ path('KejawenLab\\Application\\Admin\\Controller\\{# entity #}\\Post') }}" enctype="multipart/form-data">
                     <div class="card-body">
                         {{ form_widget(form) }}
                     </div>
