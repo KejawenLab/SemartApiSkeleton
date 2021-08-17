@@ -62,7 +62,7 @@
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
                                         <button type="button"
-                                                data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Menu\\Delete', {id: data.id}) }}"
+                                                data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Delete', {id: data.id}) }}"
                                                 data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': data.fileName}, 'notifications') }}"
                                                 class="btn btn-sm btn-outline-danger delete"
                                                 data-toggle="modal"
