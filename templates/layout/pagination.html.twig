@@ -1,25 +1,14 @@
 {% apply spaceless %}
     {% if paginator['total_item'] > 0 %}
-        <span class="float-left">{{ 'sas.table.show_records' | trans({'%items%': (paginator['items'] | length), '%total%': paginator['total_item']}, 'tables') | raw }}</span>
+        <span class="float-left">{{ 'sas.table.show_records' | trans({'%total%': paginator['total_item']}, 'tables') | raw }}</span>
     {% endif %}
     {% set prev = paginator['page'] - 1 %}
     {% set next = paginator['page'] + 1 %}
-    {% set prevLink = false %}
-    {% set nextLink = false %}
     {% set setting = setting('page_field') %}
-    {% if paginator['page'] - prev > 2 %}
-        {% set prevLink = true %}
-    {% endif %}
-    {% if paginator['total_page'] - next > 2 %}
-        {% set nextLink = true %}
-    {% endif %}
     {% set queryParams = app.request.query.all %}
     <ul class="pagination m-0 float-right">
         {% if paginator['page'] != 1 %}
             <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): 1})) | url_encode }}"><<</a></li>
-        {% endif %}
-        {% if prevLink %}
-            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): prev})) | url_encode }}"><</a></li>
         {% endif %}
         {% if prev > 0 %}
             <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): prev})) | url_encode }}">{{ prev }}</a></li>
@@ -29,9 +18,6 @@
         {% endif %}
         {% if next < paginator['total_page'] %}
             <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): next})) | url_encode }}">{{ next }}</a></li>
-        {% endif %}
-        {% if nextLink %}
-            <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): next})) | url_encode }}">></a></li>
         {% endif %}
         {% if paginator['page'] < paginator['total_page'] %}
             <li class="page-item"><a class="page-link" href="{{ app.request.pathInfo ~ '?' ~ (queryParams | merge({(setting ? setting.value : 'page'): paginator['total_page']})) | url_encode }}">>></a></li>

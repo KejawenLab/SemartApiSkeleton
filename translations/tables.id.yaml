@@ -1,6 +1,6 @@
 sas:
     table:
-        show_records: 'Menampilkan <b>%items%</b> dari <b>%total%</b>'
+        show_records: 'Total Data: <b>%total%</b>'
         action:
             download: 'Unduh'
             search: 'Cari'
