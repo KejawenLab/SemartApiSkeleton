@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    public function __construct({{ entityHumanize }}Service $service, Paginator $paginator)
+    public function __construct(private {{ entityHumanize }}Service $service, private Paginator $paginator)
     {
     }
 
@@ -37,7 +37,7 @@ final class GetAll extends AbstractController
     {
         $class = new \ReflectionClass({{ entityHumanize }}::class);
         ${{ entityLowerize }} = new {{ entityHumanize }}();
-        $flashs = $request->getSession()->getFlashBag()->get('form_data');
+        $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
             ${{ entityLowerize }} = $this->service->get($flash);
             if (${{ entityLowerize }}) {

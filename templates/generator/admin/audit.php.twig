@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct({{ entityHumanize }}Service $service, AuditService $audit, Reader $reader)
+    public function __construct(private {{ entityHumanize }}Service $service, private AuditService $audit, private Reader $reader)
     {
     }
 
@@ -41,7 +41,7 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        if (!$this->reader->getConfiguration()->isAuditable({{ entityHumanize }}::class)) {
+        if (!$this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAll::class));

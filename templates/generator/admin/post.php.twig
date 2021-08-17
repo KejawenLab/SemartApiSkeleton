@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    public function __construct({{ entityHumanize }}Service $service)
+    public function __construct(private {{ entityHumanize }}Service $service)
     {
     }
 

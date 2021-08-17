@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct({{ entityHumanize }}Service $service)
+    public function __construct(private {{ entityHumanize }}Service $service)
     {
     }
 
