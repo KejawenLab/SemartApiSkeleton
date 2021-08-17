@@ -31,6 +31,7 @@ sas:
                 code: 'Kode'
                 name: 'Nama'
                 routeName: 'Nama Rute'
+                iconClass: 'CSS Icon Class'
                 sortOrder: 'Urutan'
                 showable: 'Tampilkan?'
                 adminOnly: 'Khusus Admin?'

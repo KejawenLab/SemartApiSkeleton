@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,15 +27,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    public function __construct(private ApiClientRequestService $service, private Paginator $paginator)
+    public function __construct(private ApiClientRequestService $service, private UserService $userService, private Paginator $paginator)
     {
     }
 
     /**
-     * @Route("/api-clients/{id}/logs", name=Report::class, methods={"GET"})
+     * @Route("/users/{userId}/api-clients/{id}/logs", name=Report::class, methods={"GET"})
      */
-    public function __invoke(Request $request, string $id): Response
+    public function __invoke(Request $request, string $userId, string $id): Response
     {
+        $user = $this->userService->get($userId);
+        if (!$user instanceof User) {
+            $this->addFlash('error', 'sas.page.user.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
+        }
+
         $class = new ReflectionClass(ApiClientRequest::class);
 
         return $this->render('api_client/report.html.twig', [
@@ -40,6 +51,7 @@ final class Report extends AbstractController
             'context' => StringUtil::lowercase($class->getShortName()),
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClientRequest::class),
+            'user_id' => $userId,
         ]);
     }
 }

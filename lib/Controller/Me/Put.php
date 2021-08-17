@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
+use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -28,7 +29,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private UserService $service)
+    public function __construct(private FormFactory $formFactory, private UserService $service, private MediaService $mediaService)
     {
     }
 
@@ -71,6 +72,12 @@ final class Put extends AbstractFOSRestController
         }
 
         $user = $userProviderFactory->getRealUser($user);
+        /** @var User $user */
+        $media = $this->mediaService->getByFile($user->getProfileImage());
+        if ($media) {
+            $this->mediaService->remove($media);
+        }
+
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);

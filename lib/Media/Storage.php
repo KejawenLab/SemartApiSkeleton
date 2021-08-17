@@ -16,6 +16,20 @@ use Vich\UploaderBundle\Storage\FileSystemStorage;
  */
 final class Storage extends FileSystemStorage
 {
+    public function remove($obj, PropertyMapping $mapping): ?bool
+    {
+        if (!$obj instanceof MediaInterface) {
+            parent::upload($obj, $mapping);
+        }
+
+        $name = $mapping->getFileName($obj);
+        if (empty($name)) {
+            return false;
+        }
+
+        return $this->doRemove($mapping, $this->getUploadDir($obj, $mapping), $name);
+    }
+
     public function upload($obj, PropertyMapping $mapping): void
     {
         if (!$obj instanceof MediaInterface) {
@@ -41,17 +55,7 @@ final class Storage extends FileSystemStorage
             $mapping->writeProperty($obj, 'dimensions', array_splice($dimensions, 0, 2));
         }
 
-        $target = null;
-        if (null !== $obj->getFolder()) {
-            foreach (explode('/', $obj->getFolder()) as $value) {
-                if ($value) {
-                    $target = sprintf('%s%s%s', $target, $value, DIRECTORY_SEPARATOR);
-                }
-            }
-        }
-
-        $target = rtrim($target, DIRECTORY_SEPARATOR);
-        $dir = trim(sprintf('%s%s%s', $mapping->getUploadDir($obj), DIRECTORY_SEPARATOR, $target), DIRECTORY_SEPARATOR);
+        $dir = $this->getUploadDir($obj, $mapping);
         $fileSystem = new Filesystem();
         $storage = sprintf('%s%s%s', $mapping->getUploadDestination(), DIRECTORY_SEPARATOR, $dir);
         if (!$fileSystem->exists($storage)) {
@@ -77,5 +81,26 @@ final class Storage extends FileSystemStorage
         }
 
         return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
+    }
+
+    private function getUploadDir(MediaInterface $media, PropertyMapping $mapping): string
+    {
+        $target = null;
+        if (null !== $media->getFolder()) {
+            foreach (explode('/', $media->getFolder()) as $value) {
+                if ($value) {
+                    $target = sprintf('%s%s%s', $target, $value, DIRECTORY_SEPARATOR);
+                }
+            }
+        }
+
+        return trim(
+            sprintf('%s%s%s',
+                $mapping->getUploadDir($media),
+                DIRECTORY_SEPARATOR,
+                rtrim($target, DIRECTORY_SEPARATOR)
+            ),
+            DIRECTORY_SEPARATOR
+        );
     }
 }

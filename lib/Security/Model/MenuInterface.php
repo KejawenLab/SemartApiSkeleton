@@ -29,7 +29,7 @@ interface MenuInterface extends PermissionableInterface, EntityInterface
 
     public function setAdminPath(string $adminPath): void;
 
-    public function getExtra(): ?string;
+    public function getIconClass(): ?string;
 
     public function isShowable(): ?bool;
 }

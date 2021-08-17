@@ -11,6 +11,7 @@ use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,16 +26,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Post extends AbstractController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service)
+    public function __construct(private UserProviderFactory $userProviderFactory, private UserService $userService, private ApiClientService $service)
     {
     }
 
     /**
-     * @Route("/api-clients/add", name=Post::class, methods={"POST"}, priority=1)
+     * @Route("/users/{userId}/api-clients", name=Post::class, methods={"POST"}, priority=1)
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, string $userId): Response
     {
-        $user = $this->getUser();
+        $user = $this->userService->get($userId);
         if (!$user instanceof User) {
             $this->addFlash('error', 'sas.page.user.not_found');
 

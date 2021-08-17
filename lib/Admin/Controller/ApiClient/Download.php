@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,15 +21,22 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    public function __construct(private ApiClientService $service, private SerializerInterface $serializer)
+    public function __construct(private ApiClientService $service, private UserService $userService, private SerializerInterface $serializer)
     {
     }
 
     /**
-     * @Route("/api-clients/download", name=Download::class, methods={"GET"})
+     * @Route("/users/{userId}/api-clients/download", name=Download::class, methods={"GET"})
      */
-    public function __invoke(): Response
+    public function __invoke(string $userId): Response
     {
+        $user = $this->userService->get($userId);
+        if (!$user) {
+            $this->addFlash('error', 'sas.page.user.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
+        }
+
         $records = $this->service->total();
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');

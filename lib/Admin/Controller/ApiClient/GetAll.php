@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,15 +27,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    public function __construct(private ApiClientService $service, private Paginator $paginator)
+    public function __construct(private ApiClientService $service, private UserService $userService, private Paginator $paginator)
     {
     }
 
     /**
-     * @Route("/api-clients", name=GetAll::class, methods={"GET"})
+     * @Route("/users/{userId}/api-clients", name=GetAll::class, methods={"GET"}, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, string $userId): Response
     {
+        $user = $this->userService->get($userId);
+        if (!$user) {
+            $this->addFlash('error', 'sas.page.user.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
+        }
+
         $class = new ReflectionClass(ApiClient::class);
 
         return $this->render('api_client/all.html.twig', [
@@ -41,6 +51,7 @@ final class GetAll extends AbstractController
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class),
             'form' => $this->createForm(ApiClientType::class)->createView(),
+            'user_id' => $userId,
         ]);
     }
 }

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Entity\User as RealUser;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
+use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -21,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    public function __construct(private UserService $service, private UserProviderFactory $userProviderFactory)
+    public function __construct(private UserService $service, private MediaService $mediaService, private UserProviderFactory $userProviderFactory)
     {
     }
 
@@ -38,6 +40,12 @@ final class Put extends AbstractController
         $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
+        }
+
+        /** @var RealUser $user */
+        $media = $this->mediaService->getByFile($user->getProfileImage());
+        if ($media) {
+            $this->mediaService->remove($media);
         }
 
         $form = $this->createForm(UpdateProfileType::class, $user);

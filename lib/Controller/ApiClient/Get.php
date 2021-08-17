@@ -10,10 +10,13 @@ use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::VIEW})
@@ -22,12 +25,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientService $service)
+    public function __construct(private ApiClientService $service, private UserService $userService)
     {
     }
 
     /**
-     * @Rest\Get("/api-clients/{id}", name=Get::class)
+     * @Rest\Get("/users/{userId}/api-clients/{id}", name=Get::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\Response(
@@ -46,8 +49,13 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(Request $request, string $userId, string $id): View
     {
+        $user = $this->userService->get($userId);
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+        }
+
         return $this->view($this->service->get($id));
     }
 }

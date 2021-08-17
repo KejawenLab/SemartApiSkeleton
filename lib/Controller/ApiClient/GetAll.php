@@ -11,10 +11,13 @@ use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::VIEW})
@@ -23,12 +26,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class GetAll extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientService $service, private Paginator $paginator)
+    public function __construct(private ApiClientService $service, private UserService $userService, private Paginator $paginator)
     {
     }
 
     /**
-     * @Rest\Get("/api-clients", name=GetAll::class)
+     * @Rest\Get("users/{userId}/api-clients", name=GetAll::class, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
      *
      * @OA\Tag(name="Api Client")
      * @OA\Parameter(
@@ -62,8 +65,13 @@ final class GetAll extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request): View
+    public function __invoke(Request $request, string $userId): View
     {
+        $user = $this->userService->get($userId);
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+        }
+
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class));
     }
 }
