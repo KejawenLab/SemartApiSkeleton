@@ -9,15 +9,15 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    public const CODENAME = 'Apem Comal';
+    public const CODENAME = 'Merdeka';
 
-    public const VERSION = '5.4.7';
+    public const VERSION = '5.5.0';
 
     public const VERSION_MAYOR = 50000;
 
-    public const VERSION_MINOR = 400;
+    public const VERSION_MINOR = 500;
 
-    public const VERSION_PATCH = 7;
+    public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {
