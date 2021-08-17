@@ -26,7 +26,7 @@
                                                 {% endif %}
                                             </a>
                                         {% elseif 'fileUrl' == property.name %}
-                                            <a class="btn btn-sm btn-primary float-right" href="{{ '/admin' ~ attribute(data, property.name) }}" target="_blank">
+                                            <a class="btn btn-sm btn-info float-right" href="{{ '/admin' ~ attribute(data, property.name) }}" target="_blank">
                                                 {{ 'sas.page.media.download' | trans({}, 'pages') }}
                                             </a>
                                         {% else %}
