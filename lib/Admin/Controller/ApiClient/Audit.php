@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
@@ -26,17 +28,24 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct(private ApiClientService $service, private AuditService $audit, private Reader $reader)
+    public function __construct(private ApiClientService $service, private UserService $userService, private AuditService $audit, private Reader $reader)
     {
     }
 
     /**
-     * @Route("/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
+     * @Route("users/{userId}/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
      *
      * @throws InvalidArgumentException
      */
-    public function __invoke(string $id): Response
+    public function __invoke(string $userId, string $id): Response
     {
+        $user = $this->userService->get($userId);
+        if (!$user) {
+            $this->addFlash('error', 'sas.page.user.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAllUser::class));
+        }
+
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
@@ -58,6 +67,7 @@ final class Audit extends AbstractController
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
             'data' => $audit['entity'],
             'audits' => $audit['items'],
+            'user_id' => $userId,
         ]);
     }
 }

@@ -15,12 +15,17 @@
                 <div class="card-body table-responsive p-0">
                     <div class="col-lg-12 col-md-12 col-sm-12 p-1">
                         <div class="float-left input-group col-lg-12 col-md-12 col-sm-12 p-0">
+                            <div class="input-group-prepend">
+                                <a class="btn btn-info" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: user_id}) }}">
+                                    <i class="cil-arrow-circle-left pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.form.action.back' | trans({}, 'forms') }}
+                                </a>
+                            </div>
                             <input type="text" name="table_search" id="sasSearchValue" class="form-control float-right" placeholder="{{ 'sas.table.action.search' | trans({}, 'tables') }}">
                             <div class="input-group-append">
                                 <button type="submit" id="sasSearch" class="btn btn-default">
                                     <i class="cil-search pr-1 align-middle"></i>{{ 'sas.table.action.search' | trans({}, 'tables') }}
                                 </button>
-                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Download') }}">
+                                <a class="btn btn-secondary" href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Download', {userId: user_id}) }}">
                                     <i class="cil-arrow-circle-bottom pr-1 align-middle" aria-hidden="true"></i>{{ 'sas.table.action.download' | trans({}, 'tables') }}
                                 </a>
                             </div>
@@ -46,17 +51,17 @@
                             {% endfor %}
                             <li class="list-group-item p-1">
                                 <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Audit', {id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Audit', {userId: user_id, id: data.id}) }}" class="btn btn-sm btn-outline-secondary">
                                         {{ 'sas.form.action.audit' | trans({}, 'forms') }}
                                     </a>
                                     {% if is_granted('edit', menu) %}
-                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Report', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
+                                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Report', {userId: user_id, id: data.id}) }}" class="btn btn-sm btn-outline-info">
                                             {{ 'sas.form.action.api_request_logs' | trans({}, 'forms') }}
                                         </a>
                                     {% endif %}
                                     {% if is_granted('delete', menu) %}
                                         <button type="button"
-                                                data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Delete', {id: data.id}) }}"
+                                                data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Delete', {userId: user_id, id: data.id}) }}"
                                                 data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': data.name}, 'notifications') }}"
                                                 class="btn btn-sm btn-outline-danger delete"
                                                 data-toggle="modal"
@@ -78,7 +83,7 @@
         {% if is_granted('add', menu) %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
-                    <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Post') }}" enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Post', {userId: user_id}) }}" enctype="multipart/form-data">
                         <div class="card-body">
                             {{ form_widget(form) }}
                         </div>
@@ -146,7 +151,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll') }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll', {userId: user_id}) }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}

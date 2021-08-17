@@ -13,12 +13,14 @@ use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::ADD})
@@ -27,12 +29,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private ApiClientService $service)
+    public function __construct(private FormFactory $formFactory, private UserService $userService, private ApiClientService $service)
     {
     }
 
     /**
-     * @Rest\Post("/api-clients", name=Post::class)
+     * @Rest\Post("/users/{userId}/api-clients", name=Post::class)
      *
      * @OA\Tag(name="Api Client")
      * @OA\RequestBody(
@@ -62,8 +64,13 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
+    public function __invoke(Request $request, string $userId): View
     {
+        $user = $this->userService->get($userId);
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+        }
+
         $form = $this->formFactory->submitRequest(ApiClientType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);

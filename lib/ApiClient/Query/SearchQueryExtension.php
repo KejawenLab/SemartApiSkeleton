@@ -8,12 +8,13 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class FilterByUserExtension extends AbstractQueryExtension
+final class SearchQueryExtension extends AbstractQueryExtension
 {
     public function __construct(AliasHelper $aliasHelper)
     {
@@ -22,15 +23,15 @@ final class FilterByUserExtension extends AbstractQueryExtension
 
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $filter = $request->attributes->get('userId');
-        if (!$filter) {
+        $query = $request->query->get('q');
+        if (!$query) {
             return;
         }
 
         $queryBuilder->andWhere(
-            $queryBuilder->expr()->eq(
-                sprintf('%s.user', $this->aliasHelper->findAlias('root')),
-                $queryBuilder->expr()->literal($filter)
+            $queryBuilder->expr()->like(
+                sprintf('UPPER(%s.name)', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(sprintf('%%%s%%', StringUtil::uppercase($query)))
             )
         );
     }

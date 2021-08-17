@@ -26,7 +26,7 @@ final class Post extends AbstractController
     }
 
     /**
-     * @Route("/menus/add", name=Post::class, methods={"POST"}, priority=1)
+     * @Route("/menus", name=Post::class, methods={"POST"}, priority=1)
      */
     public function __invoke(Request $request): Response
     {
