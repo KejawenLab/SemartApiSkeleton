@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -34,10 +34,9 @@ final class GenerateCommand extends Command
     {
         $this
             ->setName('semart:generate')
-            ->setDescription('Generate RESTful API and/or Admin Page')
+            ->setDescription('Generate RESTful API and Admin Page')
             ->addArgument('entity', InputArgument::REQUIRED)
             ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
-            ->addOption('force', 'f', InputOption::VALUE_NONE)
             ->addOption('admin', 'admin', InputOption::VALUE_NONE)
             ->addOption('api', 'api', InputOption::VALUE_NONE)
             ->addOption('folder', 'folder', InputOption::VALUE_NONE)
@@ -50,7 +49,8 @@ final class GenerateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->write('<fg=green;options=bold>
+        $io = new SymfonyStyle($input, $output);
+        $io->writeln('<fg=green;options=bold>
    _____                           __     ______                           __
   / ___/___  ____ ___  ____ ______/ /_   / ____/__  ____  ___  _________ _/ /_____  _____
   \__ \/ _ \/ __ `__ \/ __ `/ ___/ __/  / / __/ _ \/ __ \/ _ \/ ___/ __ `/ __/ __ \/ ___/
@@ -58,15 +58,12 @@ final class GenerateCommand extends Command
 /____/\___/_/ /_/ /_/\__,_/_/   \__/   \____/\___/_/ /_/\___/_/   \__,_/\__/\____/_/
 
 By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</comment>>
-
 </>');
-        if (!$input->getOption('force')) {
-            $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Semart Api Generator will overwrite your file if it exists. Continue?</question> (y/n)', false);
-            if (!$helper->ask($input, $output, $question)) {
-                return 0;
-            }
-        }
+        $io->newLine();
+
+        /** @var string $entity */
+        $entity = $input->getArgument('entity');
+        $class = sprintf('%s\%s', self::NAMESPACE, $entity);
 
         $scope = GeneratorInterface::SCOPE_ALL;
         if ($input->getOption('admin')) {
@@ -77,23 +74,21 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
             $scope = GeneratorInterface::SCOPE_API;
         }
 
-        /** @var string $entity */
-        $entity = $input->getArgument('entity');
-        $reflection = new ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $entity));
+        $reflection = new ReflectionClass($class);
         $application = $this->getApplication();
 
-        $output->writeln('<info>Running Schema Updater</info>');
+        $io->title('Running Schema Updater');
         $update = $application->find('doctrine:schema:update');
         $update->run(new ArrayInput([
             'command' => 'doctrine:schema:update',
             '--force' => null,
         ]), $output);
 
-        $output->writeln('<info>Generating RESTful API and/or Admin Page</info>');
+        $io->title(sprintf('Generate classes for <info>%s</info>', $class));
         $this->generator->generate($reflection, $scope, $output, $input->getOption('folder') ?: '');
 
         if ($parentCode = $input->getOption('parent')) {
-            $output->writeln('<comment>Applying parent to menu</comment>');
+            $io->comment(sprintf('Apply parent menu to %s', $parentCode));
             $menu = $this->menuService->getMenuByCode($reflection->getShortName());
             $parent = $this->menuService->getMenuByCode($parentCode);
             if ($menu && $parent) {
@@ -103,13 +98,13 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
             }
         }
 
-        $output->writeln(sprintf('<comment>RESTful Api and/or Admin files for class <info>"%s"</info> has been generated</comment>', $reflection->getName()));
-
-        $output->writeln('<info>Clearing Cache</info>');
+        $io->title('Clear Cache');
         $update = $application->find('cache:clear');
         $update->run(new ArrayInput([
             'command' => 'cache:clear',
         ]), $output);
+
+        $io->success('Restart your container to apply changes');
 
         return 0;
     }
