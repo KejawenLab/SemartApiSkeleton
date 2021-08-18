@@ -37,7 +37,7 @@ final class Audit extends AbstractController
      */
     public function __invoke(string $id): Response
     {
-        if (!$entity = $this->service->get($id)) {
+        if (($entity = $this->service->get($id)) === null) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAll::class));

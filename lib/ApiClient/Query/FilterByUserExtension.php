@@ -15,11 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class FilterByUserExtension extends AbstractQueryExtension
 {
-    public function __construct(AliasHelper $aliasHelper)
-    {
-        parent::__construct($aliasHelper);
-    }
-
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $filter = $request->attributes->get('userId');

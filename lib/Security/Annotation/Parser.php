@@ -18,9 +18,8 @@ final class Parser
 
     public function parse(ReflectionClass $metadata): ?Permission
     {
-        /** @var Permission|null $class */
         $class = $this->reader->getClassAnnotation($metadata, Permission::class);
-        if (!$class) {
+        if (!$class instanceof Permission) {
             return null;
         }
 

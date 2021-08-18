@@ -57,7 +57,7 @@ final class Get extends AbstractFOSRestController
 
         $fileName = implode('/', $path);
         $media = $this->service->getByFile($fileName);
-        if (!$media) {
+        if (!$media instanceof MediaInterface) {
             throw new NotFoundHttpException(sprintf('File "%s" not found', $fileName));
         }
 

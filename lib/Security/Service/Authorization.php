@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Service;
 
+use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission as Annotation;
 use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -20,7 +21,7 @@ final class Authorization
     public function authorize(Annotation $permission): bool
     {
         $menu = $this->menuRepository->findByCode($permission->getMenu());
-        if (!$menu) {
+        if (!$menu instanceof MenuInterface) {
             return false;
         }
 

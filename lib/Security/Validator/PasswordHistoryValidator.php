@@ -35,7 +35,7 @@ final class PasswordHistoryValidator extends ConstraintValidator
             return;
         }
 
-        if (!$token = $this->tokenStorage->getToken()) {
+        if (($token = $this->tokenStorage->getToken()) === null) {
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 

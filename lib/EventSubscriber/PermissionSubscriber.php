@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
 use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
@@ -35,7 +36,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
         $controllerReflection = new ReflectionObject($controller);
         $permission = $this->parser->parse($controllerReflection);
-        if (!$permission) {
+        if (!$permission instanceof Permission) {
             return;
         }
 
@@ -47,9 +48,16 @@ final class PermissionSubscriber implements EventSubscriberInterface
         }
 
         $id = $event->getRequest()->attributes->get('id');
-        if ($permission->isOwnership() && $id && !$this->ownership->isOwner($id, $entity)) {
-            throw new AccessDeniedException();
+        if (!$permission->isOwnership()) {
+            return;
         }
+        if (!$id) {
+            return;
+        }
+        if ($this->ownership->isOwner($id, $entity)) {
+            return;
+        }
+        throw new AccessDeniedException();
     }
 
     /**

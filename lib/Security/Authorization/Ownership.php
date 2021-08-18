@@ -33,7 +33,7 @@ final class Ownership
 
     public function isOwner(string $id, string $entity): bool
     {
-        if (!$token = $this->tokenStorage->getToken()) {
+        if (($token = $this->tokenStorage->getToken()) === null) {
             return false;
         }
 
@@ -55,7 +55,7 @@ final class Ownership
             return false;
         }
 
-        if (!$manager = $this->doctrine->getManagerForClass($entity)) {
+        if (($manager = $this->doctrine->getManagerForClass($entity)) === null) {
             return false;
         }
 
@@ -67,11 +67,13 @@ final class Ownership
             $propertyAccessor = new PropertyAccessor();
             $creator = $propertyAccessor->getValue($object, $this->ownershipProperty);
             $creatorUser = $this->userRepository->findByUsername($creator);
-            if ($creatorUser && $this->userRepository->isSupervisor($creatorUser, $user)) {
-                return true;
+            if (!$creatorUser instanceof UserInterface) {
+                return $creator === $token->getUserIdentifier();
             }
-
-            return $creator === $token->getUserIdentifier();
+            if (!$this->userRepository->isSupervisor($creatorUser, $user)) {
+                return $creator === $token->getUserIdentifier();
+            }
+            return true;
         } catch (Exception) {
         }
 

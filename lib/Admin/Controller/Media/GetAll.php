@@ -38,7 +38,7 @@ final class GetAll extends AbstractController
         $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
             $media = $this->service->get($flash);
-            if ($media) {
+            if ($media !== null) {
                 $this->addFlash('id', $media->getId());
 
                 break;
