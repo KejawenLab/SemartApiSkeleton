@@ -47,6 +47,29 @@ final class Permission extends AbstractFOSRestController
      *         format="int32"
      *     )
      * )
+     * @OA\Parameter(
+     *     name="q",
+     *     in="query",
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     * )
+     * @OA\Parameter(
+     *     name="menu",
+     *     in="query",
+     *     @OA\Schema(
+     *         type="string"
+     *     ),
+     *     description="Filter setting by menu"
+     * )
+     * @OA\Parameter(
+     *     name="group",
+     *     in="query",
+     *     @OA\Schema(
+     *         type="string"
+     *     ),
+     *     description="Filter setting by group"
+     * )
      * @OA\Response(
      *     response=200,
      *     description= "Permission list",

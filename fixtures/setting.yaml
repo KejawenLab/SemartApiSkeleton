@@ -1,4 +1,4 @@
-- { parameter: 'PAGE_FIELD', value: 'page' }
-- { parameter: 'PER_PAGE_FIELD', value: 'limit' }
-- { parameter: 'PER_PAGE', value: '3' }
-- { parameter: 'CACHE_LIFETIME', value: '1' }
+- { group: 'pagination', parameter: 'PAGE_FIELD', value: 'page', reserved: true }
+- { group: 'pagination', parameter: 'PER_PAGE_FIELD', value: 'limit', reserved: true }
+- { group: 'pagination', parameter: 'PER_PAGE', value: '3', reserved: true }
+- { group: 'performance', parameter: 'CACHE_LIFETIME', value: '1', reserved: true }

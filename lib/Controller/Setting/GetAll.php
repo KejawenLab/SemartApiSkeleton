@@ -58,10 +58,17 @@ final class GetAll extends AbstractFOSRestController
      *     name="parameter",
      *     in="query",
      *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
+     *         type="string"
      *     ),
      *     description="Filter setting by parameter"
+     * )
+     * @OA\Parameter(
+     *     name="group",
+     *     in="query",
+     *     @OA\Schema(
+     *         type="string"
+     *     ),
+     *     description="Filter setting by group"
      * )
      * @OA\Response(
      *     response=200,

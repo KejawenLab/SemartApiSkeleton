@@ -38,6 +38,7 @@ sas:
             saved: 'Pengaturan berhasil disimpan'
             deleted: 'Pengaturan berhasil dihapus'
             not_found: 'Pengaturan tidak ditemukan'
+            reserved_not_allowed: '"reserved" setting tidak dapat dihapus'
         menu:
             saved: 'Menu berhasil disimpan'
             deleted: 'Menu berhasil dihapus'

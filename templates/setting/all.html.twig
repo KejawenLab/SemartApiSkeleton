@@ -2,6 +2,8 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 {% endblock %}
 {% block content %}
     {% apply spaceless %}
@@ -32,7 +34,7 @@
                             No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
                         </li>
                         {% for property in properties %}
-                            {% if 'id' != property.name %}
+                            {% if 'id' != property.name and 'reserved' != property.name %}
                                 <li class="list-group-item text-primary">
                                     {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                     {% if 'public' == property.name %}
@@ -119,6 +121,7 @@
 {% block javascripts %}
     {% apply spaceless %}
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 toastr.options = {
@@ -138,6 +141,10 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
+
+                $('.select2').select2({
+                    theme: 'bootstrap4'
+                });
 
                 $('#sasSearchValue').val(getParameterByName('q'));
 

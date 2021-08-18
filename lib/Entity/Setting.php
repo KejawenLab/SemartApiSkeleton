@@ -45,6 +45,16 @@ class Setting implements SettingInterface
     private UuidInterface $id;
 
     /**
+     * @ORM\Column(name="setting_group", type="string", length=27)
+     *
+     * @Assert\Length(max=27)
+     * @Assert\NotBlank()
+     *
+     * @Groups({"read"})
+     */
+    private ?string $group;
+
+    /**
      * @ORM\Column(type="string", length=27)
      *
      * @Assert\Length(max=27)
@@ -68,16 +78,35 @@ class Setting implements SettingInterface
      */
     private bool $public;
 
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     * @Groups({"read"})
+     */
+    private bool $reserved;
+
     public function __construct()
     {
+        $this->group = null;
         $this->parameter = null;
         $this->value = null;
         $this->public = false;
+        $this->reserved = false;
     }
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
+    }
+
+    public function getGroup(): ?string
+    {
+        return $this->group;
+    }
+
+    public function setGroup(?string $group): void
+    {
+        $this->group = StringUtil::lowercase($group);
     }
 
     public function getParameter(): ?string
@@ -108,6 +137,16 @@ class Setting implements SettingInterface
     public function setPublic(bool $public): void
     {
         $this->public = $public;
+    }
+
+    public function isReserved(): bool
+    {
+        return $this->reserved;
+    }
+
+    public function setReserved(bool $reserved): void
+    {
+        $this->reserved = $reserved;
     }
 
     public function getNullOrString(): ?string

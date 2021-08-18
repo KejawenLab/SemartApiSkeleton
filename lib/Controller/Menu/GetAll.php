@@ -58,8 +58,7 @@ final class GetAll extends AbstractFOSRestController
      *     name="code",
      *     in="query",
      *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
+     *         type="string"
      *     ),
      *     description="Filter menu by code"
      * )

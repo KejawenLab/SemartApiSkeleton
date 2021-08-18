@@ -42,6 +42,7 @@ sas:
                 fileUrl: 'File'
                 public: 'Publik?'
             setting:
+                group: 'Grup'
                 parameter: 'Parameter'
                 value: 'Nilai'
                 public: 'Publik?'

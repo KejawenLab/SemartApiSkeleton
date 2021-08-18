@@ -8,6 +8,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +32,12 @@ final class Delete extends AbstractController
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
+
+            return new RedirectResponse($this->generateUrl(GetAll::class));
+        }
+
+        if (!$setting->isReserved()) {
+            $this->addFlash('error', 'sas.page.setting.reserved_not_allowed');
 
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }

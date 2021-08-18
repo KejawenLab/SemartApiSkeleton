@@ -23,6 +23,7 @@ sas:
                 oldPassword: 'Kata Sandi Lama'
                 newPassword: 'Kata Sandi Baru'
             setting:
+                group: 'Grup'
                 parameter: 'Parameter'
                 value: 'Nilai'
                 public: 'Publik?'

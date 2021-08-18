@@ -14,7 +14,7 @@
                     <div class="card-body p-1">
                         <ul class="list-group">
                         {% for property in properties %}
-                            {% if 'id' != property.name %}
+                            {% if 'id' != property.name and 'reserved' != property.name %}
                                 <li class="list-group-item text-primary">
                                     {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                     {% if 'public' == property.name %}

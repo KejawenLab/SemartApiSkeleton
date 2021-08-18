@@ -16,8 +16,12 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 final class SettingService extends AbstractService implements ServiceInterface
 {
-    public function __construct(MessageBusInterface $messageBus, SettingRepositoryInterface $repository, AliasHelper $aliasHelper)
-    {
+    public function __construct(
+        MessageBusInterface $messageBus,
+        SettingRepositoryInterface $repository,
+        AliasHelper $aliasHelper,
+        private SettingGroupFactory $groupFactory,
+    ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
@@ -28,6 +32,14 @@ final class SettingService extends AbstractService implements ServiceInterface
         }
 
         throw new SettingNotFoundException();
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getGroups(): array
+    {
+        return $this->groupFactory->getGroups();
     }
 
     public function getPublicSetting(string $id): ?SettingInterface

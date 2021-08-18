@@ -12,6 +12,7 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -43,6 +44,10 @@ final class Delete extends AbstractFOSRestController
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException(sprintf('Setting with ID "%s" not found', $id));
+        }
+
+        if (!$setting->isReserved()) {
+            throw new BadRequestException('Can not delete reserved setting');
         }
 
         $this->service->remove($setting);

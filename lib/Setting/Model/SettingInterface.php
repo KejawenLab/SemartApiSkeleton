@@ -11,9 +11,13 @@ use KejawenLab\ApiSkeleton\Entity\EntityInterface;
  */
 interface SettingInterface extends EntityInterface
 {
+    public function getGroup(): ?string;
+
     public function getParameter(): ?string;
 
     public function getValue(): ?string;
 
     public function isPublic(): bool;
+
+    public function isReserved(): bool;
 }

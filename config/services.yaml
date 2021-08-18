@@ -17,6 +17,7 @@ services:
             iterable $generators: !tagged_iterator semart.generator
             iterable $initiators: !tagged_iterator semart.permission_initiator
             iterable $removers: !tagged_iterator semart.permission_remover
+            iterable $groups: !tagged_iterator semart.setting_group
             Redis $redis: '@snc_redis.default'
 
     # makes classes in lib/ available to be used as services
@@ -62,6 +63,9 @@ services:
         KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface:
             tags:
                 - { name: semart.permission_remover }
+        KejawenLab\ApiSkeleton\Setting\Model\SettingGroupInterface:
+            tags:
+                - { name: semart.setting_group }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
