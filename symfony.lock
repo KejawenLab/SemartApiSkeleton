@@ -156,6 +156,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.12.0"
+    },
     "jms/metadata": {
         "version": "2.2.0"
     },

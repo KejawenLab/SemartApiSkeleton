@@ -21,4 +21,5 @@ return [
     DH\AuditorBundle\DHAuditorBundle::class => ['all' => true],
     K911\Swoole\Bridge\Symfony\Bundle\SwooleBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
+    Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle::class => ['all' => true],
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f45901a7818a3788bfd5c1c4ef178b9",
+    "content-hash": "3c07cca432db62af6434e8889d2f5c68",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2300,6 +2300,87 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2021-06-22T11:23:22+00:00"
+        },
+        {
+            "name": "gesdinet/jwt-refresh-token-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
+                "reference": "458518cd6bbf2ecfa1729fded538a78a89a16cfa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/458518cd6bbf2ecfa1729fded538a78a89a16cfa",
+                "reference": "458518cd6bbf2ecfa1729fded538a78a89a16cfa",
+                "shasum": ""
+            },
+            "require": {
+                "lexik/jwt-authentication-bundle": "^2.0",
+                "php": ">=7.4",
+                "symfony/config": "^3.4|^4.4|^5.2",
+                "symfony/console": "^3.4|^4.4|^5.2",
+                "symfony/dependency-injection": "^3.4|^4.4|^5.2",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/event-dispatcher": "^3.4|^4.4|^5.2",
+                "symfony/http-foundation": "^3.4|^4.4|^5.2",
+                "symfony/http-kernel": "^3.4|^4.4|^5.2",
+                "symfony/polyfill-php80": "^1.15",
+                "symfony/property-access": "^3.4|^4.4|^5.2",
+                "symfony/security-bundle": "^3.4|^4.0|^5.2",
+                "symfony/security-core": "^3.4|^4.4|^5.2",
+                "symfony/security-guard": "^3.4|^4.4|^5.2",
+                "symfony/security-http": "^3.4|^4.4|^5.2"
+            },
+            "conflict": {
+                "doctrine/persistence": "<1.3.3"
+            },
+            "require-dev": {
+                "akeneo/phpspec-skip-example-extension": "^4.0|^5.0",
+                "doctrine/cache": "^1.11|^2.0",
+                "doctrine/doctrine-bundle": "^1.12|^2.0",
+                "doctrine/mongodb-odm-bundle": "^3.4|^4.0",
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^1.3.3|^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "phpspec/phpspec": "^7.0",
+                "phpunit/phpunit": "^8.5|^9.5",
+                "symfony/cache": "^3.4|^4.4|^5.2"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gesdinet\\JWTRefreshTokenBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcos Gómez Vilches",
+                    "email": "marcos@gesdinet.com"
+                }
+            ],
+            "description": "Implements a refresh token system over Json Web Tokens in Symfony",
+            "keywords": [
+                "jwt refresh token bundle symfony json web"
+            ],
+            "support": {
+                "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/master"
+            },
+            "time": "2021-08-12T11:55:47+00:00"
         },
         {
             "name": "jms/metadata",
@@ -13625,6 +13706,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "gesdinet/jwt-refresh-token-bundle": 20,
         "nelmio/api-doc-bundle": 20
     },
     "prefer-stable": false,

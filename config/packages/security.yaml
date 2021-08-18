@@ -7,6 +7,10 @@ security:
         user_provider:
             id: KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory
     firewalls:
+        api_token_refresh:
+            pattern: ^/api/token/refresh
+            stateless: true
+            refresh_jwt: ~
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|img|js|lib|fonts|bundles)/
             security: false
@@ -14,9 +18,9 @@ security:
             pattern: ^/admin
             lazy: true
             switch_user: true
-#            login_throttling:
-#                max_attempts: 5
-#                interval: '5 minutes'
+            login_throttling:
+                max_attempts: 5
+                interval: '5 minutes'
             guard:
                 authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
@@ -62,6 +66,7 @@ security:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
     access_control:
+        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['POST'] }
         - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET', 'POST'] }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }

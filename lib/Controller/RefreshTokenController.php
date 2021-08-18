@@ -13,10 +13,10 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class SecurityController extends AbstractFOSRestController
+final class RefreshTokenController extends AbstractFOSRestController
 {
     /**
-     * @Rest\Post("/login", name=SecurityController::class, priority=17)
+     * @Rest\Post("/token/refresh", name=RefreshTokenController::class, priority=17)
      *
      * @OA\Tag(name="Security")
      * @OA\RequestBody(
@@ -24,8 +24,7 @@ final class SecurityController extends AbstractFOSRestController
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 @OA\Property(property="username", type="string"),
-     *                 @OA\Property(property="password", type="string")
+     *                 @OA\Property(property="refresh_token", type="string")
      *             )
      *         )
      *     }

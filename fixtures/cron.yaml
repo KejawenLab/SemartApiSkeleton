@@ -1,3 +1,4 @@
 - { name: 'Mapping Info', description: 'Just test cron task', command: 'doctrine:mapping:info', schedule: '*/3 * * * * *' }
 - { name: 'Audit Clean', description: 'Cleaning audit records more than 12 month', command: 'audit:clean --no-confirm', schedule: '0 0 * * * *' }
 - { name: 'Cron Report Clean', description: 'Cleaning cron report more than 3 month', command: 'semart:cron:clean', schedule: '0 0 * * * *' }
+- { name: 'Refresh Token Clean', description: 'Delete expire refresh token', command: 'gesdinet:jwt:clear', schedule: '0 0 * * * *' }
