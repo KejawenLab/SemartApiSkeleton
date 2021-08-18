@@ -57,6 +57,13 @@ final class PublicAllSetting extends AbstractFOSRestController
      *         type="string"
      *     )
      * )
+     * @OA\Parameter(
+     *     name="group",
+     *     in="query",
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     * )
      * @OA\Response(
      *     response=200,
      *     description= "Setting list",

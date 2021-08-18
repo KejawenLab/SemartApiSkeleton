@@ -61,7 +61,7 @@
                                         {{ 'sas.table.action.edit' | trans({}, 'tables') }}
                                     </a>
                                 {% endif %}
-                                {% if is_granted('delete', menu) %}
+                                {% if is_granted('delete', menu) and not data.reserved %}
                                     <button type="button"
                                             data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Setting\\Delete', {id: data.id}) }}"
                                             data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': data.parameter}, 'notifications') }}"
