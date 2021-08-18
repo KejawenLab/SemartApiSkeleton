@@ -42,7 +42,7 @@
                                                                 {% set relation = attribute(data, property.name) %}
                                                                 <a class="float-right">{{ relation.name ~ ' (' ~ relation.code ~ ')' }}</a>
                                                             {% elseif
-                                                                'showable' == property.name or
+                                                                'addable' == property.name or
                                                                 'editable' == property.name or
                                                                 'viewable' == property.name or
                                                                 'deletable' == property.name
@@ -51,7 +51,7 @@
                                                                     {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
                                                                         <input
                                                                             type="checkbox"
-                                                                            class="permission-view"
+                                                                            class="permission-{{ property.name }}"
                                                                             {% if attribute(data, property.name) %}checked{% endif%}
                                                                             data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: data.id }) }}"
                                                                             data-toggle="toggle"
@@ -96,7 +96,7 @@
                                                                 {% set relation = attribute(data, property.name) %}
                                                                 <a class="float-right">{{ relation.name ~ ' (' ~ relation.code ~ ')' }}</a>
                                                             {% elseif
-                                                                'showable' == property.name or
+                                                                'addable' == property.name or
                                                                 'editable' == property.name or
                                                                 'viewable' == property.name or
                                                                 'deletable' == property.name
@@ -105,7 +105,7 @@
                                                                     {% if is_granted('add', convert_to_menu('group')) or is_granted('edit', convert_to_menu('group')) %}
                                                                         <input
                                                                             type="checkbox"
-                                                                            class="permission-view"
+                                                                            class="permission-{{ property.name }}"
                                                                             {% if attribute(data, property.name) %}checked{% endif%}
                                                                             data-url="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\PermissionPut', { groupId: group.id, id: data.id }) }}"
                                                                             data-toggle="toggle"
@@ -181,7 +181,7 @@
                     window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Group\\Permission', { id: group.id }) }}?q=' + $('#sasSearchValue').val();
                 });
 
-                $(document).on('change', '.permission-view', function () {
+                $(document).on('change', '.permission-viewable', function () {
                     let url = $(this).data('url');
                     let viewable = false;
                     if ($(this).prop('checked')) {
@@ -191,7 +191,7 @@
                     redirectPost(url, 'view', viewable);
                 });
 
-                $(document).on('change', '.permission-add', function () {
+                $(document).on('change', '.permission-addable', function () {
                     let url = $(this).data('url');
                     let addable = false;
                     if ($(this).prop('checked')) {
@@ -201,7 +201,7 @@
                     redirectPost(url, 'add', addable);
                 });
 
-                $(document).on('change', '.permission-edit', function () {
+                $(document).on('change', '.permission-editable', function () {
                     let url = $(this).data('url');
                     let editable = false;
                     if ($(this).prop('checked')) {
@@ -211,7 +211,7 @@
                     redirectPost(url, 'edit', editable);
                 });
 
-                $(document).on('change', '.permission-delete', function () {
+                $(document).on('change', '.permission-deletable', function () {
                     let url = $(this).data('url');
                     let deletable = false;
                     if ($(this).prop('checked')) {
