@@ -40,7 +40,7 @@ final class Get extends AbstractController
 
         $fileName = implode('/', $path);
         $media = $this->service->getByFile($fileName);
-        if (!$media) {
+        if (!$media instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAll::class));

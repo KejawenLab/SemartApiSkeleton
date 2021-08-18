@@ -44,7 +44,7 @@ final class Put extends AbstractController
 
         /** @var RealUser $user */
         $media = $this->mediaService->getByFile($user->getProfileImage());
-        if ($media) {
+        if ($media !== null) {
             $this->mediaService->remove($media);
         }
 

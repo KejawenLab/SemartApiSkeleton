@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
@@ -31,7 +32,7 @@ final class ApiClientRequestSubscriber implements EventSubscriberInterface
         }
 
         $token = $this->tokenStorage->getToken();
-        if (!$token) {
+        if (!$token instanceof TokenInterface) {
             return;
         }
 

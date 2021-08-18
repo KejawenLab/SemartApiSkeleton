@@ -131,7 +131,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
         /** @var MenuInterface[] $childs */
         $childs = $this->menuRepository->findChilds($menu);
-        if (0 < count($childs)) {
+        if ([] !== $childs) {
             $tree['childs'] = [];
             $permissions = $this->getPermissions($group, $childs);
             foreach ($permissions as $key => $permission) {

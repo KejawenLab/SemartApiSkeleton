@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "960a2011b96bee99cb4d4b08475eab49",
+    "content-hash": "4f45901a7818a3788bfd5c1c4ef178b9",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2958,12 +2958,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "478fb2efe01ffa727b350684d51cf89615bb6539"
+                "reference": "74a440a2b1fc1269103f9d4405ec25d197b1625a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/478fb2efe01ffa727b350684d51cf89615bb6539",
-                "reference": "478fb2efe01ffa727b350684d51cf89615bb6539",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/74a440a2b1fc1269103f9d4405ec25d197b1625a",
+                "reference": "74a440a2b1fc1269103f9d4405ec25d197b1625a",
                 "shasum": ""
             },
             "require": {
@@ -3063,7 +3063,7 @@
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
                 "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/master"
             },
-            "time": "2021-08-03T08:25:50+00:00"
+            "time": "2021-08-17T19:52:21+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -11976,16 +11976,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.47",
+            "version": "0.11.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d252ae7f74f1c5588a18528ed41a9389459e16d9"
+                "reference": "d3b80f641be8ae46b02d58ad31582d92dcda8e88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d252ae7f74f1c5588a18528ed41a9389459e16d9",
-                "reference": "d252ae7f74f1c5588a18528ed41a9389459e16d9",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d3b80f641be8ae46b02d58ad31582d92dcda8e88",
+                "reference": "d3b80f641be8ae46b02d58ad31582d92dcda8e88",
                 "shasum": ""
             },
             "require": {
@@ -12023,7 +12023,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.47"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.48"
             },
             "funding": [
                 {
@@ -12031,7 +12031,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-11T16:00:13+00:00"
+            "time": "2021-08-17T09:00:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",

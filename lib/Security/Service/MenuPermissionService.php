@@ -29,7 +29,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     {
         foreach ($this->groupRepository->findAll() as $group) {
             $permission = $this->permissionRepository->findPermission($group, $object);
-            if (!$permission) {
+            if ($permission === null) {
                 $permission = new $this->class();
             }
 

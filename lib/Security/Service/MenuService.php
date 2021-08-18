@@ -40,7 +40,7 @@ final class MenuService extends AbstractService implements ServiceInterface
      */
     public function getParentMenu(): iterable
     {
-        if (!$group = $this->getGroup()) {
+        if (($group = $this->getGroup()) === null) {
             return [];
         }
 
@@ -49,16 +49,12 @@ final class MenuService extends AbstractService implements ServiceInterface
 
     public function hasChildMenu(MenuInterface $menu): bool
     {
-        if (!$group = $this->getGroup()) {
+        if (($group = $this->getGroup()) === null) {
             return false;
         }
 
         $childMenus = $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
-        if (0 < count(iterator_to_array($childMenus, false))) {
-            return true;
-        }
-
-        return false;
+        return [] !== iterator_to_array($childMenus, false);
     }
 
     /**
@@ -66,7 +62,7 @@ final class MenuService extends AbstractService implements ServiceInterface
      */
     public function getChildsMenu(MenuInterface $menu): iterable
     {
-        if (!$group = $this->getGroup()) {
+        if (($group = $this->getGroup()) === null) {
             return [];
         }
 
@@ -75,13 +71,13 @@ final class MenuService extends AbstractService implements ServiceInterface
 
     private function getGroup(): ?GroupInterface
     {
-        if (!$token = $this->tokenStorage->getToken()) {
+        if (($token = $this->tokenStorage->getToken()) === null) {
             return null;
         }
 
         /** @var User $user */
         $user = $token->getUser();
-        if (!$group = $user->getGroup()) {
+        if (($group = $user->getGroup()) === null) {
             return null;
         }
 

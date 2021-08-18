@@ -29,7 +29,7 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     {
         foreach ($this->menuRepository->findAll() as $menu) {
             $permission = $this->permissionRepository->findPermission($object, $menu);
-            if (!$permission) {
+            if ($permission === null) {
                 $permission = new $this->class();
             }
 

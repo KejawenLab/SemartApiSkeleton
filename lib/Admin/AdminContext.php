@@ -21,10 +21,6 @@ final class AdminContext
 
     public static function isAdminContext(Request $request): bool
     {
-        if (str_starts_with($request->getPathInfo(), self::ADMIN_PATH_PREFIX)) {
-            return true;
-        }
-
-        return false;
+        return str_starts_with($request->getPathInfo(), self::ADMIN_PATH_PREFIX);
     }
 }
