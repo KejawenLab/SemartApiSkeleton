@@ -8,10 +8,12 @@ use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
@@ -44,17 +46,19 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $response = new Response();
-        $file = new File(sprintf('%s%s%s%s%s', $this->mapping->fromField($media, 'file')->getUploadDestination(), DIRECTORY_SEPARATOR, $media->getFolder(), DIRECTORY_SEPARATOR, $media->getFileName()));
+        $file = new File(sprintf('%s%s%s%s%s',
+            $this->mapping->fromField($media, 'file')->getUploadDestination(),
+            DIRECTORY_SEPARATOR,
+            $media->getFolder(),
+            DIRECTORY_SEPARATOR,
+            $media->getFileName()
+        ));
 
-        $response->headers->set('Cache-Control', 'private');
-        $response->headers->set('Content-type', (string) $file->getMimeType());
-        $response->headers->set('Content-length', (string) $file->getSize());
+        $response = new BinaryFileResponse($file->getRealPath());
+        $response->setPrivate();
         if ($request->query->get('f')) {
-            $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s.%s"', $file->getFilename(), $file->getExtension()));
+            $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
         }
-
-        $response->setContent(file_get_contents($file->getRealPath()));
 
         return $response;
     }
