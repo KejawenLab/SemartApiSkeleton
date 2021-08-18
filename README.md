@@ -537,14 +537,6 @@ Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 - [Menambah Tipe *User* Baru](doc/user.md)
 
-## Roadmap
-
-- [ ] Unit Testing
-
-- [ ] Backup Manager
-
-- [ ] Query Runner
-
 ## Digunakan Oleh
 
 <table>

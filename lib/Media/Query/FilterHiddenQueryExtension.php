@@ -16,7 +16,12 @@ final class FilterHiddenQueryExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.hidden', $this->aliasHelper->findAlias('root')), $queryBuilder->expr()->literal(false)));
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->eq(
+                sprintf('%s.hidden', $this->aliasHelper->findAlias('root')),
+                $queryBuilder->expr()->literal(false)
+            )
+        );
     }
 
     public function support(string $class, Request $request): bool
