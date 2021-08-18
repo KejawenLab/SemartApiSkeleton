@@ -34,7 +34,10 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function supports(Request $request): bool
     {
-        return AdminContext::LOGIN_ROUTE === $request->attributes->get('_route') && $request->isMethod(Request::METHOD_POST);
+        if (AdminContext::LOGIN_ROUTE !== $request->attributes->get('_route')) {
+            return false;
+        }
+        return $request->isMethod(Request::METHOD_POST);
     }
 
     public function getCredentials(Request $request): array

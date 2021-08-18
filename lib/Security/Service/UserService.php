@@ -42,7 +42,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
             return;
         }
 
-        if ($user->getFile()) {
+        if ($user->getFile() !== null) {
             $media = new Media();
             $media->setFolder(UserInterface::PROFILE_MEDIA_FOLDER);
             $media->setHidden(true);

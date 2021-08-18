@@ -40,7 +40,7 @@ final class PermissionGenerator extends AbstractGenerator
     {
         $shortName = $class->getShortName();
         $shortNameUpper = StringUtil::uppercase($shortName);
-        if ($this->menuService->getMenuByCode($shortNameUpper)) {
+        if ($this->menuService->getMenuByCode($shortNameUpper) !== null) {
             $output->writeln(sprintf('<info>Menu for "%s" already exists. Skipped</info>', $shortName));
 
             return;

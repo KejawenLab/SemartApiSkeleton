@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Twig;
 
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Iterator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
@@ -34,7 +35,7 @@ final class PermissionExtension extends AbstractExtension
     public function canViewAudit(): bool
     {
         $token = $this->tokenStorage->getToken();
-        if (!$token) {
+        if (!$token instanceof TokenInterface) {
             return false;
         }
 
@@ -48,7 +49,7 @@ final class PermissionExtension extends AbstractExtension
     public function isSuperAdmin(): bool
     {
         $token = $this->tokenStorage->getToken();
-        if (!$token) {
+        if (!$token instanceof TokenInterface) {
             return false;
         }
 

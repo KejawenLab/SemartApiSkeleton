@@ -50,12 +50,8 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
             return true;
         }
 
-        if (!$user->getSupervisor()) {
-            if ($user->getGroup()->getCode() === $this->superAdmin) {
-                return  true;
-            }
-
-            return false;
+        if ($user->getSupervisor() === null) {
+            return $user->getGroup()->getCode() === $this->superAdmin;
         }
 
         return $this->isSupervisor($user->getSupervisor(), $supervisor);

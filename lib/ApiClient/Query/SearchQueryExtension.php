@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class SearchQueryExtension extends AbstractQueryExtension
 {
-    public function __construct(AliasHelper $aliasHelper)
-    {
-        parent::__construct($aliasHelper);
-    }
-
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
         $query = $request->query->get('q');

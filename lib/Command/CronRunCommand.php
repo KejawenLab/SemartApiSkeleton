@@ -107,7 +107,7 @@ final class CronRunCommand extends Command
 
         $job = new ShellJob($cron);
         $job->setCommand($this->builder->build($cron));
-        $job->setSchedule(new CrontabSchedule(!$schedule_now ? $cron->getSchedule() : '* * * * *'));
+        $job->setSchedule(new CrontabSchedule($schedule_now ? '* * * * *' : $cron->getSchedule()));
 
         $resolver = new ArrayResolver();
         $resolver->addJob($job);

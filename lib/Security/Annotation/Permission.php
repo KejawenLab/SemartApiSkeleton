@@ -41,10 +41,13 @@ final class Permission
                 $this->actions = $configs['actions'];
             }
         }
-
-        if (isset($configs['ownership']) && \is_bool($configs['ownership'])) {
-            $this->ownership = $configs['ownership'];
+        if (!isset($configs['ownership'])) {
+            return;
         }
+        if (!\is_bool($configs['ownership'])) {
+            return;
+        }
+        $this->ownership = $configs['ownership'];
     }
 
     public function getMenu(): string
