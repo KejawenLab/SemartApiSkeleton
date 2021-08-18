@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Tests\EventSubscriber;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
-use KejawenLab\ApiSkeleton\EventSubscriber\ApiClientRequestSubscriber;
+use KejawenLab\ApiSkeleton\EventSubscriber\ApiClientRequestLogSubscriber;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
 use PHPUnit\Framework\TestCase;
@@ -32,7 +32,7 @@ class ApiClientRequestSubscriberTest extends TestCase
         $event = $this->createMock(ControllerEvent::class);
         $event->expects($this->once())->method('isMainRequest')->willReturn(false);
 
-        $apiClientRequest = new ApiClientRequestSubscriber($tokenStorage, $service, $userProvider);
+        $apiClientRequest = new ApiClientRequestLogSubscriber($tokenStorage, $service, $userProvider);
         $apiClientRequest->log($event);
     }
 
@@ -47,7 +47,7 @@ class ApiClientRequestSubscriberTest extends TestCase
         $event = $this->createMock(ControllerEvent::class);
         $event->expects($this->once())->method('isMainRequest')->willReturn(true);
 
-        $apiClientRequest = new ApiClientRequestSubscriber($tokenStorage, $service, $userProvider);
+        $apiClientRequest = new ApiClientRequestLogSubscriber($tokenStorage, $service, $userProvider);
         $apiClientRequest->log($event);
     }
 
@@ -67,7 +67,7 @@ class ApiClientRequestSubscriberTest extends TestCase
         $event = $this->createMock(ControllerEvent::class);
         $event->expects($this->once())->method('isMainRequest')->willReturn(true);
 
-        $apiClientRequest = new ApiClientRequestSubscriber($tokenStorage, $service, $userProvider);
+        $apiClientRequest = new ApiClientRequestLogSubscriber($tokenStorage, $service, $userProvider);
         $apiClientRequest->log($event);
     }
 
@@ -94,13 +94,13 @@ class ApiClientRequestSubscriberTest extends TestCase
         $event->expects($this->once())->method('isMainRequest')->willReturn(true);
         $event->expects($this->once())->method('getRequest')->willReturn(Request::createFromGlobals());
 
-        $apiClientRequest = new ApiClientRequestSubscriber($tokenStorage, $service, $userProvider);
+        $apiClientRequest = new ApiClientRequestLogSubscriber($tokenStorage, $service, $userProvider);
         $apiClientRequest->log($event);
     }
 
     public function testGetEventClass(): void
     {
-        $events = ApiClientRequestSubscriber::getSubscribedEvents();
+        $events = ApiClientRequestLogSubscriber::getSubscribedEvents();
 
         $this->assertCount(1, $events);
         $this->assertArrayHasKey(ControllerEvent::class, $events);

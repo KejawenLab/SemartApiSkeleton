@@ -51,12 +51,15 @@ final class PermissionSubscriber implements EventSubscriberInterface
         if (!$permission->isOwnership()) {
             return;
         }
+
         if (!$id) {
             return;
         }
+
         if ($this->ownership->isOwner($id, $entity)) {
             return;
         }
+
         throw new AccessDeniedException();
     }
 

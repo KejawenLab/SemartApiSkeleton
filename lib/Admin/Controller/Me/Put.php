@@ -57,7 +57,6 @@ final class Put extends AbstractController
                 }
 
                 $this->service->save($user);
-
                 $this->addFlash('info', 'sas.page.profile.updated');
             }
         }

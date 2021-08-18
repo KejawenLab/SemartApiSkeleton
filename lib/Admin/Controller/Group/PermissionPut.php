@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use KejawenLab\ApiSkeleton\Admin\Controller\Group\Permission as GetPermission;
+use KejawenLab\ApiSkeleton\Entity\Permission as Entity;
 use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
@@ -39,7 +40,7 @@ final class PermissionPut extends AbstractController
         }
 
         $permission = $this->service->get($id);
-        if (!$permission instanceof \KejawenLab\ApiSkeleton\Entity\Permission) {
+        if (!$permission instanceof Entity) {
             $this->addFlash('error', 'sas.page.permission.not_found');
 
             return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));

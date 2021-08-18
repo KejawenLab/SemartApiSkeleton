@@ -70,9 +70,11 @@ final class Ownership
             if (!$creatorUser instanceof UserInterface) {
                 return $creator === $token->getUserIdentifier();
             }
+
             if (!$this->userRepository->isSupervisor($creatorUser, $user)) {
                 return $creator === $token->getUserIdentifier();
             }
+
             return true;
         } catch (Exception) {
         }

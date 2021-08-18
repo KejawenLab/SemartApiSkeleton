@@ -49,7 +49,8 @@ final class MenuService extends AbstractService implements ServiceInterface
 
     public function hasChildMenu(MenuInterface $menu): bool
     {
-        if (($group = $this->getGroup()) === null) {
+        $group = $this->getGroup();
+        if ($group === null) {
             return false;
         }
 

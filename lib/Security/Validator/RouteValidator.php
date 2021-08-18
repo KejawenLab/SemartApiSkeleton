@@ -36,12 +36,15 @@ final class RouteValidator extends ConstraintValidator
         if ('#' === $value) {
             return;
         }
+
         if ($this->routeCollection->get($value) !== null) {
             return;
         }
+
         if ($this->routeCollection->get(sprintf('%s__invoke', $value)) !== null) {
             return;
         }
+
         $this->context->buildViolation($constraint->getMessage())->setParameter('[ROUTE]', $value)->addViolation();
     }
 }

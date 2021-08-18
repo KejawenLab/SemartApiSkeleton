@@ -77,7 +77,8 @@ final class Audit extends AbstractFOSRestController
      */
     public function __invoke(Request $request, string $id): View
     {
-        if (($entity = $this->service->get($id)) === null) {
+        $entity = $this->service->get($id);
+        if (null === $entity) {
             throw new NotFoundHttpException();
         }
 

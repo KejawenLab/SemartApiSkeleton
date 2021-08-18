@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class ApiClientRequestSubscriber implements EventSubscriberInterface
+final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private TokenStorageInterface $tokenStorage,
