@@ -26,7 +26,7 @@
                             {% for key, data in audits %}
                                 {% if 0 == key % 2 %}
                                     <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1 ml-1 mb-1 mr-0">
+                                        <div class="card mt-1">
                                             <div class="card-body p-0">
                                                 <ul class="list-group p-0">
                                                     {% for property in data | keys %}
@@ -45,7 +45,7 @@
                                     </div>
                                 {% else %}
                                     <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1 ml-0 mb-1 mr-1">
+                                        <div class="card mt-1">
                                             <div class="card-body p-0">
                                                 <ul class="list-group p-0">
                                                     {% for property in data | keys %}
