@@ -55,14 +55,17 @@ final class UserProviderFactory implements UserProviderInterface
     public function loadUserByIdentifier(string $identifier): User
     {
         foreach ($this->providers as $provider) {
-            if (($user = $provider->findByIdentifier($identifier)) !== null) {
-                $authUser = new User($user);
-                if (!$user->isEncoded()) {
-                    $authUser->setPassword($this->passwordHasher->hashPassword($authUser, $authUser->getPassword()));
-                }
-
-                return $authUser;
+            $user = $provider->findByIdentifier($identifier);
+            if (null === $user) {
+                continue;
             }
+
+            $authUser = new User($user);
+            if (!$user->isEncoded()) {
+                $authUser->setPassword($this->passwordHasher->hashPassword($authUser, $authUser->getPassword()));
+            }
+
+            return $authUser;
         }
 
         throw new UserNotFoundException();

@@ -74,7 +74,7 @@ final class Put extends AbstractFOSRestController
         $user = $userProviderFactory->getRealUser($user);
         /** @var User $user */
         $media = $this->mediaService->getByFile($user->getProfileImage());
-        if ($media !== null) {
+        if (null !== $media) {
             $this->mediaService->remove($media);
         }
 

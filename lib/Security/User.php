@@ -28,7 +28,7 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct(?AuthInterface $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             $this->id = (string) $user->getRecordId();
             $this->group = $user->getGroup();
             $this->username = (string) $user->getIdentity();

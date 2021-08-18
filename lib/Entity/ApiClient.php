@@ -102,7 +102,7 @@ class ApiClient implements ApiClientInterface
     public function getGroup(): ?GroupInterface
     {
         $user = $this->getUser();
-        if ($user !== null) {
+        if (null !== $user) {
             return $user->getGroup();
         }
 

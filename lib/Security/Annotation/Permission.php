@@ -41,12 +41,15 @@ final class Permission
                 $this->actions = $configs['actions'];
             }
         }
+
         if (!isset($configs['ownership'])) {
             return;
         }
+
         if (!\is_bool($configs['ownership'])) {
             return;
         }
+
         $this->ownership = $configs['ownership'];
     }
 

@@ -49,7 +49,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         }
 
         $user = $this->service->getByDeviceId($deviceId);
-        if ($user !== null) {
+        if (null !== $user) {
             return;
         }
 
@@ -71,7 +71,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         }
 
         $user = $this->service->getByDeviceId($payload['deviceId']);
-        if ($user !== null) {
+        if (null !== $user) {
             return;
         }
 

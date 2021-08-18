@@ -37,11 +37,11 @@ final class RouteValidator extends ConstraintValidator
             return;
         }
 
-        if ($this->routeCollection->get($value) !== null) {
+        if (null !== $this->routeCollection->get($value)) {
             return;
         }
 
-        if ($this->routeCollection->get(sprintf('%s__invoke', $value)) !== null) {
+        if (null !== $this->routeCollection->get(sprintf('%s__invoke', $value))) {
             return;
         }
 

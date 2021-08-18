@@ -37,6 +37,7 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
         if (AdminContext::LOGIN_ROUTE !== $request->attributes->get('_route')) {
             return false;
         }
+
         return $request->isMethod(Request::METHOD_POST);
     }
 
