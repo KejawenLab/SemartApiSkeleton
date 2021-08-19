@@ -21,8 +21,12 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class PasswordHistoryValidator extends ConstraintValidator
 {
-    public function __construct(private UserPasswordHasherInterface $encoder, private TokenStorageInterface $tokenStorage, private PasswordHistoryService $service, private UserProviderFactory $userProviderFactory)
-    {
+    public function __construct(
+        private UserPasswordHasherInterface $encoder,
+        private TokenStorageInterface $tokenStorage,
+        private PasswordHistoryService $service,
+        private UserProviderFactory $userProviderFactory,
+    ) {
     }
 
     public function validate($value, Constraint $constraint): void

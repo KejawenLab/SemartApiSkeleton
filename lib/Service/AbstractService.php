@@ -21,7 +21,7 @@ abstract class AbstractService implements ServiceInterface
     public function __construct(
         private MessageBusInterface $messageBus,
         protected ServiceableRepositoryInterface $repository,
-        protected AliasHelper $aliasHelper
+        protected AliasHelper $aliasHelper,
     ) {
     }
 

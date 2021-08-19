@@ -31,7 +31,7 @@ final class PermissionGenerator extends AbstractGenerator
         Filesystem $fileSystem,
         KernelInterface $kernel,
         EntityManagerInterface $entityManager,
-        private string $class
+        private string $class,
     ) {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }

@@ -21,7 +21,7 @@ final class MediaService extends AbstractService implements ServiceInterface
         private StorageInterface $storage,
         MessageBusInterface $messageBus,
         MediaRepositoryInterface $repository,
-        AliasHelper $aliasHelper
+        AliasHelper $aliasHelper,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

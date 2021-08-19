@@ -22,7 +22,7 @@ final class UserProviderFactory implements UserProviderInterface
          * @var Provider[]
          */
         private iterable $providers,
-        private UserPasswordHasherInterface $passwordHasher
+        private UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 

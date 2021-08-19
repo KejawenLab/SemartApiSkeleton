@@ -31,7 +31,7 @@ final class Permission extends AbstractController
         private PermissionService $service,
         private GroupService $groupService,
         private Paginator $paginator,
-        private SettingService $settingService
+        private SettingService $settingService,
     ) {
     }
 

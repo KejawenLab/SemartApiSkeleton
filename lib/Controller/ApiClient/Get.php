@@ -16,7 +16,6 @@ use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -54,7 +53,7 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $userId, string $id): View
+    public function __invoke(string $userId, string $id): View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {

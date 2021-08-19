@@ -22,19 +22,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Profile extends AbstractController
 {
+    public function __construct(private UserProviderFactory $userProviderFactory)
+    {
+    }
+
     /**
      * @Route("/me", name=Profile::class, methods={"GET"}, priority=-1)
      *
      * @throws ReflectionException
      */
-    public function __invoke(UserProviderFactory $userProviderFactory): Response
+    public function __invoke(): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
 
-        $user = $userProviderFactory->getRealUser($user);
+        $user = $this->userProviderFactory->getRealUser($user);
         $class = new ReflectionClass($user::class);
 
         return $this->render('profile/view.html.twig', [

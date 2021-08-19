@@ -21,7 +21,7 @@ abstract class AbstractGenerator implements GeneratorInterface
         protected Environment $twig,
         protected Filesystem $fileSystem,
         protected KernelInterface $kernel,
-        protected EntityManagerInterface $entityManager
+        protected EntityManagerInterface $entityManager,
     ) {
     }
 

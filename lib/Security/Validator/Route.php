@@ -15,7 +15,7 @@ final class Route extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Route "[ROUTE]" ia not found';
+        return 'validation.route_not_found';
     }
 
     public function getTargets(): string

@@ -24,11 +24,13 @@ final class Paginator
 
     private int $cacheLifetime;
 
-    public function __construct(SettingService $setting, /**
-     * @var QueryExtensionInterface[]
-     */
-    private iterable $queryExtension)
-    {
+    public function __construct(
+        SettingService $setting,
+        /**
+        * @var QueryExtensionInterface[]
+        */
+        private iterable $queryExtension,
+    ) {
         $this->pageField = $setting->getPageField();
         $this->perPageField = $setting->getPerPageField();
         $this->perPageDefault = $setting->getRecordPerPage();

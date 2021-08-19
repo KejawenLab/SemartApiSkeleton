@@ -11,10 +11,12 @@ use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
@@ -28,8 +30,12 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 {
     use TargetPathTrait;
 
-    public function __construct(private UserService $userService, private UserProviderFactory $userProviderFactory, private UrlGeneratorInterface $urlGenerator, private UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        private UserService $userService,
+        private UserProviderFactory $userProviderFactory,
+        private UrlGeneratorInterface $urlGenerator,
+        private UserPasswordHasherInterface $passwordEncoder,
+    ) {
     }
 
     public function supports(Request $request): bool
@@ -60,6 +66,10 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
+        if (!$user instanceof PasswordAuthenticatedUserInterface) {
+            return false;
+        }
+
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 

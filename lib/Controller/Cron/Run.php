@@ -16,7 +16,6 @@ use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -59,7 +58,7 @@ final class Run extends AbstractFOSRestController
      *
      * @throws Exception
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(string $id): View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof Cron) {

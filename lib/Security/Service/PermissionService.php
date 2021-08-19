@@ -44,7 +44,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
          * @var PermissionRemoverInterface[]
          */
         private iterable $removers,
-        private string $class
+        private string $class,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

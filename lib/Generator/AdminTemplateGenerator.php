@@ -23,7 +23,7 @@ final class AdminTemplateGenerator extends AbstractGenerator
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ) {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }

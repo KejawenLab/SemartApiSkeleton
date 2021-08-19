@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -28,7 +28,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         MessageBusInterface $messageBus,
         UserRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        private UserPasswordEncoderInterface $service,
+        private UserPasswordHasherInterface $service,
         private PasswordHistoryService $history,
         private MediaService $mediaService,
     ) {
@@ -55,7 +55,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         }
 
         if ($plainPassword = $user->getPlainPassword()) {
-            $password = $this->service->encodePassword(new User($user), $plainPassword);
+            $password = $this->service->hashPassword(new User($user), $plainPassword);
             $user->setPassword($password);
 
             $passwordHistory = new PasswordHistory();

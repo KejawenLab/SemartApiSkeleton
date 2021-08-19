@@ -13,6 +13,6 @@ final class PasswordLength extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Password length must longer than 6 characters';
+        return 'label.login.password_length';
     }
 }

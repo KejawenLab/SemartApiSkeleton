@@ -14,7 +14,6 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -49,7 +48,7 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(string $id): View
     {
         $group = $this->service->get($id);
         if ($group instanceof GroupInterface) {

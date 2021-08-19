@@ -21,6 +21,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::EDIT})
@@ -29,8 +30,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private UserService $service, private MediaService $mediaService)
-    {
+    public function __construct(
+        private FormFactory $formFactory,
+        private UserService $service,
+        private MediaService $mediaService,
+        private UserProviderFactory $userProviderFactory,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -64,14 +70,14 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, UserProviderFactory $userProviderFactory): View
+    public function __invoke(Request $request): View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {
-            throw new NotFoundHttpException('User not found.');
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
-        $user = $userProviderFactory->getRealUser($user);
+        $user = $this->userProviderFactory->getRealUser($user);
         /** @var User $user */
         $media = $this->mediaService->getByFile($user->getProfileImage());
         if (null !== $media) {

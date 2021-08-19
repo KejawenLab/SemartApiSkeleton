@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,17 +15,18 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 final class LoginController extends AbstractController
 {
+    public function __construct(private AuthenticationUtils $authenticationUtils)
+    {
+    }
+
     /**
      * @Route("/login", name=AdminContext::LOGIN_ROUTE, methods={"GET", "POST"})
      */
-    public function __invoke(Request $request, AuthenticationUtils $authenticationUtils): Response
+    public function __invoke(): Response
     {
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('layout/login.html.twig', [
-            'error' => $error,
-            'username' => $lastUsername,
+            'error' => $this->authenticationUtils->getLastAuthenticationError(),
+            'username' => $this->authenticationUtils->getLastUsername(),
         ]);
     }
 }

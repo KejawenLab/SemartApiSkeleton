@@ -25,7 +25,7 @@ final class MenuService extends AbstractService implements ServiceInterface
         private PermissionRepositoryInterface $permissionRepository,
         MessageBusInterface $messageBus,
         MenuRepositoryInterface $repository,
-        AliasHelper $aliasHelper
+        AliasHelper $aliasHelper,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

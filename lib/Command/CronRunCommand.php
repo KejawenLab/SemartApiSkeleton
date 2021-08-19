@@ -33,7 +33,7 @@ final class CronRunCommand extends Command
         private CronReportService $reportService,
         private CronBuilder $builder,
         private Executor $executor,
-        private string $reportClass
+        private string $reportClass,
     ) {
         parent::__construct();
     }

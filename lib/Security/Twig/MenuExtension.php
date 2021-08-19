@@ -20,7 +20,7 @@ final class MenuExtension extends AbstractExtension
     public function __construct(
         private Environment $twig,
         private RequestStack $requestStack,
-        private MenuService $menuService
+        private MenuService $menuService,
     ) {
     }
 

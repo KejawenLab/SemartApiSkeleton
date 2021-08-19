@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +30,7 @@ final class Run extends AbstractController
     /**
      * @Route("/crons/{id}/run", name=Run::class, methods={"GET"}, priority=-17)
      */
-    public function __invoke(Request $request, string $id): Response
+    public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {

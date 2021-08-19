@@ -27,7 +27,7 @@ final class Ownership
         private TokenStorageInterface $tokenStorage,
         private UserProviderFactory $userProviderFactory,
         private string $superAdmin,
-        private string $ownershipProperty
+        private string $ownershipProperty,
     ) {
     }
 

@@ -9,7 +9,6 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,7 +26,7 @@ final class Put extends AbstractController
     /**
      * @Route("/users/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
-    public function __invoke(Request $request, string $id): Response
+    public function __invoke(string $id): Response
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {

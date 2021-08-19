@@ -21,7 +21,7 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
     public function __construct(
         private TokenStorageInterface $tokenStorage,
         private ApiClientRequestService $apiClientRequestService,
-        private UserProviderFactory $userProvider
+        private UserProviderFactory $userProvider,
     ) {
     }
 

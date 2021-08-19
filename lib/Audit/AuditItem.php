@@ -18,7 +18,7 @@ final class AuditItem
         private ?string $logTime,
         private ?string $userId,
         private ?string $username,
-        private ?string $ip
+        private ?string $ip,
     ) {
     }
 

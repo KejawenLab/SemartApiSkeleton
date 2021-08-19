@@ -13,6 +13,6 @@ final class PasswordHistory extends Constraint
 {
     public function getMessage(): string
     {
-        return 'The same password has been used by you';
+        return 'label.login.password_already_used';
     }
 }

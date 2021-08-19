@@ -13,6 +13,6 @@ final class PasswordMatch extends Constraint
 {
     public function getMessage(): string
     {
-        return 'Password not match';
+        return 'login.label.password_not_match';
     }
 }
