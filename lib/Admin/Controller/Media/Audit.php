@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
@@ -38,7 +39,7 @@ final class Audit extends AbstractController
     public function __invoke(string $id): Response
     {
         $entity = $this->service->get($id);
-        if (null === $entity) {
+        if (!$entity instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAll::class));
