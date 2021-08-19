@@ -26,6 +26,7 @@ sas:
                 profileImage: 'Foto Profil'
                 fullName: 'Nama Lengkap'
                 email: 'Email'
+                lastLogin: 'Login Terakhir'
             menu:
                 parent: 'Induk'
                 code: 'Kode'

@@ -72,16 +72,15 @@ final class MenuService extends AbstractService implements ServiceInterface
 
     private function getGroup(): ?GroupInterface
     {
-        if (($token = $this->tokenStorage->getToken()) === null) {
+        if (null === $token = $this->tokenStorage->getToken()) {
             return null;
         }
 
-        /** @var User $user */
         $user = $token->getUser();
-        if (($group = $user->getGroup()) === null) {
+        if (!$user instanceof User) {
             return null;
         }
 
-        return $group;
+        return $user->getGroup();
     }
 }

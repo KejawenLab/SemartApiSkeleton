@@ -36,5 +36,9 @@ interface UserInterface extends AuthInterface, EntityInterface
 
     public function setDeviceId(string $deviceId): void;
 
+    public function getLastLogin(): \DateTimeImmutable;
+
+    public function setLastLogin(\DateTimeImmutable $lastLogin): void;
+
     public function getFile(): ?File;
 }

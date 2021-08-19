@@ -81,6 +81,7 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
         if ($user instanceof Model\UserInterface) {
             $deviceId = Encryptor::hash(date('YmdHis'));
             $user->setDeviceId($deviceId);
+            $user->setLastLogin(new \DateTimeImmutable());
 
             $session->set(AdminContext::USER_DEVICE_ID, $deviceId);
             $this->userService->save($user);

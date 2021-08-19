@@ -102,6 +102,13 @@ class User implements UserInterface
     private ?string $email;
 
     /**
+     * @ORM\Column(type="datetime_immutable")
+     *
+     * @Groups({"read"})
+     */
+    private \DateTimeImmutable $lastLogin;
+
+    /**
      * @ORM\Column(type="string")
      */
     private ?string $password;
@@ -124,6 +131,7 @@ class User implements UserInterface
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
+        $this->lastLogin = new \DateTimeImmutable();
     }
 
     public function getId(): ?string
@@ -205,6 +213,16 @@ class User implements UserInterface
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    public function getLastLogin(): \DateTimeImmutable
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(\DateTimeImmutable $lastLogin): void
+    {
+        $this->lastLogin = $lastLogin;
     }
 
     public function getDeviceId(): ?string

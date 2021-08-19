@@ -34,6 +34,8 @@
                                         {% else %}
                                             <a class="float-right">-</a>
                                         {% endif %}
+                                    {% elseif 'lastLogin' == property.name %}
+                                        <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}</a>
                                     {% else %}
                                         <a class="float-right">{{ attribute(data, property.name) }}</a>
                                     {% endif %}

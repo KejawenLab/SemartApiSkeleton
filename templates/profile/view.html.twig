@@ -26,7 +26,8 @@
                                     'plainPassword' != property.name and
                                     'profileImage' != property.name and
                                     'deviceId' != property.name and
-                                    'file' != property.name
+                                    'file' != property.name and
+                                    'lastLogin' != property.name
                                 %}
                                     <li class="list-group-item text-primary">
                                         <b>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</b>
