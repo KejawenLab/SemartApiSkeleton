@@ -21,6 +21,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::ADD})
@@ -29,8 +30,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private UserService $userService, private ApiClientService $service)
-    {
+    public function __construct(
+        private FormFactory $formFactory,
+        private UserService $userService,
+        private ApiClientService $service,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -68,7 +73,7 @@ final class Post extends AbstractFOSRestController
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {
-            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         $form = $this->formFactory->submitRequest(ApiClientType::class, $request);

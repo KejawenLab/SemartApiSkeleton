@@ -15,6 +15,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="CRON", actions={Permission::DELETE})
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private CronService $service)
+    public function __construct(private CronService $service, private TranslatorInterface $translator)
     {
     }
 
@@ -42,7 +43,7 @@ final class Delete extends AbstractFOSRestController
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
-            throw new NotFoundHttpException(sprintf('Cron ID: "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
 
         $this->service->remove($cron);

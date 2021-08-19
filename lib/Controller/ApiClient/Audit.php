@@ -20,6 +20,7 @@ use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="AUDIT", actions={Permission::VIEW})
@@ -28,8 +29,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Audit extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientService $service, private UserService $userService, private AuditService $audit, private Reader $reader)
-    {
+    public function __construct(
+        private ApiClientService $service,
+        private UserService $userService,
+        private AuditService $audit,
+        private Reader $reader,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -81,7 +87,7 @@ final class Audit extends AbstractFOSRestController
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {
-            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         if (!$entity = $this->service->get($id)) {

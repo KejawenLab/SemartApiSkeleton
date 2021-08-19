@@ -19,6 +19,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="CRON", actions={Permission::ADD, Permission::EDIT})
@@ -27,8 +28,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class Run extends AbstractFOSRestController
 {
-    public function __construct(private CronService $service, private KernelInterface $kernel)
-    {
+    public function __construct(
+        private CronService $service,
+        private KernelInterface $kernel,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -59,7 +63,7 @@ final class Run extends AbstractFOSRestController
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof Cron) {
-            throw new NotFoundHttpException(sprintf('Cron Job with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
 
         $application = new Application($this->kernel);
@@ -72,14 +76,14 @@ final class Run extends AbstractFOSRestController
         ]);
 
         $return = $application->run($input, new NullOutput());
-        $message = 'Job running successfully';
+        $message = 'sas.page.cron.run_success';
         if (0 !== $return) {
-            $message = 'Job can\'t be run. Please check job report';
+            $message = 'sas.page.cron.run_failed';
         }
 
         return $this->view([
             'code' => $return,
-            'message' => $message,
+            'message' => $this->translator->trans($message, [], 'pages'),
         ]);
     }
 }

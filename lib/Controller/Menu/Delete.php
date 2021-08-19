@@ -15,6 +15,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="MENU", actions={Permission::DELETE})
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private MenuService $service)
+    public function __construct(private MenuService $service, private TranslatorInterface $translator)
     {
     }
 
@@ -42,7 +43,7 @@ final class Delete extends AbstractFOSRestController
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
-            throw new NotFoundHttpException(sprintf('Menu with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.menu.not_found', [], 'pages'));
         }
 
         $this->service->remove($menu);

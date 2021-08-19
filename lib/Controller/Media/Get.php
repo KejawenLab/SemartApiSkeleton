@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
 /**
@@ -24,8 +25,11 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private MediaService $service, private PropertyMappingFactory $mapping)
-    {
+    public function __construct(
+        private MediaService $service,
+        private PropertyMappingFactory $mapping,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -60,11 +64,11 @@ final class Get extends AbstractFOSRestController
         $fileName = implode('/', $path);
         $media = $this->service->getByFile($fileName);
         if (!$media instanceof MediaInterface) {
-            throw new NotFoundHttpException(sprintf('File "%s" not found', $fileName));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
-        if (!$this->getUser() && !$media->isPublic()) {
-            throw new NotFoundHttpException(sprintf('File "%s" not found', $fileName));
+        if (!($this->getUser() || $media->isPublic())) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
         $file = new File(sprintf('%s%s%s%s%s',

@@ -21,6 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::VIEW})
@@ -29,8 +30,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Report extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientRequestService $service, private UserService $userService, private Paginator $paginator)
-    {
+    public function __construct(
+        private ApiClientRequestService $service,
+        private UserService $userService,
+        private Paginator $paginator,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -59,7 +64,7 @@ final class Report extends AbstractFOSRestController
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {
-            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClientRequest::class));

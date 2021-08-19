@@ -30,17 +30,17 @@
                                     'lastLogin' != property.name
                                 %}
                                     <li class="list-group-item text-primary">
-                                        <b>{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</b>
+                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
                                         {% if 'group' == property.name %}
                                             {% set group = attribute(data, property.name) %}
-                                            <a class="float-right">{{ group.code ~ ' - ' ~ group.name }}</a>
+                                            <b><a class="float-right">{{ group.code ~ ' - ' ~ group.name }}</a></b>
                                         {% elseif 'supervisor' == property.name %}
                                             {% set supervisor = attribute(data, property.name) %}
                                             {% if supervisor %}
-                                                <a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a>
+                                                <b><a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a></b>
                                             {% endif %}
                                         {% else %}
-                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                            <b><a class="float-right">{{ attribute(data, property.name) }}</a></b>
                                         {% endif %}
                                     </li>
                                 {% endif %}

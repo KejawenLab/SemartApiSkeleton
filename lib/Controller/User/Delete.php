@@ -15,6 +15,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="USER", actions={Permission::DELETE})
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private UserService $service)
+    public function __construct(private UserService $service, private TranslatorInterface $translator)
     {
     }
 
@@ -42,7 +43,7 @@ final class Delete extends AbstractFOSRestController
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
-            throw new NotFoundHttpException(sprintf('User with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         $this->service->remove($user);

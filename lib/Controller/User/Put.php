@@ -19,6 +19,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="USER", actions={Permission::EDIT})
@@ -27,8 +28,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private UserService $service)
-    {
+    public function __construct(
+        private FormFactory $formFactory,
+        private UserService $service,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -62,7 +66,7 @@ final class Put extends AbstractFOSRestController
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
-            throw new NotFoundHttpException(sprintf('User with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         $form = $this->formFactory->submitRequest(UpdateUserType::class, $request, $user);

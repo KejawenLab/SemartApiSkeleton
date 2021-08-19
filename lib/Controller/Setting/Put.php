@@ -19,6 +19,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="SETTING", actions={Permission::EDIT})
@@ -27,8 +28,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Put extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private SettingService $service)
-    {
+    public function __construct(
+        private FormFactory $formFactory,
+        private SettingService $service,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -66,7 +70,7 @@ final class Put extends AbstractFOSRestController
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
-            throw new NotFoundHttpException(sprintf('Setting with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
 
         $form = $this->formFactory->submitRequest(SettingType::class, $request, $setting);

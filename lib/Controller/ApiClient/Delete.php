@@ -17,6 +17,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::DELETE})
@@ -25,8 +26,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientService $service, private UserService $userService)
-    {
+    public function __construct(
+        private ApiClientService $service,
+        private UserService $userService,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -44,12 +48,12 @@ final class Delete extends AbstractFOSRestController
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {
-            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         $client = $this->service->get($id);
         if (!$client instanceof ApiClientInterface) {
-            throw new NotFoundHttpException(sprintf('Api Client ID: "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.api_client.not_found', [], 'pages'));
         }
 
         $this->service->remove($client);

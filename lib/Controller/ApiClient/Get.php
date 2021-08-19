@@ -17,6 +17,7 @@ use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="APICLIENT", actions={Permission::VIEW})
@@ -25,8 +26,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private ApiClientService $service, private UserService $userService)
-    {
+    public function __construct(
+        private ApiClientService $service,
+        private UserService $userService,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -53,7 +57,7 @@ final class Get extends AbstractFOSRestController
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof User) {
-            throw new NotFoundHttpException(sprintf('User ID: "%s" not found', $userId));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         return $this->view($this->service->get($id));

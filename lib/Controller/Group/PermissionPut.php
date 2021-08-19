@@ -21,6 +21,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Semart\Permission(menu="GROUP", actions={Semart\Permission::EDIT, Semart\Permission::ADD})
@@ -29,8 +30,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class PermissionPut extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private GroupService $groupService, private PermissionService $permissionService)
-    {
+    public function __construct(
+        private FormFactory $formFactory,
+        private GroupService $groupService,
+        private PermissionService $permissionService,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -68,7 +73,7 @@ final class PermissionPut extends AbstractFOSRestController
     {
         $group = $this->groupService->get($id);
         if (!$group instanceof GroupInterface) {
-            throw new NotFoundHttpException(sprintf('Group with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
 
         $form = $this->formFactory->submitRequest(PermissionType::class, $request);
@@ -80,7 +85,7 @@ final class PermissionPut extends AbstractFOSRestController
         $data = $form->getData();
         $permission = $this->permissionService->getPermission($group, $data->getMenu());
         if (!$permission instanceof PermissionInterface) {
-            throw new NotFoundHttpException(sprintf('Permission for Menu with ID "%s" not found', $data->getMenu()->getId()));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.permission.not_found', [], 'pages'));
         }
 
         $permission->setAddable($data->isAddable());

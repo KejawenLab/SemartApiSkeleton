@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="SETTING", actions={Permission::DELETE})
@@ -24,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private SettingService $service)
+    public function __construct(private SettingService $service, private TranslatorInterface $translator)
     {
     }
 
@@ -43,11 +44,11 @@ final class Delete extends AbstractFOSRestController
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
-            throw new NotFoundHttpException(sprintf('Setting with ID "%s" not found', $id));
+            throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
 
         if (!$setting->isReserved()) {
-            throw new BadRequestException('Can not delete reserved setting');
+            throw new NotFoundHttpException($this->translator->trans('sas.page.setting.reserved_not_allowed', [], 'pages'));
         }
 
         $this->service->remove($setting);
