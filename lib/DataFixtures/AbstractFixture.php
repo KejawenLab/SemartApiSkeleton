@@ -27,7 +27,7 @@ abstract class AbstractFixture extends Base
     {
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
         foreach ($this->getData() as $fixtures) {

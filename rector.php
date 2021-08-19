@@ -21,6 +21,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(Setlist::PHP_80);
     $containerConfigurator->import(SetList::EARLY_RETURN);
     $containerConfigurator->import(Setlist::TYPE_DECLARATION);
+    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);

@@ -20,6 +20,9 @@ final class SettingGroupFactory
     {
     }
 
+    /**
+     * @return array<int|string, string>
+     */
     public function getGroups(): array
     {
         $groups = [
