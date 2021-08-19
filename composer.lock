@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c07cca432db62af6434e8889d2f5c68",
+    "content-hash": "4b5f2c7f519345312ddf34186ea6b94e",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3035,16 +3035,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "dev-master",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "74a440a2b1fc1269103f9d4405ec25d197b1625a"
+                "reference": "06bc5136d7e510b0ffdd453baa6ef6bad366d9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/74a440a2b1fc1269103f9d4405ec25d197b1625a",
-                "reference": "74a440a2b1fc1269103f9d4405ec25d197b1625a",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/06bc5136d7e510b0ffdd453baa6ef6bad366d9db",
+                "reference": "06bc5136d7e510b0ffdd453baa6ef6bad366d9db",
                 "shasum": ""
             },
             "require": {
@@ -3104,7 +3104,6 @@
                 "twig/twig-bundle": "For using the Swagger UI.",
                 "willdurand/hateoas-bundle": "For extracting HATEOAS metadata."
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -3142,9 +3141,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/master"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.4.0"
             },
-            "time": "2021-08-17T19:52:21+00:00"
+            "time": "2021-07-18T16:59:37+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -13706,8 +13705,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "gesdinet/jwt-refresh-token-bundle": 20,
-        "nelmio/api-doc-bundle": 20
+        "gesdinet/jwt-refresh-token-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
