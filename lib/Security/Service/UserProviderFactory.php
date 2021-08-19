@@ -56,7 +56,7 @@ final class UserProviderFactory implements UserProviderInterface
     {
         foreach ($this->providers as $provider) {
             $user = $provider->findByIdentifier($identifier);
-            if (null === $user) {
+            if (!$user instanceof AuthInterface) {
                 continue;
             }
 

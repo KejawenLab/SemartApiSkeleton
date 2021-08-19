@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -78,7 +79,7 @@ final class Audit extends AbstractFOSRestController
     public function __invoke(Request $request, string $id): View
     {
         $entity = $this->service->get($id);
-        if (null === $entity) {
+        if (!$entity instanceof MediaInterface) {
             throw new NotFoundHttpException();
         }
 
