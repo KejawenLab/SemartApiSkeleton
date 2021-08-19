@@ -9,11 +9,13 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="USER", actions={Permission::VIEW})
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private UserService $service)
+    public function __construct(private UserService $service, private TranslatorInterface $translator)
     {
     }
 
@@ -46,8 +48,13 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(string $id): View
     {
-        return $this->view($this->service->get($id));
+        $user = $this->service->get($id);
+        if ($user instanceof UserInterface) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
+        }
+
+        return $this->view($user);
     }
 }

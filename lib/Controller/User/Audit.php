@@ -16,7 +16,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -75,7 +74,7 @@ final class Audit extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(string $id): View
     {
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();

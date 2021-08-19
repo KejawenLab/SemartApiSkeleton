@@ -16,6 +16,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -24,8 +25,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Menu extends AbstractFOSRestController
 {
-    public function __construct(private PermissionService $service)
-    {
+    public function __construct(
+        private PermissionService $service,
+        private UserProviderFactory $userProviderFactory,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
@@ -47,13 +51,13 @@ final class Menu extends AbstractFOSRestController
      * )
      * @Security(name="Bearer")
      */
-    public function __invoke(UserProviderFactory $userProviderFactory): View
+    public function __invoke(): View
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
-            throw new NotFoundHttpException('User not found.');
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
-        return $this->view($this->service->getByUser($userProviderFactory->getRealUser($user)));
+        return $this->view($this->service->getByUser($this->userProviderFactory->getRealUser($user)));
     }
 }

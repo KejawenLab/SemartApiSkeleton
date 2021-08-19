@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -37,8 +38,12 @@ abstract class AbstractService implements ServiceInterface
         return $this->repository->countRecords();
     }
 
-    public function get(string $id)
+    public function get(string $id): ?object
     {
+        if (!Uuid::isValid($id)) {
+            return null;
+        }
+
         return $this->repository->find($id);
     }
 

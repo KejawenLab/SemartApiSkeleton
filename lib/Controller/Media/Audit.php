@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
-use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -12,12 +11,12 @@ use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -76,7 +75,7 @@ final class Audit extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    public function __invoke(string $id): View
     {
         $entity = $this->service->get($id);
         if (!$entity instanceof MediaInterface) {

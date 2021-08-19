@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -60,6 +61,11 @@ final class Get extends AbstractFOSRestController
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
-        return $this->view($this->service->get($id));
+        $apiClient = $this->service->get($id);
+        if ($apiClient instanceof ApiClientInterface) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.api_client.not_found', [], 'pages'));
+        }
+
+        return $this->view($apiClient);
     }
 }

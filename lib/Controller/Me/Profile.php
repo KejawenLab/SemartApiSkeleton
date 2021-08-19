@@ -23,6 +23,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Profile extends AbstractFOSRestController
 {
+    public function __construct(private UserProviderFactory $userProviderFactory)
+    {
+    }
+
     /**
      * @Rest\Get("/me", name=Profile::class, priority=1)
      *
@@ -43,13 +47,13 @@ final class Profile extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(UserProviderFactory $userProviderFactory): View
+    public function __invoke(): View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException('User not found.');
         }
 
-        return $this->view($userProviderFactory->getRealUser($user));
+        return $this->view($this->userProviderFactory->getRealUser($user));
     }
 }
