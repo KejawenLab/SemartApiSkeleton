@@ -51,7 +51,7 @@ final class Get extends AbstractFOSRestController
     public function __invoke(string $id): View
     {
         $user = $this->service->get($id);
-        if ($user instanceof UserInterface) {
+        if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
 

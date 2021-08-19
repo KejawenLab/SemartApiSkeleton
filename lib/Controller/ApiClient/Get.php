@@ -61,7 +61,7 @@ final class Get extends AbstractFOSRestController
         }
 
         $apiClient = $this->service->get($id);
-        if ($apiClient instanceof ApiClientInterface) {
+        if (!$apiClient instanceof ApiClientInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.api_client.not_found', [], 'pages'));
         }
 

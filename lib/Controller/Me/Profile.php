@@ -15,6 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Permission(menu="PROFILE", actions={Permission::VIEW})
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class Profile extends AbstractFOSRestController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory)
+    public function __construct(private UserProviderFactory $userProviderFactory, private TranslatorInterface $translator)
     {
     }
 
@@ -51,7 +52,7 @@ final class Profile extends AbstractFOSRestController
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {
-            throw new NotFoundHttpException('User not found.');
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
 
         return $this->view($this->userProviderFactory->getRealUser($user));

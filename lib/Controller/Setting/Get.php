@@ -52,7 +52,7 @@ final class Get extends AbstractFOSRestController
     public function __invoke(string $id): View
     {
         $setting = $this->service->get($id);
-        if ($setting instanceof SettingInterface) {
+        if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
 

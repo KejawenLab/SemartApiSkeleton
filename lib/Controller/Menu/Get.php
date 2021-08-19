@@ -51,7 +51,7 @@ final class Get extends AbstractFOSRestController
     public function __invoke(string $id): View
     {
         $menu = $this->service->get($id);
-        if ($menu instanceof MenuInterface) {
+        if (!$menu instanceof MenuInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.menu.not_found', [], 'pages'));
         }
 

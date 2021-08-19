@@ -51,7 +51,7 @@ final class Get extends AbstractFOSRestController
     public function __invoke(string $id): View
     {
         $cron = $this->service->get($id);
-        if ($cron instanceof CronInterface) {
+        if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
 

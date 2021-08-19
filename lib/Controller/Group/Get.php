@@ -51,7 +51,7 @@ final class Get extends AbstractFOSRestController
     public function __invoke(string $id): View
     {
         $group = $this->service->get($id);
-        if ($group instanceof GroupInterface) {
+        if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
 
