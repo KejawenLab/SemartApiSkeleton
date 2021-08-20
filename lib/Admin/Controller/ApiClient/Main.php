@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
-use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
@@ -12,10 +11,11 @@ use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
-use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
-use KejawenLab\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
+use ReflectionProperty;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +31,8 @@ final class Main extends AbstractController
     public function __construct(
         private ApiClientService $service,
         private UserService $userService,
-        private UserProviderFactory $userProviderFactory,
-        Paginator $paginator,
+        private Paginator $paginator,
     ) {
-        parent::__construct($this->service, $paginator);
     }
 
     /**
@@ -43,13 +41,6 @@ final class Main extends AbstractController
     public function __invoke(Request $request, string $userId): Response
     {
         $user = $this->userService->get($userId);
-        if (!$user instanceof User) {
-            $this->addFlash('error', 'sas.page.user.not_found');
-
-            return new RedirectResponse($this->generateUrl(GetAllUser::class));
-        }
-
-        $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
@@ -68,6 +59,16 @@ final class Main extends AbstractController
             }
         }
 
-        return $this->renderList($form, $request, new ReflectionClass(ApiClient::class));
+        $class = new ReflectionClass(ApiClient::class);
+        $context = StringUtil::lowercase($class->getShortName());
+
+        return $this->render(sprintf('%s/all.html.twig', $context), [
+            'page_title' => 'sas.page.api_client.list',
+            'context' => $context,
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
+            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class),
+            'form' => $this->createForm(ApiClientType::class)->createView(),
+            'user_id' => $userId,
+        ]);
     }
 }

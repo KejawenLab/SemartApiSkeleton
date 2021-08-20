@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,7 +32,7 @@ final class Download extends AbstractController
     public function __invoke(string $userId): Response
     {
         $user = $this->userService->get($userId);
-        if (!$user) {
+        if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));

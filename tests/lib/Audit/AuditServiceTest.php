@@ -40,7 +40,7 @@ class AuditServiceTest extends TestCase
         $cache = $this->createMock(CacheItemPoolInterface::class);
         $cache->expects($this->once())->method('getItem')->withAnyParameters()->willReturn($item);
 
-        $service = new AuditService($reader, $setting, $cache);
+        $service = new AuditService($reader, $cache, $setting);
 
         $entity = $this->createMock(EntityInterface::class);
 

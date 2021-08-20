@@ -5,16 +5,20 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
-use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
+use ReflectionProperty;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +32,6 @@ final class Audit extends AbstractController
 {
     public function __construct(private ApiClientService $service, private UserService $userService, private AuditService $audit, private Reader $reader)
     {
-        parent::__construct($this->service);
     }
 
     /**
@@ -39,13 +42,14 @@ final class Audit extends AbstractController
     public function __invoke(string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);
-        if (!$user) {
+        if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));
         }
 
-        if (!$entity = $this->service->get($id)) {
+        $entity = $this->service->get($id);
+        if (!$entity instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
@@ -57,6 +61,17 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(ApiClient::class));
+        $audit = $this->audit->getAudits($entity, $id)->toArray();
+        $class = new ReflectionClass(ApiClient::class);
+        $context = StringUtil::lowercase($class->getShortName());
+
+        return $this->render(sprintf('%s/audit.html.twig', $context), [
+            'page_title' => 'sas.page.audit.view',
+            'context' => $context,
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
+            'data' => $audit['entity'],
+            'audits' => $audit['items'],
+            'user_id' => $userId,
+        ]);
     }
 }

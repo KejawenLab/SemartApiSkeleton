@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
+use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
 use ReflectionObject;

@@ -36,8 +36,11 @@
                                                                     'files' == property.name
                                                                 %}
                                                                     <a class="float-right">
-                                                                        <pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre>
+                                                                        <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
                                                                     </a>
+                                                                {% elseif 'apiClient' == property.name %}
+                                                                    {% set apiClient = attribute(data, property.name) %}
+                                                                    <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
                                                                 {% else %}
                                                                     <a class="float-right">{{ attribute(data, property.name) }}</a>
                                                                 {% endif %}
@@ -67,8 +70,11 @@
                                                                     'files' == property.name
                                                                 %}
                                                                     <a class="float-right">
-                                                                        <pre class="json-viewer" data-json="{{ audit['data'] | json_encode() }}"></pre>
+                                                                        <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
                                                                     </a>
+                                                                {% elseif 'apiClient' == property.name %}
+                                                                    {% set apiClient = attribute(data, property.name) %}
+                                                                    <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
                                                                 {% else %}
                                                                     <a class="float-right">{{ attribute(data, property.name) }}</a>
                                                                 {% endif %}

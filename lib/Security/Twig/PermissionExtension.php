@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Twig;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Iterator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

@@ -9,8 +9,8 @@ use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
-use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
@@ -37,7 +37,7 @@ final class Report extends AbstractController
     public function __invoke(Request $request, string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);
-        if (!$user instanceof User) {
+        if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));
@@ -45,7 +45,7 @@ final class Report extends AbstractController
 
         $class = new ReflectionClass(ApiClientRequest::class);
 
-        return $this->render('api_client/report.html.twig', [
+        return $this->render('apiclient/report.html.twig', [
             'page_title' => 'sas.page.api_client.report',
             'id' => $id,
             'context' => StringUtil::lowercase($class->getShortName()),

@@ -46,6 +46,6 @@ final class Get extends AbstractController
             $audit = $this->audit->getAudits($cron, $id, 3);
         }
 
-        return $this->renderAudit($audit, new ReflectionClass(Cron::class));
+        return $this->renderDetail($audit, new ReflectionClass(Cron::class));
     }
 }
