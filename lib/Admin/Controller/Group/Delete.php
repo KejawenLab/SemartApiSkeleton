@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->service->remove($group);
 
         $this->addFlash('info', 'sas.page.group.deleted');
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

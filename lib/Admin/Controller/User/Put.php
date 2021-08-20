@@ -32,11 +32,11 @@ final class Put extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->addFlash('id', $user->getId());
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

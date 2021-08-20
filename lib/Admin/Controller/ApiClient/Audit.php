@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
@@ -48,13 +48,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(Group::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(ApiClient::class));

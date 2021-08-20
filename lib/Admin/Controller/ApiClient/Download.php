@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -41,7 +41,7 @@ final class Download extends AbstractController
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $response = new Response();

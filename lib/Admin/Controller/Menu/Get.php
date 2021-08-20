@@ -38,7 +38,7 @@ final class Get extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $audit = new Record($menu);

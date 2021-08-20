@@ -24,14 +24,14 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class GetAll extends AbstractController
+final class Main extends AbstractController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private Paginator $paginator)
     {
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}", name=GetAll::class, methods={"GET"})
+     * @Route("/{{ entityPluralDash }}", name=Main::class, methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {

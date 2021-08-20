@@ -38,7 +38,7 @@ final class Get extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $audit = new Record($group);

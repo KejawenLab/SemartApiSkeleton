@@ -32,7 +32,7 @@ final class Download extends AbstractController
         if (10000 < $records) {
             $this->addFlash('error', 'sas.page.error.too_many_records');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $response = new Response();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;

@@ -40,10 +40,10 @@ final class AdminControllerGenerator extends AbstractGenerator
     public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void
     {
         $shortName = $class->getShortName();
-        $getAllFile = sprintf('%s/app/Admin/Controller/%s/GetAll.php', $this->kernel->getProjectDir(), $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\GetAll"</info></comment>', self::CONTROLLER_PREFIX, $shortName));
+        $getAllFile = sprintf('%s/app/Admin/Controller/%s/Main.php', $this->kernel->getProjectDir(), $shortName);
+        $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\Main"</info></comment>', self::CONTROLLER_PREFIX, $shortName));
         if (!$this->fileSystem->exists($getAllFile)) {
-            $getAll = $this->twig->render('generator/admin/get_all.php.twig', ['entity' => $shortName]);
+            $getAll = $this->twig->render('generator/admin/main.php.twig', ['entity' => $shortName]);
             $this->fileSystem->dumpFile($getAllFile, $getAll);
         } else {
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $getAllFile));

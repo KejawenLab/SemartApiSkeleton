@@ -7,7 +7,7 @@ namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;

@@ -83,7 +83,7 @@
         {% if is_granted('add', menu) %}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
-                    <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Post', {userId: user_id}) }}" enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Main', {userId: user_id}) }}" enctype="multipart/form-data">
                         <div class="card-body">
                             {{ form_widget(form) }}
                         </div>
@@ -151,7 +151,7 @@
                 });
 
                 $('#sasSearch').on('click', function () {
-                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\GetAll', {userId: user_id}) }}?q=' + $('#sasSearchValue').val();
+                    window.location.href = '{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Main', {userId: user_id}) }}?q=' + $('#sasSearchValue').val();
                 });
 
                 {% for message in app.flashes('info') %}

@@ -38,7 +38,7 @@ final class Get extends AbstractController
         if (!$cron instanceof CronInterface) {
             $this->addFlash('error', 'sas.page.cron.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $audit = new Record($cron);

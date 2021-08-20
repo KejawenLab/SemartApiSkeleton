@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$menu instanceof MenuInterface) {
             $this->addFlash('error', 'sas.page.menu.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->service->remove($menu);
 
         $this->addFlash('info', 'sas.page.menu.deleted');
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

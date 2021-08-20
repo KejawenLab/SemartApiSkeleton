@@ -43,7 +43,7 @@ final class Get extends AbstractController
         if (!$media instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $file = new File(sprintf('%s%s%s%s%s',

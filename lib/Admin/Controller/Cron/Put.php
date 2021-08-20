@@ -35,6 +35,6 @@ final class Put extends AbstractController
 
         $this->addFlash('id', $cron->getId());
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

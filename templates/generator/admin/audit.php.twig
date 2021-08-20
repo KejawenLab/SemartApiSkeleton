@@ -38,13 +38,13 @@ final class Audit extends AbstractController
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $class = new \ReflectionClass({{ entityHumanize }}::class);

@@ -40,13 +40,13 @@ final class Audit extends AbstractController
         if (!$entity instanceof MediaInterface) {
             $this->addFlash('error', 'sas.page.media.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         if (!$this->reader->getProvider()->isAuditable(Media::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(Media::class));

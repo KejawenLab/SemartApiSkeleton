@@ -32,11 +32,11 @@ final class Put extends AbstractController
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->addFlash('id', $group->getId());
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

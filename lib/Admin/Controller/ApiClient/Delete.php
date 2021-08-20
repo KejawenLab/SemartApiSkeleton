@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -41,13 +41,13 @@ final class Delete extends AbstractController
         if (!$client instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->service->remove($client);
 
         $this->addFlash('info', 'sas.page.api_client.deleted');
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\ApiClient;
 
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\ApiSkeleton\Admin\Controller\User\GetAll as GetAllUser;
+use KejawenLab\ApiSkeleton\Admin\Controller\User\Main as GetAllUser;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Form\ApiClientType;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class GetAll extends AbstractController
+final class Main extends AbstractController
 {
     public function __construct(
         private ApiClientService $service,
@@ -38,7 +38,7 @@ final class GetAll extends AbstractController
     }
 
     /**
-     * @Route("/users/{userId}/api-clients", name=GetAll::class, methods={"GET", "POST"}, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
+     * @Route("/users/{userId}/api-clients", name=Main::class, methods={"GET", "POST"}, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
      */
     public function __invoke(Request $request, string $userId): Response
     {

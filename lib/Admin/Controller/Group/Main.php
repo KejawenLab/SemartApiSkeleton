@@ -2,56 +2,56 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
+namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\ApiSkeleton\Cron\CronService;
-use KejawenLab\ApiSkeleton\Entity\Cron;
-use KejawenLab\ApiSkeleton\Form\CronType;
+use KejawenLab\ApiSkeleton\Entity\Group;
+use KejawenLab\ApiSkeleton\Form\GroupType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="CRON", actions={Permission::VIEW})
+ * @Permission(menu="GROUP", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class GetAll extends AbstractController
+final class Main extends AbstractController
 {
-    public function __construct(private CronService $service, Paginator $paginator)
+    public function __construct(private GroupService $service, Paginator $paginator)
     {
         parent::__construct($this->service, $paginator);
     }
 
     /**
-     * @Route("/crons", name=GetAll::class, methods={"GET", "POST"})
+     * @Route("/groups", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $cron = new Cron();
+        $group = new Group();
         $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
-            $cron = $this->service->get($flash);
-            if ($cron) {
-                $this->addFlash('id', $cron->getId());
+            $group = $this->service->get($flash);
+            if ($group) {
+                $this->addFlash('id', $group->getId());
 
                 break;
             }
         }
 
-        $form = $this->createForm(CronType::class, $cron);
+        $form = $this->createForm(GroupType::class, $group);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($cron);
-                $this->addFlash('info', 'sas.page.cron.saved');
+                $this->service->save($group);
+                $this->addFlash('info', 'sas.page.group.saved');
             }
         }
 
-        return $this->renderList($form, $request, new ReflectionClass(Cron::class));
+        return $this->renderList($form, $request, new ReflectionClass(Group::class));
     }
 }

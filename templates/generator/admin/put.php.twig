@@ -37,11 +37,11 @@ final class Put extends AbstractController
         if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
             $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->addFlash('id', ${{ entityLowerize }}->getId());
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

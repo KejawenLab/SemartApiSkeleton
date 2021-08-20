@@ -2,56 +2,56 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
+namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\ApiSkeleton\Entity\Group;
-use KejawenLab\ApiSkeleton\Form\GroupType;
+use KejawenLab\ApiSkeleton\Entity\Setting;
+use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Security\Service\GroupService;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::VIEW})
+ * @Permission(menu="SETTING", actions={Permission::VIEW})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class GetAll extends AbstractController
+final class Main extends AbstractController
 {
-    public function __construct(private GroupService $service, Paginator $paginator)
+    public function __construct(private SettingService $service, Paginator $paginator)
     {
         parent::__construct($this->service, $paginator);
     }
 
     /**
-     * @Route("/groups", name=GetAll::class, methods={"GET", "POST"})
+     * @Route("/settings", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $group = new Group();
+        $setting = new Setting();
         $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
-            $group = $this->service->get($flash);
-            if ($group) {
-                $this->addFlash('id', $group->getId());
+            $setting = $this->service->get($flash);
+            if ($setting) {
+                $this->addFlash('id', $setting->getId());
 
                 break;
             }
         }
 
-        $form = $this->createForm(GroupType::class, $group);
+        $form = $this->createForm(SettingType::class, $setting);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($group);
-                $this->addFlash('info', 'sas.page.group.saved');
+                $this->service->save($setting);
+                $this->addFlash('info', 'sas.page.setting.saved');
             }
         }
 
-        return $this->renderList($form, $request, new ReflectionClass(Group::class));
+        return $this->renderList($form, $request, new ReflectionClass(Setting::class));
     }
 }

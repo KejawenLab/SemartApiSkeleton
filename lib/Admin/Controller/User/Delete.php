@@ -32,13 +32,13 @@ final class Delete extends AbstractController
         if (!$user instanceof UserInterface) {
             $this->addFlash('error', 'sas.page.user.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $this->service->remove($user);
 
         $this->addFlash('info', 'sas.page.user.deleted');
 
-        return new RedirectResponse($this->generateUrl(GetAll::class));
+        return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

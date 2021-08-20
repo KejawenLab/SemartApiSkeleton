@@ -38,7 +38,7 @@ final class Get extends AbstractController
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
 
-            return new RedirectResponse($this->generateUrl(GetAll::class));
+            return new RedirectResponse($this->generateUrl(Main::class));
         }
 
         $audit = new Record($setting);
