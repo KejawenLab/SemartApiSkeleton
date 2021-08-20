@@ -18,7 +18,7 @@ final class AuditService
 {
     private int $cacheLifetime;
 
-    public function __construct(private Reader $auditReader, SettingService $setting, private CacheItemPoolInterface $cache)
+    public function __construct(private Reader $auditReader, private CacheItemPoolInterface $cache, SettingService $setting)
     {
         $this->cacheLifetime = $setting->getCacheLifetime();
     }
