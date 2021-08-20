@@ -67,15 +67,6 @@ final class AdminControllerGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $deleteFile));
         }
 
-        $postFile = sprintf('%s/app/Admin/Controller/%s/Post.php', $this->kernel->getProjectDir(), $shortName);
-        $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\Post"</info></comment>', self::CONTROLLER_PREFIX, $shortName));
-        if (!$this->fileSystem->exists($postFile)) {
-            $post = $this->twig->render('generator/admin/post.php.twig', ['entity' => $shortName]);
-            $this->fileSystem->dumpFile($postFile, $post);
-        } else {
-            $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $postFile));
-        }
-
         $putFile = sprintf('%s/app/Admin/Controller/%s/Put.php', $this->kernel->getProjectDir(), $shortName);
         $output->writeln(sprintf('<comment>Generating class <info>"%s\\%s\\Put"</info></comment>', self::CONTROLLER_PREFIX, $shortName));
         if (!$this->fileSystem->exists($putFile)) {

@@ -51,7 +51,7 @@ abstract class AbstractController extends Base
             'page_title' => sprintf('sas.page.%s.list', $context),
             'context' => $context,
             'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class),
+            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, $class->getName()),
             'form' => $form->createView(),
         ]);
     }

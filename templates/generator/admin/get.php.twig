@@ -9,13 +9,14 @@ declare(strict_types=1);
 namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
+use KejawenLab\ApiSkeleton\Audit\Audit as Record;
 use KejawenLab\Application\Entity\{{ entityHumanize }};
 use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +30,7 @@ final class Get extends AbstractController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private uditService $audit, private Reader $reader)
     {
+        parent::__construct($this->service);
     }
 
     /**
@@ -43,19 +45,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        $audit = ['items' => []];
+        $audit = new Record(${{ entityLowerize }});
         if ($this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
-            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 3)->toArray();
+            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 3);
         }
 
-        $class = new \ReflectionClass({{ entityHumanize }}::class);
-
-        return $this->render('{{ entityLowerize }}/view.html.twig', [
-            'page_title' => 'sas.page.{{ entityLowerize }}.view',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(\ReflectionProperty::IS_PRIVATE),
-            'data' => ${{ entityLowerize }},
-            'audits' => $audit['items'],
-        ]);
+        return $this->renderAudit($audit, new ReflectionClass({{ entityHumanize }}::class));
     }
 }
