@@ -19,8 +19,7 @@ security:
             lazy: true
             switch_user: true
             login_throttling:
-                max_attempts: 5
-                interval: '5 minutes'
+                limiter: semart_login_rate_limiter
             guard:
                 authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
@@ -32,8 +31,7 @@ security:
             lazy: true
             provider: user_provider
             login_throttling:
-                max_attempts: 5
-                interval: '5 minutes'
+                limiter: semart_login_rate_limiter
             json_login:
                 check_path: /api/login
                 username_path: username

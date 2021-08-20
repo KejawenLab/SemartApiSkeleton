@@ -69,6 +69,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    semart_login_rate_limiter:
+        class: Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter
+        arguments:
+            $globalFactory: '@limiter.ip_login'
+            $localFactory: '@limiter.username_ip_login'
     Cron\Validator\CrontabValidator:
     KejawenLab\ApiSkeleton\Repository\UserRepository:
         arguments:
