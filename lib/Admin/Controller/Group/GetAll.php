@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Form\GroupType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,16 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    public function __construct(private GroupService $service, private Paginator $paginator)
+    public function __construct(private GroupService $service, Paginator $paginator)
     {
+        parent::__construct($this->service, $paginator);
     }
 
     /**
-     * @Route("/groups", name=GetAll::class, methods={"GET"})
+     * @Route("/groups", name=GetAll::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $class = new ReflectionClass(Group::class);
         $group = new Group();
         $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
@@ -45,12 +43,15 @@ final class GetAll extends AbstractController
             }
         }
 
-        return $this->render('group/all.html.twig', [
-            'page_title' => 'sas.page.group.list',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Group::class),
-            'form' => $this->createForm(GroupType::class, $group)->createView(),
-        ]);
+        $form = $this->createForm(GroupType::class, $group);
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $this->service->save($group);
+                $this->addFlash('info', 'sas.page.group.saved');
+            }
+        }
+
+        return $this->renderList($form, $request, new ReflectionClass(Group::class));
     }
 }

@@ -4,7 +4,8 @@ sas:
             not_found: 'Rute %route% tidak ditemukan'
         password:
             already_used: 'Password sudah pernah digunakan'
-            must_length: 'Password harus lebih panjang dari 6 karakter'
+            min_length: 'Password harus lebih panjang dari 6 karakter'
             not_match: 'Password tidak sesuai'
-        command:
-            not_found: 'Perintah "%command%" tidak ditemukan'
+        cron:
+            command_not_found: 'Perintah "%command%" tidak ditemukan'
+            format_not_valid: 'Format tidak valid'

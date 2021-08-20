@@ -13,6 +13,6 @@ final class PasswordLength extends Constraint
 {
     public function getMessage(): string
     {
-        return 'label.login.password_length';
+        return 'sas.validator.password.min_length';
     }
 }

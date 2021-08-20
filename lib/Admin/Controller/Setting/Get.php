@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
+use KejawenLab\ApiSkeleton\Audit\Audit as Record;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +26,7 @@ final class Get extends AbstractController
 {
     public function __construct(private SettingService $service, private AuditService $audit, private Reader $reader)
     {
+        parent::__construct($this->service);
     }
 
     /**
@@ -41,19 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $audit = ['items' => []];
+        $audit = new Record($setting);
         if ($this->reader->getProvider()->isAuditable(Setting::class)) {
-            $audit = $this->audit->getAudits($setting, $id, 3)->toArray();
+            $audit = $this->audit->getAudits($setting, $id, 3);
         }
 
-        $class = new ReflectionClass(Setting::class);
-
-        return $this->render('setting/view.html.twig', [
-            'page_title' => 'sas.page.setting.view',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $setting,
-            'audits' => $audit['items'],
-        ]);
+        return $this->renderAudit($audit, new ReflectionClass(Setting::class));
     }
 }

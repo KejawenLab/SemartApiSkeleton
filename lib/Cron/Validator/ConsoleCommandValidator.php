@@ -12,13 +12,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class ConsoleCommandValidator extends ConstraintValidator
 {
-    public function __construct(private KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel, private TranslatorInterface $translator)
     {
     }
 
@@ -41,7 +42,7 @@ final class ConsoleCommandValidator extends ConstraintValidator
         try {
             $console->get($command[0]);
         } catch (CommandNotFoundException) {
-            $this->context->buildViolation($constraint->getMessage())->setParameter('%command%', $command[0])->addViolation();
+            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), ['%command%' => $command[0]], 'validators'))->addViolation();
         }
     }
 }

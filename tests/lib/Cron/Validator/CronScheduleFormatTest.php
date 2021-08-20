@@ -12,6 +12,11 @@ use PHPUnit\Framework\TestCase;
  */
 class CronScheduleFormatTest extends TestCase
 {
+    public function testGetMessage(): void
+    {
+        $this->assertSame('sas.validator.cron.format_not_valid', (new CronScheduleFormat())->getMessage());
+    }
+
     public function testInstance(): void
     {
         $this->assertSame(CronScheduleFormat::class, (new CronScheduleFormat())::class);

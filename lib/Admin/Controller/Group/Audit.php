@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Group;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +25,7 @@ final class Audit extends AbstractController
 {
     public function __construct(private GroupService $service, private AuditService $audit, private Reader $reader)
     {
+        parent::__construct($this->service);
     }
 
     /**
@@ -48,15 +47,6 @@ final class Audit extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $class = new ReflectionClass(Group::class);
-        $audit = $this->audit->getAudits($entity, $id)->toArray();
-
-        return $this->render('group/audit.html.twig', [
-            'page_title' => 'sas.page.audit.view',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $audit['entity'],
-            'audits' => $audit['items'],
-        ]);
+        return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(Group::class));
     }
 }

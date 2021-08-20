@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -21,8 +22,9 @@ class ConsoleCommandValidatorTest extends KernelTestCase
     public function testInvalidConstraint(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
 
-        $validator = new ConsoleCommandValidator($kernel);
+        $validator = new ConsoleCommandValidator($kernel, $translator);
 
         $constraint = $this->createMock(Constraint::class);
 
@@ -34,8 +36,9 @@ class ConsoleCommandValidatorTest extends KernelTestCase
     public function testInvalidValue(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
 
-        $validator = new ConsoleCommandValidator($kernel);
+        $validator = new ConsoleCommandValidator($kernel, $translator);
 
         $this->expectException(UnexpectedTypeException::class);
 
@@ -45,8 +48,9 @@ class ConsoleCommandValidatorTest extends KernelTestCase
     public function testValidate(): void
     {
         $kernel = self::bootKernel();
+        $translator = $this->createMock(TranslatorInterface::class);
 
-        $validator = new ConsoleCommandValidator($kernel);
+        $validator = new ConsoleCommandValidator($kernel, $translator);
 
         $cron = $this->createMock(CronInterface::class);
         $cron->expects($this->once())->method('isSymfonyCommand')->willReturn(false);

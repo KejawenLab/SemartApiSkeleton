@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -18,7 +19,7 @@ final class RouteValidator extends ConstraintValidator
 {
     private RouteCollection $routeCollection;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, private TranslatorInterface $translator)
     {
         $this->routeCollection = $router->getRouteCollection();
     }
@@ -45,6 +46,6 @@ final class RouteValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->buildViolation($constraint->getMessage())->setParameter('[ROUTE]', $value)->addViolation();
+        $this->context->buildViolation($this->translator->trans($constraint->getMessage(), ['%route%' => $value], 'validators'))->addViolation();
     }
 }

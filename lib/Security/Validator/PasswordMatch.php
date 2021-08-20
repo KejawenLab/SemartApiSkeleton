@@ -13,6 +13,6 @@ final class PasswordMatch extends Constraint
 {
     public function getMessage(): string
     {
-        return 'login.label.password_not_match';
+        return 'sas.validator.password.not_match';
     }
 }

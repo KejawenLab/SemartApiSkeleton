@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Base;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class DashboardController extends AbstractController
+final class DashboardController extends Base
 {
     /**
      * @Route("/", name=AdminContext::ADMIN_ROUTE, methods={"GET"})

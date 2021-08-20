@@ -10,13 +10,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class CronScheduleFormatValidator extends ConstraintValidator
 {
-    public function __construct(private CrontabValidator $validator)
+    public function __construct(private CrontabValidator $validator, private TranslatorInterface $translator)
     {
     }
 
@@ -33,7 +34,7 @@ final class CronScheduleFormatValidator extends ConstraintValidator
         try {
             $this->validator->validate($value);
         } catch (InvalidPatternException $exception) {
-            $this->context->buildViolation($exception->getMessage())->addViolation();
+            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
         }
     }
 }

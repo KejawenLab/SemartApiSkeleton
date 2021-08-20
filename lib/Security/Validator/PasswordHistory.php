@@ -13,6 +13,6 @@ final class PasswordHistory extends Constraint
 {
     public function getMessage(): string
     {
-        return 'label.login.password_already_used';
+        return 'sas.validator.password.already_used';
     }
 }

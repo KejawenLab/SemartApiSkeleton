@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -26,6 +27,7 @@ final class PasswordHistoryValidator extends ConstraintValidator
         private TokenStorageInterface $tokenStorage,
         private PasswordHistoryService $service,
         private UserProviderFactory $userProviderFactory,
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -64,7 +66,7 @@ final class PasswordHistoryValidator extends ConstraintValidator
         }
 
         if (0 < $invalid) {
-            $this->context->buildViolation($constraint->getMessage())->addViolation();
+            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
         }
     }
 }

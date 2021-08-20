@@ -12,14 +12,18 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class PasswordMatchValidator extends ConstraintValidator
 {
-    public function __construct(private UserPasswordHasherInterface $encoder, private TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        private UserPasswordHasherInterface $encoder,
+        private TokenStorageInterface $tokenStorage,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function validate($value, Constraint $constraint): void
@@ -42,7 +46,7 @@ final class PasswordMatchValidator extends ConstraintValidator
         }
 
         if (!$this->encoder->isPasswordValid($user, $value)) {
-            $this->context->buildViolation($constraint->getMessage())->addViolation();
+            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
         }
     }
 }

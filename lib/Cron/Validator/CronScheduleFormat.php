@@ -13,4 +13,8 @@ use Symfony\Component\Validator\Constraint;
  */
 final class CronScheduleFormat extends Constraint
 {
+    public function getMessage(): string
+    {
+        return 'sas.validator.cron.format_not_valid';
+    }
 }

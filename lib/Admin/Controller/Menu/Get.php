@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Menu;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
+use KejawenLab\ApiSkeleton\Audit\Audit as Record;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Service\MenuService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +26,7 @@ final class Get extends AbstractController
 {
     public function __construct(private MenuService $service, private AuditService $audit, private Reader $reader)
     {
+        parent::__construct($this->service);
     }
 
     /**
@@ -41,19 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $audit = ['items' => []];
+        $audit = new Record($menu);
         if ($this->reader->getProvider()->isAuditable(Menu::class)) {
-            $audit = $this->audit->getAudits($menu, $id, 3)->toArray();
+            $audit = $this->audit->getAudits($menu, $id, 3);
         }
 
-        $class = new ReflectionClass(Menu::class);
-
-        return $this->render('menu/view.html.twig', [
-            'page_title' => 'sas.page.menu.view',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $menu,
-            'audits' => $audit['items'],
-        ]);
+        return $this->renderAudit($audit, new ReflectionClass(Menu::class));
     }
 }

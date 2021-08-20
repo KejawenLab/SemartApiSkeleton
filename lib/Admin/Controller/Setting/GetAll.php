@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,16 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class GetAll extends AbstractController
 {
-    public function __construct(private SettingService $service, private Paginator $paginator)
+    public function __construct(private SettingService $service, Paginator $paginator)
     {
+        parent::__construct($this->service, $paginator);
     }
 
     /**
-     * @Route("/settings", name=GetAll::class, methods={"GET"})
+     * @Route("/settings", name=GetAll::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $class = new ReflectionClass(Setting::class);
         $setting = new Setting();
         $flashs = $request->getSession()->getFlashBag()->get('id');
         foreach ($flashs as $flash) {
@@ -45,12 +43,15 @@ final class GetAll extends AbstractController
             }
         }
 
-        return $this->render('setting/all.html.twig', [
-            'page_title' => 'sas.page.setting.list',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class),
-            'form' => $this->createForm(SettingType::class, $setting)->createView(),
-        ]);
+        $form = $this->createForm(SettingType::class, $setting);
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $this->service->save($setting);
+                $this->addFlash('info', 'sas.page.setting.saved');
+            }
+        }
+
+        return $this->renderList($form, $request, new ReflectionClass(Setting::class));
     }
 }

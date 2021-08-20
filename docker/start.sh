@@ -11,10 +11,10 @@ if [[ ! -d "/semart/vendor/composer" ]]; then
 fi
 
 if [[ "prod" == "${APP_ENV}" ]]; then
-    composer dump-autoload  --optimize --classmap-authoritative
+    composer dump-autoload --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
 else
-    composer dump-autoload --optimize
+    composer dump-autoload
     php /semart/bin/console cache:clear --env=dev
     chmod 777 -R var/
 fi

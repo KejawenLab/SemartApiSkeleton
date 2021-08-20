@@ -85,6 +85,7 @@
         "preferred-install": {
             "*": "dist"
         },
+        "optimize-autoloader": true,
         "sort-packages": true
     },
     "autoload": {

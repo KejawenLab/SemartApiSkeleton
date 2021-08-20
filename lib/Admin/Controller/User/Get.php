@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\User;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
+use KejawenLab\ApiSkeleton\Audit\Audit as Record;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
-use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +26,7 @@ final class Get extends AbstractController
 {
     public function __construct(private UserService $service, private AuditService $audit, private Reader $reader)
     {
+        parent::__construct($this->service);
     }
 
     /**
@@ -41,19 +41,11 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(GetAll::class));
         }
 
-        $audit = ['items' => []];
+        $audit = new Record($user);
         if ($this->reader->getProvider()->isAuditable(User::class)) {
-            $audit = $this->audit->getAudits($user, $id, 3)->toArray();
+            $audit = $this->audit->getAudits($user, $id, 3);
         }
 
-        $class = new ReflectionClass(User::class);
-
-        return $this->render('user/view.html.twig', [
-            'page_title' => 'sas.page.user.view',
-            'context' => StringUtil::lowercase($class->getShortName()),
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $user,
-            'audits' => $audit['items'],
-        ]);
+        return $this->renderAudit($audit, new ReflectionClass(User::class));
     }
 }
