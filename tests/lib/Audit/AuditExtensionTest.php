@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Tests\Audit;
 
+use DH\Auditor\Provider\Doctrine\DoctrineProvider;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Audit\AuditExtension;
-use KejawenLab\ApiSkeleton\Cron\CronExtension;
 use KejawenLab\ApiSkeleton\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -16,22 +17,22 @@ class AuditExtensionTest extends TestCase
 {
     public function testGetFunctions(): void
     {
-        $extension = new AuditExtension();
+        $reader = $this->createMock(Reader::class);
+
+        $extension = new AuditExtension($reader);
 
         $this->assertSame(1, count(iterator_to_array($extension->getFunctions())));
     }
 
-    public function testAuditableIsTrue(): void
+    public function testAuditable(): void
     {
-        $extension = new AuditExtension();
-        $auditable = new User();
+        $provider = $this->createMock(DoctrineProvider::class);
+        $provider->expects($this->once())->method('isAuditable')->willReturn(true);
 
-        $this->assertTrue($extension->isAuditable($auditable));
-    }
+        $reader = $this->createMock(Reader::class);
+        $reader->expects($this->once())->method('getProvider')->willReturn($provider);
 
-    public function testAuditableIsFalse(): void
-    {
-        $extension = new AuditExtension();
+        $extension = new AuditExtension($reader);
         $auditable = new User();
 
         $this->assertTrue($extension->isAuditable($auditable));

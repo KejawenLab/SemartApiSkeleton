@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class SortByCreateAtExtension extends AbstractQueryExtension
+final class SortByCreatedAtExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {

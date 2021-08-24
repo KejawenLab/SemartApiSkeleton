@@ -36,6 +36,8 @@
             <directory>lib/DataFixutes</directory>
             <directory>lib/Repository</directory>
             <directory>lib/Service</directory>
+            <directory>lib/Setting/Model</directory>
+            <directory>lib/Setting/SettingNotFoundException.php</directory>
             <file>lib/CachedKernel.php</file>
             <file>lib/Kernel.php</file>
             <file>lib/SemartApiSkeleton.php</file>
