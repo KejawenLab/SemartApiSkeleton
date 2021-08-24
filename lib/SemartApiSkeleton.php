@@ -11,13 +11,13 @@ final class SemartApiSkeleton
 {
     public const CODENAME = 'Merdeka';
 
-    public const VERSION = '5.6.3';
+    public const VERSION = '5.6.4';
 
     public const VERSION_MAYOR = 50000;
 
     public const VERSION_MINOR = 600;
 
-    public const VERSION_PATCH = 3;
+    public const VERSION_PATCH = 4;
 
     public static function getVersionNumber(): int
     {

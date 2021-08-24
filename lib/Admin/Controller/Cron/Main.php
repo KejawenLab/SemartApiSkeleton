@@ -33,11 +33,17 @@ final class Main extends AbstractController
     public function __invoke(Request $request): Response
     {
         $cron = new Cron();
-        $flashs = $request->getSession()->getFlashBag()->get('id');
-        foreach ($flashs as $flash) {
-            $cron = $this->service->get($flash);
-            if ($cron) {
-                break;
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $cron = $this->service->get($request->getSession()->get('id'));
+        } else {
+            $flashs = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashs as $flash) {
+                $cron = $this->service->get($flash);
+                if (null !== $cron) {
+                    $request->getSession()->set('id', $cron->getId());
+
+                    break;
+                }
             }
         }
 

@@ -33,11 +33,17 @@ final class Main extends AbstractController
     public function __invoke(Request $request): Response
     {
         $group = new Group();
-        $flashs = $request->getSession()->getFlashBag()->get('id');
-        foreach ($flashs as $flash) {
-            $group = $this->service->get($flash);
-            if ($group) {
-                break;
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $group = $this->service->get($request->getSession()->get('id'));
+        } else {
+            $flashs = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashs as $flash) {
+                $group = $this->service->get($flash);
+                if (null !== $group) {
+                    $request->getSession()->set('id', $group->getId());
+
+                    break;
+                }
             }
         }
 

@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class SortByCreatedAtExtension extends AbstractQueryExtension
+final class SortByUpdatedAtExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
-        $queryBuilder->addOrderBy(sprintf('%s.createdAt', $this->aliasHelper->findAlias('root')), 'DESC');
+        $queryBuilder->addOrderBy(sprintf('%s.updatedAt', $this->aliasHelper->findAlias('root')), 'DESC');
     }
 
     /**
