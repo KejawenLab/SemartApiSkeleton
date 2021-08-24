@@ -42,23 +42,30 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
 
-        /** @var RealUser $user */
-        $media = $this->mediaService->getByFile($user->getProfileImage());
-        if (null !== $media) {
-            $this->mediaService->remove($media);
-        }
-
+        $userClone = clone $user;
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
-            if ($form->isValid()) {
-                if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
-                    $user->setPlainPassword($password);
-                }
-
-                $this->service->save($user);
-                $this->addFlash('info', 'sas.page.profile.updated');
+            if (!$form->isValid()) {
+                return new RedirectResponse($this->generateUrl(Profile::class));
             }
+
+            if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
+                $user->setPlainPassword($password);
+            }
+
+            if ($form['file']->getData()) {
+                /** @var RealUser $user */
+                $media = $this->mediaService->getByFile($user->getProfileImage());
+                if (null !== $media) {
+                    $this->mediaService->remove($media);
+                }
+            } else {
+                $user->setProfileImage($userClone->getProfileImage());
+            }
+
+            $this->service->save($user);
+            $this->addFlash('info', 'sas.page.profile.updated');
         }
 
         return new RedirectResponse($this->generateUrl(Profile::class));

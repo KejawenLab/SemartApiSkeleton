@@ -24,7 +24,7 @@ final class UpdateProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('file', FileType::class, [
-            'required' => true,
+            'required' => false,
             'label' => 'sas.form.field.user.profileImage',
             'documentation' => [
                 'type' => 'string',
