@@ -45,8 +45,6 @@ class ApiClient implements ApiClientInterface
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      *
-     * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      * @MaxDepth(1)
      */
