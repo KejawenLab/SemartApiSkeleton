@@ -25,6 +25,7 @@ git clone https://github.com/KejawenLab/SemartApiSkeleton
 cd SemartApiSkeleton
 mkdir -p config/jwt
 openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+#Jangan lupa untuk mengingat passphrase yang diinput
 openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
 
@@ -35,7 +36,7 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 >
 > * Ubah file `.env.template` menjadi file `.env`
 >
-> * Ubah isi file `.env` sesuai dengan kebutuhan, berikut contoh konfigurasinya
+> * Ubah isi file `.env` sesuai dengan kebutuhan terutama pada `JWT_PASSPHRASE`, berikut contoh konfigurasinya
 
 ```dotenv
 # In all environments, the following files are loaded if they exist,
