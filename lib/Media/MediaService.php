@@ -37,8 +37,12 @@ final class MediaService extends AbstractService implements ServiceInterface
         return $media;
     }
 
-    public function getByFile(string $fileName): ?MediaInterface
+    public function getByFile(?string $fileName): ?MediaInterface
     {
+        if (!$fileName) {
+            return null;
+        }
+
         $file = explode('/', $fileName);
         $fileName = array_pop($file);
         $folder = trim(implode('/', $file), '/');

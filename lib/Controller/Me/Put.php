@@ -78,12 +78,7 @@ final class Put extends AbstractFOSRestController
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
-        /** @var User $user */
-        $media = $this->mediaService->getByFile($user->getProfileImage());
-        if (null !== $media) {
-            $this->mediaService->remove($media);
-        }
-
+        $userClone = clone $user;
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
@@ -91,6 +86,16 @@ final class Put extends AbstractFOSRestController
 
         if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
             $user->setPlainPassword($password);
+        }
+
+        if ($form['file']->getData()) {
+            /** @var User $user */
+            $media = $this->mediaService->getByFile($user->getProfileImage());
+            if (null !== $media) {
+                $this->mediaService->remove($media);
+            }
+        } else {
+            $user->setProfileImage($userClone->getProfileImage());
         }
 
         $this->service->save($user);
