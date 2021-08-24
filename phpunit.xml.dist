@@ -34,6 +34,8 @@
             <directory>lib/Controller</directory>
             <directory>lib/Cron/Model</directory>
             <directory>lib/DataFixutes</directory>
+            <directory>lib/Repository</directory>
+            <directory>lib/Service</directory>
             <file>lib/CachedKernel.php</file>
             <file>lib/Kernel.php</file>
             <file>lib/SemartApiSkeleton.php</file>

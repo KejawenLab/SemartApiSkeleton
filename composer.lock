@@ -1860,16 +1860,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.9.4",
+            "version": "2.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5"
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b19a13f4edfaa5806109cd899f5912a7df1547b5",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
                 "shasum": ""
             },
             "require": {
@@ -1948,9 +1948,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.9.4"
+                "source": "https://github.com/doctrine/orm/tree/2.9.5"
             },
-            "time": "2021-08-11T20:53:03+00:00"
+            "time": "2021-08-23T10:20:22+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -3975,22 +3975,23 @@
         },
         {
             "name": "runtime/swoole",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-runtime/swoole.git",
-                "reference": "caafeb08da141e05b8b8be3cd98fce2076658929"
+                "reference": "68c3b5e4e21e78b2a4a01407d156a0aec7552927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-runtime/swoole/zipball/caafeb08da141e05b8b8be3cd98fce2076658929",
-                "reference": "caafeb08da141e05b8b8be3cd98fce2076658929",
+                "url": "https://api.github.com/repos/php-runtime/swoole/zipball/68c3b5e4e21e78b2a4a01407d156a0aec7552927",
+                "reference": "68c3b5e4e21e78b2a4a01407d156a0aec7552927",
                 "shasum": ""
             },
             "require": {
                 "symfony/runtime": "^5.3 || ^6.0"
             },
             "require-dev": {
+                "illuminate/http": "^8.48",
                 "swoole/ide-helper": "^4.6",
                 "symfony/http-foundation": "^4.4 || ^5.2 || ^6.0",
                 "symfony/http-kernel": "^4.4 || ^5.2 || ^6.0",
@@ -4014,7 +4015,7 @@
             ],
             "description": "Swoole runtime",
             "support": {
-                "source": "https://github.com/php-runtime/swoole/tree/0.1.1"
+                "source": "https://github.com/php-runtime/swoole/tree/0.2.0"
             },
             "funding": [
                 {
@@ -4022,7 +4023,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-11T07:33:28+00:00"
+            "time": "2021-08-22T00:31:40+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -5783,7 +5784,7 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.13.4",
+            "version": "v1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
@@ -5831,7 +5832,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.13.4"
+                "source": "https://github.com/symfony/flex/tree/v1.14.1"
             },
             "funding": [
                 {
@@ -11447,16 +11448,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.94",
+            "version": "0.12.95",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6"
+                "reference": "4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6",
-                "reference": "3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58",
+                "reference": "4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58",
                 "shasum": ""
             },
             "require": {
@@ -11487,7 +11488,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.94"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.95"
             },
             "funding": [
                 {
@@ -11507,7 +11508,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-30T09:05:27+00:00"
+            "time": "2021-08-20T12:53:41+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -11983,21 +11984,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.48",
+            "version": "0.11.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d3b80f641be8ae46b02d58ad31582d92dcda8e88"
+                "reference": "fdf11ed923d79c1777f993ef755fc8fe111a25a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d3b80f641be8ae46b02d58ad31582d92dcda8e88",
-                "reference": "d3b80f641be8ae46b02d58ad31582d92dcda8e88",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/fdf11ed923d79c1777f993ef755fc8fe111a25a2",
+                "reference": "fdf11ed923d79c1777f993ef755fc8fe111a25a2",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1|^8.0",
-                "phpstan/phpstan": "0.12.94"
+                "phpstan/phpstan": "0.12.95"
             },
             "conflict": {
                 "phpstan/phpdoc-parser": "<=0.5.3",
@@ -12015,7 +12016,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.10-dev"
+                    "dev-main": "0.11-dev"
                 }
             },
             "autoload": {
@@ -12030,7 +12031,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.48"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.49"
             },
             "funding": [
                 {
@@ -12038,7 +12039,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-17T09:00:25+00:00"
+            "time": "2021-08-23T11:18:30+00:00"
         },
         {
             "name": "sebastian/cli-parser",
