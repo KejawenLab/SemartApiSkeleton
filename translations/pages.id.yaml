@@ -19,6 +19,7 @@ sas:
             not_found: 'File tidak ditemukan'
             list: 'Daftar Media'
             add: 'Tambah Media'
+            view: 'Detil Media'
             public: 'Publik'
             non_public: 'Non Publik'
             download: 'Unduh'
