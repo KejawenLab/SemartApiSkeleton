@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/menus", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/menus", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $menu = $this->service->get($flash);
             if ($menu) {
-                $this->addFlash('id', $menu->getId());
-
                 break;
             }
         }

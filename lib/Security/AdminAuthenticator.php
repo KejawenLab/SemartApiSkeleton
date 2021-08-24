@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace KejawenLab\ApiSkeleton\Security;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
@@ -10,22 +8,20 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-/**
- * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
- */
-final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+final class AdminAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
@@ -37,16 +33,12 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
     ) {
     }
 
-    public function supports(Request $request): bool
+    protected function getLoginUrl(Request $request): string
     {
-        if (AdminContext::LOGIN_ROUTE !== $request->attributes->get('_route')) {
-            return false;
-        }
-
-        return $request->isMethod(Request::METHOD_POST);
+        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
     }
 
-    public function getCredentials(Request $request): array
+    public function authenticate(Request $request): PassportInterface
     {
         $credentials = [
             'username' => $request->request->get('_username', ''),
@@ -55,35 +47,21 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
 
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
-        return $credentials;
+        return new Passport(
+            new UserBadge($credentials['username'], function ($userIdentifier) {
+                return $this->userProviderFactory->loadUserByUsername($userIdentifier);
+            }),
+            new PasswordCredentials($credentials['password']),
+        );
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): User
-    {
-        return $this->userProviderFactory->loadUserByUsername($credentials['username']);
-    }
-
-    public function checkCredentials($credentials, UserInterface $user): bool
-    {
-        if (!$user instanceof PasswordAuthenticatedUserInterface) {
-            return false;
-        }
-
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
-    }
-
-    public function getPassword($credentials): ?string
-    {
-        return $credentials['password'];
-    }
-
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $session = $request->getSession();
         $user = $token->getUser();
 
         if (!$user instanceof User) {
-            return $this->redirect($session, $providerKey);
+            return $this->redirect($session, $firewallName);
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
@@ -96,17 +74,12 @@ final class AdminAuthenticator extends AbstractFormLoginAuthenticator implements
             $this->userService->save($user);
         }
 
-        return $this->redirect($session, $providerKey);
+        return $this->redirect($session, $firewallName);
     }
 
-    protected function getLoginUrl(): string
+    private function redirect(SessionInterface $session, string $firewallName): RedirectResponse
     {
-        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
-    }
-
-    private function redirect(SessionInterface $session, string $providerKey): RedirectResponse
-    {
-        if ($targetPath = $this->getTargetPath($session, $providerKey)) {
+        if ($targetPath = $this->getTargetPath($session, $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 

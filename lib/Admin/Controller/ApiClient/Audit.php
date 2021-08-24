@@ -35,7 +35,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("users/{userId}/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
+     * @Route(path="users/{userId}/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
      *
      * @throws InvalidArgumentException
      */

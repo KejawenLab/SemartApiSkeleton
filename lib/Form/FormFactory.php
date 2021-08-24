@@ -20,7 +20,13 @@ final class FormFactory
     public function submitRequest(string $formType, Request $request, $data = null): FormInterface
     {
         $form = $this->formFactory->create($formType, $data);
-        $form->submit($request->request->all());
+        if ('application/json' === $request->getContentType()) {
+            $data = json_decode($request->getContent(), true);
+        } else {
+            $data = $request->request->all();
+        }
+
+        $form->submit($data);
 
         return $form;
     }

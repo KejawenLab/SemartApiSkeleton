@@ -28,7 +28,7 @@ final class Run extends AbstractController
     }
 
     /**
-     * @Route("/crons/{id}/run", name=Run::class, methods={"GET"}, priority=-17)
+     * @Route(path="/crons/{id}/run", name=Run::class, methods={"GET"}, priority=-17)
      */
     public function __invoke(string $id): Response
     {

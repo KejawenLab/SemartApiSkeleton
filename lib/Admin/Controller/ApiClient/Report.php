@@ -32,7 +32,7 @@ final class Report extends AbstractController
     }
 
     /**
-     * @Route("/users/{userId}/api-clients/{id}/logs", name=Report::class, methods={"GET"})
+     * @Route(path="/users/{userId}/api-clients/{id}/logs", name=Report::class, methods={"GET"})
      */
     public function __invoke(Request $request, string $userId, string $id): Response
     {

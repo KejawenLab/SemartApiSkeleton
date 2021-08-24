@@ -41,8 +41,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             ${{ entityLowerize }} = $this->service->get($flash);
             if (${{ entityLowerize }}) {
-                $this->addFlash('id', ${{ entityLowerize }}->getId());
-
                 break;
             }
         }

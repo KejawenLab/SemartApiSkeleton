@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/delete", name=Delete::class, methods={"GET"})
+     * @Route(path="/medias/{id}/delete", name=Delete::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

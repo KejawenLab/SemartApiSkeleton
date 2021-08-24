@@ -30,7 +30,7 @@ final class Get extends AbstractController
     }
 
     /**
-     * @Route("/settings/{id}", name=Get::class, methods={"GET"})
+     * @Route(path="/settings/{id}", name=Get::class, methods={"GET"})
      */
     public function __invoke(string $id): Response
     {

@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/crons", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/crons", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $cron = $this->service->get($flash);
             if ($cron) {
-                $this->addFlash('id', $cron->getId());
-
                 break;
             }
         }

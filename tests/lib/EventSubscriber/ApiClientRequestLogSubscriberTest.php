@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-class ApiClientRequestSubscriberTest extends TestCase
+class ApiClientRequestLogSubscriberTest extends TestCase
 {
     public function testOnlyMainRequestCanPass(): void
     {

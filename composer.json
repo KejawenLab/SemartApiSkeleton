@@ -48,7 +48,6 @@
         "symfony/form": ">=5.3",
         "symfony/framework-bundle": ">=5.3",
         "symfony/http-client": ">=5.3",
-        "symfony/inflector": ">=5.3",
         "symfony/lock": ">=5.3",
         "symfony/messenger": ">=5.3",
         "symfony/mime": ">=5.3",

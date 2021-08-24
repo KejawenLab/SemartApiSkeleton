@@ -27,7 +27,7 @@ final class Download extends AbstractController
     }
 
     /**
-     * @Route("/users/{userId}/api-clients/download", name=Download::class, methods={"GET"})
+     * @Route(path="/users/{userId}/api-clients/download", name=Download::class, methods={"GET"})
      */
     public function __invoke(string $userId): Response
     {

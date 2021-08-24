@@ -576,9 +576,6 @@
     "symfony/http-kernel": {
         "version": "v5.0.8"
     },
-    "symfony/inflector": {
-        "version": "v5.0.8"
-    },
     "symfony/lock": {
         "version": "v5.1.0"
     },

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
+namespace KejawenLab\ApiSkeleton\Controller\Me;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -14,7 +14,8 @@ use KejawenLab\ApiSkeleton\Form\ApiClientType;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
-use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
+use KejawenLab\ApiSkeleton\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
@@ -24,24 +25,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::ADD})
+ * @Permission(menu="PROFILE", actions={Permission::ADD})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class Post extends AbstractFOSRestController
+final class CreateApiClient extends AbstractFOSRestController
 {
     public function __construct(
         private FormFactory $formFactory,
-        private UserService $userService,
+        private UserProviderFactory $userProviderFactory,
         private ApiClientService $service,
         private TranslatorInterface $translator,
     ) {
     }
 
     /**
-     * @Rest\Post("/users/{userId}/api-clients", name=Post::class)
+     * @Rest\Post("/me/api-clients", name=CreateApiClient::class)
      *
-     * @OA\Tag(name="Api Client")
+     * @OA\Tag(name="Profile")
      * @OA\RequestBody(
      *     content={
      *         @OA\MediaType(
@@ -54,8 +55,8 @@ final class Post extends AbstractFOSRestController
      *     }
      * )
      * @OA\Response(
-     *     response=201,
-     *     description= "Api client created",
+     *     response=200,
+     *     description= "Create api client for logged user",
      *     content={
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -69,9 +70,14 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $userId): View
+    public function __invoke(Request $request): View
     {
-        $user = $this->userService->get($userId);
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
+        }
+
+        $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }

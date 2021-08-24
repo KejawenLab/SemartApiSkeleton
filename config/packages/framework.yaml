@@ -15,7 +15,16 @@ framework:
         enabled: true
         use_cookies: true
         handler_id: snc_redis.session.handler
+    rate_limiter:
+        username_ip_login:
+            policy: token_bucket
+            limit: 5
+            rate: { interval: '5 minutes' }
 
+        ip_login:
+            policy: sliding_window
+            limit: 50
+            interval: '15 minutes'
     #esi: true
     #fragments: true
     php_errors:

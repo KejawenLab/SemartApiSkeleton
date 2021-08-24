@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/groups", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/groups", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $group = $this->service->get($flash);
             if ($group) {
-                $this->addFlash('id', $group->getId());
-
                 break;
             }
         }
