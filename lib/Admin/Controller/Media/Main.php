@@ -33,14 +33,6 @@ final class Main extends AbstractController
     public function __invoke(Request $request): Response
     {
         $media = new Media();
-        $flashs = $request->getSession()->getFlashBag()->get('id');
-        foreach ($flashs as $flash) {
-            $media = $this->service->get($flash);
-            if (null !== $media) {
-                break;
-            }
-        }
-
         $form = $this->createForm(MediaType::class, $media);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);

@@ -33,11 +33,17 @@ final class Main extends AbstractController
     public function __invoke(Request $request): Response
     {
         $user = new User();
-        $flashs = $request->getSession()->getFlashBag()->get('id');
-        foreach ($flashs as $flash) {
-            $user = $this->service->get($flash);
-            if ($user) {
-                break;
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $user = $this->service->get($request->getSession()->get('id'));
+        } else {
+            $flashs = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashs as $flash) {
+                $user = $this->service->get($flash);
+                if (null !== $user) {
+                    $request->getSession()->set('id', $user->getId());
+
+                    break;
+                }
             }
         }
 
@@ -47,6 +53,8 @@ final class Main extends AbstractController
             if ($form->isValid()) {
                 $this->service->save($user);
                 $this->addFlash('info', 'sas.page.user.saved');
+
+                $form = $this->createForm(UserType::class);
             }
         }
 
