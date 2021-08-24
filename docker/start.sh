@@ -6,7 +6,7 @@ if [[ ! -d "/semart/var" ]]; then
     cd /semart && mkdir var
 fi
 
-if [[ -d "/semart/vendor/composer" ]]; then
+if [[ ! -d "/semart/vendor/composer" ]]; then
     cd /semart && composer update --prefer-dist -vvv
 fi
 
