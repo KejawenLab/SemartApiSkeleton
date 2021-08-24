@@ -24,7 +24,7 @@ final class Download extends AbstractController
     }
 
     /**
-     * @Route("/medias/download", name=Download::class, methods={"GET"})
+     * @Route(path="/medias/download", name=Download::class, methods={"GET"})
      */
     public function __invoke(): Response
     {

@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/medias", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/medias", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {

@@ -20,8 +20,7 @@ security:
             switch_user: true
             login_throttling:
                 limiter: semart_login_rate_limiter
-            guard:
-                authenticators:
+            custom_authenticators:
                     - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
             logout:
                 path: admin_logout

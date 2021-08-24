@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class DashboardController extends Base
 {
     /**
-     * @Route("/", name=AdminContext::ADMIN_ROUTE, methods={"GET"})
+     * @Route(path="/", name=AdminContext::ADMIN_ROUTE, methods={"GET"})
      */
     public function __invoke(): Response
     {

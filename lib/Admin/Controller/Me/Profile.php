@@ -27,7 +27,7 @@ final class Profile extends AbstractController
     }
 
     /**
-     * @Route("/me", name=Profile::class, methods={"GET"}, priority=-1)
+     * @Route(path="/me", name=Profile::class, methods={"GET"}, priority=-1)
      *
      * @throws ReflectionException
      */

@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/crons", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/crons", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {

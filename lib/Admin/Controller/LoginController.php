@@ -20,7 +20,7 @@ final class LoginController extends Base
     }
 
     /**
-     * @Route("/login", name=AdminContext::LOGIN_ROUTE, methods={"GET", "POST"})
+     * @Route(path="/login", name=AdminContext::LOGIN_ROUTE, methods={"GET", "POST"})
      */
     public function __invoke(): Response
     {

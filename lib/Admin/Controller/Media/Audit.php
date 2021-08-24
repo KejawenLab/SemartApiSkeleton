@@ -30,7 +30,7 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route("/medias/{id}/audit", name=Audit::class, methods={"GET"}, priority=1)
+     * @Route(path="/medias/{id}/audit", name=Audit::class, methods={"GET"}, priority=1)
      *
      * @throws InvalidArgumentException
      */

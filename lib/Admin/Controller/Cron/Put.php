@@ -24,7 +24,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route("/crons/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
+     * @Route(path="/crons/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
     public function __invoke(string $id): Response
     {

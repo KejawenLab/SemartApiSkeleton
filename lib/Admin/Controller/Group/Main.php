@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/groups", name=Main::class, methods={"GET", "POST"})
+     * @Route(path="/groups", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
