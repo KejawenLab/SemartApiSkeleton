@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $menu = $this->service->get($flash);
             if ($menu) {
-                $this->addFlash('id', $menu->getId());
-
                 break;
             }
         }

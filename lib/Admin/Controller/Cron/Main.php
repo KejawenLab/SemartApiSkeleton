@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $cron = $this->service->get($flash);
             if ($cron) {
-                $this->addFlash('id', $cron->getId());
-
                 break;
             }
         }

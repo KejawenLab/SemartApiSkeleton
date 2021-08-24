@@ -15,6 +15,8 @@ interface ApiClientInterface extends AuthInterface, EntityInterface
 {
     public function getUser(): ?UserInterface;
 
+    public function setUser(UserInterface $user): void;
+
     public function getName(): ?string;
 
     public function getApiKey(): ?string;

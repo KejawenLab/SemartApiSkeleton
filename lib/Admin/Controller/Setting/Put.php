@@ -9,6 +9,7 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,17 +27,17 @@ final class Put extends AbstractController
     /**
      * @Route(path="/settings/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
      */
-    public function __invoke(string $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             $this->addFlash('error', 'sas.page.setting.not_found');
 
-            return new RedirectResponse($this->generateUrl(Main::class));
+            return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
         }
 
         $this->addFlash('id', $setting->getId());
 
-        return new RedirectResponse($this->generateUrl(Main::class));
+        return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
     }
 }

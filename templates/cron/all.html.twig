@@ -55,7 +55,7 @@
                                     {{ 'sas.table.action.view' | trans({}, 'tables') }}
                                 </a>
                                 {% if is_granted('edit', menu) %}
-                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Put', {id: data.id}) }}" class="btn btn-sm btn-outline-info">
+                                    <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Put', ({id: data.id}) | merge(app.request.query.all)) }}" class="btn btn-sm btn-outline-info">
                                         {{ 'sas.table.action.edit' | trans({}, 'tables') }}
                                     </a>
                                 {% endif %}

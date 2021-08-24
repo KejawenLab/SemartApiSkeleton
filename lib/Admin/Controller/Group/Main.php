@@ -37,8 +37,6 @@ final class Main extends AbstractController
         foreach ($flashs as $flash) {
             $group = $this->service->get($flash);
             if ($group) {
-                $this->addFlash('id', $group->getId());
-
                 break;
             }
         }
