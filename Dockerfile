@@ -1,35 +1,36 @@
-FROM ubuntu:20.04
+FROM php:cli-alpine
 
 MAINTAINER Muhammad Surya Ihsanuddin<surya.iksanudin@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
+# Install Dependencies
+RUN apk update
+RUN apk add --no-cache supervisor vim autoconf gcc make g++ inotify-tools bash
+RUN apk add --no-cache libzip-dev curl-dev icu-dev oniguruma-dev imap-dev postgresql-dev
+RUN apk add --no-cache libpng-dev openssl-dev nghttp2-dev hiredis-dev
 
-# Install Software
-RUN apt update && apt upgrade -y && apt autoremove -y
-RUN apt install software-properties-common locales -y
-RUN locale-gen en_US.UTF-8 && export LANG=en_US.UTF-8
-RUN add-apt-repository ppa:ondrej/php -y
-RUN apt install supervisor vim wget curl unzip -y
-RUN apt install php8.0 php8.0-cli php8.0-curl php8.0-intl php8.0-mbstring php8.0-xml php8.0-zip php8.0-dev \
-    php8.0-bcmath php8.0-cli php8.0-imap php8.0-opcache php8.0-xmlrpc php-pear \
-    php8.0-bz2 php8.0-common php8.0-gd php8.0-ldap php8.0-mysql php8.0-readline php8.0-soap php8.0-tidy php8.0-xsl php8.0-redis -y
+# Install PHP Core Extensions
+RUN docker-php-ext-install curl intl mbstring zip bcmath imap opcache gd pdo_pgsql
+RUN docker-php-ext-enable curl intl mbstring zip bcmath imap opcache gd pdo_pgsql
+
+## Install Pecl Extension
+RUN pecl channel-update pecl.php.net
+RUN pecl install igbinary sockets inotify
+RUN pecl install swoole --enable-sockets --enable-openssl --enable-async-redis --enable-http2 --enable-mysqlnd
+RUN pecl bundle redis && cd redis && phpize && ./configure --enable-redis-igbinary && make && make install
+RUN docker-php-ext-enable igbinary redis swoole inotify
 
 # Install Composer
-ADD docker/php/composer.sh /composer.sh
+ADD docker/composer.sh /composer.sh
 RUN chmod a+x /composer.sh
 RUN /composer.sh && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN rm -f /composer.sh
 
 # Cleaning
-RUN apt autoremove -y && apt clean && apt autoclean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
-
-# Configuring
-RUN echo "y\ny\ny\ny\ny\ny\n"| pecl install swoole
-ADD docker/php/php.ini /etc/php/8.0/cli/php.ini
-ADD docker/supervisor/supervisord.conf /etc/supervisord.conf
+RUN docker-php-source delete
+RUN rm -r /tmp/* /var/cache/*
 
 # Here we go
+ADD docker/supervisord.conf /etc/supervisord.conf
 ADD docker/start.sh /start.sh
 RUN chmod +x /start.sh
 

@@ -82,7 +82,9 @@ final class Paginator
     private function count(QueryBuilder $queryBuilder): int
     {
         $count = clone $queryBuilder;
+
         $count->select('COUNT(1) AS total');
+        $count->resetDQLPart('orderBy');
 
         $query = $count->getQuery();
         $query->useQueryCache(true);

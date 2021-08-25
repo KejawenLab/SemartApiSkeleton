@@ -6,14 +6,20 @@ if [[ ! -d "/semart/var" ]]; then
     cd /semart && mkdir var
 fi
 
+if [[ ! -d "/var/log/supervisor" ]]; then
+    mkdir -p /var/log/supervisor
+fi
+
 if [[ ! -d "/semart/vendor/composer" ]]; then
     cd /semart && composer update --prefer-dist -vvv
 fi
 
 if [[ "prod" == "${APP_ENV}" ]]; then
+    cp "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
     composer dump-autoload --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
 else
+    cp "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
     composer dump-autoload
     php /semart/bin/console cache:clear --env=dev
     chmod 777 -R var/

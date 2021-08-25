@@ -6,5 +6,6 @@ swoole:
         socket_type: tcp
         ssl_enabled: false
         static: advanced
+        hmr: inotify
         services:
             session_cookie_event_listener: true

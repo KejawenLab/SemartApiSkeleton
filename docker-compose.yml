@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
     app:
         build:
@@ -19,21 +18,18 @@ services:
         depends_on:
             - session
     db:
-        image: mysql:latest
-        command: --default-authentication-plugin=mysql_native_password
+        image: postgres:alpine
         environment:
-            MYSQL_ROOT_PASSWORD: semart
-
+            POSTGRES_USER: semart
+            POSTGRES_PASSWORD: semart
     adminer:
         image: adminer:latest
         ports:
             - "6789:8080"
         links:
             - db
-
     session:
         image: redis:alpine
-
 volumes:
     cache:
     vendor:

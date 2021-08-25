@@ -54,9 +54,11 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 # Run "composer dump-env prod" to compile .env files for production use (requires symfony/flex >=1.2).
 # https://symfony.com/doc/current/best_practices.html#use-environment-variables-for-infrastructure-configuration
 
+APP_RUNTIME=Runtime\Swoole\Runtime
+
 ###> symfony/framework-bundle ###
 APP_ENV=dev
-APP_SECRET=3GXjF83smPRZWvHCZ7O+mA==
+APP_SECRET=ykWmyQ9xVGbn+vQB2gzCWg==
 #TRUSTED_PROXIES=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 #TRUSTED_HOSTS='^(localhost|example\.com)$'
 ###< symfony/framework-bundle ###
@@ -64,7 +66,7 @@ APP_SECRET=3GXjF83smPRZWvHCZ7O+mA==
 ###> lexik/jwt-authentication-bundle ###
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE=4e938d7532adc7163e0c657b1eb3ce93ed8f42c2
+JWT_PASSPHRASE=CHANGEME-TO-VALUE-THAT-YOU-PROVIDE-WHEN-GENERATING-PRIVATE-KEY
 ###< lexik/jwt-authentication-bundle ###
 
 ###> snc/redis-bundle ###
@@ -74,23 +76,24 @@ REDIS_URL=redis://session
 
 ###> CUSTOM ###
 NGINX_WEBROOT=/semart/public
+SWOOLE_HOST="0.0.0.0"
+SWOOLE_PORT=9501
 APP_SUPER_ADMIN=SPRADM
 APP_TITLE="Semart Api Skeleton"
-APP_DESCRIPTION="Semart Api Skeleton"
-APP_VERSION=1.0@dev
+APP_DESCRIPTION="Semart Api Skeleton Application"
+APP_VERSION=1@dev
 APP_UPLOAD_DIR=%kernel.project_dir%/storage
 APP_MEDIA_PREFIX=/medias
 ###< CUSTOM ###
 
 ###> doctrine/doctrine-bundle ###
-DATABASE_DRIVER=pdo_mysql
-DATABASE_SERVER_VERSION=5.7
-DATABASE_CHARSET=utf8mb4
-DATABASE_USER=root
-DATABASE_PASSWORD=4ZFbDniRw+vx+QnUY93Fhg==
-DATABASE_NAME=semart
+DATABASE_DRIVER=pdo_pgsql
+DATABASE_CHARSET=utf8
+DATABASE_USER=semart
+DATABASE_PASSWORD=CHANGEME-TO-VALUE-PROVIDED-BY-SEMART-ENCRYPT-COMMAND
+DATABASE_NAME=semart_skeleton
 DATABASE_HOST=db
-DATABASE_PORT=3306
+DATABASE_PORT=5432
 # Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url
 # For an SQLite database, use: "sqlite:///%kernel.project_dir%/var/data.db"
 # For a PostgreSQL database, use: "postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=11&charset=utf8"
@@ -101,6 +104,13 @@ DATABASE_PORT=3306
 ###> nelmio/cors-bundle ###
 CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 ###< nelmio/cors-bundle ###
+
+###> symfony/messenger ###
+# Choose one of the transports below
+# MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages
+# MESSENGER_TRANSPORT_DSN=doctrine://default
+# MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages
+###< symfony/messenger ###
 
 ```
 
