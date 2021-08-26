@@ -33,7 +33,7 @@ final class CronScheduleFormatValidator extends ConstraintValidator
 
         try {
             $this->validator->validate($value);
-        } catch (InvalidPatternException $exception) {
+        } catch (InvalidPatternException) {
             $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
         }
     }

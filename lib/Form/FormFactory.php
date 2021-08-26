@@ -21,7 +21,7 @@ final class FormFactory
     {
         $form = $this->formFactory->create($formType, $data);
         if ('application/json' === $request->getContentType()) {
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         } else {
             $data = $request->request->all();
         }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Cron\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use DateTime;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 
@@ -14,7 +16,10 @@ interface CronReportInterface extends EntityInterface
 {
     public function getCron(): ?CronInterface;
 
-    public function getRunAt(): DateTime;
+    /**
+     * @return DateTime|DateTimeImmutable
+     */
+    public function getRunAt(): DateTimeInterface;
 
     public function getRuntime(): float;
 

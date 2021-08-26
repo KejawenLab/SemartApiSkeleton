@@ -2,6 +2,8 @@
 
 namespace KejawenLab\ApiSkeleton\Security;
 
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use DateTimeImmutable;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -10,7 +12,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
@@ -29,7 +30,6 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         private UserService $userService,
         private UserProviderFactory $userProviderFactory,
         private UrlGeneratorInterface $urlGenerator,
-        private UserPasswordHasherInterface $passwordEncoder,
     ) {
     }
 
@@ -48,9 +48,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return new Passport(
-            new UserBadge($credentials['username'], function ($userIdentifier) {
-                return $this->userProviderFactory->loadUserByUsername($userIdentifier);
-            }),
+            new UserBadge($credentials['username'], fn($userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
             new PasswordCredentials($credentials['password']),
         );
     }
@@ -65,10 +63,10 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
-        if ($user instanceof Model\UserInterface) {
+        if ($user instanceof UserInterface) {
             $deviceId = Encryptor::hash(date('YmdHis'));
             $user->setDeviceId($deviceId);
-            $user->setLastLogin(new \DateTimeImmutable());
+            $user->setLastLogin(new DateTimeImmutable());
 
             $session->set(AdminContext::USER_DEVICE_ID, $deviceId);
             $this->userService->save($user);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -45,8 +47,9 @@ class CronReport implements CronReportInterface
      * @ORM\Column(type="datetime")
      *
      * @Groups({"read"})
+     * @var DateTime|DateTimeImmutable
      */
-    private DateTime $runAt;
+    private DateTimeInterface $runAt;
 
     /**
      * @ORM\Column(type="float")
@@ -84,12 +87,15 @@ class CronReport implements CronReportInterface
         $this->cron = $cron;
     }
 
-    public function getRunAt(): DateTime
+    /**
+     * @return DateTime|DateTimeImmutable
+     */
+    public function getRunAt(): DateTimeInterface
     {
         return $this->runAt;
     }
 
-    public function setRunAt(DateTime $runAt): void
+    public function setRunAt(\DateTime|DateTimeImmutable $runAt): void
     {
         $this->runAt = $runAt;
     }

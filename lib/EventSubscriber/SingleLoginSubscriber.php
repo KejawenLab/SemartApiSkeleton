@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use DateTimeImmutable;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
@@ -93,7 +94,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         $payload['deviceId'] = $deviceId;
 
         if ($user instanceof UserInterface) {
-            $user->setLastLogin(new \DateTimeImmutable());
+            $user->setLastLogin(new DateTimeImmutable());
             $user->setDeviceId($deviceId);
             $this->service->save($user);
         } else {
