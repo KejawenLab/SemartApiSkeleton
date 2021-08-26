@@ -29,6 +29,7 @@ final class DeleteApiClient extends AbstractFOSRestController
     public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service, private TranslatorInterface $translator)
     {
     }
+
     /**
      * @Rest\Delete("/me/api-clients/{id}", name=DeleteApiClient::class)
      *
