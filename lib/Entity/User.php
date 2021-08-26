@@ -191,7 +191,7 @@ class User implements UserInterface
         return sprintf('/%s/%s', self::PROFILE_MEDIA_FOLDER, array_pop($slice));
     }
 
-    public function setProfileImage(string $profileImage): void
+    public function setProfileImage(?string $profileImage): void
     {
         $this->profileImage = $profileImage;
     }

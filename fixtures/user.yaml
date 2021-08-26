@@ -1,1 +1,1 @@
-- { username: 'admin', fullName: 'Super Administrator', email: 'dev@kejawenlab.com', plainPassword: 'admin', group: 'ref:group#group1' }
+- { username: 'admin', fullName: 'KejawenLab Super Admin', email: 'dev@kejawenlab.com', plainPassword: 'admin', group: 'ref:group#group1' }
