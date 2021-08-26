@@ -41,7 +41,7 @@ final class TwigExtension extends AbstractExtension
             return $data->format('Y-m-d');
         }
 
-        return (string) $data ?: '';
+        return (string) $data;
     }
 
     public function hasAssociation(ReflectionClass $class, ReflectionProperty $property): bool

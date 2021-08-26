@@ -9,8 +9,8 @@ RUN apk add --no-cache libzip-dev curl-dev icu-dev oniguruma-dev imap-dev postgr
 RUN apk add --no-cache libpng-dev openssl-dev nghttp2-dev hiredis-dev
 
 # Install PHP Core Extensions
-RUN docker-php-ext-install curl intl mbstring zip bcmath imap opcache gd pdo_pgsql
-RUN docker-php-ext-enable curl intl mbstring zip bcmath imap opcache gd pdo_pgsql
+RUN docker-php-ext-install curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl iconv
+RUN docker-php-ext-enable curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl iconv
 
 ## Install Pecl Extension
 RUN pecl channel-update pecl.php.net
