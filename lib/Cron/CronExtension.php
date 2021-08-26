@@ -29,7 +29,7 @@ final class CronExtension extends AbstractExtension
         $temps = explode(PHP_EOL, $log);
         $vars = [];
         foreach ($temps as $temp) {
-            if ($temp) {
+            if ($temp !== '' && $temp !== '0') {
                 $vars[] = $temp;
             }
         }

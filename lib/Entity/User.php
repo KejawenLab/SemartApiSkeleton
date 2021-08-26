@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -106,7 +107,7 @@ class User implements UserInterface
      *
      * @Groups({"read"})
      */
-    private \DateTimeImmutable $lastLogin;
+    private DateTimeImmutable $lastLogin;
 
     /**
      * @ORM\Column(type="string")
@@ -131,7 +132,7 @@ class User implements UserInterface
         $this->fullName = null;
         $this->email = null;
         $this->password = null;
-        $this->lastLogin = new \DateTimeImmutable();
+        $this->lastLogin = new DateTimeImmutable();
     }
 
     public function getId(): ?string
@@ -215,12 +216,12 @@ class User implements UserInterface
         $this->email = $email;
     }
 
-    public function getLastLogin(): \DateTimeImmutable
+    public function getLastLogin(): DateTimeImmutable
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(\DateTimeImmutable $lastLogin): void
+    public function setLastLogin(DateTimeImmutable $lastLogin): void
     {
         $this->lastLogin = $lastLogin;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Model;
 
+use DateTimeImmutable;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -36,9 +37,9 @@ interface UserInterface extends AuthInterface, EntityInterface
 
     public function setDeviceId(string $deviceId): void;
 
-    public function getLastLogin(): \DateTimeImmutable;
+    public function getLastLogin(): DateTimeImmutable;
 
-    public function setLastLogin(\DateTimeImmutable $lastLogin): void;
+    public function setLastLogin(DateTimeImmutable $lastLogin): void;
 
     public function getFile(): ?File;
 }

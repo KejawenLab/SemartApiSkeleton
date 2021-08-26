@@ -67,7 +67,7 @@ final class Get extends AbstractFOSRestController
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
-        if (!($this->getUser() || $media->isPublic())) {
+        if (!$this->getUser() && !$media->isPublic()) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 

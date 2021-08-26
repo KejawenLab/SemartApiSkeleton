@@ -88,7 +88,7 @@ final class Storage extends FileSystemStorage
         $target = null;
         if (null !== $media->getFolder()) {
             foreach (explode('/', $media->getFolder()) as $value) {
-                if ($value) {
+                if ($value !== '' && $value !== '0') {
                     $target = sprintf('%s%s%s', $target, $value, DIRECTORY_SEPARATOR);
                 }
             }

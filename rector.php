@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
-use Rector\CodeQuality\Rector\ClassMethod\DateTimeToDateTimeInterfaceRector;
-use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\Core\Configuration\Option;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
@@ -34,16 +32,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         AddArrayReturnDocTypeRector::class => [
             // mostly class-string[] is enough for collection of class-string return
             __DIR__ . '/lib/DataFixtures/',
-        ],
-
-        // still buggy on property @see https://github.com/rectorphp/rector/issues/6644
-        DateTimeToDateTimeInterfaceRector::class,
-
-        ExplicitBoolCompareRector::class => [
-            // may have different result on explode() usage
-            // @see https://github.com/rectorphp/rector-src/pull/709
-            __DIR__ . '/lib/Cron/CronExtension.php',
-            __DIR__ . '/lib/Media/Storage.php',
         ],
     ]);
 };
