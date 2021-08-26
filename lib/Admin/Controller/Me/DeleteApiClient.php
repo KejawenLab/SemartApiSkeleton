@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
@@ -42,9 +43,8 @@ final class DeleteApiClient extends AbstractController
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
 
-        /** @var UserInterface $user */
         $client = $this->service->getByIdAndUser($id, $user);
-        if (null === $client) {
+        if (!$client instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
             return new RedirectResponse($this->generateUrl(Profile::class));

@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -19,13 +24,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=SettingRepository::class)
- * @ORM\Table(name="core_setting")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @UniqueEntity(fields={"parameter"})
  */
+#[Entity(repositoryClass: SettingRepository::class)]
+#[Table(name: 'core_setting')]
 class Setting implements SettingInterface
 {
     use BlameableEntity;
@@ -33,56 +37,46 @@ class Setting implements SettingInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\Column(name="setting_group", type="string", length=27)
-     *
      * @Assert\Length(max=27)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(name: 'setting_group', type: 'string', length: 27)]
     private ?string $group;
 
     /**
-     * @ORM\Column(type="string", length=27)
-     *
      * @Assert\Length(max=27)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 27)]
     private ?string $parameter;
 
     /**
-     * @ORM\Column(type="text")
-     *
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'text')]
     private ?string $value;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[Column(type: 'boolean')]
     private bool $public;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $reserved;
 
     public function __construct()
@@ -96,7 +90,7 @@ class Setting implements SettingInterface
 
     public function getId(): ?string
     {
-        return (string)$this->id;
+        return (string) $this->id;
     }
 
     public function getGroup(): ?string

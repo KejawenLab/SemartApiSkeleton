@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -19,11 +25,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=PermissionRepository::class)
- * @ORM\Table(name="core_permission")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
+#[Entity(repositoryClass: PermissionRepository::class)]
+#[Table(name: 'core_permission')]
 class Permission implements PermissionInterface
 {
     use BlameableEntity;
@@ -31,59 +36,51 @@ class Permission implements PermissionInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      **/
+    #[ManyToOne(targetEntity: Group::class, cascade: ['persist'])]
     private ?GroupInterface $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
-     *
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      **/
+    #[ManyToOne(targetEntity: Menu::class, cascade: ['persist'])]
     private ?MenuInterface $menu;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $addable;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $editable;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $viewable;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $deletable;
 
     public function __construct()

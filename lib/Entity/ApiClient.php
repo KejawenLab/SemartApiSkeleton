@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -22,13 +28,12 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ApiClientRepository::class)
- * @ORM\Table(name="core_api_client")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @UniqueEntity({"user", "name"})
  */
+#[Entity(repositoryClass: ApiClientRepository::class)]
+#[Table(name: 'core_api_client')]
 class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
@@ -36,47 +41,41 @@ class ApiClient implements ApiClientInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      * @MaxDepth(1)
      */
+    #[ManyToOne(targetEntity: User::class, cascade: ['persist'])]
     private ?UserInterface $user;
 
     /**
-     * @ORM\Column(type="string", length=27)
-     *
      * @Assert\Length(max=27)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 27)]
     private ?string $name;
 
     /**
-     * @ORM\Column(type="string", length=40)
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 40)]
     private ?string $apiKey;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 64)]
     private ?string $secretKey;
 
     public function __construct()

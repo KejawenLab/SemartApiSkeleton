@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Entity;
 
 use DateTimeImmutable;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -22,14 +28,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="core_user")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
+#[Entity(repositoryClass: UserRepository::class)]
+#[Table(name: 'core_user')]
 class User implements UserInterface
 {
     use BlameableEntity;
@@ -37,90 +41,73 @@ class User implements UserInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
-     *
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      **/
+    #[ManyToOne(targetEntity: Group::class, cascade: ['persist'])]
     private ?GroupInterface $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      */
+    #[ManyToOne(targetEntity: User::class, cascade: ['persist'])]
     private ?UserInterface $supervisor;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     *
      * @Assert\Length(max=180)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 180, unique: true)]
     private ?string $username;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 255, nullable: true)]
     private ?string $profileImage;
 
     /**
-     * @ORM\Column(type="string", length=55)
-     *
      * @Assert\Length(max=55)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 55)]
     private ?string $fullName;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
      * @Assert\Email()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 255, unique: true)]
     private ?string $email;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'datetime_immutable')]
     private DateTimeImmutable $lastLogin;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[Column(type: 'string')]
     private ?string $password;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[Column(type: 'string', nullable: true)]
     private ?string $deviceId = null;
 
     private ?File $file = null;
-
     private ?string $plainPassword = null;
 
     public function __construct()

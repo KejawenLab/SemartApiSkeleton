@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -19,13 +24,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=GroupRepository::class)
- * @ORM\Table(name="core_group")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @UniqueEntity(fields={"code"})
  */
+#[Entity(repositoryClass: GroupRepository::class)]
+#[Table(name: 'core_group')]
 class Group implements GroupInterface
 {
     use BlameableEntity;
@@ -33,35 +37,30 @@ class Group implements GroupInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
-     *
      * @Assert\Length(max=7)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 7)]
     private ?string $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 255)]
     private ?string $name;
 
     public function __construct()

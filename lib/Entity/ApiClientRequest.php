@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
@@ -15,83 +21,73 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
-/**
- * @ORM\Entity(repositoryClass=ApiClientRequestRepository::class)
- * @ORM\Table(name="core_api_client_request")
- */
+#[Entity(repositoryClass: ApiClientRequestRepository::class)]
+#[Table(name: 'core_api_client_request')]
 class ApiClientRequest implements ApiClientRequestInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ApiClient::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      * @MaxDepth(1)
      */
+    #[ManyToOne(targetEntity: ApiClient::class, cascade: ['persist'])]
     private ApiClientInterface $apiClient;
 
     /**
      * @Groups({"read"})
-     *
-     * @ORM\Column(type="string")
      */
+    #[Column(type: 'string')]
     private string $path;
 
     /**
      * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", length=9)
      */
+    #[Column(type: 'string', length: 9)]
     private string $method;
 
     /**
      * @Groups({"read"})
      *
-     * @ORM\Column(type="json")
-     *
      * @OA\Property(type="array", @OA\Items(type="string"))
      */
+    #[Column(type: 'json')]
     private array $headers;
 
     /**
      * @Groups({"read"})
      *
-     * @ORM\Column(type="json")
-     *
      * @OA\Property(type="array", @OA\Items(type="string"))
      */
+    #[Column(type: 'json')]
     private array $queries;
 
     /**
      * @Groups({"read"})
      *
-     * @ORM\Column(type="json")
-     *
      * @OA\Property(type="array", @OA\Items(type="string"))
      */
+    #[Column(type: 'json')]
     private array $requests;
 
     /**
      * @Groups({"read"})
      *
-     * @ORM\Column(type="json")
-     *
      * @OA\Property(type="array", @OA\Items(type="string"))
      */
+    #[Column(type: 'json')]
     private array $files;
 
     public function getId(): ?string

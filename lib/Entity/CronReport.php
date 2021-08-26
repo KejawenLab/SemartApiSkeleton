@@ -7,7 +7,13 @@ namespace KejawenLab\ApiSkeleton\Entity;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
@@ -16,59 +22,51 @@ use OpenApi\Annotations as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=CronReportRepository::class)
- * @ORM\Table(name="core_cronjob_report")
- */
+#[Entity(repositoryClass: CronReportRepository::class)]
+#[Table(name: 'core_cronjob_report')]
 class CronReport implements CronReportInterface
 {
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cron::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      */
+    #[ManyToOne(targetEntity: Cron::class, cascade: ['persist'])]
     private ?CronInterface $cron = null;
 
     /**
-     * @ORM\Column(type="datetime")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'datetime')]
     private DateTimeInterface $runAt;
 
     /**
-     * @ORM\Column(type="float")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'float')]
     private float $runtime;
 
     /**
-     * @ORM\Column(type="text")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'text')]
     private ?string $output = null;
 
     /**
-     * @ORM\Column(type="smallint")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'smallint')]
     private int $exitCode;
 
     public function getId(): ?string
@@ -91,6 +89,9 @@ class CronReport implements CronReportInterface
         return $this->runAt;
     }
 
+    /**
+     * @param DateTimeInterface $runAt
+     */
     public function setRunAt(DateTime|DateTimeImmutable $runAt): void
     {
         $this->runAt = $runAt;

@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\CustomIdGenerator;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -21,13 +27,12 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=MenuRepository::class)
- * @ORM\Table(name="core_menu")
- *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @UniqueEntity(fields={"code"})
  */
+#[Entity(repositoryClass: MenuRepository::class)]
+#[Table(name: 'core_menu')]
 class Menu implements MenuInterface
 {
     use BlameableEntity;
@@ -35,91 +40,77 @@ class Menu implements MenuInterface
     use TimestampableEntity;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
      * @Groups({"read"})
      *
      * @OA\Property(type="string")
      */
+    #[Id]
+    #[Column(type: 'uuid', unique: true)]
+    #[GeneratedValue(strategy: 'CUSTOM')]
+    #[CustomIdGenerator(class: 'Ramsey\Uuid\Doctrine\UuidGenerator')]
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
-     *
      * @Groups({"read"})
      * @MaxDepth(1)
      */
+    #[ManyToOne(targetEntity: Menu::class, cascade: ['persist'])]
     private ?MenuInterface $parent;
 
     /**
-     * @ORM\Column(type="string", length=27)
-     *
      * @Assert\Length(max=27)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 27)]
     private ?string $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 255)]
     private ?string $name;
 
     /**
-     * @ORM\Column(type="integer")
-     *
      * @Assert\NotBlank()
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'integer')]
     private int $sortOrder;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
      * @Route()
      */
+    #[Column(type: 'string', length: 255)]
     private ?string $routeName;
 
     /**
-     * @ORM\Column(type="string", length=27, nullable=true)
-     *
      * @Assert\Length(max=27)
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'string', length: 27, nullable: true)]
     private ?string $iconClass;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $showable;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
      * @Groups({"read"})
      */
+    #[Column(type: 'boolean')]
     private bool $adminOnly;
 
     /**
      * @Groups({"read"})
      */
     private ?string $apiPath;
-
     private ?string $adminPath;
 
     public function __construct()
