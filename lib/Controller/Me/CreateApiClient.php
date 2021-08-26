@@ -16,9 +16,11 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use RectorPrefix20210823\Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -36,6 +38,7 @@ final class CreateApiClient extends AbstractFOSRestController
         private UserProviderFactory $userProviderFactory,
         private ApiClientService $service,
         private TranslatorInterface $translator,
+        private SettingService $setting,
     ) {
     }
 
@@ -80,6 +83,10 @@ final class CreateApiClient extends AbstractFOSRestController
         $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
+        }
+
+        if ($this->service->countByUser($user) >= $this->setting->getMaxApiPerUser()) {
+            throw new NotAcceptableHttpException($this->translator->trans('sas.page.api_client.max_api_client_reached', [], 'pages'));
         }
 
         $form = $this->formFactory->submitRequest(ApiClientType::class, $request);

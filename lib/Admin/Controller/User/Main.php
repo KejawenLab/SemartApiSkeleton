@@ -34,7 +34,7 @@ final class Main extends AbstractController
     {
         $user = new User();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $user = $this->service->get($request->getSession()->get('id'));
+            $user = $this->service->get((string) $request->getSession()->get('id'));
         } else {
             $flashs = $request->getSession()->getFlashBag()->get('id');
             foreach ($flashs as $flash) {
@@ -51,7 +51,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($user);
+                $this->service->save($user ?: $form->getData());
                 $this->addFlash('info', 'sas.page.user.saved');
 
                 $form = $this->createForm(UserType::class);

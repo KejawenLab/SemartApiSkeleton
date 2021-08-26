@@ -83,6 +83,8 @@ sas:
             deleted: 'Token berhasil dihapus'
             not_found: 'Token tidak ditemukan'
             add: 'Tambah Token API'
+            name_not_provided: 'Nama token wajib diisi'
+            max_api_client_reached: 'Jumlah Api Anda telah mencapai maksimal'
         cron_report:
             list: 'Riwayat Pekerjaan Terjadwal'
             success: 'Sukses'

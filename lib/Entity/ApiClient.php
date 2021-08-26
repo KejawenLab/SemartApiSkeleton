@@ -6,6 +6,8 @@ namespace KejawenLab\ApiSkeleton\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Repository\ApiClientRepository;
@@ -23,11 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=ApiClientRepository::class)
  * @ORM\Table(name="core_api_client")
  *
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ *
  * @UniqueEntity({"user", "name"})
  */
 class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
+    use SoftDeleteableEntity;
     use TimestampableEntity;
 
     /**

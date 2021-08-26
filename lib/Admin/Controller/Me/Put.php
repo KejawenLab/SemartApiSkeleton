@@ -28,7 +28,7 @@ final class Put extends AbstractController
     }
 
     /**
-     * @Route(path="/me/edit", name=Put::class, methods={"POST"}, priority=-1)
+     * @Route(path="/me/edit", name=Put::class, methods={"POST"})
      */
     public function __invoke(Request $request): Response
     {
