@@ -37,7 +37,7 @@ abstract class AbstractController extends Base
 
     protected function renderList(FormInterface $form, Request $request, ReflectionClass $class): Response
     {
-        if ($this->paginator === null) {
+        if (null === $this->paginator) {
             throw new InvalidArgumentException(sprintf('%s is not passed', Paginator::class));
         }
 

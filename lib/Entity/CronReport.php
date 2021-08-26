@@ -47,7 +47,6 @@ class CronReport implements CronReportInterface
      * @ORM\Column(type="datetime")
      *
      * @Groups({"read"})
-     * @var DateTime|DateTimeImmutable
      */
     private DateTimeInterface $runAt;
 
@@ -87,15 +86,12 @@ class CronReport implements CronReportInterface
         $this->cron = $cron;
     }
 
-    /**
-     * @return DateTime|DateTimeImmutable
-     */
     public function getRunAt(): DateTimeInterface
     {
         return $this->runAt;
     }
 
-    public function setRunAt(\DateTime|DateTimeImmutable $runAt): void
+    public function setRunAt(DateTime|DateTimeImmutable $runAt): void
     {
         $this->runAt = $runAt;
     }
