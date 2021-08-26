@@ -9,15 +9,15 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    public const CODENAME = 'Merdeka';
+    public const CODENAME = 'Dodol Duren';
 
-    public const VERSION = '5.6.4';
+    public const VERSION = '5.7.0';
 
     public const VERSION_MAYOR = 50000;
 
-    public const VERSION_MINOR = 600;
+    public const VERSION_MINOR = 700;
 
-    public const VERSION_PATCH = 4;
+    public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {
