@@ -43,7 +43,7 @@ final class Get extends AbstractController
 
         $audit = new Record($menu);
         if ($this->reader->getProvider()->isAuditable(Menu::class)) {
-            $audit = $this->audit->getAudits($menu, $id, 3);
+            $audit = $this->audit->getAudits($menu, $id, 1);
         }
 
         return $this->renderDetail($audit, new ReflectionClass(Menu::class));

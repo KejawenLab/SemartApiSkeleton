@@ -43,7 +43,7 @@ final class Get extends AbstractController
 
         $audit = new Record($setting);
         if ($this->reader->getProvider()->isAuditable(Setting::class)) {
-            $audit = $this->audit->getAudits($setting, $id, 3);
+            $audit = $this->audit->getAudits($setting, $id, 1);
         }
 
         return $this->renderDetail($audit, new ReflectionClass(Setting::class));

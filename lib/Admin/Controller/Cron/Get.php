@@ -43,7 +43,7 @@ final class Get extends AbstractController
 
         $audit = new Record($cron);
         if ($this->reader->getProvider()->isAuditable(Cron::class)) {
-            $audit = $this->audit->getAudits($cron, $id, 3);
+            $audit = $this->audit->getAudits($cron, $id, 1);
         }
 
         return $this->renderDetail($audit, new ReflectionClass(Cron::class));

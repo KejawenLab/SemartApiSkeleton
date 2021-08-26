@@ -47,7 +47,7 @@ final class Get extends AbstractController
 
         $audit = new Record(${{ entityLowerize }});
         if ($this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
-            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 3);
+            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 1);
         }
 
         return $this->renderAudit($audit, new ReflectionClass({{ entityHumanize }}::class));
