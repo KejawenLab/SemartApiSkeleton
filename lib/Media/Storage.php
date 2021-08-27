@@ -95,7 +95,8 @@ final class Storage extends FileSystemStorage
         }
 
         return trim(
-            sprintf('%s%s%s',
+            sprintf(
+                '%s%s%s',
                 $mapping->getUploadDir($media),
                 DIRECTORY_SEPARATOR,
                 rtrim($target, DIRECTORY_SEPARATOR)

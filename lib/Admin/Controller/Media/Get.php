@@ -46,7 +46,8 @@ final class Get extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        $file = new File(sprintf('%s%s%s%s%s',
+        $file = new File(sprintf(
+            '%s%s%s%s%s',
             $this->mapping->fromField($media, 'file')->getUploadDestination(),
             DIRECTORY_SEPARATOR,
             $media->getFolder(),

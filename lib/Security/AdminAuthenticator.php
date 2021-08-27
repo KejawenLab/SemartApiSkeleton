@@ -48,7 +48,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return new Passport(
-            new UserBadge($credentials['username'], fn(string $userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
+            new UserBadge($credentials['username'], fn (string $userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
             new PasswordCredentials($credentials['password']),
         );
     }

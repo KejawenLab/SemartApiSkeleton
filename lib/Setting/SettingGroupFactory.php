@@ -16,8 +16,7 @@ final class SettingGroupFactory
          * @var SettingGroupInterface[]
          */
         private iterable $groups
-    )
-    {
+    ) {
     }
 
     /**

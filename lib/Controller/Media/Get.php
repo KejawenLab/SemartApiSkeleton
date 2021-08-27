@@ -71,7 +71,8 @@ final class Get extends AbstractFOSRestController
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
-        $file = new File(sprintf('%s%s%s%s%s',
+        $file = new File(sprintf(
+            '%s%s%s%s%s',
             $this->mapping->fromField($media, 'file')->getUploadDestination(),
             DIRECTORY_SEPARATOR,
             $media->getFolder(),

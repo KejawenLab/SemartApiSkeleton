@@ -25,7 +25,7 @@ final class UserType extends AbstractType
         $builder->add('group', EntityType::class, [
             'required' => true,
             'class' => Group::class,
-            'choice_label' => fn($group): string => sprintf('%s - %s', $group->getCode(), $group->getName()),
+            'choice_label' => fn ($group): string => sprintf('%s - %s', $group->getCode(), $group->getName()),
             'label' => 'sas.form.field.user.group',
             'attr' => [
                 'class' => 'select2',
@@ -35,7 +35,7 @@ final class UserType extends AbstractType
         $builder->add('supervisor', EntityType::class, [
             'required' => false,
             'class' => User::class,
-            'choice_label' => fn($supervisor): string => sprintf('%s (%s)', $supervisor->getFullName(), $supervisor->getUsername()),
+            'choice_label' => fn ($supervisor): string => sprintf('%s (%s)', $supervisor->getFullName(), $supervisor->getUsername()),
             'label' => 'sas.form.field.user.supervisor',
             'attr' => [
                 'class' => 'select2',
