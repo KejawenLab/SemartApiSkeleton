@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -59,6 +60,14 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
     public function findByUsername(string $username): ?AppUser
     {
-        return $this->findOneBy(['username' => $username]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('LOWER(o.username)', $queryBuilder->expr()->literal(StringUtil::lowercase($username))));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $username));
+
+        return $query->getOneOrNullResult();
     }
 }

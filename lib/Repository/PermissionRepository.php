@@ -30,7 +30,18 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
     public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface
     {
-        return $this->findOneBy(['group' => $group, 'menu' => $menu]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.group', 'g');
+        $queryBuilder->innerJoin('o.menu', 'm');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('m.id', $queryBuilder->expr()->literal($menu->getId())));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), $menu->getId()));
+
+        return $query->getOneOrNullResult();
     }
 
     public function findPermissions(GroupInterface $group, iterable $menus): iterable
@@ -56,7 +67,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
             sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), serialize($ids))
         );
 
-        return $query->getResult();
+        $permissions = $query->getResult();
+        foreach ($permissions as $permission) {
+            yield $permission;
+        }
     }
 
     /**

@@ -27,6 +27,6 @@ final class GroupService extends AbstractService implements ServiceInterface
 
     public function getSuperAdmin(): ?GroupInterface
     {
-        return $this->repository->findOneBy(['code' => $this->superAdmin]);
+        return $this->repository->findByCode($this->superAdmin);
     }
 }

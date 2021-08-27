@@ -56,17 +56,14 @@ final class PasswordHistoryValidator extends ConstraintValidator
         }
 
         $passwords = $this->service->getPasswords($object);
-        $invalid = count($passwords);
         $user = new User();
         foreach ($passwords as $password) {
             $user->setPassword($password->getPassword());
-            if (!$this->encoder->isPasswordValid($user, $value)) {
-                --$invalid;
-            }
-        }
+            if ($this->encoder->isPasswordValid($user, $value)) {
+                $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
 
-        if (0 < $invalid) {
-            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
+                break;
+            }
         }
     }
 }

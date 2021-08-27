@@ -16,6 +16,7 @@ fi
 
 if [[ "prod" == "${APP_ENV}" ]]; then
     cp "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
+    cp "/etc/opcache.ini" "${PHP_INI_DIR}/conf.d/opcache.ini"
     composer dump-autoload --classmap-authoritative
     php /semart/bin/console cache:clear --env=prod
 else

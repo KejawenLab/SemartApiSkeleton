@@ -27,7 +27,15 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
     public function findByCode(string $code): ?MenuInterface
     {
-        return $this->findOneBy(['code' => StringUtil::uppercase($code)]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('UPPER(o.code)', $queryBuilder->expr()->literal(StringUtil::uppercase($code))));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $code));
+
+        return $query->getOneOrNullResult();
     }
 
     public function findChilds(MenuInterface $menu): iterable
@@ -41,6 +49,9 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $query->useQueryCache(true);
         $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $menu->getId()));
 
-        return $query->getResult();
+        $menus = $query->getResult();
+        foreach ($menus as $menu) {
+            yield $menu;
+        }
     }
 }

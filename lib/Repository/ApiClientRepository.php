@@ -27,7 +27,15 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
     public function findByApiKey(string $apiKey): ?ApiClientInterface
     {
-        return $this->findOneBy(['apiKey' => $apiKey]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.apiKey', $queryBuilder->expr()->literal($apiKey)));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $apiKey));
+
+        return $query->getOneOrNullResult();
     }
 
     public function countByUser(UserInterface $user): int
@@ -46,6 +54,16 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
     public function findByIdAndUser(string $id, UserInterface $user): ?ApiClientInterface
     {
-        return $this->findOneBy(['id' => $id, 'user' => $user]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->innerJoin('o.user', 'u');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.apiKey', $queryBuilder->expr()->literal($id)));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('u.id', $queryBuilder->expr()->literal($user->getId())));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s:%s', self::class, __METHOD__, $id, $user->getId()));
+
+        return $query->getOneOrNullResult();
     }
 }

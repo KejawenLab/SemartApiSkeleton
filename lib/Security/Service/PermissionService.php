@@ -90,11 +90,6 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermission($group, $menu);
     }
 
-    public function getPermissions(GroupInterface $group, iterable $menus): iterable
-    {
-        return $this->repository->findPermissions($group, $menus);
-    }
-
     /**
      * @return Iterator<mixed[]>
      */
@@ -116,6 +111,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         yield EntityRemoved::class;
     }
 
+    private function getPermissions(GroupInterface $group, iterable $menus): iterable
+    {
+        return $this->repository->findPermissions($group, $menus);
+    }
+
     /**
      * @return array<string, string>|array<string, null>|array<string, array<int|string, mixed[]>>
      */
@@ -130,15 +130,16 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
         /** @var MenuInterface[] $childs */
         $childs = $this->menuRepository->findChilds($menu);
-        if ([] !== $childs) {
-            $tree['childs'] = [];
-            $permissions = $this->getPermissions($group, $childs);
-            foreach ($permissions as $key => $permission) {
-                /** @var PermissionInterface $permission */
-                if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
-                    $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
-                }
+        $tree['childs'] = [];
+        $permissions = $this->getPermissions($group, $childs);
+        $key = 0;
+        foreach ($permissions as $permission) {
+            /** @var PermissionInterface $permission */
+            if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
+                $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
             }
+
+            $key++;
         }
 
         return $tree;

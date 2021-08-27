@@ -27,8 +27,21 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
     /**
      * @return PasswordHistory[]
      */
-    public function findPasswords(UserInterface $user): array
+    public function findPasswords(UserInterface $user): iterable
     {
-        return $this->findBy(['source' => $user::class, 'identifier' => $user->getId()], ['createdAt' => 'DESC'], 17);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.source', $queryBuilder->expr()->literal($user::class)));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.id', $queryBuilder->expr()->literal($user->getId())));
+        $queryBuilder->addOrderBy('o.createdAt', 'DESC');
+        $queryBuilder->setMaxResults(17);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $user->getId()));
+
+        $passwordHistories = $query->getResult();
+        foreach ($passwordHistories as $passwordHistory) {
+            yield $passwordHistory;
+        }
     }
 }
