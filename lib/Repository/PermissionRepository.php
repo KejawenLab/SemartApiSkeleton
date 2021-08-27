@@ -44,6 +44,9 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $query->getOneOrNullResult();
     }
 
+    /**
+     * @return Iterator
+     */
     public function findPermissions(GroupInterface $group, iterable $menus): iterable
     {
         $ids = [];
