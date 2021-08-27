@@ -31,9 +31,9 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.source', $queryBuilder->expr()->literal($user::class)));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.id', $queryBuilder->expr()->literal($user->getId())));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.identifier', $queryBuilder->expr()->literal($user->getId())));
         $queryBuilder->addOrderBy('o.createdAt', 'DESC');
-        $queryBuilder->setMaxResults(17);
+        $queryBuilder->setMaxResults(7);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
