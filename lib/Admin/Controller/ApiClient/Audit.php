@@ -38,7 +38,7 @@ final class Audit extends AbstractController
      * @throws InvalidArgumentException
      */
     #[Route(path: 'users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
-    public function __invoke(string $userId, string $id) : Response
+    public function __invoke(string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
@@ -60,6 +60,7 @@ final class Audit extends AbstractController
         $audit = $this->audit->getAudits($entity, $id)->toArray();
         $class = new ReflectionClass(ApiClient::class);
         $context = StringUtil::lowercase($class->getShortName());
+
         return $this->render(sprintf('%s/audit.html.twig', $context), [
             'page_title' => 'sas.page.audit.view',
             'context' => $context,

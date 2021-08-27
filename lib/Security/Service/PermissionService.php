@@ -36,11 +36,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private MenuRepositoryInterface $menuRepository,
-        /**
+        /*
          * @var PermissionInitiatorInterface[]
          */
         private iterable $initiators,
-        /**
+        /*
          * @var PermissionRemoverInterface[]
          */
         private iterable $removers,
@@ -139,7 +139,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
                 $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
             }
 
-            $key++;
+            ++$key;
         }
 
         return $tree;

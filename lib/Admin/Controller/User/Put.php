@@ -25,7 +25,7 @@ final class Put extends AbstractController
     }
 
     #[Route(path: '/users/{id}/edit', name: Put::class, methods: ['GET'], priority: 1)]
-    public function __invoke(Request $request, string $id) : Response
+    public function __invoke(Request $request, string $id): Response
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
@@ -34,6 +34,7 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
         }
         $this->addFlash('id', $user->getId());
+
         return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
     }
 }

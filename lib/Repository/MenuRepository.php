@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
-use Iterator;
 use Doctrine\Persistence\ManagerRegistry;
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;

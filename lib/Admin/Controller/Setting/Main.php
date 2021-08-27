@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     #[Route(path: '/settings', name: Main::class, methods: ['GET', 'POST'])]
-    public function __invoke(Request $request) : Response
+    public function __invoke(Request $request): Response
     {
         $setting = new Setting();
         if ($request->isMethod(Request::METHOD_POST)) {
@@ -54,6 +54,7 @@ final class Main extends AbstractController
                 $form = $this->createForm(SettingType::class);
             }
         }
+
         return $this->renderList($form, $request, new ReflectionClass(Setting::class));
     }
 }

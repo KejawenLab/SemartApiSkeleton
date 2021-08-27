@@ -25,7 +25,7 @@ final class Put extends AbstractController
     }
 
     #[Route(path: '/groups/{id}/edit', name: Put::class, methods: ['GET'], priority: 1)]
-    public function __invoke(Request $request, string $id) : Response
+    public function __invoke(Request $request, string $id): Response
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
@@ -34,6 +34,7 @@ final class Put extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
         }
         $this->addFlash('id', $group->getId());
+
         return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
     }
 }

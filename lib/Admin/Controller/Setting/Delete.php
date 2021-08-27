@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     #[Route(path: '/settings/{id}/delete', name: Delete::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
@@ -39,6 +39,7 @@ final class Delete extends AbstractController
         }
         $this->service->remove($setting);
         $this->addFlash('info', 'sas.page.setting.deleted');
+
         return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

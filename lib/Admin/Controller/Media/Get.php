@@ -29,7 +29,7 @@ final class Get extends AbstractController
     }
 
     #[Route(path: '/medias/{path}', name: Get::class, methods: ['GET'], requirements: ['path' => '.+'])]
-    public function __invoke(Request $request, string $path) : Response
+    public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);
         if (MediaInterface::PUBLIC_FIELD === $path[0]) {
@@ -54,6 +54,7 @@ final class Get extends AbstractController
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
         }
+
         return $response;
     }
 }

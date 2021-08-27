@@ -30,7 +30,7 @@ final class Get extends AbstractController
     }
 
     #[Route(path: '/settings/{id}', name: Get::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
@@ -42,6 +42,7 @@ final class Get extends AbstractController
         if ($this->reader->getProvider()->isAuditable(Setting::class)) {
             $audit = $this->audit->getAudits($setting, $id, 1);
         }
+
         return $this->renderDetail($audit, new ReflectionClass(Setting::class));
     }
 }

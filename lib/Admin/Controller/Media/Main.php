@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     #[Route(path: '/medias', name: Main::class, methods: ['GET', 'POST'])]
-    public function __invoke(Request $request) : Response
+    public function __invoke(Request $request): Response
     {
         $media = new Media();
         $form = $this->createForm(MediaType::class, $media);
@@ -39,6 +39,7 @@ final class Main extends AbstractController
                 $this->addFlash('info', 'sas.page.media.saved');
             }
         }
+
         return $this->renderList($form, $request, new ReflectionClass(Media::class));
     }
 }

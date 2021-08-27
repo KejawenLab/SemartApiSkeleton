@@ -28,7 +28,7 @@ final class Main extends AbstractController
     }
 
     #[Route(path: '/crons', name: Main::class, methods: ['GET', 'POST'])]
-    public function __invoke(Request $request) : Response
+    public function __invoke(Request $request): Response
     {
         $cron = new Cron();
         if ($request->isMethod(Request::METHOD_POST)) {
@@ -52,6 +52,7 @@ final class Main extends AbstractController
                 $this->addFlash('info', 'sas.page.cron.saved');
             }
         }
+
         return $this->renderList($form, $request, new ReflectionClass(Cron::class));
     }
 }

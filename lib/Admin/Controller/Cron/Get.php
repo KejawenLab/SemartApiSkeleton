@@ -30,7 +30,7 @@ final class Get extends AbstractController
     }
 
     #[Route(path: '/crons/{id}', name: Get::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
@@ -42,6 +42,7 @@ final class Get extends AbstractController
         if ($this->reader->getProvider()->isAuditable(Cron::class)) {
             $audit = $this->audit->getAudits($cron, $id, 1);
         }
+
         return $this->renderDetail($audit, new ReflectionClass(Cron::class));
     }
 }

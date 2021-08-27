@@ -24,7 +24,7 @@ final class Download extends AbstractController
     }
 
     #[Route(path: '/settings/download', name: Download::class, methods: ['GET'])]
-    public function __invoke() : Response
+    public function __invoke(): Response
     {
         $records = $this->service->total();
         if (10000 < $records) {
@@ -37,6 +37,7 @@ final class Download extends AbstractController
         $response->headers->set('Content-type', 'text/csv');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', 'settings', date('YmdHis')));
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
+
         return $response;
     }
 }

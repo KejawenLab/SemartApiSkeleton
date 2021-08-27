@@ -36,7 +36,7 @@ final class Main extends AbstractController
     }
 
     #[Route(path: '/users/{userId}/api-clients', name: Main::class, methods: ['GET', 'POST'], defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
-    public function __invoke(Request $request, string $userId) : Response
+    public function __invoke(Request $request, string $userId): Response
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
@@ -57,6 +57,7 @@ final class Main extends AbstractController
         }
         $class = new ReflectionClass(ApiClient::class);
         $context = StringUtil::lowercase($class->getShortName());
+
         return $this->render(sprintf('%s/all.html.twig', $context), [
             'page_title' => 'sas.page.api_client.list',
             'context' => $context,

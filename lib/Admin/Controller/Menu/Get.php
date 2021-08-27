@@ -30,7 +30,7 @@ final class Get extends AbstractController
     }
 
     #[Route(path: '/menus/{id}', name: Get::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
@@ -42,6 +42,7 @@ final class Get extends AbstractController
         if ($this->reader->getProvider()->isAuditable(Menu::class)) {
             $audit = $this->audit->getAudits($menu, $id, 1);
         }
+
         return $this->renderDetail($audit, new ReflectionClass(Menu::class));
     }
 }

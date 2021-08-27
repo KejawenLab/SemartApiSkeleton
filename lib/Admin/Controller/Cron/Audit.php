@@ -32,7 +32,7 @@ final class Audit extends AbstractController
      * @throws InvalidArgumentException
      */
     #[Route(path: '/crons/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
             $this->addFlash('error', 'sas.page.cron.not_found');
@@ -44,6 +44,7 @@ final class Audit extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
+
         return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(Cron::class));
     }
 }

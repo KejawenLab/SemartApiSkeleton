@@ -28,7 +28,7 @@ final class Run extends AbstractController
     }
 
     #[Route(path: '/crons/{id}/run', name: Run::class, methods: ['GET'], priority: -17)]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
@@ -49,6 +49,7 @@ final class Run extends AbstractController
         } else {
             $this->addFlash('error', 'sas.page.cron.run_failed');
         }
+
         return new RedirectResponse($this->generateUrl(Get::class, ['id' => $id]));
     }
 }

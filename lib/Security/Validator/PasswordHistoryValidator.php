@@ -42,7 +42,7 @@ final class PasswordHistoryValidator extends ConstraintValidator
         }
 
         $token = $this->tokenStorage->getToken();
-        if ($token === null) {
+        if (null === $token) {
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 

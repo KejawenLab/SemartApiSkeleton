@@ -30,7 +30,7 @@ final class Get extends AbstractController
     }
 
     #[Route(path: '/users/{id}', name: Get::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
@@ -42,6 +42,7 @@ final class Get extends AbstractController
         if ($this->reader->getProvider()->isAuditable(User::class)) {
             $audit = $this->audit->getAudits($user, $id, 1);
         }
+
         return $this->renderDetail($audit, new ReflectionClass(User::class));
     }
 }

@@ -12,12 +12,11 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingGroupInterface;
 final class SettingGroupFactory
 {
     public function __construct(
-        /**
+        /*
          * @var SettingGroupInterface[]
          */
         private iterable $groups
-    )
-    {
+    ) {
     }
 
     /**

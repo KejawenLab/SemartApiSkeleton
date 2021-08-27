@@ -24,7 +24,7 @@ final class Delete extends AbstractController
     }
 
     #[Route(path: '/medias/{id}/delete', name: Delete::class, methods: ['GET'])]
-    public function __invoke(string $id) : Response
+    public function __invoke(string $id): Response
     {
         $media = $this->service->get($id);
         if (!$media instanceof MediaInterface) {
@@ -34,6 +34,7 @@ final class Delete extends AbstractController
         }
         $this->service->remove($media);
         $this->addFlash('info', 'sas.page.media.deleted');
+
         return new RedirectResponse($this->generateUrl(Main::class));
     }
 }
