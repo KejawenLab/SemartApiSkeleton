@@ -24,10 +24,8 @@ final class Put extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/menus/{id}/edit", name=Put::class, methods={"GET"}, priority=1)
-     */
-    public function __invoke(Request $request, string $id): Response
+    #[Route(path: '/menus/{id}/edit', name: Put::class, methods: ['GET'], priority: 1)]
+    public function __invoke(Request $request, string $id) : Response
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
@@ -35,9 +33,7 @@ final class Put extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
         }
-
         $this->addFlash('id', $menu->getId());
-
         return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -48,26 +50,26 @@ class Setting implements SettingInterface
     private UuidInterface $id;
 
     /**
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(name: 'setting_group', type: 'string', length: 27)]
+    #[Length(max: 27)]
+    #[NotBlank]
     private ?string $group;
 
     /**
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 27)]
+    #[Length(max: 27)]
+    #[NotBlank]
     private ?string $parameter;
 
     /**
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'text')]
+    #[NotBlank]
     private ?string $value;
 
     #[Column(type: 'boolean')]

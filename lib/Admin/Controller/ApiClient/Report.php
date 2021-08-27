@@ -31,10 +31,8 @@ final class Report extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/users/{userId}/api-clients/{id}/logs", name=Report::class, methods={"GET"})
-     */
-    public function __invoke(Request $request, string $userId, string $id): Response
+    #[Route(path: '/users/{userId}/api-clients/{id}/logs', name: Report::class, methods: ['GET'])]
+    public function __invoke(Request $request, string $userId, string $id) : Response
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
@@ -42,9 +40,7 @@ final class Report extends AbstractController
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));
         }
-
         $class = new ReflectionClass(ApiClientRequest::class);
-
         return $this->render('apiclient/report.html.twig', [
             'page_title' => 'sas.page.api_client.report',
             'id' => $id,

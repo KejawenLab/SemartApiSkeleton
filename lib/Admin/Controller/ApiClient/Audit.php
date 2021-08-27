@@ -35,11 +35,10 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route(path="users/{userId}/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
-     *
      * @throws InvalidArgumentException
      */
-    public function __invoke(string $userId, string $id): Response
+    #[Route(path: 'users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
+    public function __invoke(string $userId, string $id) : Response
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
@@ -47,24 +46,20 @@ final class Audit extends AbstractController
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));
         }
-
         $entity = $this->service->get($id);
         if (!$entity instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         if (!$this->reader->getProvider()->isAuditable(Group::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $audit = $this->audit->getAudits($entity, $id)->toArray();
         $class = new ReflectionClass(ApiClient::class);
         $context = StringUtil::lowercase($class->getShortName());
-
         return $this->render(sprintf('%s/audit.html.twig', $context), [
             'page_title' => 'sas.page.audit.view',
             'context' => $context,

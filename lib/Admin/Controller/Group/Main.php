@@ -27,10 +27,8 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/groups", name=Main::class, methods={"GET", "POST"})
-     */
-    public function __invoke(Request $request): Response
+    #[Route(path: '/groups', name: Main::class, methods: ['GET', 'POST'])]
+    public function __invoke(Request $request) : Response
     {
         $group = new Group();
         if ($request->isMethod(Request::METHOD_POST)) {
@@ -46,7 +44,6 @@ final class Main extends AbstractController
                 }
             }
         }
-
         $form = $this->createForm(GroupType::class, $group);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -55,7 +52,6 @@ final class Main extends AbstractController
                 $this->addFlash('info', 'sas.page.group.saved');
             }
         }
-
         return $this->renderList($form, $request, new ReflectionClass(Group::class));
     }
 }

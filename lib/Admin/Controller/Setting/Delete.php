@@ -23,10 +23,8 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/settings/{id}/delete", name=Delete::class, methods={"GET"})
-     */
-    public function __invoke(string $id): Response
+    #[Route(path: '/settings/{id}/delete', name: Delete::class, methods: ['GET'])]
+    public function __invoke(string $id) : Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
@@ -34,17 +32,13 @@ final class Delete extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         if (!$setting->isReserved()) {
             $this->addFlash('error', 'sas.page.setting.reserved_not_allowed');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $this->service->remove($setting);
-
         $this->addFlash('info', 'sas.page.setting.deleted');
-
         return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

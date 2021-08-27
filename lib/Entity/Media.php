@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -64,9 +65,8 @@ class Media implements MediaInterface
 
     /**
      * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
-     *
-     * @Assert\NotBlank()
      */
+    #[NotBlank]
     private ?File $file = null;
 
     public function __construct()

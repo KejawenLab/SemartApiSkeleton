@@ -35,10 +35,8 @@ final class Main extends AbstractController
     ) {
     }
 
-    /**
-     * @Route(path="/users/{userId}/api-clients", name=Main::class, methods={"GET", "POST"}, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
-     */
-    public function __invoke(Request $request, string $userId): Response
+    #[Route(path: '/users/{userId}/api-clients', name: Main::class, methods: ['GET', 'POST'], defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
+    public function __invoke(Request $request, string $userId) : Response
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
@@ -46,7 +44,6 @@ final class Main extends AbstractController
 
             return new RedirectResponse($this->generateUrl(GetAllUser::class));
         }
-
         $client = new ApiClient();
         $client->setUser($user);
         $form = $this->createForm(ApiClientType::class, $client);
@@ -58,10 +55,8 @@ final class Main extends AbstractController
                 $this->addFlash('info', 'sas.page.api_client.saved');
             }
         }
-
         $class = new ReflectionClass(ApiClient::class);
         $context = StringUtil::lowercase($class->getShortName());
-
         return $this->render(sprintf('%s/all.html.twig', $context), [
             'page_title' => 'sas.page.api_client.list',
             'context' => $context,

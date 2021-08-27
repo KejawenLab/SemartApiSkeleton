@@ -26,16 +26,13 @@ final class CreateApiClient extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/me/api-clients", name=CreateApiClient::class, methods={"POST"})
-     */
-    public function __invoke(Request $request): Response
+    #[Route(path: '/me/api-clients', name: CreateApiClient::class, methods: ['POST'])]
+    public function __invoke(Request $request) : Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
-
         $user = $this->userProviderFactory->getRealUser($user);
         $name = $request->request->get('name');
         if ('' === $name) {
@@ -43,22 +40,17 @@ final class CreateApiClient extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
-
         /** @var UserInterface $user */
         if ($this->service->countByUser($user) >= $this->setting->getMaxApiPerUser()) {
             $this->addFlash('error', 'sas.page.api_client.max_api_client_reached');
 
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
-
         $client = new ApiClient();
         $client->setName($name);
         $client->setUser($user);
-
         $this->addFlash('info', 'sas.page.api_client.saved');
-
         $this->service->save($client);
-
         return new RedirectResponse($this->generateUrl(Profile::class));
     }
 }

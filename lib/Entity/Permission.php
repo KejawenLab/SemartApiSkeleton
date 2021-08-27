@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -53,10 +54,10 @@ class Permission implements PermissionInterface
     private ?GroupInterface $group;
 
     /**
-     * @Assert\NotBlank()
      * @Groups({"read"})
      **/
     #[ManyToOne(targetEntity: Menu::class, cascade: ['persist'])]
+    #[NotBlank]
     private ?MenuInterface $menu;
 
     /**

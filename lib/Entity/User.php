@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Email;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
@@ -52,10 +55,10 @@ class User implements UserInterface
     private UuidInterface $id;
 
     /**
-     * @Assert\NotBlank()
      * @Groups({"read"})
      **/
     #[ManyToOne(targetEntity: Group::class, cascade: ['persist'])]
+    #[NotBlank]
     private ?GroupInterface $group;
 
     /**
@@ -65,11 +68,11 @@ class User implements UserInterface
     private ?UserInterface $supervisor;
 
     /**
-     * @Assert\Length(max=180)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 180, unique: true)]
+    #[Length(max: 180)]
+    #[NotBlank]
     private ?string $username;
 
     /**
@@ -79,20 +82,20 @@ class User implements UserInterface
     private ?string $profileImage;
 
     /**
-     * @Assert\Length(max=55)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 55)]
+    #[Length(max: 55)]
+    #[NotBlank]
     private ?string $fullName;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     * @Assert\Email()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255, unique: true)]
+    #[Length(max: 255)]
+    #[NotBlank]
+    #[Email]
     private ?string $email;
 
     /**

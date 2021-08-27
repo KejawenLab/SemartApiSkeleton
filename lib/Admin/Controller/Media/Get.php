@@ -28,16 +28,13 @@ final class Get extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/medias/{path}", name=Get::class, methods={"GET"}, requirements={"path"=".+"})
-     */
-    public function __invoke(Request $request, string $path): Response
+    #[Route(path: '/medias/{path}', name: Get::class, methods: ['GET'], requirements: ['path' => '.+'])]
+    public function __invoke(Request $request, string $path) : Response
     {
         $path = explode('/', $path);
         if (MediaInterface::PUBLIC_FIELD === $path[0]) {
             array_shift($path);
         }
-
         $fileName = implode('/', $path);
         $media = $this->service->getByFile($fileName);
         if (!$media instanceof MediaInterface) {
@@ -45,7 +42,6 @@ final class Get extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $file = new File(sprintf('%s%s%s%s%s',
             $this->mapping->fromField($media, 'file')->getUploadDestination(),
             DIRECTORY_SEPARATOR,
@@ -53,13 +49,11 @@ final class Get extends AbstractController
             DIRECTORY_SEPARATOR,
             $media->getFileName()
         ));
-
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
         }
-
         return $response;
     }
 }

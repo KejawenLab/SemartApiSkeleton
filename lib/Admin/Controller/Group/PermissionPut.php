@@ -27,10 +27,8 @@ final class PermissionPut extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/groups/{groupId}/permissions/{id}", name=PermissionPut::class, methods={"POST"})
-     */
-    public function __invoke(Request $request, string $groupId, string $id): Response
+    #[Route(path: '/groups/{groupId}/permissions/{id}', name: PermissionPut::class, methods: ['POST'])]
+    public function __invoke(Request $request, string $groupId, string $id) : Response
     {
         $group = $this->groupService->get($groupId);
         if (!$group) {
@@ -38,20 +36,17 @@ final class PermissionPut extends AbstractController
 
             return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
         }
-
         $permission = $this->service->get($id);
         if (!$permission instanceof Entity) {
             $this->addFlash('error', 'sas.page.permission.not_found');
 
             return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
         }
-
         $type = $request->request->get('type');
         $value = false;
         if ('true' === $request->request->get('value')) {
             $value = true;
         }
-
         switch ($type) {
             case Permission::ADD:
                 $permission->setAddable($value);
@@ -66,11 +61,8 @@ final class PermissionPut extends AbstractController
                 $permission->setDeletable($value);
                 break;
         }
-
         $this->service->save($permission);
-
         $this->addFlash('info', 'sas.page.permission.saved');
-
         return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));
     }
 }

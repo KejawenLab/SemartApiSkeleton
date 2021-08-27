@@ -23,10 +23,8 @@ final class Download extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/medias/download", name=Download::class, methods={"GET"})
-     */
-    public function __invoke(): Response
+    #[Route(path: '/medias/download', name: Download::class, methods: ['GET'])]
+    public function __invoke() : Response
     {
         $records = $this->service->total();
         if (10000 < $records) {
@@ -34,14 +32,11 @@ final class Download extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $response = new Response();
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', 'medias', date('YmdHis')));
-
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
-
         return $response;
     }
 }

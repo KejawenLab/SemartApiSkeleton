@@ -29,10 +29,8 @@ final class Get extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @Route(path="/settings/{id}", name=Get::class, methods={"GET"})
-     */
-    public function __invoke(string $id): Response
+    #[Route(path: '/settings/{id}', name: Get::class, methods: ['GET'])]
+    public function __invoke(string $id) : Response
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
@@ -40,12 +38,10 @@ final class Get extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $audit = new Record($setting);
         if ($this->reader->getProvider()->isAuditable(Setting::class)) {
             $audit = $this->audit->getAudits($setting, $id, 1);
         }
-
         return $this->renderDetail($audit, new ReflectionClass(Setting::class));
     }
 }

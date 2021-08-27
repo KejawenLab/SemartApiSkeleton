@@ -35,10 +35,8 @@ final class Permission extends AbstractController
     ) {
     }
 
-    /**
-     * @Route(path="/groups/{id}/permissions", name=Permission::class, methods={"GET"})
-     */
-    public function __invoke(Request $request, string $id): Response
+    #[Route(path: '/groups/{id}/permissions', name: Permission::class, methods: ['GET'])]
+    public function __invoke(Request $request, string $id) : Response
     {
         $group = $this->groupService->get($id);
         if (!$group instanceof GroupInterface) {
@@ -46,11 +44,8 @@ final class Permission extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $request->query->set($this->settingService->getPerPageField(), 10);
-
         $class = new ReflectionClass(Entity::class);
-
         return $this->render('group/permission.html.twig', [
             'page_title' => 'sas.page.permission.list',
             'group' => $group,

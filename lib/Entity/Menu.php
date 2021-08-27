@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -58,41 +60,41 @@ class Menu implements MenuInterface
     private ?MenuInterface $parent;
 
     /**
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 27)]
+    #[Length(max: 27)]
+    #[NotBlank]
     private ?string $code;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $name;
 
     /**
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'integer')]
+    #[NotBlank]
     private int $sortOrder;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @Route()
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $routeName;
 
     /**
-     * @Assert\Length(max=27)
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 27, nullable: true)]
+    #[Length(max: 27)]
     private ?string $iconClass;
 
     /**

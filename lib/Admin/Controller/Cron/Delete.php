@@ -23,10 +23,8 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/crons/{id}/delete", name=Delete::class, methods={"GET"})
-     */
-    public function __invoke(string $id): Response
+    #[Route(path: '/crons/{id}/delete', name: Delete::class, methods: ['GET'])]
+    public function __invoke(string $id) : Response
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
@@ -34,11 +32,8 @@ final class Delete extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $this->service->remove($cron);
-
         $this->addFlash('info', 'sas.page.cron.deleted');
-
         return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

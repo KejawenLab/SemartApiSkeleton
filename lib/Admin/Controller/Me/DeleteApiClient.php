@@ -25,16 +25,13 @@ final class DeleteApiClient extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/me/api-clients/{id}/delete", name=DeleteApiClient::class, methods={"GET"})
-     */
-    public function __invoke(Request $request, string $id): Response
+    #[Route(path: '/me/api-clients/{id}/delete', name: DeleteApiClient::class, methods: ['GET'])]
+    public function __invoke(Request $request, string $id) : Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
-
         $user = $this->userProviderFactory->getRealUser($user);
         $name = $request->request->get('name');
         if ('' === $name) {
@@ -42,18 +39,14 @@ final class DeleteApiClient extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
-
         $client = $this->service->getByIdAndUser($id, $user);
         if (!$client instanceof ApiClientInterface) {
             $this->addFlash('error', 'sas.page.api_client.not_found');
 
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
-
         $this->service->remove($client);
-
         $this->addFlash('info', 'sas.page.api_client.deleted');
-
         return new RedirectResponse($this->generateUrl(Profile::class));
     }
 }

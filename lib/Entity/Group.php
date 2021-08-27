@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -48,19 +50,19 @@ class Group implements GroupInterface
     private UuidInterface $id;
 
     /**
-     * @Assert\Length(max=7)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 7)]
+    #[Length(max: 7)]
+    #[NotBlank]
     private ?string $code;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $name;
 
     public function __construct()

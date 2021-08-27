@@ -27,10 +27,8 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/settings", name=Main::class, methods={"GET", "POST"})
-     */
-    public function __invoke(Request $request): Response
+    #[Route(path: '/settings', name: Main::class, methods: ['GET', 'POST'])]
+    public function __invoke(Request $request) : Response
     {
         $setting = new Setting();
         if ($request->isMethod(Request::METHOD_POST)) {
@@ -46,7 +44,6 @@ final class Main extends AbstractController
                 }
             }
         }
-
         $form = $this->createForm(SettingType::class, $setting);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -57,7 +54,6 @@ final class Main extends AbstractController
                 $form = $this->createForm(SettingType::class);
             }
         }
-
         return $this->renderList($form, $request, new ReflectionClass(Setting::class));
     }
 }

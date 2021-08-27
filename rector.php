@@ -6,6 +6,8 @@ use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
 use Rector\Core\Configuration\Option;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Rector\New_\PropertyAccessorCreationBooleanToFlagsRector;
+use Rector\Symfony\Set\SymfonySetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -22,6 +24,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(Setlist::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
     $containerConfigurator->import(DoctrineSetList::DOCTRINE_ORM_29);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_52);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
@@ -34,6 +37,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         AddArrayReturnDocTypeRector::class => [
             // mostly class-string[] is enough for collection of class-string return
             __DIR__ . '/lib/DataFixtures/',
+        ],
+
+        // no arg means use default value
+        PropertyAccessorCreationBooleanToFlagsRector::class => [
+            __DIR__ . '/lib/Security/Authorization/Ownership.php',
         ],
     ]);
 };

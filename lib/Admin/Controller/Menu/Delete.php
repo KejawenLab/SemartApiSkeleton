@@ -23,10 +23,8 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/menus/{id}/delete", name=Delete::class, methods={"GET"})
-     */
-    public function __invoke(string $id): Response
+    #[Route(path: '/menus/{id}/delete', name: Delete::class, methods: ['GET'])]
+    public function __invoke(string $id) : Response
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
@@ -34,11 +32,8 @@ final class Delete extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         $this->service->remove($menu);
-
         $this->addFlash('info', 'sas.page.menu.deleted');
-
         return new RedirectResponse($this->generateUrl(Main::class));
     }
 }

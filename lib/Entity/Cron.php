@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -50,35 +52,35 @@ class Cron implements CronInterface
     private UuidInterface $id;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $name;
 
     /**
-     * @Assert\Length(max=255)
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255, nullable: true)]
+    #[Length(max: 255)]
     private ?string $description;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $command;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @CronScheduleFormat()
      * @Groups({"read"})
      */
     #[Column(type: 'string', length: 255)]
+    #[Length(max: 255)]
+    #[NotBlank]
     private ?string $schedule;
 
     /**

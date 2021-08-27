@@ -30,11 +30,10 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route(path="/medias/{id}/audit", name=Audit::class, methods={"GET"}, priority=1)
-     *
      * @throws InvalidArgumentException
      */
-    public function __invoke(string $id): Response
+    #[Route(path: '/medias/{id}/audit', name: Audit::class, methods: ['GET'], priority: 1)]
+    public function __invoke(string $id) : Response
     {
         $entity = $this->service->get($id);
         if (!$entity instanceof MediaInterface) {
@@ -42,13 +41,11 @@ final class Audit extends AbstractController
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         if (!$this->reader->getProvider()->isAuditable(Media::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
-
         return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass(Media::class));
     }
 }

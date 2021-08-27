@@ -44,24 +44,22 @@ final class Profile extends AbstractController
     }
 
     /**
-     * @Route(path="/me", name=Profile::class, methods={"GET", "POST"}, priority=-1)
      *
      * @throws ReflectionException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function __invoke(Request $request): Response
+    #[Route(path: '/me', name: Profile::class, methods: ['GET', 'POST'], priority: -1)]
+    public function __invoke(Request $request) : Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
-
         $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
-
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $userClone = clone $user;
@@ -88,11 +86,8 @@ final class Profile extends AbstractController
                 }
             }
         }
-
         $class = new ReflectionClass($user::class);
-
         $request->query->set($this->setting->getPerPageField(), 17);
-
         return $this->render('profile/view.html.twig', [
             'page_title' => 'sas.page.profile.view',
             'context' => StringUtil::lowercase($class->getShortName()),
