@@ -34,10 +34,13 @@ final class Main extends AbstractController
     {
         $cron = new Cron();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $cron = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $cron = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $cron = $this->service->get($flash);
                 if (null !== $cron) {
                     $request->getSession()->set('id', $cron->getId());

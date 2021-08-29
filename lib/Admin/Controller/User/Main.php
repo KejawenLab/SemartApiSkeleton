@@ -34,10 +34,13 @@ final class Main extends AbstractController
     {
         $user = new User();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $user = $this->service->get((string) $request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $user = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $user = $this->service->get($flash);
                 if (null !== $user) {
                     $request->getSession()->set('id', $user->getId());

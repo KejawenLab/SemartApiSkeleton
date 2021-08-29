@@ -34,10 +34,13 @@ final class Main extends AbstractController
     {
         $menu = new Menu();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $menu = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $menu = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $menu = $this->service->get($flash);
                 if (null !== $menu) {
                     $request->getSession()->set('id', $menu->getId());

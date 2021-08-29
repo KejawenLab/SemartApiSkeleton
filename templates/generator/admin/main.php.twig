@@ -32,16 +32,19 @@ final class Main extends AbstractController
     }
 
     /**
-     * @Route("/{{ entityPluralDash }}", name=Main::class, methods={"GET"})
+     * @Route("/{{ entityPluralDash }}", name=Main::class, methods={"GET", "POST"})
      */
     public function __invoke(Request $request): Response
     {
         ${{ entityLowerize }} = new {{ entityHumanize }}();
         if ($request->isMethod(Request::METHOD_POST)) {
-            ${{ entityLowerize }} = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                ${{ entityLowerize }} = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 ${{ entityLowerize }} = $this->service->get($flash);
                 if (null !== ${{ entityLowerize }}) {
                     $request->getSession()->set('id', ${{ entityLowerize }}->getId());
