@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements PaginatableRepositoryInterface
 {
-    protected const MICRO_CACHE = 1;
+    protected const MICRO_CACHE = 5;
 
     public function find($id, $lockMode = null, $lockVersion = null)
     {
