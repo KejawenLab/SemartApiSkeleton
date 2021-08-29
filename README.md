@@ -315,7 +315,7 @@ Dan ketika membuka menu `Menu` maka record `Todo` pun akan muncul sebagai beriku
 
 Dan pastinya kamu juga bisa set permission untuk `Todo` pada menu Hak Akses (`Group` -> `Lihat` -> `Hak Akses`) sebagai berikut:
 
-![Todo Permission](doc/assets/rbac-todo.png)
+![Todo Permission](doc/assets/permission-todo.png)
 
 Dan jika kamu mengakses halaman Api Documentation maka akan muncul section `Todo` sebagai berikut:
 
