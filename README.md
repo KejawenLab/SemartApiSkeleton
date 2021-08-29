@@ -307,7 +307,7 @@ Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menja
 
 Dan jika kamu login ke Semart Api Skeleton maka akan muncul menu `Todo` pada sidebar sebagai berikut:
 
-![After Generate](doc/assets/sidebar-menu-todo.png)
+![After Generate](doc/assets/side-menu-todo.png)
 
 Dan ketika membuka menu `Menu` maka record `Todo` pun akan muncul sebagai berikut:
 
