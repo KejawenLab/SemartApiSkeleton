@@ -30,6 +30,16 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         return $query->getOneOrNullResult();
     }
 
+    public function findAll(): iterable
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+
+        return $query->getResult();
+    }
+
     public function countRecords(): int
     {
         return $this->count([]);

@@ -9,7 +9,7 @@ namespace KejawenLab\ApiSkeleton\Service\Model;
  */
 interface ServiceableRepositoryInterface
 {
-    public function findAll();
+    public function findAll(): iterable;
 
     public function countRecords(): int;
 
