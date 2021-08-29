@@ -58,7 +58,8 @@ final class PermissionGenerator extends AbstractGenerator
         $this->permissionService->initiate($menu);
 
         $superGroup = $this->groupService->getSuperAdmin();
-        if ($superGroup && $permission = $this->permissionService->getPermission($superGroup, $menu)) {
+        $permission = $this->permissionService->getPermission($superGroup, $menu);
+        if ($superGroup && $permission) {
             $permission->setAddable(true);
             $permission->setEditable(true);
             $permission->setDeletable(true);
