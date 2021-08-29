@@ -12,4 +12,6 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 interface SettingRepositoryInterface extends PaginatableRepositoryInterface
 {
     public function findByParameter(string $parameter): ?SettingInterface;
+
+    public function findPublicSetting(string $id): ?SettingInterface;
 }

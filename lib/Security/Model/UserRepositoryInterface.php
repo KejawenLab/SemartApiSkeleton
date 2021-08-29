@@ -14,4 +14,6 @@ interface UserRepositoryInterface extends PaginatableRepositoryInterface
     public function isSupervisor(UserInterface $user, UserInterface $supervisor): bool;
 
     public function findByUsername(string $username): ?UserInterface;
+
+    public function findByDeviceId(string $deviceId): ?UserInterface;
 }

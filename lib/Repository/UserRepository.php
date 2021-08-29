@@ -70,4 +70,17 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
         return $query->getOneOrNullResult();
     }
+
+    public function findByDeviceId(string $deviceId): ?AppUser
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.deviceId', $queryBuilder->expr()->literal($deviceId)));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $deviceId));
+
+        return $query->getOneOrNullResult();
+    }
 }

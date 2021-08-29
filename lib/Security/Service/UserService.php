@@ -69,7 +69,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
 
     public function getByDeviceId(string $deviceId): ?UserInterface
     {
-        return $this->repository->findOneBy(['deviceId' => $deviceId]);
+        return $this->repository->findByDeviceId($deviceId);
     }
 
     /**

@@ -44,7 +44,7 @@ final class SettingService extends AbstractService implements ServiceInterface
 
     public function getPublicSetting(string $id): ?SettingInterface
     {
-        return $this->repository->findOneBy(['id' => $id, 'public' => true]);
+        return $this->repository->findPublicSetting($id);
     }
 
     public function getCacheLifetime(): int

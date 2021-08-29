@@ -65,27 +65,25 @@ final class Profile extends AbstractController
         $form = $this->createForm(UpdateProfileType::class, $user);
         if ($request->isMethod(Request::METHOD_POST)) {
             $userClone = clone $user;
-            if ($request->isMethod(Request::METHOD_POST)) {
-                $form->handleRequest($request);
-                if ($form->isValid()) {
-                    if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
-                        $user->setPlainPassword($password);
-                    }
-
-                    if ($form['file']->getData()) {
-                        /** @var RealUser $user */
-                        $media = $this->mediaService->getByFile($user->getProfileImage());
-                        if (null !== $media) {
-                            $this->mediaService->remove($media);
-                        }
-                    } else {
-                        $user->setProfileImage($userClone->getProfileImage());
-                    }
-
-                    $this->service->save($user);
-
-                    $this->addFlash('info', 'sas.page.profile.updated');
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
+                    $user->setPlainPassword($password);
                 }
+
+                if ($form['file']->getData()) {
+                    /** @var RealUser $user */
+                    $media = $this->mediaService->getByFile($user->getProfileImage());
+                    if (null !== $media) {
+                        $this->mediaService->remove($media);
+                    }
+                } else {
+                    $user->setProfileImage($userClone->getProfileImage());
+                }
+
+                $this->service->save($user);
+
+                $this->addFlash('info', 'sas.page.profile.updated');
             }
         }
 
