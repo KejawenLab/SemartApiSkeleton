@@ -39,7 +39,6 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), $menu->getId()));
 
         return $query->getOneOrNullResult();
     }
@@ -62,10 +61,6 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(
-            self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), serialize($ids))
-        );
 
         $permissions = $query->getResult();
         foreach ($permissions as $permission) {
@@ -95,10 +90,6 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(
-            self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%d', self::class, __METHOD__, $group->getId(), (int) $parentOnly)
-        );
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
@@ -128,10 +119,6 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(
-            self::MICRO_CACHE,
-            sprintf('%s:%s:%s:%s', self::class, __METHOD__, $group->getId(), $menu->getId())
-        );
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
