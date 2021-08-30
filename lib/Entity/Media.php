@@ -144,7 +144,7 @@ class Media implements MediaInterface
         return $this->file;
     }
 
-    public function setFile(File $file): void
+    public function setFile(?File $file): void
     {
         $this->file = $file;
     }

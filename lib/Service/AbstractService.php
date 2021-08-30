@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Service;
 
 use Doctrine\ORM\QueryBuilder;
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
@@ -47,14 +48,14 @@ abstract class AbstractService implements ServiceInterface
         return $this->repository->find($id);
     }
 
-    public function save(object $object): void
+    public function save(EntityInterface $object): void
     {
         $this->repository->persist($object);
         $this->messageBus->dispatch(new EntityPersisted($object));
         $this->repository->commit();
     }
 
-    public function remove(object $object): void
+    public function remove(EntityInterface $object): void
     {
         $this->repository->remove($object);
         $this->messageBus->dispatch(new EntityRemoved($object));
