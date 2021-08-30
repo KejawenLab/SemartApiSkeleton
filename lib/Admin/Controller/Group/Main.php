@@ -54,7 +54,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($group);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.group.saved');
             }
         }

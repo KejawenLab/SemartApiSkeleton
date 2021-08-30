@@ -54,7 +54,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($menu);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.menu.saved');
 
                 $form = $this->createForm(MenuType::class);

@@ -54,7 +54,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($user ?: $form->getData());
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.user.saved');
 
                 $form = $this->createForm(UserType::class);
