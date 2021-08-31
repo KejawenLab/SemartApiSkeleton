@@ -23,7 +23,7 @@ final class FormFactory
         if ('application/json' === $request->getContentType()) {
             $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         } else {
-            $data = $request->request->get($form->getName());
+            $data = $request->request->all();
         }
 
         $form->submit($data);
