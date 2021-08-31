@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class ResetCommand extends Command
 {
-    public function __construct(private KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel, private EntityManagerInterface $entityManager)
     {
         parent::__construct();
     }
@@ -39,20 +40,34 @@ final class ResetCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ('dev' !== strtolower($this->kernel->getEnvironment())) {
+            $output->writeln('<comment>Semart Reset can not run in production environment</comment>');
+
             return 0;
         }
 
         if (!$this->kernel->isDebug()) {
+            $output->writeln('<comment>Semart Reset can not run in production environment</comment>');
+
             return 0;
         }
 
         if (!$input->getOption('force')) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('<comment>[!!!WARNING!!!]</comment><question> Semart Api Reset will reset your data. Continue?</question> (y/n)', false);
+            $question = new ConfirmationQuestion(
+                '<comment>[!!!WARNING!!!]</comment><question> Semart Api Reset will reset your data. Continue?</question> (y/n)',
+                false
+            );
+
             if (!$helper->ask($input, $output, $question)) {
                 return 0;
             }
         }
+
+        $dbName = $this->entityManager->getConnection()->getDatabase();
+        $this->entityManager->getConnection()->executeQuery(
+            'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = :db',
+            ['db' => $dbName]
+        );
 
         /** @var Application $application */
         $application = $this->getApplication();
