@@ -71,30 +71,34 @@ final class ResetCommand extends Command
 
         /** @var Application $application */
         $application = $this->getApplication();
-        $dropDatabase = $application->find('doctrine:database:drop');
-        $dropDatabase->run(new ArrayInput([
+
+        $input = new ArrayInput([
             'command' => 'doctrine:database:drop',
             '--force' => null,
-        ]), $output);
+        ]);
+        $input->setInteractive(false);
+        $dropDatabase = $application->find('doctrine:database:drop');
+        $dropDatabase->run($input, $output);
 
+        $input = new ArrayInput(['command' => 'doctrine:database:create']);
+        $input->setInteractive(false);
         $createDatabase = $application->find('doctrine:database:create');
-        $createDatabase->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-        ]), $output);
+        $createDatabase->run($input, $output);
+
+        $input = new ArrayInput(['command' => 'doctrine:migrations:migrate']);
+        $input->setInteractive(false);
+        $migration = $application->find('doctrine:migrations:migrate');
+        $migration->run($input, $output);
 
         $input = new ArrayInput([
             'command' => 'doctrine:schema:update',
             '--force' => null,
-            '--no-interaction' => null,
         ]);
         $input->setInteractive(false);
-        $migration = $application->find('doctrine:schema:update');
-        $migration->run($input, $output);
+        $schemaUpdater = $application->find('doctrine:schema:update');
+        $schemaUpdater->run($input, $output);
 
-        $input = new ArrayInput([
-            'command' => 'doctrine:fixtures:load',
-            '--no-interaction' => null,
-        ]);
+        $input = new ArrayInput(['command' => 'doctrine:fixtures:load']);
         $input->setInteractive(false);
         $fixtures = $application->find('doctrine:fixtures:load');
         $fixtures->run($input, $output);

@@ -10,7 +10,10 @@ framework:
                     delay: 5000
                     multiplier: 2
                     max_delay: 0
-            failed: 'doctrine://default?queue_name=failed'
+            failed:
+                dsn: 'doctrine://default?queue_name=failed'
+                options:
+                    table_name: 'core_messages'
             sync: 'sync://'
         routing:
             KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted: sync
