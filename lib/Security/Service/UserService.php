@@ -15,6 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
+use Swoole\Coroutine;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -46,15 +47,18 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         }
 
         if (null !== $user->getFile()) {
-            $media = new Media();
-            $media->setFolder(UserInterface::PROFILE_MEDIA_FOLDER);
-            $media->setHidden(true);
-            $media->setPublic(false);
-            $media->setFile($user->getFile());
+            $mediaService = $this->mediaService;
+            Coroutine::create(function () use ($mediaService, $user) {
+                $media = new Media();
+                $media->setFolder(UserInterface::PROFILE_MEDIA_FOLDER);
+                $media->setHidden(true);
+                $media->setPublic(false);
+                $media->setFile($user->getFile());
 
-            $this->mediaService->save($media);
+                $mediaService->save($media);
 
-            $user->setProfileImage($media->getFileName());
+                $user->setProfileImage($media->getFileName());
+            });
         }
 
         $plainPassword = $user->getPlainPassword();

@@ -72,6 +72,7 @@ class Media implements MediaInterface
      * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
      *
      * @Assert\NotBlank()
+     * @Assert\File(maxSize="1024k", mimeTypes = {"image/png", "image/jpg", "image/jpeg"})
      */
     private ?File $file = null;
 

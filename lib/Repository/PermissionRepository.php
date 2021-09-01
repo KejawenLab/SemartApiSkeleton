@@ -12,6 +12,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use Swoole\Coroutine;
 
 /**
  * @method Permission|null find($id, $lockMode = null, $lockVersion = null)
@@ -129,21 +130,27 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
     public function removeByGroup(GroupInterface $group): void
     {
-        $queryBuilder = $this->createQueryBuilder('o')->update();
-        $queryBuilder->set('o.deletedAt', ':now');
-        $queryBuilder->where('o.group = :group');
-        $queryBuilder->setParameter('now', new DateTime());
-        $queryBuilder->setParameter('group', $group);
-        $queryBuilder->getQuery()->execute();
+        $queryBuilder = $this->createQueryBuilder('o');
+        Coroutine::create(function () use ($queryBuilder, $group) {
+            $queryBuilder->update();
+            $queryBuilder->set('o.deletedAt', ':now');
+            $queryBuilder->where('o.group = :group');
+            $queryBuilder->setParameter('now', new DateTime());
+            $queryBuilder->setParameter('group', $group);
+            $queryBuilder->getQuery()->execute();
+        });
     }
 
     public function removeByMenu(MenuInterface $menu): void
     {
-        $queryBuilder = $this->createQueryBuilder('o')->update();
-        $queryBuilder->set('o.deletedAt', ':now');
-        $queryBuilder->where('o.menu= :menu');
-        $queryBuilder->setParameter('menu', $menu);
-        $queryBuilder->setParameter('now', new DateTime());
-        $queryBuilder->getQuery()->execute();
+        $queryBuilder = $this->createQueryBuilder('o');
+        Coroutine::create(function () use ($queryBuilder, $menu) {
+            $queryBuilder->update();
+            $queryBuilder->set('o.deletedAt', ':now');
+            $queryBuilder->where('o.menu= :menu');
+            $queryBuilder->setParameter('menu', $menu);
+            $queryBuilder->setParameter('now', new DateTime());
+            $queryBuilder->getQuery()->execute();
+        });
     }
 }

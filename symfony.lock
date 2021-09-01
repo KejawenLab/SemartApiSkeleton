@@ -472,6 +472,9 @@
             "config/packages/stof_doctrine_extensions.yaml"
         ]
     },
+    "swoole/ide-helper": {
+        "version": "4.7.1"
+    },
     "symfony/amqp-messenger": {
         "version": "v5.1.0"
     },
