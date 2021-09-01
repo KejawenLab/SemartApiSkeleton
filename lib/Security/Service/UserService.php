@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Security\Service;
 
 use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Media;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Message\PasswordHistory;

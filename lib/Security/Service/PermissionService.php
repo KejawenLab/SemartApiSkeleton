@@ -6,8 +6,8 @@ namespace KejawenLab\ApiSkeleton\Security\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Iterator;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;

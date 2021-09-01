@@ -8,7 +8,6 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
 use KejawenLab\ApiSkeleton\Cron\Query\CronReportJoinExtension;
-use KejawenLab\ApiSkeleton\Cron\Query\CronReportSearchQueryExtension;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;

@@ -13,7 +13,7 @@ framework:
             failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'
         routing:
-            KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted: sync
-            KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved: async
+            KejawenLab\ApiSkeleton\Service\Message\EntityPersisted: sync
+            KejawenLab\ApiSkeleton\Service\Message\EntityRemoved: async
             KejawenLab\ApiSkeleton\ApiClient\Message\RequestLog: async
             KejawenLab\ApiSkeleton\Security\Message\PasswordHistory: async

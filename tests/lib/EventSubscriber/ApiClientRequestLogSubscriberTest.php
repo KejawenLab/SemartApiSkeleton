@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Tests\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
-use KejawenLab\ApiSkeleton\Entity\ApiClient;
-use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\EventSubscriber\ApiClientRequestLogSubscriber;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
@@ -75,7 +73,9 @@ class ApiClientRequestLogSubscriberTest extends TestCase
     public function testTokenReturnValidUser(): void
     {
         $user = new User();
-        $realUser = new ApiClient();
+
+        $apiClient = $this->createMock(ApiClientInterface::class);
+        $apiClient->expects($this->once())->method('getId')->willReturn('test');
 
         $token = $this->createMock(TokenInterface::class);
         $token->expects($this->once())->method('getUser')->willReturn($user);
@@ -86,7 +86,7 @@ class ApiClientRequestLogSubscriberTest extends TestCase
         $messageBus = $this->createMock(MessageBusInterface::class);
 
         $userProvider = $this->createMock(UserProviderFactory::class);
-        $userProvider->expects($this->once())->method('getRealUser')->willReturn($realUser);
+        $userProvider->expects($this->once())->method('getRealUser')->willReturn($apiClient);
 
         $event = $this->createMock(ControllerEvent::class);
         $event->expects($this->once())->method('isMainRequest')->willReturn(true);
