@@ -15,3 +15,5 @@ framework:
         routing:
             KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted: sync
             KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved: async
+            KejawenLab\ApiSkeleton\ApiClient\Message\RequestLog: async
+            KejawenLab\ApiSkeleton\Security\Message\PasswordHistory: async

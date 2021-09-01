@@ -19,15 +19,5 @@ class ApiClientRequestServiceTest extends TestCase
 {
     public function testCreateFromRequest(): void
     {
-        $bus = $this->createMock(MessageBusInterface::class);
-
-        $repository = $this->createMock(ApiClientRequestRepositoryInterface::class);
-
-        $helper = new AliasHelper();
-        $class = $this->createMock(ApiClientRequestInterface::class);
-
-        $service = new ApiClientRequestService($bus, $repository, $helper, $class::class);
-
-        $this->assertEquals($class, $service->createFromRequest(Request::createFromGlobals()));
     }
 }

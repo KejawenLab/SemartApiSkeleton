@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\ApiClient\ApiClientRequestService;
+use KejawenLab\ApiSkeleton\ApiClient\Message\RequestLog;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -20,8 +21,8 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private TokenStorageInterface $tokenStorage,
-        private ApiClientRequestService $apiClientRequestService,
         private UserProviderFactory $userProvider,
+        private MessageBusInterface $messageBus,
     ) {
     }
 
@@ -46,10 +47,7 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $apiClientRequest = $this->apiClientRequestService->createFromRequest($event->getRequest());
-        $apiClientRequest->setApiClient($user);
-
-        $this->apiClientRequestService->save($apiClientRequest);
+        $this->messageBus->dispatch(new RequestLog($user, $event->getRequest()));
     }
 
     /**

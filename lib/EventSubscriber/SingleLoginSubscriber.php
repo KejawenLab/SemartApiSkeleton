@@ -45,7 +45,8 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         }
 
         $session = $request->getSession();
-        if (!$deviceId = $session->get(AdminContext::USER_DEVICE_ID)) {
+        $deviceId = $session->get(AdminContext::USER_DEVICE_ID);
+        if (null === $deviceId) {
             return;
         }
 
