@@ -53,7 +53,7 @@ abstract class AbstractService implements ServiceInterface
     {
         $repository = $this->repository;
         $bus = $this->messageBus;
-        Coroutine::create(function () use ($repository, $bus, $object) {
+        Coroutine::create(function () use ($repository, $bus, $object): void {
             $repository->persist($object);
             $bus->dispatch(new EntityPersisted($object));
             $repository->commit();
@@ -64,7 +64,7 @@ abstract class AbstractService implements ServiceInterface
     {
         $repository = $this->repository;
         $bus = $this->messageBus;
-        Coroutine::create(function () use ($repository, $bus, $object) {
+        Coroutine::create(function () use ($repository, $bus, $object): void {
             $repository->remove($object);
             $bus->dispatch(new EntityRemoved($object));
             $repository->commit();

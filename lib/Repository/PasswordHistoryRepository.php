@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Iterator;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
@@ -25,7 +26,7 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
     }
 
     /**
-     * @return PasswordHistory[]
+     * @return Iterator
      */
     public function findPasswords(UserInterface $user): iterable
     {

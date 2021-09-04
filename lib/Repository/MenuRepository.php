@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
+use Iterator;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
@@ -38,6 +39,9 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         return $query->getOneOrNullResult();
     }
 
+    /**
+     * @return Iterator
+     */
     public function findChilds(MenuInterface $menu): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');

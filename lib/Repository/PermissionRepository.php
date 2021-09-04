@@ -44,6 +44,9 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         return $query->getOneOrNullResult();
     }
 
+    /**
+     * @return Iterator
+     */
     public function findPermissions(GroupInterface $group, iterable $menus): iterable
     {
         $ids = [];
@@ -131,7 +134,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
     public function removeByGroup(GroupInterface $group): void
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        Coroutine::create(function () use ($queryBuilder, $group) {
+        Coroutine::create(function () use ($queryBuilder, $group): void {
             $queryBuilder->update();
             $queryBuilder->set('o.deletedAt', ':now');
             $queryBuilder->where('o.group = :group');
@@ -144,7 +147,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
     public function removeByMenu(MenuInterface $menu): void
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        Coroutine::create(function () use ($queryBuilder, $menu) {
+        Coroutine::create(function () use ($queryBuilder, $menu): void {
             $queryBuilder->update();
             $queryBuilder->set('o.deletedAt', ':now');
             $queryBuilder->where('o.menu= :menu');

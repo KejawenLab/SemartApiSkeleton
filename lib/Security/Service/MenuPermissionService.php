@@ -30,7 +30,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     {
         $permissionRepository = $this->permissionRepository;
         foreach ($this->groupRepository->findAll() as $key =>  $group) {
-            Coroutine::create(function () use ($permissionRepository, $object, $key, $group) {
+            Coroutine::create(function () use ($permissionRepository, $object, $key, $group): void {
                 if (0 === $key % 7) {
                     $permissionRepository->commit();
                 }

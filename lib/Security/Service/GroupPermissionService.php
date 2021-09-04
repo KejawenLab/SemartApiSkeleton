@@ -30,7 +30,7 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
     {
         $permissionRepository = $this->permissionRepository;
         foreach ($this->menuRepository->findAll() as $key => $menu) {
-            Coroutine::create(function () use ($permissionRepository, $object, $key, $menu) {
+            Coroutine::create(function () use ($permissionRepository, $object, $key, $menu): void {
                 if (0 === $key % 7) {
                     $permissionRepository->commit();
                 }

@@ -25,17 +25,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 final class UserService extends AbstractService implements ServiceInterface, MessageSubscriberInterface
 {
-    private MessageBusInterface $messageBus;
-
     public function __construct(
-        MessageBusInterface $messageBus,
+        private MessageBusInterface $messageBus,
         UserRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private UserPasswordHasherInterface $passwordHasher,
         private MediaService $mediaService,
     ) {
-        $this->messageBus = $messageBus;
-
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
@@ -48,7 +44,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
 
         if (null !== $user->getFile()) {
             $mediaService = $this->mediaService;
-            Coroutine::create(function () use ($mediaService, $user) {
+            Coroutine::create(function () use ($mediaService, $user): void {
                 $media = new Media();
                 $media->setFolder(UserInterface::PROFILE_MEDIA_FOLDER);
                 $media->setHidden(true);

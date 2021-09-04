@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Service;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory as Entity;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Message\PasswordHistory;
@@ -43,6 +44,9 @@ final class PasswordHistoryService extends AbstractService implements ServiceInt
         return $this->repository->findPasswords($user);
     }
 
+    /**
+     * @return Iterator<string>
+     */
     public static function getHandledMessages(): iterable
     {
         yield PasswordHistory::class;

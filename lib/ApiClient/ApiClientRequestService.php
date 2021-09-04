@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\ApiClient;
 
+use Iterator;
 use KejawenLab\ApiSkeleton\ApiClient\Message\RequestLog;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRepositoryInterface;
@@ -58,6 +59,9 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         return $apiClientRequest;
     }
 
+    /**
+     * @return Iterator<string>
+     */
     public static function getHandledMessages(): iterable
     {
         yield RequestLog::class;
