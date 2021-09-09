@@ -77,18 +77,6 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
         $reflection = new ReflectionClass($class);
         $application = $this->getApplication();
 
-        $io->title('Running Migration');
-
-        $input = new ArrayInput(['command' => 'doctrine:migrations:diff']);
-        $input->setInteractive(false);
-        $migration = $application->find('doctrine:migrations:diff');
-        $migration->run($input, $output);
-
-        $input = new ArrayInput(['command' => 'doctrine:migrations:migrate']);
-        $input->setInteractive(false);
-        $migration = $application->find('doctrine:migrations:migrate');
-        $migration->run($input, $output);
-
         $io->title(sprintf('Generate classes for <info>%s</info>', $class));
         $this->generator->generate($reflection, $scope, $output, $input->getOption('folder') ?: '');
 

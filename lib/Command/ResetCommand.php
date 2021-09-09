@@ -85,11 +85,6 @@ final class ResetCommand extends Command
         $createDatabase = $application->find('doctrine:database:create');
         $createDatabase->run($input, $output);
 
-        $input = new ArrayInput(['command' => 'doctrine:migrations:migrate']);
-        $input->setInteractive(false);
-        $migration = $application->find('doctrine:migrations:migrate');
-        $migration->run($input, $output);
-
         $input = new ArrayInput([
             'command' => 'doctrine:schema:update',
             '--force' => null,
