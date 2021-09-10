@@ -36,7 +36,7 @@ final class GroupPermissionService implements PermissionInitiatorInterface, Perm
                 }
 
                 $permission = $permissionRepository->findPermission($object, $menu);
-                if ($permission === null) {
+                if (null === $permission) {
                     $permission = new $this->class();
                 }
 

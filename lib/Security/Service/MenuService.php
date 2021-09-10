@@ -55,6 +55,7 @@ final class MenuService extends AbstractService implements ServiceInterface
         }
 
         $childMenus = $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
+
         return [] !== iterator_to_array($childMenus, false);
     }
 

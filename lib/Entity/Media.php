@@ -21,7 +21,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=MediaRepository::class)
  * @ORM\Table(name="core_media")
  *
- *
  * @UniqueEntity(fields={"fileName"})
  *
  * @Vich\Uploadable

@@ -30,10 +30,9 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route(path="/medias/{id}/audit", name=Audit::class, methods={"GET"}, priority=1)
-     *
      * @throws InvalidArgumentException
      */
+    #[Route(path: '/medias/{id}/audit', name: Audit::class, methods: ['GET'], priority: 1)]
     public function __invoke(string $id): Response
     {
         $entity = $this->service->get($id);

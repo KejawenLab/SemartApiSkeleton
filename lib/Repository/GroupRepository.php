@@ -25,7 +25,7 @@ final class GroupRepository extends AbstractRepository implements GroupRepositor
     }
 
     /**
-     * @return null|mixed
+     * @return mixed|null
      */
     public function findByCode(string $code)
     {

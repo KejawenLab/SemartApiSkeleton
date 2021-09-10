@@ -26,9 +26,7 @@ final class Download extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/users/{userId}/api-clients/download", name=Download::class, methods={"GET"})
-     */
+    #[Route(path: '/users/{userId}/api-clients/download', name: Download::class, methods: ['GET'])]
     public function __invoke(string $userId): Response
     {
         $user = $this->userService->get($userId);
@@ -49,7 +47,6 @@ final class Download extends AbstractController
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', 'api-clients', date('YmdHis')));
-
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
 
         return $response;

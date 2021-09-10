@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class Ownership
 {
     private const SKELETON_NAMESPACE = 'KejawenLab\\ApiSkeleton\\Entity';
+
     private const APPLICATION_NAMESPACE = 'KejawenLab\\Application\\Entity';
 
     public function __construct(

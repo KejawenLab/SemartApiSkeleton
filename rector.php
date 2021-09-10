@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
+use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Core\Configuration\Option;
+use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
+use Rector\Php80\ValueObject\AnnotationToAttribute;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(SetList::CODE_QUALITY);
@@ -20,6 +24,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(SetList::EARLY_RETURN);
     $containerConfigurator->import(Setlist::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
+
+    $services = $containerConfigurator->services();
+    $services->set(AnnotationToAttributeRector::class)
+        ->call('configure', [[
+            AnnotationToAttributeRector::ANNOTATION_TO_ATTRIBUTE => ValueObjectInliner::inline([
+                // @see https://symfony.com/blog/new-in-symfony-5-2-php-8-attributes
+                new AnnotationToAttribute(
+                    'Symfony\Component\Routing\Annotation\Route',
+                    'Symfony\Component\Routing\Annotation\Route'
+                ),
+            ]),
+        ]]);
+
+    // tidify lines after apply annotation to attribute that make remove lines
+    // this may need to run rector twice as first is apply the AnnotationToAttributeRector
+    $services->set(NewlineAfterStatementRector::class);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);

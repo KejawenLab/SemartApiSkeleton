@@ -28,13 +28,10 @@ final class Report extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/crons/{id}/logs", name=Report::class, methods={"GET"}, priority=-27)
-     */
+    #[Route(path: '/crons/{id}/logs', name: Report::class, methods: ['GET'], priority: -27)]
     public function __invoke(Request $request, string $id): Response
     {
         $class = new ReflectionClass(CronReport::class);
-
         $request->query->set($this->settingService->getPerPageField(), 10);
 
         return $this->render('cron/report.html.twig', [

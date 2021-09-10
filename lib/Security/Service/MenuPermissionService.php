@@ -29,14 +29,14 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     public function initiate(PermissionableInterface $object): void
     {
         $permissionRepository = $this->permissionRepository;
-        foreach ($this->groupRepository->findAll() as $key =>  $group) {
+        foreach ($this->groupRepository->findAll() as $key => $group) {
             Coroutine::create(function () use ($permissionRepository, $object, $key, $group): void {
                 if (0 === $key % 7) {
                     $permissionRepository->commit();
                 }
 
                 $permission = $permissionRepository->findPermission($group, $object);
-                if ($permission === null) {
+                if (null === $permission) {
                     $permission = new $this->class();
                 }
 

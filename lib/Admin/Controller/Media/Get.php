@@ -28,9 +28,7 @@ final class Get extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/medias/{path}", name=Get::class, methods={"GET"}, requirements={"path"=".+"})
-     */
+    #[Route(path: '/medias/{path}', name: Get::class, methods: ['GET'], requirements: ['path' => '.+'])]
     public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);
@@ -54,7 +52,6 @@ final class Get extends AbstractController
             DIRECTORY_SEPARATOR,
             $media->getFileName()
         ));
-
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
         if ($request->query->get('f')) {

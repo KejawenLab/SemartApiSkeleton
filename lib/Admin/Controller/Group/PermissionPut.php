@@ -27,9 +27,7 @@ final class PermissionPut extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/groups/{groupId}/permissions/{id}", name=PermissionPut::class, methods={"POST"})
-     */
+    #[Route(path: '/groups/{groupId}/permissions/{id}', name: PermissionPut::class, methods: ['POST'])]
     public function __invoke(Request $request, string $groupId, string $id): Response
     {
         $group = $this->groupService->get($groupId);
@@ -68,7 +66,6 @@ final class PermissionPut extends AbstractController
         }
 
         $this->service->save($permission);
-
         $this->addFlash('info', 'sas.page.permission.saved');
 
         return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));

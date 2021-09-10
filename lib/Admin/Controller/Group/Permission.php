@@ -35,9 +35,7 @@ final class Permission extends AbstractController
     ) {
     }
 
-    /**
-     * @Route(path="/groups/{id}/permissions", name=Permission::class, methods={"GET"})
-     */
+    #[Route(path: '/groups/{id}/permissions', name: Permission::class, methods: ['GET'])]
     public function __invoke(Request $request, string $id): Response
     {
         $group = $this->groupService->get($id);
@@ -48,7 +46,6 @@ final class Permission extends AbstractController
         }
 
         $request->query->set($this->settingService->getPerPageField(), 10);
-
         $class = new ReflectionClass(Entity::class);
 
         return $this->render('group/permission.html.twig', [

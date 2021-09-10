@@ -49,6 +49,7 @@ final class Voter extends SymfonyVoter
         if (!$permission instanceof PermissionInterface) {
             return false;
         }
+
         return match ($attribute) {
             Permission::ADD => $permission->isAddable(),
             Permission::EDIT => $permission->isEditable(),

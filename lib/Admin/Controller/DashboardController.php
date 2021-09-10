@@ -14,9 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class DashboardController extends Base
 {
-    /**
-     * @Route(path="/", name=AdminContext::ADMIN_ROUTE, methods={"GET"})
-     */
+    #[Route(path: '/', name: AdminContext::ADMIN_ROUTE, methods: ['GET'])]
     public function __invoke(): Response
     {
         return $this->render('dashboard/layout.html.twig', ['page_title' => 'sas.page.dashboard']);
