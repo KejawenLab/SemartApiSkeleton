@@ -96,7 +96,7 @@ class Setting implements SettingInterface
 
     public function getId(): ?string
     {
-        return (string)$this->id;
+        return (string) $this->id;
     }
 
     public function getGroup(): ?string

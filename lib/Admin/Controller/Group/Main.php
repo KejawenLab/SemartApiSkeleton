@@ -27,9 +27,7 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/groups", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/groups', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $group = new Group();

@@ -23,9 +23,7 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/groups/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: '/groups/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $group = $this->service->get($id);
@@ -36,7 +34,6 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($group);
-
         $this->addFlash('info', 'sas.page.group.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

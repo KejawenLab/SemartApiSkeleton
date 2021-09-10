@@ -26,9 +26,7 @@ final class CreateApiClient extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/me/api-clients", name=CreateApiClient::class, methods={"POST"})
-     */
+    #[Route(path: '/me/api-clients', name: CreateApiClient::class, methods: ['POST'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
@@ -54,9 +52,7 @@ final class CreateApiClient extends AbstractController
         $client = new ApiClient();
         $client->setName($name);
         $client->setUser($user);
-
         $this->addFlash('info', 'sas.page.api_client.saved');
-
         $this->service->save($client);
 
         return new RedirectResponse($this->generateUrl(Profile::class));

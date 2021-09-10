@@ -26,9 +26,7 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="users/{userId}/api-clients/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: 'users/{userId}/api-clients/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);
@@ -46,7 +44,6 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($client);
-
         $this->addFlash('info', 'sas.page.api_client.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

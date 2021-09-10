@@ -23,9 +23,7 @@ final class Download extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/users/download", name=Download::class, methods={"GET"})
-     */
+    #[Route(path: '/users/download', name: Download::class, methods: ['GET'])]
     public function __invoke(): Response
     {
         $records = $this->service->total();
@@ -39,7 +37,6 @@ final class Download extends AbstractController
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', 'users', date('YmdHis')));
-
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
 
         return $response;

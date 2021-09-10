@@ -19,9 +19,7 @@ final class LoginController extends Base
     {
     }
 
-    /**
-     * @Route(path="/login", name=AdminContext::LOGIN_ROUTE, methods={"GET", "POST"})
-     */
+    #[Route(path: '/login', name: AdminContext::LOGIN_ROUTE, methods: ['GET', 'POST'])]
     public function __invoke(): Response
     {
         return $this->render('layout/login.html.twig', [

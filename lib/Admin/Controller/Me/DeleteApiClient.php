@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
-use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
-use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,9 +24,7 @@ final class DeleteApiClient extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/me/api-clients/{id}/delete", name=DeleteApiClient::class, methods={"GET"})
-     */
+    #[Route(path: '/me/api-clients/{id}/delete', name: DeleteApiClient::class, methods: ['GET'])]
     public function __invoke(Request $request, string $id): Response
     {
         $user = $this->getUser();
@@ -51,7 +48,6 @@ final class DeleteApiClient extends AbstractController
         }
 
         $this->service->remove($client);
-
         $this->addFlash('info', 'sas.page.api_client.deleted');
 
         return new RedirectResponse($this->generateUrl(Profile::class));

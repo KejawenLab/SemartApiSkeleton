@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Security\Service;
 
 use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Media;
-use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Message\PasswordHistory;
@@ -14,6 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Swoole\Coroutine;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;

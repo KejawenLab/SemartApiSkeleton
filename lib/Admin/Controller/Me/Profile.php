@@ -44,12 +44,11 @@ final class Profile extends AbstractController
     }
 
     /**
-     * @Route(path="/me", name=Profile::class, methods={"GET", "POST"}, priority=-1)
-     *
      * @throws ReflectionException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
+    #[Route(path: '/me', name: Profile::class, methods: ['GET', 'POST'], priority: -1)]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
@@ -88,7 +87,6 @@ final class Profile extends AbstractController
         }
 
         $class = new ReflectionClass($user::class);
-
         $request->query->set($this->setting->getPerPageField(), 17);
 
         return $this->render('profile/view.html.twig', [

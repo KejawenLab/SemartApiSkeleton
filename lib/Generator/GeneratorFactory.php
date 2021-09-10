@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class GeneratorFactory
 {
     public function __construct(
-        /**
+        /*
          * @var GeneratorInterface[]
          */
         private iterable $generators

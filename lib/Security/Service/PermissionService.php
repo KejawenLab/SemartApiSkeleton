@@ -6,8 +6,6 @@ namespace KejawenLab\ApiSkeleton\Security\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Iterator;
-use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
-use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -19,6 +17,8 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -36,11 +36,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private MenuRepositoryInterface $menuRepository,
-        /**
+        /*
          * @var PermissionInitiatorInterface[]
          */
         private iterable $initiators,
-        /**
+        /*
          * @var PermissionRemoverInterface[]
          */
         private iterable $removers,
@@ -139,7 +139,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
                 $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
             }
 
-            $key++;
+            ++$key;
         }
 
         return $tree;

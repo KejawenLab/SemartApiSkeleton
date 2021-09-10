@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Repository;
 
-use Iterator;
 use Doctrine\Persistence\ManagerRegistry;
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;

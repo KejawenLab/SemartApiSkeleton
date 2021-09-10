@@ -29,10 +29,9 @@ final class Audit extends AbstractController
     }
 
     /**
-     * @Route(path="/crons/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
-     *
      * @throws InvalidArgumentException
      */
+    #[Route(path: '/crons/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
