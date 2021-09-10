@@ -39,11 +39,13 @@ final class Run extends AbstractController
 
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
+
         $input = new ArrayInput([
             'command' => 'semart:cron:run',
             'job' => $cron->getId(),
             '--schedule_now' => null,
         ]);
+
         $return = $application->run($input, new NullOutput());
         if (0 === $return) {
             $this->addFlash('info', 'sas.page.cron.run_success');

@@ -66,6 +66,7 @@ final class PermissionPut extends AbstractController
         }
 
         $this->service->save($permission);
+
         $this->addFlash('info', 'sas.page.permission.saved');
 
         return new RedirectResponse($this->generateUrl(GetPermission::class, ['id' => $groupId]));

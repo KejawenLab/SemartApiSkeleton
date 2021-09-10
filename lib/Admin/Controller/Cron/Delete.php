@@ -34,6 +34,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($cron);
+
         $this->addFlash('info', 'sas.page.cron.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

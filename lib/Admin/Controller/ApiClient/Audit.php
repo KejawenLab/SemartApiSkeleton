@@ -34,9 +34,6 @@ final class Audit extends AbstractController
     {
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     #[Route(path: 'users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $userId, string $id): Response
     {

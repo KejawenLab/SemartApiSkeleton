@@ -52,7 +52,9 @@ final class CreateApiClient extends AbstractController
         $client = new ApiClient();
         $client->setName($name);
         $client->setUser($user);
+
         $this->addFlash('info', 'sas.page.api_client.saved');
+
         $this->service->save($client);
 
         return new RedirectResponse($this->generateUrl(Profile::class));

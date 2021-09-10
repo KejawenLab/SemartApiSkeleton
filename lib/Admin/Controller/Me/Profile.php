@@ -87,6 +87,7 @@ final class Profile extends AbstractController
         }
 
         $class = new ReflectionClass($user::class);
+
         $request->query->set($this->setting->getPerPageField(), 17);
 
         return $this->render('profile/view.html.twig', [

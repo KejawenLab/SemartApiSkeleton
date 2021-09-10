@@ -44,6 +44,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($client);
+
         $this->addFlash('info', 'sas.page.api_client.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

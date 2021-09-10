@@ -34,6 +34,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($media);
+
         $this->addFlash('info', 'sas.page.media.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

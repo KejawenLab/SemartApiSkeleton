@@ -34,6 +34,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($group);
+
         $this->addFlash('info', 'sas.page.group.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

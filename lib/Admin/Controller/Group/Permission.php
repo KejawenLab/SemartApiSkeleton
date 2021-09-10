@@ -46,6 +46,7 @@ final class Permission extends AbstractController
         }
 
         $request->query->set($this->settingService->getPerPageField(), 10);
+
         $class = new ReflectionClass(Entity::class);
 
         return $this->render('group/permission.html.twig', [

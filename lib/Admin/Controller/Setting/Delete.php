@@ -40,6 +40,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($setting);
+
         $this->addFlash('info', 'sas.page.setting.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));

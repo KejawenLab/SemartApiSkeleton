@@ -37,6 +37,7 @@ final class Download extends AbstractController
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', 'groups', date('YmdHis')));
+
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
 
         return $response;

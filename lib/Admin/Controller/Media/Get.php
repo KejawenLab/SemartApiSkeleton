@@ -52,6 +52,7 @@ final class Get extends AbstractController
             DIRECTORY_SEPARATOR,
             $media->getFileName()
         ));
+
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
         if ($request->query->get('f')) {

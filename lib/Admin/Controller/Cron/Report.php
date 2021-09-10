@@ -32,6 +32,7 @@ final class Report extends AbstractController
     public function __invoke(Request $request, string $id): Response
     {
         $class = new ReflectionClass(CronReport::class);
+
         $request->query->set($this->settingService->getPerPageField(), 10);
 
         return $this->render('cron/report.html.twig', [

@@ -34,6 +34,7 @@ final class Delete extends AbstractController
         }
 
         $this->service->remove($menu);
+
         $this->addFlash('info', 'sas.page.menu.deleted');
 
         return new RedirectResponse($this->generateUrl(Main::class));
