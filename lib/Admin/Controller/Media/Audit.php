@@ -11,7 +11,6 @@ use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,9 +28,6 @@ final class Audit extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     #[Route(path: '/medias/{id}/audit', name: Audit::class, methods: ['GET'], priority: 1)]
     public function __invoke(string $id): Response
     {

@@ -10,7 +10,6 @@ use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,9 +27,6 @@ final class Audit extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     #[Route(path: '/crons/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {

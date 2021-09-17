@@ -4,7 +4,7 @@ MAINTAINER Muhammad Surya Ihsanuddin<surya.iksanudin@gmail.com>
 
 # Install Dependencies
 RUN apk update
-RUN apk add --no-cache supervisor vim autoconf gcc make g++ inotify-tools bash
+RUN apk add --no-cache supervisor vim autoconf gcc make g++ inotify-tools bash git
 RUN apk add --no-cache libzip-dev curl-dev icu-dev oniguruma-dev imap-dev postgresql-dev
 RUN apk add --no-cache libpng-dev openssl-dev nghttp2-dev hiredis-dev rabbitmq-c-dev
 

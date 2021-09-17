@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
@@ -20,7 +18,6 @@ use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
-use ReflectionException;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,11 +40,6 @@ final class Profile extends AbstractController
     ) {
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     */
     #[Route(path: '/me', name: Profile::class, methods: ['GET', 'POST'], priority: -1)]
     public function __invoke(Request $request): Response
     {

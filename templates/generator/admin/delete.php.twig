@@ -27,9 +27,7 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route("/{{ entityPluralDash }}/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: '/{{ entityPluralDash }}/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         ${{ entityLowerize }} = $this->service->get($id);
