@@ -24,9 +24,6 @@ final class GroupRepository extends AbstractRepository implements GroupRepositor
         parent::__construct($registry, Group::class);
     }
 
-    /**
-     * @return null|mixed
-     */
     public function findByCode(string $code)
     {
         $queryBuilder = $this->createQueryBuilder('o');

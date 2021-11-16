@@ -143,65 +143,41 @@ class ApiClientRequest implements ApiClientRequestInterface
         $this->method = $method;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @param mixed[] $headers
-     */
     public function setHeaders(array $headers): void
     {
         $this->headers = $headers;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * @param mixed[] $queries
-     */
     public function setQueries(array $queries): void
     {
         $this->queries = $queries;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getRequests(): array
     {
         return $this->requests;
     }
 
-    /**
-     * @param mixed[] $requests
-     */
     public function setRequests(array $requests): void
     {
         $this->requests = $requests;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getFiles(): array
     {
         return $this->files;
     }
 
-    /**
-     * @param mixed[] $files
-     */
     public function setFiles(array $files): void
     {
         $this->files = $files;
