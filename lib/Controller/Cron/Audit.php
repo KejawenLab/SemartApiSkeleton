@@ -78,9 +78,11 @@ final class Audit extends AbstractFOSRestController
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();
         }
+
         if (!$this->reader->getProvider()->isAuditable(Cron::class)) {
             return $this->view([]);
         }
+
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

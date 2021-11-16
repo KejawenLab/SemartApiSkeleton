@@ -53,6 +53,7 @@ final class Get extends AbstractFOSRestController
         if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
+
         return $this->view($cron);
     }
 }

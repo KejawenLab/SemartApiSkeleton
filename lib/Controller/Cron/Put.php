@@ -72,11 +72,14 @@ final class Put extends AbstractFOSRestController
         if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(CronType::class, $request, $cron);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         $this->service->save($cron);
+
         return $this->view($this->service->get($cron->getId()));
     }
 }

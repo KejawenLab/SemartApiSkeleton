@@ -66,9 +66,11 @@ final class Post extends AbstractFOSRestController
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         /** @var CronInterface $cron */
         $cron = $form->getData();
         $this->service->save($cron);
+
         return $this->view($this->service->get($cron->getId()), Response::HTTP_CREATED);
     }
 }

@@ -42,7 +42,9 @@ final class Delete extends AbstractFOSRestController
         if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
+
         $this->service->remove($cron);
+
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }
