@@ -27,17 +27,18 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/settings", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/settings', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $setting = new Setting();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $setting = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $setting = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $setting = $this->service->get($flash);
                 if (null !== $setting) {
                     $request->getSession()->set('id', $setting->getId());
@@ -51,7 +52,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($setting);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.setting.saved');
 
                 $form = $this->createForm(SettingType::class);

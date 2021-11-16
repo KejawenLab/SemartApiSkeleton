@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;
@@ -27,9 +28,20 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
     public function findByCode(string $code): ?MenuInterface
     {
-        return $this->findOneBy(['code' => StringUtil::uppercase($code)]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('UPPER(o.code)', $queryBuilder->expr()->literal(StringUtil::uppercase($code))));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $code));
+
+        return $query->getOneOrNullResult();
     }
 
+    /**
+     * @return Iterator
+     */
     public function findChilds(MenuInterface $menu): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -41,6 +53,9 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $query->useQueryCache(true);
         $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $menu->getId()));
 
-        return $query->getResult();
+        $menus = $query->getResult();
+        foreach ($menus as $menu) {
+            yield $menu;
+        }
     }
 }

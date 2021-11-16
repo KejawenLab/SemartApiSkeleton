@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -50,7 +51,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
             return true;
         }
 
-        if ($user->getSupervisor() === null) {
+        if (null === $user->getSupervisor()) {
             return $user->getGroup()->getCode() === $this->superAdmin;
         }
 
@@ -59,6 +60,27 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
     public function findByUsername(string $username): ?AppUser
     {
-        return $this->findOneBy(['username' => $username]);
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('LOWER(o.username)', $queryBuilder->expr()->literal(StringUtil::lowercase($username))));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $username));
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findByDeviceId(string $deviceId): ?AppUser
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.deviceId', $queryBuilder->expr()->literal($deviceId)));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $deviceId));
+
+        return $query->getOneOrNullResult();
     }
 }

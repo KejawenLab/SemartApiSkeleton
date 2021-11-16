@@ -6,8 +6,6 @@ namespace KejawenLab\ApiSkeleton\Security\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Iterator;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Security\Model\AuthInterface;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -19,6 +17,8 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -36,11 +36,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private MenuRepositoryInterface $menuRepository,
-        /**
+        /*
          * @var PermissionInitiatorInterface[]
          */
         private iterable $initiators,
-        /**
+        /*
          * @var PermissionRemoverInterface[]
          */
         private iterable $removers,
@@ -90,11 +90,6 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         return $this->repository->findPermission($group, $menu);
     }
 
-    public function getPermissions(GroupInterface $group, iterable $menus): iterable
-    {
-        return $this->repository->findPermissions($group, $menus);
-    }
-
     /**
      * @return Iterator<mixed[]>
      */
@@ -116,6 +111,11 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         yield EntityRemoved::class;
     }
 
+    private function getPermissions(GroupInterface $group, iterable $menus): iterable
+    {
+        return $this->repository->findPermissions($group, $menus);
+    }
+
     /**
      * @return array<string, string>|array<string, null>|array<string, array<int|string, mixed[]>>
      */
@@ -130,15 +130,16 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
         /** @var MenuInterface[] $childs */
         $childs = $this->menuRepository->findChilds($menu);
-        if ([] !== $childs) {
-            $tree['childs'] = [];
-            $permissions = $this->getPermissions($group, $childs);
-            foreach ($permissions as $key => $permission) {
-                /** @var PermissionInterface $permission */
-                if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
-                    $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
-                }
+        $tree['childs'] = [];
+        $permissions = $this->getPermissions($group, $childs);
+        $key = 0;
+        foreach ($permissions as $permission) {
+            /** @var PermissionInterface $permission */
+            if ($permission && ($permission->isViewable() || $permission->isAddable() || $permission->isEditable())) {
+                $tree['childs'][$key] = $this->buildMenu($permission->getMenu(), $permission->getGroup());
             }
+
+            ++$key;
         }
 
         return $tree;

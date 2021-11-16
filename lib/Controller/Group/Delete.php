@@ -14,6 +14,7 @@ use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -43,6 +44,10 @@ final class Delete extends AbstractFOSRestController
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
+        }
+
+        if (GroupInterface::SUPER_ADMIN_ID === $group->getId()) {
+            throw new UnauthorizedHttpException($this->translator->trans('sas.page.error.unauthorized', [], 'pages'));
         }
 
         $this->service->remove($group);

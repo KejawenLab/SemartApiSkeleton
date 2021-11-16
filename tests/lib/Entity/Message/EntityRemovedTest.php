@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Tests\Entity\Message;
 
-use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
+use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use PHPUnit\Framework\TestCase;
 
 /**

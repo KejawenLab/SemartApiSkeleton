@@ -29,45 +29,24 @@
                         </ul>
                         <div class="row">
                             {% for key, data in audits %}
-                                {% if 0 == key % 2 %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1">
-                                            <div class="card-body p-0">
-                                                <ul class="list-group p-0">
-                                                    {% for property in data | keys %}
-                                                        <li class="list-group-item text-primary">
-                                                            {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
-                                                            {% if 'data' == property %}
-                                                                <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
-                                                            {% else %}
-                                                                <a class="float-right">{{ data[property] }}</a>
-                                                            {% endif %}
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card mt-1">
+                                        <div class="card-body p-0">
+                                            <ul class="list-group p-0">
+                                                {% for property in data | keys %}
+                                                    <li class="list-group-item text-primary">
+                                                        {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
+                                                        {% if 'data' == property %}
+                                                            <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
+                                                        {% else %}
+                                                            <a class="float-right">{{ data[property] }}</a>
+                                                        {% endif %}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
                                         </div>
                                     </div>
-                                {% else %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1">
-                                            <div class="card-body p-0">
-                                                <ul class="list-group p-0">
-                                                    {% for property in data | keys %}
-                                                        <li class="list-group-item text-primary">
-                                                            {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
-                                                            {% if 'data' == property %}
-                                                                <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
-                                                            {% else %}
-                                                                <a class="float-right">{{ data[property] }}</a>
-                                                            {% endif %}
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
+                                </div>
                             {% endfor %}
                         </div>
                     </div>

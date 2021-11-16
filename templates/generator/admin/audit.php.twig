@@ -31,9 +31,7 @@ final class Audit extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @Route("/{{ entityPluralDash }}/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
-     */
+    #[Route(path: '/{{ entityPluralDash }}/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {

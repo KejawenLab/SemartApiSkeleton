@@ -41,7 +41,8 @@ final class PasswordHistoryValidator extends ConstraintValidator
             return;
         }
 
-        if (($token = $this->tokenStorage->getToken()) === null) {
+        $token = $this->tokenStorage->getToken();
+        if (!$token instanceof TokenInterface) {
             throw new UnexpectedValueException($token, TokenInterface::class);
         }
 
@@ -55,18 +56,14 @@ final class PasswordHistoryValidator extends ConstraintValidator
             throw new UnexpectedValueException($token, UserInterface::class);
         }
 
-        $passwords = $this->service->getPasswords($object);
-        $invalid = count($passwords);
         $user = new User();
-        foreach ($passwords as $password) {
+        foreach ($this->service->getPasswords($object) as $password) {
             $user->setPassword($password->getPassword());
-            if (!$this->encoder->isPasswordValid($user, $value)) {
-                --$invalid;
-            }
-        }
+            if ($this->encoder->isPasswordValid($user, $value)) {
+                $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
 
-        if (0 < $invalid) {
-            $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
+                break;
+            }
         }
     }
 }

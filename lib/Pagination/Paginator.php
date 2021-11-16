@@ -26,7 +26,7 @@ final class Paginator
 
     public function __construct(
         SettingService $setting,
-        /**
+        /*
         * @var QueryExtensionInterface[]
         */
         private iterable $queryExtension,
@@ -40,6 +40,7 @@ final class Paginator
     /**
      * @throws NonUniqueResultException
      * @throws NoResultException
+     *
      * @return array<string, mixed[]>|array<string, float>|array<string, int>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Tests\Entity;
 
-use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
-use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Entity\CronReport;
 use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use PHPUnit\Framework\TestCase;

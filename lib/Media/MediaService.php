@@ -47,6 +47,6 @@ final class MediaService extends AbstractService implements ServiceInterface
         $fileName = array_pop($file);
         $folder = trim(implode('/', $file), '/');
 
-        return $this->repository->findOneBy(['fileName' => $fileName, 'folder' => $folder]);
+        return $this->repository->findByFilename($fileName, $folder);
     }
 }

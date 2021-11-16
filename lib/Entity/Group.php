@@ -36,7 +36,7 @@ class Group implements GroupInterface
      * @ORM\Id()
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     * @ORM\CustomIdGenerator(class="KejawenLab\ApiSkeleton\Security\GroupIdGenerator")
      *
      * @Groups({"read"})
      *

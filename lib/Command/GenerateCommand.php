@@ -77,13 +77,6 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
         $reflection = new ReflectionClass($class);
         $application = $this->getApplication();
 
-        $io->title('Running Schema Updater');
-        $update = $application->find('doctrine:schema:update');
-        $update->run(new ArrayInput([
-            'command' => 'doctrine:schema:update',
-            '--force' => null,
-        ]), $output);
-
         $io->title(sprintf('Generate classes for <info>%s</info>', $class));
         $this->generator->generate($reflection, $scope, $output, $input->getOption('folder') ?: '');
 

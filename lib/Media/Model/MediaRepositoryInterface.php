@@ -11,4 +11,5 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 interface MediaRepositoryInterface extends PaginatableRepositoryInterface
 {
+    public function findByFilename(string $fileName, string $folder = null): ?MediaInterface;
 }

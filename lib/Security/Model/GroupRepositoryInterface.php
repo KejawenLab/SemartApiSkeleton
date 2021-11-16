@@ -11,4 +11,5 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 interface GroupRepositoryInterface extends PaginatableRepositoryInterface
 {
+    public function findByCode(string $code);
 }

@@ -41,4 +41,21 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
 
         return $query->getOneOrNullResult();
     }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findPublicSetting(string $id): ?SettingInterface
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.id', $queryBuilder->expr()->literal($id)));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('o.public', $queryBuilder->expr()->literal(true)));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s:public', self::class, __METHOD__, $id));
+
+        return $query->getOneOrNullResult();
+    }
 }

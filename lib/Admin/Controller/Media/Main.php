@@ -27,9 +27,7 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/medias", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/medias', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $media = new Media();
@@ -37,7 +35,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($media);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.media.saved');
             }
         }

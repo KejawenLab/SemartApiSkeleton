@@ -10,7 +10,6 @@ use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
-use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +27,7 @@ final class Audit extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @Route(path="/users/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
-     *
-     * @throws InvalidArgumentException
-     */
+    #[Route(path: '/users/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {

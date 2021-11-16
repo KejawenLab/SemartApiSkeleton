@@ -27,17 +27,18 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/groups", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/groups', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $group = new Group();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $group = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $group = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $group = $this->service->get($flash);
                 if (null !== $group) {
                     $request->getSession()->set('id', $group->getId());
@@ -51,7 +52,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($group);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.group.saved');
             }
         }

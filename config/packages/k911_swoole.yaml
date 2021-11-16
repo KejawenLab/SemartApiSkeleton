@@ -9,3 +9,10 @@ swoole:
         hmr: inotify
         services:
             session_cookie_event_listener: true
+            entity_manager_handler: true
+        settings:
+            reactor_count: 4
+            worker_count: 8
+            task_worker_count: 4
+            buffer_output_size: 2097152
+            package_max_length: 8388608

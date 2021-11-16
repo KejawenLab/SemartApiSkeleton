@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -26,6 +27,10 @@ final class UpdateProfileType extends AbstractType
         $builder->add('file', FileType::class, [
             'required' => false,
             'label' => 'sas.form.field.user.profileImage',
+            'constraints' => new File([
+                'maxSize' => '1024k',
+                'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
+            ]),
             'documentation' => [
                 'type' => 'string',
                 'format' => 'binary',

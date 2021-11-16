@@ -2,9 +2,9 @@
 
 namespace KejawenLab\ApiSkeleton\Security;
 
-use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use DateTimeImmutable;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
@@ -48,7 +48,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return new Passport(
-            new UserBadge($credentials['username'], fn(string $userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
+            new UserBadge($credentials['username'], fn (string $userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
             new PasswordCredentials($credentials['password']),
         );
     }

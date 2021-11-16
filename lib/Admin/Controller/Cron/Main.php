@@ -27,17 +27,18 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/crons", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/crons', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $cron = new Cron();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $cron = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $cron = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $cron = $this->service->get($flash);
                 if (null !== $cron) {
                     $request->getSession()->set('id', $cron->getId());
@@ -51,7 +52,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($cron);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.cron.saved');
             }
         }

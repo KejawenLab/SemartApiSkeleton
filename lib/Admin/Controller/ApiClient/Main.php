@@ -35,9 +35,7 @@ final class Main extends AbstractController
     ) {
     }
 
-    /**
-     * @Route(path="/users/{userId}/api-clients", name=Main::class, methods={"GET", "POST"}, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
-     */
+    #[Route(path: '/users/{userId}/api-clients', name: Main::class, methods: ['GET', 'POST'], defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
     public function __invoke(Request $request, string $userId): Response
     {
         $user = $this->userService->get($userId);
@@ -53,7 +51,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($client);
+                $this->service->save($form->getData());
 
                 $this->addFlash('info', 'sas.page.api_client.saved');
             }

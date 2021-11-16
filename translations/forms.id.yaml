@@ -51,6 +51,7 @@ sas:
             api_request_logs: 'Riwayat Permintaan'
             api_key: 'Daftar Token API'
             permission: 'Hak Akses'
+            add: 'Tambah'
             submit: 'Simpan'
             back: 'Kembali'
             cancel: 'Batal'

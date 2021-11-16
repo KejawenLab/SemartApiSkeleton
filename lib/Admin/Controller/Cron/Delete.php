@@ -23,9 +23,7 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/crons/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: '/crons/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);

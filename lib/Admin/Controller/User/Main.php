@@ -27,17 +27,18 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/users", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/users', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $user = new User();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $user = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $user = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $user = $this->service->get($flash);
                 if (null !== $user) {
                     $request->getSession()->set('id', $user->getId());
@@ -51,7 +52,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($user);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.user.saved');
 
                 $form = $this->createForm(UserType::class);

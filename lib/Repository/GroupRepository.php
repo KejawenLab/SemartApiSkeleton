@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use KejawenLab\ApiSkeleton\Util\StringUtil;
 
 /**
  * @method Group|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,5 +22,21 @@ final class GroupRepository extends AbstractRepository implements GroupRepositor
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Group::class);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function findByCode(string $code)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('UPPER(o.code)', $queryBuilder->expr()->literal(StringUtil::uppercase($code))));
+        $queryBuilder->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $code));
+
+        return $query->getOneOrNullResult();
     }
 }

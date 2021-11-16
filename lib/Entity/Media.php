@@ -21,7 +21,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=MediaRepository::class)
  * @ORM\Table(name="core_media")
  *
- *
  * @UniqueEntity(fields={"fileName"})
  *
  * @Vich\Uploadable
@@ -72,6 +71,7 @@ class Media implements MediaInterface
      * @Vich\UploadableField(mapping="media", fileNameProperty="fileName")
      *
      * @Assert\NotBlank()
+     * @Assert\File(maxSize="1024k", mimeTypes = {"image/png", "image/jpg", "image/jpeg"})
      */
     private ?File $file = null;
 
@@ -144,7 +144,7 @@ class Media implements MediaInterface
         return $this->file;
     }
 
-    public function setFile(File $file): void
+    public function setFile(?File $file): void
     {
         $this->file = $file;
     }

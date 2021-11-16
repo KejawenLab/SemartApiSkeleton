@@ -11,7 +11,7 @@ final class AuditItem
 {
     public function __construct(
         private string $type,
-        /**
+        /*
          * @var array<string, mixed>
          */
         private array $data,

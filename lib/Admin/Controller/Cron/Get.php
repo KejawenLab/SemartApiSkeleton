@@ -29,9 +29,7 @@ final class Get extends AbstractController
         parent::__construct($this->service);
     }
 
-    /**
-     * @Route(path="/crons/{id}", name=Get::class, methods={"GET"})
-     */
+    #[Route(path: '/crons/{id}', name: Get::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);

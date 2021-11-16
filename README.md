@@ -107,7 +107,7 @@ CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
 
 ###> symfony/messenger ###
 # Choose one of the transports below
-# MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages
+MESSENGER_TRANSPORT_DSN=amqp://guest:guest@messenger:5672/%2f/messages
 # MESSENGER_TRANSPORT_DSN=doctrine://default
 # MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages
 ###< symfony/messenger ###
@@ -127,6 +127,8 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:en
 > * Abaikan warning atau error yang terjadi
 > 
 > * Ubah nilai `DATABASE_PASSWORD` pada file `.env` sesuai dengan hasil perintah di atas
+> 
+> *  Restart container
 >
 > * Jalankan perintah berikut:
 >
@@ -134,8 +136,8 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:en
 ```bash
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
 docker-compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
 ```
@@ -291,33 +293,47 @@ class Todo implements TodoInterface
 
 Class `KejawenLab\Application\Repository\TodoRepository` untuk sekarang belum ada, namun jangan khawatir, SemartApiSkeleton akan mengenerate class tersebut nanti.
 
+#### Daftarkan sebagai auditable
+
+Buka file `config/packages/dh_auditor.yaml` dan daftarkan entity sebagai berikut:
+
+```yaml
+dh_auditor:
+    providers:
+        doctrine:
+            entities:
+                ...
+                KejawenLab\Application\Entity\Todo: ~
+```
+
 #### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
 
 ```bash
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
 ```
 
-![Generate Command](doc/assets/generate_command.png)
+![Generate Command](doc/assets/generate-command.png)
 
 Setelah menjalankan perintah di atas maka susunan folder `Todo/Model` akan menjadi seperti berikut:
 
-![After Generate](doc/assets/after_generate.png)
+![After Generate](doc/assets/after-generate.png)
 
 Dan jika kamu login ke Semart Api Skeleton maka akan muncul menu `Todo` pada sidebar sebagai berikut:
 
-![After Generate](doc/assets/sidebar_todo.png)
+![After Generate](doc/assets/side-menu-todo.png)
 
 Dan ketika membuka menu `Menu` maka record `Todo` pun akan muncul sebagai berikut:
 
-![Menu](doc/assets/menu_todo.png)
+![Menu](doc/assets/menu-todo.png)
 
 Dan pastinya kamu juga bisa set permission untuk `Todo` pada menu Hak Akses (`Group` -> `Lihat` -> `Hak Akses`) sebagai berikut:
 
-![Todo Permission](doc/assets/rbac_todo.png)
+![Todo Permission](doc/assets/permission-todo.png)
 
 Dan jika kamu mengakses halaman Api Documentation maka akan muncul section `Todo` sebagai berikut:
 
-![Api Doc](doc/assets/api_todo.png)
+![Api Doc](doc/assets/api-todo.png)
 
 Sangat mudah sekali bukan? Selanjutnya kamu harus restart dulu docker-nya agar class-class yang tadi digenerate dan didaftarkan sebagai service. Hal ini perlu dilakukan karena kita menggunakan swoole. 
 
@@ -325,7 +341,7 @@ Sangat mudah sekali bukan? Selanjutnya kamu harus restart dulu docker-nya agar c
 
 Ketika kamu mengetik menu `Todo` pada sidebar, maka akan muncul tampilan sebagai berikut:
 
-![Todo List](doc/assets/todo_list.png)
+![Todo List](doc/assets/todo-page.png)
 
 Terdapat beberapa text yang aneh? Santai, kamu cukup buka file `translations/pages.id.yaml` dan tambahkan baris berikut:
 
@@ -349,11 +365,7 @@ Selanjut, kamu juga perlu mengubah translasi pada file `translations/tables.id.y
                 done: 'Selesai?'
 ```
 
-Dan ketika kamu mengeklik menu pilihan `Tambah Baru` pun akan muncul hal yang sama:
-
-![Todo Add](doc/assets/todo_add.png)
-
-Kamu bisa mengubahnya pada file `translations/forms.id.yaml` dan tambahkan baris berikut:
+Selanjutnya, kamu juga perlu mengubah translasi pada file `translations/forms.id.yaml` dan tambahkan baris berikut:
 
 ```yaml
             todo:
@@ -422,7 +434,7 @@ Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
 
 Secara default, SemartApiSkeleton akan mengubah `bool` menjadi `string` (direpresentasikan dengan `0` dan `1`) seperti pada daftar todo berikut:
 
-![Todo List](doc/assets/todo_template.png)
+![Todo List](doc/assets/todo-template.png)
 
 Kita dapat mengubahnya melalui file `templates/todo/all.html.twig` sebagai berikut:
 

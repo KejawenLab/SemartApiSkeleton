@@ -44,7 +44,7 @@ final class SettingService extends AbstractService implements ServiceInterface
 
     public function getPublicSetting(string $id): ?SettingInterface
     {
-        return $this->repository->findOneBy(['id' => $id, 'public' => true]);
+        return $this->repository->findPublicSetting($id);
     }
 
     public function getCacheLifetime(): int
@@ -65,5 +65,10 @@ final class SettingService extends AbstractService implements ServiceInterface
     public function getRecordPerPage(): int
     {
         return (int) $this->getSetting('PER_PAGE')->getValue();
+    }
+
+    public function getMaxApiPerUser(): int
+    {
+        return (int) $this->getSetting('MAX_API_PER_USER')->getValue();
     }
 }

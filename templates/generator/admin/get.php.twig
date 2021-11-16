@@ -28,14 +28,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private {{ entityHumanize }}Service $service, private uditService $audit, private Reader $reader)
+    public function __construct(private {{ entityHumanize }}Service $service, private AuditService $audit, private Reader $reader)
     {
         parent::__construct($this->service);
     }
 
-    /**
-     * @Route("/{{ entityPluralDash }}/{id}", name=Get::class, methods={"GET"})
-     */
+    #[Route(path: '/{{ entityPluralDash }}/{id}', name: Get::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         ${{ entityLowerize }} = $this->service->get($id);
@@ -50,6 +48,6 @@ final class Get extends AbstractController
             $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 1);
         }
 
-        return $this->renderAudit($audit, new ReflectionClass({{ entityHumanize }}::class));
+        return $this->renderDetail($audit, new ReflectionClass({{ entityHumanize }}::class));
     }
 }

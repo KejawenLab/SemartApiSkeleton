@@ -15,7 +15,6 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,11 +33,7 @@ final class Audit extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="users/{userId}/api-clients/{id}/audit", name=Audit::class, methods={"GET"}, priority=-255)
-     *
-     * @throws InvalidArgumentException
-     */
+    #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);

@@ -23,9 +23,7 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/settings/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: '/settings/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $setting = $this->service->get($id);

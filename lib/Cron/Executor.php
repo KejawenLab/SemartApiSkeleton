@@ -38,6 +38,8 @@ final class Executor extends Base
             }
 
             $this->logger->info(sprintf('Locking "%s" schedule', $cron->getName()));
+
+            /** @var CronInterface $cron */
             $cron = $this->service->get($cron->getId());
             if ($cron->isRunning()) {
                 $this->logger->info(sprintf('"%s" schedule is already running in other machine', $cron->getName()));
@@ -49,6 +51,7 @@ final class Executor extends Base
             $this->service->save($cron);
 
             $report->addJobReport($set->getReport());
+
             $this->logger->info(sprintf('Running "%s" schedule', $cron->getName()));
             $set->run();
 

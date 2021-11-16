@@ -27,17 +27,18 @@ final class Main extends AbstractController
         parent::__construct($this->service, $paginator);
     }
 
-    /**
-     * @Route(path="/menus", name=Main::class, methods={"GET", "POST"})
-     */
+    #[Route(path: '/menus', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $menu = new Menu();
         if ($request->isMethod(Request::METHOD_POST)) {
-            $menu = $this->service->get($request->getSession()->get('id'));
+            $id = $request->getSession()->get('id');
+            if (null !== $id) {
+                $menu = $this->service->get($id);
+            }
         } else {
-            $flashs = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashs as $flash) {
+            $flashes = $request->getSession()->getFlashBag()->get('id');
+            foreach ($flashes as $flash) {
                 $menu = $this->service->get($flash);
                 if (null !== $menu) {
                     $request->getSession()->set('id', $menu->getId());
@@ -51,7 +52,7 @@ final class Main extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $this->service->save($menu);
+                $this->service->save($form->getData());
                 $this->addFlash('info', 'sas.page.menu.saved');
 
                 $form = $this->createForm(MenuType::class);

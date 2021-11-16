@@ -17,75 +17,39 @@
                     <div class="card-body p-1">
                         <div class="row">
                             {% for key, data in paginator['items'] %}
-                                {% if 0 == key % 2 %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1">
-                                            <div class="card-body p-0">
-                                                <ul class="list-group p-0">
-                                                    <li class="list-group-item text-primary">
-                                                        No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
-                                                    </li>
-                                                    {% for property in properties %}
-                                                        {% if 'id' != property.name %}
-                                                            <li class="list-group-item text-primary">
-                                                                {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                                                {% if
-                                                                    'headers' == property.name or
-                                                                    'queries' == property.name or
-                                                                    'requests' == property.name or
-                                                                    'files' == property.name
-                                                                %}
-                                                                    <a class="float-right">
-                                                                        <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
-                                                                    </a>
-                                                                {% elseif 'apiClient' == property.name %}
-                                                                    {% set apiClient = attribute(data, property.name) %}
-                                                                    <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
-                                                                {% else %}
-                                                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                                                {% endif %}
-                                                            </li>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card mt-1">
+                                        <div class="card-body p-0">
+                                            <ul class="list-group p-0">
+                                                <li class="list-group-item text-primary">
+                                                    No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                                </li>
+                                                {% for property in properties %}
+                                                    {% if 'id' != property.name %}
+                                                        <li class="list-group-item text-primary">
+                                                            {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
+                                                            {% if
+                                                                'headers' == property.name or
+                                                                'queries' == property.name or
+                                                                'requests' == property.name or
+                                                                'files' == property.name
+                                                            %}
+                                                                <a class="float-right">
+                                                                    <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
+                                                                </a>
+                                                            {% elseif 'apiClient' == property.name %}
+                                                                {% set apiClient = attribute(data, property.name) %}
+                                                                <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
+                                                            {% else %}
+                                                                <a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
                                         </div>
                                     </div>
-                                {% else %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <div class="card mt-1">
-                                            <div class="card-body p-0">
-                                                <ul class="list-group p-0">
-                                                    <li class="list-group-item text-primary">
-                                                        No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
-                                                    </li>
-                                                    {% for property in properties %}
-                                                        {% if 'id' != property.name %}
-                                                            <li class="list-group-item text-primary">
-                                                                {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                                                {% if
-                                                                    'headers' == property.name or
-                                                                    'queries' == property.name or
-                                                                    'requests' == property.name or
-                                                                    'files' == property.name
-                                                                %}
-                                                                    <a class="float-right">
-                                                                        <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
-                                                                    </a>
-                                                                {% elseif 'apiClient' == property.name %}
-                                                                    {% set apiClient = attribute(data, property.name) %}
-                                                                    <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
-                                                                {% else %}
-                                                                    <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                                                {% endif %}
-                                                            </li>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
+                                </div>
                             {% endfor %}
                         </div>
                     </div>

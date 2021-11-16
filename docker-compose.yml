@@ -15,6 +15,7 @@ services:
         links:
             - session
             - db
+            - messenger
         depends_on:
             - session
     db:
@@ -30,6 +31,10 @@ services:
             - db
     session:
         image: redis:alpine
+    messenger:
+        image: rabbitmq:management-alpine
+        ports:
+            - "12345:15672"
 volumes:
     cache:
     vendor:

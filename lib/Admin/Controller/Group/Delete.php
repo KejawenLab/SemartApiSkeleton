@@ -23,14 +23,18 @@ final class Delete extends AbstractController
     {
     }
 
-    /**
-     * @Route(path="/groups/{id}/delete", name=Delete::class, methods={"GET"})
-     */
+    #[Route(path: '/groups/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
             $this->addFlash('error', 'sas.page.group.not_found');
+
+            return new RedirectResponse($this->generateUrl(Main::class));
+        }
+
+        if (GroupInterface::SUPER_ADMIN_ID === $group->getId()) {
+            $this->addFlash('error', 'sas.page.error.unauthorized');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }

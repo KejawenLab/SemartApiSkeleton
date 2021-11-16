@@ -6,6 +6,7 @@ doctrine:
         port: '%env(resolve:DATABASE_PORT)%'
         user: '%env(resolve:DATABASE_USER)%'
         charset: '%env(resolve:DATABASE_CHARSET)%'
+        schema_filter: ~^(?!(core_|refresh_tokens|messenger_messages))~
         default_table_options:
             charset: '%env(resolve:DATABASE_CHARSET)%'
     orm:

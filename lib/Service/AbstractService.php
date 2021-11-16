@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Service;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityPersisted;
-use KejawenLab\ApiSkeleton\Entity\Message\EntityRemoved;
+use KejawenLab\ApiSkeleton\Entity\EntityInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
+use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
+use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceableRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Ramsey\Uuid\Uuid;
+use Swoole\Coroutine;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -47,18 +49,26 @@ abstract class AbstractService implements ServiceInterface
         return $this->repository->find($id);
     }
 
-    public function save(object $object): void
+    public function save(EntityInterface $object): void
     {
-        $this->repository->persist($object);
-        $this->messageBus->dispatch(new EntityPersisted($object));
-        $this->repository->commit();
+        $repository = $this->repository;
+        $bus = $this->messageBus;
+        Coroutine::create(function () use ($repository, $bus, $object): void {
+            $repository->persist($object);
+            $bus->dispatch(new EntityPersisted($object));
+            $repository->commit();
+        });
     }
 
-    public function remove(object $object): void
+    public function remove(EntityInterface $object): void
     {
-        $this->repository->remove($object);
-        $this->messageBus->dispatch(new EntityRemoved($object));
-        $this->repository->commit();
+        $repository = $this->repository;
+        $bus = $this->messageBus;
+        Coroutine::create(function () use ($repository, $bus, $object): void {
+            $repository->remove($object);
+            $bus->dispatch(new EntityRemoved($object));
+            $repository->commit();
+        });
     }
 
     public function getQueryBuilder(): QueryBuilder
