@@ -37,7 +37,6 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     *
      * @Cache(expires="+1 minute", public=false)
      *
      * @OA\Tag(name="Api Client")
@@ -64,6 +63,7 @@ final class Report extends AbstractFOSRestController
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClientRequest::class));
     }
 }

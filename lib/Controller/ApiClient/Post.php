@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
@@ -38,7 +39,6 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Api Client")
      * @OA\RequestBody(
      *     content={
@@ -67,21 +67,24 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Post(data: '/users/{userId}/api-clients', name: Post::class)]
+    #[Route(data: '/users/{userId}/api-clients', name: Post::class)]
     public function __invoke(Request $request, string $userId) : View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(ApiClientType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         /** @var ApiClientInterface $client */
         $client = $form->getData();
         $client->setUser($user);
         $this->service->save($client);
+
         return $this->view($this->service->get($client->getId()), Response::HTTP_CREATED);
     }
 }

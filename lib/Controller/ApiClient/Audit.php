@@ -87,12 +87,15 @@ final class Audit extends AbstractFOSRestController
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();
         }
+
         if (!$this->reader->getProvider()->isAuditable(ApiClient::class)) {
             return $this->view([]);
         }
+
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

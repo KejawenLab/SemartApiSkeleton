@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
@@ -33,7 +34,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Api Client")
      * @OA\Response(
      *     response=200,
@@ -51,17 +51,19 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/users/{userId}/api-clients/{id}', name: Get::class)]
+    #[Route(data: '/users/{userId}/api-clients/{id}', name: Get::class)]
     public function __invoke(string $userId, string $id) : View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $apiClient = $this->service->get($id);
         if (!$apiClient instanceof ApiClientInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.api_client.not_found', [], 'pages'));
         }
+
         return $this->view($apiClient);
     }
 }

@@ -36,7 +36,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Api Client")
      * @OA\Parameter(
      *     name="page",
@@ -77,6 +76,7 @@ final class GetAll extends AbstractFOSRestController
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class));
     }
 }
