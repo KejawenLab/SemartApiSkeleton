@@ -17,9 +17,6 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 {
     protected const MICRO_CACHE = 3;
 
-    /**
-     * @return mixed|null
-     */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');

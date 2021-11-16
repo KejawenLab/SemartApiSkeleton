@@ -27,9 +27,6 @@ abstract class AbstractService implements ServiceInterface
     ) {
     }
 
-    /**
-     * @return mixed[]
-     */
     public function all(): array
     {
         return $this->repository->findAll();

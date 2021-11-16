@@ -35,9 +35,6 @@ final class MenuService extends AbstractService implements ServiceInterface
         return $this->repository->findByCode($code);
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getParentMenu(): iterable
     {
         if (($group = $this->getGroup()) === null) {
@@ -59,9 +56,6 @@ final class MenuService extends AbstractService implements ServiceInterface
         return [] !== iterator_to_array($childMenus, false);
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getChildsMenu(MenuInterface $menu): iterable
     {
         if (($group = $this->getGroup()) === null) {
