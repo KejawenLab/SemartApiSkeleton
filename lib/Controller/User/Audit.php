@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Controller\User;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\User;
@@ -30,7 +30,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/users/{id}/audit", name=Audit::class, priority=-255)
      *
      * @Cache(expires="+17 minute", public=false)
      *
@@ -74,16 +73,15 @@ final class Audit extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[Get(data: '/users/{id}/audit', name: Audit::class, priority: -255)]
+    public function __invoke(string $id) : View
     {
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();
         }
-
         if (!$this->reader->getProvider()->isAuditable(User::class)) {
             return $this->view([]);
         }
-
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

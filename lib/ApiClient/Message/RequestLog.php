@@ -46,7 +46,7 @@ final class RequestLog
 
     public function getApiClientId(): string
     {
-        return (string) $this->apiClientId;
+        return $this->apiClientId;
     }
 
     public function getPath(): string
@@ -59,21 +59,33 @@ final class RequestLog
         return $this->method;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getRequests(): array
     {
         return $this->requests;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getFiles(): array
     {
         return $this->files;

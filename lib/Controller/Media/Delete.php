@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
@@ -28,25 +27,22 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/medias/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Response(
      *     response=204,
      *     description="Delete media"
      * )
-     *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/medias/{id}', name: Delete::class)]
+    public function __invoke(string $id) : View
     {
         $media = $this->service->get($id);
         if (!$media instanceof MediaInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
-
         $this->service->remove($media);
-
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

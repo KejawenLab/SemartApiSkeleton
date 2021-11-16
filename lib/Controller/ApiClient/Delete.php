@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
@@ -33,17 +32,15 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/users/{userId}/api-clients/{id}", name=Delete::class)
-     *
      * @OA\Tag(name="Api Client")
      * @OA\Response(
      *     response=204,
      *     description="Api client deletec"
      * )
-     *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $userId, string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/users/{userId}/api-clients/{id}', name: Delete::class)]
+    public function __invoke(string $userId, string $id) : View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {

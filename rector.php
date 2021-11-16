@@ -29,13 +29,29 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(AnnotationToAttributeRector::class)
         ->call('configure', [[
             AnnotationToAttributeRector::ANNOTATION_TO_ATTRIBUTE => ValueObjectInliner::inline([
-                // @see https://symfony.com/blog/new-in-symfony-5-2-php-8-attributes
                 new AnnotationToAttribute(
                     'Symfony\Component\Routing\Annotation\Route',
-                    'Symfony\Component\Routing\Annotation\Route'
+                    'Symfony\Component\Routing\Annotation\Route',
+                ),
+                new AnnotationToAttribute(
+                    'FOS\RestBundle\Controller\Annotations\Get',
+                    'FOS\RestBundle\Controller\Annotations\Get',
+                ),
+                new AnnotationToAttribute(
+                    'FOS\RestBundle\Controller\Annotations\Post',
+                    'FOS\RestBundle\Controller\Annotations\Post',
+                ),
+                new AnnotationToAttribute(
+                    'FOS\RestBundle\Controller\Annotations\Put',
+                    'FOS\RestBundle\Controller\Annotations\Put',
+                ),
+                new AnnotationToAttribute(
+                    'FOS\RestBundle\Controller\Annotations\Delete',
+                    'FOS\RestBundle\Controller\Annotations\Delete',
                 ),
             ]),
-        ]]);
+        ]])
+    ;
 
     // tidify lines after apply annotation to attribute that make remove lines
     // this may need to run rector twice as first is apply the AnnotationToAttributeRector

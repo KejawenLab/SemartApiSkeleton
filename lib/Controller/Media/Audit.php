@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Controller\Media;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\Media;
@@ -31,7 +31,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/medias/{id}/audit", name=Audit::class, priority=-255)
      *
      * @Cache(expires="+17 minute", public=false)
      *
@@ -75,17 +74,16 @@ final class Audit extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[Get(data: '/medias/{id}/audit', name: Audit::class, priority: -255)]
+    public function __invoke(string $id) : View
     {
         $entity = $this->service->get($id);
         if (!$entity instanceof MediaInterface) {
             throw new NotFoundHttpException();
         }
-
         if (!$this->reader->getProvider()->isAuditable(Media::class)) {
             return $this->view([]);
         }
-
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

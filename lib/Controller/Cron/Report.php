@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronReportService;
 use KejawenLab\ApiSkeleton\Entity\CronReport;
@@ -29,7 +29,6 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/cronjobs/{id}/logs", name=Report::class, priority=-27)
      *
      * @Cache(expires="+1 minute", public=false)
      *
@@ -50,7 +49,8 @@ final class Report extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    #[Get(data: '/cronjobs/{id}/logs', name: Report::class, priority: -27)]
+    public function __invoke(Request $request, string $id) : View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, CronReport::class));
     }

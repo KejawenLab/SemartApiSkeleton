@@ -24,13 +24,11 @@ final class Paginator
 
     private int $cacheLifetime;
 
-    public function __construct(
-        SettingService $setting,
-        /*
-        * @var QueryExtensionInterface[]
-        */
-        private iterable $queryExtension,
-    ) {
+    /**
+     * @param QueryExtensionInterface[] $queryExtension
+     */
+    public function __construct(SettingService $setting, private iterable $queryExtension)
+    {
         $this->pageField = $setting->getPageField();
         $this->perPageField = $setting->getPerPageField();
         $this->perPageDefault = $setting->getRecordPerPage();
@@ -38,9 +36,10 @@ final class Paginator
     }
 
     /**
-     * @throws NonUniqueResultException
-     * @throws NoResultException
      *
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      * @return array<string, mixed[]>|array<string, float>|array<string, int>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array

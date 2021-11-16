@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Menu as Entity;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -33,7 +33,6 @@ final class Menu extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/me/menus", name=Menu::class, priority=1)
      *
      * @OA\Tag(name="Profile")
      * @OA\Response(
@@ -51,13 +50,13 @@ final class Menu extends AbstractFOSRestController
      * )
      * @Security(name="Bearer")
      */
-    public function __invoke(): View
+    #[Get(data: '/me/menus', name: Menu::class, priority: 1)]
+    public function __invoke() : View
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
-
         return $this->view($this->service->getByUser($this->userProviderFactory->getRealUser($user)));
     }
 }

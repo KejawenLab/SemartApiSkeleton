@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Permission;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -39,7 +39,6 @@ final class PermissionPut extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Put("/groups/{id}/permissions", name=PermissionPut::class)
      *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(
@@ -69,32 +68,28 @@ final class PermissionPut extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $id): View
+    #[Put(data: '/groups/{id}/permissions', name: PermissionPut::class)]
+    public function __invoke(Request $request, string $id) : View
     {
         $group = $this->groupService->get($id);
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
-
         $form = $this->formFactory->submitRequest(PermissionType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
-
         /** @var Permission $data */
         $data = $form->getData();
         $permission = $this->permissionService->getPermission($group, $data->getMenu());
         if (!$permission instanceof PermissionInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.permission.not_found', [], 'pages'));
         }
-
         $permission->setAddable($data->isAddable());
         $permission->setEditable($data->isEditable());
         $permission->setViewable($data->isViewable());
         $permission->setDeletable($data->isDeletable());
-
         $this->permissionService->save($permission);
-
         return $this->view($permission);
     }
 }

@@ -13,12 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class GeneratorFactory
 {
-    public function __construct(
-        /*
-         * @var GeneratorInterface[]
-         */
-        private iterable $generators
-    ) {
+    /**
+     * @param GeneratorInterface[] $generators
+     */
+    public function __construct(private iterable $generators)
+    {
     }
 
     public function generate(ReflectionClass $class, string $scope, OutputInterface $output, ?string $folder = null): void

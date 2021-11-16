@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -29,7 +28,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/groups/{id}", name=Get::class)
      *
      * @OA\Tag(name="Group")
      * @OA\Response(
@@ -48,13 +46,13 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/groups/{id}', name: Get::class)]
+    public function __invoke(string $id) : View
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
-
         return $this->view($group);
     }
 }

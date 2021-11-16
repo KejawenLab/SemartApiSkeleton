@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\DataFixtures;
 
+use ReflectionProperty;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
@@ -53,7 +54,7 @@ abstract class AbstractFixture extends Base
                         $accessor->setValue($entity, $key, $value);
                     } catch (NoSuchPropertyException) {
                         if ('id' === $key && $entity instanceof GroupInterface)  {
-                            $reflect = new \ReflectionProperty($entity, $key);
+                            $reflect = new ReflectionProperty($entity, $key);
                             $reflect->setAccessible(true);
                             $reflect->setValue($entity, Uuid::fromString(GroupInterface::SUPER_ADMIN_ID));
                         }

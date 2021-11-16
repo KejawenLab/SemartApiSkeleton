@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -28,25 +27,22 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/cronjobs/{id}", name=Delete::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=204,
      *     description="Delete cron"
      * )
-     *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/cronjobs/{id}', name: Delete::class, priority: -7)]
+    public function __invoke(string $id) : View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
-
         $this->service->remove($cron);
-
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
@@ -25,7 +25,6 @@ final class PublicGetSetting extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings/public/{id}", name=PublicGetSetting::class, priority=1)
      *
      * @OA\Tag(name="Setting")
      * @OA\Response(
@@ -42,13 +41,13 @@ final class PublicGetSetting extends AbstractFOSRestController
      *     }
      * )
      */
-    public function __invoke(string $id): View
+    #[Get(data: '/settings/public/{id}', name: PublicGetSetting::class, priority: 1)]
+    public function __invoke(string $id) : View
     {
         $setting = $this->service->getPublicSetting($id);
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
-
         return $this->view($setting);
     }
 }

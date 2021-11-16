@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
@@ -28,7 +28,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/medias", name=GetAll::class)
      *
      * @OA\Tag(name="Media")
      * @OA\Parameter(
@@ -70,7 +69,8 @@ final class GetAll extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request): View
+    #[Get(data: '/medias', name: GetAll::class)]
+    public function __invoke(Request $request) : View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Media::class));
     }

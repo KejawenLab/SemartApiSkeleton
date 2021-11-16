@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
@@ -28,29 +27,25 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Delete("/settings/{id}", name=Delete::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Response(
      *     response=204,
      *     description="Delete setting"
      * )
-     *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/settings/{id}', name: Delete::class)]
+    public function __invoke(string $id) : View
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
-
         if (!$setting->isReserved()) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.reserved_not_allowed', [], 'pages'));
         }
-
         $this->service->remove($setting);
-
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

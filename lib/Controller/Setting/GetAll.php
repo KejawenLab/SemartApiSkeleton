@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
@@ -28,7 +28,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/settings", name=GetAll::class)
      *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(
@@ -86,7 +85,8 @@ final class GetAll extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request): View
+    #[Get(data: '/settings', name: GetAll::class)]
+    public function __invoke(Request $request) : View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class));
     }

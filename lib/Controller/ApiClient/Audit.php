@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
@@ -38,8 +38,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/users/{userId}/api-clients/{id}/audit", name=Audit::class, priority=-255)
-     *
      * @Cache(expires="+17 minute", public=false)
      *
      * @OA\Tag(name="Api Client")
@@ -82,21 +80,19 @@ final class Audit extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $userId, string $id): View
+    #[Get(data: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, priority: -255)]
+    public function __invoke(string $userId, string $id) : View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
-
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();
         }
-
         if (!$this->reader->getProvider()->isAuditable(ApiClient::class)) {
             return $this->view([]);
         }
-
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

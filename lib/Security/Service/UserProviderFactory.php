@@ -17,10 +17,10 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 final class UserProviderFactory implements UserProviderInterface
 {
+    /**
+     * @param Provider[] $providers
+     */
     public function __construct(
-        /*
-         * @var Provider[]
-         */
         private iterable $providers,
         private UserPasswordHasherInterface $passwordHasher,
     ) {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -29,7 +28,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/cronjobs/{id}", name=Get::class, priority=-7)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(
@@ -48,13 +46,13 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(string $id): View
+    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/cronjobs/{id}', name: Get::class, priority: -7)]
+    public function __invoke(string $id) : View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.cron.not_found', [], 'pages'));
         }
-
         return $this->view($cron);
     }
 }

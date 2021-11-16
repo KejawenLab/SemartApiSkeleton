@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -29,7 +29,6 @@ final class Profile extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/me", name=Profile::class, priority=1)
      *
      * @OA\Tag(name="Profile")
      * @OA\Response(
@@ -48,13 +47,13 @@ final class Profile extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(): View
+    #[Get(data: '/me', name: Profile::class, priority: 1)]
+    public function __invoke() : View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
-
         return $this->view($this->userProviderFactory->getRealUser($user));
     }
 }

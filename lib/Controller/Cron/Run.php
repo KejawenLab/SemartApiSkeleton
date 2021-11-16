@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
@@ -35,7 +35,6 @@ final class Run extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/cronjobs/{id}/run", name=Run::class, priority=-17)
      *
      * @OA\Tag(name="Cron")
      * @OA\Response(
@@ -58,7 +57,8 @@ final class Run extends AbstractFOSRestController
      *
      * @throws Exception
      */
-    public function __invoke(string $id): View
+    #[Post(data: '/cronjobs/{id}/run', name: Run::class, priority: -17)]
+    public function __invoke(string $id) : View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof Cron) {

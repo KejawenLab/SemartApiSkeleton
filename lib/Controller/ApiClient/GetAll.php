@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
@@ -36,7 +36,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("users/{userId}/api-clients", name=GetAll::class, defaults={"userId": "2e0cac45-822f-4b97-95f1-9516ad824ec1"})
      *
      * @OA\Tag(name="Api Client")
      * @OA\Parameter(
@@ -71,13 +70,13 @@ final class GetAll extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    public function __invoke(Request $request, string $userId): View
+    #[Get(data: 'users/{userId}/api-clients', name: GetAll::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
+    public function __invoke(Request $request, string $userId) : View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
-
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class));
     }
 }

@@ -30,19 +30,17 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 {
     private const FILTER_NAME = 'semart_softdeletable';
 
+    /**
+     * @param PermissionInitiatorInterface[] $initiators
+     * @param PermissionRemoverInterface[] $removers
+     */
     public function __construct(
         private EntityManagerInterface $entityManager,
         MessageBusInterface $messageBus,
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
         private MenuRepositoryInterface $menuRepository,
-        /*
-         * @var PermissionInitiatorInterface[]
-         */
         private iterable $initiators,
-        /*
-         * @var PermissionRemoverInterface[]
-         */
         private iterable $removers,
         private string $class,
     ) {
@@ -117,7 +115,8 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     }
 
     /**
-     * @return array<string, string>|array<string, null>|array<string, array<int|string, mixed[]>>
+     *
+     * @return array<string, array<int, mixed[]>>|array<string, string>|array<string, null>
      */
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
     {
