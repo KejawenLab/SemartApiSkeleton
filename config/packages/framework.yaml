@@ -15,6 +15,7 @@ framework:
         cookie_lifetime: 3600
         enabled: true
         use_cookies: true
+        storege_id: session.storage.factory.native
         handler_id: snc_redis.session.handler
     rate_limiter:
         username_ip_login:

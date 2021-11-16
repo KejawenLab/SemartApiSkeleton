@@ -30,6 +30,7 @@
         "damienharper/auditor-bundle": ">=4.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": ">=2.4",
+        "doctrine/dbal": "^2.13",
         "doctrine/orm": ">=2.9",
         "friendsofsymfony/rest-bundle": ">=3.0",
         "gesdinet/jwt-refresh-token-bundle": "dev-master",
