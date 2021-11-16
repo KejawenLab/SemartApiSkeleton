@@ -28,7 +28,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Cron")
      * @OA\Parameter(
      *     name="page",

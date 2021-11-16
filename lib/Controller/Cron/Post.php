@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -30,7 +31,6 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Cron")
      * @OA\RequestBody(
      *     content={
@@ -59,7 +59,7 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Post(data: '/cronjobs', name: Post::class, priority: -7)]
+    #[Route(data: '/cronjobs', name: Post::class, priority: -7)]
     public function __invoke(Request $request) : View
     {
         $form = $this->formFactory->submitRequest(CronType::class, $request);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -28,7 +29,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=200,
@@ -46,7 +46,7 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/cronjobs/{id}', name: Get::class, priority: -7)]
+    #[Route(data: '/cronjobs/{id}', name: Get::class, priority: -7)]
     public function __invoke(string $id) : View
     {
         $cron = $this->service->get($id);

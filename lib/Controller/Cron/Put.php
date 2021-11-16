@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
@@ -64,7 +65,7 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Put(data: '/cronjobs/{id}', name: Put::class, priority: -7)]
+    #[Route(data: '/cronjobs/{id}', name: Put::class, priority: -7)]
     public function __invoke(Request $request, string $id) : View
     {
         $cron = $this->service->get($id);

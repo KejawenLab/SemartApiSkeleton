@@ -30,7 +30,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     *
      * @Cache(expires="+17 minute", public=false)
      *
      * @OA\Tag(name="Cron")
