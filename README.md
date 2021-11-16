@@ -293,10 +293,24 @@ class Todo implements TodoInterface
 
 Class `KejawenLab\Application\Repository\TodoRepository` untuk sekarang belum ada, namun jangan khawatir, SemartApiSkeleton akan mengenerate class tersebut nanti.
 
+#### Daftarkan sebagai auditable
+
+Buka file `config/packages/dh_auditor.yaml` dan daftarkan entity sebagai berikut:
+
+```yaml
+dh_auditor:
+    providers:
+        doctrine:
+            entities:
+                ...
+                KejawenLab\Application\Entity\Todo: ~
+```
+
 #### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
 
 ```bash
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
+docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
 ```
 
 ![Generate Command](doc/assets/generate-command.png)
