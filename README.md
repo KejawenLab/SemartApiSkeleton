@@ -576,6 +576,16 @@ Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
         <img height="77px" src="./doc/assets/dki.png">
       </td>
     </tr>
+    <tr valign="top">
+      <td width="50%" align="center" style="padding-bottom: 17px">
+        <span>Kementerian Kesehatan</span><br>
+        <span style="font-size: small">(checked: 8-7-2021)</span><br><br> 
+        <img height="77px" src="./doc/assets/kemkes.jpeg">
+      </td>
+      <td width="50%" align="center">
+        -
+      </td>
+    </tr>
   </tbody>
 </table>
 
