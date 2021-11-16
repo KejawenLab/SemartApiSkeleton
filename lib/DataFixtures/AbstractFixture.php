@@ -7,12 +7,16 @@ namespace KejawenLab\ApiSkeleton\DataFixtures;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Persistence\ObjectManager;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Ramsey\Uuid\Rfc4122\UuidV4;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
 
@@ -45,7 +49,15 @@ abstract class AbstractFixture extends Base
                         $value = DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
                     }
 
-                    $accessor->setValue($entity, $key, $value);
+                    try {
+                        $accessor->setValue($entity, $key, $value);
+                    } catch (NoSuchPropertyException) {
+                        if ('id' === $key && $entity instanceof GroupInterface)  {
+                            $reflect = new \ReflectionProperty($entity, $key);
+                            $reflect->setAccessible(true);
+                            $reflect->setValue($entity, Uuid::fromString(GroupInterface::SUPER_ADMIN_ID));
+                        }
+                    }
                 }
             }
 

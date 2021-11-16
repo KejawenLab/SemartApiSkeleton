@@ -33,6 +33,12 @@ final class Delete extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
+        if (GroupInterface::SUPER_ADMIN_ID === $group->getId()) {
+            $this->addFlash('error', 'sas.page.error.unauthorized');
+
+            return new RedirectResponse($this->generateUrl(Main::class));
+        }
+
         $this->service->remove($group);
 
         $this->addFlash('info', 'sas.page.group.deleted');

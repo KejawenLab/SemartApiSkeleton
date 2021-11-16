@@ -5,6 +5,7 @@ sas:
         logout: 'Keluar'
         error:
             too_many_records: 'Data yang diunduh terlalu besar. Gunakan mekanisme lain untuk mengunduh data.'
+            unauthorized: 'Operasi tidak diijinkan'
         profile:
             title: 'Profil'
             view: 'Profil'
