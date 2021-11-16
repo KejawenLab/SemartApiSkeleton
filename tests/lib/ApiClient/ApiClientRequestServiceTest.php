@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ApiClientRequestServiceTest extends TestCase
 {
-    public function testCreateFromRequest(): void
+    public function testCreateFromMessage(): void
     {
     }
 }

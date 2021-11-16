@@ -55,6 +55,8 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         $apiClientRequest->setQueries($message->getQueries());
         $apiClientRequest->setRequests($message->getRequests());
         $apiClientRequest->setFiles($message->getFiles());
+        $apiClientRequest->setContent($message->getContent());
+        $apiClientRequest->setStatusCode($message->getStatusCode());
 
         return $apiClientRequest;
     }

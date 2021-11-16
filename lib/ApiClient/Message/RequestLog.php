@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\ApiClient\Message;
 
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -26,7 +27,11 @@ final class RequestLog
 
     private array $files;
 
-    public function __construct(ApiClientInterface $apiClient, Request $request)
+    private string $content;
+
+    private int $statusCode;
+
+    public function __construct(ApiClientInterface $apiClient, Request $request, Response $response)
     {
         $this->apiClientId = $apiClient->getId();
         $this->path = $request->getPathInfo();
@@ -35,11 +40,13 @@ final class RequestLog
         $this->queries = $request->query->all();
         $this->requests = $request->request->all();
         $this->files = $request->files->all();
+        $this->content = (string) $response->getContent();
+        $this->statusCode = $response->getStatusCode();
     }
 
     public function getApiClientId(): string
     {
-        return $this->apiClientId;
+        return (string) $this->apiClientId;
     }
 
     public function getPath(): string
@@ -52,35 +59,33 @@ final class RequestLog
         return $this->method;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getRequests(): array
     {
         return $this->requests;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getFiles(): array
     {
         return $this->files;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
     }
 }
