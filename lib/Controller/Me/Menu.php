@@ -33,7 +33,6 @@ final class Menu extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Profile")
      * @OA\Response(
      *     response=200,
@@ -57,6 +56,7 @@ final class Menu extends AbstractFOSRestController
         if (!$user instanceof User) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         return $this->view($this->service->getByUser($this->userProviderFactory->getRealUser($user)));
     }
 }

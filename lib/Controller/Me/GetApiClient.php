@@ -37,7 +37,6 @@ final class GetApiClient extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Profile")
      * @OA\Response(
      *     response=200,
@@ -62,10 +61,12 @@ final class GetApiClient extends AbstractFOSRestController
         if (!$user instanceof User) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, ApiClient::class));
     }
 }

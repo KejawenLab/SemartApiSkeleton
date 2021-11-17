@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -30,7 +31,6 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Menu")
      * @OA\RequestBody(
      *     content={
@@ -59,16 +59,18 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Post(data: '/menus', name: Post::class)]
+    #[Route(data: '/menus', name: Post::class)]
     public function __invoke(Request $request) : View
     {
         $form = $this->formFactory->submitRequest(MenuType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         /** @var MenuInterface $menu */
         $menu = $form->getData();
         $this->service->save($menu);
+
         return $this->view($this->service->get($menu->getId()), Response::HTTP_CREATED);
     }
 }

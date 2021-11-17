@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -39,7 +40,6 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Profile")
      * @OA\RequestBody(
      *     content={
@@ -68,22 +68,25 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Put(data: '/me', name: Put::class)]
+    #[Route(data: '/me', name: Put::class)]
     public function __invoke(Request $request) : View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $user = $this->userProviderFactory->getRealUser($user);
         $userClone = clone $user;
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {
             $user->setPlainPassword($password);
         }
+
         if ($form['file']->getData()) {
             /** @var User $user */
             $media = $this->mediaService->getByFile($user->getProfileImage());
@@ -93,6 +96,7 @@ final class Put extends AbstractFOSRestController
         } else {
             $user->setProfileImage($userClone->getProfileImage());
         }
+
         $this->service->save($user);
         return $this->view($this->service->get($user->getId()));
     }

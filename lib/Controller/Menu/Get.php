@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -28,7 +29,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Menu")
      * @OA\Response(
      *     response=200,
@@ -46,13 +46,14 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/menus/{id}', name: Get::class)]
+    #[Route(data: '/menus/{id}', name: Get::class)]
     public function __invoke(string $id) : View
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.menu.not_found', [], 'pages'));
         }
+
         return $this->view($menu);
     }
 }

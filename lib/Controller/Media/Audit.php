@@ -31,7 +31,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     *
      * @Cache(expires="+17 minute", public=false)
      *
      * @OA\Tag(name="Media")
@@ -81,9 +80,11 @@ final class Audit extends AbstractFOSRestController
         if (!$entity instanceof MediaInterface) {
             throw new NotFoundHttpException();
         }
+
         if (!$this->reader->getProvider()->isAuditable(Media::class)) {
             return $this->view([]);
         }
+
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

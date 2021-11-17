@@ -26,12 +26,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class DeleteApiClient extends AbstractFOSRestController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service, private TranslatorInterface $translator)
-    {
+    public function __construct(
+        private UserProviderFactory $userProviderFactory,
+        private ApiClientService $service,
+        private TranslatorInterface $translator
+    ) {
     }
 
     /**
-     *
      * @OA\Tag(name="Profile")
      * @OA\Response(
      *     response=204,
@@ -46,15 +48,19 @@ final class DeleteApiClient extends AbstractFOSRestController
         if (!$user instanceof User) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $user = $this->userProviderFactory->getRealUser($user);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $client = $this->service->getByIdAndUser($id, $user);
         if (!$client instanceof ApiClientInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.api_client.not_found', [], 'pages'));
         }
+
         $this->service->remove($client);
+
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

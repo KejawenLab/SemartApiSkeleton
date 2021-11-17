@@ -29,7 +29,6 @@ final class Profile extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Profile")
      * @OA\Response(
      *     response=200,
@@ -54,6 +53,7 @@ final class Profile extends AbstractFOSRestController
         if (!$user instanceof AuthUser) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         return $this->view($this->userProviderFactory->getRealUser($user));
     }
 }
