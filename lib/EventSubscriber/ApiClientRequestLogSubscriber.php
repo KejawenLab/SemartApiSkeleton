@@ -65,10 +65,6 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        if (str_contains($event->getRequest()->getPathInfo(), '/login')) {
-            return false;
-        }
-
         $token = $this->tokenStorage->getToken();
         if (!$token instanceof TokenInterface) {
             return false;
