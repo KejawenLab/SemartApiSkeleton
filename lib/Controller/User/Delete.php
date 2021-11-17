@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
@@ -27,7 +28,6 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="User")
      * @OA\Response(
      *     response=204,
@@ -35,14 +35,16 @@ final class Delete extends AbstractFOSRestController
      * )
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/users/{id}', name: Delete::class)]
+    #[Route(data: '/users/{id}', name: Delete::class)]
     public function __invoke(string $id) : View
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $this->service->remove($user);
+
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -25,7 +25,6 @@ final class PublicGetSetting extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Setting")
      * @OA\Response(
      *     response=200,
@@ -48,6 +47,7 @@ final class PublicGetSetting extends AbstractFOSRestController
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
+
         return $this->view($setting);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -35,7 +36,6 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Setting")
      * @OA\RequestBody(
      *     content={
@@ -64,18 +64,21 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Put(data: '/settings/{id}', name: Put::class)]
+    #[Route(data: '/settings/{id}', name: Put::class)]
     public function __invoke(Request $request, string $id) : View
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(SettingType::class, $request, $setting);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         $this->service->save($setting);
+
         return $this->view($this->service->get($setting->getId()));
     }
 }

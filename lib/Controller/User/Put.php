@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -35,7 +36,6 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="User")
      * @OA\RequestBody(
      *     @OA\Schema(
@@ -60,18 +60,21 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Put(data: '/users/{id}', name: Put::class)]
+    #[Route(data: '/users/{id}', name: Put::class)]
     public function __invoke(Request $request, string $id) : View
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.user.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(UpdateUserType::class, $request, $user);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         $this->service->save($user);
+
         return $this->view($this->service->get($user->getId()));
     }
 }

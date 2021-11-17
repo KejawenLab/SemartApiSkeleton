@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\User;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -30,7 +31,6 @@ final class Post extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="User")
      * @OA\RequestBody(
      *     @OA\Schema(
@@ -55,16 +55,18 @@ final class Post extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Post(data: '/users', name: Post::class)]
+    #[Route(data: '/users', name: Post::class)]
     public function __invoke(Request $request) : View
     {
         $form = $this->formFactory->submitRequest(UserType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         /** @var UserInterface $user */
         $user = $form->getData();
         $this->service->save($user);
+
         return $this->view($this->service->get($user->getId()), Response::HTTP_CREATED);
     }
 }

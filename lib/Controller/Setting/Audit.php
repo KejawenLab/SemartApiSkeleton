@@ -30,7 +30,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     *
      * @Cache(expires="+17 minute", public=false)
      *
      * @OA\Tag(name="Setting")
@@ -79,9 +78,11 @@ final class Audit extends AbstractFOSRestController
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();
         }
+
         if (!$this->reader->getProvider()->isAuditable(Setting::class)) {
             return $this->view([]);
         }
+
         return $this->view($this->audit->getAudits($entity, $id)->toArray());
     }
 }

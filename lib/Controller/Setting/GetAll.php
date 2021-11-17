@@ -28,7 +28,6 @@ final class GetAll extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(
      *     name="page",

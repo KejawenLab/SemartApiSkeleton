@@ -24,7 +24,6 @@ final class PublicAllSetting extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Setting")
      * @OA\Parameter(
      *     name="page",

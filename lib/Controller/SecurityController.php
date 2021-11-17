@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 final class SecurityController extends AbstractFOSRestController
 {
     /**
-     *
      * @OA\Tag(name="Security")
      * @OA\RequestBody(
      *     content={

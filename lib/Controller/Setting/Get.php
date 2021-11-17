@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
@@ -28,7 +29,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Setting")
      * @OA\Response(
      *     response=200,
@@ -46,13 +46,14 @@ final class Get extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Get(data: '/settings/{id}', name: Get::class)]
+    #[Route(data: '/settings/{id}', name: Get::class)]
     public function __invoke(string $id) : View
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
+
         return $this->view($setting);
     }
 }
