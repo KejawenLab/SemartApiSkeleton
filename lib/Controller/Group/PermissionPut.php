@@ -39,7 +39,6 @@ final class PermissionPut extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(
      *     content={
@@ -75,21 +74,26 @@ final class PermissionPut extends AbstractFOSRestController
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(PermissionType::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         /** @var Permission $data */
         $data = $form->getData();
         $permission = $this->permissionService->getPermission($group, $data->getMenu());
         if (!$permission instanceof PermissionInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.permission.not_found', [], 'pages'));
         }
+
         $permission->setAddable($data->isAddable());
         $permission->setEditable($data->isEditable());
         $permission->setViewable($data->isViewable());
         $permission->setDeletable($data->isDeletable());
+
         $this->permissionService->save($permission);
+
         return $this->view($permission);
     }
 }

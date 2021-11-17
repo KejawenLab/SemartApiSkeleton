@@ -28,7 +28,6 @@ final class Permission extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Group")
      * @OA\Parameter(
      *     name="page",

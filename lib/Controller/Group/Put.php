@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
@@ -35,7 +36,6 @@ final class Put extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Group")
      * @OA\RequestBody(
      *     content={
@@ -64,18 +64,21 @@ final class Put extends AbstractFOSRestController
      *
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Put(data: '/groups/{id}', name: Put::class)]
+    #[Route(data: '/groups/{id}', name: Put::class)]
     public function __invoke(Request $request, string $id) : View
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
+
         $form = $this->formFactory->submitRequest(GroupType::class, $request, $group);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
+
         $this->service->save($group);
+
         return $this->view($this->service->get($group->getId()));
     }
 }

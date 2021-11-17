@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -28,7 +29,6 @@ final class Delete extends AbstractFOSRestController
     }
 
     /**
-     *
      * @OA\Tag(name="Group")
      * @OA\Response(
      *     response=204,
@@ -36,17 +36,20 @@ final class Delete extends AbstractFOSRestController
      * )
      * @Security(name="Bearer")
      */
-    #[\FOS\RestBundle\Controller\Annotations\Delete(data: '/groups/{id}', name: Delete::class)]
+    #[Route(data: '/groups/{id}', name: Delete::class)]
     public function __invoke(string $id) : View
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.group.not_found', [], 'pages'));
         }
+
         if (GroupInterface::SUPER_ADMIN_ID === $group->getId()) {
             throw new UnauthorizedHttpException($this->translator->trans('sas.page.error.unauthorized', [], 'pages'));
         }
+
         $this->service->remove($group);
+
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 }
