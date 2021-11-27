@@ -38,9 +38,14 @@ final class Paginator
     /**
      *
      *
+     * @param QueryBuilder $queryBuilder
+     * @param Request $request
+     * @param string $class
+     *
+     * @return array
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
-     * @return array<string, mixed[]>|array<string, float>|array<string, int>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
@@ -70,7 +75,11 @@ final class Paginator
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache($this->cacheLifetime, sprintf('%s:%s:%s:%s', self::class, __METHOD__, $page, $perPage));
+        $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%s',
+            str_replace([':', '/', '\\'], "_", self::class),
+            str_replace([':', '/', '\\'], "_", __METHOD__),
+            $page, $perPage,
+        ));
 
         return $query->getResult();
     }
@@ -88,7 +97,10 @@ final class Paginator
 
         $query = $count->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache($this->cacheLifetime, sprintf('%s:%s', self::class, __METHOD__));
+        $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s',
+            str_replace([':', '/', '\\'], "_", self::class),
+            str_replace([':', '/', '\\'], "_", __METHOD__),
+        ));
 
         return (int) $query->getSingleScalarResult();
     }

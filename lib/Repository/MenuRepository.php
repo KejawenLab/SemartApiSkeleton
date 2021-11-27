@@ -34,7 +34,11 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $code));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+            str_replace([':', '/', '\\'], "_", self::class),
+            str_replace([':', '/', '\\'], "_", __METHOD__),
+            $code,
+        ));
 
         return $query->getOneOrNullResult();
     }
@@ -51,7 +55,11 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s:%s:%s', self::class, __METHOD__, $menu->getId()));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+            str_replace([':', '/', '\\'], "_", self::class),
+            str_replace([':', '/', '\\'], "_", __METHOD__),
+            $menu->getId(),
+        ));
 
         $menus = $query->getResult();
         foreach ($menus as $menu) {
