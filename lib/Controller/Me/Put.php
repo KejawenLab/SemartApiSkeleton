@@ -69,7 +69,7 @@ final class Put extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/me', name: Put::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {

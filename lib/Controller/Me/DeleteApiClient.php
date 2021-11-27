@@ -42,7 +42,7 @@ final class DeleteApiClient extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Delete(data: '/me/api-clients/{id}', name: DeleteApiClient::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $user = $this->getUser();
         if (!$user instanceof User) {

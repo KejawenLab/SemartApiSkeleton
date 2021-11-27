@@ -36,7 +36,7 @@ final class Delete extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/medias/{id}', name: Delete::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $media = $this->service->get($id);
         if (!$media instanceof MediaInterface) {

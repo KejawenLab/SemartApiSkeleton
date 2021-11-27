@@ -68,7 +68,7 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/users/{userId}/api-clients', name: Post::class)]
-    public function __invoke(Request $request, string $userId) : View
+    public function __invoke(Request $request, string $userId): View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {

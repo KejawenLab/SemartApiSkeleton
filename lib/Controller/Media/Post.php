@@ -58,7 +58,7 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/medias', name: Post::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $media = new Media();
         if (!$file = $request->files->get('file')) {

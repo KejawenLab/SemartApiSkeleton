@@ -65,7 +65,7 @@ final class Put extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/menus/{id}', name: Put::class)]
-    public function __invoke(Request $request, string $id) : View
+    public function __invoke(Request $request, string $id): View
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {

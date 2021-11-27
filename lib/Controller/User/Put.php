@@ -61,7 +61,7 @@ final class Put extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/users/{id}', name: Put::class)]
-    public function __invoke(Request $request, string $id) : View
+    public function __invoke(Request $request, string $id): View
     {
         $user = $this->service->get($id);
         if (!$user instanceof UserInterface) {

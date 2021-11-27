@@ -85,7 +85,7 @@ final class Permission extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/groups/{id}/permissions', name: Permission::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Entity::class));
     }

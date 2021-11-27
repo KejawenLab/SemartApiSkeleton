@@ -33,7 +33,8 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
             $apiKey,
@@ -51,7 +52,8 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
         ));
@@ -69,10 +71,12 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
-            $id, $user->getId(),
+            $id,
+            $user->getId(),
         ));
 
         return $query->getOneOrNullResult();

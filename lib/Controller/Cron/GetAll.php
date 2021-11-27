@@ -69,7 +69,7 @@ final class GetAll extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/cronjobs', name: GetAll::class, priority: -7)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Cron::class));
     }

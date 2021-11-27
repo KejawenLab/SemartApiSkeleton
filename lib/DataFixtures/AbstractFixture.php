@@ -53,7 +53,7 @@ abstract class AbstractFixture extends Base
                     try {
                         $accessor->setValue($entity, $key, $value);
                     } catch (NoSuchPropertyException) {
-                        if ('id' === $key && $entity instanceof GroupInterface)  {
+                        if ('id' === $key && $entity instanceof GroupInterface) {
                             $reflect = new ReflectionProperty($entity, $key);
                             $reflect->setAccessible(true);
                             $reflect->setValue($entity, Uuid::fromString(GroupInterface::SUPER_ADMIN_ID));

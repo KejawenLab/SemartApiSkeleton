@@ -58,7 +58,7 @@ final class Run extends AbstractFOSRestController
      * @throws Exception
      */
     #[Post(data: '/cronjobs/{id}/run', name: Run::class, priority: -17)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof Cron) {

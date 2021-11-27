@@ -76,7 +76,7 @@ final class GetAll extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/users', name: GetAll::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, User::class));
     }

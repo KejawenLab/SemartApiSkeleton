@@ -74,7 +74,7 @@ final class Audit extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/medias/{id}/audit', name: Audit::class, priority: -255)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $entity = $this->service->get($id);
         if (!$entity instanceof MediaInterface) {

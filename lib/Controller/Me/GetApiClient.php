@@ -55,7 +55,7 @@ final class GetApiClient extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/me/api-clients', name: GetApiClient::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $user = $this->getUser();
         if (!$user instanceof User) {

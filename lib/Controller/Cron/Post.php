@@ -60,7 +60,7 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/cronjobs', name: Post::class, priority: -7)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(CronType::class, $request);
         if (!$form->isValid()) {

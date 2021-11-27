@@ -41,7 +41,7 @@ final class Delete extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/users/{userId}/api-clients/{id}', name: Delete::class)]
-    public function __invoke(string $userId, string $id) : View
+    public function __invoke(string $userId, string $id): View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {

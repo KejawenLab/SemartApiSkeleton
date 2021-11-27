@@ -47,7 +47,7 @@ final class Get extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/menus/{id}', name: Get::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $menu = $this->service->get($id);
         if (!$menu instanceof MenuInterface) {

@@ -50,7 +50,7 @@ final class Menu extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/me/menus', name: Menu::class, priority: 1)]
-    public function __invoke() : View
+    public function __invoke(): View
     {
         $user = $this->getUser();
         if (!$user instanceof User) {

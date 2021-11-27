@@ -66,7 +66,7 @@ final class Put extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/cronjobs/{id}', name: Put::class, priority: -7)]
-    public function __invoke(Request $request, string $id) : View
+    public function __invoke(Request $request, string $id): View
     {
         $cron = $this->service->get($id);
         if (!$cron instanceof CronInterface) {

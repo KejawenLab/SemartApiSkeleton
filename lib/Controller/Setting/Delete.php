@@ -36,7 +36,7 @@ final class Delete extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/settings/{id}', name: Delete::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {

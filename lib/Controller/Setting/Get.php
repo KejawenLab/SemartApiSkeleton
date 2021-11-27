@@ -47,7 +47,7 @@ final class Get extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/settings/{id}', name: Get::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $setting = $this->service->get($id);
         if (!$setting instanceof SettingInterface) {

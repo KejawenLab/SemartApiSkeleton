@@ -53,7 +53,7 @@ final class Get extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'])]
-    public function __invoke(Request $request, string $path) : Response
+    public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);
         if (MediaInterface::PUBLIC_FIELD === $path[0]) {

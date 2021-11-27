@@ -73,7 +73,7 @@ final class Audit extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/menus/{id}/audit', name: Audit::class, priority: -255)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         if (!$entity = $this->service->get($id)) {
             throw new NotFoundHttpException();

@@ -60,7 +60,7 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/settings', name: Post::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(SettingType::class, $request);
         if (!$form->isValid()) {

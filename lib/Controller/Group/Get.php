@@ -47,7 +47,7 @@ final class Get extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/groups/{id}', name: Get::class)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $group = $this->service->get($id);
         if (!$group instanceof GroupInterface) {

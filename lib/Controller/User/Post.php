@@ -56,7 +56,7 @@ final class Post extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Route(data: '/users', name: Post::class)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(UserType::class, $request);
         if (!$form->isValid()) {

@@ -77,7 +77,7 @@ final class PublicAllSetting extends AbstractFOSRestController
      * )
      */
     #[Get(data: '/settings/public', name: PublicAllSetting::class, priority: 1)]
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class));
     }

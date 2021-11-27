@@ -39,7 +39,7 @@ final class RefreshTokenController extends AbstractFOSRestController
      * @throws RuntimeException
      */
     #[Post(data: '/token/refresh', name: RefreshTokenController::class, priority: 17)]
-    public function __invoke() : Response
+    public function __invoke(): Response
     {
         throw new RuntimeException('Invalid security configuration');
     }

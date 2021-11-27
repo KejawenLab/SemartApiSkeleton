@@ -37,7 +37,8 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
             $parameter,
@@ -58,7 +59,8 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s_public',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s_public',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
             $id,

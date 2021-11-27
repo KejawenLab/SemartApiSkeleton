@@ -81,7 +81,7 @@ final class Audit extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, priority: -255)]
-    public function __invoke(string $userId, string $id) : View
+    public function __invoke(string $userId, string $id): View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {

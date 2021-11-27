@@ -68,7 +68,7 @@ final class PermissionPut extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Put(data: '/groups/{id}/permissions', name: PermissionPut::class)]
-    public function __invoke(Request $request, string $id) : View
+    public function __invoke(Request $request, string $id): View
     {
         $group = $this->groupService->get($id);
         if (!$group instanceof GroupInterface) {

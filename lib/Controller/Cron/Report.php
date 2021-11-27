@@ -50,7 +50,7 @@ final class Report extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/cronjobs/{id}/logs', name: Report::class, priority: -27)]
-    public function __invoke(Request $request, string $id) : View
+    public function __invoke(Request $request, string $id): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, CronReport::class));
     }

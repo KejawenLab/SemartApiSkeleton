@@ -66,7 +66,8 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
             $username,
@@ -83,7 +84,8 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s',
+        $query->enableResultCache(self::MICRO_CACHE, sprintf(
+            '%s_%s_%s',
             str_replace([':', '/', '\\'], "_", self::class),
             str_replace([':', '/', '\\'], "_", __METHOD__),
             $deviceId,

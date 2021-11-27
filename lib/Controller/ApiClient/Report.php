@@ -57,7 +57,7 @@ final class Report extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/users/{userId}/api-clients/{id}/logs', name: Report::class, priority: -27)]
-    public function __invoke(Request $request, string $userId, string $id) : View
+    public function __invoke(Request $request, string $userId, string $id): View
     {
         $user = $this->userService->get($userId);
         if (!$user instanceof UserInterface) {

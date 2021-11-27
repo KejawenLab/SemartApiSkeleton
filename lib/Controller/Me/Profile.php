@@ -47,7 +47,7 @@ final class Profile extends AbstractFOSRestController
      * @Security(name="Bearer")
      */
     #[Get(data: '/me', name: Profile::class, priority: 1)]
-    public function __invoke() : View
+    public function __invoke(): View
     {
         $user = $this->getUser();
         if (!$user instanceof AuthUser) {

@@ -41,7 +41,7 @@ final class PublicGetSetting extends AbstractFOSRestController
      * )
      */
     #[Get(data: '/settings/public/{id}', name: PublicGetSetting::class, priority: 1)]
-    public function __invoke(string $id) : View
+    public function __invoke(string $id): View
     {
         $setting = $this->service->getPublicSetting($id);
         if (!$setting instanceof SettingInterface) {
