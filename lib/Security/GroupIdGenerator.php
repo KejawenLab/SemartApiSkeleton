@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security;
 
-use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
