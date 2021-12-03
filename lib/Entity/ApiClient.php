@@ -45,7 +45,7 @@ class ApiClient implements ApiClientInterface
      *
      * @OA\Property(type="string")
      */
-    private readonly UuidInterface $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})

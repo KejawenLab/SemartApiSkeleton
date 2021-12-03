@@ -7,6 +7,7 @@ use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Core\Configuration\Option;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\Php80\ValueObject\AnnotationToAttribute;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
@@ -65,6 +66,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             // mostly class-string[] is enough for collection of class-string return
             __DIR__ . '/lib/DataFixtures/',
         ],
+
+        ReadOnlyPropertyRector::class,
     ]);
 };
 

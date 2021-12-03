@@ -40,7 +40,7 @@ class Permission implements PermissionInterface
      *
      * @OA\Property(type="string")
      */
-    private readonly UuidInterface $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
