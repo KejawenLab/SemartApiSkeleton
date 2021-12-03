@@ -23,12 +23,12 @@ final class Ownership
     private const APPLICATION_NAMESPACE = 'KejawenLab\\Application\\Entity';
 
     public function __construct(
-        private ManagerRegistry $doctrine,
-        private UserRepositoryInterface $userRepository,
-        private TokenStorageInterface $tokenStorage,
-        private UserProviderFactory $userProviderFactory,
-        private string $superAdmin,
-        private string $ownershipProperty,
+        private readonly ManagerRegistry $doctrine,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly string $superAdmin,
+        private readonly string $ownershipProperty,
     ) {
     }
 

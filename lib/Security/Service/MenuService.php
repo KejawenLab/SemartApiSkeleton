@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class MenuService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private PermissionRepositoryInterface $permissionRepository,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly PermissionRepositoryInterface $permissionRepository,
         MessageBusInterface $messageBus,
         MenuRepositoryInterface $repository,
         AliasHelper $aliasHelper,

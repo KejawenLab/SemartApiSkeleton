@@ -45,7 +45,7 @@ class Cron implements CronInterface
      *
      * @OA\Property(type="string")
      */
-    private UuidInterface $id;
+    private readonly UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)

@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private GroupService $service)
+    public function __construct(private readonly FormFactory $formFactory, private readonly GroupService $service)
     {
     }
 

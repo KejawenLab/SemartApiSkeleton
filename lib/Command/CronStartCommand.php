@@ -66,7 +66,7 @@ final class CronStartCommand extends Command
     /**
      * @throws Exception
      */
-    private function scheduler(OutputInterface $output, $pidFile): void
+    private function scheduler(OutputInterface $output, ?string $pidFile): void
     {
         $input = new ArrayInput([]);
 

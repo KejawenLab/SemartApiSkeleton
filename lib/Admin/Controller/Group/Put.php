@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    public function __construct(private GroupService $service)
+    public function __construct(private readonly GroupService $service)
     {
     }
 

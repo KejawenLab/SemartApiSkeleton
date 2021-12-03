@@ -26,7 +26,7 @@ class PasswordHistory implements PasswordHistoryInterface
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    private UuidInterface $id;
+    private readonly UuidInterface $id;
 
     /**
      * @ORM\Column(type="string")

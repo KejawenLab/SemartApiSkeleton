@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    public function __construct(private ApiClientRequestService $service, private UserService $userService, private Paginator $paginator)
+    public function __construct(private readonly ApiClientRequestService $service, private readonly UserService $userService, private readonly Paginator $paginator)
     {
     }
 

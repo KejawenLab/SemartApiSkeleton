@@ -11,9 +11,9 @@ use KejawenLab\ApiSkeleton\Entity\EntityInterface;
  */
 interface GroupInterface extends PermissionableInterface, EntityInterface
 {
-    public const SUPER_ADMIN_ID = '1dcc811a-c791-493d-aec8-a9608f0f0ee5';
+    public final const SUPER_ADMIN_ID = '1dcc811a-c791-493d-aec8-a9608f0f0ee5';
 
-    public const SUPER_ADMIN_CODE = 'SPRADM';
+    public final const SUPER_ADMIN_CODE = 'SPRADM';
 
     public function getCode(): ?string;
 

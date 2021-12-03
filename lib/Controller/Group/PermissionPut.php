@@ -31,10 +31,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PermissionPut extends AbstractFOSRestController
 {
     public function __construct(
-        private FormFactory $formFactory,
-        private GroupService $groupService,
-        private PermissionService $permissionService,
-        private TranslatorInterface $translator,
+        private readonly FormFactory $formFactory,
+        private readonly GroupService $groupService,
+        private readonly PermissionService $permissionService,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

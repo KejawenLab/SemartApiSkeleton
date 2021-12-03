@@ -31,12 +31,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class Profile extends AbstractController
 {
     public function __construct(
-        private UserProviderFactory $userProviderFactory,
-        private MediaService $mediaService,
-        private Paginator $paginator,
-        private SettingService $setting,
-        private ApiClientService $apiClientService,
-        private UserService $service,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly MediaService $mediaService,
+        private readonly Paginator $paginator,
+        private readonly SettingService $setting,
+        private readonly ApiClientService $apiClientService,
+        private readonly UserService $service,
     ) {
     }
 

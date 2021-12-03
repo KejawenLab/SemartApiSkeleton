@@ -24,7 +24,7 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private MediaService $service, private PropertyMappingFactory $mapping)
+    public function __construct(private readonly MediaService $service, private readonly PropertyMappingFactory $mapping)
     {
     }
 

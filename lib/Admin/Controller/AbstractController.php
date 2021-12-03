@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 abstract class AbstractController extends Base
 {
-    public function __construct(private ServiceInterface $service, private ?Paginator $paginator = null)
+    public function __construct(private readonly ServiceInterface $service, private readonly ?Paginator $paginator = null)
     {
     }
 

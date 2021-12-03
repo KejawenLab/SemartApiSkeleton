@@ -46,7 +46,7 @@ class User implements UserInterface
      *
      * @OA\Property(type="string")
      */
-    private UuidInterface $id;
+    private readonly UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})

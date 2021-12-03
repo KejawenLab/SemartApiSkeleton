@@ -13,23 +13,23 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class RequestLog
 {
-    private string $apiClientId;
+    private readonly string $apiClientId;
 
-    private string $path;
+    private readonly string $path;
 
-    private string $method;
+    private readonly string $method;
 
-    private array $headers;
+    private readonly array $headers;
 
-    private array $queries;
+    private readonly array $queries;
 
-    private array $requests;
+    private readonly array $requests;
 
-    private array $files;
+    private readonly array $files;
 
-    private string $content;
+    private readonly string $content;
 
-    private int $statusCode;
+    private readonly int $statusCode;
 
     public function __construct(ApiClientInterface $apiClient, Request $request, Response $response)
     {

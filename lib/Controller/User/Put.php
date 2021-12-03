@@ -29,9 +29,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
-        private FormFactory $formFactory,
-        private UserService $service,
-        private TranslatorInterface $translator,
+        private readonly FormFactory $formFactory,
+        private readonly UserService $service,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

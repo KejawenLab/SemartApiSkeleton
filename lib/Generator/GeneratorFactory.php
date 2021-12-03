@@ -16,7 +16,7 @@ final class GeneratorFactory
     /**
      * @param GeneratorInterface[] $generators
      */
-    public function __construct(private iterable $generators)
+    public function __construct(private readonly iterable $generators)
     {
     }
 

@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry, private string $superAdmin)
+    public function __construct(ManagerRegistry $registry, private readonly string $superAdmin)
     {
         parent::__construct($registry, User::class);
     }

@@ -75,9 +75,9 @@
         "doctrine/doctrine-fixtures-bundle": ">=3.3",
         "friendsofphp/php-cs-fixer": ">=2.16",
         "nunomaduro/phpinsights": "^2.0",
-        "phpstan/phpstan": "^0.12.94",
+        "phpstan/phpstan": "^1.1",
         "phpunit/phpunit": ">=9.5",
-        "rector/rector": "^0.11.53",
+        "rector/rector": "dev-main#29a408a74b1eea6cdcd7c58d06ce932203393466",
         "swoole/ide-helper": "^4.7",
         "symfony/browser-kit": ">=5.4",
         "symfony/css-selector": ">=5.4",
@@ -136,5 +136,7 @@
             "allow-contrib": true,
             "require": ">=5.4"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

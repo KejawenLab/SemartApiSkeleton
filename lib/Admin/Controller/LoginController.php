@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 final class LoginController extends Base
 {
-    public function __construct(private AuthenticationUtils $authenticationUtils)
+    public function __construct(private readonly AuthenticationUtils $authenticationUtils)
     {
     }
 

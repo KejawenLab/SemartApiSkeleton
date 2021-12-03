@@ -27,9 +27,9 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
     private const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
 
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator,
-        private UserService $service,
-        private UserProviderFactory $userProviderFactory,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly UserService $service,
+        private readonly UserProviderFactory $userProviderFactory,
     ) {
     }
 

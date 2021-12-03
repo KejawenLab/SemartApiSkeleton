@@ -29,11 +29,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(
-        private ApiClientService $service,
-        private UserService $userService,
-        private AuditService $audit,
-        private Reader $reader,
-        private TranslatorInterface $translator,
+        private readonly ApiClientService $service,
+        private readonly UserService $userService,
+        private readonly AuditService $audit,
+        private readonly Reader $reader,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

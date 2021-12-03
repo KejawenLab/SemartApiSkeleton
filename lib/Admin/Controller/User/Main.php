@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Main extends AbstractController
 {
-    public function __construct(private UserService $service, Paginator $paginator)
+    public function __construct(private readonly UserService $service, Paginator $paginator)
     {
         parent::__construct($this->service, $paginator);
     }

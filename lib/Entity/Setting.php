@@ -42,7 +42,7 @@ class Setting implements SettingInterface
      *
      * @OA\Property(type="string")
      */
-    private UuidInterface $id;
+    private readonly UuidInterface $id;
 
     /**
      * @ORM\Column(name="setting_group", type="string", length=27)

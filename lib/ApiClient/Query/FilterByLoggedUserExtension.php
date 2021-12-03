@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 final class FilterByLoggedUserExtension extends AbstractQueryExtension
 {
-    public function __construct(AliasHelper $aliasHelper, private TokenStorageInterface $tokenStorage)
+    public function __construct(AliasHelper $aliasHelper, private readonly TokenStorageInterface $tokenStorage)
     {
         $this->aliasHelper = $aliasHelper;
     }

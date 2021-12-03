@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Run extends AbstractController
 {
-    public function __construct(private CronService $service, private KernelInterface $kernel)
+    public function __construct(private readonly CronService $service, private readonly KernelInterface $kernel)
     {
     }
 

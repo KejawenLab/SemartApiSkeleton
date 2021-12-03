@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private MediaService $service)
+    public function __construct(private readonly MediaService $service)
     {
     }
 

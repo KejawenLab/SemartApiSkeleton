@@ -29,11 +29,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class CronRunCommand extends Command
 {
     public function __construct(
-        private CronService $cronService,
-        private CronReportService $reportService,
-        private CronBuilder $builder,
-        private Executor $executor,
-        private string $reportClass,
+        private readonly CronService $cronService,
+        private readonly CronReportService $reportService,
+        private readonly CronBuilder $builder,
+        private readonly Executor $executor,
+        private readonly string $reportClass,
     ) {
         parent::__construct();
     }
@@ -94,7 +94,7 @@ final class CronRunCommand extends Command
         return 0;
     }
 
-    private function getResolver(string $id, $force = false, $schedule_now = false): ArrayResolver
+    private function getResolver(string $id, bool $force = false, bool $schedule_now = false): ArrayResolver
     {
         $cron = $this->cronService->get($id);
         if (!$cron) {

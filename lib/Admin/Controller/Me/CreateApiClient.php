@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class CreateApiClient extends AbstractController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory, private SettingService $setting, private ApiClientService $service)
+    public function __construct(private readonly UserProviderFactory $userProviderFactory, private readonly SettingService $setting, private readonly ApiClientService $service)
     {
     }
 

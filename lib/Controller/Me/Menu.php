@@ -26,9 +26,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Menu extends AbstractFOSRestController
 {
     public function __construct(
-        private PermissionService $service,
-        private UserProviderFactory $userProviderFactory,
-        private TranslatorInterface $translator,
+        private readonly PermissionService $service,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

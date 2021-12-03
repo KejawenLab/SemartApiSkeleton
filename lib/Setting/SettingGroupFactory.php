@@ -14,7 +14,7 @@ final class SettingGroupFactory
     /**
      * @param SettingGroupInterface[] $groups
      */
-    public function __construct(private iterable $groups)
+    public function __construct(private readonly iterable $groups)
     {
     }
 

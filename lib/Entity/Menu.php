@@ -44,7 +44,7 @@ class Menu implements MenuInterface
      *
      * @OA\Property(type="string")
      */
-    private UuidInterface $id;
+    private readonly UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})

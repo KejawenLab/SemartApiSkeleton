@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    public function __construct(private ApiClientService $service, private UserService $userService, private SerializerInterface $serializer)
+    public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly SerializerInterface $serializer)
     {
     }
 

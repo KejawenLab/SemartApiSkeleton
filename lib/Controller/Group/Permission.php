@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Permission extends AbstractFOSRestController
 {
-    public function __construct(private PermissionService $service, private Paginator $paginator)
+    public function __construct(private readonly PermissionService $service, private readonly Paginator $paginator)
     {
     }
 

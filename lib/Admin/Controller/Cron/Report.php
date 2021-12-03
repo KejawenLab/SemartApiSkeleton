@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Report extends AbstractController
 {
-    public function __construct(private CronReportService $service, private Paginator $paginator, private SettingService $settingService)
+    public function __construct(private readonly CronReportService $service, private readonly Paginator $paginator, private readonly SettingService $settingService)
     {
     }
 

@@ -10,15 +10,15 @@ namespace KejawenLab\ApiSkeleton\Audit;
 final class AuditItem
 {
     public function __construct(
-        private string $type,
+        private readonly string $type,
         /*
          * @var array<string, mixed>
          */
-        private array $data,
-        private ?string $logTime,
-        private ?string $userId,
-        private ?string $username,
-        private ?string $ip,
+        private readonly array $data,
+        private readonly ?string $logTime,
+        private readonly ?string $userId,
+        private readonly ?string $username,
+        private readonly ?string $ip,
     ) {
     }
 
