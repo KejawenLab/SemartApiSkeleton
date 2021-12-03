@@ -67,7 +67,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/lib/DataFixtures/',
         ],
 
-        ReadOnlyPropertyRector::class,
+        ReadOnlyPropertyRector::class => [
+            __DIR__ . '/lib/Entity',
+        ],
     ]);
 };
 
