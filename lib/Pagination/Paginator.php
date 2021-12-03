@@ -42,6 +42,7 @@ final class Paginator
      *
      * @throws NoResultException
      * @throws NonUniqueResultException
+     * @return array<string, mixed[]>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {

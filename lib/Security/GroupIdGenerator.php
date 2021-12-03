@@ -20,9 +20,11 @@ final class GroupIdGenerator extends AbstractIdGenerator
         if (!$entity instanceof GroupInterface) {
             return Uuid::uuid4();
         }
+
         if (GroupInterface::SUPER_ADMIN_CODE !== $entity->getCode()) {
             return Uuid::uuid4();
         }
+
         return Uuid::fromString(GroupInterface::SUPER_ADMIN_ID);
     }
 }

@@ -116,7 +116,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     /**
      *
-     * @return array<string, array<int, mixed[]>>|array<string, string>|array<string, null>
+     * @return array<string, mixed[]>
      */
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
     {

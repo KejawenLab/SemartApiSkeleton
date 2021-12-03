@@ -14,15 +14,15 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    //$containerConfigurator->import(SetList::CODE_QUALITY);
-    //$containerConfigurator->import(SetList::DEAD_CODE);
+    $containerConfigurator->import(SetList::CODE_QUALITY);
+    $containerConfigurator->import(SetList::DEAD_CODE);
     $containerConfigurator->import(LevelSetList::UP_TO_PHP_81);
-    //$containerConfigurator->import(SetList::EARLY_RETURN);
-    //$containerConfigurator->import(Setlist::TYPE_DECLARATION);
+    $containerConfigurator->import(SetList::EARLY_RETURN);
+    $containerConfigurator->import(Setlist::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
 
     $services = $containerConfigurator->services();
-    /*$services->set(AnnotationToAttributeRector::class)
+    $services->set(AnnotationToAttributeRector::class)
         ->call('configure', [[
             AnnotationToAttributeRector::ANNOTATION_TO_ATTRIBUTE => ValueObjectInliner::inline([
                 new AnnotationToAttribute(
@@ -48,10 +48,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ]),
         ]])
     ;
-            */
+
     // tidify lines after apply annotation to attribute that make remove lines
     // this may need to run rector twice as first is apply the AnnotationToAttributeRector
-   // $services->set(NewlineAfterStatementRector::class);
+    $services->set(NewlineAfterStatementRector::class);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
@@ -65,7 +65,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             // mostly class-string[] is enough for collection of class-string return
             __DIR__ . '/lib/DataFixtures/',
         ],
-        //\Rector\TypeDeclaration\Rector\ClassMethod\AddMethodCallBasedStrictParamTypeRector::class,
     ]);
 };
 
