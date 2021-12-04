@@ -1346,16 +1346,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "511d22bf801fc094bdce9c7b3a238d0d1e8d9512"
+                "reference": "5b77477ba2981a00b423d1bb17084b87eb57a4a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/511d22bf801fc094bdce9c7b3a238d0d1e8d9512",
-                "reference": "511d22bf801fc094bdce9c7b3a238d0d1e8d9512",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/5b77477ba2981a00b423d1bb17084b87eb57a4a5",
+                "reference": "5b77477ba2981a00b423d1bb17084b87eb57a4a5",
                 "shasum": ""
             },
             "require": {
@@ -1372,7 +1372,7 @@
                 "symfony/deprecation-contracts": "^2.1|^3",
                 "symfony/doctrine-bridge": "^4.4.22|^5.2.7|^6.0",
                 "symfony/framework-bundle": "^3.4.30|^4.3.3|^5.0|^6.0",
-                "symfony/service-contracts": "^1.1.1|^2.0"
+                "symfony/service-contracts": "^1.1.1|^2.0|^3"
             },
             "conflict": {
                 "doctrine/orm": "<2.9",
@@ -1439,7 +1439,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.5.1"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.5.2"
             },
             "funding": [
                 {
@@ -1455,7 +1455,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-30T09:51:33+00:00"
+            "time": "2021-12-01T10:13:31+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -2971,24 +2971,24 @@
         },
         {
             "name": "nelmio/cors-bundle",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioCorsBundle.git",
-                "reference": "0b964b665016dfb61dd0fd2bb8c24afb1ae45a93"
+                "reference": "0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/0b964b665016dfb61dd0fd2bb8c24afb1ae45a93",
-                "reference": "0b964b665016dfb61dd0fd2bb8c24afb1ae45a93",
+                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0",
+                "reference": "0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0",
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "^4.3 || ^5.0"
+                "symfony/framework-bundle": "^4.3 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.2",
-                "symfony/phpunit-bridge": "^4.3 || ^5.0"
+                "symfony/phpunit-bridge": "^4.3 || ^5.0 || ^6.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3026,9 +3026,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioCorsBundle/issues",
-                "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.1.1"
+                "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.2.0"
             },
-            "time": "2021-04-20T08:27:05+00:00"
+            "time": "2021-12-01T09:34:27+00:00"
         },
         {
             "name": "php-webdriver/webdriver",
@@ -12731,16 +12731,16 @@
         },
         {
             "name": "swoole/ide-helper",
-            "version": "4.8.2",
+            "version": "4.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "63e19521c232adb1e86472bf2c4e94bff6189c8f"
+                "reference": "3ac4971814273889933b871e03b2a6b340e58f79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swoole/ide-helper/zipball/63e19521c232adb1e86472bf2c4e94bff6189c8f",
-                "reference": "63e19521c232adb1e86472bf2c4e94bff6189c8f",
+                "url": "https://api.github.com/repos/swoole/ide-helper/zipball/3ac4971814273889933b871e03b2a6b340e58f79",
+                "reference": "3ac4971814273889933b871e03b2a6b340e58f79",
                 "shasum": ""
             },
             "type": "library",
@@ -12757,7 +12757,7 @@
             "description": "IDE help files for Swoole.",
             "support": {
                 "issues": "https://github.com/swoole/ide-helper/issues",
-                "source": "https://github.com/swoole/ide-helper/tree/4.8.2"
+                "source": "https://github.com/swoole/ide-helper/tree/4.8.3"
             },
             "funding": [
                 {
@@ -12769,7 +12769,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-17T05:43:38+00:00"
+            "time": "2021-12-01T08:11:40+00:00"
         },
         {
             "name": "symfony/css-selector",
