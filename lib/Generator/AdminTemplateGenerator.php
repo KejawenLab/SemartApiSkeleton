@@ -19,7 +19,7 @@ use Twig\Environment;
 final class AdminTemplateGenerator extends AbstractGenerator
 {
     public function __construct(
-        private Reader $reader,
+        private readonly Reader $reader,
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,

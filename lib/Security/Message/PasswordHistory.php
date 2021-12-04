@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Security\User;
  */
 final class PasswordHistory
 {
-    public function __construct(private User $user, private string $password)
+    public function __construct(private readonly User $user, private readonly string $password)
     {
     }
 

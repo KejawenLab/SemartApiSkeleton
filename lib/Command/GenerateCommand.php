@@ -25,7 +25,7 @@ final class GenerateCommand extends Command
 {
     private const NAMESPACE = 'KejawenLab\\Application\\Entity';
 
-    public function __construct(private GeneratorFactory $generator, private MenuService $menuService)
+    public function __construct(private readonly GeneratorFactory $generator, private readonly MenuService $menuService)
     {
         parent::__construct();
     }

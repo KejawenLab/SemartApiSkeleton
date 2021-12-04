@@ -27,9 +27,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class DeleteApiClient extends AbstractFOSRestController
 {
     public function __construct(
-        private UserProviderFactory $userProviderFactory,
-        private ApiClientService $service,
-        private TranslatorInterface $translator
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly ApiClientService $service,
+        private readonly TranslatorInterface $translator
     ) {
     }
 

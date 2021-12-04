@@ -34,11 +34,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class CreateApiClient extends AbstractFOSRestController
 {
     public function __construct(
-        private FormFactory $formFactory,
-        private UserProviderFactory $userProviderFactory,
-        private ApiClientService $service,
-        private TranslatorInterface $translator,
-        private SettingService $setting,
+        private readonly FormFactory $formFactory,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly ApiClientService $service,
+        private readonly TranslatorInterface $translator,
+        private readonly SettingService $setting,
     ) {
     }
 

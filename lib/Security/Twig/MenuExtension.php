@@ -18,9 +18,9 @@ use Twig\TwigFunction;
 final class MenuExtension extends AbstractExtension
 {
     public function __construct(
-        private Environment $twig,
-        private RequestStack $requestStack,
-        private MenuService $menuService,
+        private readonly Environment $twig,
+        private readonly RequestStack $requestStack,
+        private readonly MenuService $menuService,
     ) {
     }
 

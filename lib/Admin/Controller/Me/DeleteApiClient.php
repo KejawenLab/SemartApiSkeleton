@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class DeleteApiClient extends AbstractController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory, private ApiClientService $service)
+    public function __construct(private readonly UserProviderFactory $userProviderFactory, private readonly ApiClientService $service)
     {
     }
 

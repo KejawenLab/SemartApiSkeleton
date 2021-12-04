@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct(private CronService $service, private AuditService $audit, private Reader $reader)
+    public function __construct(private readonly CronService $service, private readonly AuditService $audit, private readonly Reader $reader)
     {
         parent::__construct($this->service);
     }

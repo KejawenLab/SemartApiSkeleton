@@ -14,17 +14,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    private ?GroupInterface $group;
+    private readonly ?GroupInterface $group;
 
-    private string $id;
+    private readonly string $id;
 
     private ?string $profileImage;
 
-    private string $username;
+    private readonly string $username;
 
     private string $password;
 
-    private string $class;
+    private readonly string $class;
 
     public function __construct(?AuthInterface $user = null)
     {

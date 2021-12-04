@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class Download extends AbstractController
 {
-    public function __construct(private CronService $service, private SerializerInterface $serializer)
+    public function __construct(private readonly CronService $service, private readonly SerializerInterface $serializer)
     {
     }
 

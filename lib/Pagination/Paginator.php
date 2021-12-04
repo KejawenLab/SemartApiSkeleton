@@ -16,18 +16,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class Paginator
 {
-    private ?string $pageField;
+    private readonly ?string $pageField;
 
-    private ?string $perPageField;
+    private readonly ?string $perPageField;
 
-    private int $perPageDefault;
+    private readonly int $perPageDefault;
 
-    private int $cacheLifetime;
+    private readonly int $cacheLifetime;
 
     /**
      * @param QueryExtensionInterface[] $queryExtension
      */
-    public function __construct(SettingService $setting, private iterable $queryExtension)
+    public function __construct(SettingService $setting, private readonly iterable $queryExtension)
     {
         $this->pageField = $setting->getPageField();
         $this->perPageField = $setting->getPerPageField();
@@ -38,14 +38,11 @@ final class Paginator
     /**
      *
      *
-     * @param QueryBuilder $queryBuilder
-     * @param Request $request
-     * @param string $class
      *
-     * @return array
      *
      * @throws NoResultException
      * @throws NonUniqueResultException
+     * @return array<string, mixed[]>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {

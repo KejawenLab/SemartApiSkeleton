@@ -28,9 +28,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Run extends AbstractFOSRestController
 {
     public function __construct(
-        private CronService $service,
-        private KernelInterface $kernel,
-        private TranslatorInterface $translator,
+        private readonly CronService $service,
+        private readonly KernelInterface $kernel,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

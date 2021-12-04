@@ -18,7 +18,7 @@ use Twig\TwigFunction;
  */
 final class TwigExtension extends AbstractExtension
 {
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
     }
 

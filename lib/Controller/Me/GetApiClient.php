@@ -29,10 +29,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class GetApiClient extends AbstractFOSRestController
 {
     public function __construct(
-        private Paginator $paginator,
-        private UserProviderFactory $userProviderFactory,
-        private ApiClientService $service,
-        private TranslatorInterface $translator,
+        private readonly Paginator $paginator,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly ApiClientService $service,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

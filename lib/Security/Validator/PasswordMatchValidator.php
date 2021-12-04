@@ -20,9 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PasswordMatchValidator extends ConstraintValidator
 {
     public function __construct(
-        private UserPasswordHasherInterface $encoder,
-        private TokenStorageInterface $tokenStorage,
-        private TranslatorInterface $translator,
+        private readonly UserPasswordHasherInterface $encoder,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

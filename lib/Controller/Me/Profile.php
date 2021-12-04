@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class Profile extends AbstractFOSRestController
 {
-    public function __construct(private UserProviderFactory $userProviderFactory, private TranslatorInterface $translator)
+    public function __construct(private readonly UserProviderFactory $userProviderFactory, private readonly TranslatorInterface $translator)
     {
     }
 

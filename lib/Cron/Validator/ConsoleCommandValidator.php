@@ -19,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class ConsoleCommandValidator extends ConstraintValidator
 {
-    public function __construct(private KernelInterface $kernel, private TranslatorInterface $translator)
+    public function __construct(private readonly KernelInterface $kernel, private readonly TranslatorInterface $translator)
     {
     }
 

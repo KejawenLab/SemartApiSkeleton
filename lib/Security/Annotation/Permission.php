@@ -12,15 +12,15 @@ namespace KejawenLab\ApiSkeleton\Security\Annotation;
  */
 final class Permission
 {
-    public const ADD = 'add';
+    public final const ADD = 'add';
 
-    public const EDIT = 'edit';
+    public final const EDIT = 'edit';
 
-    public const VIEW = 'view';
+    public final const VIEW = 'view';
 
-    public const DELETE = 'delete';
+    public final const DELETE = 'delete';
 
-    private string $menu;
+    private readonly string $menu;
 
     private array $actions = [];
 
@@ -58,6 +58,9 @@ final class Permission
         return $this->menu;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getActions(): array
     {
         return $this->actions;

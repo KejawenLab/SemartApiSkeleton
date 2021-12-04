@@ -12,7 +12,7 @@ use ReflectionClass;
  */
 final class Parser
 {
-    public function __construct(private Reader $reader)
+    public function __construct(private readonly Reader $reader)
     {
     }
 

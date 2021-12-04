@@ -28,10 +28,10 @@ use Symfony\Component\Routing\Annotation\Route;
 final class Permission extends AbstractController
 {
     public function __construct(
-        private PermissionService $service,
-        private GroupService $groupService,
-        private Paginator $paginator,
-        private SettingService $settingService,
+        private readonly PermissionService $service,
+        private readonly GroupService $groupService,
+        private readonly Paginator $paginator,
+        private readonly SettingService $settingService,
     ) {
     }
 

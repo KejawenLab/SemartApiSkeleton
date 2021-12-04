@@ -23,7 +23,7 @@ final class ApiControllerGenerator extends AbstractGenerator
     private const CONTROLLER_PREFIX = 'KejawenLab\\Application\\Controller';
 
     public function __construct(
-        private Reader $reader,
+        private readonly Reader $reader,
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,

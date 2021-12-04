@@ -30,9 +30,9 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public function __construct(
-        private UserService $userService,
-        private UserProviderFactory $userProviderFactory,
-        private UrlGeneratorInterface $urlGenerator,
+        private readonly UserService $userService,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly UrlGeneratorInterface $urlGenerator,
     ) {
     }
 

@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private MenuService $service, private TranslatorInterface $translator)
+    public function __construct(private readonly MenuService $service, private readonly TranslatorInterface $translator)
     {
     }
 

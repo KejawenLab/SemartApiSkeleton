@@ -40,7 +40,7 @@ final class SecurityController extends AbstractFOSRestController
      * @throws RuntimeException
      */
     #[Post(data: '/login', name: SecurityController::class, priority: 17)]
-    public function __invoke(): Response
+    public function __invoke(): never
     {
         throw new RuntimeException('Invalid security configuration');
     }

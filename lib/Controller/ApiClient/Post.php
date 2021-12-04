@@ -31,10 +31,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Post extends AbstractFOSRestController
 {
     public function __construct(
-        private FormFactory $formFactory,
-        private UserService $userService,
-        private ApiClientService $service,
-        private TranslatorInterface $translator,
+        private readonly FormFactory $formFactory,
+        private readonly UserService $userService,
+        private readonly ApiClientService $service,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

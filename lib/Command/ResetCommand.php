@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class ResetCommand extends Command
 {
-    public function __construct(private KernelInterface $kernel, private EntityManagerInterface $entityManager)
+    public function __construct(private readonly KernelInterface $kernel, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct();
     }

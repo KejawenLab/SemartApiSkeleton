@@ -29,9 +29,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class Main extends AbstractController
 {
     public function __construct(
-        private ApiClientService $service,
-        private UserService $userService,
-        private Paginator $paginator,
+        private readonly ApiClientService $service,
+        private readonly UserService $userService,
+        private readonly Paginator $paginator,
     ) {
     }
 

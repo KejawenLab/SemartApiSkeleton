@@ -21,8 +21,8 @@ final class UserProviderFactory implements UserProviderInterface
      * @param Provider[] $providers
      */
     public function __construct(
-        private iterable $providers,
-        private UserPasswordHasherInterface $passwordHasher,
+        private readonly iterable $providers,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
