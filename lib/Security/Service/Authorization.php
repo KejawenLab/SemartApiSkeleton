@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 final class Authorization
 {
-    public function __construct(private MenuRepositoryInterface $menuRepository, private AuthorizationCheckerInterface $checker)
+    public function __construct(private readonly MenuRepositoryInterface $menuRepository, private readonly AuthorizationCheckerInterface $checker)
     {
     }
 

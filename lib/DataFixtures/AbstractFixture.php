@@ -27,7 +27,7 @@ abstract class AbstractFixture extends Base
 {
     protected const REF_KEY = 'ref:';
 
-    public function __construct(private PermissionService $service, protected KernelInterface $kernel, private MessageBusInterface $messageBus)
+    public function __construct(private readonly PermissionService $service, protected KernelInterface $kernel, private readonly MessageBusInterface $messageBus)
     {
     }
 

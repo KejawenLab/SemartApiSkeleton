@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Delete extends AbstractController
 {
-    public function __construct(private MenuService $service)
+    public function __construct(private readonly MenuService $service)
     {
     }
 

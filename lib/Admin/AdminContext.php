@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class AdminContext
 {
-    public const ADMIN_PATH_PREFIX = '/admin';
+    public final const ADMIN_PATH_PREFIX = '/admin';
 
-    public const LOGIN_ROUTE = 'admin_login';
+    public final const LOGIN_ROUTE = 'admin_login';
 
-    public const ADMIN_ROUTE = 'admin_home';
+    public final const ADMIN_ROUTE = 'admin_home';
 
-    public const USER_DEVICE_ID = 'USER_DEVICE_ID';
+    public final const USER_DEVICE_ID = 'USER_DEVICE_ID';
 
     public static function isAdminContext(Request $request): bool
     {

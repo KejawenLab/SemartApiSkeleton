@@ -15,7 +15,7 @@ use Twig\TwigFunction;
  */
 final class AuditExtension extends AbstractExtension
 {
-    public function __construct(private Reader $reader)
+    public function __construct(private readonly Reader $reader)
     {
     }
 

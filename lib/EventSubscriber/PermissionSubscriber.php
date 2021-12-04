@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class PermissionSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private Parser $parser, private Authorization $authorization, private Ownership $ownership)
+    public function __construct(private readonly Parser $parser, private readonly Authorization $authorization, private readonly Ownership $ownership)
     {
     }
 

@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private MenuService $service, private AuditService $audit, private Reader $reader)
+    public function __construct(private readonly MenuService $service, private readonly AuditService $audit, private readonly Reader $reader)
     {
         parent::__construct($this->service);
     }

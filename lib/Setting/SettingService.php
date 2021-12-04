@@ -20,7 +20,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         MessageBusInterface $messageBus,
         SettingRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        private SettingGroupFactory $groupFactory,
+        private readonly SettingGroupFactory $groupFactory,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

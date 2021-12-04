@@ -14,7 +14,7 @@ use Twig\TwigFunction;
  */
 final class SettingExtension extends AbstractExtension
 {
-    public function __construct(private SettingService $service)
+    public function __construct(private readonly SettingService $service)
     {
     }
 

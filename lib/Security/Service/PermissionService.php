@@ -35,14 +35,14 @@ final class PermissionService extends AbstractService implements ServiceInterfac
      * @param PermissionRemoverInterface[] $removers
      */
     public function __construct(
-        private EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
         MessageBusInterface $messageBus,
         PermissionRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        private MenuRepositoryInterface $menuRepository,
-        private iterable $initiators,
-        private iterable $removers,
-        private string $class,
+        private readonly MenuRepositoryInterface $menuRepository,
+        private readonly iterable $initiators,
+        private readonly iterable $removers,
+        private readonly string $class,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
@@ -116,7 +116,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     /**
      *
-     * @return array<string, array<int, mixed[]>>|array<string, string>|array<string, null>
+     * @return array<string, mixed[]>
      */
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
     {

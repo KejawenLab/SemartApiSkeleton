@@ -23,11 +23,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PasswordHistoryValidator extends ConstraintValidator
 {
     public function __construct(
-        private UserPasswordHasherInterface $encoder,
-        private TokenStorageInterface $tokenStorage,
-        private PasswordHistoryService $service,
-        private UserProviderFactory $userProviderFactory,
-        private TranslatorInterface $translator,
+        private readonly UserPasswordHasherInterface $encoder,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly PasswordHistoryService $service,
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

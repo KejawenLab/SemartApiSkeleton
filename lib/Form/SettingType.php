@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class SettingType extends AbstractType
 {
-    public function __construct(private SettingGroupFactory $settingGroupFactory)
+    public function __construct(private readonly SettingGroupFactory $settingGroupFactory)
     {
     }
 

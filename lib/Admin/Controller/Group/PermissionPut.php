@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PermissionPut extends AbstractController
 {
-    public function __construct(private GroupService $groupService, private PermissionService $service)
+    public function __construct(private readonly GroupService $groupService, private readonly PermissionService $service)
     {
     }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use KejawenLab\ApiSkeleton\Controller\Me\Profile;
+use KejawenLab\ApiSkeleton\Controller\User\GetAll;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -20,17 +22,17 @@ final class LoadUrlPathSubscriber implements EventSubscriber
     private const ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\Application\\Controller\\';
 
     private array $reservedRoutes = [
-        'KejawenLab\\ApiSkeleton\\Controller\\Me\\Profile',
-        'KejawenLab\\ApiSkeleton\\Controller\\User\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\Group\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\Menu\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\Setting\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\ApiClient\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\Cron\\GetAll',
-        'KejawenLab\\ApiSkeleton\\Controller\\Media\\GetAll',
+        Profile::class,
+        GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\Group\GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\Menu\GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\Setting\GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\Cron\GetAll::class,
+        \KejawenLab\ApiSkeleton\Controller\Media\GetAll::class,
     ];
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
     }
 

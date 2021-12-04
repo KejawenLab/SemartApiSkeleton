@@ -12,7 +12,7 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
  */
 final class ShellJob extends Base
 {
-    public function __construct(private CronInterface $cron)
+    public function __construct(private readonly CronInterface $cron)
     {
     }
 

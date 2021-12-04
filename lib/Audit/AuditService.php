@@ -16,9 +16,9 @@ use Psr\Cache\InvalidArgumentException;
  */
 final class AuditService
 {
-    private int $cacheLifetime;
+    private readonly int $cacheLifetime;
 
-    public function __construct(private Reader $auditReader, private CacheItemPoolInterface $cache, SettingService $setting)
+    public function __construct(private readonly Reader $auditReader, private readonly CacheItemPoolInterface $cache, SettingService $setting)
     {
         $this->cacheLifetime = $setting->getCacheLifetime();
     }

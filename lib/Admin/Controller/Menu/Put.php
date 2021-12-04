@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Put extends AbstractController
 {
-    public function __construct(private MenuService $service)
+    public function __construct(private readonly MenuService $service)
     {
     }
 

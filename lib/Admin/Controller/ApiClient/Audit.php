@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct(private ApiClientService $service, private UserService $userService, private AuditService $audit, private Reader $reader)
+    public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly AuditService $audit, private readonly Reader $reader)
     {
     }
 

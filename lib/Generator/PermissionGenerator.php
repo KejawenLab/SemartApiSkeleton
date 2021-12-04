@@ -24,14 +24,14 @@ final class PermissionGenerator extends AbstractGenerator
     private const ROUTE_PLACEHOLDER = 'KejawenLab\\Application\\Controller\\%s\\GetAll';
 
     public function __construct(
-        private PermissionService $permissionService,
-        private MenuService $menuService,
-        private GroupService $groupService,
+        private readonly PermissionService $permissionService,
+        private readonly MenuService $menuService,
+        private readonly GroupService $groupService,
         Environment $twig,
         Filesystem $fileSystem,
         KernelInterface $kernel,
         EntityManagerInterface $entityManager,
-        private string $class,
+        private readonly string $class,
     ) {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }

@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CronScheduleFormatValidator extends ConstraintValidator
 {
-    public function __construct(private CrontabValidator $validator, private TranslatorInterface $translator)
+    public function __construct(private readonly CrontabValidator $validator, private readonly TranslatorInterface $translator)
     {
     }
 

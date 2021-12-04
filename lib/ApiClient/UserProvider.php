@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface;
  */
 final class UserProvider implements UserProviderInterface
 {
-    public function __construct(private string $class, private ApiClientRepositoryInterface $repository)
+    public function __construct(private readonly string $class, private readonly ApiClientRepositoryInterface $repository)
     {
     }
 

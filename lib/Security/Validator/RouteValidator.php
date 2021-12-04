@@ -17,9 +17,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class RouteValidator extends ConstraintValidator
 {
-    private RouteCollection $routeCollection;
+    private readonly RouteCollection $routeCollection;
 
-    public function __construct(RouterInterface $router, private TranslatorInterface $translator)
+    public function __construct(RouterInterface $router, private readonly TranslatorInterface $translator)
     {
         $this->routeCollection = $router->getRouteCollection();
     }

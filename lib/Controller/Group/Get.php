@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private GroupService $service, private TranslatorInterface $translator)
+    public function __construct(private readonly GroupService $service, private readonly TranslatorInterface $translator)
     {
     }
 

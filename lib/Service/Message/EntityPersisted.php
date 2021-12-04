@@ -9,7 +9,7 @@ namespace KejawenLab\ApiSkeleton\Service\Message;
  */
 class EntityPersisted
 {
-    public function __construct(private object $entity)
+    public function __construct(private readonly object $entity)
     {
     }
 

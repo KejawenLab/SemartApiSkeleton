@@ -23,8 +23,8 @@ final class CronService extends AbstractService implements ServiceInterface, Res
         MessageBusInterface $messageBus,
         CronRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        private KernelInterface $kernel,
-        private CronBuilder $builder,
+        private readonly KernelInterface $kernel,
+        private readonly CronBuilder $builder,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

@@ -20,7 +20,7 @@ final class GroupService extends AbstractService implements ServiceInterface
         MessageBusInterface $messageBus,
         GroupRepositoryInterface $repository,
         AliasHelper $aliasHelper,
-        private string $superAdmin,
+        private readonly string $superAdmin,
     ) {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

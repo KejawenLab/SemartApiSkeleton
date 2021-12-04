@@ -23,18 +23,30 @@ interface ApiClientRequestInterface extends EntityInterface
 
     public function setMethod(string $method): void;
 
+    /**
+     * @return mixed[]
+     */
     public function getHeaders(): array;
 
     public function setHeaders(array $headers): void;
 
+    /**
+     * @return mixed[]
+     */
     public function getQueries(): array;
 
     public function setQueries(array $queries): void;
 
+    /**
+     * @return mixed[]
+     */
     public function getRequests(): array;
 
     public function setRequests(array $requests): void;
 
+    /**
+     * @return mixed[]
+     */
     public function getFiles(): array;
 
     public function setFiles(array $files): void;
