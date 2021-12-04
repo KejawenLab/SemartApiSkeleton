@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Command;
 
 use Cron\Cron;
-use Cron\Report\ReportInterface;
 use Cron\Resolver\ArrayResolver;
 use Cron\Schedule\CrontabSchedule;
 use DateTime;
@@ -56,7 +55,7 @@ final class CronRunCommand extends Command
             $resolver = $this->getResolver(
                 $input->getArgument('job'),
                 false !== $input->getParameterOption('--force'),
-                false !== $input->getParameterOption('--schedule_now')
+                false !== $input->getParameterOption('--schedule_now'),
             );
         } else {
             $resolver = $this->cronService;
@@ -64,7 +63,7 @@ final class CronRunCommand extends Command
 
         $cron->setResolver($resolver);
         $time = microtime(true);
-        /** @var ReportInterface $outputs */
+
         $outputs = $cron->run();
 
         $output->writeln(sprintf('time: %s', microtime(true) - $time));

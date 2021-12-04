@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Command;
 
 use Exception;
-use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
-use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,33 +30,8 @@ final class CronStartCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if ($input->getOption('blocking')) {
-            $output->writeln('<info>Starting cron scheduler in blocking mode</info>');
-            $this->scheduler($output->isVerbose() ? $output : new NullOutput(), null);
-
-            return 0;
-        }
-
-        $pidFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.CronInterface::PID_FILE;
-        if (-1 === $pid = pcntl_fork()) {
-            throw new RuntimeException('Unable to start the cron process');
-        }
-
-        if (0 !== $pid) {
-            if (false === file_put_contents($pidFile, $pid)) {
-                throw new RuntimeException('Unable to create process file');
-            }
-
-            $output->writeln('<info>Cron scheduler started in non-blocking mode</info>');
-
-            return 0;
-        }
-
-        if (-1 === posix_setsid()) {
-            throw new RuntimeException('Unable to set the child process as session leader');
-        }
-
-        $this->scheduler(new NullOutput(), $pidFile);
+        $output->writeln('<info>Starting cron scheduler</info>');
+        $this->scheduler($output->isVerbose() ? $output : new NullOutput());
 
         return 0;
     }
@@ -66,7 +39,7 @@ final class CronStartCommand extends Command
     /**
      * @throws Exception
      */
-    private function scheduler(OutputInterface $output, ?string $pidFile): void
+    private function scheduler(OutputInterface $output): void
     {
         $input = new ArrayInput([]);
 
@@ -74,11 +47,7 @@ final class CronStartCommand extends Command
         $command = $console->find('semart:cron:run');
         while (true) {
             $now = microtime(true);
-            usleep((int) ((60 - ($now % 60) + (int) $now - $now) * 1_000_000.0));
-
-            if (null !== $pidFile && !file_exists($pidFile)) {
-                break;
-            }
+            usleep(intval((60 - ($now % 60) + $now - $now) * 1_000_000.0));
 
             $command->run($input, $output);
         }

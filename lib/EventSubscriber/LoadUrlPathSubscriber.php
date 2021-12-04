@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\Controller\Me\Profile;
-use KejawenLab\ApiSkeleton\Controller\User\GetAll;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll as ApiClient;
+use KejawenLab\ApiSkeleton\Controller\Cron\GetAll as Cron;
+use KejawenLab\ApiSkeleton\Controller\Group\GetAll as Group;
+use KejawenLab\ApiSkeleton\Controller\Me\Profile;
+use KejawenLab\ApiSkeleton\Controller\Media\GetAll as Media;
+use KejawenLab\ApiSkeleton\Controller\Menu\GetAll as Menu;
+use KejawenLab\ApiSkeleton\Controller\Setting\GetAll as Setting;
+use KejawenLab\ApiSkeleton\Controller\User\GetAll;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -22,14 +28,8 @@ final class LoadUrlPathSubscriber implements EventSubscriber
     private const ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\Application\\Controller\\';
 
     private array $reservedRoutes = [
-        Profile::class,
-        GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\Group\GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\Menu\GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\Setting\GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\Cron\GetAll::class,
-        \KejawenLab\ApiSkeleton\Controller\Media\GetAll::class,
+        Profile::class, GetAll::class, Group::class, Menu::class,
+        Setting::class, ApiClient::class, Cron::class, Media::class,
     ];
 
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)

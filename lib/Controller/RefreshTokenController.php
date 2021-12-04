@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Controller;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
 use OpenApi\Annotations as OA;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
