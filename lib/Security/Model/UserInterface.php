@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 interface UserInterface extends AuthInterface, EntityInterface
 {
-    public final const PROFILE_MEDIA_FOLDER = 'profiles';
+    final public const PROFILE_MEDIA_FOLDER = 'profiles';
 
     public function getSupervisor(): ?self;
 

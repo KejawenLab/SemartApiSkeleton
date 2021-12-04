@@ -12,13 +12,13 @@ namespace KejawenLab\ApiSkeleton\Security\Annotation;
  */
 final class Permission
 {
-    public final const ADD = 'add';
+    final public const ADD = 'add';
 
-    public final const EDIT = 'edit';
+    final public const EDIT = 'edit';
 
-    public final const VIEW = 'view';
+    final public const VIEW = 'view';
 
-    public final const DELETE = 'delete';
+    final public const DELETE = 'delete';
 
     private readonly string $menu;
 

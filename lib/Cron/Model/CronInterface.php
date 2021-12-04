@@ -11,9 +11,9 @@ use KejawenLab\ApiSkeleton\Entity\EntityInterface;
  */
 interface CronInterface extends EntityInterface
 {
-    public final const PID_FILE = '.semart.pid';
+    final public const PID_FILE = '.semart.pid';
 
-    public final const CRON_RUN_KEY = 'CRON_RUN';
+    final public const CRON_RUN_KEY = 'CRON_RUN';
 
     public function getName(): ?string;
 

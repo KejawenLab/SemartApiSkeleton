@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 interface MediaInterface extends EntityInterface
 {
-    public final const FILE_FIELD = 'file';
+    final public const FILE_FIELD = 'file';
 
-    public final const PUBLIC_FIELD = 'public';
+    final public const PUBLIC_FIELD = 'public';
 
     public function getFile(): ?File;
 

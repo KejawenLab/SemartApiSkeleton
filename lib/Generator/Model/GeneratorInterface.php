@@ -12,11 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 interface GeneratorInterface
 {
-    public final const SCOPE_API = 'api';
+    final public const SCOPE_API = 'api';
 
-    public final const SCOPE_ADMIN = 'admin';
+    final public const SCOPE_ADMIN = 'admin';
 
-    public final const SCOPE_ALL = 'all';
+    final public const SCOPE_ALL = 'all';
 
     public function generate(ReflectionClass $class, OutputInterface $output, ?string $folder = null): void;
 
