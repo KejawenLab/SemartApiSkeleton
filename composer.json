@@ -77,7 +77,7 @@
         "nunomaduro/phpinsights": "^2.0",
         "phpstan/phpstan": "^1.1",
         "phpunit/phpunit": ">=9.5",
-        "rector/rector": "dev-main#29a408a74b1eea6cdcd7c58d06ce932203393466",
+        "rector/rector": "dev-main#4a5f1c82b3d295875c8ac2475b075b4fa3f9fe5a",
         "swoole/ide-helper": "^4.7",
         "symfony/browser-kit": ">=5.4",
         "symfony/css-selector": ">=5.4",
