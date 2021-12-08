@@ -30,6 +30,7 @@
         "doctrine/dbal": "^2.13.6",
         "doctrine/doctrine-bundle": ">=2.4",
         "doctrine/orm": ">=2.9",
+        "friendsofphp/proxy-manager-lts": ">=1.0",
         "friendsofsymfony/rest-bundle": ">=3.0",
         "gesdinet/jwt-refresh-token-bundle": "dev-master",
         "lexik/jwt-authentication-bundle": ">=2.11",

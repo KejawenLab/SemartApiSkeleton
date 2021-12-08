@@ -49,11 +49,6 @@ final class StringUtil
 
     public static function plural(string $string): string
     {
-        $plural = (new EnglishInflector())->pluralize($string);
-        if (is_array($plural)) {
-            $plural = $plural[0];
-        }
-
-        return $plural;
+        return (new EnglishInflector())->pluralize($string)[0];
     }
 }

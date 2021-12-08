@@ -12,5 +12,3 @@ snc_redis:
             type: phpredis
             alias: session
             dsn: '%env(REDIS_URL)%/2'
-    session:
-        client: session

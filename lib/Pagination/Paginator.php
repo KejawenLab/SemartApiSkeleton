@@ -36,10 +36,6 @@ final class Paginator
     }
 
     /**
-     *
-     *
-     *
-     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      * @return array<string, mixed[]>

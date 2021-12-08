@@ -17,6 +17,9 @@
     "composer/metadata-minifier": {
         "version": "1.0.0"
     },
+    "composer/pcre": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -153,6 +156,9 @@
             ".php_cs.dist"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.5"
+    },
     "friendsofsymfony/rest-bundle": {
         "version": "2.2",
         "recipe": {
@@ -182,6 +188,9 @@
     },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
+    },
+    "laminas/laminas-code": {
+        "version": "4.5.0"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -972,12 +981,6 @@
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
-    },
-    "zendframework/zend-code": {
-        "version": "3.4.1"
-    },
-    "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
     },
     "zircote/swagger-php": {
         "version": "2.0.16"
