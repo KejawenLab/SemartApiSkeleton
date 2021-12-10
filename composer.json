@@ -76,7 +76,7 @@
         "nunomaduro/phpinsights": "^2.0",
         "phpstan/phpstan": "^1.1",
         "phpunit/phpunit": ">=9.5",
-        "rector/rector": "dev-main#4a5f1c82b3d295875c8ac2475b075b4fa3f9fe5a",
+        "rector/rector": "0.12.7",
         "swoole/ide-helper": "^4.7",
         "symfony/browser-kit": ">=5.4",
         "symfony/css-selector": ">=5.4",
@@ -135,7 +135,5 @@
             "allow-contrib": true,
             "require": ">=5.4"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
