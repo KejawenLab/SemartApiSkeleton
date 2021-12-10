@@ -41,7 +41,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         $credentials = [
             'username' => $request->request->get('_username', ''),
@@ -51,7 +51,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return new Passport(
-            new UserBadge($credentials['username'], fn (string $userIdentifier): User => $this->userProviderFactory->loadUserByUsername($userIdentifier)),
+            new UserBadge($credentials['username'], fn (string $userIdentifier): User => $this->userProviderFactory->loadUserByIdentifier($userIdentifier)),
             new PasswordCredentials($credentials['password']),
         );
     }
