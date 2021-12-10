@@ -47,7 +47,7 @@ final class CronStartCommand extends Command
         $command = $console->find('semart:cron:run');
         while (true) {
             $now = microtime(true);
-            usleep(intval((60 - ($now % 60) + $now - $now) * 1_000_000.0));
+            usleep((int) ((60 - ($now % 60) + $now - $now) * 1_000_000.0));
 
             $command->run($input, $output);
         }
