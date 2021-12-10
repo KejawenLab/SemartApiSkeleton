@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c62c68cf4e43bb7d41e64efcd90c0dec",
+    "content-hash": "6a86c6cb407721d4fa75a34f93a1caad",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -11833,16 +11833,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "dev-main",
+            "version": "0.12.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "4a5f1c82b3d295875c8ac2475b075b4fa3f9fe5a"
+                "reference": "d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/4a5f1c82b3d295875c8ac2475b075b4fa3f9fe5a",
-                "reference": "4a5f1c82b3d295875c8ac2475b075b4fa3f9fe5a",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d",
+                "reference": "d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d",
                 "shasum": ""
             },
             "require": {
@@ -11860,7 +11860,6 @@
                 "rector/rector-prefixed": "*",
                 "rector/rector-symfony": "*"
             },
-            "default-branch": true,
             "bin": [
                 "bin/rector"
             ],
@@ -11882,7 +11881,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/main"
+                "source": "https://github.com/rectorphp/rector/tree/0.12.7"
             },
             "funding": [
                 {
@@ -11890,7 +11889,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-10T11:01:04+00:00"
+            "time": "2021-12-09T20:25:42+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -13522,12 +13521,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "gesdinet/jwt-refresh-token-bundle": 20,
-        "rector/rector": 20
+        "gesdinet/jwt-refresh-token-bundle": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.1",

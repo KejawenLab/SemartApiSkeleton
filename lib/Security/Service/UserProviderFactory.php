@@ -44,7 +44,7 @@ final class UserProviderFactory implements UserProviderInterface
 
     public function refreshUser(UserInterface $user): User
     {
-        return $this->loadUserByUsername($user->getUserIdentifier());
+        return $this->loadUserByIdentifier($user->getUserIdentifier());
     }
 
     public function supportsClass(string $class): bool
