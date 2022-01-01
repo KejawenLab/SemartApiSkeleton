@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Storage\FileSystemStorage;
  */
 final class Storage extends FileSystemStorage
 {
-    public function remove($obj, PropertyMapping $mapping): ?bool
+    public function remove($obj, PropertyMapping $mapping, ?string $forcedFilename = null): ?bool
     {
         if (!$obj instanceof MediaInterface) {
             parent::upload($obj, $mapping);

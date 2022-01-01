@@ -598,6 +598,9 @@
     "symfony/doctrine-bridge": {
         "version": "v5.0.8"
     },
+    "symfony/doctrine-messenger": {
+        "version": "v6.0.2"
+    },
     "symfony/dom-crawler": {
         "version": "v5.3.0"
     },
