@@ -583,7 +583,9 @@ Jangan lupa untuk merestart docker untuk mendapatkan perubahan.
         <img height="77px" src="./doc/assets/kemkes.jpeg">
       </td>
       <td width="50%" align="center">
-        -
+        <span>Kementerian Kesehatan</span><br>
+        <span style="font-size: small">(checked: 04-01-2022)</span><br><br> 
+        <img height="77px" src="./doc/assets/imigrasi.png">
       </td>
     </tr>
   </tbody>
