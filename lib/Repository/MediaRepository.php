@@ -36,13 +36,7 @@ final class MediaRepository extends AbstractRepository implements MediaRepositor
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf(
-            '%s_%s_%s_%s',
-            str_replace([':', '/', '\\'], "_", self::class),
-            str_replace([':', '/', '\\'], "_", __METHOD__),
-            str_replace([':', '/', '\\'], "_", $fileName),
-            str_replace([':', '/', '\\'], "_", $folder),
-        ));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), sha1($folder), sha1($fileName)));
 
         return $query->getOneOrNullResult();
     }

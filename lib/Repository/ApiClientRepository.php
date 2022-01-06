@@ -33,12 +33,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf(
-            '%s_%s_%s',
-            str_replace([':', '/', '\\'], "_", self::class),
-            str_replace([':', '/', '\\'], "_", __METHOD__),
-            $apiKey,
-        ));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $apiKey));
 
         return $query->getOneOrNullResult();
     }
@@ -52,11 +47,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf(
-            '%s_%s',
-            str_replace([':', '/', '\\'], "_", self::class),
-            str_replace([':', '/', '\\'], "_", __METHOD__),
-        ));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s", sha1(self::class), sha1(__METHOD__)));
 
         return (int) $query->getSingleScalarResult();
     }
@@ -71,13 +62,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf(
-            '%s_%s_%s_%s',
-            str_replace([':', '/', '\\'], "_", self::class),
-            str_replace([':', '/', '\\'], "_", __METHOD__),
-            $id,
-            $user->getId(),
-        ));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $id, $user->getId()));
 
         return $query->getOneOrNullResult();
     }

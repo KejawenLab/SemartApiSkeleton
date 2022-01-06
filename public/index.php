@@ -10,6 +10,7 @@ $_SERVER['APP_RUNTIME_OPTIONS'] = [
     'port' => 9501,
     'mode' => SWOOLE_BASE,
     'settings' => [
+        Constant::OPTION_REACTOR_NUM => swoole_cpu_num() * 8,
         Constant::OPTION_WORKER_NUM => swoole_cpu_num() * 2,
         Constant::OPTION_ENABLE_STATIC_HANDLER => true,
         Constant::OPTION_DOCUMENT_ROOT => sprintf('%s/%s', $root, 'public')

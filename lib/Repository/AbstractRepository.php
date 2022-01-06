@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
@@ -19,6 +20,8 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     /**
      * @return mixed|null
+     *
+     * @throws NonUniqueResultException
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
