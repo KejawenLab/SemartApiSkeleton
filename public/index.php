@@ -1,5 +1,6 @@
 <?php
 
+use KejawenLab\ApiSkeleton\CachedKernel;
 use KejawenLab\ApiSkeleton\Kernel;
 use Swoole\Constant;
 
@@ -20,5 +21,10 @@ $_SERVER['APP_RUNTIME_OPTIONS'] = [
 require_once sprintf('%s/%s', $root, 'vendor/autoload_runtime.php');
 
 return function (array $context) {
-    return new Kernel($context['APP_ENV'], $context['APP_DEBUG']);
+    $kernel = new Kernel($context['APP_ENV'], $context['APP_DEBUG']);
+    if ('prod' === $kernel->getEnvironment()) {
+        $kernel = new CachedKernel($kernel);
+    }
+
+    return $kernel;
 };

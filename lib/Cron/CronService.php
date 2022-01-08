@@ -40,6 +40,6 @@ final class CronService extends AbstractService implements ServiceInterface, Res
             $job->setSchedule(new CrontabSchedule($cron->getSchedule()));
 
             return $job;
-        }, $this->repository->findBy(['enabled' => true, 'running' => false], ['name' => 'ASC']));
+        }, $this->repository->findUnRunningCrons());
     }
 }

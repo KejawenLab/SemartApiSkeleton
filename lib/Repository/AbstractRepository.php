@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements PaginatableRepositoryInterface
 {
-    protected const MICRO_CACHE = 3;
+    protected const MICRO_CACHE = 7;
 
     /**
      * @return mixed|null
@@ -42,13 +42,14 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
+        $query->enableResultCache(self::MICRO_CACHE, sha1($query->getSQL()));
 
         return $query->getResult();
     }
 
     public function countRecords(): int
     {
-        return $this->count([]);
+        return count($this->findAll());
     }
 
     /**

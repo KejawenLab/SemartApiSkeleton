@@ -1,5 +1,5 @@
 - { group: 'pagination', parameter: 'PAGE_FIELD', value: 'page', reserved: true }
 - { group: 'pagination', parameter: 'PER_PAGE_FIELD', value: 'limit', reserved: true }
 - { group: 'pagination', parameter: 'PER_PAGE', value: '3', reserved: true }
-- { group: 'performance', parameter: 'CACHE_LIFETIME', value: '3', reserved: true }
+- { group: 'performance', parameter: 'CACHE_LIFETIME', value: '17', reserved: true }
 - { group: 'integration', parameter: 'MAX_API_PER_USER', value: '7', reserved: true }

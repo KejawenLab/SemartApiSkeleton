@@ -1,5 +1,6 @@
 nelmio_api_doc:
     documentation:
+        openapi: '3.0.0'
         info:
             title: '%env(resolve:APP_TITLE)%'
             description: '%env(resolve:APP_DESCRIPTION)%'

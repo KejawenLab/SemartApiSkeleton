@@ -55,6 +55,8 @@ final class Get extends AbstractController
 
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
+        $response->setMaxAge(3600);
+
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
         }
