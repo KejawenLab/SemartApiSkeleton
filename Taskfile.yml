@@ -1,0 +1,11 @@
+version: '3'
+tasks:
+    build:
+        cmds:
+            - docker-compose -f docker-compose.yml build
+    run:
+        cmds:
+            - docker-compose -f docker-compose.yml up
+    update:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
