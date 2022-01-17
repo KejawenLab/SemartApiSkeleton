@@ -2400,7 +2400,7 @@
             ],
             "support": {
                 "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
-                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/master"
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.0.0"
             },
             "time": "2022-01-11T19:50:56+00:00"
         },
@@ -3852,16 +3852,16 @@
         },
         {
             "name": "ramsey/uuid-doctrine",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid-doctrine.git",
-                "reference": "135fadb32d91a2d7c0ee12bfd21631d2035cfa0c"
+                "reference": "1a6f235ba3faf1cd9ba18daf5b54d8dc9d3bc7d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid-doctrine/zipball/135fadb32d91a2d7c0ee12bfd21631d2035cfa0c",
-                "reference": "135fadb32d91a2d7c0ee12bfd21631d2035cfa0c",
+                "url": "https://api.github.com/repos/ramsey/uuid-doctrine/zipball/1a6f235ba3faf1cd9ba18daf5b54d8dc9d3bc7d0",
+                "reference": "1a6f235ba3faf1cd9ba18daf5b54d8dc9d3bc7d0",
                 "shasum": ""
             },
             "require": {
@@ -3903,7 +3903,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid-doctrine/issues",
-                "source": "https://github.com/ramsey/uuid-doctrine/tree/1.8.0"
+                "source": "https://github.com/ramsey/uuid-doctrine/tree/1.8.1"
             },
             "funding": [
                 {
@@ -3915,7 +3915,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-08T03:04:18+00:00"
+            "time": "2022-01-15T23:54:44+00:00"
         },
         {
             "name": "react/promise",
@@ -4213,16 +4213,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "4.0.2",
+            "version": "4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "8a3bbd5871b6fa8aad0a8887a31f8531ab5a411a"
+                "reference": "c91d95b82b55f3636b46bb9b5596fc6124fb74bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/8a3bbd5871b6fa8aad0a8887a31f8531ab5a411a",
-                "reference": "8a3bbd5871b6fa8aad0a8887a31f8531ab5a411a",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/c91d95b82b55f3636b46bb9b5596fc6124fb74bb",
+                "reference": "c91d95b82b55f3636b46bb9b5596fc6124fb74bb",
                 "shasum": ""
             },
             "require": {
@@ -4296,9 +4296,9 @@
             ],
             "support": {
                 "issues": "https://github.com/snc/SncRedisBundle/issues",
-                "source": "https://github.com/snc/SncRedisBundle/tree/4.0.2"
+                "source": "https://github.com/snc/SncRedisBundle/tree/4.1.2"
             },
-            "time": "2022-01-06T12:13:25+00:00"
+            "time": "2022-01-17T10:34:57+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -10139,16 +10139,16 @@
         },
         {
             "name": "zircote/swagger-php",
-            "version": "4.2.1",
+            "version": "4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "8f53ded4c90ec7cccb18333c1d7d8a4c16f0c3c8"
+                "reference": "910eda5bc1114d7d203af7788df462b781f98286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/8f53ded4c90ec7cccb18333c1d7d8a4c16f0c3c8",
-                "reference": "8f53ded4c90ec7cccb18333c1d7d8a4c16f0c3c8",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/910eda5bc1114d7d203af7788df462b781f98286",
+                "reference": "910eda5bc1114d7d203af7788df462b781f98286",
                 "shasum": ""
             },
             "require": {
@@ -10208,9 +10208,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zircote/swagger-php/issues",
-                "source": "https://github.com/zircote/swagger-php/tree/4.2.1"
+                "source": "https://github.com/zircote/swagger-php/tree/4.2.2"
             },
-            "time": "2022-01-10T22:04:03+00:00"
+            "time": "2022-01-16T05:39:33+00:00"
         }
     ],
     "packages-dev": [
