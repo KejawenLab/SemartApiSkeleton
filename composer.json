@@ -32,7 +32,7 @@
         "doctrine/orm": ">=2.9",
         "friendsofphp/proxy-manager-lts": ">=1.0",
         "friendsofsymfony/rest-bundle": ">=3.0",
-        "gesdinet/jwt-refresh-token-bundle": "dev-master",
+        "gesdinet/jwt-refresh-token-bundle": ">=v1.0.0",
         "lexik/jwt-authentication-bundle": ">=2.11",
         "nelmio/api-doc-bundle": ">=v4.0.1",
         "nelmio/cors-bundle": ">=2.0",
