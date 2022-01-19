@@ -37,7 +37,7 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
                     $permissionRepository->commit();
                 }
 
-                $permission = $permissionRepository->findPermission($group, $object);
+                $permission = $permissionRepository->findPermission($group, $object, false);
                 if (null === $permission) {
                     $permission = new $this->class();
                 }

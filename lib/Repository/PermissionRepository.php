@@ -29,7 +29,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         parent::__construct($registry, Permission::class);
     }
 
-    public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface
+    public function findPermission(GroupInterface $group, MenuInterface $menu, bool $cached = true): ?PermissionInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
@@ -40,7 +40,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+
+        if ($cached) {
+            $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+        }
 
         return $query->getOneOrNullResult();
     }

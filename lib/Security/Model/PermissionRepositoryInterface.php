@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 interface PermissionRepositoryInterface extends PaginatableRepositoryInterface
 {
-    public function findPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface;
+    public function findPermission(GroupInterface $group, MenuInterface $menu, bool $cached = true): ?PermissionInterface;
 
     public function findPermissions(GroupInterface $group, array $menus): iterable;
 

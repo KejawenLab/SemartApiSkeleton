@@ -83,9 +83,9 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         }
     }
 
-    public function getPermission(GroupInterface $group, MenuInterface $menu): ?PermissionInterface
+    public function getPermission(GroupInterface $group, MenuInterface $menu, bool $cached = true): ?PermissionInterface
     {
-        return $this->repository->findPermission($group, $menu);
+        return $this->repository->findPermission($group, $menu, $cached);
     }
 
     /**
