@@ -9,3 +9,12 @@ tasks:
     update:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
+    login:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash
+    reset:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"
+    log:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "tail -f var/log/dev.log"
