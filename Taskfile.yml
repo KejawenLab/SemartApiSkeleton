@@ -6,15 +6,53 @@ tasks:
     run:
         cmds:
             - docker-compose -f docker-compose.yml up
+    start:
+        cmds:
+            - docker-compose -f docker-compose.yml up -d
+    stop:
+        cmds:
+            - docker-compose -f docker-compose.yml stop
+    restart:
+        cmds:
+            - task: stop
+            - task: start
+    encrypt:
+        cmds:
+            - task: start
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt {{.CLI_ARGS}}"
+            - task: stop
+    init:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
+            - task: sync
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+    install:
+        cmds:
+            - task: start
+            - task: clean
+            - task: init
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
+            - task: restart
     update:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
+    sync:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
     login:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash
     reset:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"
+    generate:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate {{.CLI_ARGS}}"
+            - task: sync
     log:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "tail -f var/log/dev.log"
+    clean:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
+            - docker-compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"

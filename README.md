@@ -123,6 +123,12 @@ docker-compose -f docker-compose.yml build && docker-compose -f docker-compose.y
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt semart"
 ```
 
+Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:
+
+```bash
+task encrypt -- semart
+```
+
 > 
 > * Abaikan warning atau error yang terjadi
 > 
@@ -140,6 +146,12 @@ docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
+```
+
+Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:
+
+```bash
+task install
 ```
 
 > 
@@ -311,6 +323,12 @@ dh_auditor:
 ```bash
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
 docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
+```
+
+Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:
+
+```bash
+task generate -- Todo
 ```
 
 ![Generate Command](doc/assets/generate-command.png)
