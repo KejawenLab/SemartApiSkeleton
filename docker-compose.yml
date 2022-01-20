@@ -18,6 +18,8 @@ services:
             - messenger
         depends_on:
             - session
+            - db
+            - messenger
     db:
         image: postgres:alpine
         environment:
