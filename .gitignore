@@ -20,6 +20,7 @@
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
+/.php_cs.dist.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 
