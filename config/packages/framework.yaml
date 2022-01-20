@@ -1,3 +1,4 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     default_locale: 'id'
     enabled_locales: ['id']
@@ -23,7 +24,6 @@ framework:
             policy: token_bucket
             limit: 5
             rate: { interval: '5 minutes' }
-
         ip_login:
             policy: sliding_window
             limit: 50
@@ -32,3 +32,9 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
