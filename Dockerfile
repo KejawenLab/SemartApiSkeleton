@@ -1,4 +1,4 @@
-FROM phpswoole/swoole:4.8-alpine
+FROM openswoole/swoole:latest-alpine
 
 MAINTAINER Muhammad Surya Ihsanuddin<surya.iksanudin@gmail.com>
 
