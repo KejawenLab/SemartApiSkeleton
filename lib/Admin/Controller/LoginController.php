@@ -22,9 +22,15 @@ final class LoginController extends Base
     #[Route(path: '/login', name: AdminContext::LOGIN_ROUTE, methods: ['GET', 'POST'])]
     public function __invoke(): Response
     {
-        return $this->render('layout/login.html.twig', [
+        $response = $this->render('layout/login.html.twig', [
             'error' => $this->authenticationUtils->getLastAuthenticationError(),
             'username' => $this->authenticationUtils->getLastUsername(),
         ]);
+
+        $response->setSharedMaxAge(2700);
+        $response->setPublic();
+        $response->setEtag(sha1($response->getContent()));
+
+        return $response;
     }
 }

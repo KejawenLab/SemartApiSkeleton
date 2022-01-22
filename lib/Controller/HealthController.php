@@ -16,7 +16,7 @@ final class HealthController extends AbstractController
 {
     public function __invoke(): Response
     {
-        return new JsonResponse([
+        $response = new JsonResponse([
             'semart' => [
                 'name' => 'Semart Api Skeleton',
                 'version' => [
@@ -33,5 +33,11 @@ final class HealthController extends AbstractController
                 'version' => $_SERVER['APP_VERSION'],
             ],
         ]);
+
+        $response->setSharedMaxAge(2700);
+        $response->setPublic();
+        $response->setEtag(sha1($response->getContent()));
+
+        return $response;
     }
 }

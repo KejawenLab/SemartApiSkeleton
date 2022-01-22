@@ -36,6 +36,10 @@ tasks:
     update:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
+            - task: restart
+    require:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "composer require {{.CLI_ARGS}} -vvv"
     upgrade:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "composer recipes:update -vvv"
