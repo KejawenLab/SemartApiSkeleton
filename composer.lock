@@ -193,16 +193,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f"
+                "reference": "22c41ef275c7bb64fa28fb2c0871a39666832cb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f",
-                "reference": "8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f",
+                "url": "https://api.github.com/repos/composer/composer/zipball/22c41ef275c7bb64fa28fb2c0871a39666832cb9",
+                "reference": "22c41ef275c7bb64fa28fb2c0871a39666832cb9",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.2.4"
+                "source": "https://github.com/composer/composer/tree/2.2.5"
             },
             "funding": [
                 {
@@ -288,7 +288,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-08T11:30:42+00:00"
+            "time": "2022-01-21T16:25:52+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -361,23 +361,23 @@
         },
         {
             "name": "composer/pcre",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/pcre.git",
-                "reference": "3d322d715c43a1ac36c7fe215fa59336265500f2"
+                "reference": "67a32d7d6f9f560b726ab25a061b38ff3a80c560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/pcre/zipball/3d322d715c43a1ac36c7fe215fa59336265500f2",
-                "reference": "3d322d715c43a1ac36c7fe215fa59336265500f2",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/67a32d7d6f9f560b726ab25a061b38ff3a80c560",
+                "reference": "67a32d7d6f9f560b726ab25a061b38ff3a80c560",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1",
+                "phpstan/phpstan": "^1.3",
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
             },
@@ -412,7 +412,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/pcre/issues",
-                "source": "https://github.com/composer/pcre/tree/1.0.0"
+                "source": "https://github.com/composer/pcre/tree/1.0.1"
             },
             "funding": [
                 {
@@ -428,7 +428,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-06T15:17:27+00:00"
+            "time": "2022-01-21T20:24:37+00:00"
         },
         {
             "name": "composer/semver",
@@ -10338,16 +10338,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "f18adf13f6c81c67a88360dca359ad474523f8e3"
+                "reference": "51c1890e8c5467c421c7cab4579f059ebf720278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/f18adf13f6c81c67a88360dca359ad474523f8e3",
-                "reference": "f18adf13f6c81c67a88360dca359ad474523f8e3",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/51c1890e8c5467c421c7cab4579f059ebf720278",
+                "reference": "51c1890e8c5467c421c7cab4579f059ebf720278",
                 "shasum": ""
             },
             "require": {
@@ -10356,15 +10356,20 @@
                 "php": "^7.2 || ^8.0"
             },
             "conflict": {
+                "doctrine/dbal": "<2.13",
                 "doctrine/phpcr-odm": "<1.3.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^9.0",
-                "doctrine/dbal": "^2.5.4 || ^3.0",
+                "doctrine/dbal": "^2.13 || ^3.0",
                 "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
                 "doctrine/orm": "^2.7.0",
                 "ext-sqlite3": "*",
-                "phpunit/phpunit": "^8.0"
+                "jangregor/phpstan-prophecy": "^0.8.1",
+                "phpstan/phpstan": "^0.12.99",
+                "phpunit/phpunit": "^8.0",
+                "symfony/cache": "^5.0 || ^6.0",
+                "vimeo/psalm": "^4.10"
             },
             "suggest": {
                 "alcaeus/mongo-php-adapter": "For using MongoDB ODM 1.3 with PHP 7 (deprecated)",
@@ -10389,13 +10394,13 @@
                 }
             ],
             "description": "Data Fixtures for all Doctrine Object Managers",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "https://www.doctrine-project.org",
             "keywords": [
                 "database"
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.1"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.2"
             },
             "funding": [
                 {
@@ -10411,7 +10416,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-20T21:51:43+00:00"
+            "time": "2022-01-20T17:10:56+00:00"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -11667,16 +11672,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.11",
+            "version": "9.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2406855036db1102126125537adb1406f7242fdd"
+                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2406855036db1102126125537adb1406f7242fdd",
-                "reference": "2406855036db1102126125537adb1406f7242fdd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93d4bf4c37aec6384bb9e5d390d9049a463a7256",
+                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256",
                 "shasum": ""
             },
             "require": {
@@ -11754,7 +11759,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.11"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.12"
             },
             "funding": [
                 {
@@ -11766,7 +11771,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-25T07:07:57+00:00"
+            "time": "2022-01-21T05:54:47+00:00"
         },
         {
             "name": "psr/simple-cache",
