@@ -5,10 +5,10 @@ tasks:
             - docker-compose -f docker-compose.yml build
     run:
         cmds:
-            - docker-compose -f docker-compose.yml up
+            - docker-compose -f docker-compose.yml up --remove-orphans
     start:
         cmds:
-            - docker-compose -f docker-compose.yml up -d
+            - docker-compose -f docker-compose.yml up -d --remove-orphans
     stop:
         cmds:
             - docker-compose -f docker-compose.yml stop
@@ -44,7 +44,7 @@ tasks:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
     login:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash
+            - docker-compose -f docker-compose.yml exec {{.CLI_ARGS}}
     reset:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"

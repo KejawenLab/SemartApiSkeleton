@@ -12,31 +12,39 @@ services:
             - vendor:/semart/vendor
         ports:
             - "9876:9501"
-        links:
-            - session
-            - db
-            - messenger
         depends_on:
             - session
             - db
             - messenger
+        networks:
+            - app
     db:
         image: postgres:alpine
         environment:
             POSTGRES_USER: semart
             POSTGRES_PASSWORD: semart
+        networks:
+            - app
+            - db
     adminer:
         image: adminer:latest
         ports:
             - "6789:8080"
-        links:
+        networks:
             - db
     session:
         image: redis:alpine
+        networks:
+            - app
     messenger:
         image: rabbitmq:management-alpine
         ports:
             - "12345:15672"
+        networks:
+            - app
 volumes:
     cache:
     vendor:
+networks:
+    app: {}
+    db: {}
