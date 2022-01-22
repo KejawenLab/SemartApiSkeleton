@@ -42,7 +42,7 @@ tasks:
     sync:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
-    login:
+    exec:
         cmds:
             - docker-compose -f docker-compose.yml exec {{.CLI_ARGS}}
     reset:
