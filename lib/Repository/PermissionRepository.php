@@ -12,6 +12,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Swoole\Coroutine;
 
 /**
@@ -80,8 +81,15 @@ final class PermissionRepository extends AbstractRepository implements Permissio
     /**
      * @return Iterator<MenuInterface|null>
      */
-    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false): iterable
+    public function findAllowedMenusByGroup(GroupInterface $group, bool $parentOnly = false, bool $maxCache = false): iterable
     {
+        $cacheLifetime = self::MICRO_CACHE;
+        $cacheKey = sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId());
+        if ($maxCache) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheKey = sprintf('%s_max', $cacheKey);
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
         $queryBuilder->innerJoin('o.menu', 'm');
@@ -99,7 +107,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId()));
+        $query->enableResultCache($cacheLifetime, $cacheKey);
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
@@ -111,8 +119,15 @@ final class PermissionRepository extends AbstractRepository implements Permissio
     /**
      * @return Iterator<MenuInterface|null>
      */
-    public function findAllowedChildMenusByGroupAndMenu(GroupInterface $group, MenuInterface $menu): iterable
+    public function findAllowedChildMenusByGroupAndMenu(GroupInterface $group, MenuInterface $menu, bool $maxCache = false): iterable
     {
+        $cacheLifetime = self::MICRO_CACHE;
+        $cacheKey = sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId());
+        if ($maxCache) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheKey = sprintf('%s_max', $cacheKey);
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.group', 'g');
         $queryBuilder->innerJoin('o.menu', 'm');
@@ -129,7 +144,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+        $query->enableResultCache($cacheLifetime, $cacheKey);
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();

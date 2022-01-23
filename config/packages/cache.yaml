@@ -18,5 +18,6 @@ framework:
         pools:
             doctrine.result_cache_pool:
                 adapter: cache.app
+                provider: snc_redis.cache
             doctrine.system_cache_pool:
                 adapter: cache.system

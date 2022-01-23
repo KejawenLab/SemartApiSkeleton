@@ -9,15 +9,17 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
+    final public const STATIC_CACHE_LIFETIME = 1027;
+
     final public const CODENAME = 'Dodol Duren';
 
-    final public const VERSION = '5.7.7';
+    final public const VERSION = '5.8.0';
 
     final public const VERSION_MAYOR = 50000;
 
-    final public const VERSION_MINOR = 700;
+    final public const VERSION_MINOR = 800;
 
-    final public const VERSION_PATCH = 7;
+    final public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {

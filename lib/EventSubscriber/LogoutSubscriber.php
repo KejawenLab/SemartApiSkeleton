@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -15,7 +17,7 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
  */
 final class LogoutSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private readonly CacheItemPoolInterface $cache)
     {
     }
 
@@ -24,6 +26,12 @@ final class LogoutSubscriber implements EventSubscriberInterface
         if (!AdminContext::isAdminContext($event->getRequest())) {
             return;
         }
+
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_CACHE_LIFETIME);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE)));
     }
