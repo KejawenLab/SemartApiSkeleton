@@ -41,7 +41,7 @@ final class MenuService extends AbstractService implements ServiceInterface
             return [];
         }
 
-        return $this->permissionRepository->findAllowedMenusByGroup($group, true, true);
+        return $this->permissionRepository->findAllowedMenusByGroup($group, true);
     }
 
     public function hasChildMenu(MenuInterface $menu): bool
@@ -51,7 +51,7 @@ final class MenuService extends AbstractService implements ServiceInterface
             return false;
         }
 
-        $childMenus = $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu, true);
+        $childMenus = $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
 
         return [] !== iterator_to_array($childMenus, false);
     }
@@ -62,7 +62,7 @@ final class MenuService extends AbstractService implements ServiceInterface
             return [];
         }
 
-        return $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu, true);
+        return $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
     }
 
     private function getGroup(): ?GroupInterface

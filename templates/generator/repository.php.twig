@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Application\Entity\{{ entityHumanize }};
 use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
 use KejawenLab\ApiSkeleton\Repository\AbstractRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method {{ entityHumanize }}|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,8 +21,8 @@ use KejawenLab\ApiSkeleton\Repository\AbstractRepository;
  */
 final class {{ entityHumanize }}Repository extends AbstractRepository implements {{ entityHumanize }}RepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, {{ entityHumanize }}::class);
+        parent::__construct($requestStack, $registry, {{ entityHumanize }}::class);
     }
 }

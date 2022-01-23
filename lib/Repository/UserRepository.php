@@ -10,7 +10,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,9 +27,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry, private readonly string $superAdmin)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry, private readonly string $superAdmin)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($requestStack, $registry, User::class);
     }
 
     /**
@@ -60,26 +62,38 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
     public function findByUsername(string $username): ?AppUser
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('LOWER(o.username)', $queryBuilder->expr()->literal(StringUtil::lowercase($username))));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $username));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $username));
 
         return $query->getOneOrNullResult();
     }
 
     public function findByDeviceId(string $deviceId): ?AppUser
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.deviceId', $queryBuilder->expr()->literal($deviceId)));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $deviceId));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $deviceId));
 
         return $query->getOneOrNullResult();
     }

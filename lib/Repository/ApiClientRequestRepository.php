@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRequestRepositoryInterface;
 use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method ApiClientRequest|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,8 +19,8 @@ use KejawenLab\ApiSkeleton\Entity\ApiClientRequest;
  */
 final class ApiClientRequestRepository extends AbstractRepository implements ApiClientRequestRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, ApiClientRequest::class);
+        parent::__construct($requestStack, $registry, ApiClientRequest::class);
     }
 }

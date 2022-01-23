@@ -9,7 +9,9 @@ use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Menu;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\MenuRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method Menu|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,20 +23,26 @@ use KejawenLab\ApiSkeleton\Util\StringUtil;
  */
 final class MenuRepository extends AbstractRepository implements MenuRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Menu::class);
+        parent::__construct($requestStack, $registry, Menu::class);
     }
 
     public function findByCode(string $code): ?MenuInterface
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('UPPER(o.code)', $queryBuilder->expr()->literal(StringUtil::uppercase($code))));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $code));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $code));
 
         return $query->getOneOrNullResult();
     }
@@ -44,6 +52,12 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
      */
     public function findChilds(MenuInterface $menu): iterable
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->innerJoin('o.parent', 'p');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('p.id', $queryBuilder->expr()->literal($menu->getId())));
@@ -51,7 +65,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $menu->getId()));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $menu->getId()));
 
         $menus = $query->getResult();
         foreach ($menus as $menu) {

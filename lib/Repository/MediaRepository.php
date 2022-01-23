@@ -8,6 +8,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method Media|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,13 +21,19 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaRepositoryInterface;
  */
 final class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Media::class);
+        parent::__construct($requestStack, $registry, Media::class);
     }
 
     public function findByFilename(string $fileName, string $folder = null): ?MediaInterface
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.fileName', $queryBuilder->expr()->literal($fileName)));
         if (null !== $folder) {
@@ -36,7 +44,7 @@ final class MediaRepository extends AbstractRepository implements MediaRepositor
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), sha1($folder), sha1($fileName)));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), sha1($folder), sha1($fileName)));
 
         return $query->getOneOrNullResult();
     }

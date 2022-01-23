@@ -9,6 +9,8 @@ use Iterator;
 use KejawenLab\ApiSkeleton\Entity\PasswordHistory;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method PasswordHistory|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,9 +22,9 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
  */
 final class PasswordHistoryRepository extends AbstractRepository implements PasswordHistoryRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, PasswordHistory::class);
+        parent::__construct($requestStack, $registry, PasswordHistory::class);
     }
 
     /**
@@ -30,6 +32,12 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
      */
     public function findPasswords(UserInterface $user): iterable
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.source', $queryBuilder->expr()->literal($user::class)));
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.identifier', $queryBuilder->expr()->literal($user->getId())));
@@ -38,7 +46,7 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $user->getId()));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $user->getId()));
 
         $passwordHistories = $query->getResult();
         foreach ($passwordHistories as $passwordHistory) {

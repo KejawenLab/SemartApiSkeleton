@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportRepositoryInterface;
 use KejawenLab\ApiSkeleton\Entity\CronReport;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method CronReport|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,8 +19,8 @@ use KejawenLab\ApiSkeleton\Entity\CronReport;
  */
 final class CronReportRepository extends AbstractRepository implements CronReportRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, CronReport::class);
+        parent::__construct($requestStack, $registry, CronReport::class);
     }
 }

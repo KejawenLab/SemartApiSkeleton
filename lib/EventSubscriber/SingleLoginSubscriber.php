@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use DateTimeImmutable;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -24,8 +25,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class SingleLoginSubscriber implements EventSubscriberInterface
 {
-    private const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
-
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly UserService $service,
@@ -44,8 +43,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $session = $request->getSession();
-        $deviceId = $session->get(AdminContext::USER_DEVICE_ID);
+        $deviceId = $request->getSession()->get(AdminContext::USER_DEVICE_ID);
         if (null === $deviceId) {
             return;
         }
@@ -68,7 +66,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (self::API_CLIENT_DEVICE_ID === $payload['deviceId']) {
+        if (ApiClientInterface::DEVICE_ID === $payload['deviceId']) {
             return;
         }
 
@@ -99,7 +97,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             $user->setDeviceId($deviceId);
             $this->service->save($user);
         } else {
-            $payload['deviceId'] = self::API_CLIENT_DEVICE_ID;
+            $payload['deviceId'] = ApiClientInterface::DEVICE_ID;
         }
 
         $event->setData($payload);

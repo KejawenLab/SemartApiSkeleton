@@ -7,6 +7,8 @@ namespace KejawenLab\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Cron\Model\CronRepositoryInterface;
 use KejawenLab\ApiSkeleton\Entity\Cron;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method Cron|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,13 +20,19 @@ use KejawenLab\ApiSkeleton\Entity\Cron;
  */
 final class CronRepository extends AbstractRepository implements CronRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Cron::class);
+        parent::__construct($requestStack, $registry, Cron::class);
     }
 
     public function findUnRunningCrons(): array
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.running', $queryBuilder->expr()->literal(false)));
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.enabled', $queryBuilder->expr()->literal(true)));
@@ -32,7 +40,7 @@ final class CronRepository extends AbstractRepository implements CronRepositoryI
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), sha1($query->getSQL())));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), sha1($query->getSQL())));
 
         return $query->getResult();
     }

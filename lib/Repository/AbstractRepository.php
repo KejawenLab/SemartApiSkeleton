@@ -9,7 +9,12 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -18,6 +23,18 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 {
     protected const MICRO_CACHE = 7;
 
+    protected RequestStack $requestStack;
+
+    public function __construct(
+        RequestStack $requestStack,
+        ManagerRegistry $registry,
+        string $entityClass,
+    ) {
+        $this->requestStack = $requestStack;
+
+        parent::__construct($registry, $entityClass);
+    }
+
     /**
      * @return mixed|null
      *
@@ -25,24 +42,36 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.id', $queryBuilder->expr()->literal($id)));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, $id);
+        $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, $id));
 
         return $query->getOneOrNullResult();
     }
 
     public function findAll(): iterable
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sha1($query->getSQL()));
+        $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, sha1($query->getSQL())));
 
         return $query->getResult();
     }
@@ -80,5 +109,15 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     public function queryBuilder(string $alias): QueryBuilder
     {
         return $this->createQueryBuilder($alias);
+    }
+
+    protected function getDeviceId(): string
+    {
+        $deviceId = $this->requestStack->getSession()->get(AdminContext::USER_DEVICE_ID, '');
+        if ($deviceId === ApiClientInterface::DEVICE_ID) {
+            return '';
+        }
+
+        return $deviceId;
     }
 }

@@ -7,7 +7,9 @@ namespace KejawenLab\ApiSkeleton\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\Group;
 use KejawenLab\ApiSkeleton\Security\Model\GroupRepositoryInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method Group|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +21,9 @@ use KejawenLab\ApiSkeleton\Util\StringUtil;
  */
 final class GroupRepository extends AbstractRepository implements GroupRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
-        parent::__construct($registry, Group::class);
+        parent::__construct($requestStack, $registry, Group::class);
     }
 
     /**
@@ -29,13 +31,19 @@ final class GroupRepository extends AbstractRepository implements GroupRepositor
      */
     public function findByCode(string $code)
     {
+        $deviceId = $this->getDeviceId();
+        $cacheLifetime = self::MICRO_CACHE;
+        if (!empty($deviceId)) {
+            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('UPPER(o.code)', $queryBuilder->expr()->literal(StringUtil::uppercase($code))));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), $code));
+        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $code));
 
         return $query->getOneOrNullResult();
     }
