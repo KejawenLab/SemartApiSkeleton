@@ -7,7 +7,9 @@ use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +34,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         private readonly UserService $userService,
         private readonly UserProviderFactory $userProviderFactory,
         private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly CacheItemPoolInterface $cache,
     ) {
     }
 
@@ -73,6 +76,12 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
             $session->set(AdminContext::USER_DEVICE_ID, $deviceId);
             $this->userService->save($user);
         }
+
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_CACHE_LIFETIME);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
 
         return $this->redirect($session, $firewallName);
     }

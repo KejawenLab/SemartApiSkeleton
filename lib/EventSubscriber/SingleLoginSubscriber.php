@@ -11,10 +11,12 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -29,6 +31,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly UserService $service,
         private readonly UserProviderFactory $userProviderFactory,
+        private readonly CacheItemPoolInterface $cache,
     ) {
     }
 
@@ -63,6 +66,12 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             $event->markAsInvalid();
             $event->stopPropagation();
 
+            $this->cache->deleteItem(SettingInterface::CACHE_ID_CACHE_LIFETIME);
+            $this->cache->deleteItem(SettingInterface::CACHE_ID_PAGE_FIELD);
+            $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
+            $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
+            $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+
             return;
         }
 
@@ -77,6 +86,12 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
         $event->markAsInvalid();
         $event->stopPropagation();
+
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_CACHE_LIFETIME);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
     }
 
     public function create(JWTCreatedEvent $event): void
@@ -101,6 +116,12 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         }
 
         $event->setData($payload);
+
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_CACHE_LIFETIME);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
+        $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
     }
 
     /**
