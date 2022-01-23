@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -20,6 +21,7 @@ final class LogoutSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly CacheItemPoolInterface $cache,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -34,6 +36,11 @@ final class LogoutSubscriber implements EventSubscriberInterface
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+
+        $configuration = $this->entityManager->getConfiguration();
+
+        $configuration->getQueryCache()->clear();
+        $configuration->getResultCache()->clear();
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE)));
     }

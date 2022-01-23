@@ -49,6 +49,9 @@ tasks:
     exec:
         cmds:
             - docker-compose -f docker-compose.yml exec {{.CLI_ARGS}}
+    symfony:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console {{.CLI_ARGS}}"
     reset:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"

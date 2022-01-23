@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
@@ -32,6 +33,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         private readonly UserService $service,
         private readonly UserProviderFactory $userProviderFactory,
         private readonly CacheItemPoolInterface $cache,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -72,6 +74,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
             $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
 
+            $configuration = $this->entityManager->getConfiguration();
+
+            $configuration->getQueryCache()->clear();
+            $configuration->getResultCache()->clear();
+
             return;
         }
 
@@ -92,6 +99,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+
+        $configuration = $this->entityManager->getConfiguration();
+
+        $configuration->getQueryCache()->clear();
+        $configuration->getResultCache()->clear();
     }
 
     public function create(JWTCreatedEvent $event): void
@@ -122,6 +134,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+
+        $configuration = $this->entityManager->getConfiguration();
+
+        $configuration->getQueryCache()->clear();
+        $configuration->getResultCache()->clear();
     }
 
     /**

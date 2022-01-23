@@ -3,6 +3,7 @@
 namespace KejawenLab\ApiSkeleton\Security;
 
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
@@ -35,6 +36,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         private readonly UserProviderFactory $userProviderFactory,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly CacheItemPoolInterface $cache,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -82,6 +84,10 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+        $configuration = $this->entityManager->getConfiguration();
+
+        $configuration->getQueryCache()->clear();
+        $configuration->getResultCache()->clear();
 
         return $this->redirect($session, $firewallName);
     }
