@@ -81,19 +81,13 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
 
     public function findByDeviceId(string $deviceId): ?AppUser
     {
-        $deviceId = $this->getDeviceId();
-        $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
-        }
-
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.deviceId', $queryBuilder->expr()->literal($deviceId)));
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
         $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $deviceId));
+        $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $deviceId));
 
         return $query->getOneOrNullResult();
     }
