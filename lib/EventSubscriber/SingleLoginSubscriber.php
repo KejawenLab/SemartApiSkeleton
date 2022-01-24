@@ -16,7 +16,6 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
-use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -150,8 +149,6 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             RequestEvent::class => [['validate', -255]],
             JWTCreatedEvent::class => 'create',
             JWTDecodedEvent::class => 'decode',
-            Events::JWT_CREATED => 'create',
-            Events::JWT_DECODED => 'decode',
         ];
     }
 }

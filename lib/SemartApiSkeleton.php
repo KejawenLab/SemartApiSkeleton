@@ -11,6 +11,8 @@ final class SemartApiSkeleton
 {
     final public const STATIC_CACHE_LIFETIME = 1027;
 
+    final public const STATIC_CACHE_PERIOD = 'P17M';
+
     final public const CODENAME = 'Dodol Duren';
 
     final public const VERSION = '5.8.3';

@@ -14,6 +14,7 @@ use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -113,11 +114,17 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     protected function getDeviceId(): string
     {
-        $deviceId = $this->requestStack->getSession()->get(AdminContext::USER_DEVICE_ID, '');
-        if ($deviceId === ApiClientInterface::DEVICE_ID) {
+        try {
+            $session = $this->requestStack->getSession();
+
+            $deviceId = $session->get(AdminContext::USER_DEVICE_ID, '');
+            if ($deviceId === ApiClientInterface::DEVICE_ID) {
+                return '';
+            }
+
+            return $deviceId;
+        } catch (SessionNotFoundException) {
             return '';
         }
-
-        return $deviceId;
     }
 }
