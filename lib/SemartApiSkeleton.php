@@ -13,15 +13,17 @@ final class SemartApiSkeleton
 
     final public const STATIC_CACHE_PERIOD = 'P17M';
 
+    final public const STATIC_CACHE_HEADER = 'X-Semart-Content-ID';
+
     final public const CODENAME = 'Dodol Duren';
 
-    final public const VERSION = '5.8.3';
+    final public const VERSION = '5.8.4';
 
     final public const VERSION_MAYOR = 50000;
 
     final public const VERSION_MINOR = 800;
 
-    final public const VERSION_PATCH = 3;
+    final public const VERSION_PATCH = 4;
 
     public static function getVersionNumber(): int
     {

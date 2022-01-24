@@ -31,11 +31,11 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $cached = $this->getCache($event);
-        if (empty($cached)) {
+        if (null === $cached) {
             return;
         }
 
-        $event->setResponse(new Response($cached));
+        $event->setResponse($cached);
         $event->stopPropagation();
     }
 
@@ -76,7 +76,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
     {
         return [
             RequestEvent::class => [
-                ['serve', 127],
+                ['serve', 125],
                 ['invalidate', 17],
             ],
             ResponseEvent::class => [['populate', -27]],
@@ -111,7 +111,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
             $keys = $pool->get();
         }
 
-        $keys = array_merge($keys, [$key => true]);
+        $keys = array_merge($keys, [$key => $response->headers->get('Content-Type')]);
 
         $pool->set($keys);
         $pool->expiresAfter(new \DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
@@ -122,30 +122,34 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         $this->cache->save($cache);
     }
 
-    private function getCache(KernelEvent $event): string
+    private function getCache(KernelEvent $event): ?Response
     {
         $deviceId = $this->getDeviceId($event);
         if (empty($deviceId)) {
-            return '';
+            return null;
         }
 
         $pool = $this->cache->getItem($deviceId);
         if (!$pool->isHit()) {
-            return '';
+            return null;
         }
 
         $keys = $pool->get();
         $cacheId = $this->getCacheKey($event);
         if (!array_key_exists($cacheId, $keys)) {
-            return '';
+            return null;
         }
 
         $item = $this->cache->getItem($cacheId);
         if (!$item->isHit()) {
-            return '';
+            return null;
         }
 
-        return $item->get();
+        $response = new Response($item->get());
+        $response->headers->set('Content-Type', $keys[$cacheId]);
+        $response->headers->set(SemartApiSkeleton::STATIC_CACHE_HEADER, $cacheId);
+
+        return $response;
     }
 
     private function getCacheKey(KernelEvent $event): string

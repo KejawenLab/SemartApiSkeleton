@@ -16,6 +16,7 @@ use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTDecodedEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,6 +57,8 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
         if (null !== $user) {
             return;
         }
+
+        $event->getRequest()->getSession()->clear();
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generate('admin_logout')));
     }
@@ -146,9 +149,11 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            RequestEvent::class => [['validate', -255]],
+            RequestEvent::class => [['validate', 127]],
             JWTCreatedEvent::class => 'create',
             JWTDecodedEvent::class => 'decode',
+            Events::JWT_CREATED => 'create',
+            Events::JWT_DECODED => 'decode',
         ];
     }
 }
