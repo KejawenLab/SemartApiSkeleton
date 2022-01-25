@@ -190,6 +190,10 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
+        if ($request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING)) {
+            return false;
+        }
+
         if ($request->isMethod(Request::METHOD_GET)) {
             return true;
         }
