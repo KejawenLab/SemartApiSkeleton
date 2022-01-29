@@ -51,7 +51,7 @@ final class Audit extends AbstractFOSRestController
                     properties: [
                         new OA\Property(
                             property: 'entity',
-                            ref: new OA\Schema(ref: new Model(type: ApiClient::class, groups: ['read']), type: 'object'),
+                            ref: new Model(type: ApiClient::class, groups: ['read']),
                             type: 'object',
                         ),
                         new OA\Property(property: 'type', type: 'string'),
