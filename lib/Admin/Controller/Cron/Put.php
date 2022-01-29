@@ -22,6 +22,7 @@ final class Put extends AbstractController
     public function __construct(private readonly CronService $service)
     {
     }
+
     #[Route(path: '/crons/{id}/edit', name: Put::class, methods: ['GET'], priority: 1)]
     public function __invoke(Request $request, string $id): Response
     {

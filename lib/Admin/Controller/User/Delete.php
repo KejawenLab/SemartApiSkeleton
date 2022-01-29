@@ -21,6 +21,7 @@ final class Delete extends AbstractController
     public function __construct(private readonly UserService $service)
     {
     }
+
     #[Route(path: '/users/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {

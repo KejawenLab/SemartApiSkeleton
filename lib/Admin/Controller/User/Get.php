@@ -34,6 +34,7 @@ final class Get extends AbstractController
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
+
     #[Route(path: '/users/{id}', name: Get::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {

@@ -29,6 +29,7 @@ final class Report extends AbstractController
         private readonly SettingService $settingService,
     ) {
     }
+
     #[Route(path: '/crons/{id}/logs', name: Report::class, methods: ['GET'], priority: -27)]
     public function __invoke(Request $request, string $id): Response
     {

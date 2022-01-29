@@ -32,6 +32,7 @@ final class Audit extends AbstractController
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
+
     #[Route(path: '/menus/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {

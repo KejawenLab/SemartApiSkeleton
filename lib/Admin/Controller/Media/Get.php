@@ -27,6 +27,7 @@ final class Get extends AbstractController
     public function __construct(private readonly MediaService $service, private readonly PropertyMappingFactory $mapping)
     {
     }
+
     #[Route(path: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'], methods: ['GET'])]
     public function __invoke(Request $request, string $path): Response
     {

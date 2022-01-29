@@ -21,6 +21,7 @@ final class Download extends AbstractController
     public function __construct(private readonly MediaService $service, private readonly SerializerInterface $serializer)
     {
     }
+
     #[Route(path: '/medias/download', name: Download::class, methods: ['GET'])]
     public function __invoke(): Response
     {

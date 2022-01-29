@@ -25,6 +25,7 @@ final class Run extends AbstractController
     public function __construct(private readonly CronService $service, private readonly KernelInterface $kernel)
     {
     }
+
     #[Route(path: '/crons/{id}/run', name: Run::class, methods: ['GET'], priority: -17)]
     public function __invoke(string $id): Response
     {

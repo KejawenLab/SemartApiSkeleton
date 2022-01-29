@@ -31,6 +31,7 @@ final class Audit extends AbstractController
     public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly AuditService $audit, private readonly Reader $reader)
     {
     }
+
     #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $userId, string $id): Response
     {
