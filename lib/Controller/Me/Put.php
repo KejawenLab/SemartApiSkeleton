@@ -44,7 +44,7 @@ final class Put extends AbstractFOSRestController
      * @OA\RequestBody(
      *     content={
      *         @OA\MediaType(
-     *             mediaType="application/json",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
      *                 ref=@Model(type=UpdateProfileType::class)
