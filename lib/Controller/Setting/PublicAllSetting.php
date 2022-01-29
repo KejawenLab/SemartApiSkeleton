@@ -35,7 +35,7 @@ final class PublicAllSetting extends AbstractFOSRestController
     #[Parameter(name: 'group', description: 'Filter setting by group', in: 'query', schema: new OA\Schema(type: 'string'))]
     #[Response(
         response: 200,
-        description: 'Menu list',
+        description: 'Setting list',
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(

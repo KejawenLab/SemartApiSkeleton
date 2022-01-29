@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +27,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'USER', actions: [Permission::EDIT])]
+#[Tag(name: 'User')]
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
@@ -35,11 +36,23 @@ final class Put extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/users/{id}', name: Put::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'User')]
-    #[RequestBody(new OA\Schema(type: 'object', ref: new Model(type: UpdateUserType::class)), description: 'User form')]
-    #[\OpenApi\Attributes\Response(response: 200, description: 'User updated', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: User::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: UpdateUserType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User updated',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: User::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request, string $id): View
     {
         $user = $this->service->get($id);
