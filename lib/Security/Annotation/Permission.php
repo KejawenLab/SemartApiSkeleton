@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Annotation;
 
+use Attribute;
+
 /**
  * @Annotation()
  * @Target({"CLASS"})
  *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Attribute(Attribute::TARGET_CLASS)]
 final class Permission
 {
     final public const ADD = 'add';
