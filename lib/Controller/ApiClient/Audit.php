@@ -18,7 +18,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -26,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
+#[Tag(name: 'Api Client')]
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(
@@ -36,10 +37,54 @@ final class Audit extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Get(data: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, priority: -255)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Api Client')]
-    #[Response(response: 200, description: 'Audit list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(properties: [new OA\Property(property: 'entity', type: 'object', new OA\Schema(type: 'object', ref: new Model(type: ApiClient::class, groups: ['read']))), new OA\Property(type: 'string', property: 'type'), new OA\Property(type: 'string', property: 'user_id'), new OA\Property(type: 'string', property: 'username'), new OA\Property(type: 'string', property: 'ip_address'), new OA\Property(type: 'array', property: 'data', new OA\Items(new OA\Property(type: 'string', property: 'new'), new OA\Property(type: 'string', property: 'old')))])))])]
+    #[Response(
+        response: 200,
+        description: 'Audit list',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                type: 'array',
+                items: new OA\Items(
+                    properties: [
+                        new OA\Property(
+                            property: 'entity',
+                            ref: new OA\Schema(
+                                ref: new Model(
+                                    type: ApiClient::class,
+                                    groups: ['read'],
+                                ),
+                                type: 'object',
+                            ),
+                            type: 'object',
+                        ),
+                        new OA\Property(property: 'type', type: 'string'),
+                        new OA\Property(property: 'user_id', type: 'string'),
+                        new OA\Property(property: 'username', type: 'string'),
+                        new OA\Property(property: 'ip_address', type: 'string'),
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(
+                                properties: [
+                                    new OA\Property(
+                                        property: 'new',
+                                        type: 'string',
+                                    ),
+                                    new OA\Property(
+                                        property: 'old',
+                                        type: 'string',
+                                    ),
+                                ],
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        ),
+    )]
     public function __invoke(string $userId, string $id): View
     {
         $user = $this->userService->get($userId);

@@ -14,7 +14,6 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -23,6 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'APICLIENT', actions: [Permission::DELETE])]
+#[Tag(name: 'Api Client')]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(
@@ -31,9 +31,9 @@ final class Delete extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/users/{userId}/api-clients/{id}', name: Delete::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Api Client')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Api client deletec')]
     public function __invoke(string $userId, string $id): View
     {

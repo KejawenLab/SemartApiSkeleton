@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -25,6 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
+#[Tag(name: 'Api Client')]
 final class Get extends AbstractFOSRestController
 {
     public function __construct(
@@ -33,10 +34,17 @@ final class Get extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/users/{userId}/api-clients/{id}', name: Get::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Api Client')]
-    #[Response(response: 200, description: 'Api client detail', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClient::class, groups: ['read'])))])]
+    #[Response(
+        response: 200,
+        description: 'Api client detail',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: ApiClient::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(string $userId, string $id): View
     {
         $user = $this->userService->get($userId);

@@ -19,7 +19,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,6 +29,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'APICLIENT', actions: [Permission::ADD])]
+#[Tag(name: 'Api Client')]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(
@@ -38,11 +39,23 @@ final class Post extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/users/{userId}/api-clients', name: Post::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Api Client')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClientType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 201, description: 'Api client created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClient::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: ApiClientType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Api client created',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: ApiClient::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request, string $userId): View
     {
         $user = $this->userService->get($userId);

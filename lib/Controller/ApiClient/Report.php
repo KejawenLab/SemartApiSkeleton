@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -26,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
+#[Tag(name: 'Api Client')]
 final class Report extends AbstractFOSRestController
 {
     public function __construct(
@@ -35,10 +36,20 @@ final class Report extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Get(data: '/users/{userId}/api-clients/{id}/logs', name: Report::class, priority: -27)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Api Client')]
-    #[Response(response: 200, description: 'Api client request list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: ApiClientRequest::class, groups: ['read']))))])]
+    #[Response(
+        response: 200,
+        description: 'Api client request list',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                type: 'array',
+                items: new OA\Items(ref: new Model(type: ApiClientRequest::class, groups: ['read'])),
+            ),
+        ),
+    )]
     public function __invoke(Request $request, string $userId, string $id): View
     {
         $user = $this->userService->get($userId);
