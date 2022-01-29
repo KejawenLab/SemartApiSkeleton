@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -81,7 +82,7 @@ final class Get extends AbstractFOSRestController
 
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
-        $response->setMaxAge(3600);
+        $response->setMaxAge(SemartApiSkeleton::STATIC_CACHE_LIFETIME);
 
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
