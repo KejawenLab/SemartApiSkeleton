@@ -45,6 +45,14 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         $this->save($apiClientRequest);
     }
 
+    /**
+     * @return Iterator<string>
+     */
+    public static function getHandledMessages(): iterable
+    {
+        yield RequestLog::class;
+    }
+
     private function createFromMessage(RequestLog $message): ApiClientRequestInterface
     {
         /** @var ApiClientRequestInterface $apiClientRequest */
@@ -59,13 +67,5 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         $apiClientRequest->setStatusCode($message->getStatusCode());
 
         return $apiClientRequest;
-    }
-
-    /**
-     * @return Iterator<string>
-     */
-    public static function getHandledMessages(): iterable
-    {
-        yield RequestLog::class;
     }
 }

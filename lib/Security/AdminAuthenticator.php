@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace KejawenLab\ApiSkeleton\Security;
 
 use DateTimeImmutable;
@@ -38,11 +40,6 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         private readonly CacheItemPoolInterface $cache,
         private readonly EntityManagerInterface $entityManager,
     ) {
-    }
-
-    protected function getLoginUrl(Request $request): string
-    {
-        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
     }
 
     public function authenticate(Request $request): Passport
@@ -90,6 +87,11 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $configuration->getResultCache()->clear();
 
         return $this->redirect($session, $firewallName);
+    }
+
+    protected function getLoginUrl(Request $request): string
+    {
+        return $this->urlGenerator->generate(AdminContext::LOGIN_ROUTE);
     }
 
     private function redirect(SessionInterface $session, string $firewallName): RedirectResponse

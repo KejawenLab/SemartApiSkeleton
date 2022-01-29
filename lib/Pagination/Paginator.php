@@ -86,7 +86,7 @@ final class Paginator
         $query = $queryBuilder->getQuery();
         if (!$disableCache) {
             $query->useQueryCache(true);
-            $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s_%d_%d_%s", sha1(self::class), sha1(__METHOD__), $deviceId, $page, $perPage, sha1(serialize($query->getParameters()))));
+            $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%d_%d_%s', sha1(self::class), sha1(__METHOD__), $deviceId, $page, $perPage, sha1(serialize($query->getParameters()))));
         }
 
         return $query->getResult();
@@ -106,7 +106,7 @@ final class Paginator
         $query = $count->getQuery();
         if (!$disableCache) {
             $query->useQueryCache(true);
-            $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $deviceId, sha1(serialize($query->getParameters()))));
+            $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%s', sha1(self::class), sha1(__METHOD__), $deviceId, sha1(serialize($query->getParameters()))));
         }
 
         return (int) $query->getSingleScalarResult();

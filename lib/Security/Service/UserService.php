@@ -58,7 +58,7 @@ final class UserService extends AbstractService implements ServiceInterface, Mes
         }
 
         $plainPassword = $user->getPlainPassword();
-        if (null != $plainPassword) {
+        if (null !== $plainPassword) {
             $holder = new User($user);
 
             $password = $this->passwordHasher->hashPassword($holder, $plainPassword);

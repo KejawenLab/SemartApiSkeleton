@@ -89,7 +89,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     }
 
     /**
-     * @return Iterator<mixed[]>
+     * @return Iterator<array>
      */
     public function getByUser(AuthInterface $user): iterable
     {
@@ -115,8 +115,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
     }
 
     /**
-     *
-     * @return array<string, mixed[]>
+     * @return array<string, array>
      */
     private function buildMenu(MenuInterface $menu, GroupInterface $group): array
     {

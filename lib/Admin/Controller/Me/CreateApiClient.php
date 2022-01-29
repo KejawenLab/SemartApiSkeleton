@@ -35,6 +35,7 @@ final class CreateApiClient extends AbstractController
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
+        /** @var UserInterface $user */
         $name = $request->request->get('name');
         if ('' === $name) {
             $this->addFlash('error', 'sas.page.api_client.name_not_provided');
@@ -42,7 +43,6 @@ final class CreateApiClient extends AbstractController
             return new RedirectResponse($this->generateUrl(Profile::class));
         }
 
-        /** @var UserInterface $user */
         if ($this->service->countByUser($user) >= $this->setting->getMaxApiPerUser()) {
             $this->addFlash('error', 'sas.page.api_client.max_api_client_reached');
 

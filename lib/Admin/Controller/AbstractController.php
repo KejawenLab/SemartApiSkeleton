@@ -148,7 +148,7 @@ abstract class AbstractController extends Base
                 }
 
                 try {
-                    @serialize($value);
+                    serialize($value);
                 } catch (Throwable) {
                     return false;
                 }
@@ -159,7 +159,9 @@ abstract class AbstractController extends Base
     }
 
     /**
-     * @return mixed[]
+     * @param $variable
+     *
+     * @return array
      */
     private function enumerateObjectsAndResources($variable): array
     {
@@ -178,7 +180,6 @@ abstract class AbstractController extends Base
                 }
 
                 if (!is_resource($element)) {
-                    /** @noinspection SlowArrayOperationsInLoopInspection */
                     $result = array_merge(
                         $result,
                         $this->enumerateObjectsAndResources($element, $processed)

@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenGlobals;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Metrics\Complexity\Complexity;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff;
@@ -116,11 +118,13 @@ return [
         DocCommentSpacingSniff::class,
         MethodChainingIndentationFixer::class,
         ObjectOperatorIndentSniff::class,
+        ForbiddenNormalClasses::class,
+        ComposerMustBeValid::class,
     ],
 
     'config' => [
         CyclomaticComplexityIsHigh::class => [
-            'maxComplexity' => 17,
+            'maxComplexity' => 33,
         ],
         FunctionLengthSniff::class => [
             'maxLinesLength' => 77,

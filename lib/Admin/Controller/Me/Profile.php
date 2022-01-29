@@ -54,6 +54,7 @@ final class Profile extends AbstractController
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
+        /** @var RealUser $user */
         if (!$user instanceof UserInterface) {
             return new RedirectResponse($this->generateUrl(AdminContext::ADMIN_ROUTE));
         }
@@ -68,7 +69,6 @@ final class Profile extends AbstractController
                 }
 
                 if ($form['file']->getData()) {
-                    /** @var RealUser $user */
                     $media = $this->mediaService->getByFile($user->getProfileImage());
                     if (null !== $media) {
                         $this->mediaService->remove($media);

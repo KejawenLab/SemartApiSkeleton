@@ -66,6 +66,7 @@ final class Put extends AbstractFOSRestController
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
+        /** @var User $user */
         $userClone = clone $user;
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
@@ -76,7 +77,6 @@ final class Put extends AbstractFOSRestController
             $user->setPlainPassword($password);
         }
 
-        /** @var User $user */
         /** @var File $profile */
         $profile = $request->files->get('file');
         if ($profile) {

@@ -62,6 +62,12 @@ tasks:
     log:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "tail -f var/log/dev.log"
+    test:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpunit"
+    insight:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpinsights"
     clean:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
