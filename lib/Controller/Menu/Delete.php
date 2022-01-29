@@ -20,14 +20,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'MENU', actions: [Permission::DELETE])]
+#[Tag(name: 'Menu')]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly MenuService $service, private readonly TranslatorInterface $translator)
     {
     }
+
     #[Route(data: '/menus/{id}', name: Delete::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Menu')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete menu')]
     public function __invoke(string $id): View
     {
