@@ -28,8 +28,8 @@ final class Audit extends AbstractController
         private readonly GroupService $service,
         private readonly CacheItemPoolInterface $cache,
         private readonly AuditService $audit,
-        private readonly Reader $reader)
-    {
+        private readonly Reader $reader,
+    ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 

@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
  */
 interface ApiClientInterface extends AuthInterface, EntityInterface
 {
-    public final const DEVICE_ID = 'API_CLIENT_DEVICE_ID';
+    final public const DEVICE_ID = 'API_CLIENT_DEVICE_ID';
 
     public function getUser(): ?UserInterface;
 

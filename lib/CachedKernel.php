@@ -8,5 +8,4 @@ use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 
 final class CachedKernel extends HttpCache
 {
-
 }
