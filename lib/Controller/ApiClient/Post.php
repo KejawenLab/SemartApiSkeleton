@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -24,10 +26,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'APICLIENT', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(
@@ -37,37 +38,11 @@ final class Post extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Api Client")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=ApiClientType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description= "Api client created",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=ApiClient::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/users/{userId}/api-clients', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Api Client')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClientType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 201, description: 'Api client created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClient::class, groups: ['read'])))])]
     public function __invoke(Request $request, string $userId): View
     {
         $user = $this->userService->get($userId);

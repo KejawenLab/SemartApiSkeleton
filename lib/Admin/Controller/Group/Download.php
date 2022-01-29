@@ -13,10 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
     public function __construct(private readonly GroupService $service, private readonly SerializerInterface $serializer)

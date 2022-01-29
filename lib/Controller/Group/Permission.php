@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -17,74 +20,23 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Semart\Permission(menu="GROUP", actions=Semart\Permission::VIEW)
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Semart\Permission(menu: 'GROUP', actions: [Semart\Permission::VIEW])]
 final class Permission extends AbstractFOSRestController
 {
     public function __construct(private readonly PermissionService $service, private readonly Paginator $paginator)
     {
     }
-
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\Parameter(
-     *     name="page",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="limit",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="q",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="menu",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     ),
-     *     description="Filter setting by menu"
-     * )
-     * @OA\Parameter(
-     *     name="group",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     ),
-     *     description="Filter setting by group"
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "Permission list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Get(data: '/groups/{id}/permissions', name: Permission::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[Parameter(name: 'page', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'limit', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'q', in: 'query', new OA\Schema(type: 'string'))]
+    #[Parameter(name: 'menu', in: 'query', new OA\Schema(type: 'string'), description: 'Filter setting by menu')]
+    #[Parameter(name: 'group', in: 'query', new OA\Schema(type: 'string'), description: 'Filter setting by group')]
+    #[Response(response: 200, description: 'Permission list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: Entity::class, groups: ['read']))))])]
     public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Entity::class));

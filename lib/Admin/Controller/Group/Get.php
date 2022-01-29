@@ -20,10 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::VIEW])]
 final class Get extends AbstractController
 {
     public function __construct(

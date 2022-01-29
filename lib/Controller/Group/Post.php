@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -20,46 +22,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly FormFactory $formFactory, private readonly GroupService $service)
     {
     }
 
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=GroupType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description= "Group created",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Group::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/groups', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: GroupType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 201, description: 'Group created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Group::class, groups: ['read'])))])]
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(GroupType::class, $request);

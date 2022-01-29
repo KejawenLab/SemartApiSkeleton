@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
@@ -18,35 +20,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="MENU", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MENU', actions: [Permission::VIEW])]
 final class Get extends AbstractFOSRestController
 {
     public function __construct(private readonly MenuService $service, private readonly TranslatorInterface $translator)
     {
     }
-
-    /**
-     * @OA\Tag(name="Menu")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Menu detail",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Menu::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/menus/{id}', name: Get::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Menu')]
+    #[Response(response: 200, description: 'Menu detail', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Menu::class, groups: ['read'])))])]
     public function __invoke(string $id): View
     {
         $menu = $this->service->get($id);

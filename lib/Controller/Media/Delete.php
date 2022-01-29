@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
@@ -17,25 +18,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="MEDIA", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MEDIA', actions: [Permission::DELETE])]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly MediaService $service, private readonly TranslatorInterface $translator)
     {
     }
-
-    /**
-     * @OA\Tag(name="Media")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete media"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/medias/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Media')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete media')]
     public function __invoke(string $id): View
     {
         $media = $this->service->get($id);

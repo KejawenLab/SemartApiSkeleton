@@ -18,10 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="CRON", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'CRON', actions: [Permission::VIEW])]
 final class Report extends AbstractController
 {
     public function __construct(
@@ -30,7 +29,6 @@ final class Report extends AbstractController
         private readonly SettingService $settingService,
     ) {
     }
-
     #[Route(path: '/crons/{id}/logs', name: Report::class, methods: ['GET'], priority: -27)]
     public function __invoke(Request $request, string $id): Response
     {

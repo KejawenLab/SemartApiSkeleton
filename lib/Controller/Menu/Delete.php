@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
@@ -17,25 +18,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="MENU", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MENU', actions: [Permission::DELETE])]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly MenuService $service, private readonly TranslatorInterface $translator)
     {
     }
-
-    /**
-     * @OA\Tag(name="Menu")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete menu"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/menus/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Menu')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete menu')]
     public function __invoke(string $id): View
     {
         $menu = $this->service->get($id);

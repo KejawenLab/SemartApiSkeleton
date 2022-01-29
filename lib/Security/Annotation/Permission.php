@@ -29,31 +29,11 @@ final class Permission
 
     private bool $ownership = false;
 
-    public function __construct(array $configs = [])
+    public function __construct(string $menu, array $actions, bool $ownership = false)
     {
-        if (isset($configs['menu']) && \is_string($configs['menu'])) {
-            $this->menu = $configs['menu'];
-        }
-
-        if (isset($configs['actions'])) {
-            if (\is_string($configs['actions'])) {
-                $this->actions = (array) $configs['actions'];
-            }
-
-            if (\is_array($configs['actions'])) {
-                $this->actions = $configs['actions'];
-            }
-        }
-
-        if (!isset($configs['ownership'])) {
-            return;
-        }
-
-        if (!\is_bool($configs['ownership'])) {
-            return;
-        }
-
-        $this->ownership = $configs['ownership'];
+        $this->menu = $menu;
+        $this->actions = $actions;
+        $this->ownership = $ownership;
     }
 
     public function getMenu(): string

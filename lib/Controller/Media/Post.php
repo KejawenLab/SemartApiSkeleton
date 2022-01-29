@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -18,46 +20,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Permission(menu="MEDIA", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MEDIA', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly MediaService $service)
     {
     }
-
-    /**
-     * @OA\Tag(name="Media")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=MediaType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description= "Media created",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Media::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/medias', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Media')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'multipart/form-data', new OA\Schema(type: 'object', ref: new Model(type: MediaType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 201, description: 'Media created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Media::class, groups: ['read'])))])]
     public function __invoke(Request $request): View
     {
         $media = new Media();

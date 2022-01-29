@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -19,10 +21,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="PROFILE", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'PROFILE', actions: [Permission::VIEW])]
 final class Menu extends AbstractFOSRestController
 {
     public function __construct(
@@ -31,25 +32,10 @@ final class Menu extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Profile")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Menu list for logged user",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=Entity::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     * @Security(name="Bearer")
-     */
     #[Get(data: '/me/menus', name: Menu::class, priority: 1)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Profile')]
+    #[Response(response: 200, description: 'Menu list for logged user', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: Entity::class, groups: ['read']))))])]
     public function __invoke(): View
     {
         $user = $this->getUser();

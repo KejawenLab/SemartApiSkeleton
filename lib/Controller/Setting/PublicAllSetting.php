@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -23,60 +26,14 @@ final class PublicAllSetting extends AbstractFOSRestController
     {
     }
 
-    /**
-     * @OA\Tag(name="Setting")
-     * @OA\Parameter(
-     *     name="page",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="limit",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="q",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="parameter",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="group",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="string"
-     *     )
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "Setting list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     */
     #[Get(data: '/settings/public', name: PublicAllSetting::class, priority: 1)]
+    #[Tag(name: 'Setting')]
+    #[Parameter(name: 'page', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'limit', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'q', in: 'query', new OA\Schema(type: 'string'))]
+    #[Parameter(name: 'parameter', in: 'query', new OA\Schema(type: 'string'))]
+    #[Parameter(name: 'group', in: 'query', new OA\Schema(type: 'string'))]
+    #[Response(response: 200, description: 'Setting list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: Setting::class, groups: ['read']))))])]
     public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, Setting::class));

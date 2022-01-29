@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\User;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -20,42 +22,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Permission(menu="USER", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'USER', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly FormFactory $formFactory, private readonly UserService $service)
     {
     }
-
-    /**
-     * @OA\Tag(name="User")
-     * @OA\RequestBody(
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type=UserType::class)
-     *     ),
-     *     description="User form"
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description= "User created",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=User::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/users', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'User')]
+    #[RequestBody(new OA\Schema(type: 'object', ref: new Model(type: UserType::class)), description: 'User form')]
+    #[\OpenApi\Attributes\Response(response: 201, description: 'User created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: User::class, groups: ['read'])))])]
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(UserType::class, $request);

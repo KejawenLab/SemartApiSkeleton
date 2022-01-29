@@ -18,10 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="USER", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'USER', actions: [Permission::VIEW])]
 final class Main extends AbstractController
 {
     public function __construct(
@@ -32,7 +31,6 @@ final class Main extends AbstractController
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
-
     #[Route(path: '/users', name: Main::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {

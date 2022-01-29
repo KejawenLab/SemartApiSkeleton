@@ -21,10 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Semart\Permission(menu="GROUP", actions=Semart\Permission::VIEW)
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Semart\Permission(menu: 'GROUP', actions: [Semart\Permission::VIEW])]
 final class Permission extends AbstractController
 {
     public function __construct(
@@ -34,7 +33,6 @@ final class Permission extends AbstractController
         private readonly SettingService $settingService,
     ) {
     }
-
     #[Route(path: '/groups/{id}/permissions', name: Permission::class, methods: ['GET'])]
     public function __invoke(Request $request, string $id): Response
     {

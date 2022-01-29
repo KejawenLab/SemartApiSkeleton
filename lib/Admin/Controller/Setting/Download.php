@@ -13,16 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Permission(menu="SETTING", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'SETTING', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
     public function __construct(private readonly SettingService $service, private readonly SerializerInterface $serializer)
     {
     }
-
     #[Route(path: '/settings/download', name: Download::class, methods: ['GET'])]
     public function __invoke(): Response
     {

@@ -13,10 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::DELETE])]
 final class Delete extends AbstractController
 {
     public function __construct(private readonly GroupService $service)

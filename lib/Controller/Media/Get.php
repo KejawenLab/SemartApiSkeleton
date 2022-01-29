@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use KejawenLab\ApiSkeleton\Media\MediaService;
@@ -32,25 +33,10 @@ final class Get extends AbstractFOSRestController
     ) {
     }
 
-    /**
-     * @OA\Tag(name="Media")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Api client detail",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="*",
-     *             @OA\Schema(
-     *                 type="string",
-     *                 format="binary"
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'])]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Media')]
+    #[\OpenApi\Attributes\Response(response: 200, description: 'Api client detail', content: [new OA\MediaType(mediaType: '*', new OA\Schema(type: 'string', format: 'binary'))])]
     public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);

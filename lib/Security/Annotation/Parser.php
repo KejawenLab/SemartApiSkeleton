@@ -18,15 +18,16 @@ final class Parser
 
     public function parse(ReflectionClass $metadata): ?Permission
     {
-        $class = $this->reader->getClassAnnotation($metadata, Permission::class);
-        if (!$class instanceof Permission) {
-            return null;
+        $attributes = $metadata->getAttributes(Permission::class);
+        foreach ($attributes as $attribute) {
+            return $attribute->newInstance();
         }
 
-        return new Permission([
-            'menu' => $class->getMenu(),
-            'actions' => $class->getActions(),
-            'ownership' => $class->isOwnership(),
-        ]);
+        $permission = $this->reader->getClassAnnotation($metadata, Permission::class);
+        if ($permission instanceof Permission) {
+            return $permission;
+        }
+
+        return null;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\View\View;
@@ -20,10 +21,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="PROFILE", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'PROFILE', actions: [Permission::DELETE])]
 final class DeleteApiClient extends AbstractFOSRestController
 {
     public function __construct(
@@ -32,16 +32,10 @@ final class DeleteApiClient extends AbstractFOSRestController
         private readonly TranslatorInterface $translator
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Profile")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete api client related to logged user"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Delete(data: '/me/api-clients/{id}', name: DeleteApiClient::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Profile')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete api client related to logged user')]
     public function __invoke(string $id): View
     {
         $user = $this->getUser();

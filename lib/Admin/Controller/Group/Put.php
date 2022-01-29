@@ -14,10 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::EDIT})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::EDIT])]
 final class Put extends AbstractController
 {
     public function __construct(private readonly GroupService $service)

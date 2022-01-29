@@ -13,16 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="USER", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'USER', actions: [Permission::DELETE])]
 final class Delete extends AbstractController
 {
     public function __construct(private readonly UserService $service)
     {
     }
-
     #[Route(path: '/users/{id}/delete', name: Delete::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {

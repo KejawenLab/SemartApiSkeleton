@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
@@ -18,35 +20,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::VIEW])]
 final class Get extends AbstractFOSRestController
 {
     public function __construct(private readonly GroupService $service, private readonly TranslatorInterface $translator)
     {
     }
 
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Api client detail",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Group::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/groups/{id}', name: Get::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[Response(response: 200, description: 'Api client detail', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Group::class, groups: ['read'])))])]
     public function __invoke(string $id): View
     {
         $group = $this->service->get($id);

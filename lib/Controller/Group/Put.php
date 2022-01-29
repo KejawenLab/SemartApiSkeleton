@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
@@ -22,10 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::EDIT})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::EDIT])]
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
@@ -35,36 +36,11 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=GroupType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "Group updated",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Group::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/groups/{id}', name: Put::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: GroupType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 200, description: 'Group updated', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Group::class, groups: ['read'])))])]
     public function __invoke(Request $request, string $id): View
     {
         $group = $this->service->get($id);

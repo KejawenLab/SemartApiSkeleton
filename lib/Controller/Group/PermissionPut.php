@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\View\View;
@@ -24,10 +26,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Semart\Permission(menu="GROUP", actions={Semart\Permission::EDIT, Semart\Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Semart\Permission(menu: 'GROUP', actions: [Semart\Permission::EDIT, Semart\Permission::ADD])]
 final class PermissionPut extends AbstractFOSRestController
 {
     public function __construct(
@@ -37,37 +38,11 @@ final class PermissionPut extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=PermissionType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "Permission updated",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Permission::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Put(data: '/groups/{id}/permissions', name: PermissionPut::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: PermissionType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 200, description: 'Permission updated', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Permission::class, groups: ['read'])))])]
     public function __invoke(Request $request, string $id): View
     {
         $group = $this->groupService->get($id);

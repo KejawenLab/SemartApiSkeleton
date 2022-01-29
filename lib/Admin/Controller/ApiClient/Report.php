@@ -21,16 +21,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
 final class Report extends AbstractController
 {
     public function __construct(private readonly ApiClientRequestService $service, private readonly UserService $userService, private readonly Paginator $paginator)
     {
     }
-
     #[Route(path: '/users/{userId}/api-clients/{id}/logs', name: Report::class, methods: ['GET'])]
     public function __invoke(Request $request, string $userId, string $id): Response
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
@@ -17,25 +18,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="SETTING", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'SETTING', actions: [Permission::DELETE])]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly SettingService $service, private readonly TranslatorInterface $translator)
     {
     }
-
-    /**
-     * @OA\Tag(name="Setting")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete setting"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/settings/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Setting')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete setting')]
     public function __invoke(string $id): View
     {
         $setting = $this->service->get($id);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Setting;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -24,23 +26,9 @@ final class PublicGetSetting extends AbstractFOSRestController
     {
     }
 
-    /**
-     * @OA\Tag(name="Setting")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Setting list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=Setting::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     */
     #[Get(data: '/settings/public/{id}', name: PublicGetSetting::class, priority: 1)]
+    #[Tag(name: 'Setting')]
+    #[Response(response: 200, description: 'Setting list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: Setting::class, groups: ['read']))))])]
     public function __invoke(string $id): View
     {
         $setting = $this->service->getPublicSetting($id);

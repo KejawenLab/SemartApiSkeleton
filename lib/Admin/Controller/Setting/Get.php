@@ -20,10 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="SETTING", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'SETTING', actions: [Permission::VIEW])]
 final class Get extends AbstractController
 {
     public function __construct(
@@ -35,7 +34,6 @@ final class Get extends AbstractController
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
-
     #[Route(path: '/settings/{id}', name: Get::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {

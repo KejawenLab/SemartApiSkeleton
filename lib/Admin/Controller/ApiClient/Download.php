@@ -16,16 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
     public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly SerializerInterface $serializer)
     {
     }
-
     #[Route(path: '/users/{userId}/api-clients/download', name: Download::class, methods: ['GET'])]
     public function __invoke(string $userId): Response
     {

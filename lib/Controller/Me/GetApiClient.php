@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -22,10 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="PROFILE", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'PROFILE', actions: [Permission::ADD])]
 final class GetApiClient extends AbstractFOSRestController
 {
     public function __construct(
@@ -35,26 +36,10 @@ final class GetApiClient extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Profile")
-     * @OA\Response(
-     *     response=200,
-     *     description= "User's api client list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=ApiClient::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Get(data: '/me/api-clients', name: GetApiClient::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Profile')]
+    #[Response(response: 200, description: "User's api client list", content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: ApiClient::class, groups: ['read']))))])]
     public function __invoke(Request $request): View
     {
         $user = $this->getUser();

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Media;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Response;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -19,58 +21,18 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Permission(menu="AUDIT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(private readonly MediaService $service, private readonly AuditService $audit, private readonly Reader $reader)
     {
     }
-
-    /**
-     * @OA\Tag(name="Media")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Audit list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(
-     *                     properties={
-     *                         @OA\Property(
-     *                             property="entity",
-     *                             type="object",
-     *                             @OA\Schema(
-     *                                 type="object",
-     *                                 ref=@Model(type=Media::class, groups={"read"})
-     *                             )
-     *                         ),
-     *                         @OA\Property(type="string", property="type"),
-     *                         @OA\Property(type="string", property="user_id"),
-     *                         @OA\Property(type="string", property="username"),
-     *                         @OA\Property(type="string", property="ip_address"),
-     *                         @OA\Property(
-     *                             type="array",
-     *                             property="data",
-     *                             @OA\Items(
-     *                                 @OA\Property(type="string", property="new"),
-     *                                 @OA\Property(type="string", property="old"),
-     *                             )
-     *                         )
-     *                     }
-     *                 )
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Get(data: '/medias/{id}/audit', name: Audit::class, priority: -255)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Media')]
+    #[Response(response: 200, description: 'Audit list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(properties: [new OA\Property(property: 'entity', type: 'object', new OA\Schema(type: 'object', ref: new Model(type: Media::class, groups: ['read']))), new OA\Property(type: 'string', property: 'type'), new OA\Property(type: 'string', property: 'user_id'), new OA\Property(type: 'string', property: 'username'), new OA\Property(type: 'string', property: 'ip_address'), new OA\Property(type: 'array', property: 'data', new OA\Items(new OA\Property(type: 'string', property: 'new'), new OA\Property(type: 'string', property: 'old')))])))])]
     public function __invoke(string $id): View
     {
         $entity = $this->service->get($id);

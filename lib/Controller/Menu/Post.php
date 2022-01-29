@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Menu;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -20,46 +22,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Permission(menu="MENU", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MENU', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly FormFactory $formFactory, private readonly MenuService $service)
     {
     }
-
-    /**
-     * @OA\Tag(name="Menu")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=MenuType::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description= "Menu created",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type=Menu::class, groups={"read"})
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/menus', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Menu')]
+    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: MenuType::class)))])]
+    #[\OpenApi\Attributes\Response(response: 201, description: 'Menu created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Menu::class, groups: ['read'])))])]
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(MenuType::class, $request);

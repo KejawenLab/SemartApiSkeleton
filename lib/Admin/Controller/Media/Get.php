@@ -19,16 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
 /**
- * @Permission(menu="MEDIA", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'MEDIA', actions: [Permission::VIEW])]
 final class Get extends AbstractController
 {
     public function __construct(private readonly MediaService $service, private readonly PropertyMappingFactory $mapping)
     {
     }
-
     #[Route(path: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'], methods: ['GET'])]
     public function __invoke(Request $request, string $path): Response
     {

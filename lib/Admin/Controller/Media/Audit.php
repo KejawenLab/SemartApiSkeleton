@@ -19,10 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="AUDIT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
 final class Audit extends AbstractController
 {
     public function __construct(
@@ -34,7 +33,6 @@ final class Audit extends AbstractController
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
-
     #[Route(path: '/medias/{id}/audit', name: Audit::class, methods: ['GET'], priority: 1)]
     public function __invoke(string $id): Response
     {

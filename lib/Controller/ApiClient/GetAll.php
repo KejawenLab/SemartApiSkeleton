@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
+use OpenApi\Attributes\Tag;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\View\View;
@@ -21,10 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
 final class GetAll extends AbstractFOSRestController
 {
     public function __construct(
@@ -34,42 +36,12 @@ final class GetAll extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
-
-    /**
-     * @OA\Tag(name="Api Client")
-     * @OA\Parameter(
-     *     name="page",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="limit",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "Api client list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type=ApiClient::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     */
     #[Get(data: 'users/{userId}/api-clients', name: GetAll::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Api Client')]
+    #[Parameter(name: 'page', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'limit', in: 'query', new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Response(response: 200, description: 'Api client list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(ref: new Model(type: ApiClient::class, groups: ['read']))))])]
     public function __invoke(Request $request, string $userId): View
     {
         $user = $this->userService->get($userId);

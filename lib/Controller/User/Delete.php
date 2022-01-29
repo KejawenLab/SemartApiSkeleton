@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\User;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
@@ -17,25 +18,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="USER", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'USER', actions: [Permission::DELETE])]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly UserService $service, private readonly TranslatorInterface $translator)
     {
     }
-
-    /**
-     * @OA\Tag(name="User")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete user"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/users/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'User')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete user')]
     public function __invoke(string $id): View
     {
         $user = $this->service->get($id);

@@ -22,10 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Permission(menu="APICLIENT", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
 final class Main extends AbstractController
 {
     public function __construct(
@@ -34,7 +33,6 @@ final class Main extends AbstractController
         private readonly Paginator $paginator,
     ) {
     }
-
     #[Route(path: '/users/{userId}/api-clients', name: Main::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'], methods: ['GET', 'POST'])]
     public function __invoke(Request $request, string $userId): Response
     {

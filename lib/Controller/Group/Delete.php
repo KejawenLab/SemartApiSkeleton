@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Group;
 
+use OpenApi\Attributes\Tag;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
@@ -18,25 +19,19 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="GROUP", actions={Permission::DELETE})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: 'GROUP', actions: [Permission::DELETE])]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly GroupService $service, private readonly TranslatorInterface $translator)
     {
     }
 
-    /**
-     * @OA\Tag(name="Group")
-     * @OA\Response(
-     *     response=204,
-     *     description="Delete group"
-     * )
-     * @Security(name="Bearer")
-     */
     #[Route(data: '/groups/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[Tag(name: 'Group')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete group')]
     public function __invoke(string $id): View
     {
         $group = $this->service->get($id);

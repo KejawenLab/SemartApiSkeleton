@@ -17,16 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Semart\Permission(menu="GROUP", actions={Semart\Permission::EDIT, Semart\Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Semart\Permission(menu: 'GROUP', actions: [Semart\Permission::EDIT, Semart\Permission::ADD])]
 final class PermissionPut extends AbstractController
 {
     public function __construct(private readonly GroupService $groupService, private readonly PermissionService $service)
     {
     }
-
     #[Route(path: '/groups/{groupId}/permissions/{id}', name: PermissionPut::class, methods: ['POST'])]
     public function __invoke(Request $request, string $groupId, string $id): Response
     {
