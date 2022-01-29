@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,77 +13,52 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Repository\SettingRepository;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=SettingRepository::class)
- * @ORM\Table(name="core_setting")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"parameter"})
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: SettingRepository::class)]
+#[ORM\Table(name: 'core_setting')]
+#[UniqueEntity(['parameter'])]
 class Setting implements SettingInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\Column(name="setting_group", type="string", length=27)
-     *
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 27)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(name: 'setting_group', type: 'string', length: 27)]
     private ?string $group;
 
-    /**
-     * @ORM\Column(type="string", length=27)
-     *
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 27)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 27)]
     private ?string $parameter;
 
-    /**
-     * @ORM\Column(type="text")
-     *
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'text')]
     private ?string $value;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private bool $public;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $reserved;
 
     public function __construct()

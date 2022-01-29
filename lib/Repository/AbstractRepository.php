@@ -24,15 +24,11 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 {
     protected const MICRO_CACHE = 7;
 
-    protected RequestStack $requestStack;
-
     public function __construct(
-        RequestStack $requestStack,
+        protected RequestStack $requestStack,
         ManagerRegistry $registry,
         string $entityClass,
     ) {
-        $this->requestStack = $requestStack;
-
         parent::__construct($registry, $entityClass);
     }
 
@@ -79,7 +75,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     public function countRecords(): int
     {
-        return count($this->findAll());
+        return is_countable($this->findAll()) ? count($this->findAll()) : 0;
     }
 
     /**

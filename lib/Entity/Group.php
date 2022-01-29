@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use KejawenLab\ApiSkeleton\Security\GroupIdGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,56 +13,40 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Repository\GroupRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=GroupRepository::class)
- * @ORM\Table(name="core_group")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"code"})
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: GroupRepository::class)]
+#[ORM\Table(name: 'core_group')]
+#[UniqueEntity(['code'])]
 class Group implements GroupInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="KejawenLab\ApiSkeleton\Security\GroupIdGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: GroupIdGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\Column(type="string", length=7)
-     *
-     * @Assert\Length(max=7)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 7)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 7)]
     private ?string $code;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
 
     public function __construct()

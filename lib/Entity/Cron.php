@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,98 +15,65 @@ use KejawenLab\ApiSkeleton\Cron\Validator\ConsoleCommand;
 use KejawenLab\ApiSkeleton\Cron\Validator\CronScheduleFormat;
 use KejawenLab\ApiSkeleton\Repository\CronRepository;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=CronRepository::class)
- * @ORM\Table(name="core_cronjob")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"name"})
- * @ConsoleCommand()
- */
+#[ConsoleCommand]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: CronRepository::class)]
+#[ORM\Table(name: 'core_cronjob')]
+#[UniqueEntity(['name'])]
 class Cron implements CronInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $command;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     * @CronScheduleFormat()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[CronScheduleFormat]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $schedule;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $enabled;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $symfonyCommand;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $running;
 
     public function __construct()

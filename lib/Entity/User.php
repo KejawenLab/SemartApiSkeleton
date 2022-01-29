@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
@@ -14,109 +15,72 @@ use KejawenLab\ApiSkeleton\Repository\UserRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="core_user")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"username"})
- * @UniqueEntity(fields={"email"})
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: 'core_user')]
+#[UniqueEntity('email')]
+#[UniqueEntity('username')]
 class User implements UserInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Group::class, cascade={"persist"})
-     *
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     **/
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\ManyToOne(targetEntity: Group::class, cascade: ['persist'])]
     private ?GroupInterface $group;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
     private ?UserInterface $supervisor;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     *
-     * @Assert\Length(max=180)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 180)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $username;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $profileImage;
 
-    /**
-     * @ORM\Column(type="string", length=55)
-     *
-     * @Assert\Length(max=55)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 55)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 55)]
     private ?string $fullName;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private ?string $email;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $lastLogin;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private ?string $password;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $deviceId = null;
 
     private ?File $file = null;

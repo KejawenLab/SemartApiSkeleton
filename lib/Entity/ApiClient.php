@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,69 +15,48 @@ use KejawenLab\ApiSkeleton\Repository\ApiClientRepository;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ApiClientRepository::class)
- * @ORM\Table(name="core_api_client")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity({"user", "name"})
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[UniqueEntity(['user', 'name'])]
+#[ORM\Entity(repositoryClass: ApiClientRepository::class)]
+#[ORM\Table(name: 'core_api_client')]
 class ApiClient implements ApiClientInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     *
-     * @Groups({"read"})
-     * @MaxDepth(1)
-     */
+    #[Groups(groups: ['read'])]
+    #[MaxDepth(1)]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
     private ?UserInterface $user;
 
-    /**
-     * @ORM\Column(type="string", length=27)
-     *
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 27)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 27)]
     private ?string $name;
 
-    /**
-     * @ORM\Column(type="string", length=40)
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 40)]
     private ?string $apiKey;
 
-    /**
-     * @ORM\Column(type="string", length=64)
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 64)]
     private ?string $secretKey;
 
     public function __construct()

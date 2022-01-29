@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -11,36 +12,25 @@ use KejawenLab\ApiSkeleton\Repository\PasswordHistoryRepository;
 use KejawenLab\ApiSkeleton\Security\Model\PasswordHistoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity(repositoryClass=PasswordHistoryRepository::class)
- * @ORM\Table(name="core_user_password_history")
- */
+#[ORM\Entity(repositoryClass: PasswordHistoryRepository::class)]
+#[ORM\Table(name: 'core_user_password_history')]
 class PasswordHistory implements PasswordHistoryInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
-
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private ?string $source = null;
 
-    /**
-     * @ORM\Column(type="string", length=49)
-     */
+    #[ORM\Column(type: 'string', length: 49)]
     private ?string $identifier = null;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
     public function getId(): ?string

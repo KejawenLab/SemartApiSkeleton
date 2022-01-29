@@ -26,13 +26,11 @@ doctrine:
         mappings:
             Semart:
                 is_bundle: false
-                type: annotation
                 dir: '%kernel.project_dir%/lib/Entity'
                 prefix: 'KejawenLab\ApiSkeleton\Entity'
                 alias: Semart
             App:
                 is_bundle: false
-                type: annotation
                 dir: '%kernel.project_dir%/app/Entity'
                 prefix: 'KejawenLab\Application\Entity'
                 alias: App

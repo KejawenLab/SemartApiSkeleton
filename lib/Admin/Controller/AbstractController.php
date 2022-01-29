@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
+use DateInterval;
 use InvalidArgumentException;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
@@ -65,13 +66,13 @@ abstract class AbstractController extends Base
         $keys = array_merge($keys, [$key => true]);
 
         $pool->set($keys);
-        $pool->expiresAfter(new \DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
         $this->cache->save($pool);
 
         $content = parent::renderView($view, $parameters);
 
         $item->set($content);
-        $item->expiresAfter(new \DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $item->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
         $this->cache->save($item);
 
         return $content;
@@ -116,7 +117,11 @@ abstract class AbstractController extends Base
 
     private function canBeSerialized($variable): bool
     {
-        if (is_scalar($variable) || $variable === null) {
+        if (is_scalar($variable)) {
+            return true;
+        }
+
+        if ($variable === null) {
             return true;
         }
 
@@ -146,6 +151,9 @@ abstract class AbstractController extends Base
         return true;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function enumerateObjectsAndResources($variable): array
     {
         $processed = func_get_args()[1] ?? new Context();

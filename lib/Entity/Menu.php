@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,111 +14,73 @@ use KejawenLab\ApiSkeleton\Repository\MenuRepository;
 use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Validator\Route;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=MenuRepository::class)
- * @ORM\Table(name="core_menu")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- *
- * @UniqueEntity(fields={"code"})
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: MenuRepository::class)]
+#[ORM\Table(name: 'core_menu')]
+#[UniqueEntity(['code'])]
 class Menu implements MenuInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Menu::class, cascade={"persist"})
-     *
-     * @Groups({"read"})
-     * @MaxDepth(1)
-     */
+    #[Groups(groups: ['read'])]
+    #[MaxDepth(1)]
+    #[ORM\ManyToOne(targetEntity: Menu::class, cascade: ['persist'])]
     private ?MenuInterface $parent;
 
-    /**
-     * @ORM\Column(type="string", length=27)
-     *
-     * @Assert\Length(max=27)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 27)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 27)]
     private ?string $code;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'integer')]
     private int $sortOrder;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     * @Route()
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Route]
     private ?string $routeName;
 
-    /**
-     * @ORM\Column(type="string", length=27, nullable=true)
-     *
-     * @Assert\Length(max=27)
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 27)]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 27, nullable: true)]
     private ?string $iconClass;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $showable;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $adminOnly;
 
-    /**
-     * @Groups({"read"})
-     */
+    #[Groups(groups: ['read'])]
     private ?string $apiPath;
 
     private ?string $adminPath;

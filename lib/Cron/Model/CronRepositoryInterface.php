@@ -11,5 +11,8 @@ use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
  */
 interface CronRepositoryInterface extends PaginatableRepositoryInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function findUnRunningCrons(): array;
 }

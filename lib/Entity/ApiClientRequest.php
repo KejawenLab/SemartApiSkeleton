@@ -4,108 +4,72 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRequestInterface;
 use KejawenLab\ApiSkeleton\Repository\ApiClientRequestRepository;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
-/**
- * @ORM\Entity(repositoryClass=ApiClientRequestRepository::class)
- * @ORM\Table(name="core_api_client_request")
- */
+#[ORM\Entity(repositoryClass: ApiClientRequestRepository::class)]
+#[ORM\Table(name: 'core_api_client_request')]
 class ApiClientRequest implements ApiClientRequestInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=ApiClient::class, cascade={"persist"})
-     *
-     * @Groups({"read"})
-     * @MaxDepth(1)
-     */
+    #[Groups(groups: ['read'])]
+    #[MaxDepth(1)]
+    #[ORM\ManyToOne(targetEntity: ApiClient::class, cascade: ['persist'])]
     private ApiClientInterface $apiClient;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string')]
     private string $path;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", length=9)
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 9)]
     private string $method;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="json")
-     *
-     * @OA\Property(type="array", @OA\Items(type="string"))
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'array', items: new OA\Items(type: 'string'))]
+    #[ORM\Column(type: 'json')]
     private array $headers;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="json")
-     *
-     * @OA\Property(type="array", @OA\Items(type="string"))
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'array', items: new OA\Items(type: 'string'))]
+    #[ORM\Column(type: 'json')]
     private array $queries;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="json")
-     *
-     * @OA\Property(type="array", @OA\Items(type="string"))
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'array', items: new OA\Items(type: 'string'))]
+    #[ORM\Column(type: 'json')]
     private array $requests;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="json")
-     *
-     * @OA\Property(type="array", @OA\Items(type="string"))
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'array', items: new OA\Items(type: 'string'))]
+    #[ORM\Column(type: 'json')]
     private array $files;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="text")
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'text')]
     private string $content;
 
-    /**
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="smallint", length=3)
-     */
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'smallint', length: 3)]
     private int $statusCode;
 
     public function getId(): ?string
@@ -143,65 +107,41 @@ class ApiClientRequest implements ApiClientRequestInterface
         $this->method = $method;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @param mixed[] $headers
-     */
     public function setHeaders(array $headers): void
     {
         $this->headers = $headers;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * @param mixed[] $queries
-     */
     public function setQueries(array $queries): void
     {
         $this->queries = $queries;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getRequests(): array
     {
         return $this->requests;
     }
 
-    /**
-     * @param mixed[] $requests
-     */
     public function setRequests(array $requests): void
     {
         $this->requests = $requests;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getFiles(): array
     {
         return $this->files;
     }
 
-    /**
-     * @param mixed[] $files
-     */
     public function setFiles(array $files): void
     {
         $this->files = $files;

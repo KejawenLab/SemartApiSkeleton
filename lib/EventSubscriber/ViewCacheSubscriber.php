@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
+use DateInterval;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
@@ -31,7 +32,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $cached = $this->getCache($event);
-        if (null === $cached) {
+        if (!$cached instanceof Response) {
             return;
         }
 
@@ -45,11 +46,12 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (empty($this->deviceId)) {
+        $deviceId = $this->getDeviceId($event);
+        if (empty($deviceId)) {
             return;
         }
 
-        $pool = $this->cache->getItem($this->deviceId);
+        $pool = $this->cache->getItem($deviceId);
         if (!$pool->isHit()) {
             return;
         }
@@ -114,11 +116,11 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         $keys = array_merge($keys, [$key => $response->headers->get('Content-Type')]);
 
         $pool->set($keys);
-        $pool->expiresAfter(new \DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
         $this->cache->save($pool);
 
         $cache->set($event->getResponse()->getContent());
-        $cache->expiresAfter(new \DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $cache->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
         $this->cache->save($cache);
     }
 
@@ -207,10 +209,6 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
             return true;
         }
 
-        if ($request->isMethod(Request::METHOD_OPTIONS)) {
-            return true;
-        }
-
-        return false;
+        return $request->isMethod(Request::METHOD_OPTIONS);
     }
 }
