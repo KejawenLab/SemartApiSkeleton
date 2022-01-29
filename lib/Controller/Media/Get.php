@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
@@ -24,6 +24,7 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Tag(name: 'Media')]
 final class Get extends AbstractFOSRestController
 {
     public function __construct(
@@ -35,8 +36,11 @@ final class Get extends AbstractFOSRestController
 
     #[Route(data: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'])]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Media')]
-    #[\OpenApi\Attributes\Response(response: 200, description: 'Api client detail', content: [new OA\MediaType(mediaType: '*', new OA\Schema(type: 'string', format: 'binary'))])]
+    #[OA\Response(
+        response: 200,
+        description: 'Get media detail',
+        content: new OA\MediaType(mediaType: '*', schema: new OA\Schema(type: 'string', format: 'binary')),
+    )]
     public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);

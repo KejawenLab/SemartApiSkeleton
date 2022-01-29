@@ -20,14 +20,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'MEDIA', actions: [Permission::DELETE])]
+#[Tag(name: 'Media')]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly MediaService $service, private readonly TranslatorInterface $translator)
     {
     }
+
     #[Route(data: '/medias/{id}', name: Delete::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Media')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete media')]
     public function __invoke(string $id): View
     {

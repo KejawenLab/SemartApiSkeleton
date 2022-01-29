@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,16 +23,29 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'MEDIA', actions: [Permission::ADD])]
+#[Tag(name: 'Media')]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly MediaService $service)
     {
     }
+
     #[Route(data: '/medias', name: Post::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Media')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'multipart/form-data', new OA\Schema(type: 'object', ref: new Model(type: MediaType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 201, description: 'Media created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Media::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'multipart/form-data',
+            schema: new OA\Schema(ref: new Model(type: MediaType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Media created',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: Media::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         $media = new Media();
