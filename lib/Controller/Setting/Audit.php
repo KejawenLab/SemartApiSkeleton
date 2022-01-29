@@ -14,7 +14,7 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,15 +23,48 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
+#[Tag(name: 'Setting')]
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(private readonly SettingService $service, private readonly AuditService $audit, private readonly Reader $reader)
     {
     }
+
     #[Get(data: '/settings/{id}/audit', name: Audit::class, priority: -255)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Setting')]
-    #[Response(response: 200, description: 'Audit list', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'array', new OA\Items(properties: [new OA\Property(property: 'entity', type: 'object', new OA\Schema(type: 'object', ref: new Model(type: Setting::class, groups: ['read']))), new OA\Property(type: 'string', property: 'type'), new OA\Property(type: 'string', property: 'user_id'), new OA\Property(type: 'string', property: 'username'), new OA\Property(type: 'string', property: 'ip_address'), new OA\Property(type: 'array', property: 'data', new OA\Items(new OA\Property(type: 'string', property: 'new'), new OA\Property(type: 'string', property: 'old')))])))])]
+    #[Response(
+        response: 200,
+        description: 'Audit list',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                type: 'array',
+                items: new OA\Items(
+                    properties: [
+                        new OA\Property(
+                            property: 'entity',
+                            ref: new OA\Schema(ref: new Model(type: Setting::class, groups: ['read']), type: 'object'),
+                            type: 'object',
+                        ),
+                        new OA\Property(property: 'type', type: 'string'),
+                        new OA\Property(property: 'user_id', type: 'string'),
+                        new OA\Property(property: 'username', type: 'string'),
+                        new OA\Property(property: 'ip_address', type: 'string'),
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(
+                                properties: [
+                                    new OA\Property(property: 'new', type: 'string'),
+                                    new OA\Property(property: 'old', type: 'string'),
+                                ],
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        ),
+    )]
     public function __invoke(string $id): View
     {
         if (!$entity = $this->service->get($id)) {
