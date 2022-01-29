@@ -18,6 +18,7 @@ use KejawenLab\ApiSkeleton\Security\User as AuthUser;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -87,12 +88,16 @@ final class Put extends AbstractFOSRestController
             $user->setPlainPassword($password);
         }
 
-        if ($form['file']->getData()) {
+        /** @var File $profile */
+        $profile = $request->files->get('file');
+        if ($profile) {
             /** @var User $user */
             $media = $this->mediaService->getByFile($user->getProfileImage());
             if (null !== $media) {
                 $this->mediaService->remove($media);
             }
+
+            $user->setFile($profile);
         } else {
             $user->setProfileImage($userClone->getProfileImage());
         }

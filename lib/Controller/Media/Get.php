@@ -11,7 +11,6 @@ use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,8 +33,6 @@ final class Get extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(expires="+2 week", public=true)
-     *
      * @OA\Tag(name="Media")
      * @OA\Response(
      *     response=200,

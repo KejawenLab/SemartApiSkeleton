@@ -16,7 +16,6 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -31,8 +30,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(expires="+17 minute", public=false)
-     *
      * @OA\Tag(name="Media")
      * @OA\Response(
      *     response=200,

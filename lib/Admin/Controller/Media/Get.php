@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
@@ -28,7 +29,7 @@ final class Get extends AbstractController
     {
     }
 
-    #[Route(path: '/medias/{path}', name: Get::class, methods: ['GET'], requirements: ['path' => '.+'])]
+    #[Route(path: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'], methods: ['GET'])]
     public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);
@@ -55,7 +56,7 @@ final class Get extends AbstractController
 
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
-        $response->setMaxAge(3600);
+        $response->setMaxAge(SemartApiSkeleton::STATIC_CACHE_LIFETIME);
 
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());

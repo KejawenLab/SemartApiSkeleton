@@ -145,7 +145,12 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
             return null;
         }
 
-        $response = new Response($item->get());
+        $content = $item->get();
+        if (!is_string($content)) {
+            return null;
+        }
+
+        $response = new Response($content);
         $response->headers->set('Content-Type', $keys[$cacheId]);
         $response->headers->set(SemartApiSkeleton::STATIC_CACHE_HEADER, $cacheId);
 

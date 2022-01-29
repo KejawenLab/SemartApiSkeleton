@@ -14,7 +14,6 @@ use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -29,9 +28,6 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     *
-     * @Cache(expires="+1 minute", public=false)
-     *
      * @OA\Tag(name="Cron")
      * @OA\Response(
      *     response=200,

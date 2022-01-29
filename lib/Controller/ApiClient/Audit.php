@@ -17,7 +17,6 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -38,8 +37,6 @@ final class Audit extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(expires="+17 minute", public=false)
-     *
      * @OA\Tag(name="Api Client")
      * @OA\Response(
      *     response=200,

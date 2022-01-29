@@ -1,6 +1,0 @@
-sensio_framework_extra:
-    router: { annotations: false }
-    request: { converters: false, auto_convert: false }
-    view: { annotations: true }
-    cache: { annotations: true }
-    security: { annotations: false }

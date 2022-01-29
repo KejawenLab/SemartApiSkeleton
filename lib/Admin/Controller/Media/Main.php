@@ -10,8 +10,10 @@ use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,9 +24,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Main extends AbstractController
 {
-    public function __construct(private readonly MediaService $service, Paginator $paginator)
-    {
-        parent::__construct($this->service, $paginator);
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly MediaService $service,
+        private readonly CacheItemPoolInterface $cache,
+        private readonly Paginator $paginator,
+    ) {
+        parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 
     #[Route(path: '/medias', name: Main::class, methods: ['GET', 'POST'])]

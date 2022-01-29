@@ -16,7 +16,6 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -37,8 +36,6 @@ final class Report extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(expires="+1 minute", public=false)
-     *
      * @OA\Tag(name="Api Client")
      * @OA\Response(
      *     response=200,

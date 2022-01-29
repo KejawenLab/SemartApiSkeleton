@@ -14,8 +14,10 @@ use KejawenLab\Application\Entity\{{ entityHumanize }};
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,9 +28,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct(private {{ entityHumanize }}Service $service, private AuditService $audit, private Reader $reader)
-    {
-        parent::__construct($this->service);
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private {{ entityHumanize }}Service $service,
+        private readonly CacheItemPoolInterface $cache,
+        private AuditService $audit,
+        private Reader $reader,
+    ) {
+        parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
     #[Route(path: '/{{ entityPluralDash }}/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]

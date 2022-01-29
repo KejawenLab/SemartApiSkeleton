@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Entity\User as RealUser;
@@ -17,11 +18,12 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use ReflectionProperty;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,11 +35,14 @@ final class Profile extends AbstractController
     public function __construct(
         private readonly UserProviderFactory $userProviderFactory,
         private readonly MediaService $mediaService,
-        private readonly Paginator $paginator,
         private readonly SettingService $setting,
         private readonly ApiClientService $apiClientService,
+        private readonly RequestStack $requestStack,
         private readonly UserService $service,
+        private readonly CacheItemPoolInterface $cache,
+        private readonly Paginator $paginator,
     ) {
+        parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 
     #[Route(path: '/me', name: Profile::class, methods: ['GET', 'POST'], priority: -1)]

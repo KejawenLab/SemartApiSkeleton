@@ -11,8 +11,10 @@ use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
+use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,9 +25,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Audit extends AbstractController
 {
-    public function __construct(private readonly MediaService $service, private readonly AuditService $audit, private readonly Reader $reader)
-    {
-        parent::__construct($this->service);
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly MediaService $service,
+        private readonly CacheItemPoolInterface $cache,
+        private readonly AuditService $audit,
+        private readonly Reader $reader,
+    ) {
+        parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
     #[Route(path: '/medias/{id}/audit', name: Audit::class, methods: ['GET'], priority: 1)]

@@ -39,7 +39,6 @@
         "phpdocumentor/reflection-docblock": ">=5.2",
         "ramsey/uuid-doctrine": ">=1.6",
         "runtime/swoole": ">=0.2.1",
-        "sensio/framework-extra-bundle": ">=5.5",
         "snc/redis-bundle": ">=3.0",
         "stof/doctrine-extensions-bundle": ">=1.4",
         "symfony/amqp-messenger": ">=5.4",

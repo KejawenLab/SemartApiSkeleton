@@ -12,8 +12,10 @@ use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,9 +26,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Get extends AbstractController
 {
-    public function __construct(private readonly UserService $service, private readonly AuditService $audit, private readonly Reader $reader)
-    {
-        parent::__construct($this->service);
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly UserService $service,
+        private readonly CacheItemPoolInterface $cache,
+        private readonly AuditService $audit,
+        private readonly Reader $reader,
+    ) {
+        parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
     #[Route(path: '/users/{id}', name: Get::class, methods: ['GET'])]
