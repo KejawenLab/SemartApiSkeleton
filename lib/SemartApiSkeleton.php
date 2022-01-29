@@ -9,13 +9,21 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    final public const STATIC_CACHE_LIFETIME = 1027;
+    final public const STATIC_PAGE_CACHE_LIFETIME = 1627;
 
-    final public const STATIC_CACHE_PERIOD = 'P17M';
+    final public const STATIC_QUERY_CACHE_LIFETIME = 1027;
+
+    final public const STATIC_PAGE_CACHE_PERIOD = 'P27M';
+
+    final public const STATIC_VIEW_CACHE_PERIOD = 'P17M';
 
     final public const STATIC_CACHE_HEADER = 'X-Semart-Content-ID';
 
-    final public const DISABLE_CACHE_QUERY_STRING = 'dc';
+    final public const DISABLE_PAGE_CACHE_QUERY_STRING = 'dcp';
+
+    final public const DISABLE_VIEW_CACHE_QUERY_STRING = 'dcv';
+
+    final public const DISABLE_QUERY_CACHE_QUERY_STRING = 'dcq';
 
     final public const CODENAME = 'Dodol Duren';
 

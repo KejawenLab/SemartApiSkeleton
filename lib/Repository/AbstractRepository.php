@@ -42,7 +42,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -63,7 +63,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -103,7 +103,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     protected function isDisableCache(): bool
     {
-        return !empty($this->requestStack->getCurrentRequest()->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING));
+        return !empty($this->requestStack->getCurrentRequest()->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING));
     }
 
     protected function getDeviceId(): string

@@ -116,11 +116,11 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         $keys = array_merge($keys, [$key => $response->headers->get('Content-Type')]);
 
         $pool->set($keys);
-        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_PAGE_CACHE_PERIOD));
         $this->cache->save($pool);
 
         $cache->set($event->getResponse()->getContent());
-        $cache->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $cache->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_PAGE_CACHE_PERIOD));
         $this->cache->save($cache);
     }
 
@@ -201,7 +201,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        if (!empty($request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING))) {
+        if (!empty($request->query->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING))) {
             return false;
         }
 

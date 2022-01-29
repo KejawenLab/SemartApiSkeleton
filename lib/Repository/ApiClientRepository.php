@@ -32,7 +32,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -53,7 +53,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -75,7 +75,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');

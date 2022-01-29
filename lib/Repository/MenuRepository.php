@@ -33,7 +33,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -57,7 +57,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');

@@ -39,7 +39,7 @@ abstract class AbstractController extends Base
 
     protected function renderView(string $view, array $parameters = []): string
     {
-        if (!empty($this->request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING))) {
+        if (!empty($this->request->query->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING))) {
             parent::renderView($view, $parameters);
         }
 
@@ -73,13 +73,13 @@ abstract class AbstractController extends Base
         $keys = array_merge($keys, [$key => true]);
 
         $pool->set($keys);
-        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_VIEW_CACHE_PERIOD));
         $this->cache->save($pool);
 
         $content = parent::renderView($view, $parameters);
 
         $item->set($content);
-        $item->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_CACHE_PERIOD));
+        $item->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_VIEW_CACHE_PERIOD));
         $this->cache->save($item);
 
         return $content;
