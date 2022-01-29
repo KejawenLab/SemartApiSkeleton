@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @method PasswordHistory[]    findAll()
  * @method PasswordHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>ssss
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class PasswordHistoryRepository extends AbstractRepository implements PasswordHistoryRepositoryInterface
 {

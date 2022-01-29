@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @method Setting[]    findAll()
  * @method Setting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>ss
+ * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 final class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {
