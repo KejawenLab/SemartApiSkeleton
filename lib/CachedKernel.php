@@ -6,7 +6,7 @@ namespace KejawenLab\ApiSkeleton;
 
 use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 
-class CachedKernel extends HttpCache
+final class CachedKernel extends HttpCache
 {
 
 }
