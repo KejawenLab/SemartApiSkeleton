@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller;
 
-use OpenApi\Attributes\Tag;
-use OpenApi\Attributes\RequestBody;
-use OpenApi\Attributes\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
 use OpenApi\Attributes as OA;
+use OpenApi\Attributes\RequestBody;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**

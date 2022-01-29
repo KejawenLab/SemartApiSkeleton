@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use OpenApi\Attributes\Tag;
-use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
@@ -17,7 +15,9 @@ use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\RequestBody;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,16 +25,29 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'CRON', actions: [Permission::ADD])]
+#[Tag(name: 'Cron')]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private readonly FormFactory $formFactory, private readonly CronService $service)
     {
     }
+
     #[Route(data: '/cronjobs', name: Post::class, priority: -7)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Cron')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: CronType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 201, description: 'Cron created', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Cron::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: CronType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Api client created',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: Cron::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest(CronType::class, $request);

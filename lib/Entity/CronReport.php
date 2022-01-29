@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Entity;
 
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -14,6 +13,7 @@ use KejawenLab\ApiSkeleton\Cron\Model\CronInterface;
 use KejawenLab\ApiSkeleton\Cron\Model\CronReportInterface;
 use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
 use OpenApi\Attributes as OA;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 

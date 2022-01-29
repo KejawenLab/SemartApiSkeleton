@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Me;
 
-use OpenApi\Attributes\Tag;
-use OpenApi\Attributes\RequestBody;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Put as Route;
 use FOS\RestBundle\View\View;
@@ -20,6 +18,8 @@ use KejawenLab\ApiSkeleton\Security\User as AuthUser;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use OpenApi\Attributes\RequestBody;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

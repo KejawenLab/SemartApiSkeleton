@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\ApiClient;
 
-use OpenApi\Attributes\Tag;
-use OpenApi\Attributes\Response;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -19,6 +17,8 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Attributes as OA;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -51,13 +51,7 @@ final class Audit extends AbstractFOSRestController
                     properties: [
                         new OA\Property(
                             property: 'entity',
-                            ref: new OA\Schema(
-                                ref: new Model(
-                                    type: ApiClient::class,
-                                    groups: ['read'],
-                                ),
-                                type: 'object',
-                            ),
+                            ref: new OA\Schema(ref: new Model(type: ApiClient::class, groups: ['read']), type: 'object'),
                             type: 'object',
                         ),
                         new OA\Property(property: 'type', type: 'string'),
@@ -69,14 +63,8 @@ final class Audit extends AbstractFOSRestController
                             type: 'array',
                             items: new OA\Items(
                                 properties: [
-                                    new OA\Property(
-                                        property: 'new',
-                                        type: 'string',
-                                    ),
-                                    new OA\Property(
-                                        property: 'old',
-                                        type: 'string',
-                                    ),
+                                    new OA\Property(property: 'new', type: 'string'),
+                                    new OA\Property(property: 'old', type: 'string'),
                                 ],
                             ),
                         ),

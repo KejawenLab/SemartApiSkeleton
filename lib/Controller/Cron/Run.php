@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use OpenApi\Attributes\Tag;
-use OpenApi\Attributes\Response;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -14,7 +12,9 @@ use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Tag;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -26,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'CRON', actions: [Permission::ADD, Permission::EDIT])]
+#[Tag(name: 'Cron')]
 final class Run extends AbstractFOSRestController
 {
     public function __construct(
@@ -34,16 +35,25 @@ final class Run extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     /**
-     *
-     *
-     *
      * @throws Exception
      */
     #[Post(data: '/cronjobs/{id}/run', name: Run::class, priority: -17)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Cron')]
-    #[Response(response: 200, description: 'Job status', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(properties: [new OA\Property(property: 'code', type: 'integer'), new OA\Property(property: 'message', type: 'string')]))])]
+    #[Response(
+        response: 200,
+        description: 'Job status',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                properties: [
+                    new OA\Property(property: 'code', type: 'integer'),
+                    new OA\Property(property: 'message', type: 'string'),
+                ],
+            ),
+        ),
+    )]
     public function __invoke(string $id): View
     {
         $cron = $this->service->get($id);
