@@ -39,7 +39,7 @@ abstract class AbstractController extends Base
 
     protected function renderView(string $view, array $parameters = []): string
     {
-        if ($this->request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING)) {
+        if (!empty($this->request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING))) {
             parent::renderView($view, $parameters);
         }
 

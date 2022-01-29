@@ -44,8 +44,10 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $parameter));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $parameter));
+        }
 
         return $query->getOneOrNullResult();
     }
@@ -67,8 +69,10 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $id));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $id));
+        }
 
         return $query->getOneOrNullResult();
     }

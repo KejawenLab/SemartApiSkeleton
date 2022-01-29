@@ -45,8 +45,10 @@ final class PasswordHistoryRepository extends AbstractRepository implements Pass
         $queryBuilder->setMaxResults(7);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $user->getId()));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $user->getId()));
+        }
 
         $passwordHistories = $query->getResult();
         foreach ($passwordHistories as $passwordHistory) {

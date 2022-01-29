@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements PaginatableRepositoryInterface
 {
-    protected const MICRO_CACHE = 7;
+    protected const MICRO_CACHE = 1;
 
     public function __construct(
         protected RequestStack $requestStack,
@@ -50,8 +50,10 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, $id));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, $id));
+        }
 
         return $query->getOneOrNullResult();
     }
@@ -65,10 +67,11 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
-
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, sha1($query->getSQL())));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s', $deviceId, sha1($query->getSQL())));
+        }
 
         return $query->getResult();
     }
@@ -78,26 +81,16 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         return is_countable($this->findAll()) ? count($this->findAll()) : 0;
     }
 
-    /**
-     * @throws ORMException
-     */
     public function persist(object $object): void
     {
         $this->_em->persist($object);
     }
 
-    /**
-     * @throws ORMException
-     */
     public function remove(object $object): void
     {
         $this->_em->remove($object);
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     public function commit(): void
     {
         $this->_em->flush();
@@ -106,6 +99,11 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     public function queryBuilder(string $alias): QueryBuilder
     {
         return $this->createQueryBuilder($alias);
+    }
+
+    protected function isDisableCache(): bool
+    {
+        return !empty($this->requestStack->getCurrentRequest()->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING));
     }
 
     protected function getDeviceId(): string

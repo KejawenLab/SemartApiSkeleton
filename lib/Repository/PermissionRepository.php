@@ -41,9 +41,8 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-
         if ($cached) {
+            $query->useQueryCache(true);
             $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s_%s", $this->getDeviceId(), sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
         }
 
@@ -76,8 +75,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), sha1(serialize($ids))));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), sha1(serialize($ids))));
+        }
 
         $permissions = $query->getResult();
         foreach ($permissions as $permission) {
@@ -112,8 +113,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         }
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId()));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId()));
+        }
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
@@ -148,8 +151,10 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $queryBuilder->addOrderBy('m.sortOrder', 'ASC');
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+        }
 
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();

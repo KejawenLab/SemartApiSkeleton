@@ -40,8 +40,10 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $apiKey));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $apiKey));
+        }
 
         return $query->getOneOrNullResult();
     }
@@ -60,8 +62,10 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $queryBuilder->andWhere($queryBuilder->expr()->eq('u.id', $queryBuilder->expr()->literal($user->getId())));
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__)));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__)));
+        }
 
         return (int) $query->getSingleScalarResult();
     }
@@ -81,8 +85,10 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $id, $user->getId()));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $id, $user->getId()));
+        }
 
         return $query->getOneOrNullResult();
     }

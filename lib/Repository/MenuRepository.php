@@ -41,8 +41,10 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $queryBuilder->setMaxResults(1);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $code));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $code));
+        }
 
         return $query->getOneOrNullResult();
     }
@@ -64,8 +66,10 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $queryBuilder->addOrderBy('o.sortOrder', 'ASC');
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $menu->getId()));
+        if (!$this->isDisableCache()) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $menu->getId()));
+        }
 
         $menus = $query->getResult();
         foreach ($menus as $menu) {

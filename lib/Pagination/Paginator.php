@@ -7,7 +7,10 @@ namespace KejawenLab\ApiSkeleton\Pagination;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use KejawenLab\ApiSkeleton\Admin\AdminContext;
+use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,7 +25,7 @@ final class Paginator
 
     private readonly int $perPageDefault;
 
-    private readonly int $cacheLifetime;
+    private int $cacheLifetime;
 
     /**
      * @param QueryExtensionInterface[] $queryExtension
@@ -38,7 +41,7 @@ final class Paginator
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
-     * @return array<string, mixed[]>
+     * @return array<string, array>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
@@ -50,25 +53,41 @@ final class Paginator
             }
         }
 
-        $total = $this->count($queryBuilder);
+        $deviceId = $request->getSession()->get(AdminContext::USER_DEVICE_ID, '');
+        if ($deviceId === ApiClientInterface::DEVICE_ID) {
+            $deviceId = '';
+        }
+
+        $disableCache = false;
+        if (!empty($request->query->get(SemartApiSkeleton::DISABLE_CACHE_QUERY_STRING))) {
+            $disableCache = true;
+        }
+
+        if (!empty($deviceId)) {
+            $this->cacheLifetime = SemartApiSkeleton::STATIC_CACHE_LIFETIME;
+        }
+
+        $total = $this->count($queryBuilder, $deviceId, $disableCache);
 
         return [
             'page' => $page,
             'per_page' => $perPage,
             'total_page' => ceil($total / $perPage),
             'total_item' => $total,
-            'items' => $this->paging($queryBuilder, $page, $perPage),
+            'items' => $this->paging($queryBuilder, $deviceId, $page, $perPage, $disableCache),
         ];
     }
 
-    private function paging(QueryBuilder $queryBuilder, int $page, int $perPage): array
+    private function paging(QueryBuilder $queryBuilder, string $deviceId, int $page, int $perPage, bool $disableCache = false): array
     {
         $queryBuilder->setMaxResults($perPage);
         $queryBuilder->setFirstResult(($page - 1) * $perPage);
 
         $query = $queryBuilder->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $page, $perPage, sha1(serialize($query->getParameters()))));
+        if (!$disableCache) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s_%d_%d_%s", sha1(self::class), sha1(__METHOD__), $deviceId, $page, $perPage, sha1(serialize($query->getParameters()))));
+        }
 
         return $query->getResult();
     }
@@ -77,7 +96,7 @@ final class Paginator
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    private function count(QueryBuilder $queryBuilder): int
+    private function count(QueryBuilder $queryBuilder, string $deviceId, bool $disableCache = false): int
     {
         $count = clone $queryBuilder;
 
@@ -85,8 +104,10 @@ final class Paginator
         $count->resetDQLPart('orderBy');
 
         $query = $count->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s", sha1(self::class), sha1(__METHOD__), sha1(serialize($query->getParameters()))));
+        if (!$disableCache) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($this->cacheLifetime, sprintf("%s_%s_%s_%s", sha1(self::class), sha1(__METHOD__), $deviceId, sha1(serialize($query->getParameters()))));
+        }
 
         return (int) $query->getSingleScalarResult();
     }
