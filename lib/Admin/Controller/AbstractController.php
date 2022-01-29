@@ -46,6 +46,9 @@ abstract class AbstractController extends Base
             }
         }
 
+        $params = array_merge($params, $this->request->getSession()->all());
+        $params = array_merge($params, $this->request->query->all());
+
         $deviceId = $this->getDeviceId();
         $key = sprintf('%s_%s_%s', $deviceId, sha1($view), sha1(serialize($params)));
 

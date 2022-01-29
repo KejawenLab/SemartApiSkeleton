@@ -61,9 +61,6 @@ final class Permission
         return $this->menu;
     }
 
-    /**
-     * @return mixed[]
-     */
     public function getActions(): array
     {
         return $this->actions;

@@ -126,6 +126,11 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
 
     private function getCache(KernelEvent $event): ?Response
     {
+        $key = $this->getCacheKey($event);
+        if (empty($key)) {
+            return null;
+        }
+
         $deviceId = $this->getDeviceId($event);
         if (empty($deviceId)) {
             return null;
@@ -137,12 +142,11 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $keys = $pool->get();
-        $cacheId = $this->getCacheKey($event);
-        if (!array_key_exists($cacheId, $keys)) {
+        if (!array_key_exists($key, $keys)) {
             return null;
         }
 
-        $item = $this->cache->getItem($cacheId);
+        $item = $this->cache->getItem($key);
         if (!$item->isHit()) {
             return null;
         }
@@ -153,8 +157,8 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $response = new Response($content);
-        $response->headers->set('Content-Type', $keys[$cacheId]);
-        $response->headers->set(SemartApiSkeleton::STATIC_CACHE_HEADER, $cacheId);
+        $response->headers->set('Content-Type', $keys[$key]);
+        $response->headers->set(SemartApiSkeleton::STATIC_CACHE_HEADER, $key);
 
         return $response;
     }
@@ -172,7 +176,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         if (!empty($id)) {
-            $session->getFlashBag()->add('id', $id);
+            $session->getFlashBag()->set('id', $id);
 
             return '';
         }
