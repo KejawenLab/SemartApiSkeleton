@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User as AuthUser;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\File\File;
@@ -30,6 +30,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'PROFILE', actions: [Permission::EDIT])]
+#[Tag(name: 'Profile')]
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
@@ -40,11 +41,23 @@ final class Put extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/me', name: Put::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Profile')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'multipart/form-data', new OA\Schema(type: 'object', ref: new Model(type: UpdateProfileType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 200, description: 'User profile', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: User::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'multipart/form-data',
+            schema: new OA\Schema(ref: new Model(type: UpdateProfileType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User profile',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: User::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         $user = $this->getUser();
@@ -63,10 +76,10 @@ final class Put extends AbstractFOSRestController
             $user->setPlainPassword($password);
         }
 
+        /** @var User $user */
         /** @var File $profile */
         $profile = $request->files->get('file');
         if ($profile) {
-            /** @var User $user */
             $media = $this->mediaService->getByFile($user->getProfileImage());
             if (null !== $media) {
                 $this->mediaService->remove($media);

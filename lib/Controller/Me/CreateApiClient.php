@@ -19,7 +19,7 @@ use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +32,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'PROFILE', actions: [Permission::ADD])]
+#[Tag(name: 'Profile')]
 final class CreateApiClient extends AbstractFOSRestController
 {
     public function __construct(
@@ -42,11 +43,23 @@ final class CreateApiClient extends AbstractFOSRestController
         private readonly SettingService $setting,
     ) {
     }
+
     #[Post(data: '/me/api-clients', name: CreateApiClient::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Profile')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClientType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 200, description: 'Create api client for logged user', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: ApiClient::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: ApiClientType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Create api client for logged user',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: ApiClient::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         $user = $this->getUser();

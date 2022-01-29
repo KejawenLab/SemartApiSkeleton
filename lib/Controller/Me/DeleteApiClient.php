@@ -23,6 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'PROFILE', actions: [Permission::DELETE])]
+#[Tag(name: 'Profile')]
 final class DeleteApiClient extends AbstractFOSRestController
 {
     public function __construct(
@@ -31,9 +32,9 @@ final class DeleteApiClient extends AbstractFOSRestController
         private readonly TranslatorInterface $translator
     ) {
     }
+
     #[Delete(data: '/me/api-clients/{id}', name: DeleteApiClient::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Profile')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete api client related to logged user')]
     public function __invoke(string $id): View
     {
