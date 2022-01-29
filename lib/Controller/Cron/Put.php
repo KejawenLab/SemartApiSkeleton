@@ -47,7 +47,7 @@ final class Put extends AbstractFOSRestController
     )]
     #[OA\Response(
         response: 200,
-        description: 'Api client created',
+        description: 'Cron updated',
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(ref: new Model(type: Cron::class, groups: ['read']), type: 'object'),

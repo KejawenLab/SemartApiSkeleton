@@ -17,7 +17,7 @@ use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +29,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Semart\Permission(menu: 'GROUP', actions: [Semart\Permission::EDIT, Semart\Permission::ADD])]
+#[Tag(name: 'Group')]
 final class PermissionPut extends AbstractFOSRestController
 {
     public function __construct(
@@ -38,11 +39,23 @@ final class PermissionPut extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Put(data: '/groups/{id}/permissions', name: PermissionPut::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Group')]
-    #[RequestBody(content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: PermissionType::class)))])]
-    #[\OpenApi\Attributes\Response(response: 200, description: 'Permission updated', content: [new OA\MediaType(mediaType: 'application/json', new OA\Schema(type: 'object', ref: new Model(type: Permission::class, groups: ['read'])))])]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: PermissionType::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Permission updated',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: Permission::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request, string $id): View
     {
         $group = $this->groupService->get($id);

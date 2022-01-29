@@ -21,6 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'GROUP', actions: [Permission::DELETE])]
+#[Tag(name: 'Group')]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private readonly GroupService $service, private readonly TranslatorInterface $translator)
@@ -29,7 +30,6 @@ final class Delete extends AbstractFOSRestController
 
     #[Route(data: '/groups/{id}', name: Delete::class)]
     #[Security(name: 'Bearer')]
-    #[Tag(name: 'Group')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete group')]
     public function __invoke(string $id): View
     {

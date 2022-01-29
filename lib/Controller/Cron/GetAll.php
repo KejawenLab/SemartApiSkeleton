@@ -37,7 +37,7 @@ final class GetAll extends AbstractFOSRestController
     #[Parameter(name: 'q', in: 'query', schema: new OA\Schema(type: 'string', format: 'int32'))]
     #[Response(
         response: 200,
-        description: 'Api client list',
+        description: 'Cron list',
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(

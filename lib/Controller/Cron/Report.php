@@ -33,7 +33,7 @@ final class Report extends AbstractFOSRestController
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,
-        description: 'Api client request list',
+        description: 'Cron report list',
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(

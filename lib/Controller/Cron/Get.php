@@ -34,7 +34,7 @@ final class Get extends AbstractFOSRestController
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,
-        description: 'Api client detail',
+        description: 'Cron detail',
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(ref: new Model(type: Cron::class, groups: ['read']), type: 'object'),
