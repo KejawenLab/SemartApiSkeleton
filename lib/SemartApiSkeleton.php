@@ -27,15 +27,13 @@ final class SemartApiSkeleton
 
     final public const USER_DEVICE_ID = 'USER_DEVICE_ID';
 
-    final public const CODENAME = 'Dodol Duren';
-
-    final public const VERSION = '5.8.7';
+    final public const VERSION = '5.9.0';
 
     final public const VERSION_MAYOR = 50000;
 
-    final public const VERSION_MINOR = 800;
+    final public const VERSION_MINOR = 900;
 
-    final public const VERSION_PATCH = 7;
+    final public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {

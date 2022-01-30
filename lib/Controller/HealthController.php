@@ -20,7 +20,6 @@ final class HealthController extends AbstractController
             'semart' => [
                 'name' => 'Semart Api Skeleton',
                 'version' => [
-                    'codename' => SemartApiSkeleton::CODENAME,
                     'alias' => SemartApiSkeleton::VERSION,
                     'number' => SemartApiSkeleton::getVersionNumber(),
                 ],
