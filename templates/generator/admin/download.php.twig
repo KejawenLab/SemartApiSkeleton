@@ -17,10 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Permission(menu="{{ entityUpper }}", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private SerializerInterface $serializer)
