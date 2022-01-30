@@ -103,7 +103,12 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     protected function isDisableCache(): bool
     {
-        return !empty($this->requestStack->getCurrentRequest()->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING));
+        $request = $this->requestStack->getCurrentRequest();
+        if (null === $request) {
+            return false;
+        }
+
+        return !empty($request->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING));
     }
 
     protected function getDeviceId(): string
