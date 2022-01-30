@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use DateInterval;
 use InvalidArgumentException;
-use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Audit\Audit;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
@@ -114,7 +113,7 @@ abstract class AbstractController extends Base
 
     private function getDeviceId(): string
     {
-        $deviceId = $this->request->getSession()->get(AdminContext::USER_DEVICE_ID, '');
+        $deviceId = $this->request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
         if ($deviceId === ApiClientInterface::DEVICE_ID) {
             return '';
         }

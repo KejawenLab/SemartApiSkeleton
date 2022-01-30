@@ -25,6 +25,8 @@ final class SemartApiSkeleton
 
     final public const DISABLE_QUERY_CACHE_QUERY_STRING = 'dcq';
 
+    final public const USER_DEVICE_ID = 'USER_DEVICE_ID';
+
     final public const CODENAME = 'Dodol Duren';
 
     final public const VERSION = '5.8.7';

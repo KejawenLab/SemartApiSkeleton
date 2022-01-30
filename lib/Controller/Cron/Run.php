@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Controller\Cron;
 
-use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\View\View;

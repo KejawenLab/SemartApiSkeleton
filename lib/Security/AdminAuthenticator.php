@@ -10,6 +10,7 @@ use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Psr\Cache\CacheItemPoolInterface;
@@ -72,7 +73,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
             $user->setDeviceId($deviceId);
             $user->setLastLogin(new DateTimeImmutable());
 
-            $session->set(AdminContext::USER_DEVICE_ID, $deviceId);
+            $session->set(SemartApiSkeleton::USER_DEVICE_ID, $deviceId);
             $this->userService->save($user);
         }
 

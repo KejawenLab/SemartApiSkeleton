@@ -6,11 +6,8 @@ namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
@@ -116,7 +113,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         try {
             $session = $this->requestStack->getSession();
 
-            $deviceId = $session->get(AdminContext::USER_DEVICE_ID, '');
+            $deviceId = $session->get(SemartApiSkeleton::USER_DEVICE_ID, '');
             if ($deviceId === ApiClientInterface::DEVICE_ID) {
                 return '';
             }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use DateInterval;
-use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Psr\Cache\CacheItemPoolInterface;
@@ -61,7 +60,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
             $this->cache->deleteItem($key);
         }
 
-        $this->cache->deleteItem($pool);
+        $this->cache->deleteItem($deviceId);
     }
 
     public function populate(ResponseEvent $event): void
@@ -188,7 +187,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
 
     private function getDeviceId(KernelEvent $event): string
     {
-        $deviceId = $event->getRequest()->getSession()->get(AdminContext::USER_DEVICE_ID, '');
+        $deviceId = $event->getRequest()->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
         if ($deviceId === ApiClientInterface::DEVICE_ID) {
             return '';
         }

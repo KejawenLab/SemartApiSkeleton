@@ -15,13 +15,13 @@ use Attribute;
 #[Attribute(Attribute::TARGET_CLASS)]
 final class Permission
 {
-    public const ADD = 'add';
+    final public const ADD = 'add';
 
-    public const EDIT = 'edit';
+    final public const EDIT = 'edit';
 
-    public const VIEW = 'view';
+    final public const VIEW = 'view';
 
-    public const DELETE = 'delete';
+    final public const DELETE = 'delete';
 
     private readonly string $menu;
 

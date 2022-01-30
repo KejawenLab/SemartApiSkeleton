@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Pagination;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
@@ -53,7 +52,7 @@ final class Paginator
             }
         }
 
-        $deviceId = $request->getSession()->get(AdminContext::USER_DEVICE_ID, '');
+        $deviceId = $request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
         if ($deviceId === ApiClientInterface::DEVICE_ID) {
             $deviceId = '';
         }

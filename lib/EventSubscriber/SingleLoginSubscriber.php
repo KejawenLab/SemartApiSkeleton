@@ -12,6 +12,7 @@ use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Util\Encryptor;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
@@ -48,7 +49,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $deviceId = $request->getSession()->get(AdminContext::USER_DEVICE_ID);
+        $deviceId = $request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID);
         if (null === $deviceId) {
             return;
         }
