@@ -43,7 +43,7 @@ final class PermissionExtension extends AbstractExtension
             return true;
         }
 
-        return $this->authorization->authorize(new Permission(['menu' => 'audit', 'actions' => 'view']));
+        return $this->authorization->authorize(new Permission('audit', ['view']));
     }
 
     public function isSuperAdmin(): bool

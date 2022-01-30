@@ -29,7 +29,7 @@ final class DeleteApiClient extends AbstractFOSRestController
     public function __construct(
         private readonly UserProviderFactory $userProviderFactory,
         private readonly ApiClientService $service,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

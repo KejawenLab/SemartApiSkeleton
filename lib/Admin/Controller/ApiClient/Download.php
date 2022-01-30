@@ -21,8 +21,11 @@ use Symfony\Component\Serializer\SerializerInterface;
 #[Permission(menu: 'APICLIENT', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
-    public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly SerializerInterface $serializer)
-    {
+    public function __construct(
+        private readonly ApiClientService $service,
+        private readonly UserService $userService,
+        private readonly SerializerInterface $serializer,
+    ) {
     }
 
     #[Route(path: '/users/{userId}/api-clients/download', name: Download::class, methods: ['GET'])]

@@ -28,8 +28,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
 final class Audit extends AbstractController
 {
-    public function __construct(private readonly ApiClientService $service, private readonly UserService $userService, private readonly AuditService $audit, private readonly Reader $reader)
-    {
+    public function __construct(
+        private readonly ApiClientService $service,
+        private readonly UserService $userService,
+        private readonly AuditService $audit,
+        private readonly Reader $reader,
+    ) {
     }
 
     #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
