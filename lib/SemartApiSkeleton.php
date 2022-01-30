@@ -29,13 +29,13 @@ final class SemartApiSkeleton
 
     final public const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
 
-    final public const VERSION = '5.9.0';
+    final public const VERSION = '5.9.1';
 
     final public const VERSION_MAYOR = 50000;
 
     final public const VERSION_MINOR = 900;
 
-    final public const VERSION_PATCH = 0;
+    final public const VERSION_PATCH = 1;
 
     public static function getVersionNumber(): int
     {
