@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Admin\Controller\Setting;
 
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\ApiSkeleton\Cache\CacheFactory;
 use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Form\SettingType;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\ApiSkeleton\Cache;
+namespace KejawenLab\ApiSkeleton\Util;
 
 use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,28 +35,22 @@ final class CacheFactory
         $configuration->getResultCache()->clear();
     }
 
-    public function invalidPageAndViewCache(): void
+    public function invalidPageCache(): void
     {
-        if (!($this->isDisablePageOrViewCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
+        if (!($this->isDisablePageCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
             return;
         }
 
-        $deviceId = $this->getDeviceId();
-        if (empty($deviceId)) {
+        $this->invalidateCache('page');
+    }
+
+    public function invalidViewCache(): void
+    {
+        if (!($this->isDisableViewCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
             return;
         }
 
-        $pool = $this->cache->getItem($deviceId);
-        if (!$pool->isHit()) {
-            return;
-        }
-
-        $keys = $pool->get();
-        foreach ($keys as $key => $nothing) {
-            $this->cache->deleteItem($key);
-        }
-
-        $this->cache->deleteItem($deviceId);
+        $this->invalidateCache('view');
     }
 
     public function getPageCache(): ?Response
@@ -65,19 +59,19 @@ final class CacheFactory
             return null;
         }
 
-        if ($this->isDisablePageOrViewCache()) {
+        if ($this->isDisablePageCache()) {
             return null;
         }
 
         $key = $this->getCacheKey();
-        $data = $this->getCache($key);
+        $data = $this->getCache($key, 'page');
         if (0 === count($data)) {
             return null;
         }
 
         $response = new Response($data['content']);
         $response->headers->set('Content-Type', $data['attribute']);
-        $response->headers->set(SemartApiSkeleton::STATIC_CACHE_HEADER, $key);
+        $response->headers->set(SemartApiSkeleton::CACHE_HEADER, $key);
 
         return $response;
     }
@@ -88,7 +82,7 @@ final class CacheFactory
             return;
         }
 
-        if ($this->isDisablePageOrViewCache()) {
+        if ($this->isDisablePageCache()) {
             return;
         }
 
@@ -96,18 +90,19 @@ final class CacheFactory
             return;
         }
 
-        $this->setCache($this->getCacheKey(), $response->getContent(), $response->headers->get('Content-Type'));
+        $this->setCache($this->getCacheKey(), 'page', $response->getContent(), $response->headers->get('Content-Type'), SemartApiSkeleton::PAGE_CACHE_PERIOD);
     }
 
-    public function getCache(string $key): array
+    public function getCache(string $key, string $namespace): array
     {
         $deviceId = $this->getDeviceId();
         if ('' === $deviceId) {
             return [];
         }
 
-        $key = sprintf('%s_%s', $deviceId, $key);
-        $pool = $this->cache->getItem($deviceId);
+        $poolKey = sprintf('%s_%s', $deviceId, $namespace);
+        $key = sprintf('%s_%s', $poolKey, $key);
+        $pool = $this->cache->getItem($poolKey);
         if (!$pool->isHit()) {
             return [];
         }
@@ -123,17 +118,21 @@ final class CacheFactory
         ];
     }
 
-    public function setCache(string $key, string $content, string|bool $attribute): void
+    public function setCache(string $key, string $namespace, string $content, string|bool $attribute, string $period): void
     {
+        if ('' === $content) {
+            return;
+        }
+
         $deviceId = $this->getDeviceId();
         if ('' === $deviceId) {
             return;
         }
 
-        $key = sprintf('%s_%s', $deviceId, $key);
-        $item = $this->cache->getItem($key);
+        $poolKey = sprintf('%s_%s', $deviceId, $namespace);
+        $key = sprintf('%s_%s', $poolKey, $key);
 
-        $pool = $this->cache->getItem($deviceId);
+        $pool = $this->cache->getItem($poolKey);
         $keys = [];
         if ($pool->isHit()) {
             $keys = $pool->get();
@@ -142,11 +141,13 @@ final class CacheFactory
         $keys = array_merge($keys, [$key => $attribute]);
 
         $pool->set($keys);
-        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_PAGE_CACHE_PERIOD));
+        $pool->expiresAfter(new DateInterval($period));
         $this->cache->save($pool);
 
+        $item = $this->cache->getItem($key);
+
         $item->set($content);
-        $item->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_PAGE_CACHE_PERIOD));
+        $item->expiresAfter(new DateInterval($period));
         $this->cache->save($item);
     }
 
@@ -162,6 +163,27 @@ final class CacheFactory
         }
 
         return false;
+    }
+
+    public function invalidateCache(string $namespace): void
+    {
+        $deviceId = $this->getDeviceId();
+        if ('' === $deviceId) {
+            return;
+        }
+
+        $poolKey = sprintf('%s_%s', $deviceId, $namespace);
+        $pool = $this->cache->getItem($poolKey);
+        if (!$pool->isHit()) {
+            return;
+        }
+
+        $keys = $pool->get();
+        foreach ($keys as $key => $nothing) {
+            $this->cache->deleteItem($key);
+        }
+
+        $this->cache->deleteItem($deviceId);
     }
 
     private function getCacheKey(): string
@@ -185,7 +207,7 @@ final class CacheFactory
         return sprintf('%s_%s', sha1($request->getPathInfo()), sha1(serialize($request->query->all())));
     }
 
-    private function isDisablePageOrViewCache(): bool
+    private function isDisablePageCache(): bool
     {
         $request = $this->requestStack->getCurrentRequest();
         if ($request->query->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING)) {
@@ -193,14 +215,6 @@ final class CacheFactory
         }
 
         if ($request->attributes->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        if ($request->query->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        if ($request->attributes->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING)) {
             return true;
         }
 

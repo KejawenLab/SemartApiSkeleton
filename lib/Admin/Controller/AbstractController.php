@@ -6,9 +6,10 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
 use InvalidArgumentException;
 use KejawenLab\ApiSkeleton\Audit\Audit;
-use KejawenLab\ApiSkeleton\Cache\CacheFactory;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
+use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use ReflectionClass;
 use ReflectionProperty;
@@ -50,13 +51,13 @@ abstract class AbstractController extends Base
         $params = array_merge($params, $this->request->query->all());
 
         $key = sprintf('%s_%s', sha1($view), sha1(serialize($params)));
-        $data = $this->cache->getCache($key);
+        $data = $this->cache->getCache($key, 'view');
         if (0 !== count($data)) {
             return $data['content'];
         }
 
         $content = parent::renderView($view, $parameters);
-        $this->cache->setCache($key, $content, true);
+        $this->cache->setCache($key, 'view', $content, true, SemartApiSkeleton::VIEW_CACHE_PERIOD);
 
         return $content;
     }

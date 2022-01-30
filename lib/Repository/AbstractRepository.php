@@ -38,7 +38,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -59,7 +59,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');

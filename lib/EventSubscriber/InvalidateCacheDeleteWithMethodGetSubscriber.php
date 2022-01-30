@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
-use KejawenLab\ApiSkeleton\Cache\CacheFactory;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -38,7 +38,8 @@ final class InvalidateCacheDeleteWithMethodGetSubscriber implements EventSubscri
             return;
         }
 
-        $this->cache->invalidPageAndViewCache();
+        $this->cache->invalidPageCache();
+        $this->cache->invalidViewCache();
         $this->cache->invalidQueryCache();
     }
 

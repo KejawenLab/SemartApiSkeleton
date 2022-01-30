@@ -65,7 +65,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');

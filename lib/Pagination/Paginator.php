@@ -62,7 +62,7 @@ final class Paginator
         }
 
         if (!empty($deviceId)) {
-            $this->cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $this->cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $total = $this->count($queryBuilder, $deviceId, $disableCache);

@@ -69,7 +69,7 @@ final class Get extends AbstractFOSRestController
 
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
-        $response->setMaxAge(SemartApiSkeleton::STATIC_PAGE_CACHE_LIFETIME);
+        $response->setMaxAge(SemartApiSkeleton::PAGE_CACHE_LIFETIME);
 
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());
