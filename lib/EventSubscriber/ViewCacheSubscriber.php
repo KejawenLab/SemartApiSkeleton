@@ -60,6 +60,8 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         foreach ($keys as $key => $nothing) {
             $this->cache->deleteItem($key);
         }
+
+        $this->cache->deleteItem($pool);
     }
 
     public function populate(ResponseEvent $event): void

@@ -32,7 +32,7 @@ final class Delete extends AbstractController
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        if (!$setting->isReserved()) {
+        if ($setting->isReserved()) {
             $this->addFlash('error', 'sas.page.setting.reserved_not_allowed');
 
             return new RedirectResponse($this->generateUrl(Main::class));

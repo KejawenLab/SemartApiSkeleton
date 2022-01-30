@@ -37,7 +37,7 @@ final class Delete extends AbstractFOSRestController
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.not_found', [], 'pages'));
         }
 
-        if (!$setting->isReserved()) {
+        if ($setting->isReserved()) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.setting.reserved_not_allowed', [], 'pages'));
         }
 
