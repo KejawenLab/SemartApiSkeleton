@@ -218,50 +218,37 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Application\Repository\TodoRepository;
 use KejawenLab\Application\Todo\Model\TodoInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
+use OpenApi\Attributes as OA;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
-use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=TodoRepository::class)
- * @ORM\Table(name="todos")
- *
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- */
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
+#[ORM\Entity(repositoryClass: TodoRepository::class)]
+#[ORM\Table(name: 'todos')]
 class Todo implements TodoInterface
 {
     use BlameableEntity;
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Groups({"read"})
-     *
-     * @OA\Property(type="string")
-     */
+    #[Groups(groups: ['read'])]
+    #[OA\Property(type: 'string')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
-     *
-     * @Groups({"read"})
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $task;
-    
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @Groups({"read"})
-     */
+
+    #[Groups(groups: ['read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $done;
     
     public function __construct()
