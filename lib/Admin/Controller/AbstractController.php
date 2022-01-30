@@ -36,7 +36,7 @@ abstract class AbstractController extends Base
     protected function renderView(string $view, array $parameters = []): string
     {
         if ($this->cache->isDisableViewCache()) {
-            parent::renderView($view, $parameters);
+            return parent::renderView($view, $parameters);
         }
 
         $params = [];
@@ -56,7 +56,7 @@ abstract class AbstractController extends Base
         }
 
         $content = parent::renderView($view, $parameters);
-        $this->cache->setCache($content, true);
+        $this->cache->setCache($key, $content, true);
 
         return $content;
     }

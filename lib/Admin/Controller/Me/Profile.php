@@ -7,6 +7,7 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
+use KejawenLab\ApiSkeleton\Cache\CacheFactory;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
 use KejawenLab\ApiSkeleton\Entity\User as RealUser;
 use KejawenLab\ApiSkeleton\Form\UpdateProfileType;
@@ -18,7 +19,6 @@ use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use ReflectionProperty;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,7 +39,7 @@ final class Profile extends AbstractController
         private readonly ApiClientService $apiClientService,
         private readonly RequestStack $requestStack,
         private readonly UserService $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly Paginator $paginator,
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);

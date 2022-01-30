@@ -7,10 +7,10 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Cron;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
+use KejawenLab\ApiSkeleton\Cache\CacheFactory;
 use KejawenLab\ApiSkeleton\Cron\CronService;
 use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -26,7 +26,7 @@ final class Audit extends AbstractController
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly CronService $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly AuditService $audit,
         private readonly Reader $reader,
     ) {

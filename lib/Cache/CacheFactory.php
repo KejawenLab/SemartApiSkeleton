@@ -96,14 +96,17 @@ final class CacheFactory
             return;
         }
 
-        $this->setCache($response->getContent(), $response->headers->get('Content-Type'));
+        $this->setCache($this->getCacheKey(), $response->getContent(), $response->headers->get('Content-Type'));
     }
 
     public function getCache(string $key): array
     {
         $deviceId = $this->getDeviceId();
-        $key = sprintf('%s_%s', $deviceId, $key);
+        if ('' === $deviceId) {
+            return [];
+        }
 
+        $key = sprintf('%s_%s', $deviceId, $key);
         $pool = $this->cache->getItem($deviceId);
         if (!$pool->isHit()) {
             return [];
@@ -120,15 +123,15 @@ final class CacheFactory
         ];
     }
 
-    public function setCache(string $content, string|bool $attribute): void
+    public function setCache(string $key, string $content, string|bool $attribute): void
     {
-        $key = $this->getCacheKey();
-        $item = $this->cache->getItem($key);
-        if ($item->isHit()) {
+        $deviceId = $this->getDeviceId();
+        if ('' === $deviceId) {
             return;
         }
 
-        $deviceId = $this->getDeviceId();
+        $key = sprintf('%s_%s', $deviceId, $key);
+        $item = $this->cache->getItem($key);
 
         $pool = $this->cache->getItem($deviceId);
         $keys = [];
