@@ -68,6 +68,9 @@ tasks:
     insight:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpinsights"
+    style:
+        cmds:
+            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/php-cs-fixer fix lib"
     clean:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
