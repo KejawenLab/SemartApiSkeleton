@@ -11,9 +11,6 @@ final class AuditItem
 {
     public function __construct(
         private readonly string $type,
-        /*
-         * @var array<string, mixed>
-         */
         private readonly array $data,
         private readonly ?string $logTime,
         private readonly ?string $userId,

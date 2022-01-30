@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Entity\User;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
-use Psr\Cache\CacheItemPoolInterface;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -26,7 +26,7 @@ final class Audit extends AbstractController
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly UserService $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly AuditService $audit,
         private readonly Reader $reader,
     ) {

@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 #[Tag(name: 'Security')]
 final class SecurityController extends AbstractFOSRestController
 {
-
     #[Post(data: '/login', name: SecurityController::class, priority: 17)]
     #[RequestBody(
         content: new OA\MediaType(

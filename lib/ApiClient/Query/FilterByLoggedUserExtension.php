@@ -20,7 +20,7 @@ final class FilterByLoggedUserExtension extends AbstractQueryExtension
 {
     public function __construct(AliasHelper $aliasHelper, private readonly TokenStorageInterface $tokenStorage)
     {
-        $this->aliasHelper = $aliasHelper;
+        parent::__construct($aliasHelper);
     }
 
     public function apply(QueryBuilder $queryBuilder, Request $request): void

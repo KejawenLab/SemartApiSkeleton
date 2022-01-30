@@ -17,8 +17,8 @@ use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use ReflectionProperty;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,7 +39,7 @@ final class Profile extends AbstractController
         private readonly ApiClientService $apiClientService,
         private readonly RequestStack $requestStack,
         private readonly UserService $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly Paginator $paginator,
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);

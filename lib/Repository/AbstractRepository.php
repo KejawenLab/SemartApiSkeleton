@@ -8,7 +8,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
@@ -39,7 +38,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -60,7 +59,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
         if (!empty($deviceId)) {
-            $cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $queryBuilder = $this->createQueryBuilder('o');
@@ -114,7 +113,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
             $session = $this->requestStack->getSession();
 
             $deviceId = $session->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-            if ($deviceId === ApiClientInterface::DEVICE_ID) {
+            if ($deviceId === SemartApiSkeleton::API_CLIENT_DEVICE_ID) {
                 return '';
             }
 

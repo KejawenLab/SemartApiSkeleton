@@ -10,7 +10,7 @@ use KejawenLab\ApiSkeleton\Form\MediaType;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Psr\Cache\CacheItemPoolInterface;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -26,7 +26,7 @@ final class Main extends AbstractController
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly MediaService $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly Paginator $paginator,
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);

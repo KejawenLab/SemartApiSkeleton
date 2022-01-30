@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use Doctrine\ORM\EntityManagerInterface;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -16,7 +15,7 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
  */
 final class InvalidateDoctrineCacheSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly CacheFactory $cache)
     {
     }
 
@@ -26,23 +25,7 @@ final class InvalidateDoctrineCacheSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        $request = $event->getRequest();
-        if ($request->isMethod(Request::METHOD_GET)) {
-            return;
-        }
-
-        if ($request->isMethod(Request::METHOD_HEAD)) {
-            return;
-        }
-
-        if ($request->isMethod(Request::METHOD_OPTIONS)) {
-            return;
-        }
-
-        $configuration = $this->entityManager->getConfiguration();
-
-        $configuration->getQueryCache()->clear();
-        $configuration->getResultCache()->clear();
+        $this->cache->invalidQueryCache();
     }
 
     /**

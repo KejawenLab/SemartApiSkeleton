@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\EventSubscriber;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
-use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\Service\UserService;
@@ -85,7 +84,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (ApiClientInterface::DEVICE_ID === $payload['deviceId']) {
+        if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $payload['deviceId']) {
             return;
         }
 
@@ -127,7 +126,7 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
             $user->setDeviceId($deviceId);
             $this->service->save($user);
         } else {
-            $payload['deviceId'] = ApiClientInterface::DEVICE_ID;
+            $payload['deviceId'] = SemartApiSkeleton::API_CLIENT_DEVICE_ID;
         }
 
         $event->setData($payload);

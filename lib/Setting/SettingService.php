@@ -60,7 +60,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         $setting = (int) $this->getSetting('CACHE_LIFETIME')->getValue();
 
         $cache->set($setting);
-        $cache->expiresAfter(SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME);
+        $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;
@@ -76,7 +76,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         $setting = $this->getSetting('PAGE_FIELD')->getValue();
 
         $cache->set($setting);
-        $cache->expiresAfter(SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME);
+        $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;
@@ -92,7 +92,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         $setting = $this->getSetting('PER_PAGE_FIELD')->getValue();
 
         $cache->set($setting);
-        $cache->expiresAfter(SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME);
+        $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;
@@ -108,7 +108,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         $setting = (int) $this->getSetting('PER_PAGE')->getValue();
 
         $cache->set($setting);
-        $cache->expiresAfter(SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME);
+        $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;
@@ -124,7 +124,7 @@ final class SettingService extends AbstractService implements ServiceInterface
         $setting = (int) $this->getSetting('MAX_API_PER_USER')->getValue();
 
         $cache->set($setting);
-        $cache->expiresAfter(SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME);
+        $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;

@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Pagination;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Pagination\Model\QueryExtensionInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -53,7 +52,7 @@ final class Paginator
         }
 
         $deviceId = $request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-        if ($deviceId === ApiClientInterface::DEVICE_ID) {
+        if ($deviceId === SemartApiSkeleton::API_CLIENT_DEVICE_ID) {
             $deviceId = '';
         }
 
@@ -63,7 +62,7 @@ final class Paginator
         }
 
         if (!empty($deviceId)) {
-            $this->cacheLifetime = SemartApiSkeleton::STATIC_QUERY_CACHE_LIFETIME;
+            $this->cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
         $total = $this->count($queryBuilder, $deviceId, $disableCache);

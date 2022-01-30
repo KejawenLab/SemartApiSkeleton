@@ -22,8 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class CreateApiClient extends AbstractController
 {
-    public function __construct(private readonly UserProviderFactory $userProviderFactory, private readonly SettingService $setting, private readonly ApiClientService $service)
-    {
+    public function __construct(
+        private readonly UserProviderFactory $userProviderFactory,
+        private readonly SettingService $setting,
+        private readonly ApiClientService $service,
+    ) {
     }
 
     #[Route(path: '/me/api-clients', name: CreateApiClient::class, methods: ['POST'])]
