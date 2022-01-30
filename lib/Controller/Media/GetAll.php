@@ -29,6 +29,7 @@ final class GetAll extends AbstractFOSRestController
     public function __construct(private readonly MediaService $service, private readonly Paginator $paginator)
     {
     }
+
     #[Get(data: '/medias', name: GetAll::class)]
     #[Security(name: 'Bearer')]
     #[Parameter(name: 'page', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]

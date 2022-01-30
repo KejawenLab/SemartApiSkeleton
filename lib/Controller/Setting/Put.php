@@ -36,6 +36,7 @@ final class Put extends AbstractFOSRestController
         private readonly TranslatorInterface $translator,
     ) {
     }
+
     #[Route(data: '/settings/{id}', name: Put::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(

@@ -18,9 +18,7 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 #[Tag(name: 'Security')]
 final class RefreshTokenController extends AbstractFOSRestController
 {
-    /**
-     * @throws RuntimeException
-     */
+
     #[Post(data: '/token/refresh', name: RefreshTokenController::class, priority: 17)]
     #[RequestBody(
         content: new OA\MediaType(

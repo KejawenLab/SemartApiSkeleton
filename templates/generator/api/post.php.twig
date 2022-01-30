@@ -19,7 +19,9 @@ use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\RequestBody;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,41 +29,29 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: '{{ entityUpper }}', actions: [Permission::ADD])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private FormFactory $formFactory, private {{ entityHumanize }}Service $service)
     {
     }
 
-    /**
-     * @OA\Tag(name="{{ entityHumanize }}")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type={{ entityHumanize }}Type::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=201,
-     *     description="Crate new {{ entityLowerize }}",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
-     *     )
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     *
-     * @return View
-     */
     #[Route(data: '/{{ entityPluralDash }}', name: Post::class)]
+    #[Security(name: 'Bearer')]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}Type::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 201,
+        description: '{{ entityHumanize }} created',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         $form = $this->formFactory->submitRequest({{ entityHumanize }}Type::class, $request);

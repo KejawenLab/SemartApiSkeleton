@@ -19,7 +19,9 @@ use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\RequestBody;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,6 +31,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: '{{ entityUpper }}', actions: [Permission::EDIT])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
@@ -38,36 +41,22 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    /**
-     * @OA\Tag(name="{{ entityHumanize }}")
-     * @OA\RequestBody(
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 ref=@Model(type={{ entityHumanize }}Type::class)
-     *             )
-     *         )
-     *     }
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description="Update {{ entityLowerize }}",
-     *     @OA\Schema(
-     *         type="object",
-     *         ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
-     *     )
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
-     */
     #[Route(data: '/{{ entityPluralDash }}/{id}', name: Put::class)]
+    #[Security(name: 'Bearer')]
+    #[RequestBody(
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}Type::class), type: 'object'),
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: '{{ entityHumanize }} updated',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}::class, groups: ['read']), type: 'object'),
+        ),
+    )]
     public function __invoke(Request $request, string $id): View
     {
         ${{ entityLowerize }} = $this->service->get($id);
