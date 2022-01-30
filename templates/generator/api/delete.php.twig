@@ -15,7 +15,7 @@ use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interf
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,27 +24,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: '{{ entityUpper }}', actions: [Permission::DELETE])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Delete extends AbstractFOSRestController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private TranslatorInterface $translator)
     {
     }
 
-    /**
-     * @OA\Tag(name="{{ entityHumanize }}")
-     * @OA\Response(
-     *     response=204,
-     *     description="{{ entityHumanize }} deleted"
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     * @param string $id
-     *
-     * @return View
-     */
     #[Route(data: '/{{ entityPluralDash }}/{id}', name: Delete::class)]
+    #[Security(name: 'Bearer')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete {{ entityLowerize }}')]
     public function __invoke(string $id): View
     {
         ${{ entityLowerize }} = $this->service->get($id);

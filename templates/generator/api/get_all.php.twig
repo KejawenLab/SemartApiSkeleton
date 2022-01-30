@@ -17,58 +17,38 @@ use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class GetAll extends AbstractFOSRestController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private Paginator $paginator)
     {
     }
 
-    /**
-     * @OA\Tag(name="{{ entityHumanize }}")
-     * @OA\Parameter(
-     *     name="page",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Parameter(
-     *     name="limit",
-     *     in="query",
-     *     @OA\Schema(
-     *         type="integer",
-     *         format="int32"
-     *     )
-     * )
-     * @OA\Response(
-     *     response=200,
-     *     description= "{{ entityHumanize }} list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(ref=@Model(type={{ entityHumanize }}::class, groups={"read"}))
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     *
-     * @return View
-     */
     #[Get(data: '/{{ entityPluralDash }}', name: GetAll::class)]
+    #[Security(name: 'Bearer')]
+    #[Parameter(name: 'page', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Parameter(name: 'limit', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
+    #[Response(
+        response: 200,
+        description: '{{ entityHumanize }} list',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                type: 'array',
+                items: new OA\Items(ref: new Model(type: {{ entityHumanize }}::class, groups: ['read'])),
+            ),
+        ),
+    )]
     public function __invoke(Request $request): View
     {
         return $this->view($this->paginator->paginate($this->service->getQueryBuilder(), $request, {{ entityHumanize }}::class));

@@ -17,67 +17,57 @@ use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[Permission(menu: 'AUDIT', actions: [Permission::VIEW])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private AuditService $audit, private Reader $reader)
     {
     }
 
-    /**
-     * @OA\Tag(name="{{ entityHumanize }}")
-     * @OA\Response(
-     *     response=200,
-     *     description= "Audit list",
-     *     content={
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="array",
-     *                 @OA\Items(
-     *                     properties={
-     *                         @OA\Property(
-     *                             property="entity",
-     *                             type="object",
-     *                             @OA\Schema(
-     *                                 type="object",
-     *                                 ref=@Model(type={{ entityHumanize }}::class, groups={"read"})
-     *                             )
-     *                         ),
-     *                         @OA\Property(type="string", property="type"),
-     *                         @OA\Property(type="string", property="user_id"),
-     *                         @OA\Property(type="string", property="username"),
-     *                         @OA\Property(type="string", property="ip_address"),
-     *                         @OA\Property(
-     *                             type="array",
-     *                             property="data",
-     *                             @OA\Items(
-     *                                 @OA\Property(type="string", property="new"),
-     *                                 @OA\Property(type="string", property="old"),
-     *                             )
-     *                         )
-     *                     }
-     *                 )
-     *             )
-     *         )
-     *     }
-     * )
-     *
-     * @Security(name="Bearer")
-     *
-     * @param Request $request
-     *
-     * @param string $id
-     *
-     * @return View
-     */
     #[Get(data: '/{{ entityPluralDash }}/{id}/audit', name: Audit::class, priority: -255)]
+    #[Security(name: 'Bearer')]
+    #[Response(
+        response: 200,
+        description: 'Audit list',
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                type: 'array',
+                items: new OA\Items(
+                    properties: [
+                        new OA\Property(
+                            property: 'entity',
+                            ref: new Model(type: {{ entityHumanize }}::class, groups: ['read']),
+                            type: 'object',
+                        ),
+                        new OA\Property(property: 'type', type: 'string'),
+                        new OA\Property(property: 'user_id', type: 'string'),
+                        new OA\Property(property: 'username', type: 'string'),
+                        new OA\Property(property: 'ip_address', type: 'string'),
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(
+                                properties: [
+                                    new OA\Property(property: 'new', type: 'string'),
+                                    new OA\Property(property: 'old', type: 'string'),
+                                ],
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        ),
+    )]
     public function __invoke(string $id): View
     {
         if (!$entity = $this->service->get($id)) {
