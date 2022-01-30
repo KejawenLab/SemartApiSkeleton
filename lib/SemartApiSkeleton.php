@@ -27,6 +27,8 @@ final class SemartApiSkeleton
 
     final public const USER_DEVICE_ID = 'USER_DEVICE_ID';
 
+    final public const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
+
     final public const VERSION = '5.9.0';
 
     final public const VERSION_MAYOR = 50000;

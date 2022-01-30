@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Admin\Controller;
 
-use DateInterval;
 use InvalidArgumentException;
-use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\Audit\Audit;
+use KejawenLab\ApiSkeleton\Cache\CacheFactory;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
-use Psr\Cache\CacheItemPoolInterface;
 use ReflectionClass;
 use ReflectionProperty;
 use SebastianBergmann\ObjectReflector\ObjectReflector;
@@ -31,14 +28,14 @@ abstract class AbstractController extends Base
     public function __construct(
         private readonly Request $request,
         private readonly ServiceInterface $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private readonly ?Paginator $paginator = null,
     ) {
     }
 
     protected function renderView(string $view, array $parameters = []): string
     {
-        if (!empty($this->request->query->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING))) {
+        if ($this->cache->isDisableViewCache()) {
             parent::renderView($view, $parameters);
         }
 
@@ -52,34 +49,14 @@ abstract class AbstractController extends Base
         $params = array_merge($params, $this->request->getSession()->all());
         $params = array_merge($params, $this->request->query->all());
 
-        $deviceId = $this->getDeviceId();
-        $key = sprintf('%s_%s_%s', $deviceId, sha1($view), sha1(serialize($params)));
-
-        $pool = $this->cache->getItem($deviceId);
-        $item = $this->cache->getItem($key);
-        $keys = [];
-
-        if ($pool->isHit()) {
-            if ($item->isHit()) {
-                return $item->get();
-            }
-
-            $keys = $pool->get();
+        $key = sprintf('%s_%s', sha1($view), sha1(serialize($params)));
+        $data = $this->cache->getCache($key);
+        if (0 !== count($data)) {
+            return $data['content'];
         }
 
-        $item = $this->cache->getItem($key);
-
-        $keys = array_merge($keys, [$key => true]);
-
-        $pool->set($keys);
-        $pool->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_VIEW_CACHE_PERIOD));
-        $this->cache->save($pool);
-
         $content = parent::renderView($view, $parameters);
-
-        $item->set($content);
-        $item->expiresAfter(new DateInterval(SemartApiSkeleton::STATIC_VIEW_CACHE_PERIOD));
-        $this->cache->save($item);
+        $this->cache->setCache($content, true);
 
         return $content;
     }
@@ -111,14 +88,18 @@ abstract class AbstractController extends Base
         ]);
     }
 
-    private function getDeviceId(): string
+    private function renderWithAudit(Audit $audit, ReflectionClass $class, string $template): Response
     {
-        $deviceId = $this->request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-        if ($deviceId === ApiClientInterface::DEVICE_ID) {
-            return '';
-        }
+        $context = StringUtil::lowercase($class->getShortName());
+        $audits = $audit->toArray();
 
-        return $deviceId;
+        return $this->render(sprintf('%s/%s.html.twig', $context, $template), [
+            'page_title' => sprintf('sas.page.%s.view', $context),
+            'context' => $context,
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
+            'data' => $audits['entity'],
+            'audits' => $audits['items'],
+        ]);
     }
 
     private function canBeSerialized($variable): bool
@@ -157,11 +138,6 @@ abstract class AbstractController extends Base
         return true;
     }
 
-    /**
-     * @param $variable
-     *
-     * @return array
-     */
     private function enumerateObjectsAndResources($variable): array
     {
         $processed = func_get_args()[1] ?? new Context();
@@ -206,19 +182,5 @@ abstract class AbstractController extends Base
         }
 
         return $result;
-    }
-
-    private function renderWithAudit(Audit $audit, ReflectionClass $class, string $template): Response
-    {
-        $context = StringUtil::lowercase($class->getShortName());
-        $audits = $audit->toArray();
-
-        return $this->render(sprintf('%s/%s.html.twig', $context, $template), [
-            'page_title' => sprintf('sas.page.%s.view', $context),
-            'context' => $context,
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $audits['entity'],
-            'audits' => $audits['items'],
-        ]);
     }
 }
