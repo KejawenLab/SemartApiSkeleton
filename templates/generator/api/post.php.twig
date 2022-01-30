@@ -24,10 +24,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Permission(menu="{{ entityUpper }}", actions={Permission::ADD})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::ADD])]
 final class Post extends AbstractFOSRestController
 {
     public function __construct(private FormFactory $formFactory, private {{ entityHumanize }}Service $service)

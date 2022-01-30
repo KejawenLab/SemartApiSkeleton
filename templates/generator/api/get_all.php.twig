@@ -21,10 +21,9 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Permission(menu="{{ entityUpper }}", actions={Permission::VIEW})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
 final class GetAll extends AbstractFOSRestController
 {
     public function __construct(private {{ entityHumanize }}Service $service, private Paginator $paginator)

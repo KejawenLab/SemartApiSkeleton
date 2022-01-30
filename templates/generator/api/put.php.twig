@@ -26,10 +26,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Permission(menu="{{ entityUpper }}", actions={Permission::EDIT})
- *
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::EDIT])]
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
