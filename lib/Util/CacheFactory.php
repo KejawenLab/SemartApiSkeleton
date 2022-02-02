@@ -69,6 +69,10 @@ final class CacheFactory
             return null;
         }
 
+        if ('' === $data['content'] || false === $data['content']) {
+            return null;
+        }
+
         $response = new Response($data['content']);
         $response->headers->set('Content-Type', $data['attribute']);
         $response->headers->set(SemartApiSkeleton::CACHE_HEADER, $key);
@@ -87,6 +91,10 @@ final class CacheFactory
         }
 
         if ($response->getStatusCode() !== Response::HTTP_OK) {
+            return;
+        }
+
+        if ('' === $response->getContent() || false === $response->getContent()) {
             return;
         }
 
