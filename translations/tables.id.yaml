@@ -81,3 +81,5 @@ sas:
                 queries: 'Queries'
                 requests: 'Post Data'
                 files: 'Files'
+                content: 'Response'
+                statusCode: 'Status Code'
