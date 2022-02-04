@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f0220bc666bfaba89173456c3a981c5",
+    "content-hash": "bc1f85054a5afdcbdc1e74db6732f447",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -11437,21 +11437,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.12.7",
+            "version": "0.12.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d"
+                "reference": "e923bcd0d675dc4d8746da0554089b484044d0b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d",
-                "reference": "d88fbe1bcde87e11cbdfa1bf2f51c990f33f426d",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/e923bcd0d675dc4d8746da0554089b484044d0b5",
+                "reference": "e923bcd0d675dc4d8746da0554089b484044d0b5",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1|^8.0",
-                "phpstan/phpstan": "^1.1.1"
+                "phpstan/phpstan": "^1.4.2"
             },
             "conflict": {
                 "phpstan/phpdoc-parser": "<1.2",
@@ -11482,10 +11482,10 @@
             "license": [
                 "MIT"
             ],
-            "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
+            "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.12.7"
+                "source": "https://github.com/rectorphp/rector/tree/0.12.15"
             },
             "funding": [
                 {
@@ -11493,7 +11493,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-09T20:25:42+00:00"
+            "time": "2022-01-26T12:02:35+00:00"
         },
         {
             "name": "sebastian/cli-parser",
