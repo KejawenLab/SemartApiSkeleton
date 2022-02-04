@@ -35,7 +35,7 @@ final class Run extends AbstractFOSRestController
     ) {
     }
 
-    #[Post(data: '/cronjobs/{id}/run', name: Run::class, priority: -17)]
+    #[Post(data: '/cronjobs/{id}/run', name: self::class, priority: -17)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

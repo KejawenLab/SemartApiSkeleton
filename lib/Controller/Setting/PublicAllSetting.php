@@ -27,7 +27,7 @@ final class PublicAllSetting extends AbstractFOSRestController
     {
     }
 
-    #[Get(data: '/settings/public', name: PublicAllSetting::class, priority: 1)]
+    #[Get(data: '/settings/public', name: self::class, priority: 1)]
     #[Parameter(name: 'page', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
     #[Parameter(name: 'limit', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
     #[Parameter(name: 'q', in: 'query', schema: new OA\Schema(type: 'string'))]

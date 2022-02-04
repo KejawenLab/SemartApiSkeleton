@@ -32,7 +32,7 @@ final class Post extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/users', name: Post::class)]
+    #[Route(data: '/users', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

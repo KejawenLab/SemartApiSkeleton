@@ -26,6 +26,6 @@ final class FilterHiddenQueryExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(MediaInterface::class, class_implements($class));
+        return \in_array(MediaInterface::class, class_implements($class));
     }
 }

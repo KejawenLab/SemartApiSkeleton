@@ -28,7 +28,7 @@ final class Get extends AbstractController
     {
     }
 
-    #[Route(path: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'], methods: ['GET'])]
+    #[Route(path: '/medias/{path}', name: self::class, requirements: ['path' => '.+'], methods: ['GET'])]
     public function __invoke(Request $request, string $path): Response
     {
         $path = explode('/', $path);
@@ -47,9 +47,9 @@ final class Get extends AbstractController
         $file = new File(sprintf(
             '%s%s%s%s%s',
             $this->mapping->fromField($media, 'file')->getUploadDestination(),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             $media->getFolder(),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             $media->getFileName()
         ));
 

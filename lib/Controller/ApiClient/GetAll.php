@@ -38,7 +38,7 @@ final class GetAll extends AbstractFOSRestController
     ) {
     }
 
-    #[Get(data: 'users/{userId}/api-clients', name: GetAll::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
+    #[Get(data: 'users/{userId}/api-clients', name: self::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]
     #[Security(name: 'Bearer')]
     #[Parameter(name: 'page', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
     #[Parameter(name: 'limit', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]

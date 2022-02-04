@@ -32,7 +32,7 @@ final class Delete extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/users/{userId}/api-clients/{id}', name: Delete::class)]
+    #[Route(data: '/users/{userId}/api-clients/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Api client deletec')]
     public function __invoke(string $userId, string $id): View

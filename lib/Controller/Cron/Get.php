@@ -30,7 +30,7 @@ final class Get extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/cronjobs/{id}', name: Get::class, priority: -7)]
+    #[Route(data: '/cronjobs/{id}', name: self::class, priority: -7)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

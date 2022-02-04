@@ -17,7 +17,7 @@ final class CronSearchQueryExtension extends AbstractQueryExtension
 {
     public function support(string $class, Request $request): bool
     {
-        return in_array(CronInterface::class, class_implements($class)) && $request->query->get('q');
+        return \in_array(CronInterface::class, class_implements($class)) && $request->query->get('q');
     }
 
     public function apply(QueryBuilder $queryBuilder, Request $request): void

@@ -37,7 +37,7 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/settings/{id}', name: Put::class)]
+    #[Route(data: '/settings/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

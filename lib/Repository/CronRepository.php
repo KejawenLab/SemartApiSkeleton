@@ -41,7 +41,7 @@ final class CronRepository extends AbstractRepository implements CronRepositoryI
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), sha1($query->getSQL())));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), sha1($query->getSQL())));
         }
 
         return $query->getResult();

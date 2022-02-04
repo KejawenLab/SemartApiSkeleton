@@ -35,7 +35,7 @@ final class Get extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/users/{userId}/api-clients/{id}', name: Get::class)]
+    #[Route(data: '/users/{userId}/api-clients/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

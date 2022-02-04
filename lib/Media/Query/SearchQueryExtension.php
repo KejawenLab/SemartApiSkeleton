@@ -35,6 +35,6 @@ final class SearchQueryExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(MediaInterface::class, class_implements($class)) && $request->query->get('q');
+        return \in_array(MediaInterface::class, class_implements($class)) && $request->query->get('q');
     }
 }

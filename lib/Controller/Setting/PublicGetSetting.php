@@ -27,7 +27,7 @@ final class PublicGetSetting extends AbstractFOSRestController
     {
     }
 
-    #[Get(data: '/settings/public/{id}', name: PublicGetSetting::class, priority: 1)]
+    #[Get(data: '/settings/public/{id}', name: self::class, priority: 1)]
     #[Response(
         response: 200,
         description: 'Setting detail',

@@ -63,7 +63,7 @@ final class LoadUrlPathSubscriber implements EventSubscriber
             }
 
             $placeHolder = self::ROUTE_NAMESPACE_PREFIX;
-            if (in_array($object->getRouteName(), $this->reservedRoutes)) {
+            if (\in_array($object->getRouteName(), $this->reservedRoutes)) {
                 $placeHolder = 'KejawenLab\\ApiSkeleton\\Controller\\';
             }
 

@@ -39,6 +39,7 @@ final class Paginator
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
+     *
      * @return array<string, array>
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
@@ -52,7 +53,7 @@ final class Paginator
         }
 
         $deviceId = $request->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-        if ($deviceId === SemartApiSkeleton::API_CLIENT_DEVICE_ID) {
+        if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
             $deviceId = '';
         }
 

@@ -38,7 +38,7 @@ final class GetApiClient extends AbstractFOSRestController
     ) {
     }
 
-    #[Get(data: '/me/api-clients', name: GetApiClient::class)]
+    #[Get(data: '/me/api-clients', name: self::class)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

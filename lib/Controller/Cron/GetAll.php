@@ -30,7 +30,7 @@ final class GetAll extends AbstractFOSRestController
     {
     }
 
-    #[Get(data: '/cronjobs', name: GetAll::class, priority: -7)]
+    #[Get(data: '/cronjobs', name: self::class, priority: -7)]
     #[Security(name: 'Bearer')]
     #[Parameter(name: 'page', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]
     #[Parameter(name: 'limit', in: 'query', schema: new OA\Schema(type: 'integer', format: 'int32'))]

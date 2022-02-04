@@ -34,7 +34,7 @@ final class Main extends AbstractController
     ) {
     }
 
-    #[Route(path: '/users/{userId}/api-clients', name: Main::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'], methods: ['GET', 'POST'])]
+    #[Route(path: '/users/{userId}/api-clients', name: self::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'], methods: ['GET', 'POST'])]
     public function __invoke(Request $request, string $userId): Response
     {
         $user = $this->userService->get($userId);

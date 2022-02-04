@@ -42,7 +42,7 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/me', name: Put::class)]
+    #[Route(data: '/me', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(
@@ -91,6 +91,7 @@ final class Put extends AbstractFOSRestController
         }
 
         $this->service->save($user);
+
         return $this->view($this->service->get($user->getId()));
     }
 }

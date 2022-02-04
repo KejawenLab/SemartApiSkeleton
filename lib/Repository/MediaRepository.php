@@ -45,7 +45,7 @@ final class MediaRepository extends AbstractRepository implements MediaRepositor
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), sha1($folder), sha1($fileName)));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), sha1($folder), sha1($fileName)));
         }
 
         return $query->getOneOrNullResult();

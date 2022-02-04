@@ -31,6 +31,6 @@ final class FilterByUserExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(ApiClientInterface::class, class_implements($class));
+        return \in_array(ApiClientInterface::class, class_implements($class));
     }
 }

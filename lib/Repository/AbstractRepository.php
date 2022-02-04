@@ -74,7 +74,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     public function countRecords(): int
     {
-        return is_countable($this->findAll()) ? count($this->findAll()) : 0;
+        return is_countable($this->findAll()) ? \count($this->findAll()) : 0;
     }
 
     public function persist(object $object): void
@@ -113,7 +113,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
             $session = $this->requestStack->getSession();
 
             $deviceId = $session->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-            if ($deviceId === SemartApiSkeleton::API_CLIENT_DEVICE_ID) {
+            if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
                 return '';
             }
 

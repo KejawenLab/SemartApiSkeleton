@@ -36,7 +36,7 @@ final class Audit extends AbstractController
     ) {
     }
 
-    #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
+    #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: self::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $userId, string $id): Response
     {
         $user = $this->userService->get($userId);

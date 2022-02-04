@@ -45,7 +45,7 @@ final class Profile extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 
-    #[Route(path: '/me', name: Profile::class, methods: ['GET', 'POST'], priority: -1)]
+    #[Route(path: '/me', name: self::class, methods: ['GET', 'POST'], priority: -1)]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();

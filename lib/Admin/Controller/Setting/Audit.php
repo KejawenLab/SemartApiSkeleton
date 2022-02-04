@@ -33,7 +33,7 @@ final class Audit extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
-    #[Route(path: '/settings/{id}/audit', name: Audit::class, methods: ['GET'], priority: -255)]
+    #[Route(path: '/settings/{id}/audit', name: self::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {

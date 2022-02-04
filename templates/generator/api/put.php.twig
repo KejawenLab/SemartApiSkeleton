@@ -41,7 +41,7 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/{{ entityPluralDash }}/{id}', name: Put::class)]
+    #[Route(data: '/{{ entityPluralDash }}/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

@@ -30,7 +30,7 @@ final class RouteValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, Route::class);
         }
 
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             throw new UnexpectedValueException($value, 'string');
         }
 

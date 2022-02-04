@@ -27,7 +27,7 @@ final class Delete extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/cronjobs/{id}', name: Delete::class, priority: -7)]
+    #[Route(data: '/cronjobs/{id}', name: self::class, priority: -7)]
     #[Security(name: 'Bearer')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete cron')]
     public function __invoke(string $id): View

@@ -22,7 +22,7 @@ final class Download extends AbstractController
     {
     }
 
-    #[Route(path: '/crons/download', name: Download::class, methods: ['GET'])]
+    #[Route(path: '/crons/download', name: self::class, methods: ['GET'])]
     public function __invoke(): Response
     {
         $records = $this->service->total();

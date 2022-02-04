@@ -34,7 +34,7 @@ final class Menu extends AbstractFOSRestController
     ) {
     }
 
-    #[Get(data: '/me/menus', name: Menu::class, priority: 1)]
+    #[Get(data: '/me/menus', name: self::class, priority: 1)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

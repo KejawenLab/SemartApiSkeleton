@@ -25,6 +25,6 @@ final class SortByUpdatedAtExtension extends AbstractQueryExtension
      */
     public function support(string $class, Request $request): bool
     {
-        return in_array(TimestampableEntity::class, (new ReflectionClass($class))->getTraitNames());
+        return \in_array(TimestampableEntity::class, (new ReflectionClass($class))->getTraitNames());
     }
 }

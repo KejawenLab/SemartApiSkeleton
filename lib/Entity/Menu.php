@@ -41,7 +41,7 @@ class Menu implements MenuInterface
 
     #[Groups(groups: ['read'])]
     #[MaxDepth(1)]
-    #[ORM\ManyToOne(targetEntity: Menu::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist'])]
     private ?MenuInterface $parent;
 
     #[Assert\Length(max: 27)]

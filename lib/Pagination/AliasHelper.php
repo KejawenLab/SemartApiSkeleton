@@ -13,7 +13,7 @@ final class AliasHelper
 
     public function findAlias(string $field): ?string
     {
-        if (!array_key_exists($field, $this->aliases)) {
+        if (!\array_key_exists($field, $this->aliases)) {
             $this->aliases[$field] = $this->getAlias(array_values($this->aliases));
         }
 

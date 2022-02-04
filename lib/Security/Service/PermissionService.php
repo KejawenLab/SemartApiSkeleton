@@ -32,7 +32,7 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     /**
      * @param PermissionInitiatorInterface[] $initiators
-     * @param PermissionRemoverInterface[] $removers
+     * @param PermissionRemoverInterface[]   $removers
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,

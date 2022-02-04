@@ -33,7 +33,7 @@ final class DeleteApiClient extends AbstractFOSRestController
     ) {
     }
 
-    #[Delete(data: '/me/api-clients/{id}', name: DeleteApiClient::class)]
+    #[Delete(data: '/me/api-clients/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[\OpenApi\Attributes\Response(response: 204, description: 'Delete api client related to logged user')]
     public function __invoke(string $id): View

@@ -33,7 +33,7 @@ final class Get extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/{{ entityPluralDash }}/{id}', name: Get::class)]
+    #[Route(data: '/{{ entityPluralDash }}/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

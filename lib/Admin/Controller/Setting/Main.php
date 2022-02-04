@@ -32,7 +32,7 @@ final class Main extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 
-    #[Route(path: '/settings', name: Main::class, methods: ['GET', 'POST'])]
+    #[Route(path: '/settings', name: self::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $setting = new Setting();

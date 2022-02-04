@@ -47,7 +47,7 @@ class User implements UserInterface
     private ?GroupInterface $group;
 
     #[Groups(groups: ['read'])]
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist'])]
     private ?UserInterface $supervisor;
 
     #[Assert\Length(max: 180)]

@@ -70,7 +70,7 @@ tasks:
             - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpinsights"
     cs-fixer:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/php-cs-fixer fix lib"
+            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/php-cs-fixer fix lib --config=.php-cs-fixer.dist.php"
     checkbug:
         cmds:
             - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpstan analyse lib"

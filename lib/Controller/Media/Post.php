@@ -30,7 +30,7 @@ final class Post extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/medias', name: Post::class)]
+    #[Route(data: '/medias', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

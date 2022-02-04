@@ -56,6 +56,6 @@ final class PermissionQueryExtension implements QueryExtensionInterface
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(PermissionInterface::class, class_implements($class)) && $request->attributes->get('id');
+        return \in_array(PermissionInterface::class, class_implements($class)) && $request->attributes->get('id');
     }
 }

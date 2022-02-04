@@ -45,6 +45,6 @@ final class FilterByLoggedUserExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array(ApiClientInterface::class, class_implements($class)) && str_contains($request->getPathInfo(), '/me/');
+        return \in_array(ApiClientInterface::class, class_implements($class)) && str_contains($request->getPathInfo(), '/me/');
     }
 }

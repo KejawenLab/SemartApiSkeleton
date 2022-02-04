@@ -30,7 +30,7 @@ final class Get extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/menus/{id}', name: Get::class)]
+    #[Route(data: '/menus/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

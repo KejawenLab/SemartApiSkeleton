@@ -15,6 +15,6 @@ abstract class AbstractQueryExtension extends Base
 {
     public function support(string $class, Request $request): bool
     {
-        return in_array(SettingInterface::class, class_implements($class));
+        return \in_array(SettingInterface::class, class_implements($class));
     }
 }

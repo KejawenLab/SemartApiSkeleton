@@ -26,7 +26,7 @@ final class CronExtension extends AbstractExtension
      */
     public function normalize(string $log): array
     {
-        $temps = explode(PHP_EOL, $log);
+        $temps = explode(\PHP_EOL, $log);
         $vars = [];
         foreach ($temps as $temp) {
             if ('' !== $temp) {

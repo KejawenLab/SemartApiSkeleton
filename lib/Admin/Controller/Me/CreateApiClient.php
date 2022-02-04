@@ -29,7 +29,7 @@ final class CreateApiClient extends AbstractController
     ) {
     }
 
-    #[Route(path: '/me/api-clients', name: CreateApiClient::class, methods: ['POST'])]
+    #[Route(path: '/me/api-clients', name: self::class, methods: ['POST'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();

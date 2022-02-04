@@ -65,7 +65,7 @@ final class CacheFactory
 
         $key = $this->getCacheKey();
         $data = $this->getCache($key, 'page');
-        if (0 === count($data)) {
+        if (0 === \count($data)) {
             return null;
         }
 
@@ -90,7 +90,7 @@ final class CacheFactory
             return;
         }
 
-        if ($response->getStatusCode() !== Response::HTTP_OK) {
+        if (Response::HTTP_OK !== $response->getStatusCode()) {
             return;
         }
 
@@ -116,7 +116,7 @@ final class CacheFactory
         }
 
         $keys = $pool->get();
-        if (!array_key_exists($key, $keys)) {
+        if (!\array_key_exists($key, $keys)) {
             return [];
         }
 
@@ -246,7 +246,7 @@ final class CacheFactory
     private function getDeviceId(): string
     {
         $deviceId = $this->requestStack->getCurrentRequest()->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-        if ($deviceId === SemartApiSkeleton::API_CLIENT_DEVICE_ID) {
+        if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
             return '';
         }
 

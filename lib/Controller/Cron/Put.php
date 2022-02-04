@@ -37,7 +37,7 @@ final class Put extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/cronjobs/{id}', name: Put::class, priority: -7)]
+    #[Route(data: '/cronjobs/{id}', name: self::class, priority: -7)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

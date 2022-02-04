@@ -43,7 +43,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $code));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), $code));
         }
 
         return $query->getOneOrNullResult();
@@ -68,7 +68,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $menu->getId()));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), $menu->getId()));
         }
 
         $menus = $query->getResult();

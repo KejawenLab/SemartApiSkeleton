@@ -30,7 +30,7 @@ final class Audit extends AbstractFOSRestController
     {
     }
 
-    #[Get(data: '/settings/{id}/audit', name: Audit::class, priority: -255)]
+    #[Get(data: '/settings/{id}/audit', name: self::class, priority: -255)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

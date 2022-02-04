@@ -34,7 +34,7 @@ final class Get extends AbstractFOSRestController
     ) {
     }
 
-    #[Route(data: '/medias/{path}', name: Get::class, requirements: ['path' => '.+'])]
+    #[Route(data: '/medias/{path}', name: self::class, requirements: ['path' => '.+'])]
     #[Security(name: 'Bearer')]
     #[OA\Response(
         response: 200,
@@ -61,9 +61,9 @@ final class Get extends AbstractFOSRestController
         $file = new File(sprintf(
             '%s%s%s%s%s',
             $this->mapping->fromField($media, 'file')->getUploadDestination(),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             $media->getFolder(),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             $media->getFileName()
         ));
 

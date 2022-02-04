@@ -44,7 +44,7 @@ final class CreateApiClient extends AbstractFOSRestController
     ) {
     }
 
-    #[Post(data: '/me/api-clients', name: CreateApiClient::class)]
+    #[Post(data: '/me/api-clients', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

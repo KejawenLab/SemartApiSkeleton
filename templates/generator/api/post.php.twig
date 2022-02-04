@@ -36,7 +36,7 @@ final class Post extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/{{ entityPluralDash }}', name: Post::class)]
+    #[Route(data: '/{{ entityPluralDash }}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

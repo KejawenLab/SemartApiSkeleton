@@ -35,7 +35,7 @@ final class Get extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
-    #[Route(path: '/crons/{id}', name: Get::class, methods: ['GET'])]
+    #[Route(path: '/crons/{id}', name: self::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $cron = $this->service->get($id);

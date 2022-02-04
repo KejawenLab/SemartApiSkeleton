@@ -57,7 +57,7 @@ final class Storage extends FileSystemStorage
 
         $dir = $this->getUploadDir($obj, $mapping);
         $fileSystem = new Filesystem();
-        $storage = sprintf('%s%s%s', $mapping->getUploadDestination(), DIRECTORY_SEPARATOR, $dir);
+        $storage = sprintf('%s%s%s', $mapping->getUploadDestination(), \DIRECTORY_SEPARATOR, $dir);
         if (!$fileSystem->exists($storage)) {
             $fileSystem->mkdir($storage);
         }
@@ -89,7 +89,7 @@ final class Storage extends FileSystemStorage
         if (null !== $media->getFolder()) {
             foreach (explode('/', $media->getFolder()) as $value) {
                 if ('' !== $value) {
-                    $target = sprintf('%s%s%s', $target, $value, DIRECTORY_SEPARATOR);
+                    $target = sprintf('%s%s%s', $target, $value, \DIRECTORY_SEPARATOR);
                 }
             }
         }
@@ -98,10 +98,10 @@ final class Storage extends FileSystemStorage
             sprintf(
                 '%s%s%s',
                 $mapping->getUploadDir($media),
-                DIRECTORY_SEPARATOR,
-                rtrim($target, DIRECTORY_SEPARATOR)
+                \DIRECTORY_SEPARATOR,
+                rtrim($target, \DIRECTORY_SEPARATOR)
             ),
-            DIRECTORY_SEPARATOR
+            \DIRECTORY_SEPARATOR
         );
     }
 }

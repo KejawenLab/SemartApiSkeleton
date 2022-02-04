@@ -40,7 +40,7 @@ final class PermissionPut extends AbstractFOSRestController
     ) {
     }
 
-    #[Put(data: '/groups/{id}/permissions', name: PermissionPut::class)]
+    #[Put(data: '/groups/{id}/permissions', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(

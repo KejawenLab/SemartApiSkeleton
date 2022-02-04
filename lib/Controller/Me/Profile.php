@@ -30,7 +30,7 @@ final class Profile extends AbstractFOSRestController
     {
     }
 
-    #[Get(data: '/me', name: Profile::class, priority: 1)]
+    #[Get(data: '/me', name: self::class, priority: 1)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

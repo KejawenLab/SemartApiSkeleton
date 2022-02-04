@@ -52,7 +52,7 @@ abstract class AbstractController extends Base
 
         $key = sprintf('%s_%s', sha1($view), sha1(serialize($params)));
         $data = $this->cache->getCache($key, 'view');
-        if (0 !== count($data)) {
+        if (0 !== \count($data)) {
             return $data['content'];
         }
 
@@ -109,20 +109,20 @@ abstract class AbstractController extends Base
             return true;
         }
 
-        if ($variable === null) {
+        if (null === $variable) {
             return true;
         }
 
-        if (is_resource($variable)) {
+        if (\is_resource($variable)) {
             return false;
         }
 
         foreach ($this->enumerateObjectsAndResources($variable) as $value) {
-            if (is_resource($value)) {
+            if (\is_resource($value)) {
                 return false;
             }
 
-            if (is_object($value)) {
+            if (\is_object($value)) {
                 $class = new ReflectionClass($value);
                 if ($class->isAnonymous()) {
                     return false;
@@ -141,7 +141,7 @@ abstract class AbstractController extends Base
 
     private function enumerateObjectsAndResources($variable): array
     {
-        $processed = func_get_args()[1] ?? new Context();
+        $processed = \func_get_args()[1] ?? new Context();
         $result = [];
         if ($processed->contains($variable)) {
             return $result;
@@ -149,13 +149,13 @@ abstract class AbstractController extends Base
 
         $array = $variable;
         $processed->add($variable);
-        if (is_array($variable)) {
+        if (\is_array($variable)) {
             foreach ($array as $element) {
-                if (!is_array($element) && !is_object($element) && !is_resource($element)) {
+                if (!\is_array($element) && !\is_object($element) && !\is_resource($element)) {
                     continue;
                 }
 
-                if (!is_resource($element)) {
+                if (!\is_resource($element)) {
                     $result = array_merge(
                         $result,
                         $this->enumerateObjectsAndResources($element, $processed)
@@ -167,11 +167,11 @@ abstract class AbstractController extends Base
         } else {
             $result[] = $variable;
             foreach ((new ObjectReflector())->getAttributes($variable) as $value) {
-                if (!is_array($value) && !is_object($value) && !is_resource($value)) {
+                if (!\is_array($value) && !\is_object($value) && !\is_resource($value)) {
                     continue;
                 }
 
-                if (!is_resource($value)) {
+                if (!\is_resource($value)) {
                     $result = array_merge(
                         $result,
                         $this->enumerateObjectsAndResources($value, $processed)

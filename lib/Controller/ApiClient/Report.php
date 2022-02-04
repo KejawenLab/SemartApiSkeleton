@@ -37,7 +37,7 @@ final class Report extends AbstractFOSRestController
     ) {
     }
 
-    #[Get(data: '/users/{userId}/api-clients/{id}/logs', name: Report::class, priority: -27)]
+    #[Get(data: '/users/{userId}/api-clients/{id}/logs', name: self::class, priority: -27)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,

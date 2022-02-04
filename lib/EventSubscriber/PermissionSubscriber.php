@@ -30,7 +30,7 @@ final class PermissionSubscriber implements EventSubscriberInterface
 
         /** @var object $controller */
         $controller = $event->getController();
-        if (!is_object($controller)) {
+        if (!\is_object($controller)) {
             return;
         }
 

@@ -43,7 +43,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query = $queryBuilder->getQuery();
         if ($cached) {
             $query->useQueryCache(true);
-            $query->enableResultCache(self::MICRO_CACHE, sprintf("%s_%s_%s_%s_%s", $this->getDeviceId(), sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+            $query->enableResultCache(self::MICRO_CACHE, sprintf('%s_%s_%s_%s_%s', $this->getDeviceId(), sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
         }
 
         return $query->getOneOrNullResult();
@@ -77,7 +77,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), sha1(serialize($ids))));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), sha1(serialize($ids))));
         }
 
         $permissions = $query->getResult();
@@ -115,7 +115,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId()));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId()));
         }
 
         /** @var PermissionInterface[] $permissions */
@@ -153,7 +153,7 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         $query = $queryBuilder->getQuery();
         if (!$this->isDisableCache()) {
             $query->useQueryCache(true);
-            $query->enableResultCache($cacheLifetime, sprintf("%s_%s_%s_%s_%s", $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
+            $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__), $group->getId(), $menu->getId()));
         }
 
         /** @var PermissionInterface[] $permissions */

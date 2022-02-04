@@ -35,7 +35,7 @@ final class Get extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
-    #[Route(path: '/settings/{id}', name: Get::class, methods: ['GET'])]
+    #[Route(path: '/settings/{id}', name: self::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
         $setting = $this->service->get($id);

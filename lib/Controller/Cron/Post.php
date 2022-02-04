@@ -32,7 +32,7 @@ final class Post extends AbstractFOSRestController
     {
     }
 
-    #[Route(data: '/cronjobs', name: Post::class, priority: -7)]
+    #[Route(data: '/cronjobs', name: self::class, priority: -7)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(
