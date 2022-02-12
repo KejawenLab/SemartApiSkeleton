@@ -71,6 +71,9 @@ class CronReport implements CronReportInterface
         return $this->runAt;
     }
 
+    /**
+     * @param DateTimeInterface $runAt
+     */
     public function setRunAt(DateTime|DateTimeImmutable $runAt): void
     {
         $this->runAt = $runAt;

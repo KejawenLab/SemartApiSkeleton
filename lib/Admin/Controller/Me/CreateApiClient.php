@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller\Me;
 use KejawenLab\ApiSkeleton\Admin\AdminContext;
 use KejawenLab\ApiSkeleton\ApiClient\ApiClientService;
 use KejawenLab\ApiSkeleton\Entity\ApiClient;
-use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
 use KejawenLab\ApiSkeleton\Security\User;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -38,7 +37,6 @@ final class CreateApiClient extends AbstractController
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
-        /** @var UserInterface $user */
         $name = $request->request->get('name');
         if ('' === $name) {
             $this->addFlash('error', 'sas.page.api_client.name_not_provided');

@@ -23,7 +23,7 @@ final class UserFixture extends AbstractFixture implements DependentFixtureInter
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<GroupFixture>>
      */
     public function getDependencies(): array
     {

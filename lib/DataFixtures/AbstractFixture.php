@@ -41,7 +41,7 @@ abstract class AbstractFixture extends Base
                 if (static::REF_KEY === sprintf('%s:', $key)) {
                     $this->setReference(StringUtil::uppercase(sprintf('%s#%s', $this->getReferenceKey(), $value)), $entity);
                 } else {
-                    if (\is_string($value) && str_contains($value, static::REF_KEY)) {
+                    if (\is_string($value) && str_contains($value, (string) static::REF_KEY)) {
                         $value = $this->getReference(StringUtil::uppercase(str_replace('ref:', '', $value)));
                     }
 

@@ -23,17 +23,11 @@ final class Permission
 
     final public const DELETE = 'delete';
 
-    private readonly string $menu;
-
-    private array $actions = [];
-
-    private bool $ownership = false;
-
-    public function __construct(string $menu, array $actions, bool $ownership = false)
+    /**
+     * @param mixed[] $actions
+     */
+    public function __construct(private readonly string $menu, private readonly array $actions, private readonly bool $ownership = false)
     {
-        $this->menu = $menu;
-        $this->actions = $actions;
-        $this->ownership = $ownership;
     }
 
     public function getMenu(): string
@@ -41,6 +35,9 @@ final class Permission
         return $this->menu;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getActions(): array
     {
         return $this->actions;

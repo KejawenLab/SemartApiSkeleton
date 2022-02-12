@@ -48,7 +48,7 @@ final class Storage extends FileSystemStorage
         $mapping->writeProperty($obj, 'originalName', $file->getClientOriginalName());
 
         if (
-            str_contains($file->getMimeType(), 'image/') &&
+            str_contains((string) $file->getMimeType(), 'image/') &&
             'image/svg+xml' !== $file->getMimeType() &&
             false !== $dimensions = getimagesize($file->getRealPath())
         ) {
