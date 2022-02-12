@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -100,7 +101,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     protected function isDisableCache(): bool
     {
         $request = $this->requestStack->getCurrentRequest();
-        if (null === $request) {
+        if (!$request instanceof Request) {
             return false;
         }
 

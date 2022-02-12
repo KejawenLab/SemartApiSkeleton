@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
 use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
@@ -25,7 +26,7 @@ final class ViewCacheSubscriber implements EventSubscriberInterface
         }
 
         $response = $this->cache->getPageCache();
-        if (!$response) {
+        if (!$response instanceof Response) {
             return;
         }
 

@@ -52,7 +52,7 @@ abstract class AbstractController extends Base
 
         $key = sprintf('%s_%s', sha1($view), sha1(serialize($params)));
         $data = $this->cache->getCache($key, 'view');
-        if (0 !== \count($data)) {
+        if ([] !== $data) {
             return $data['content'];
         }
 
@@ -139,6 +139,9 @@ abstract class AbstractController extends Base
         return true;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function enumerateObjectsAndResources($variable): array
     {
         $processed = \func_get_args()[1] ?? new Context();

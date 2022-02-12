@@ -13,7 +13,7 @@ final class Encryptor
 
     private const HASH_METHOD = 'sha256';
 
-    public static function encrypt(string $plainText, string $key): string
+    public static function encrypt(string $plainText, string $key): bool|string
     {
         $key = hash(self::HASH_METHOD, $key);
         $iv = substr(md5($key), 0, 16);

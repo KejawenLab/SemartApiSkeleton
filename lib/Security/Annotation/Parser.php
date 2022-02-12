@@ -23,11 +23,6 @@ final class Parser
             return $attribute->newInstance();
         }
 
-        $permission = $this->reader->getClassAnnotation($metadata, Permission::class);
-        if ($permission instanceof Permission) {
-            return $permission;
-        }
-
-        return null;
+        return $this->reader->getClassAnnotation($metadata, Permission::class);
     }
 }

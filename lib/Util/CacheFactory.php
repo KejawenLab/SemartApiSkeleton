@@ -25,7 +25,7 @@ final class CacheFactory
 
     public function invalidQueryCache(): void
     {
-        if (!($this->isDisableQueryCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
+        if (!$this->isDisableQueryCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
             return;
         }
 
@@ -37,7 +37,7 @@ final class CacheFactory
 
     public function invalidPageCache(): void
     {
-        if (!($this->isDisablePageCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
+        if (!$this->isDisablePageCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
             return;
         }
 
@@ -46,7 +46,7 @@ final class CacheFactory
 
     public function invalidViewCache(): void
     {
-        if (!($this->isDisableViewCache() || !$this->requestStack->getCurrentRequest()->isMethodCacheable())) {
+        if (!$this->isDisableViewCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
             return;
         }
 
@@ -65,11 +65,15 @@ final class CacheFactory
 
         $key = $this->getCacheKey();
         $data = $this->getCache($key, 'page');
-        if (0 === \count($data)) {
+        if ([] === $data) {
             return null;
         }
 
-        if ('' === $data['content'] || false === $data['content']) {
+        if ('' === $data['content']) {
+            return null;
+        }
+
+        if (false === $data['content']) {
             return null;
         }
 
@@ -94,13 +98,20 @@ final class CacheFactory
             return;
         }
 
-        if ('' === $response->getContent() || false === $response->getContent()) {
+        if ('' === $response->getContent()) {
+            return;
+        }
+
+        if (false === $response->getContent()) {
             return;
         }
 
         $this->setCache($this->getCacheKey(), 'page', $response->getContent(), $response->headers->get('Content-Type'), SemartApiSkeleton::PAGE_CACHE_PERIOD);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getCache(string $key, string $namespace): array
     {
         $deviceId = $this->getDeviceId();
@@ -166,11 +177,7 @@ final class CacheFactory
             return true;
         }
 
-        if ($request->attributes->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING);
     }
 
     public function invalidateCache(string $namespace): void
@@ -222,11 +229,7 @@ final class CacheFactory
             return true;
         }
 
-        if ($request->attributes->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING);
     }
 
     private function isDisableQueryCache(): bool
@@ -236,11 +239,7 @@ final class CacheFactory
             return true;
         }
 
-        if ($request->attributes->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING);
     }
 
     private function getDeviceId(): string
