@@ -36,7 +36,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // follow convention, eg: Twig extension @see https://symfony.com/doc/current/templating/twig_extension.html
         CallableThisArrayToAnonymousFunctionRector::class => [
             __DIR__ . '/lib/*/Twig*',
-            __DIR__ . '/lib/Setting/SettingExtension.php',
+            __DIR__ . '/lib/*/*Extension.php',
         ],
     ]);
 };
