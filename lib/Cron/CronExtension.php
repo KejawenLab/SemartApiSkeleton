@@ -18,7 +18,7 @@ final class CronExtension extends AbstractExtension
      */
     public function getFunctions(): iterable
     {
-        yield new TwigFunction('normalize_cron_log', fn (string $log): array => $this->normalize($log));
+        yield new TwigFunction('normalize_cron_log', [$this, 'normalize']);
     }
 
     /**
