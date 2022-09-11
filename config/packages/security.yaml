@@ -22,7 +22,7 @@ security:
             login_throttling:
                 limiter: semart_login_rate_limiter
             custom_authenticators:
-                    - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
+                - KejawenLab\ApiSkeleton\Security\AdminAuthenticator
             logout:
                 path: admin_logout
         api_login:
@@ -38,6 +38,10 @@ security:
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        admin_login:
+            pattern: ^/admin/login$
+            methods: ['GET', 'POST']
+            security: false
         api_doc:
             pattern: ^/api/doc$
             methods: ['GET']
@@ -62,7 +66,7 @@ security:
             jwt: ~
 
     access_control:
-        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['POST'] }
         - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET', 'POST'] }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }

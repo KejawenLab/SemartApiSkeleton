@@ -102,7 +102,7 @@ DATABASE_PORT=5432
 ###< doctrine/doctrine-bundle ###
 
 ###> nelmio/cors-bundle ###
-CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
 ###< nelmio/cors-bundle ###
 
 ###> symfony/messenger ###
@@ -119,8 +119,8 @@ MESSENGER_TRANSPORT_DSN=amqp://guest:guest@messenger:5672/%2f/messages
 >
 
 ```bash
-docker-compose -f docker-compose.yml build && docker-compose -f docker-compose.yml up
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt semart"
+docker compose -f docker-compose.yml build && docker compose -f docker-compose.yml up
+docker compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt semart"
 ```
 
 Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:
@@ -140,12 +140,12 @@ task encrypt -- semart
 >
 
 ```bash
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
-docker-compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
+docker compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
 ```
 
 Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:
@@ -308,8 +308,8 @@ dh_auditor:
 #### Generate Controller, Form, Repository, Serivce, Register Menu, Template, dan Api Documentation
 
 ```bash
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
-docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate Todo"
+docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
 ```
 
 Jika Anda menggunakan [Taskfile](https://taskfile.dev), Anda cukup menjalankan perintah:

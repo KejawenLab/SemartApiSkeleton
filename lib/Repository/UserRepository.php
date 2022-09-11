@@ -8,14 +8,14 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
-use KejawenLab\ApiSkeleton\Security\Model\UserInterface as AppUser;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,7 +36,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
      * @throws OptimisticLockException
      * @throws ORMException
      */
-    public function upgradePassword(UserInterface $user, string $newHashedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
@@ -47,7 +47,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         $this->_em->flush();
     }
 
-    public function isSupervisor(AppUser $user, AppUser $supervisor): bool
+    public function isSupervisor(UserInterface $user, UserInterface $supervisor): bool
     {
         if ($user->getSupervisor() && $user->getSupervisor()->getId() === $supervisor->getId()) {
             return true;
@@ -60,7 +60,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         return $this->isSupervisor($user->getSupervisor(), $supervisor);
     }
 
-    public function findByUsername(string $username): ?AppUser
+    public function findByUsername(string $username): ?UserInterface
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
@@ -81,7 +81,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         return $query->getOneOrNullResult();
     }
 
-    public function findByDeviceId(string $deviceId): ?AppUser
+    public function findByDeviceId(string $deviceId): ?UserInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->eq('o.deviceId', $queryBuilder->expr()->literal($deviceId)));

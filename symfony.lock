@@ -243,7 +243,7 @@
         "version": "2.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.5",
             "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
         },

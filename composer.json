@@ -35,7 +35,7 @@
         "gesdinet/jwt-refresh-token-bundle": ">=v1.0.0",
         "lexik/jwt-authentication-bundle": ">=2.11",
         "nelmio/api-doc-bundle": ">=v4.0.1",
-        "nelmio/cors-bundle": ">=2.0",
+        "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": ">=5.2",
         "ramsey/uuid-doctrine": ">=1.6",
         "runtime/swoole": ">=0.2.1",

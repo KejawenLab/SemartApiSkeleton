@@ -2,16 +2,16 @@ version: '3'
 tasks:
     build:
         cmds:
-            - docker-compose -f docker-compose.yml build
+            - docker compose -f docker-compose.yml build
     run:
         cmds:
-            - docker-compose -f docker-compose.yml up --remove-orphans
+            - docker compose -f docker-compose.yml up --remove-orphans
     start:
         cmds:
-            - docker-compose -f docker-compose.yml up -d --remove-orphans
+            - docker compose -f docker-compose.yml up --remove-orphans
     stop:
         cmds:
-            - docker-compose -f docker-compose.yml stop
+            - docker compose -f docker-compose.yml stop
     restart:
         cmds:
             - task: stop
@@ -19,62 +19,62 @@ tasks:
     encrypt:
         cmds:
             - task: start
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt {{.CLI_ARGS}}"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console semart:encrypt {{.CLI_ARGS}}"
             - task: stop
     init:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:database:create --no-interaction"
             - task: sync
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:fixtures:load --no-interaction"
     install:
         cmds:
             - task: start
             - task: clean
             - task: init
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console assets:install"
             - task: restart
     update:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
+            - docker compose -f docker-compose.yml exec app bash -c "composer update --prefer-dist -vvv"
             - task: restart
     require:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "composer require {{.CLI_ARGS}} -vvv"
+            - docker compose -f docker-compose.yml exec app bash -c "composer require {{.CLI_ARGS}} -vvv"
     upgrade:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "composer recipes:update -vvv"
+            - docker compose -f docker-compose.yml exec app bash -c "composer recipes:update -vvv"
     sync:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console doctrine:schema:update --force --no-interaction"
     exec:
         cmds:
-            - docker-compose -f docker-compose.yml exec {{.CLI_ARGS}}
+            - docker compose -f docker-compose.yml exec {{.CLI_ARGS}}
     symfony:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console {{.CLI_ARGS}}"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console {{.CLI_ARGS}}"
     reset:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console semart:reset"
     generate:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate {{.CLI_ARGS}}"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console semart:generate {{.CLI_ARGS}}"
             - task: sync
     log:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "tail -f var/log/dev.log"
+            - docker compose -f docker-compose.yml exec app bash -c "tail -f var/log/dev.log"
     test:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpunit"
+            - docker compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpunit"
     insight:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpinsights"
+            - docker compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpinsights"
     cs-fixer:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/php-cs-fixer fix lib --config=.php-cs-fixer.dist.php"
+            - docker compose -f docker-compose.yml exec app bash -c "php vendor/bin/php-cs-fixer fix lib --config=.php-cs-fixer.dist.php"
     checkbug:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpstan analyse lib"
+            - docker compose -f docker-compose.yml exec app bash -c "php vendor/bin/phpstan analyse lib"
     clean:
         cmds:
-            - docker-compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
-            - docker-compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
+            - docker compose -f docker-compose.yml exec app bash -c "php bin/console cache:clear"
+            - docker compose -f docker-compose.yml exec app bash -c "chmod 777 -R var"
