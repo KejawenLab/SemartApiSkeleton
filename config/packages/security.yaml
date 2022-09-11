@@ -15,6 +15,10 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|img|js|lib|fonts|bundles)/
             security: false
+        admin_login:
+            pattern: ^/admin/login
+            methods: ['GET']
+            security: false
         admin:
             pattern: ^/admin
             lazy: true
@@ -38,10 +42,6 @@ security:
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        admin_login:
-            pattern: ^/admin/login$
-            methods: ['GET', 'POST']
-            security: false
         api_doc:
             pattern: ^/api/doc$
             methods: ['GET']

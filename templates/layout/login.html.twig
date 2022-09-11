@@ -14,7 +14,7 @@
             <div class="fadeIn first">
                 <img src="{{ asset('logo.gif') }}" id="icon" alt="{{ sas.app_title }}" />
             </div>
-            <form id="semartLogin" action="{{ path('admin_login') }}" method="post">
+            <form id="semartLogin" action="{{ path('admin_home') }}" method="post">
                 <input type="text" id="username" class="fadeIn second" name="_username" value="{{ username }}" placeholder="{{ 'sas.form.field.login.username' | trans({}, 'forms') }}">
                 <input type="password" id="password" class="fadeIn third" name="_password" placeholder="{{ 'sas.form.field.login.password' | trans({}, 'forms') }}">
                 <input type="submit" class="fadeIn fourth" value="{{ 'sas.page.login' | trans({}, 'pages')}}">
