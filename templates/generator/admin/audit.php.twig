@@ -14,7 +14,7 @@ use KejawenLab\Application\Entity\{{ entityHumanize }};
 use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Psr\Cache\CacheItemPoolInterface;
+use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -30,7 +30,7 @@ final class Audit extends AbstractController
     public function __construct(
         private readonly RequestStack $requestStack,
         private {{ entityHumanize }}Service $service,
-        private readonly CacheItemPoolInterface $cache,
+        private readonly CacheFactory $cache,
         private AuditService $audit,
         private Reader $reader,
     ) {
