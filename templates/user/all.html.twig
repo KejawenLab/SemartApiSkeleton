@@ -8,7 +8,7 @@
 {%- block content -%}
     {%- set menu = convert_to_menu(context) -%}
     <div class="row">
-        <div class="{%- if is_granted('add', menu) -%} col-lg-6{%- else -%} col-lg-12{%- endif -%}  col-md-12 col-sm-12">
+        <div class="{% if is_granted('add', menu) %} col-lg-6{% else %} col-lg-12{% endif %}  col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4>{{- page_title | trans({}, 'pages') -}}</h4>

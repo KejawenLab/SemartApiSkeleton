@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Application\Form;
 
-use KejawenLab\Application\Entity\{{- entityHumanize -}};
+use KejawenLab\Application\Entity\{{ entityHumanize }};
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,42 +13,42 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class {{- entityHumanize -}}Type extends AbstractType
+final class {{ entityHumanize }}Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-{%- for i, property in properties -%}
-{%- if 'id' != property.name -%}
-{%- if semart_association(entity, property) -%}
-        $builder->add('{{- property.name -}}', null, [
+{% for i, property in properties %}
+{% if 'id' != property.name %}
+{% if semart_association(entity, property) %}
+        $builder->add('{{ property.name }}', null, [
             'required' => false,
-            'label' => 'sas.form.field.{{- entity.shortName | lower -}}.{{- property.name -}}',
-            'choice_label' => function (${{- property.name -}}) {
-                if (${{- property.name -}} instanceof EntityInterface) {
-                    return ${{- property.name -}}->getNullOrString();
+            'label' => 'sas.form.field.{{ entity.shortName | lower }}.{{ property.name }}',
+            'choice_label' => function (${{ property.name }}) {
+                if (${{ property.name }} instanceof EntityInterface) {
+                    return ${{ property.name }}->getNullOrString();
                 }
 
-                return (string) ${{- property.name -}};
+                return (string) ${{ property.name }};
             },
             'attr' => [
                 'class' => 'select2',
             ],
             'placeholder' => 'sas.form.field.empty_select',
         ]);
-{%- else -%}
-        $builder->add('{{- property.name -}}', null, [
+{% else %}
+        $builder->add('{{ property.name }}', null, [
             'required' => true,
-            'label' => 'sas.form.field.{{- entity.shortName | lower -}}.{{- property.name -}}',
+            'label' => 'sas.form.field.{{ entity.shortName | lower }}.{{ property.name }}',
         ]);
-{%- endif -%}
-{%- endif -%}
-{%- endfor -%}
+{% endif %}
+{% endif %}
+{% endfor %}
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => {{- entityHumanize -}}::class,
+            'data_class' => {{ entityHumanize }}::class,
             'translation_domain' => 'forms',
         ]);
     }

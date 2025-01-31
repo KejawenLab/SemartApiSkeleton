@@ -3,10 +3,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\{{- entityHumanize -}}\Query;
+namespace KejawenLab\Application\{{ entityHumanize }}\Query;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
+use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
 use KejawenLab\ApiSkeleton\Pagination\Query\AbstractQueryExtension;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class {{- entityHumanize -}}QueryExtension extends AbstractQueryExtension
+final class {{ entityHumanize }}QueryExtension extends AbstractQueryExtension
 {
     public function apply(QueryBuilder $queryBuilder, Request $request): void
     {
@@ -32,6 +32,6 @@ final class {{- entityHumanize -}}QueryExtension extends AbstractQueryExtension
 
     public function support(string $class, Request $request): bool
     {
-        return in_array({{- entityHumanize -}}Interface::class, class_implements($class));
+        return in_array({{ entityHumanize }}Interface::class, class_implements($class));
     }
 }

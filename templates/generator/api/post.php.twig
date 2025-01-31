@@ -6,18 +6,18 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Controller\{{- entityHumanize -}};
+namespace KejawenLab\Application\Controller\{{ entityHumanize }};
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post as Route;
 use FOS\RestBundle\View\View;
-use KejawenLab\Application\Entity\{{- entityHumanize -}};
-use KejawenLab\Application\Form\{{- entityHumanize -}}Type;
-use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
-use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
+use KejawenLab\Application\Entity\{{ entityHumanize }};
+use KejawenLab\Application\Form\{{ entityHumanize }}Type;
+use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
@@ -28,41 +28,41 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::ADD])]
-#[Tag(name: '{{- entityHumanize -}}')]
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::ADD])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Post extends AbstractFOSRestController
 {
-    public function __construct(private FormFactory $formFactory, private {{- entityHumanize -}}Service $service)
+    public function __construct(private FormFactory $formFactory, private {{ entityHumanize }}Service $service)
     {
     }
 
-    #[Route(data: '/{{- entityPluralDash -}}', name: self::class)]
+    #[Route(data: '/{{ entityPluralDash }}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[RequestBody(
         content: new OA\MediaType(
             mediaType: 'application/json',
-            schema: new OA\Schema(ref: new Model(type: {{- entityHumanize -}}Type::class), type: 'object'),
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}Type::class), type: 'object'),
         ),
     )]
     #[OA\Response(
         response: 201,
-        description: '{{- entityHumanize -}} created',
+        description: '{{ entityHumanize }} created',
         content: new OA\MediaType(
             mediaType: 'application/json',
-            schema: new OA\Schema(ref: new Model(type: {{- entityHumanize -}}::class, groups: ['read']), type: 'object'),
+            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}::class, groups: ['read']), type: 'object'),
         ),
     )]
     public function __invoke(Request $request): View
     {
-        $form = $this->formFactory->submitRequest({{- entityHumanize -}}Type::class, $request);
+        $form = $this->formFactory->submitRequest({{ entityHumanize }}Type::class, $request);
         if (!$form->isValid()) {
             return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
-        /** @var {{- entityHumanize -}}Interface ${{- entityLowerize -}} */
-        ${{- entityLowerize -}} = $form->getData();
-        $this->service->save(${{- entityLowerize -}});
+        /** @var {{ entityHumanize }}Interface ${{ entityLowerize }} */
+        ${{ entityLowerize }} = $form->getData();
+        $this->service->save(${{ entityLowerize }});
 
-        return $this->view($this->service->get(${{- entityLowerize -}}->getId()), Response::HTTP_CREATED);
+        return $this->view($this->service->get(${{ entityLowerize }}->getId()), Response::HTTP_CREATED);
     }
 }

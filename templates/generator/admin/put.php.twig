@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Admin\Controller\{{- entityHumanize -}};
+namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
 
-use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
-use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
+use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,24 +20,24 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
 */
-#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::EDIT])]
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::EDIT])]
 final class Put extends AbstractController
 {
-    public function __construct(private {{- entityHumanize -}}Service $service)
+    public function __construct(private {{ entityHumanize }}Service $service)
     {
     }
 
-    #[Route(path: '/{{- entityPluralDash -}}/{id}/edit', name: self::class, methods: ['GET'], priority: 1)]
+    #[Route(path: '/{{ entityPluralDash }}/{id}/edit', name: self::class, methods: ['GET'], priority: 1)]
     public function __invoke(Request $request, string $id): Response
     {
-        ${{- entityLowerize -}} = $this->service->get($id);
-        if (!${{- entityLowerize -}} instanceof {{- entityHumanize -}}Interface) {
-            $this->addFlash('error', 'sas.page.{{- entityLowerize -}}.not_found');
+        ${{ entityLowerize }} = $this->service->get($id);
+        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
+            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
         }
 
-        $this->addFlash('id', ${{- entityLowerize -}}->getId());
+        $this->addFlash('id', ${{ entityLowerize }}->getId());
 
         return new RedirectResponse($this->generateUrl(Main::class, $request->query->all()));
     }

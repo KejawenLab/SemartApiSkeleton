@@ -6,13 +6,13 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Controller\{{- entityHumanize -}};
+namespace KejawenLab\Application\Controller\{{ entityHumanize }};
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete as Route;
 use FOS\RestBundle\View\View;
-use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
-use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
+use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes\Tag;
@@ -23,25 +23,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::DELETE])]
-#[Tag(name: '{{- entityHumanize -}}')]
+#[Permission(menu: '{{ entityUpper }}', actions: [Permission::DELETE])]
+#[Tag(name: '{{ entityHumanize }}')]
 final class Delete extends AbstractFOSRestController
 {
-    public function __construct(private {{- entityHumanize -}}Service $service, private TranslatorInterface $translator)
+    public function __construct(private {{ entityHumanize }}Service $service, private TranslatorInterface $translator)
     {
     }
 
-    #[Route(data: '/{{- entityPluralDash -}}/{id}', name: self::class)]
+    #[Route(data: '/{{ entityPluralDash }}/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
-    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete {{- entityLowerize -}}')]
+    #[\OpenApi\Attributes\Response(response: 204, description: 'Delete {{ entityLowerize }}')]
     public function __invoke(string $id): View
     {
-        ${{- entityLowerize -}} = $this->service->get($id);
-        if (!${{- entityLowerize -}} instanceof {{- entityHumanize -}}Interface) {
-            throw new NotFoundHttpException($this->translator->trans('sas.page.{{- entityLowerize -}}.not_found', [], 'pages'));
+        ${{ entityLowerize }} = $this->service->get($id);
+        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.{{ entityLowerize }}.not_found', [], 'pages'));
         }
 
-        $this->service->remove(${{- entityLowerize -}});
+        $this->service->remove(${{ entityLowerize }});
 
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }

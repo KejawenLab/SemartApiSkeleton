@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Admin\Controller\{{- entityHumanize -}};
+namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\Application\Entity\{{- entityHumanize -}};
-use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
+use KejawenLab\Application\Entity\{{ entityHumanize }};
+use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Psr\Cache\CacheItemPoolInterface;
@@ -29,7 +29,7 @@ final class Audit extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private {{- entityHumanize -}}Service $service,
+        private {{ entityHumanize }}Service $service,
         private readonly CacheItemPoolInterface $cache,
         private AuditService $audit,
         private Reader $reader,
@@ -37,21 +37,21 @@ final class Audit extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
-    #[Route(path: '/{{- entityPluralDash -}}/{id}/audit', name: self::class, methods: ['GET'], priority: -255)]
+    #[Route(path: '/{{ entityPluralDash }}/{id}/audit', name: self::class, methods: ['GET'], priority: -255)]
     public function __invoke(string $id): Response
     {
         if (!$entity = $this->service->get($id)) {
-            $this->addFlash('error', 'sas.page.{{- entityLowerize -}}.not_found');
+            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        if (!$this->reader->getProvider()->isAuditable({{- entityHumanize -}}::class)) {
+        if (!$this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
             $this->addFlash('error', 'sas.page.audit.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass({{- entityHumanize -}}::class));
+        return $this->renderAudit($this->audit->getAudits($entity, $id), new ReflectionClass({{ entityHumanize }}::class));
     }
 }
