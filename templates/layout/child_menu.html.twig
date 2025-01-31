@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="{{- menu.adminPath -}}" class="nav-link {%- if is_active_path(menu.adminPath) -%} active{%- endif -%} ">
-        {%- if menu.iconClass -%} <i class="nav-icon {{- menu.iconClass -}}"></i>{%- endif -%} <p>{{- menu.name -}}</p>
+    <a href="{{ menu.adminPath }}" class="nav-link {% if is_active_path(menu.adminPath) %} active{% endif %} ">
+        {% if menu.iconClass %} <i class="nav-icon {{ menu.iconClass }}"></i>{% endif %} <p>{{ menu.name }}</p>
     </a>
 </li>
