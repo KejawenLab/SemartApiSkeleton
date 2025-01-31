@@ -19,23 +19,19 @@ final class SemartApiSkeleton
 
     final public const CACHE_HEADER = 'X-Semart-Content-ID';
 
-    final public const DISABLE_PAGE_CACHE_QUERY_STRING = 'dcp';
-
-    final public const DISABLE_VIEW_CACHE_QUERY_STRING = 'dcv';
-
     final public const DISABLE_QUERY_CACHE_QUERY_STRING = 'dcq';
 
     final public const USER_DEVICE_ID = 'USER_DEVICE_ID';
 
     final public const API_CLIENT_DEVICE_ID = 'API_CLIENT_DEVICE_ID';
 
-    final public const VERSION = '5.9.1';
+    final public const VERSION = '6.0.0';
 
-    final public const VERSION_MAYOR = 50000;
+    final public const VERSION_MAYOR = 60000;
 
-    final public const VERSION_MINOR = 900;
+    final public const VERSION_MINOR = 0;
 
-    final public const VERSION_PATCH = 1;
+    final public const VERSION_PATCH = 0;
 
     public static function getVersionNumber(): int
     {

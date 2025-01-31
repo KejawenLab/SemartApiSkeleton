@@ -35,80 +35,6 @@ final class CacheFactory
         $configuration->getResultCache()->clear();
     }
 
-    public function invalidPageCache(): void
-    {
-        if (!$this->isDisablePageCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-            return;
-        }
-
-        $this->invalidateCache('page');
-    }
-
-    public function invalidViewCache(): void
-    {
-        if (!$this->isDisableViewCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-            return;
-        }
-
-        $this->invalidateCache('view');
-    }
-
-    public function getPageCache(): ?Response
-    {
-        if (!$this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-            return null;
-        }
-
-        if ($this->isDisablePageCache()) {
-            return null;
-        }
-
-        $key = $this->getCacheKey();
-        $data = $this->getCache($key, 'page');
-        if ([] === $data) {
-            return null;
-        }
-
-        if ('' === $data['content']) {
-            return null;
-        }
-
-        if (false === $data['content']) {
-            return null;
-        }
-
-        $response = new Response($data['content']);
-        $response->headers->set('Content-Type', $data['attribute']);
-        $response->headers->set(SemartApiSkeleton::CACHE_HEADER, $key);
-
-        return $response;
-    }
-
-    public function setPageCache(Response $response): void
-    {
-        if (!$this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-            return;
-        }
-
-        if ($this->isDisablePageCache()) {
-            return;
-        }
-
-        if (Response::HTTP_OK !== $response->getStatusCode()) {
-            return;
-        }
-
-        if ('' === $response->getContent()) {
-            return;
-        }
-
-        if (false === $response->getContent()) {
-            return;
-        }
-
-        $this->setCache($this->getCacheKey(), 'page', $response->getContent(), $response->headers->get('Content-Type'), SemartApiSkeleton::PAGE_CACHE_PERIOD);
-    }
-
     /**
      * @return mixed[]
      */
@@ -170,16 +96,6 @@ final class CacheFactory
         $this->cache->save($item);
     }
 
-    public function isDisableViewCache(): bool
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request->query->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_VIEW_CACHE_QUERY_STRING);
-    }
-
     public function invalidateCache(string $namespace): void
     {
         $deviceId = $this->getDeviceId();
@@ -220,16 +136,6 @@ final class CacheFactory
         }
 
         return sprintf('%s_%s', sha1($request->getPathInfo()), sha1(serialize($request->query->all())));
-    }
-
-    private function isDisablePageCache(): bool
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request->query->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_PAGE_CACHE_QUERY_STRING);
     }
 
     private function isDisableQueryCache(): bool
