@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Permission as Entity;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation as Semart;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Parameter;

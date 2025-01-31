@@ -13,7 +13,7 @@ use KejawenLab\ApiSkeleton\Entity\Cron;
 use KejawenLab\ApiSkeleton\Form\CronType;
 use KejawenLab\ApiSkeleton\Form\FormFactory;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;

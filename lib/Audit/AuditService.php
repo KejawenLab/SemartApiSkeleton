@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Audit;
 
 use DH\Auditor\Model\Entry;
+use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
@@ -36,7 +37,7 @@ final class AuditService
                     $entity::class,
                     ['page' => 1, 'page_size' => $limit]
                 )
-                ->addFilter(Query::OBJECT_ID, $id)->execute()
+                ->addFilter(new SimpleFilter(Query::OBJECT_ID, $id))->execute()
             );
             $cache->set($audits);
             $cache->expiresAfter($this->cacheLifetime);

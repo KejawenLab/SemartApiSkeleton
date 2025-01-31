@@ -11,7 +11,7 @@ use KejawenLab\ApiSkeleton\Entity\Setting;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Setting\Model\SettingInterface;
 use KejawenLab\ApiSkeleton\Setting\SettingService;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Response;

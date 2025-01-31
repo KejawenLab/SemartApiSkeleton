@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Service\GroupService;
 use KejawenLab\ApiSkeleton\Security\Service\PermissionService;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\RequestBody;
