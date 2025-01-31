@@ -444,37 +444,37 @@ Secara default, SemartApiSkeleton akan mengubah `bool` menjadi `string` (direpre
 Kita dapat mengubahnya melalui file `templates/todo/all.html.twig` sebagai berikut:
 
 ```twig
-{% for property in properties %}
-    {% if 'id' != property.name %}
+{%- for property in properties -%} 
+    {%- if 'id' != property.name -%} 
         <tr>
-            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 149px;">{{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}</td>
             <td style="width: 7px;">:</td>
-            {% if 'done' == property.name %}
-                <td>{% if todo.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
-            {% else %}
-                <td>{{ semart_print(attribute(data, property.name)) }}</td>
-            {% endif %}
+            {%- if 'done' == property.name -%} 
+                <td>{%- if todo.done -%} Selesai{%- else -%} Belum Selesai{%- endif -%} </td>
+            {%- else -%} 
+                <td>{{- semart_print(attribute(data, property.name)) -}}</td>
+            {%- endif -%} 
         </tr>
-    {% endif %}
-{% endfor %}
+    {%- endif -%} 
+{%- endfor -%} 
 ```
 
 Selain itu, kita juga perlu mengubah file `templates/todo/view.html.twig` sebagai berikut:
 
 ```twig
-{% for property in properties %}
-    {% if 'id' != property.name %}
+{%- for property in properties -%} 
+    {%- if 'id' != property.name -%} 
         <tr>
-            <td style="width: 149px;">{{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}</td>
+            <td style="width: 149px;">{{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}</td>
             <td style="width: 7px;">:</td>
-            {% if 'done' == property.name %}
-                <td>{% if data.done %}Selesai{% else %}Belum Selesai{% endif %}</td>
-            {% else %}
-                <td>{{ semart_print(attribute(data, property.name)) }}</td>
-            {% endif %}
+            {%- if 'done' == property.name -%} 
+                <td>{%- if data.done -%} Selesai{%- else -%} Belum Selesai{%- endif -%} </td>
+            {%- else -%} 
+                <td>{{- semart_print(attribute(data, property.name)) -}}</td>
+            {%- endif -%} 
         </tr>
-    {% endif %}
-{% endfor %}
+    {%- endif -%} 
+{%- endfor -%} 
 ```
 
 Untuk lebih jelas tentang Twig Template, kamu dapat membaca dokumentasi resmi [Twig Template](https://twig.symfony.com)

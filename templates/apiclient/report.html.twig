@@ -1,68 +1,66 @@
-{% extends 'layout/main.html.twig' %}
+{%- extends 'layout/main.html.twig' -%}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
-{% endblock %}
-{% block content %}
-    {% apply spaceless %}
-        {% set menu = convert_to_menu(context) %}
+{%- block stylesheets -%}
+    <link rel="stylesheet" href="{{- asset('plugins/json-viewer/json-viewer.min.css') -}}">
+{%- endblock -%}
+{%- block content -%}
+        {%- set menu = convert_to_menu(context) -%}
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left col-2">
-                            <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Main', {userId: user_id}) }}" class="btn btn-outline-dark ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                            <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\ApiClient\\Main', {userId: user_id}) -}}" class="btn btn-outline-dark ml-1">{{- 'sas.form.action.back' | trans({}, 'forms') -}}</a>
                         </div>
                     </div>
                     <div class="card-body p-1">
                         <div class="row">
-                            {% for key, data in paginator['items'] %}
+                            {%- for key, data in paginator['items'] -%}
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card mt-1">
                                         <div class="card-body p-0">
                                             <ul class="list-group p-0">
                                                 <li class="list-group-item text-primary">
-                                                    No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                                    No<a class="float-right">{{- (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) -}}</a>
                                                 </li>
-                                                {% for property in properties %}
-                                                    {% if 'id' != property.name %}
+                                                {%- for property in properties -%}
+                                                    {%- if 'id' != property.name -%}
                                                         <li class="list-group-item text-primary">
-                                                            {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                                            {% if
+                                                            {{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}
+                                                            {%- if
                                                                 'headers' == property.name or
                                                                 'queries' == property.name or
                                                                 'requests' == property.name or
                                                                 'files' == property.name
-                                                            %}
+                                                            -%}
                                                                 <a class="float-right">
-                                                                    <pre class="json-viewer" data-json="{{ attribute(data, property.name) | json_encode() }}"></pre>
+                                                                    <pre class="json-viewer" data-json="{{- attribute(data, property.name) | json_encode() -}}"></pre>
                                                                 </a>
-                                                            {% elseif 'apiClient' == property.name %}
-                                                                {% set apiClient = attribute(data, property.name) %}
-                                                                <a class="float-right">{{ apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' }}</a>
-                                                            {% else %}
-                                                                <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                                            {% endif %}
+                                                            {%- elseif 'apiClient' == property.name -%}
+                                                                {%- set apiClient = attribute(data, property.name) -%}
+                                                                <a class="float-right">{{- apiClient.name ~ ' (' ~ apiClient.apiKey ~ ')' -}}</a>
+                                                            {%- else -%}
+                                                                <a class="float-right">{{- attribute(data, property.name) -}}</a>
+                                                            {%- endif -%}
                                                         </li>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                    {%- endif -%}
+                                                {%- endfor -%}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
+                            {%- endfor -%}
                         </div>
                     </div>
                     <div class="card-footer clearfix">
-                        {% include 'layout/pagination.html.twig' with {paginator: paginator} %}
+                        {%- include 'layout/pagination.html.twig' with {paginator: paginator} -%}
                     </div>
                 </div>
             </div>
         </div>
-    {% endapply %}
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+{%- endblock -%}
+{%- block javascripts -%}
+    <script src="{{- asset('plugins/json-viewer/json-viewer.min.js') -}}"></script>
     <script>
         $(document).ready(function () {
             $('.json-viewer').each(function() {
@@ -71,4 +69,4 @@
             });
         });
     </script>
-{% endblock %}
+{%- endblock -%}

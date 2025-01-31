@@ -43,8 +43,8 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         }
 
         $user->setPassword($newHashedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
     }
 
     public function isSupervisor(UserInterface $user, UserInterface $supervisor): bool

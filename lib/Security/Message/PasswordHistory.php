@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Security\Message;
 
 use KejawenLab\ApiSkeleton\Security\User;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[AsMessage('async')]
 final class PasswordHistory
 {
     public function __construct(private readonly User $user, private readonly string $password)

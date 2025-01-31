@@ -1,17 +1,10 @@
 security:
-    enable_authenticator_manager: true
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         user_provider:
             id: KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory
     firewalls:
-        api_token_refresh:
-            pattern: ^/api/token/refresh
-            stateless: true
-            refresh_jwt: ~
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|img|js|lib|fonts|bundles)/
             security: false
@@ -66,7 +59,6 @@ security:
             jwt: ~
 
     access_control:
-        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['POST'] }
         - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET', 'POST'] }
         - { path: ^/api/doc$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ['GET'] }
@@ -80,10 +72,6 @@ security:
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
                 cost: 4 # Lowest possible value for bcrypt

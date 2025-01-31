@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use Ramsey\Uuid\Uuid;
@@ -15,7 +15,7 @@ use Ramsey\Uuid\UuidInterface;
  */
 final class GroupIdGenerator extends AbstractIdGenerator
 {
-    public function generate(EntityManager $em, $entity): UuidInterface
+    public function generateId(EntityManagerInterface $em, object|null $entity): mixed
     {
         if (!$entity instanceof GroupInterface) {
             return Uuid::uuid4();

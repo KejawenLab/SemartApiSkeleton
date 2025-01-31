@@ -1,7 +1,5 @@
 FROM openswoole/swoole:latest-alpine
 
-MAINTAINER Muhammad Surya Ihsanuddin<surya.iksanudin@gmail.com>
-
 # Install Dependencies
 RUN apk update
 RUN apk add --no-cache supervisor vim autoconf gcc make g++ inotify-tools bash git
@@ -15,8 +13,8 @@ RUN pecl bundle redis && cd redis && phpize && ./configure --enable-redis-igbina
 RUN docker-php-ext-enable igbinary redis inotify amqp apcu
 
 # Install PHP Core Extensions
-RUN docker-php-ext-install curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl iconv sockets
-RUN docker-php-ext-enable curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl iconv sockets
+RUN docker-php-ext-install curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl sockets
+RUN docker-php-ext-enable curl intl mbstring zip bcmath imap opcache gd pdo_pgsql pcntl sockets
 
 # Install Composer
 ADD docker/composer.sh /composer.sh

@@ -1,22 +1,22 @@
-{% set entityHumanize = entity | humanize %}
-{% set entityLowerize = entity | lower %}
-{% set entityUpper = entity | upper %}
-{% set entityPluralDash = entity | pluralize | dash %}
+{%- set entityHumanize = entity | humanize -%}
+{%- set entityLowerize = entity | lower -%}
+{%- set entityUpper = entity | upper -%}
+{%- set entityPluralDash = entity | pluralize | dash -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Controller\{{ entityHumanize }};
+namespace KejawenLab\Application\Controller\{{- entityHumanize -}};
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use FOS\RestBundle\View\View;
-use KejawenLab\Application\Entity\{{ entityHumanize }};
-use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
-use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
+use KejawenLab\Application\Entity\{{- entityHumanize -}};
+use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
+use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
+use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Tag;
@@ -25,31 +25,31 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
-#[Tag(name: '{{ entityHumanize }}')]
+#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::VIEW])]
+#[Tag(name: '{{- entityHumanize -}}')]
 final class Get extends AbstractFOSRestController
 {
-    public function __construct(private {{ entityHumanize }}Service $service, private TranslatorInterface $translator)
+    public function __construct(private {{- entityHumanize -}}Service $service, private TranslatorInterface $translator)
     {
     }
 
-    #[Route(data: '/{{ entityPluralDash }}/{id}', name: self::class)]
+    #[Route(data: '/{{- entityPluralDash -}}/{id}', name: self::class)]
     #[Security(name: 'Bearer')]
     #[Response(
         response: 200,
-        description: '{{ entityHumanize }} detail',
+        description: '{{- entityHumanize -}} detail',
         content: new OA\MediaType(
             mediaType: 'application/json',
-            schema: new OA\Schema(ref: new Model(type: {{ entityHumanize }}::class, groups: ['read']), type: 'object'),
+            schema: new OA\Schema(ref: new Model(type: {{- entityHumanize -}}::class, groups: ['read']), type: 'object'),
         ),
     )]
     public function __invoke(string $id): View
     {
-        ${{ entityLowerize }} = $this->service->get($id);
-        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
-            throw new NotFoundHttpException($this->translator->trans('sas.page.{{ entityLowerize }}.not_found', [], 'pages'));
+        ${{- entityLowerize -}} = $this->service->get($id);
+        if (!${{- entityLowerize -}} instanceof {{- entityHumanize -}}Interface) {
+            throw new NotFoundHttpException($this->translator->trans('sas.page.{{- entityLowerize -}}.not_found', [], 'pages'));
         }
 
-        return $this->view(${{ entityLowerize }});
+        return $this->view(${{- entityLowerize -}});
     }
 }

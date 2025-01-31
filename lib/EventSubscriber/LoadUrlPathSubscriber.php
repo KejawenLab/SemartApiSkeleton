@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use Doctrine\Common\EventSubscriber;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\Event\PostLoadEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll as ApiClient;
 use KejawenLab\ApiSkeleton\Controller\Cron\GetAll as Cron;
 use KejawenLab\ApiSkeleton\Controller\Group\GetAll as Group;
@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Controller\Media\GetAll as Media;
 use KejawenLab\ApiSkeleton\Controller\Menu\GetAll as Menu;
 use KejawenLab\ApiSkeleton\Controller\Setting\GetAll as Setting;
 use KejawenLab\ApiSkeleton\Controller\User\GetAll;
-use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
+use KejawenLab\ApiSkeleton\Entity\Menu as Entity;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -23,7 +23,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class LoadUrlPathSubscriber implements EventSubscriber
+#[AsEntityListener(event: Events::postLoad, method: 'postLoad', entity: Entity::class)]
+final class LoadUrlPathSubscriber
 {
     private const ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\Application\\Controller\\';
 
@@ -36,13 +37,8 @@ final class LoadUrlPathSubscriber implements EventSubscriber
     {
     }
 
-    public function postLoad(LifecycleEventArgs $args): void
+    public function postLoad(Entity $object, PostLoadEventArgs $args): void
     {
-        $object = $args->getObject();
-        if (!$object instanceof MenuInterface) {
-            return;
-        }
-
         $apiPath = '#';
         $path = $object->getRouteName();
         $adminPath = '#';
@@ -77,15 +73,5 @@ final class LoadUrlPathSubscriber implements EventSubscriber
 
         $object->setApiPath($apiPath);
         $object->setAdminPath($adminPath);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::postLoad,
-        ];
     }
 }

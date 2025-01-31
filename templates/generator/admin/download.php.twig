@@ -1,14 +1,14 @@
-{% set entityHumanize = entity | humanize %}
-{% set entityLowerize = entity | lower %}
-{% set entityUpper = entity | upper %}
-{% set entityPluralDash = entity | pluralize | dash %}
+{%- set entityHumanize = entity | humanize -%}
+{%- set entityLowerize = entity | lower -%}
+{%- set entityUpper = entity | upper -%}
+{%- set entityPluralDash = entity | pluralize | dash -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\Application\Admin\Controller\{{- entityHumanize -}};
 
-use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,14 +19,14 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
+#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::VIEW])]
 final class Download extends AbstractController
 {
-    public function __construct(private {{ entityHumanize }}Service $service, private SerializerInterface $serializer)
+    public function __construct(private {{- entityHumanize -}}Service $service, private SerializerInterface $serializer)
     {
     }
 
-    #[Route(path: '/{{ entityPluralDash }}/download', name: self::class, methods: ['GET'])]
+    #[Route(path: '/{{- entityPluralDash -}}/download', name: self::class, methods: ['GET'])]
     public function __invoke(): Response
     {
         $records = $this->service->total();
@@ -39,7 +39,7 @@ final class Download extends AbstractController
         $response = new Response();
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', 'text/csv');
-        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', '{{ entityPluralDash }}', date('YmdHis')));
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s_%s.csv"', '{{- entityPluralDash -}}', date('YmdHis')));
 
         $response->setContent($this->serializer->serialize($this->service->all(), 'csv', ['groups' => 'read']));
 

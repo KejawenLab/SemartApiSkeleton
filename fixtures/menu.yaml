@@ -1,10 +1,10 @@
 - { parent: null, code: 'PROFILE', name: 'Profile', sortOrder: 0, routeName: 'KejawenLab\ApiSkeleton\Controller\Me\Profile', iconClass: 'cil-user', ref: 'profile' }
 - { parent: null, code: 'ADMIN', name: 'Administrator', sortOrder: 1, routeName: '#', iconClass: 'cib-adguard', ref: 'administrator' }
-- { parent: 'ref:menu#administrator', code: 'USER', sortOrder: 1, name: 'User', routeName: 'KejawenLab\ApiSkeleton\Controller\User\GetAll', ref: 'administrator_user' }
-- { parent: 'ref:menu#administrator', code: 'GROUP', sortOrder: 2, name: 'Group', routeName: 'KejawenLab\ApiSkeleton\Controller\Group\GetAll', ref: 'administrator_group' }
-- { parent: 'ref:menu#administrator', code: 'MENU', sortOrder: 3, name: 'Menu', routeName: 'KejawenLab\ApiSkeleton\Controller\Menu\GetAll', ref: 'administrator_menu' }
-- { parent: 'ref:menu#administrator', code: 'SETTING', sortOrder: 4, name: 'Setting', routeName: 'KejawenLab\ApiSkeleton\Controller\Setting\GetAll', ref: 'administrator_setting' }
-- { parent: 'ref:menu#administrator', code: 'APICLIENT', sortOrder: 5, name: 'Api Client', routeName: 'KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll', showable: false, ref: 'administrator_apiclient' }
-- { parent: 'ref:menu#administrator', code: 'CRON', sortOrder: 6, name: 'Cronjob', routeName: 'KejawenLab\ApiSkeleton\Controller\Cron\GetAll', ref: 'administrator_cronjob' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'USER', sortOrder: 1, name: 'User', routeName: 'KejawenLab\ApiSkeleton\Controller\User\GetAll', ref: 'administrator_user' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'GROUP', sortOrder: 2, name: 'Group', routeName: 'KejawenLab\ApiSkeleton\Controller\Group\GetAll', ref: 'administrator_group' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'MENU', sortOrder: 3, name: 'Menu', routeName: 'KejawenLab\ApiSkeleton\Controller\Menu\GetAll', ref: 'administrator_menu' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'SETTING', sortOrder: 4, name: 'Setting', routeName: 'KejawenLab\ApiSkeleton\Controller\Setting\GetAll', ref: 'administrator_setting' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'APICLIENT', sortOrder: 5, name: 'Api Client', routeName: 'KejawenLab\ApiSkeleton\Controller\ApiClient\GetAll', showable: false, ref: 'administrator_apiclient' }
+- { parent: 'ref:KejawenLab_ApiSkeleton_Entity_Menu@menu#administrator', code: 'CRON', sortOrder: 6, name: 'Cronjob', routeName: 'KejawenLab\ApiSkeleton\Controller\Cron\GetAll', ref: 'administrator_cronjob' }
 - { parent: null, code: 'MEDIA', name: 'Media', sortOrder: 2, routeName: 'KejawenLab\ApiSkeleton\Controller\Media\GetAll', iconClass: 'cil-folder-open', ref: 'media' }
 - { parent: null, code: 'AUDIT', name: 'Audit', sortOrder: -99, routeName: '#', showable: false, ref: 'audit' }

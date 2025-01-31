@@ -81,9 +81,10 @@ class Menu implements MenuInterface
     private bool $adminOnly;
 
     #[Groups(groups: ['read'])]
-    private ?string $apiPath;
+    private ?string $apiPath = '#';
 
-    private ?string $adminPath;
+    #[Groups(groups: ['read'])]
+    private ?string $adminPath = '#';
 
     public function __construct()
     {
@@ -95,8 +96,6 @@ class Menu implements MenuInterface
         $this->iconClass = null;
         $this->showable = true;
         $this->adminOnly = false;
-        $this->apiPath = '#';
-        $this->adminPath = '#';
     }
 
     public function getId(): ?string

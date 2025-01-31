@@ -29,9 +29,6 @@
     "composer/xdebug-handler": {
         "version": "1.4.1"
     },
-    "cron/cron": {
-        "version": "1.4.2"
-    },
     "cweagans/composer-patches": {
         "version": "1.7.1"
     },
@@ -174,9 +171,6 @@
     },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
-    },
-    "gesdinet/jwt-refresh-token-bundle": {
-        "version": "v0.12.0"
     },
     "helmich/typo3-typoscript-parser": {
         "version": "v2.3.1"
@@ -790,9 +784,6 @@
         "version": "v5.0.8"
     },
     "symfony/security-csrf": {
-        "version": "v5.0.8"
-    },
-    "symfony/security-guard": {
         "version": "v5.0.8"
     },
     "symfony/security-http": {

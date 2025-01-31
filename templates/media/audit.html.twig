@@ -1,74 +1,72 @@
-{% extends 'layout/main.html.twig' %}
+{%- extends 'layout/main.html.twig' -%}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
-{% endblock %}
-{% block content %}
-    {% apply spaceless %}
+{%- block stylesheets -%}
+    <link rel="stylesheet" href="{{- asset('plugins/json-viewer/json-viewer.min.css') -}}">
+{%- endblock -%}
+{%- block content -%}
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                        <h4>{{- page_title | trans({}, 'pages') -}}</h4>
                     </div>
                     <div class="card-body p-1">
                         <ul class="list-group mb-1">
-                            {% for property in properties %}
-                                {% if 'id' != property.name and 'file' != property.name and 'hidden' != property.name %}
+                            {%- for property in properties -%}
+                                {%- if 'id' != property.name and 'file' != property.name and 'hidden' != property.name -%}
                                     <li class="list-group-item list-group-item-dark">
-                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                        {% if 'public' == property.name %}
+                                        {{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}
+                                        {%- if 'public' == property.name -%}
                                             <a class="float-right">
-                                                {% if attribute(data, property.name) %}
-                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.media.public' | trans({}, 'pages') }}</span>
-                                                {% else %}
-                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.media.non_public' | trans({}, 'pages') }}</span>
-                                                {% endif %}
+                                                {%- if attribute(data, property.name) -%}
+                                                    <span class="btn btn-sm btn-success disabled">{{- 'sas.page.media.public' | trans({}, 'pages') -}}</span>
+                                                {%- else -%}
+                                                    <span class="btn btn-sm btn-dark disabled">{{- 'sas.page.media.non_public' | trans({}, 'pages') -}}</span>
+                                                {%- endif -%}
                                             </a>
-                                        {% elseif 'fileUrl' == property.name %}
-                                            <a class="btn btn-sm btn-info float-right" href="{{ '/admin' ~ attribute(data, property.name) }}" target="_blank">
-                                                {{ 'sas.page.media.download' | trans({}, 'pages') }}
+                                        {%- elseif 'fileUrl' == property.name -%}
+                                            <a class="btn btn-sm btn-info float-right" href="{{- '/admin' ~ attribute(data, property.name) -}}" target="_blank">
+                                                {{- 'sas.page.media.download' | trans({}, 'pages') -}}
                                             </a>
-                                        {% else %}
-                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                        {% endif %}
+                                        {%- else -%}
+                                            <a class="float-right">{{- attribute(data, property.name) -}}</a>
+                                        {%- endif -%}
                                     </li>
-                                {% endif %}
-                            {% endfor %}
+                                {%- endif -%}
+                            {%- endfor -%}
                         </ul>
                         <div class="row">
-                            {% for key, data in audits %}
+                            {%- for key, data in audits -%}
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card mt-1">
                                         <div class="card-body p-0">
                                             <ul class="list-group p-0">
-                                                {% for property in data | keys %}
+                                                {%- for property in data | keys -%}
                                                     <li class="list-group-item text-primary">
-                                                        {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
-                                                        {% if 'data' == property %}
-                                                            <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
-                                                        {% else %}
-                                                            <a class="float-right">{{ data[property] }}</a>
-                                                        {% endif %}
+                                                        {{- ('sas.table.column.audit.' ~ property) | trans({}, 'tables') -}}
+                                                        {%- if 'data' == property -%}
+                                                            <a class="float-right"><pre class="json-viewer" data-json="{{- data[property] | json_encode() -}}"></pre></a>
+                                                        {%- else -%}
+                                                            <a class="float-right">{{- data[property] -}}</a>
+                                                        {%- endif -%}
                                                     </li>
-                                                {% endfor %}
+                                                {%- endfor -%}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
+                            {%- endfor -%}
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Main', {id: data.id}) }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Media\\Main', {id: data.id}) -}}" class="btn btn-outline-secondary ml-1">{{- 'sas.form.action.back' | trans({}, 'forms') -}}</a>
                     </div>
                 </div>
             </div>
         </div>
-    {% endapply %}
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+{%- endblock -%}
+{%- block javascripts -%}
+    <script src="{{- asset('plugins/json-viewer/json-viewer.min.js') -}}"></script>
     <script>
         $(document).ready(function () {
             $('.json-viewer').each(function() {
@@ -77,4 +75,4 @@
             });
         });
     </script>
-{% endblock %}
+{%- endblock -%}

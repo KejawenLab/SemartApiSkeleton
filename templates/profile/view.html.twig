@@ -1,26 +1,25 @@
-{% extends 'layout/main.html.twig' %}
+{%- extends 'layout/main.html.twig' -%}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
-{% endblock %}
-{% block content %}
-    {% apply spaceless %}
+{%- block stylesheets -%}
+    <link rel="stylesheet" href="{{- asset('plugins/toastr/toastr.min.css') -}}">
+{%- endblock -%}
+{%- block content -%}
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                    <h4>{{- page_title | trans({}, 'pages') -}}</h4>
                 </div>
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="{% if data.profileImage %}{{ '/admin' ~ sas.media_prefix ~ data.profileImage }}{% else %}{{ asset('dist/img/avatar5.png') }}{% endif %}" alt="{{ data.username | humanize }}" />
+                        <img class="profile-user-img img-fluid img-circle" src="{%- if data.profileImage -%} {{- '/admin' ~ sas.media_prefix ~ data.profileImage -}}{%- else -%} {{- asset('dist/img/avatar5.png') -}}{%- endif -%} " alt="{{- data.username | humanize -}}" />
                     </div>
-                    <h3 class="profile-username text-center">{{ data.fullName }}</h3>
-                    {% set group = data.group %}
-                    <p class="text-muted text-center">{{ group.code ~ ' - ' ~ group.name }}</p>
+                    <h3 class="profile-username text-center">{{- data.fullName -}}</h3>
+                    {%- set group = data.group -%}
+                    <p class="text-muted text-center">{{- group.code ~ ' - ' ~ group.name -}}</p>
                     <ul class="list-group list-group-unbordered mb-3">
-                        {% for property in properties %}
-                            {% if
+                        {%- for property in properties -%}
+                            {%- if
                                 'id' != property.name and
                                 'password' != property.name and
                                 'plainPassword' != property.name and
@@ -28,36 +27,36 @@
                                 'deviceId' != property.name and
                                 'file' != property.name and
                                 'lastLogin' != property.name
-                            %}
+                            -%}
                                 <li class="list-group-item text-primary">
-                                    {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                    {% if 'group' == property.name %}
-                                        {% set group = attribute(data, property.name) %}
-                                        <b><a class="float-right">{{ group.code ~ ' - ' ~ group.name }}</a></b>
-                                    {% elseif 'supervisor' == property.name %}
-                                        {% set supervisor = attribute(data, property.name) %}
-                                        {% if supervisor %}
-                                            <b><a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a></b>
-                                        {% endif %}
-                                    {% else %}
-                                        <b><a class="float-right">{{ attribute(data, property.name) }}</a></b>
-                                    {% endif %}
+                                    {{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}
+                                    {%- if 'group' == property.name -%}
+                                        {%- set group = attribute(data, property.name) -%}
+                                        <b><a class="float-right">{{- group.code ~ ' - ' ~ group.name -}}</a></b>
+                                    {%- elseif 'supervisor' == property.name -%}
+                                        {%- set supervisor = attribute(data, property.name) -%}
+                                        {%- if supervisor -%}
+                                            <b><a class="float-right">{{- supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' -}}</a></b>
+                                        {%- endif -%}
+                                    {%- else -%}
+                                        <b><a class="float-right">{{- attribute(data, property.name) -}}</a></b>
+                                    {%- endif -%}
                                 </li>
-                            {% endif %}
-                        {% endfor %}
+                            {%- endif -%}
+                        {%- endfor -%}
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
-                <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\Profile') }}" enctype="multipart/form-data">
+                <form role="form" method="post" action="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\Profile') -}}" enctype="multipart/form-data">
                     <div class="card-body">
-                        {{ form_widget(form) }}
+                        {{- form_widget(form) -}}
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-outline-primary">{{ 'sas.form.action.submit' | trans({}, 'forms') }}</button>
-                        <button type="reset" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.cancel' | trans({}, 'forms') }}</button>
+                        <button type="submit" class="btn btn-outline-primary">{{- 'sas.form.action.submit' | trans({}, 'forms') -}}</button>
+                        <button type="reset" class="btn btn-outline-secondary ml-1">{{- 'sas.form.action.cancel' | trans({}, 'forms') -}}</button>
                     </div>
                 </form>
             </div>
@@ -67,46 +66,46 @@
                 <div class="card-body p-0">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <form role="form" method="post" action="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\CreateApiClient') }}" enctype="multipart/form-data">
+                            <form role="form" method="post" action="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\CreateApiClient') -}}" enctype="multipart/form-data">
                                 <div class="float-left input-group col-lg-12 col-md-12 col-sm-12 p-1">
-                                    <input type="text" name="name" id="sasApiClient" class="form-control float-right" placeholder="{{ 'sas.page.api_client.add' | trans({}, 'pages') }}">
+                                    <input type="text" name="name" id="sasApiClient" class="form-control float-right" placeholder="{{- 'sas.page.api_client.add' | trans({}, 'pages') -}}">
                                     <div class="input-group-append">
                                         <button type="submit" id="sasCreateApiKey" class="btn btn-default">
-                                            <i class="cib-addthis pr-1 align-middle"></i>{{ 'sas.form.action.add' | trans({}, 'forms') }}
+                                            <i class="cib-addthis pr-1 align-middle"></i>{{- 'sas.form.action.add' | trans({}, 'forms') -}}
                                         </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        {% for key, data in paginator['items'] %}
+                        {%- for key, data in paginator['items'] -%}
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <ul class="list-group p-1">
                                     <li class="list-group-item text-primary">
-                                        No<a class="float-right">{{ (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) }}</a>
+                                        No<a class="float-right">{{- (key + 1) + (paginator['per_page'] * (paginator['page'] - 1)) -}}</a>
                                     </li>
-                                    {% for property in api_clients %}
-                                        {% if 'id' != property.name and 'user' != property.name %}
+                                    {%- for property in api_clients -%}
+                                        {%- if 'id' != property.name and 'user' != property.name -%}
                                             <li class="list-group-item text-primary">
-                                                {{ ('sas.table.column.apiclient.' ~ property.name) | trans({}, 'tables') }}<a class="float-right">{{ attribute(data, property.name) }}</a>
+                                                {{- ('sas.table.column.apiclient.' ~ property.name) | trans({}, 'tables') -}}<a class="float-right">{{- attribute(data, property.name) -}}</a>
                                             </li>
-                                        {% endif %}
-                                    {% endfor %}
+                                        {%- endif -%}
+                                    {%- endfor -%}
                                     <li class="list-group-item p-1">
                                         <div class="btn-group col-lg-12 col-md-12 col-sm-12" role="group">
                                             <button type="button"
-                                                    data-path="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\DeleteApiClient', {id: data.id}) }}"
-                                                    data-notification="{{ 'sas.notification.delete.message' | trans({'%data%': data.name}, 'notifications') }}"
+                                                    data-path="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Me\\DeleteApiClient', {id: data.id}) -}}"
+                                                    data-notification="{{- 'sas.notification.delete.message' | trans({'%data%': data.name}, 'notifications') -}}"
                                                     class="btn btn-sm btn-outline-danger delete"
                                                     data-toggle="modal"
                                                     data-target="#sasDeleteModal"
                                             >
-                                                {{ 'sas.table.action.delete' | trans({}, 'tables') }}
+                                                {{- 'sas.table.action.delete' | trans({}, 'tables') -}}
                                             </button>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                        {% endfor %}
+                        {%- endfor -%}
                     </div>
                 </div>
             </div>
@@ -116,7 +115,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ 'sas.notification.delete.title' | trans({}, 'notifications') }}</h5>
+                    <h5 class="modal-title">{{- 'sas.notification.delete.title' | trans({}, 'notifications') -}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,17 +123,15 @@
                 </div>
                 <div class="modal-body" id="sasNotification"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">{{ 'sas.notification.delete.cancel' | trans({}, 'notifications') }}</button>
-                    <button type="button" id="sasDeleteConfirm" class="btn btn-outline-primary">{{ 'sas.notification.delete.confirm' | trans({}, 'notifications') }}</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">{{- 'sas.notification.delete.cancel' | trans({}, 'notifications') -}}</button>
+                    <button type="button" id="sasDeleteConfirm" class="btn btn-outline-primary">{{- 'sas.notification.delete.confirm' | trans({}, 'notifications') -}}</button>
                 </div>
             </div>
         </div>
     </div>
-    {% endapply %}
-{% endblock %}
-{% block javascripts %}
-    {% apply spaceless %}
-        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+{%- endblock -%}
+{%- block javascripts -%}
+        <script src="{{- asset('plugins/toastr/toastr.min.js') -}}"></script>
         <script>
             $(document).ready(function () {
                 toastr.options = {
@@ -155,12 +152,12 @@
                     "hideMethod": "fadeOut"
                 };
 
-                {% for message in app.flashes('info') %}
-                    toastr['success']('{{ message | trans({}, 'pages') }}');
-                {% endfor %}
-                {% for message in app.flashes('error') %}
-                    toastr['error']('{{ message | trans({}, 'pages') }}');
-                {% endfor %}
+                {%- for message in app.flashes('info') -%}
+                    toastr['success']('{{- message | trans({}, 'pages') -}}');
+                {%- endfor -%}
+                {%- for message in app.flashes('error') -%}
+                    toastr['error']('{{- message | trans({}, 'pages') -}}');
+                {%- endfor -%}
 
                 $('.delete').on('click', function() {
                     $('#sasPath').val($(this).data('path'));
@@ -177,5 +174,4 @@
                 });
             });
         </script>
-    {% endapply %}
-{% endblock %}
+{%- endblock -%}

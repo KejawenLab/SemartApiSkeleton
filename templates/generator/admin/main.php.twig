@@ -1,17 +1,17 @@
-{% set entityHumanize = entity | humanize %}
-{% set entityLowerize = entity | lower %}
-{% set entityUpper = entity | upper %}
-{% set entityPluralDash = entity | pluralize | dash %}
+{%- set entityHumanize = entity | humanize -%}
+{%- set entityLowerize = entity | lower -%}
+{%- set entityUpper = entity | upper -%}
+{%- set entityPluralDash = entity | pluralize | dash -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\Application\Admin\Controller\{{- entityHumanize -}};
 
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
-use KejawenLab\Application\Entity\{{ entityHumanize }};
-use KejawenLab\Application\Form\{{ entityHumanize }}Type;
-use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use KejawenLab\Application\Entity\{{- entityHumanize -}};
+use KejawenLab\Application\Form\{{- entityHumanize -}}Type;
+use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Psr\Cache\CacheItemPoolInterface;
@@ -24,50 +24,50 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
+#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::VIEW])]
 final class Main extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly {{ entityHumanize }}Service $service,
+        private readonly {{- entityHumanize -}}Service $service,
         private readonly CacheItemPoolInterface $cache,
         private readonly Paginator $paginator,
     ) {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 
-    #[Route(path: '/{{ entityPluralDash }}', name: self::class, methods: ['GET', 'POST'])]
+    #[Route(path: '/{{- entityPluralDash -}}', name: self::class, methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
-        ${{ entityLowerize }} = new {{ entityHumanize }}();
+        ${{- entityLowerize -}} = new {{- entityHumanize -}}();
         if ($request->isMethod(Request::METHOD_POST)) {
             $id = $request->getSession()->get('id');
             if (null !== $id) {
-                ${{ entityLowerize }} = $this->service->get($id);
+                ${{- entityLowerize -}} = $this->service->get($id);
             }
         } else {
             $flashes = $request->getSession()->getFlashBag()->get('id');
             foreach ($flashes as $flash) {
-                ${{ entityLowerize }} = $this->service->get($flash);
-                if (null !== ${{ entityLowerize }}) {
-                    $request->getSession()->set('id', ${{ entityLowerize }}->getId());
+                ${{- entityLowerize -}} = $this->service->get($flash);
+                if (null !== ${{- entityLowerize -}}) {
+                    $request->getSession()->set('id', ${{- entityLowerize -}}->getId());
 
                     break;
                 }
             }
         }
 
-        $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
+        $form = $this->createForm({{- entityHumanize -}}Type::class, ${{- entityLowerize -}});
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save($form->getData());
-                $this->addFlash('info', 'sas.page.{{ entityLowerize }}.saved');
+                $this->addFlash('info', 'sas.page.{{- entityLowerize -}}.saved');
 
-                $form = $this->createForm({{ entityHumanize }}Type::class);
+                $form = $this->createForm({{- entityHumanize -}}Type::class);
             }
         }
 
-        return $this->renderList($form, $request, new ReflectionClass({{ entityHumanize }}::class));
+        return $this->renderList($form, $request, new ReflectionClass({{- entityHumanize -}}::class));
     }
 }

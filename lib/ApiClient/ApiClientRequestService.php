@@ -13,13 +13,14 @@ use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRequestRepositoryInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
-use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class ApiClientRequestService extends AbstractService implements ServiceInterface, MessageSubscriberInterface
+#[AsMessageHandler]
+final class ApiClientRequestService extends AbstractService implements ServiceInterface
 {
     public function __construct(
         MessageBusInterface $messageBus,
@@ -43,14 +44,6 @@ final class ApiClientRequestService extends AbstractService implements ServiceIn
         $apiClientRequest->setApiClient($apiClient);
 
         $this->save($apiClientRequest);
-    }
-
-    /**
-     * @return Iterator<string>
-     */
-    public static function getHandledMessages(): iterable
-    {
-        yield RequestLog::class;
     }
 
     private function createFromMessage(RequestLog $message): ApiClientRequestInterface

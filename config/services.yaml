@@ -45,9 +45,6 @@ services:
         tags: [ 'controller.service_arguments' ]
 
     _instanceof:
-        Doctrine\Common\EventSubscriber:
-            tags:
-                - { name: doctrine.event_subscriber }
         KejawenLab\ApiSkeleton\Security\Model\UserProviderInterface:
             tags:
                 - { name: semart.user_provider }
@@ -74,6 +71,7 @@ services:
     semart_login_rate_limiter:
         class: Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter
         arguments:
+            $secret: '%env(resolve:APP_SECRET)%'
             $globalFactory: '@limiter.ip_login'
             $localFactory: '@limiter.username_ip_login'
     Cron\Validator\CrontabValidator:

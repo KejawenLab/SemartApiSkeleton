@@ -1,15 +1,15 @@
-{% set entityHumanize = entity | humanize %}
+{%- set entityHumanize = entity | humanize -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\{{ entityHumanize }}\Model;
+namespace KejawenLab\Application\{{- entityHumanize -}}\Model;
 
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-interface {{ entityHumanize }}RepositoryInterface extends PaginatableRepositoryInterface
+interface {{- entityHumanize -}}RepositoryInterface extends PaginatableRepositoryInterface
 {
 }

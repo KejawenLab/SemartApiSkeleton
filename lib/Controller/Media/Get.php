@@ -9,7 +9,7 @@ use FOS\RestBundle\Controller\Annotations\Get as Route;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
-use Nelmio\ApiDocBundle\Annotation\Security;
+use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Tag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

@@ -1,11 +1,11 @@
-{% set entityHumanize = entity | humanize %}
+{%- set entityHumanize = entity | humanize -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\{{ entityHumanize }};
+namespace KejawenLab\Application\{{- entityHumanize -}};
 
-use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}RepositoryInterface;
+use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}RepositoryInterface;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
@@ -14,9 +14,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class {{ entityHumanize }}Service extends AbstractService implements ServiceInterface
+final class {{- entityHumanize -}}Service extends AbstractService implements ServiceInterface
 {
-    public function __construct(MessageBusInterface $messageBus, {{ entityHumanize }}RepositoryInterface $repository, AliasHelper $aliasHelper)
+    public function __construct(MessageBusInterface $messageBus, {{- entityHumanize -}}RepositoryInterface $repository, AliasHelper $aliasHelper)
     {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }

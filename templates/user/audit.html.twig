@@ -1,81 +1,79 @@
-{% extends 'layout/main.html.twig' %}
+{%- extends 'layout/main.html.twig' -%}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
-{% endblock %}
-{% block content %}
-    {% apply spaceless %}
+{%- block stylesheets -%}
+    <link rel="stylesheet" href="{{- asset('plugins/json-viewer/json-viewer.min.css') -}}">
+{%- endblock -%}
+{%- block content -%}
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                        <h4>{{- page_title | trans({}, 'pages') -}}</h4>
                     </div>
                     <div class="card-body p-1">
                         <ul class="list-group mb-1">
-                            {% for property in properties %}
-                                {% if
+                            {%- for property in properties -%}
+                                {%- if
                                     'id' != property.name and
                                     'password' != property.name and
                                     'plainPassword' != property.name and
                                     'profileImage' != property.name and
                                     'deviceId' != property.name and
                                     'file' != property.name
-                                %}
+                                -%}
                                     <li class="list-group-item list-group-item-dark">
-                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                        {% if 'group' == property.name %}
-                                            {% set group = attribute(data, property.name) %}
-                                            <a class="float-right">{{ group.name ~ ' (' ~ group.code ~ ')' }}</a>
-                                        {% elseif 'supervisor' == property.name %}
-                                            {% set supervisor = attribute(data, property.name) %}
-                                            {% if supervisor %}
-                                                <a class="float-right">{{ supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' }}</a>
-                                            {% else %}
+                                        {{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}
+                                        {%- if 'group' == property.name -%}
+                                            {%- set group = attribute(data, property.name) -%}
+                                            <a class="float-right">{{- group.name ~ ' (' ~ group.code ~ ')' -}}</a>
+                                        {%- elseif 'supervisor' == property.name -%}
+                                            {%- set supervisor = attribute(data, property.name) -%}
+                                            {%- if supervisor -%}
+                                                <a class="float-right">{{- supervisor.fullName ~ ' (' ~ supervisor.username ~ ')' -}}</a>
+                                            {%- else -%}
                                                 <a class="float-right">-</a>
-                                            {% endif %}
-                                        {% elseif 'lastLogin' == property.name %}
-                                            <a class="float-right">{{ attribute(data, property.name) | date('Y-m-d H:i:s') }}</a>
-                                        {% else %}
-                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                        {% endif %}
+                                            {%- endif -%}
+                                        {%- elseif 'lastLogin' == property.name -%}
+                                            <a class="float-right">{{- attribute(data, property.name) | date('Y-m-d H:i:s') -}}</a>
+                                        {%- else -%}
+                                            <a class="float-right">{{- attribute(data, property.name) -}}</a>
+                                        {%- endif -%}
                                     </li>
-                                {% endif %}
-                            {% endfor %}
+                                {%- endif -%}
+                            {%- endfor -%}
                         </ul>
                         <div class="row">
-                            {% for key, data in audits %}
+                            {%- for key, data in audits -%}
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card mt-1">
                                         <div class="card-body p-0">
                                             <ul class="list-group p-0">
-                                                {% for property in data | keys %}
+                                                {%- for property in data | keys -%}
                                                     <li class="list-group-item text-primary">
-                                                        {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
-                                                        {% if 'data' == property %}
-                                                            <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
-                                                        {% else %}
-                                                            <a class="float-right">{{ data[property] }}</a>
-                                                        {% endif %}
+                                                        {{- ('sas.table.column.audit.' ~ property) | trans({}, 'tables') -}}
+                                                        {%- if 'data' == property -%}
+                                                            <a class="float-right"><pre class="json-viewer" data-json="{{- data[property] | json_encode() -}}"></pre></a>
+                                                        {%- else -%}
+                                                            <a class="float-right">{{- data[property] -}}</a>
+                                                        {%- endif -%}
                                                     </li>
-                                                {% endfor %}
+                                                {%- endfor -%}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
+                            {%- endfor -%}
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: data.id}) }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\User\\Get', {id: data.id}) -}}" class="btn btn-outline-secondary ml-1">{{- 'sas.form.action.back' | trans({}, 'forms') -}}</a>
                     </div>
                 </div>
             </div>
         </div>
-    {% endapply %}
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+{%- endblock -%}
+{%- block javascripts -%}
+    <script src="{{- asset('plugins/json-viewer/json-viewer.min.js') -}}"></script>
     <script>
         $(document).ready(function () {
             $('.json-viewer').each(function() {
@@ -84,4 +82,4 @@
             });
         });
     </script>
-{% endblock %}
+{%- endblock -%}

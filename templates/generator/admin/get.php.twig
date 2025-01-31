@@ -1,19 +1,19 @@
-{% set entityHumanize = entity | humanize %}
-{% set entityLowerize = entity | lower %}
-{% set entityUpper = entity | upper %}
-{% set entityPluralDash = entity | pluralize | dash %}
+{%- set entityHumanize = entity | humanize -%}
+{%- set entityLowerize = entity | lower -%}
+{%- set entityUpper = entity | upper -%}
+{%- set entityPluralDash = entity | pluralize | dash -%}
 <?php
 
 declare(strict_types=1);
 
-namespace KejawenLab\Application\Admin\Controller\{{ entityHumanize }};
+namespace KejawenLab\Application\Admin\Controller\{{- entityHumanize -}};
 
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use KejawenLab\ApiSkeleton\Admin\Controller\AbstractController;
 use KejawenLab\ApiSkeleton\Audit\Audit as Record;
-use KejawenLab\Application\Entity\{{ entityHumanize }};
-use KejawenLab\Application\{{ entityHumanize }}\Model\{{ entityHumanize }}Interface;
-use KejawenLab\Application\{{ entityHumanize }}\{{ entityHumanize }}Service;
+use KejawenLab\Application\Entity\{{- entityHumanize -}};
+use KejawenLab\Application\{{- entityHumanize -}}\Model\{{- entityHumanize -}}Interface;
+use KejawenLab\Application\{{- entityHumanize -}}\{{- entityHumanize -}}Service;
 use KejawenLab\ApiSkeleton\Audit\AuditService;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use Psr\Cache\CacheItemPoolInterface;
@@ -26,12 +26,12 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-#[Permission(menu: '{{ entityUpper }}', actions: [Permission::VIEW])]
+#[Permission(menu: '{{- entityUpper -}}', actions: [Permission::VIEW])]
 final class Get extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private {{ entityHumanize }}Service $service,
+        private {{- entityHumanize -}}Service $service,
         private readonly CacheItemPoolInterface $cache,
         private AuditService $audit,
         private Reader $reader,
@@ -39,21 +39,21 @@ final class Get extends AbstractController
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 
-    #[Route(path: '/{{ entityPluralDash }}/{id}', name: self::class, methods: ['GET'])]
+    #[Route(path: '/{{- entityPluralDash -}}/{id}', name: self::class, methods: ['GET'])]
     public function __invoke(string $id): Response
     {
-        ${{ entityLowerize }} = $this->service->get($id);
-        if (!${{ entityLowerize }} instanceof {{ entityHumanize }}Interface) {
-            $this->addFlash('error', 'sas.page.{{ entityLowerize }}.not_found');
+        ${{- entityLowerize -}} = $this->service->get($id);
+        if (!${{- entityLowerize -}} instanceof {{- entityHumanize -}}Interface) {
+            $this->addFlash('error', 'sas.page.{{- entityLowerize -}}.not_found');
 
             return new RedirectResponse($this->generateUrl(Main::class));
         }
 
-        $audit = new Record(${{ entityLowerize }});
-        if ($this->reader->getProvider()->isAuditable({{ entityHumanize }}::class)) {
-            $audit = $this->audit->getAudits(${{ entityLowerize }}, $id, 1);
+        $audit = new Record(${{- entityLowerize -}});
+        if ($this->reader->getProvider()->isAuditable({{- entityHumanize -}}::class)) {
+            $audit = $this->audit->getAudits(${{- entityLowerize -}}, $id, 1);
         }
 
-        return $this->renderDetail($audit, new ReflectionClass({{ entityHumanize }}::class));
+        return $this->renderDetail($audit, new ReflectionClass({{- entityHumanize -}}::class));
     }
 }

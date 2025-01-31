@@ -1,80 +1,78 @@
-{% extends 'layout/main.html.twig' %}
+{%- extends 'layout/main.html.twig' -%}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/json-viewer/json-viewer.min.css') }}">
-{% endblock %}
-{% block content %}
-    {% apply spaceless %}
+{%- block stylesheets -%}
+    <link rel="stylesheet" href="{{- asset('plugins/toastr/toastr.min.css') -}}">
+    <link rel="stylesheet" href="{{- asset('plugins/json-viewer/json-viewer.min.css') -}}">
+{%- endblock -%}
+{%- block content -%}
         <div class="row">
-            <div class="{% if is_auditable(data) %}col-lg-6{% else %}col-lg-12{% endif %} col-md-12 col-sm-12">
+            <div class="{%- if is_auditable(data) -%} col-lg-6{%- else -%} col-lg-12{%- endif -%}  col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{ page_title | trans({}, 'pages') }}</h4>
+                        <h4>{{- page_title | trans({}, 'pages') -}}</h4>
                     </div>
                     <div class="card-body p-1">
                         <ul class="list-group">
-                            {% for property in properties %}
-                                {% if 'id' != property.name %}
+                            {%- for property in properties -%}
+                                {%- if 'id' != property.name -%}
                                     <li class="list-group-item text-primary">
-                                        {{ ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') }}
-                                        {% if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name %}
+                                        {{- ('sas.table.column.' ~ context ~ '.' ~ property.name) | trans({}, 'tables') -}}
+                                        {%- if 'enabled' == property.name or 'symfonyCommand' == property.name or 'running' == property.name -%}
                                             <a class="float-right">
-                                                {% if attribute(data, property.name) %}
-                                                    <span class="btn btn-sm btn-success disabled">{{ 'sas.page.cron.active' | trans({}, 'pages') }}</span>
-                                                {% else %}
-                                                    <span class="btn btn-sm btn-dark disabled">{{ 'sas.page.cron.inactive' | trans({}, 'pages') }}</span>
-                                                {% endif %}
+                                                {%- if attribute(data, property.name) -%}
+                                                    <span class="btn btn-sm btn-success disabled">{{- 'sas.page.cron.active' | trans({}, 'pages') -}}</span>
+                                                {%- else -%}
+                                                    <span class="btn btn-sm btn-dark disabled">{{- 'sas.page.cron.inactive' | trans({}, 'pages') -}}</span>
+                                                {%- endif -%}
                                             </a>
-                                        {% else %}
-                                            <a class="float-right">{{ attribute(data, property.name) }}</a>
-                                        {% endif %}
+                                        {%- else -%}
+                                            <a class="float-right">{{- attribute(data, property.name) -}}</a>
+                                        {%- endif -%}
                                     </li>
-                                {% endif %}
-                            {% endfor %}
+                                {%- endif -%}
+                            {%- endfor -%}
                         </ul>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) }}" class="btn btn-outline-danger">{{ 'sas.form.action.run' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) }}" class="btn btn-outline-info ml-1">{{ 'sas.form.action.cron_logs' | trans({}, 'forms') }}</a>
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Main') }}" class="btn btn-outline-secondary ml-1">{{ 'sas.form.action.back' | trans({}, 'forms') }}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Run', {id: data.id}) -}}" class="btn btn-outline-danger">{{- 'sas.form.action.run' | trans({}, 'forms') -}}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Report', {id: data.id}) -}}" class="btn btn-outline-info ml-1">{{- 'sas.form.action.cron_logs' | trans({}, 'forms') -}}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Main') -}}" class="btn btn-outline-secondary ml-1">{{- 'sas.form.action.back' | trans({}, 'forms') -}}</a>
                     </div>
                 </div>
             </div>
-            {% if is_auditable(data) %}
+            {%- if is_auditable(data) -%}
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-2">
-                        <h4>{{ 'sas.page.audit.last_changes' | trans({}, 'pages') }}</h4>
+                        <h4>{{- 'sas.page.audit.last_changes' | trans({}, 'pages') -}}</h4>
                     </div>
                     <div class="card-body p-0">
-                        {% for key, data in audits %}
+                        {%- for key, data in audits -%}
                             <ul class="list-group p-1">
-                                {% for property in data | keys %}
+                                {%- for property in data | keys -%}
                                     <li class="list-group-item text-primary">
-                                        {{ ('sas.table.column.audit.' ~ property) | trans({}, 'tables') }}
-                                        {% if 'data' == property %}
-                                            <a class="float-right"><pre class="json-viewer" data-json="{{ data[property] | json_encode() }}"></pre></a>
-                                        {% else %}
-                                            <a class="float-right">{{ data[property] }}</a>
-                                        {% endif %}
+                                        {{- ('sas.table.column.audit.' ~ property) | trans({}, 'tables') -}}
+                                        {%- if 'data' == property -%}
+                                            <a class="float-right"><pre class="json-viewer" data-json="{{- data[property] | json_encode() -}}"></pre></a>
+                                        {%- else -%}
+                                            <a class="float-right">{{- data[property] -}}</a>
+                                        {%- endif -%}
                                     </li>
-                                {% endfor %}
+                                {%- endfor -%}
                             </ul>
-                        {% endfor %}
+                        {%- endfor -%}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Audit', {id: data.id}) }}" class="btn btn-outline-info">{{ 'sas.form.action.audit' | trans({}, 'forms') }}</a>
+                        <a href="{{- path('KejawenLab\\ApiSkeleton\\Admin\\Controller\\Cron\\Audit', {id: data.id}) -}}" class="btn btn-outline-info">{{- 'sas.form.action.audit' | trans({}, 'forms') -}}</a>
                     </div>
                 </div>
             </div>
-            {% endif %}
+            {%- endif -%}
         </div>
-    {% endapply %}
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('plugins/json-viewer/json-viewer.min.js') }}"></script>
+{%- endblock -%}
+{%- block javascripts -%}
+    <script src="{{- asset('plugins/toastr/toastr.min.js') -}}"></script>
+    <script src="{{- asset('plugins/json-viewer/json-viewer.min.js') -}}"></script>
     <script>
         $(document).ready(function () {
             toastr.options = {
@@ -100,12 +98,12 @@
                 me.jsonViewer(me.data('json'), {collapsed: true, withQuotes: true, withLinks: false});
             });
 
-            {% for message in app.flashes('info') %}
-                toastr['success']('{{ message | trans({}, 'pages') }}');
-            {% endfor %}
-            {% for message in app.flashes('error') %}
-                toastr['error']('{{ message | trans({}, 'pages') }}');
-            {% endfor %}
+            {%- for message in app.flashes('info') -%}
+                toastr['success']('{{- message | trans({}, 'pages') -}}');
+            {%- endfor -%}
+            {%- for message in app.flashes('error') -%}
+                toastr['error']('{{- message | trans({}, 'pages') -}}');
+            {%- endfor -%}
         });
     </script>
-{% endblock %}
+{%- endblock -%}

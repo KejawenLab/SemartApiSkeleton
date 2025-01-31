@@ -7,10 +7,12 @@ namespace KejawenLab\ApiSkeleton\ApiClient\Message;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
+#[AsMessage('sync')]
 final class RequestLog
 {
     private readonly string $apiClientId;

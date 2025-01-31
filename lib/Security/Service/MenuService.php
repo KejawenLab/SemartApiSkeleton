@@ -58,7 +58,7 @@ final class MenuService extends AbstractService implements ServiceInterface
 
     public function getChildsMenu(MenuInterface $menu): iterable
     {
-        if (($group = $this->getGroup()) === null) {
+        if (null === $group = $this->getGroup()) {
             return [];
         }
 

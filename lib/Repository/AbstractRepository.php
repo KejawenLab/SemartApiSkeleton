@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,11 +31,11 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     }
 
     /**
-     * @return mixed|null
+     * @return object|null
      *
      * @throws NonUniqueResultException
      */
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find(mixed $id, LockMode|int|null $lockMode = null, ?int $lockVersion = null): ?object
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
@@ -55,7 +56,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         return $query->getOneOrNullResult();
     }
 
-    public function findAll(): iterable
+    public function findAll(): array
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
@@ -80,17 +81,18 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     public function persist(object $object): void
     {
-        $this->_em->persist($object);
+        $this->getEntityManager()->persist($object);
     }
 
     public function remove(object $object): void
     {
-        $this->_em->remove($object);
+        $this->getEntityManager()->remove($object);
+        $this->getEntityManager()->flush();
     }
 
     public function commit(): void
     {
-        $this->_em->flush();
+        $this->getEntityManager()->flush();
     }
 
     public function queryBuilder(string $alias): QueryBuilder

@@ -26,7 +26,7 @@ final class MediaRepository extends AbstractRepository implements MediaRepositor
         parent::__construct($requestStack, $registry, Media::class);
     }
 
-    public function findByFilename(string $fileName, string $folder = null): ?MediaInterface
+    public function findByFilename(string $fileName, ?string $folder): ?MediaInterface
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;

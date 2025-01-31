@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Repository;
 
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Proxy;
 use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Permission;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
@@ -13,7 +14,6 @@ use KejawenLab\ApiSkeleton\Security\Model\MenuInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
-use Swoole\Coroutine;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -121,7 +121,12 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
         foreach ($permissions as $permission) {
-            yield $permission->getMenu();
+            $menu = $permission->getMenu();
+            if ($menu instanceof Proxy) {
+                $menu->__load();
+            }
+
+            yield $menu;
         }
     }
 
@@ -159,33 +164,34 @@ final class PermissionRepository extends AbstractRepository implements Permissio
         /** @var PermissionInterface[] $permissions */
         $permissions = $query->getResult();
         foreach ($permissions as $permission) {
-            yield $permission->getMenu();
+            $menu = $permission->getMenu();
+            if ($menu instanceof Proxy) {
+                $menu->__load();
+            }
+
+            yield $menu;
         }
     }
 
     public function removeByGroup(GroupInterface $group): void
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        Coroutine::create(function () use ($queryBuilder, $group): void {
-            $queryBuilder->update();
-            $queryBuilder->set('o.deletedAt', ':now');
-            $queryBuilder->where('o.group = :group');
-            $queryBuilder->setParameter('now', new DateTime());
-            $queryBuilder->setParameter('group', $group);
-            $queryBuilder->getQuery()->execute();
-        });
+        $queryBuilder->update();
+        $queryBuilder->set('o.deletedAt', ':now');
+        $queryBuilder->where('o.group = :group');
+        $queryBuilder->setParameter('now', new DateTime());
+        $queryBuilder->setParameter('group', $group);
+        $queryBuilder->getQuery()->execute();
     }
 
     public function removeByMenu(MenuInterface $menu): void
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        Coroutine::create(function () use ($queryBuilder, $menu): void {
-            $queryBuilder->update();
-            $queryBuilder->set('o.deletedAt', ':now');
-            $queryBuilder->where('o.menu= :menu');
-            $queryBuilder->setParameter('menu', $menu);
-            $queryBuilder->setParameter('now', new DateTime());
-            $queryBuilder->getQuery()->execute();
-        });
+        $queryBuilder->update();
+        $queryBuilder->set('o.deletedAt', ':now');
+        $queryBuilder->where('o.menu= :menu');
+        $queryBuilder->setParameter('menu', $menu);
+        $queryBuilder->setParameter('now', new DateTime());
+        $queryBuilder->getQuery()->execute();
     }
 }

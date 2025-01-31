@@ -9,12 +9,11 @@ use LogicException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
-use Vich\UploaderBundle\Storage\FileSystemStorage;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class Storage extends FileSystemStorage
+final class Storage extends AbstractStorage
 {
     public function remove($obj, PropertyMapping $mapping, ?string $forcedFilename = null): ?bool
     {

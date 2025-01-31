@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\EventSubscriber;
 
-use KejawenLab\ApiSkeleton\Security\Annotation\Parser;
 use KejawenLab\ApiSkeleton\Security\Annotation\Permission;
 use KejawenLab\ApiSkeleton\Security\Authorization\Ownership;
 use KejawenLab\ApiSkeleton\Security\Service\Authorization;
@@ -18,7 +17,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class PermissionSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly Parser $parser, private readonly Authorization $authorization, private readonly Ownership $ownership)
+    public function __construct(private readonly Authorization $authorization, private readonly Ownership $ownership)
     {
     }
 
@@ -34,21 +33,21 @@ final class PermissionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $controllerReflection = new ReflectionObject($controller);
-        $permission = $this->parser->parse($controllerReflection);
-        if (!$permission instanceof Permission) {
+        $attributes = $event->getAttributes();
+        $permission = $attributes[Permission::class] ?? null;
+        if (!$permission) {
             return;
         }
 
-        $namespaceArray = explode('\\', $controllerReflection->getNamespaceName());
+        $namespaceArray = explode('\\', new ReflectionObject($controller)->getNamespaceName());
         $entity = array_pop($namespaceArray);
-        $authorize = $this->authorization->authorize($permission);
+        $authorize = $this->authorization->authorize($permission[0]);
         if (!$authorize) {
             throw new AccessDeniedException();
         }
 
         $id = $event->getRequest()->attributes->get('id');
-        if (!$permission->isOwnership()) {
+        if (!$permission[0]->isOwnership()) {
             return;
         }
 

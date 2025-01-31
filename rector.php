@@ -15,11 +15,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES);
     $containerConfigurator->import(SetList::CODE_QUALITY);
     $containerConfigurator->import(SetList::DEAD_CODE);
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_81);
+    $containerConfigurator->import(LevelSetList::UP_TO_PHP_84);
     $containerConfigurator->import(SetList::EARLY_RETURN);
     $containerConfigurator->import(Setlist::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
-    $containerConfigurator->import(SymfonyLevelSetList::UP_TO_SYMFONY_54);
+    $containerConfigurator->import(SymfonyLevelSetList::SYMFONY_72);
 
     $services = $containerConfigurator->services();
     // tidify lines after apply annotation to attribute that make remove lines

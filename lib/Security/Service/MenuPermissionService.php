@@ -10,7 +10,6 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionableInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionInitiatorInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
-use Swoole\Coroutine;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -32,21 +31,19 @@ final class MenuPermissionService implements PermissionInitiatorInterface, Permi
     {
         $permissionRepository = $this->permissionRepository;
         foreach ($this->groupRepository->findAll() as $key => $group) {
-            Coroutine::create(function () use ($permissionRepository, $object, $key, $group): void {
-                if (0 === $key % 7) {
-                    $permissionRepository->commit();
-                }
+            if (0 === $key % 7) {
+                $permissionRepository->commit();
+            }
 
-                $permission = $permissionRepository->findPermission($group, $object, false);
-                if (null === $permission) {
-                    $permission = new $this->class();
-                }
+            $permission = $permissionRepository->findPermission($group, $object, false);
+            if (null === $permission) {
+                $permission = new $this->class();
+            }
 
-                $permission->setMenu($object);
-                $permission->setGroup($group);
+            $permission->setMenu($object);
+            $permission->setGroup($group);
 
-                $permissionRepository->persist($permission);
-            });
+            $permissionRepository->persist($permission);
         }
     }
 

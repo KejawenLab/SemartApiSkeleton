@@ -20,13 +20,14 @@ use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
 use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
-use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class PermissionService extends AbstractService implements ServiceInterface, MessageSubscriberInterface
+#[AsMessageHandler]
+final class PermissionService extends AbstractService implements ServiceInterface
 {
     private const FILTER_NAME = 'semart_softdeletable';
 
@@ -98,15 +99,6 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         foreach ($parents as $parent) {
             yield $this->buildMenu($parent, $user->getGroup());
         }
-    }
-
-    /**
-     * @return Iterator<string>
-     */
-    public static function getHandledMessages(): iterable
-    {
-        yield EntityPersisted::class;
-        yield EntityRemoved::class;
     }
 
     private function getPermissions(GroupInterface $group, iterable $menus): iterable

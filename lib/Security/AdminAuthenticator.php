@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
@@ -46,11 +47,9 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $credentials = [
-            'username' => $request->request->get('_username', ''),
-            'password' => $request->request->get('_password', ''),
+            'username' => $request->getPayload()->get('_username', ''),
+            'password' => $request->getPayload()->get('_password', ''),
         ];
-
-        $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return new Passport(
             new UserBadge($credentials['username'], fn (string $userIdentifier): User => $this->userProviderFactory->loadUserByIdentifier($userIdentifier)),
@@ -82,6 +81,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE_FIELD);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_PER_PAGE);
         $this->cache->deleteItem(SettingInterface::CACHE_ID_MAX_API_PER_USER);
+
         $configuration = $this->entityManager->getConfiguration();
 
         $configuration->getQueryCache()->clear();
@@ -102,5 +102,10 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         return new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE));
+    }
+
+    public function supports(Request $request): bool
+    {
+        return AdminContext::ADMIN_ROUTE === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 }
