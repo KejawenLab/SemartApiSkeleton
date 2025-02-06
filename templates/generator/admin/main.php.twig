@@ -19,7 +19,7 @@ use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -45,20 +45,9 @@ final class Main extends AbstractController
             if (null !== $id) {
                 ${{ entityLowerize }} = $this->service->get($id);
             }
-        } else {
-            $flashes = $request->getSession()->getFlashBag()->get('id');
-            foreach ($flashes as $flash) {
-                ${{ entityLowerize }} = $this->service->get($flash);
-                if (null !== ${{ entityLowerize }}) {
-                    $request->getSession()->set('id', ${{ entityLowerize }}->getId());
 
-                    break;
-                }
-            }
-        }
+            $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
 
-        $form = $this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }});
-        if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->service->save($form->getData());
@@ -66,8 +55,20 @@ final class Main extends AbstractController
 
                 $form = $this->createForm({{ entityHumanize }}Type::class);
             }
+
+            return $this->renderList($form, $request, new ReflectionClass({{ entityHumanize }}::class));
         }
 
-        return $this->renderList($form, $request, new ReflectionClass({{ entityHumanize }}::class));
+        $flashes = $request->getSession()->getFlashBag()->get('id');
+        foreach ($flashes as $flash) {
+            ${{ entityLowerize }} = $this->service->get($flash);
+            if (null !== ${{ entityLowerize }}) {
+                $request->getSession()->set('id', ${{ entityLowerize }}->getId());
+
+                break;
+            }
+        }
+
+        return $this->renderList($this->createForm({{ entityHumanize }}Type::class, ${{ entityLowerize }}), $request, new ReflectionClass({{ entityHumanize }}::class));
     }
 }
