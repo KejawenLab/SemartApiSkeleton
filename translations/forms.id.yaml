@@ -41,7 +41,7 @@ sas:
                 description: 'Deskripsi'
                 command: 'Perintah'
                 schedule: 'Jadwal'
-                enabled: 'Aktif'
+                enabled: 'Aktif?'
                 symfonyCommand: 'Perintah Symfony'
             api_client:
                 name: 'Nama'

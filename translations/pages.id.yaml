@@ -1,5 +1,7 @@
 sas:
     page:
+        active: 'ON'
+        inactive: 'OFF'
         dashboard: 'Dashboard'
         login: 'Masuk'
         logout: 'Keluar'
@@ -74,8 +76,6 @@ sas:
             add: 'Tambah Pekerjaan Terjadwal'
             edit: 'Ubah Pekerjaan Terjadwal'
             view: 'Detil Pekerjaan Terjadwal'
-            active: 'ON'
-            inactive: 'OFF'
             run_success: 'Pekerjaan berhasil dijalankan'
         api_client:
             report: 'Riwayat Klien API'
