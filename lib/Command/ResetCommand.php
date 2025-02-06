@@ -30,8 +30,7 @@ final class ResetCommand extends Command
         $this
             ->setName('semart:reset')
             ->setDescription('Reset Database Semart Api Skeleton')
-            ->addOption('force', 'f', InputOption::VALUE_NONE)
-        ;
+            ->addOption('force', 'f', InputOption::VALUE_NONE);
     }
 
     /**

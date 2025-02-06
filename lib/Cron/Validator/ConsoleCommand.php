@@ -20,6 +20,7 @@ final class ConsoleCommand extends Constraint
         return 'sas.validator.cron.command_not_found';
     }
 
+    #[\Override]
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

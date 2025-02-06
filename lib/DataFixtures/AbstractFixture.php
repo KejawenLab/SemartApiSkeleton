@@ -41,7 +41,7 @@ abstract class AbstractFixture extends Base
                 if (static::REF_KEY === sprintf('%s:', $key)) {
                     $this->addReference(StringUtil::uppercase(sprintf('%s#%s', $this->getReferenceKey(), $value)), $entity);
                 } else {
-                    if (\is_string($value) && str_contains($value, (string) static::REF_KEY)) {
+                    if (\is_string($value) && str_contains($value, (string)static::REF_KEY)) {
                         $references = explode('@', str_replace('ref:', '', $value));
                         $value = $this->getReference(StringUtil::uppercase($references[1]), str_replace('_', '\\', $references[0]));
                     }
@@ -80,10 +80,10 @@ abstract class AbstractFixture extends Base
 
     protected function getData(): iterable
     {
-        return Yaml::parse((string) file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
+        return Yaml::parse((string)file_get_contents(sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey())));
     }
 
-    abstract protected function createNew();
-
     abstract protected function getReferenceKey(): string;
+
+    abstract protected function createNew();
 }

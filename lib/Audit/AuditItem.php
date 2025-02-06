@@ -12,13 +12,14 @@ use DateTimeImmutable;
 final class AuditItem
 {
     public function __construct(
-        private readonly string $type,
-        private readonly array $data,
+        private readonly string             $type,
+        private readonly array              $data,
         private readonly ?DateTimeImmutable $logTime,
-        private readonly ?string $userId,
-        private readonly ?string $username,
-        private readonly ?string $ip,
-    ) {
+        private readonly ?string            $userId,
+        private readonly ?string            $username,
+        private readonly ?string            $ip,
+    )
+    {
     }
 
     /**

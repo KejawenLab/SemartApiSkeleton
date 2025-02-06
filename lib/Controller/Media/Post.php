@@ -59,7 +59,7 @@ final class Post extends AbstractFOSRestController
         }
 
         $media->setFile($file);
-        $media->setPublic((bool) $public);
+        $media->setPublic((bool)$public);
         $media->setFolder($request->request->get('folder'));
         $this->service->save($media);
 

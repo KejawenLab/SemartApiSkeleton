@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionInterface;
 use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -73,7 +73,7 @@ class Permission implements PermissionInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getGroup(): ?GroupInterface

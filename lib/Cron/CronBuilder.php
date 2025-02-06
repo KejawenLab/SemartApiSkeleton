@@ -20,7 +20,7 @@ final class CronBuilder
     public function build(CronInterface $cron): ?string
     {
         if ($cron->isSymfonyCommand()) {
-            $docRoot = explode('/', (string) $_SERVER['NGINX_WEBROOT']);
+            $docRoot = explode('/', (string)$_SERVER['NGINX_WEBROOT']);
             array_pop($docRoot);
 
             return sprintf(

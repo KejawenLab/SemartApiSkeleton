@@ -25,27 +25,10 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
-        private readonly UserProviderFactory $userProvider,
-        private readonly MessageBusInterface $messageBus,
-    ) {
-    }
-
-    public function requestLog(ResponseEvent $event): void
+        private readonly UserProviderFactory   $userProvider,
+        private readonly MessageBusInterface   $messageBus,
+    )
     {
-        if (!$this->isValid($event)) {
-            return;
-        }
-
-        $this->messageBus->dispatch(new RequestLog($this->user, $event->getRequest(), $event->getResponse()));
-    }
-
-    public function exceptionLog(ExceptionEvent $event): void
-    {
-        if (!$this->isValid($event)) {
-            return;
-        }
-
-        $this->messageBus->dispatch(new RequestLog($this->user, $event->getRequest(), $event->getResponse()));
     }
 
     /**
@@ -57,6 +40,15 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
             ResponseEvent::class => 'requestLog',
             ExceptionEvent::class => 'exceptionLog',
         ];
+    }
+
+    public function requestLog(ResponseEvent $event): void
+    {
+        if (!$this->isValid($event)) {
+            return;
+        }
+
+        $this->messageBus->dispatch(new RequestLog($this->user, $event->getRequest(), $event->getResponse()));
     }
 
     private function isValid(KernelEvent $event): bool
@@ -83,5 +75,14 @@ final class ApiClientRequestLogSubscriber implements EventSubscriberInterface
         $this->user = $user;
 
         return true;
+    }
+
+    public function exceptionLog(ExceptionEvent $event): void
+    {
+        if (!$this->isValid($event)) {
+            return;
+        }
+
+        $this->messageBus->dispatch(new RequestLog($this->user, $event->getRequest(), $event->getResponse()));
     }
 }

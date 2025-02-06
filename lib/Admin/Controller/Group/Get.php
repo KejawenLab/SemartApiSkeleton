@@ -30,8 +30,9 @@ final class Get extends AbstractController
         private readonly GroupService $service,
         private readonly CacheFactory $cache,
         private readonly AuditService $audit,
-        private readonly Reader $reader,
-    ) {
+        private readonly Reader       $reader,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 

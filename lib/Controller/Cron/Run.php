@@ -29,10 +29,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Run extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly CronService $service,
-        private readonly KernelInterface $kernel,
+        private readonly CronService         $service,
+        private readonly KernelInterface     $kernel,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Post(data: '/cronjobs/{id}/run', name: self::class, priority: -17)]

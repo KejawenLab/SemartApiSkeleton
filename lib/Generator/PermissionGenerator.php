@@ -25,14 +25,15 @@ final class PermissionGenerator extends AbstractGenerator
 
     public function __construct(
         private readonly PermissionService $permissionService,
-        private readonly MenuService $menuService,
-        private readonly GroupService $groupService,
-        Environment $twig,
-        Filesystem $fileSystem,
-        KernelInterface $kernel,
-        EntityManagerInterface $entityManager,
-        private readonly string $class,
-    ) {
+        private readonly MenuService       $menuService,
+        private readonly GroupService      $groupService,
+        Environment                        $twig,
+        Filesystem                         $fileSystem,
+        KernelInterface                    $kernel,
+        EntityManagerInterface             $entityManager,
+        private readonly string            $class,
+    )
+    {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 

@@ -76,15 +76,11 @@ services:
             $localFactory: '@limiter.username_ip_login'
     Cron\Validator\CrontabValidator:
     KejawenLab\ApiSkeleton\Repository\UserRepository:
-        arguments:
-            $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
     KejawenLab\ApiSkeleton\Security\Authorization\Ownership:
         arguments:
-            $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
             $ownershipProperty: 'created_by'
     KejawenLab\ApiSkeleton\Security\Service\GroupService:
         arguments:
-            $superAdmin: '%env(resolve:APP_SUPER_ADMIN)%'
     KejawenLab\ApiSkeleton\Security\Service\UserProvider:
         arguments:
             $class: 'KejawenLab\ApiSkeleton\Entity\User'

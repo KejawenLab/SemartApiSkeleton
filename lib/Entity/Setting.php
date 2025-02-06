@@ -16,7 +16,7 @@ use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -72,7 +72,7 @@ class Setting implements SettingInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getGroup(): ?string
@@ -83,26 +83,6 @@ class Setting implements SettingInterface
     public function setGroup(?string $group): void
     {
         $this->group = StringUtil::lowercase($group);
-    }
-
-    public function getParameter(): ?string
-    {
-        return $this->parameter;
-    }
-
-    public function setParameter(string $parameter): void
-    {
-        $this->parameter = StringUtil::uppercase($parameter);
-    }
-
-    public function getValue(): ?string
-    {
-        return $this->value;
-    }
-
-    public function setValue(string $value): void
-    {
-        $this->value = $value;
     }
 
     public function isPublic(): bool
@@ -128,5 +108,25 @@ class Setting implements SettingInterface
     public function getNullOrString(): ?string
     {
         return sprintf('%s: %s', $this->getParameter(), $this->getValue());
+    }
+
+    public function getParameter(): ?string
+    {
+        return $this->parameter;
+    }
+
+    public function setParameter(string $parameter): void
+    {
+        $this->parameter = StringUtil::uppercase($parameter);
+    }
+
+    public function getValue(): ?string
+    {
+        return $this->value;
+    }
+
+    public function setValue(string $value): void
+    {
+        $this->value = $value;
     }
 }

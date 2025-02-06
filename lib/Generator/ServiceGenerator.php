@@ -24,12 +24,12 @@ final class ServiceGenerator extends AbstractGenerator
     {
         $shortName = $class->getShortName();
 
-        $serviceFile = sprintf('%s/app/%s/%sService.php', $this->kernel->getProjectDir(), ($folder ?: $shortName), $shortName);
+        $serviceFile = sprintf('%s/app/%s/%sService.php', $this->kernel->getProjectDir(), ($folder !== null && $folder !== '' && $folder !== '0' ? $folder : $shortName), $shortName);
         if (!$this->fileSystem->exists($serviceFile)) {
             $template = $this->twig->render('generator/service.php.twig', ['entity' => $shortName]);
             $output->writeln(sprintf(
                 '<comment>Generating class <info>"KejawenLab\\Application\\%s\\%sService"</info></comment>',
-                ($folder ?: $shortName),
+                ($folder !== null && $folder !== '' ? $folder : $shortName),
                 $shortName
             ));
             $this->fileSystem->dumpFile($serviceFile, $template);

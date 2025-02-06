@@ -42,8 +42,23 @@ final class RequestLog
         $this->queries = $request->query->all();
         $this->requests = $request->request->all();
         $this->files = $request->files->all();
-        $this->content = (string) $response->getContent();
+        $this->content = (string)$response->getContent();
         $this->statusCode = $response->getStatusCode();
+    }
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
     }
 
     public function getApiClientId(): string
@@ -54,11 +69,6 @@ final class RequestLog
     public function getPath(): string
     {
         return $this->path;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->method;
     }
 
     /**
@@ -91,15 +101,5 @@ final class RequestLog
     public function getFiles(): array
     {
         return $this->files;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function getStatusCode(): int
-    {
-        return $this->statusCode;
     }
 }

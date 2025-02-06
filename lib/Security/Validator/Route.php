@@ -20,6 +20,7 @@ final class Route extends Constraint
         return 'validation.route.not_found';
     }
 
+    #[\Override]
     public function getTargets(): string
     {
         return self::PROPERTY_CONSTRAINT;

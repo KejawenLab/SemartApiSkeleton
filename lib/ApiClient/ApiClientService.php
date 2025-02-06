@@ -27,6 +27,7 @@ final class ApiClientService extends AbstractService implements ServiceInterface
     /**
      * @param ApiClient $object
      */
+    #[\Override]
     public function save(object $object): void
     {
         $object->setApiKey(sha1(date('YmdHis')));

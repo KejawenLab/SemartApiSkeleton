@@ -21,12 +21,13 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class MenuService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        private readonly TokenStorageInterface $tokenStorage,
+        private readonly TokenStorageInterface         $tokenStorage,
         private readonly PermissionRepositoryInterface $permissionRepository,
-        MessageBusInterface $messageBus,
-        MenuRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
-    ) {
+        MessageBusInterface                            $messageBus,
+        MenuRepositoryInterface                        $repository,
+        AliasHelper                                    $aliasHelper,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
@@ -42,6 +43,20 @@ final class MenuService extends AbstractService implements ServiceInterface
         }
 
         return $this->permissionRepository->findAllowedMenusByGroup($group, true);
+    }
+
+    private function getGroup(): ?GroupInterface
+    {
+        if (null === $token = $this->tokenStorage->getToken()) {
+            return null;
+        }
+
+        $user = $token->getUser();
+        if (!$user instanceof User) {
+            return null;
+        }
+
+        return $user->getGroup();
     }
 
     public function hasChildMenu(MenuInterface $menu): bool
@@ -63,19 +78,5 @@ final class MenuService extends AbstractService implements ServiceInterface
         }
 
         return $this->permissionRepository->findAllowedChildMenusByGroupAndMenu($group, $menu);
-    }
-
-    private function getGroup(): ?GroupInterface
-    {
-        if (null === $token = $this->tokenStorage->getToken()) {
-            return null;
-        }
-
-        $user = $token->getUser();
-        if (!$user instanceof User) {
-            return null;
-        }
-
-        return $user->getGroup();
     }
 }

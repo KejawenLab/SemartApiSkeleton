@@ -12,16 +12,6 @@ use KejawenLab\ApiSkeleton\Entity\Permission;
  */
 final class PermissionFixture extends AbstractFixture implements DependentFixtureInterface
 {
-    protected function createNew(): Permission
-    {
-        return new Permission();
-    }
-
-    protected function getReferenceKey(): string
-    {
-        return 'permission';
-    }
-
     /**
      * @return string[]
      */
@@ -31,5 +21,15 @@ final class PermissionFixture extends AbstractFixture implements DependentFixtur
             GroupFixture::class,
             MenuFixture::class,
         ];
+    }
+
+    protected function createNew(): Permission
+    {
+        return new Permission();
+    }
+
+    protected function getReferenceKey(): string
+    {
+        return 'permission';
     }
 }

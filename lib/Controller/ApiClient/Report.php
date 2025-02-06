@@ -31,10 +31,11 @@ final class Report extends AbstractFOSRestController
 {
     public function __construct(
         private readonly ApiClientRequestService $service,
-        private readonly UserService $userService,
-        private readonly Paginator $paginator,
-        private readonly TranslatorInterface $translator,
-    ) {
+        private readonly UserService             $userService,
+        private readonly Paginator               $paginator,
+        private readonly TranslatorInterface     $translator,
+    )
+    {
     }
 
     #[Get(data: '/users/{userId}/api-clients/{id}/logs', name: self::class, priority: -27)]

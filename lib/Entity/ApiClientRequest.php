@@ -13,8 +13,8 @@ use KejawenLab\ApiSkeleton\Repository\ApiClientRequestRepository;
 use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\MaxDepth;
 
 #[ORM\Entity(repositoryClass: ApiClientRequestRepository::class)]
 #[ORM\Table(name: 'core_api_client_request')]
@@ -74,7 +74,7 @@ class ApiClientRequest implements ApiClientRequestInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getApiClient(): ?ApiClientInterface

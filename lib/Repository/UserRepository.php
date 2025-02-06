@@ -8,14 +8,15 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Entity\User;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,7 +28,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public function __construct(RequestStack $requestStack, ManagerRegistry $registry, private readonly string $superAdmin)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $registry)
     {
         parent::__construct($requestStack, $registry, User::class);
     }
@@ -54,7 +55,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
         }
 
         if (null === $user->getSupervisor()) {
-            return $user->getGroup()->getCode() === $this->superAdmin;
+            return $user->getGroup()->getCode() === GroupInterface::SUPER_ADMIN_CODE;
         }
 
         return $this->isSupervisor($user->getSupervisor(), $supervisor);
@@ -64,7 +65,7 @@ final class UserRepository extends AbstractRepository implements PasswordUpgrade
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 

@@ -6,7 +6,6 @@ namespace KejawenLab\ApiSkeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\LockMode;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\ApiSkeleton\Pagination\Model\PaginatableRepositoryInterface;
@@ -24,22 +23,19 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
 
     public function __construct(
         protected RequestStack $requestStack,
-        ManagerRegistry $registry,
-        string $entityClass,
-    ) {
+        ManagerRegistry        $registry,
+        string                 $entityClass,
+    )
+    {
         parent::__construct($registry, $entityClass);
     }
 
-    /**
-     * @return object|null
-     *
-     * @throws NonUniqueResultException
-     */
+    #[\Override]
     public function find(mixed $id, LockMode|int|null $lockMode = null, ?int $lockVersion = null): ?object
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -56,11 +52,43 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         return $query->getOneOrNullResult();
     }
 
+    protected function getDeviceId(): string
+    {
+        try {
+            $session = $this->requestStack->getSession();
+
+            $deviceId = $session->get(SemartApiSkeleton::USER_DEVICE_ID, '');
+            if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
+                return '';
+            }
+
+            return $deviceId;
+        } catch (SessionNotFoundException) {
+            return '';
+        }
+    }
+
+    protected function isDisableCache(): bool
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        if (!$request instanceof Request) {
+            return false;
+        }
+
+        return !empty($request->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING));
+    }
+
+    public function countRecords(): int
+    {
+        return is_countable($this->findAll()) ? \count($this->findAll()) : 0;
+    }
+
+    #[\Override]
     public function findAll(): array
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -72,11 +100,6 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
         }
 
         return $query->getResult();
-    }
-
-    public function countRecords(): int
-    {
-        return is_countable($this->findAll()) ? \count($this->findAll()) : 0;
     }
 
     public function persist(object $object): void
@@ -98,31 +121,5 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Pag
     public function queryBuilder(string $alias): QueryBuilder
     {
         return $this->createQueryBuilder($alias);
-    }
-
-    protected function isDisableCache(): bool
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if (!$request instanceof Request) {
-            return false;
-        }
-
-        return !empty($request->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING));
-    }
-
-    protected function getDeviceId(): string
-    {
-        try {
-            $session = $this->requestStack->getSession();
-
-            $deviceId = $session->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-            if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
-                return '';
-            }
-
-            return $deviceId;
-        } catch (SessionNotFoundException) {
-            return '';
-        }
     }
 }

@@ -22,6 +22,7 @@ final class AuditExtension extends AbstractExtension
     /**
      * @return Iterator<TwigFunction>
      */
+    #[\Override]
     public function getFunctions(): iterable
     {
         yield new TwigFunction('is_auditable', [$this, 'isAuditable']);

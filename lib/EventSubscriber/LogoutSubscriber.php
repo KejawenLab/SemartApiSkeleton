@@ -16,13 +16,24 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class LogoutSubscriber implements EventSubscriberInterface
+final readonly class LogoutSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly CacheItemPoolInterface $cache,
-        private readonly EntityManagerInterface $entityManager,
-    ) {
+        private UrlGeneratorInterface  $urlGenerator,
+        private CacheItemPoolInterface $cache,
+        private EntityManagerInterface $entityManager,
+    )
+    {
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            LogoutEvent::class => 'redirect',
+        ];
     }
 
     public function redirect(LogoutEvent $event): void
@@ -43,15 +54,5 @@ final class LogoutSubscriber implements EventSubscriberInterface
         $configuration->getResultCache()->clear();
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generate(AdminContext::ADMIN_ROUTE)));
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            LogoutEvent::class => 'redirect',
-        ];
     }
 }

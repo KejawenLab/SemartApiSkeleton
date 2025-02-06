@@ -18,6 +18,7 @@ class PasswordHistory implements PasswordHistoryInterface
 {
     use BlameableEntity;
     use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
@@ -35,7 +36,7 @@ class PasswordHistory implements PasswordHistoryInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getSource(): ?string

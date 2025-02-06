@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
@@ -17,22 +16,29 @@ use Symfony\Component\HttpFoundation\Response;
 final class CacheFactory
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
+        private readonly RequestStack           $requestStack,
         private readonly CacheItemPoolInterface $cache,
         private readonly EntityManagerInterface $entityManager,
-    ) {
+    )
+    {
     }
 
     public function invalidQueryCache(): void
     {
-        if (!$this->isDisableQueryCache() && $this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-            return;
-        }
-
         $configuration = $this->entityManager->getConfiguration();
 
         $configuration->getQueryCache()->clear();
         $configuration->getResultCache()->clear();
+    }
+
+    public function isDisableQueryCache(): bool
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING)) {
+            return true;
+        }
+
+        return (bool)$request->attributes->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING);
     }
 
     /**
@@ -61,6 +67,16 @@ final class CacheFactory
             'content' => $this->cache->getItem($key)->get(),
             'attribute' => $keys[$key],
         ];
+    }
+
+    private function getDeviceId(): string
+    {
+        $deviceId = $this->requestStack->getCurrentRequest()->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
+        if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
+            return '';
+        }
+
+        return $deviceId;
     }
 
     public function setCache(string $key, string $namespace, string $content, string|bool $attribute, string $period): void
@@ -136,25 +152,5 @@ final class CacheFactory
         }
 
         return sprintf('%s_%s', sha1($request->getPathInfo()), sha1(serialize($request->query->all())));
-    }
-
-    private function isDisableQueryCache(): bool
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request->query->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING)) {
-            return true;
-        }
-
-        return (bool) $request->attributes->get(SemartApiSkeleton::DISABLE_QUERY_CACHE_QUERY_STRING);
-    }
-
-    private function getDeviceId(): string
-    {
-        $deviceId = $this->requestStack->getCurrentRequest()->getSession()->get(SemartApiSkeleton::USER_DEVICE_ID, '');
-        if (SemartApiSkeleton::API_CLIENT_DEVICE_ID === $deviceId) {
-            return '';
-        }
-
-        return $deviceId;
     }
 }

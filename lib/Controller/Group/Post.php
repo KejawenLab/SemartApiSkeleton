@@ -52,7 +52,7 @@ final class Post extends AbstractFOSRestController
     {
         $form = $this->formFactory->submitRequest(GroupType::class, $request);
         if (!$form->isValid()) {
-            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+            return $this->view((array)$form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         /** @var GroupInterface $group */

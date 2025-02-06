@@ -12,16 +12,6 @@ use KejawenLab\ApiSkeleton\Entity\User;
  */
 final class UserFixture extends AbstractFixture implements DependentFixtureInterface
 {
-    protected function createNew(): User
-    {
-        return new User();
-    }
-
-    protected function getReferenceKey(): string
-    {
-        return 'user';
-    }
-
     /**
      * @return array<class-string<GroupFixture>>
      */
@@ -30,5 +20,15 @@ final class UserFixture extends AbstractFixture implements DependentFixtureInter
         return [
             GroupFixture::class,
         ];
+    }
+
+    protected function createNew(): User
+    {
+        return new User();
+    }
+
+    protected function getReferenceKey(): string
+    {
+        return 'user';
     }
 }

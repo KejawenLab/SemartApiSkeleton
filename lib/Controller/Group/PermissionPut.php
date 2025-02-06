@@ -33,11 +33,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PermissionPut extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly FormFactory $formFactory,
-        private readonly GroupService $groupService,
-        private readonly PermissionService $permissionService,
+        private readonly FormFactory         $formFactory,
+        private readonly GroupService        $groupService,
+        private readonly PermissionService   $permissionService,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Put(data: '/groups/{id}/permissions', name: self::class)]
@@ -65,7 +66,7 @@ final class PermissionPut extends AbstractFOSRestController
 
         $form = $this->formFactory->submitRequest(PermissionType::class, $request);
         if (!$form->isValid()) {
-            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+            return $this->view((array)$form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         /** @var Permission $data */

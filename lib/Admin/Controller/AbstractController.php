@@ -7,7 +7,6 @@ namespace KejawenLab\ApiSkeleton\Admin\Controller;
 use InvalidArgumentException;
 use KejawenLab\ApiSkeleton\Audit\Audit;
 use KejawenLab\ApiSkeleton\Pagination\Paginator;
-use KejawenLab\ApiSkeleton\SemartApiSkeleton;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use KejawenLab\ApiSkeleton\Util\CacheFactory;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
@@ -27,19 +26,17 @@ use Throwable;
 abstract class AbstractController extends Base
 {
     public function __construct(
-        private readonly Request $request,
+        private readonly Request          $request,
         private readonly ServiceInterface $service,
-        private readonly CacheFactory $cache,
-        private readonly ?Paginator $paginator = null,
-    ) {
+        private readonly CacheFactory     $cache,
+        private readonly ?Paginator       $paginator = null,
+    )
+    {
     }
 
+    #[\Override]
     protected function renderView(string $view, array $parameters = []): string
     {
-        if ($this->cache->isDisableViewCache()) {
-            return parent::renderView($view, $parameters);
-        }
-
         $params = [];
         foreach ($parameters as $parameter) {
             if ($this->canBeSerialized($parameter)) {
@@ -56,51 +53,7 @@ abstract class AbstractController extends Base
             return $data['content'];
         }
 
-        $content = parent::renderView($view, $parameters);
-        $this->cache->setCache($key, 'view', $content, true, SemartApiSkeleton::VIEW_CACHE_PERIOD);
-
-        return $content;
-    }
-
-    protected function renderAudit(Audit $audit, ReflectionClass $class): Response
-    {
-        return $this->renderWithAudit($audit, $class, 'audit');
-    }
-
-    protected function renderDetail(Audit $audit, ReflectionClass $class): Response
-    {
-        return $this->renderWithAudit($audit, $class, 'view');
-    }
-
-    protected function renderList(FormInterface $form, Request $request, ReflectionClass $class): Response
-    {
-        if (null === $this->paginator) {
-            throw new InvalidArgumentException(sprintf('%s is not passed', Paginator::class));
-        }
-
-        $context = StringUtil::lowercase($class->getShortName());
-
-        return $this->render(sprintf('%s/all.html.twig', $context), [
-            'page_title' => sprintf('sas.page.%s.list', $context),
-            'context' => $context,
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, $class->getName()),
-            'form' => $form->createView(),
-        ]);
-    }
-
-    private function renderWithAudit(Audit $audit, ReflectionClass $class, string $template): Response
-    {
-        $context = StringUtil::lowercase($class->getShortName());
-        $audits = $audit->toArray();
-
-        return $this->render(sprintf('%s/%s.html.twig', $context, $template), [
-            'page_title' => sprintf('sas.page.%s.view', $context),
-            'context' => $context,
-            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
-            'data' => $audits['entity'],
-            'audits' => $audits['items'],
-        ]);
+        return parent::renderView($view, $parameters);
     }
 
     private function canBeSerialized($variable): bool
@@ -139,9 +92,6 @@ abstract class AbstractController extends Base
         return true;
     }
 
-    /**
-     * @return mixed[]
-     */
     private function enumerateObjectsAndResources($variable): array
     {
         $processed = \func_get_args()[1] ?? new Context();
@@ -169,7 +119,7 @@ abstract class AbstractController extends Base
             }
         } else {
             $result[] = $variable;
-            foreach ((new ObjectReflector())->getAttributes($variable) as $value) {
+            foreach (new ObjectReflector()->getProperties($variable) as $value) {
                 if (!\is_array($value) && !\is_object($value) && !\is_resource($value)) {
                     continue;
                 }
@@ -186,5 +136,46 @@ abstract class AbstractController extends Base
         }
 
         return $result;
+    }
+
+    protected function renderAudit(Audit $audit, ReflectionClass $class): Response
+    {
+        return $this->renderWithAudit($audit, $class, 'audit');
+    }
+
+    private function renderWithAudit(Audit $audit, ReflectionClass $class, string $template): Response
+    {
+        $context = StringUtil::lowercase($class->getShortName());
+        $audits = $audit->toArray();
+
+        return $this->render(sprintf('%s/%s.html.twig', $context, $template), [
+            'page_title' => sprintf('sas.page.%s.view', $context),
+            'context' => $context,
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
+            'data' => $audits['entity'],
+            'audits' => $audits['items'],
+        ]);
+    }
+
+    protected function renderDetail(Audit $audit, ReflectionClass $class): Response
+    {
+        return $this->renderWithAudit($audit, $class, 'view');
+    }
+
+    protected function renderList(FormInterface $form, Request $request, ReflectionClass $class): Response
+    {
+        if (null === $this->paginator) {
+            throw new InvalidArgumentException(sprintf('%s is not passed', Paginator::class));
+        }
+
+        $context = StringUtil::lowercase($class->getShortName());
+
+        return $this->render(sprintf('%s/all.html.twig', $context), [
+            'page_title' => sprintf('sas.page.%s.list', $context),
+            'context' => $context,
+            'properties' => $class->getProperties(ReflectionProperty::IS_PRIVATE),
+            'paginator' => $this->paginator->paginate($this->service->getQueryBuilder(), $request, $class->getName()),
+            'form' => $form->createView(),
+        ]);
     }
 }

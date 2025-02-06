@@ -14,7 +14,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -66,7 +66,7 @@ class Media implements MediaInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getFileName(): ?string
@@ -109,16 +109,6 @@ class Media implements MediaInterface
         $this->hidden = $hidden;
     }
 
-    public function getFileUrl(): ?string
-    {
-        return $this->fileUrl;
-    }
-
-    public function setFileUrl(?string $fileUrl): void
-    {
-        $this->fileUrl = $fileUrl;
-    }
-
     public function getFile(): ?File
     {
         return $this->file;
@@ -132,5 +122,15 @@ class Media implements MediaInterface
     public function getNullOrString(): ?string
     {
         return $this->getFileUrl();
+    }
+
+    public function getFileUrl(): ?string
+    {
+        return $this->fileUrl;
+    }
+
+    public function setFileUrl(?string $fileUrl): void
+    {
+        $this->fileUrl = $fileUrl;
     }
 }

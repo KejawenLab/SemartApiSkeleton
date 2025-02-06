@@ -25,11 +25,12 @@ final class Audit extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly MenuService $service,
+        private readonly MenuService  $service,
         private readonly CacheFactory $cache,
         private readonly AuditService $audit,
-        private readonly Reader $reader,
-    ) {
+        private readonly Reader       $reader,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 

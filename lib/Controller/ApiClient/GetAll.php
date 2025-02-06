@@ -31,11 +31,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class GetAll extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly ApiClientService $service,
-        private readonly UserService $userService,
-        private readonly Paginator $paginator,
+        private readonly ApiClientService    $service,
+        private readonly UserService         $userService,
+        private readonly Paginator           $paginator,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Get(data: 'users/{userId}/api-clients', name: self::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'])]

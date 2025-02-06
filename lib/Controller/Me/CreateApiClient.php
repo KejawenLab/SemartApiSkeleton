@@ -36,12 +36,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class CreateApiClient extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly FormFactory $formFactory,
+        private readonly FormFactory         $formFactory,
         private readonly UserProviderFactory $userProviderFactory,
-        private readonly ApiClientService $service,
+        private readonly ApiClientService    $service,
         private readonly TranslatorInterface $translator,
-        private readonly SettingService $setting,
-    ) {
+        private readonly SettingService      $setting,
+    )
+    {
     }
 
     #[Post(data: '/me/api-clients', name: self::class)]
@@ -78,7 +79,7 @@ final class CreateApiClient extends AbstractFOSRestController
 
         $form = $this->formFactory->submitRequest(ApiClientType::class, $request);
         if (!$form->isValid()) {
-            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+            return $this->view((array)$form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         /** @var ApiClientInterface $client */

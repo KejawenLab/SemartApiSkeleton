@@ -19,6 +19,16 @@ final class InvalidateCacheDeleteWithMethodGetSubscriber implements EventSubscri
     {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            RequestEvent::class => [['invalidate', 127]],
+        ];
+    }
+
     public function invalidate(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
@@ -38,18 +48,6 @@ final class InvalidateCacheDeleteWithMethodGetSubscriber implements EventSubscri
             return;
         }
 
-        $this->cache->invalidPageCache();
-        $this->cache->invalidViewCache();
         $this->cache->invalidQueryCache();
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            RequestEvent::class => [['invalidate', 127]],
-        ];
     }
 }

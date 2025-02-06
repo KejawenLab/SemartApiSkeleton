@@ -35,7 +35,7 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -59,7 +59,7 @@ final class SettingRepository extends AbstractRepository implements SettingRepos
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 

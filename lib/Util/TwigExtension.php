@@ -25,6 +25,7 @@ final class TwigExtension extends AbstractExtension
     /**
      * @return Iterator<TwigFunction>
      */
+    #[\Override]
     public function getFunctions(): iterable
     {
         yield new TwigFunction('semart_print', [$this, 'toString']);
@@ -34,14 +35,14 @@ final class TwigExtension extends AbstractExtension
     public function toString($data): string
     {
         if ($data instanceof EntityInterface) {
-            return (string) $data->getNullOrString();
+            return (string)$data->getNullOrString();
         }
 
         if ($data instanceof DateTimeInterface) {
             return $data->format('Y-m-d');
         }
 
-        return (string) $data;
+        return (string)$data;
     }
 
     public function hasAssociation(ReflectionClass $class, ReflectionProperty $property): bool

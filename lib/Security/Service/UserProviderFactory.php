@@ -21,14 +21,34 @@ final class UserProviderFactory implements UserProviderInterface
      * @param Provider[] $providers
      */
     public function __construct(
-        private readonly iterable $providers,
+        private readonly iterable                    $providers,
         private readonly UserPasswordHasherInterface $passwordHasher,
-    ) {
+    )
+    {
     }
 
     public function loadUserByUsername(string $username): User
     {
         return $this->loadUserByIdentifier($username);
+    }
+
+    public function loadUserByIdentifier(string $identifier): User
+    {
+        foreach ($this->providers as $provider) {
+            $user = $provider->findByIdentifier($identifier);
+            if (!$user instanceof AuthInterface) {
+                continue;
+            }
+
+            $authUser = new User($user);
+            if (!$user->isEncoded()) {
+                $authUser->setPassword($this->passwordHasher->hashPassword($authUser, $authUser->getPassword()));
+            }
+
+            return $authUser;
+        }
+
+        throw new UserNotFoundException();
     }
 
     public function getRealUser(User $user): ?AuthInterface
@@ -50,24 +70,5 @@ final class UserProviderFactory implements UserProviderInterface
     public function supportsClass(string $class): bool
     {
         return User::class === $class;
-    }
-
-    public function loadUserByIdentifier(string $identifier): User
-    {
-        foreach ($this->providers as $provider) {
-            $user = $provider->findByIdentifier($identifier);
-            if (!$user instanceof AuthInterface) {
-                continue;
-            }
-
-            $authUser = new User($user);
-            if (!$user->isEncoded()) {
-                $authUser->setPassword($this->passwordHasher->hashPassword($authUser, $authUser->getPassword()));
-            }
-
-            return $authUser;
-        }
-
-        throw new UserNotFoundException();
     }
 }

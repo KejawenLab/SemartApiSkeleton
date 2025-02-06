@@ -18,8 +18,8 @@ use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -67,9 +67,14 @@ class ApiClient implements ApiClientInterface
         $this->secretKey = null;
     }
 
-    public function getId(): ?string
+    public function getGroup(): ?GroupInterface
     {
-        return (string) $this->id;
+        $user = $this->getUser();
+        if (null !== $user) {
+            return $user->getGroup();
+        }
+
+        return null;
     }
 
     public function getUser(): ?UserInterface
@@ -82,24 +87,9 @@ class ApiClient implements ApiClientInterface
         $this->user = $user;
     }
 
-    public function getGroup(): ?GroupInterface
+    public function getIdentity(): ?string
     {
-        $user = $this->getUser();
-        if (null !== $user) {
-            return $user->getGroup();
-        }
-
-        return null;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): void
-    {
-        $this->name = StringUtil::title($name);
+        return $this->getApiKey();
     }
 
     public function getApiKey(): ?string
@@ -112,6 +102,21 @@ class ApiClient implements ApiClientInterface
         $this->apiKey = $apiKey;
     }
 
+    public function getRecordId(): ?string
+    {
+        return $this->getId();
+    }
+
+    public function getId(): ?string
+    {
+        return (string)$this->id;
+    }
+
+    public function getCredential(): ?string
+    {
+        return $this->getSecretKey();
+    }
+
     public function getSecretKey(): ?string
     {
         return $this->secretKey;
@@ -122,21 +127,6 @@ class ApiClient implements ApiClientInterface
         $this->secretKey = $secretKey;
     }
 
-    public function getIdentity(): ?string
-    {
-        return $this->getApiKey();
-    }
-
-    public function getRecordId(): ?string
-    {
-        return $this->getId();
-    }
-
-    public function getCredential(): ?string
-    {
-        return $this->getSecretKey();
-    }
-
     public function isEncoded(): bool
     {
         return false;
@@ -145,5 +135,15 @@ class ApiClient implements ApiClientInterface
     public function getNullOrString(): ?string
     {
         return $this->getName();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): void
+    {
+        $this->name = StringUtil::title($name);
     }
 }

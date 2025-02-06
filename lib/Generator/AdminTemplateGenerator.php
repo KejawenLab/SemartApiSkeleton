@@ -20,11 +20,12 @@ final class AdminTemplateGenerator extends AbstractGenerator
 {
     public function __construct(
         private readonly Reader $reader,
-        Environment $twig,
-        Filesystem $fileSystem,
-        KernelInterface $kernel,
-        EntityManagerInterface $entityManager,
-    ) {
+        Environment             $twig,
+        Filesystem              $fileSystem,
+        KernelInterface         $kernel,
+        EntityManagerInterface  $entityManager,
+    )
+    {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 
@@ -44,12 +45,12 @@ final class AdminTemplateGenerator extends AbstractGenerator
         }
 
         if ($this->reader->getProvider()->isAuditable($class->getName())) {
-            $auditTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/audit.html.stub', $projectDir)));
+            $auditTemplate = str_replace($search, $replace, (string)file_get_contents(sprintf('%s/templates/generator/admin/view/audit.html.stub', $projectDir)));
             $this->fileSystem->dumpFile(sprintf('%s/templates/%s/audit.html.twig', $projectDir, $lowercase), $auditTemplate);
         }
 
-        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/%s', $projectDir, $all)));
-        $viewTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/admin/view/view.html.stub', $projectDir)));
+        $indexTemplate = str_replace($search, $replace, (string)file_get_contents(sprintf('%s/templates/generator/admin/view/%s', $projectDir, $all)));
+        $viewTemplate = str_replace($search, $replace, (string)file_get_contents(sprintf('%s/templates/generator/admin/view/view.html.stub', $projectDir)));
 
         $output->writeln(sprintf('<comment>Generating template <info>"%s/all.html.twig"</info></comment>', $lowercase));
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/all.html.twig', $projectDir, $lowercase), $indexTemplate);

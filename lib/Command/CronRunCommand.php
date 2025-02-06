@@ -28,12 +28,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class CronRunCommand extends Command
 {
     public function __construct(
-        private readonly CronService $cronService,
+        private readonly CronService       $cronService,
         private readonly CronReportService $reportService,
-        private readonly CronBuilder $builder,
-        private readonly Executor $executor,
-        private readonly string $reportClass,
-    ) {
+        private readonly CronBuilder       $builder,
+        private readonly Executor          $executor,
+        private readonly string            $reportClass,
+    )
+    {
         parent::__construct();
     }
 
@@ -43,8 +44,7 @@ final class CronRunCommand extends Command
             ->setDescription('Runs any currently schedule cron jobs')
             ->addArgument('job', InputArgument::OPTIONAL, 'Run only this job (if enabled)')
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force schedule the current job.')
-            ->addOption('schedule_now', null, InputOption::VALUE_NONE, 'Temporary set the job schedule to now.')
-        ;
+            ->addOption('schedule_now', null, InputOption::VALUE_NONE, 'Temporary set the job schedule to now.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -77,8 +77,8 @@ final class CronRunCommand extends Command
             /** @var CronReportInterface $report */
             $report = new $this->reportClass();
             $report->setCron($cron);
-            $report->setOutput(implode("\n", (array) $value->getOutput()));
-            $report->setExitCode((int) $value->getJob()->getProcess()->getExitCode());
+            $report->setOutput(implode("\n", (array)$value->getOutput()));
+            $report->setExitCode((int)$value->getJob()->getProcess()->getExitCode());
             $report->setRunAt(
                 DateTime::createFromFormat(
                     'U.u',

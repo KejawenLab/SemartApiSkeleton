@@ -17,8 +17,8 @@ use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -100,7 +100,7 @@ class Menu implements MenuInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getParent(): ?MenuInterface
@@ -121,16 +121,6 @@ class Menu implements MenuInterface
     public function setCode(string $code): void
     {
         $this->code = StringUtil::uppercase($code);
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = StringUtil::title($name);
     }
 
     public function getSortOrder(): ?int
@@ -206,5 +196,15 @@ class Menu implements MenuInterface
     public function getNullOrString(): ?string
     {
         return $this->getName();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = StringUtil::title($name);
     }
 }

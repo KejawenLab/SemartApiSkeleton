@@ -16,7 +16,7 @@ use KejawenLab\ApiSkeleton\Util\StringUtil;
 use OpenApi\Attributes as OA;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -57,7 +57,7 @@ class Group implements GroupInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getCode(): ?string
@@ -70,16 +70,6 @@ class Group implements GroupInterface
         $this->code = StringUtil::uppercase($code);
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = StringUtil::title($name);
-    }
-
     public function __sleep()
     {
         return [];
@@ -88,5 +78,15 @@ class Group implements GroupInterface
     public function getNullOrString(): ?string
     {
         return $this->getName();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = StringUtil::title($name);
     }
 }

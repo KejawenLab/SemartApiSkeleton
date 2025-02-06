@@ -8,7 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get as Route;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
-use KejawenLab\ApiSkeleton\SemartApiSkeleton;
+use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use Nelmio\ApiDocBundle\Attribute\Security;
 use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Tag;
@@ -28,10 +28,11 @@ use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 final class Get extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly MediaService $service,
+        private readonly MediaService           $service,
         private readonly PropertyMappingFactory $mapping,
-        private readonly TranslatorInterface $translator,
-    ) {
+        private readonly TranslatorInterface    $translator,
+    )
+    {
     }
 
     #[Route(data: '/medias/{path}', name: self::class, requirements: ['path' => '.+'])]
@@ -54,7 +55,7 @@ final class Get extends AbstractFOSRestController
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
-        if (!$this->getUser() && !$media->isPublic()) {
+        if (!$this->getUser() instanceof UserInterface && !$media->isPublic()) {
             throw new NotFoundHttpException($this->translator->trans('sas.page.media.not_found', [], 'pages'));
         }
 
@@ -69,7 +70,6 @@ final class Get extends AbstractFOSRestController
 
         $response = new BinaryFileResponse($file->getRealPath());
         $response->setPrivate();
-        $response->setMaxAge(SemartApiSkeleton::PAGE_CACHE_LIFETIME);
 
         if ($request->query->get('f')) {
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilename());

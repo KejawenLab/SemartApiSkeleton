@@ -21,8 +21,7 @@ final class CronStartCommand extends Command
     {
         $this->setName('semart:cron:start')
             ->setDescription('Starts cron scheduler')
-            ->addOption('blocking', 'b', InputOption::VALUE_NONE, 'Run in blocking mode.')
-        ;
+            ->addOption('blocking', 'b', InputOption::VALUE_NONE, 'Run in blocking mode.');
     }
 
     /**
@@ -47,7 +46,7 @@ final class CronStartCommand extends Command
         $command = $console->find('semart:cron:run');
         while (true) {
             $now = microtime(true);
-            usleep((int) ((60 - ($now % 60) + $now - $now) * 1_000_000.0));
+            usleep((int)((60 - ($now % 60) + $now - $now) * 1_000_000.0));
 
             $command->run($input, $output);
         }

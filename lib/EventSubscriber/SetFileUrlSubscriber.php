@@ -8,15 +8,16 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PostLoadEventArgs;
 use Doctrine\ORM\Events;
 use KejawenLab\ApiSkeleton\Entity\Media as Entity;
+use KejawenLab\ApiSkeleton\Media\Model\MediaInterface;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
 #[AsEntityListener(event: Events::postLoad, method: 'postLoad', entity: Entity::class)]
-final class SetFileUrlSubscriber
+final readonly class SetFileUrlSubscriber
 {
-    public function __construct(private readonly StorageInterface $storage)
+    public function __construct(private StorageInterface $storage)
     {
     }
 

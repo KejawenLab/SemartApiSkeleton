@@ -18,15 +18,17 @@ use Twig\TwigFunction;
 final class MenuExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly Environment $twig,
+        private readonly Environment  $twig,
         private readonly RequestStack $requestStack,
-        private readonly MenuService $menuService,
-    ) {
+        private readonly MenuService  $menuService,
+    )
+    {
     }
 
     /**
      * @return Iterator<TwigFunction>
      */
+    #[\Override]
     public function getFunctions(): iterable
     {
         yield new TwigFunction('convert_to_menu', [$this, 'getMenu']);

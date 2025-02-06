@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\Security\Service;
 
-use Iterator;
 use KejawenLab\ApiSkeleton\Entity\Media;
 use KejawenLab\ApiSkeleton\Media\MediaService;
 use KejawenLab\ApiSkeleton\Pagination\AliasHelper;
@@ -26,12 +25,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class UserService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        private readonly MessageBusInterface $messageBus,
-        UserRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
+        private readonly MessageBusInterface         $messageBus,
+        UserRepositoryInterface                      $repository,
+        AliasHelper                                  $aliasHelper,
         private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly MediaService $mediaService,
-    ) {
+        private readonly MediaService                $mediaService,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 

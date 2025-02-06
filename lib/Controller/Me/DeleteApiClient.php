@@ -28,9 +28,10 @@ final class DeleteApiClient extends AbstractFOSRestController
 {
     public function __construct(
         private readonly UserProviderFactory $userProviderFactory,
-        private readonly ApiClientService $service,
+        private readonly ApiClientService    $service,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Delete(data: '/me/api-clients/{id}', name: self::class)]

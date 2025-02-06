@@ -27,11 +27,12 @@ final class Get extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly CronService $service,
+        private readonly CronService  $service,
         private readonly CacheFactory $cache,
         private readonly AuditService $audit,
-        private readonly Reader $reader,
-    ) {
+        private readonly Reader       $reader,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache);
     }
 

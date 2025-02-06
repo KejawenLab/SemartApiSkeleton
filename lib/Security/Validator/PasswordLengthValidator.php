@@ -28,7 +28,7 @@ final class PasswordLengthValidator extends ConstraintValidator
             return;
         }
 
-        if (6 >= \strlen((string) $value)) {
+        if (6 >= \strlen((string)$value)) {
             $this->context->buildViolation($this->translator->trans($constraint->getMessage(), [], 'validators'))->addViolation();
         }
     }

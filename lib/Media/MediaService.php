@@ -19,13 +19,15 @@ final class MediaService extends AbstractService implements ServiceInterface
 {
     public function __construct(
         private readonly StorageInterface $storage,
-        MessageBusInterface $messageBus,
-        MediaRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
-    ) {
+        MessageBusInterface               $messageBus,
+        MediaRepositoryInterface          $repository,
+        AliasHelper                       $aliasHelper,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
+    #[\Override]
     public function get(string $id): ?MediaInterface
     {
         /** @var MediaInterface|null $media */
@@ -39,7 +41,7 @@ final class MediaService extends AbstractService implements ServiceInterface
 
     public function getByFile(?string $fileName): ?MediaInterface
     {
-        if (!$fileName) {
+        if ($fileName === null || $fileName === '') {
             return null;
         }
 

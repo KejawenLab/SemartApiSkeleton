@@ -17,16 +17,16 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class GroupService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        MessageBusInterface $messageBus,
+        MessageBusInterface      $messageBus,
         GroupRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
-        private readonly string $superAdmin,
-    ) {
+        AliasHelper              $aliasHelper,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     public function getSuperAdmin(): ?GroupInterface
     {
-        return $this->repository->findByCode($this->superAdmin);
+        return $this->repository->findByCode(GroupInterface::SUPER_ADMIN_CODE);
     }
 }

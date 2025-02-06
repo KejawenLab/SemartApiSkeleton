@@ -24,11 +24,12 @@ final class ApiControllerGenerator extends AbstractGenerator
 
     public function __construct(
         private readonly Reader $reader,
-        Environment $twig,
-        Filesystem $fileSystem,
-        KernelInterface $kernel,
-        EntityManagerInterface $entityManager,
-    ) {
+        Environment             $twig,
+        Filesystem              $fileSystem,
+        KernelInterface         $kernel,
+        EntityManagerInterface  $entityManager,
+    )
+    {
         parent::__construct($twig, $fileSystem, $kernel, $entityManager);
     }
 

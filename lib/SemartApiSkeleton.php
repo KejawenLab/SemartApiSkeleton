@@ -9,15 +9,7 @@ namespace KejawenLab\ApiSkeleton;
  */
 final class SemartApiSkeleton
 {
-    final public const PAGE_CACHE_LIFETIME = 1627;
-
     final public const QUERY_CACHE_LIFETIME = 1027;
-
-    final public const PAGE_CACHE_PERIOD = 'P27M';
-
-    final public const VIEW_CACHE_PERIOD = 'P17M';
-
-    final public const CACHE_HEADER = 'X-Semart-Content-ID';
 
     final public const DISABLE_QUERY_CACHE_QUERY_STRING = 'dcq';
 

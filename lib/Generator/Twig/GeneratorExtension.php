@@ -17,6 +17,7 @@ final class GeneratorExtension extends AbstractExtension
     /**
      * @return Iterator<TwigFilter>
      */
+    #[\Override]
     public function getFilters(): iterable
     {
         yield new TwigFilter('pluralize', [$this, 'pluralize']);

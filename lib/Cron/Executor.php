@@ -18,12 +18,14 @@ use Symfony\Component\Lock\Store\RedisStore;
 final class Executor extends Base
 {
     public function __construct(
-        private readonly Redis $redis,
-        private readonly CronService $service,
+        private readonly Redis           $redis,
+        private readonly CronService     $service,
         private readonly LoggerInterface $logger,
-    ) {
+    )
+    {
     }
 
+    #[\Override]
     protected function startProcesses(CronReport $report): void
     {
         foreach ($this->sets as $set) {

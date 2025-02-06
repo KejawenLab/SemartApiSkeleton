@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\ApiSkeleton\ApiClient;
 
-use Iterator;
 use KejawenLab\ApiSkeleton\ApiClient\Message\RequestLog;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientInterface;
 use KejawenLab\ApiSkeleton\ApiClient\Model\ApiClientRepositoryInterface;
@@ -23,12 +22,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class ApiClientRequestService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        MessageBusInterface $messageBus,
-        ApiClientRequestRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
+        MessageBusInterface                           $messageBus,
+        ApiClientRequestRepositoryInterface           $repository,
+        AliasHelper                                   $aliasHelper,
         private readonly ApiClientRepositoryInterface $apiClientRepository,
-        private readonly string $class,
-    ) {
+        private readonly string                       $class,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 

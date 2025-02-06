@@ -32,10 +32,10 @@ final class RepositoryGenerator extends AbstractGenerator
             $output->writeln(sprintf('<info>File "%s" is exists. Skipped</info>', $repositoryFile));
         }
 
-        $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder ?: $shortName), $shortName);
+        $repositoryModelFile = sprintf('%s/app/%s/Model/%sRepositoryInterface.php', $this->kernel->getProjectDir(), ($folder !== null && $folder !== '' && $folder !== '0' ? $folder : $shortName), $shortName);
         $output->writeln(sprintf(
             '<comment>Generating class <info>"KejawenLab\\Application\\%s\\Model\\%sRepositoryInterface"</info></comment>',
-            ($folder ?: $shortName),
+            ($folder !== null && $folder !== '' ? $folder : $shortName),
             $shortName
         ));
         if (!$this->fileSystem->exists($repositoryModelFile)) {

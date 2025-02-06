@@ -34,12 +34,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Put extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly FormFactory $formFactory,
-        private readonly UserService $service,
-        private readonly MediaService $mediaService,
+        private readonly FormFactory         $formFactory,
+        private readonly UserService         $service,
+        private readonly MediaService        $mediaService,
         private readonly UserProviderFactory $userProviderFactory,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Route(data: '/me', name: self::class)]
@@ -70,7 +71,7 @@ final class Put extends AbstractFOSRestController
         $userClone = clone $user;
         $form = $this->formFactory->submitRequest(UpdateProfileType::class, $request, $user);
         if (!$form->isValid()) {
-            return $this->view((array) $form->getErrors(), Response::HTTP_BAD_REQUEST);
+            return $this->view((array)$form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         if ($form['oldPassword']->getData() && $password = $form['newPassword']->getData()) {

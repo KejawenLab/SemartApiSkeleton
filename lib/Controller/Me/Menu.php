@@ -28,10 +28,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Menu extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly PermissionService $service,
+        private readonly PermissionService   $service,
         private readonly UserProviderFactory $userProviderFactory,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Get(data: '/me/menus', name: self::class, priority: 1)]

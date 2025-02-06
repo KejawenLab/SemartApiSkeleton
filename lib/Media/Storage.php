@@ -15,6 +15,7 @@ use Vich\UploaderBundle\Mapping\PropertyMapping;
  */
 final class Storage extends AbstractStorage
 {
+    #[\Override]
     public function remove($obj, PropertyMapping $mapping, ?string $forcedFilename = null): ?bool
     {
         if (!$obj instanceof MediaInterface) {
@@ -22,13 +23,14 @@ final class Storage extends AbstractStorage
         }
 
         $name = $mapping->getFileName($obj);
-        if (empty($name)) {
+        if ($name === null || $name === '') {
             return false;
         }
 
         return $this->doRemove($mapping, $this->getUploadDir($obj, $mapping), $name);
     }
 
+    #[\Override]
     public function upload($obj, PropertyMapping $mapping): void
     {
         if (!$obj instanceof MediaInterface) {
@@ -47,7 +49,7 @@ final class Storage extends AbstractStorage
         $mapping->writeProperty($obj, 'originalName', $file->getClientOriginalName());
 
         if (
-            str_contains((string) $file->getMimeType(), 'image/') &&
+            str_contains((string)$file->getMimeType(), 'image/') &&
             'image/svg+xml' !== $file->getMimeType() &&
             false !== $dimensions = getimagesize($file->getRealPath())
         ) {
@@ -62,24 +64,6 @@ final class Storage extends AbstractStorage
         }
 
         $this->doUpload($mapping, $file, $dir, $name);
-    }
-
-    public function resolveUri($obj, ?string $fieldName = null, ?string $className = null): ?string
-    {
-        if (!$obj instanceof MediaInterface) {
-            return parent::resolveUri($obj, $fieldName, $className);
-        }
-
-        [$mapping, $name] = $this->getFilename($obj, $fieldName, $className);
-        if (!$name) {
-            return null;
-        }
-
-        if (!$obj->isPublic()) {
-            return sprintf('%s/%s%s', $mapping->getUriPrefix(), $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
-        }
-
-        return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, $obj->getFolder() ? sprintf('%s/', $obj->getFolder()) : '', $name);
     }
 
     private function getUploadDir(MediaInterface $media, PropertyMapping $mapping): string
@@ -102,5 +86,24 @@ final class Storage extends AbstractStorage
             ),
             \DIRECTORY_SEPARATOR
         );
+    }
+
+    #[\Override]
+    public function resolveUri($obj, ?string $fieldName = null, ?string $className = null): ?string
+    {
+        if (!$obj instanceof MediaInterface) {
+            return parent::resolveUri($obj, $fieldName, $className);
+        }
+
+        [$mapping, $name] = $this->getFilename($obj, $fieldName, $className);
+        if (!$name) {
+            return null;
+        }
+
+        if (!$obj->isPublic()) {
+            return sprintf('%s/%s%s', $mapping->getUriPrefix(), !in_array($obj->getFolder(), [null, '', '0'], true) ? sprintf('%s/', $obj->getFolder()) : '', $name);
+        }
+
+        return sprintf('%s/%s/%s%s', $mapping->getUriPrefix(), MediaInterface::PUBLIC_FIELD, !in_array($obj->getFolder(), [null, '', '0'], true) ? sprintf('%s/', $obj->getFolder()) : '', $name);
     }
 }

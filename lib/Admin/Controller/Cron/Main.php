@@ -25,10 +25,11 @@ final class Main extends AbstractController
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly CronService $service,
+        private readonly CronService  $service,
         private readonly CacheFactory $cache,
-        private readonly Paginator $paginator,
-    ) {
+        private readonly Paginator    $paginator,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 

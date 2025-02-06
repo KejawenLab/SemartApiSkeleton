@@ -27,8 +27,9 @@ final class Main extends AbstractController
         private readonly RequestStack $requestStack,
         private readonly GroupService $service,
         private readonly CacheFactory $cache,
-        private readonly Paginator $paginator,
-    ) {
+        private readonly Paginator    $paginator,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 

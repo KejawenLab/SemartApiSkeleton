@@ -21,6 +21,7 @@ final class SettingExtension extends AbstractExtension
     /**
      * @return Iterator<TwigFunction>
      */
+    #[\Override]
     public function getFunctions(): iterable
     {
         yield new TwigFunction('setting', [$this, 'getSetting']);

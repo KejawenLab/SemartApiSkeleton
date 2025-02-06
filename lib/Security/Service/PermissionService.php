@@ -18,7 +18,6 @@ use KejawenLab\ApiSkeleton\Security\Model\PermissionRemoverInterface;
 use KejawenLab\ApiSkeleton\Security\Model\PermissionRepositoryInterface;
 use KejawenLab\ApiSkeleton\Service\AbstractService;
 use KejawenLab\ApiSkeleton\Service\Message\EntityPersisted;
-use KejawenLab\ApiSkeleton\Service\Message\EntityRemoved;
 use KejawenLab\ApiSkeleton\Service\Model\ServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -33,18 +32,19 @@ final class PermissionService extends AbstractService implements ServiceInterfac
 
     /**
      * @param PermissionInitiatorInterface[] $initiators
-     * @param PermissionRemoverInterface[]   $removers
+     * @param PermissionRemoverInterface[] $removers
      */
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        MessageBusInterface $messageBus,
-        PermissionRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
+        private readonly EntityManagerInterface  $entityManager,
+        MessageBusInterface                      $messageBus,
+        PermissionRepositoryInterface            $repository,
+        AliasHelper                              $aliasHelper,
         private readonly MenuRepositoryInterface $menuRepository,
-        private readonly iterable $initiators,
-        private readonly iterable $removers,
-        private readonly string $class,
-    ) {
+        private readonly iterable                $initiators,
+        private readonly iterable                $removers,
+        private readonly string                  $class,
+    )
+    {
         parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
@@ -101,11 +101,6 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         }
     }
 
-    private function getPermissions(GroupInterface $group, iterable $menus): iterable
-    {
-        return $this->repository->findPermissions($group, $menus);
-    }
-
     /**
      * @return array<string, array>
      */
@@ -133,5 +128,10 @@ final class PermissionService extends AbstractService implements ServiceInterfac
         }
 
         return $tree;
+    }
+
+    private function getPermissions(GroupInterface $group, iterable $menus): iterable
+    {
+        return $this->repository->findPermissions($group, $menus);
     }
 }

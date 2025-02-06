@@ -29,9 +29,10 @@ final class Main extends AbstractController
 {
     public function __construct(
         private readonly ApiClientService $service,
-        private readonly UserService $userService,
-        private readonly Paginator $paginator,
-    ) {
+        private readonly UserService      $userService,
+        private readonly Paginator        $paginator,
+    )
+    {
     }
 
     #[Route(path: '/users/{userId}/api-clients', name: self::class, defaults: ['userId' => '2e0cac45-822f-4b97-95f1-9516ad824ec1'], methods: ['GET', 'POST'])]

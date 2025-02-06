@@ -19,22 +19,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class SettingService extends AbstractService implements ServiceInterface
 {
     public function __construct(
-        MessageBusInterface $messageBus,
-        SettingRepositoryInterface $repository,
-        AliasHelper $aliasHelper,
-        private readonly SettingGroupFactory $groupFactory,
+        MessageBusInterface                     $messageBus,
+        SettingRepositoryInterface              $repository,
+        AliasHelper                             $aliasHelper,
+        private readonly SettingGroupFactory    $groupFactory,
         private readonly CacheItemPoolInterface $cache,
-    ) {
-        parent::__construct($messageBus, $repository, $aliasHelper);
-    }
-
-    public function getSetting(string $key): SettingInterface
+    )
     {
-        if ($setting = $this->repository->findByParameter($key)) {
-            return $setting;
-        }
-
-        throw new SettingNotFoundException();
+        parent::__construct($messageBus, $repository, $aliasHelper);
     }
 
     /**
@@ -57,13 +49,22 @@ final class SettingService extends AbstractService implements ServiceInterface
             return $cache->get();
         }
 
-        $setting = (int) $this->getSetting('CACHE_LIFETIME')->getValue();
+        $setting = (int)$this->getSetting('CACHE_LIFETIME')->getValue();
 
         $cache->set($setting);
         $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
         $this->cache->save($cache);
 
         return $setting;
+    }
+
+    public function getSetting(string $key): SettingInterface
+    {
+        if ($setting = $this->repository->findByParameter($key)) {
+            return $setting;
+        }
+
+        throw new SettingNotFoundException();
     }
 
     public function getPageField(): ?string
@@ -105,7 +106,7 @@ final class SettingService extends AbstractService implements ServiceInterface
             return $cache->get();
         }
 
-        $setting = (int) $this->getSetting('PER_PAGE')->getValue();
+        $setting = (int)$this->getSetting('PER_PAGE')->getValue();
 
         $cache->set($setting);
         $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);
@@ -121,7 +122,7 @@ final class SettingService extends AbstractService implements ServiceInterface
             return $cache->get();
         }
 
-        $setting = (int) $this->getSetting('MAX_API_PER_USER')->getValue();
+        $setting = (int)$this->getSetting('MAX_API_PER_USER')->getValue();
 
         $cache->set($setting);
         $cache->expiresAfter(SemartApiSkeleton::QUERY_CACHE_LIFETIME);

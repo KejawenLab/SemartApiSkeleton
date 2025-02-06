@@ -31,11 +31,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class GetApiClient extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly Paginator $paginator,
+        private readonly Paginator           $paginator,
         private readonly UserProviderFactory $userProviderFactory,
-        private readonly ApiClientService $service,
+        private readonly ApiClientService    $service,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Get(data: '/me/api-clients', name: self::class)]

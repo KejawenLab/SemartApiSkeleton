@@ -30,12 +30,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class Audit extends AbstractFOSRestController
 {
     public function __construct(
-        private readonly ApiClientService $service,
-        private readonly UserService $userService,
-        private readonly AuditService $audit,
-        private readonly Reader $reader,
+        private readonly ApiClientService    $service,
+        private readonly UserService         $userService,
+        private readonly AuditService        $audit,
+        private readonly Reader              $reader,
         private readonly TranslatorInterface $translator,
-    ) {
+    )
+    {
     }
 
     #[Get(data: '/users/{userId}/api-clients/{id}/audit', name: self::class, priority: -255)]

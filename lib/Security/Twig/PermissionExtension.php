@@ -26,6 +26,7 @@ final class PermissionExtension extends AbstractExtension
     /**
      * @return Iterator<TwigFunction>
      */
+    #[\Override]
     public function getFunctions(): iterable
     {
         yield new TwigFunction('is_super_admin', [$this, 'isSuperAdmin']);

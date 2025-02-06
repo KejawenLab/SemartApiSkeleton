@@ -30,10 +30,11 @@ final class Audit extends AbstractController
 {
     public function __construct(
         private readonly ApiClientService $service,
-        private readonly UserService $userService,
-        private readonly AuditService $audit,
-        private readonly Reader $reader,
-    ) {
+        private readonly UserService      $userService,
+        private readonly AuditService     $audit,
+        private readonly Reader           $reader,
+    )
+    {
     }
 
     #[Route(path: '/users/{userId}/api-clients/{id}/audit', name: self::class, methods: ['GET'], priority: -255)]

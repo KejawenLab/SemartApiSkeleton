@@ -24,8 +24,7 @@ final class CronCleanCommand extends Command
     protected function configure(): void
     {
         $this->setName('semart:cron:clean')
-            ->setDescription('Clean stale reports')
-        ;
+            ->setDescription('Clean stale reports');
     }
 
     /**

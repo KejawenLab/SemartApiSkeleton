@@ -20,8 +20,7 @@ final class EncryptionCommand extends Command
         $this
             ->setName('semart:encrypt')
             ->setDescription('Encrypt Plain Text')
-            ->addArgument('text', InputArgument::REQUIRED)
-        ;
+            ->addArgument('text', InputArgument::REQUIRED);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -20,6 +20,7 @@ final class CronScheduleFormat extends Constraint
         return 'sas.validator.cron.format_not_valid';
     }
 
+    #[\Override]
     public function getTargets(): string
     {
         return self::PROPERTY_CONSTRAINT;

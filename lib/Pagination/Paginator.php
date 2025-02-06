@@ -37,15 +37,15 @@ final class Paginator
     }
 
     /**
-     * @throws NoResultException
+     * @return array<string, array>
      * @throws NonUniqueResultException
      *
-     * @return array<string, array>
+     * @throws NoResultException
      */
     public function paginate(QueryBuilder $queryBuilder, Request $request, string $class): array
     {
-        $page = (int) $request->query->get($this->pageField, 1);
-        $perPage = (int) $request->query->get($this->perPageField, $this->perPageDefault);
+        $page = (int)$request->query->get($this->pageField, 1);
+        $perPage = (int)$request->query->get($this->perPageField, $this->perPageDefault);
         foreach ($this->queryExtension as $extension) {
             if ($extension->support($class, $request)) {
                 $extension->apply($queryBuilder, $request);
@@ -77,20 +77,6 @@ final class Paginator
         ];
     }
 
-    private function paging(QueryBuilder $queryBuilder, string $deviceId, int $page, int $perPage, bool $disableCache = false): array
-    {
-        $queryBuilder->setMaxResults($perPage);
-        $queryBuilder->setFirstResult(($page - 1) * $perPage);
-
-        $query = $queryBuilder->getQuery();
-        if (!$disableCache) {
-            $query->useQueryCache(true);
-            $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%d_%d_%s', sha1(self::class), sha1(__METHOD__), $deviceId, $page, $perPage, sha1(serialize($query->getParameters()))));
-        }
-
-        return $query->getResult();
-    }
-
     /**
      * @throws NonUniqueResultException
      * @throws NoResultException
@@ -108,6 +94,20 @@ final class Paginator
             $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%s', sha1(self::class), sha1(__METHOD__), $deviceId, sha1(serialize($query->getParameters()))));
         }
 
-        return (int) $query->getSingleScalarResult();
+        return (int)$query->getSingleScalarResult();
+    }
+
+    private function paging(QueryBuilder $queryBuilder, string $deviceId, int $page, int $perPage, bool $disableCache = false): array
+    {
+        $queryBuilder->setMaxResults($perPage);
+        $queryBuilder->setFirstResult(($page - 1) * $perPage);
+
+        $query = $queryBuilder->getQuery();
+        if (!$disableCache) {
+            $query->useQueryCache(true);
+            $query->enableResultCache($this->cacheLifetime, sprintf('%s_%s_%s_%d_%d_%s', sha1(self::class), sha1(__METHOD__), $deviceId, $page, $perPage, sha1(serialize($query->getParameters()))));
+        }
+
+        return $query->getResult();
     }
 }

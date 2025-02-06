@@ -31,7 +31,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -52,7 +52,7 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -67,14 +67,14 @@ final class ApiClientRepository extends AbstractRepository implements ApiClientR
             $query->enableResultCache($cacheLifetime, sprintf('%s_%s_%s', $deviceId, sha1(self::class), sha1(__METHOD__)));
         }
 
-        return (int) $query->getSingleScalarResult();
+        return (int)$query->getSingleScalarResult();
     }
 
     public function findByIdAndUser(string $id, UserInterface $user): ?ApiClientInterface
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 

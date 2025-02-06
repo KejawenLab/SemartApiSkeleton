@@ -38,7 +38,7 @@ final class ConsoleCommandValidator extends ConstraintValidator
         }
 
         $console = new Application($this->kernel);
-        $command = explode(' ', (string) $value->getCommand());
+        $command = explode(' ', (string)$value->getCommand());
         try {
             $console->get($command[0]);
         } catch (CommandNotFoundException) {

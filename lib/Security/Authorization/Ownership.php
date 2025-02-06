@@ -6,6 +6,7 @@ namespace KejawenLab\ApiSkeleton\Security\Authorization;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
+use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserInterface;
 use KejawenLab\ApiSkeleton\Security\Model\UserRepositoryInterface;
 use KejawenLab\ApiSkeleton\Security\Service\UserProviderFactory;
@@ -23,13 +24,13 @@ final class Ownership
     private const APPLICATION_NAMESPACE = 'KejawenLab\\Application\\Entity';
 
     public function __construct(
-        private readonly ManagerRegistry $doctrine,
+        private readonly ManagerRegistry         $doctrine,
         private readonly UserRepositoryInterface $userRepository,
-        private readonly TokenStorageInterface $tokenStorage,
-        private readonly UserProviderFactory $userProviderFactory,
-        private readonly string $superAdmin,
-        private readonly string $ownershipProperty,
-    ) {
+        private readonly TokenStorageInterface   $tokenStorage,
+        private readonly UserProviderFactory     $userProviderFactory,
+        private readonly string                  $ownershipProperty,
+    )
+    {
     }
 
     public function isOwner(string $id, string $entity): bool
@@ -44,7 +45,7 @@ final class Ownership
         }
 
         $user = $this->userProviderFactory->getRealUser($user);
-        if ($user->getGroup()->getCode() === $this->superAdmin) {
+        if ($user->getGroup()->getCode() === GroupInterface::SUPER_ADMIN_CODE) {
             return true;
         }
 
@@ -52,7 +53,8 @@ final class Ownership
             return false;
         }
 
-        if (!$entity = $this->getEntity($entity)) {
+        $entity = $this->getEntity($entity);
+        if ($entity === null) {
             return false;
         }
 

@@ -37,7 +37,7 @@ final class AuditService
                     $entity::class,
                     ['page' => 1, 'page_size' => $limit]
                 )
-                ->addFilter(new SimpleFilter(Query::OBJECT_ID, $id))->execute()
+                    ->addFilter(new SimpleFilter(Query::OBJECT_ID, $id))->execute()
             );
             $cache->set($audits);
             $cache->expiresAfter($this->cacheLifetime);

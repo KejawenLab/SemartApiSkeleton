@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 #[AsEntityListener(event: Events::postLoad, method: 'postLoad', entity: Entity::class)]
 final class LoadUrlPathSubscriber
 {
-    private const ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\Application\\Controller\\';
+    private const string ROUTE_NAMESPACE_PREFIX = 'KejawenLab\\Application\\Controller\\';
 
     private array $reservedRoutes = [
         Profile::class, GetAll::class, Group::class, Menu::class,
@@ -63,8 +63,8 @@ final class LoadUrlPathSubscriber
                 $placeHolder = 'KejawenLab\\ApiSkeleton\\Controller\\';
             }
 
-            $replece = StringUtil::replace($placeHolder, 'Controller\\', 'Admin\\Controller\\');
-            $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replece);
+            $replace = StringUtil::replace($placeHolder, 'Controller\\', 'Admin\\Controller\\');
+            $adminRoute = StringUtil::replace($object->getRouteName(), $placeHolder, $replace);
             try {
                 $adminPath = $this->urlGenerator->generate(StringUtil::replace($adminRoute, 'GetAll', 'Main'));
             } catch (RouteNotFoundException) {

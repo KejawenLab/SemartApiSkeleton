@@ -34,14 +34,15 @@ final class Profile extends AbstractController
 {
     public function __construct(
         private readonly UserProviderFactory $userProviderFactory,
-        private readonly MediaService $mediaService,
-        private readonly SettingService $setting,
-        private readonly ApiClientService $apiClientService,
-        private readonly RequestStack $requestStack,
-        private readonly UserService $service,
-        private readonly CacheFactory $cache,
-        private readonly Paginator $paginator,
-    ) {
+        private readonly MediaService        $mediaService,
+        private readonly SettingService      $setting,
+        private readonly ApiClientService    $apiClientService,
+        private readonly RequestStack        $requestStack,
+        private readonly UserService         $service,
+        private readonly CacheFactory        $cache,
+        private readonly Paginator           $paginator,
+    )
+    {
         parent::__construct($this->requestStack->getCurrentRequest(), $this->service, $this->cache, $this->paginator);
     }
 

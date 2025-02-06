@@ -26,15 +26,30 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class SingleLoginSubscriber implements EventSubscriberInterface
+final readonly class SingleLoginSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly UserService $service,
-        private readonly UserProviderFactory $userProviderFactory,
-        private readonly CacheItemPoolInterface $cache,
-        private readonly EntityManagerInterface $entityManager,
-    ) {
+        private UrlGeneratorInterface  $urlGenerator,
+        private UserService            $service,
+        private UserProviderFactory    $userProviderFactory,
+        private CacheItemPoolInterface $cache,
+        private EntityManagerInterface $entityManager,
+    )
+    {
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            RequestEvent::class => [['validate', 127]],
+            JWTCreatedEvent::class => 'create',
+            JWTDecodedEvent::class => 'decode',
+            Events::JWT_CREATED => 'create',
+            Events::JWT_DECODED => 'decode',
+        ];
     }
 
     public function validate(RequestEvent $event): void
@@ -141,19 +156,5 @@ final class SingleLoginSubscriber implements EventSubscriberInterface
 
         $configuration->getQueryCache()->clear();
         $configuration->getResultCache()->clear();
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            RequestEvent::class => [['validate', 127]],
-            JWTCreatedEvent::class => 'create',
-            JWTDecodedEvent::class => 'decode',
-            Events::JWT_CREATED => 'create',
-            Events::JWT_DECODED => 'decode',
-        ];
     }
 }

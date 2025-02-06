@@ -32,7 +32,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 
@@ -56,7 +56,7 @@ final class MenuRepository extends AbstractRepository implements MenuRepositoryI
     {
         $deviceId = $this->getDeviceId();
         $cacheLifetime = self::MICRO_CACHE;
-        if (!empty($deviceId)) {
+        if ($deviceId !== '' && $deviceId !== '0') {
             $cacheLifetime = SemartApiSkeleton::QUERY_CACHE_LIFETIME;
         }
 

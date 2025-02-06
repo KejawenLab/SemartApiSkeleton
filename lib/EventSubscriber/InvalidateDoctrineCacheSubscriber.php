@@ -13,19 +13,10 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class InvalidateDoctrineCacheSubscriber implements EventSubscriberInterface
+final readonly class InvalidateDoctrineCacheSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly CacheFactory $cache)
+    public function __construct(private CacheFactory $cache)
     {
-    }
-
-    public function invalidate(KernelEvent $event): void
-    {
-        if (!$event->isMainRequest()) {
-            return;
-        }
-
-        $this->cache->invalidQueryCache();
     }
 
     /**
@@ -37,5 +28,18 @@ final class InvalidateDoctrineCacheSubscriber implements EventSubscriberInterfac
             RequestEvent::class => [['invalidate', 27]],
             ResponseEvent::class => [['invalidate', -27]],
         ];
+    }
+
+    public function invalidate(KernelEvent $event): void
+    {
+        if (!$event->isMainRequest()) {
+            return;
+        }
+
+        if (!$this->cache->isDisableQueryCache() && $event->getRequest()->isMethodCacheable()) {
+            return;
+        }
+
+        $this->cache->invalidQueryCache();
     }
 }

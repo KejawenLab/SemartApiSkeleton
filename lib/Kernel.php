@@ -16,31 +16,6 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 {
     use MicroKernelTrait;
 
-    protected function configureContainer(ContainerConfigurator $container): void
-    {
-        $container->import('../config/{packages}/*.yaml');
-        $container->import('../config/{packages}/'.$this->environment.'/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/services.yaml')) {
-            $container->import('../config/services.yaml');
-            $container->import('../config/{services}_'.$this->environment.'.yaml');
-        } elseif (is_file($path = \dirname(__DIR__).'/config/services.php')) {
-            (require $path)($container->withPath($path), $this);
-        }
-    }
-
-    protected function configureRoutes(RoutingConfigurator $routes): void
-    {
-        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import('../config/{routes}/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/routes.yaml')) {
-            $routes->import('../config/routes.yaml');
-        } elseif (is_file($path = \dirname(__DIR__).'/config/routes.php')) {
-            (require $path)($routes->withPath($path), $this);
-        }
-    }
-
     public function process(ContainerBuilder $container): void
     {
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
@@ -66,5 +41,30 @@ class Kernel extends BaseKernel implements CompilerPassInterface
             'semart_name' => 'Semart Api Skeleton',
             'semart_version' => SemartApiSkeleton::VERSION,
         ]]);
+    }
+
+    protected function configureContainer(ContainerConfigurator $container): void
+    {
+        $container->import('../config/{packages}/*.yaml');
+        $container->import('../config/{packages}/' . $this->environment . '/*.yaml');
+
+        if (is_file(\dirname(__DIR__) . '/config/services.yaml')) {
+            $container->import('../config/services.yaml');
+            $container->import('../config/{services}_' . $this->environment . '.yaml');
+        } elseif (is_file($path = \dirname(__DIR__) . '/config/services.php')) {
+            (require $path)($container->withPath($path), $this);
+        }
+    }
+
+    protected function configureRoutes(RoutingConfigurator $routes): void
+    {
+        $routes->import('../config/{routes}/' . $this->environment . '/*.yaml');
+        $routes->import('../config/{routes}/*.yaml');
+
+        if (is_file(\dirname(__DIR__) . '/config/routes.yaml')) {
+            $routes->import('../config/routes.yaml');
+        } elseif (is_file($path = \dirname(__DIR__) . '/config/routes.php')) {
+            (require $path)($routes->withPath($path), $this);
+        }
     }
 }

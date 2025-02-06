@@ -29,10 +29,10 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(?AuthInterface $user = null)
     {
         if (null !== $user) {
-            $this->id = (string) $user->getRecordId();
+            $this->id = (string)$user->getRecordId();
             $this->group = $user->getGroup();
-            $this->username = (string) $user->getIdentity();
-            $this->password = (string) $user->getCredential();
+            $this->username = (string)$user->getIdentity();
+            $this->password = (string)$user->getCredential();
             $this->class = $user::class;
 
             if (method_exists($user, 'getProfileImage')) {
@@ -56,11 +56,6 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->profileImage = $profileImage;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return $this->username;
-    }
-
     public function getId(): string
     {
         return $this->id;
@@ -69,6 +64,11 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUsername(): string
     {
         return $this->getUserIdentifier();
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
     }
 
     public function getPassword(): string

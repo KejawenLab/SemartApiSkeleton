@@ -15,7 +15,7 @@ use KejawenLab\ApiSkeleton\Repository\CronReportRepository;
 use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CronReportRepository::class)]
 #[ORM\Table(name: 'core_cronjob_report')]
@@ -53,7 +53,7 @@ class CronReport implements CronReportInterface
 
     public function getId(): ?string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getCron(): ?CronInterface
@@ -89,14 +89,14 @@ class CronReport implements CronReportInterface
         $this->runtime = $runtime;
     }
 
-    public function getOutput(): ?string
+    public function isError(): bool
     {
-        return $this->output;
+        return !$this->isSuccessful();
     }
 
-    public function setOutput(string $output): void
+    public function isSuccessful(): bool
     {
-        $this->output = $output;
+        return 0 === $this->getExitCode();
     }
 
     public function getExitCode(): int
@@ -109,18 +109,18 @@ class CronReport implements CronReportInterface
         $this->exitCode = $exitCode;
     }
 
-    public function isSuccessful(): bool
-    {
-        return 0 === $this->getExitCode();
-    }
-
-    public function isError(): bool
-    {
-        return !$this->isSuccessful();
-    }
-
     public function getNullOrString(): ?string
     {
         return $this->getOutput();
+    }
+
+    public function getOutput(): ?string
+    {
+        return $this->output;
+    }
+
+    public function setOutput(string $output): void
+    {
+        $this->output = $output;
     }
 }

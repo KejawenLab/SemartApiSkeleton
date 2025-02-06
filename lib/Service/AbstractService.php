@@ -20,10 +20,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 abstract class AbstractService implements ServiceInterface
 {
     public function __construct(
-        private readonly MessageBusInterface $messageBus,
+        private readonly MessageBusInterface     $messageBus,
         protected ServiceableRepositoryInterface $repository,
-        protected AliasHelper $aliasHelper,
-    ) {
+        protected AliasHelper                    $aliasHelper,
+    )
+    {
     }
 
     public function all(): array

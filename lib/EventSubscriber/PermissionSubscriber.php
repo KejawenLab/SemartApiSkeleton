@@ -15,10 +15,20 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @author Muhamad Surya Iksanudin<surya.iksanudin@gmail.com>
  */
-final class PermissionSubscriber implements EventSubscriberInterface
+final readonly class PermissionSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly Authorization $authorization, private readonly Ownership $ownership)
+    public function __construct(private Authorization $authorization, private Ownership $ownership)
     {
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            ControllerEvent::class => 'validate',
+        ];
     }
 
     public function validate(ControllerEvent $event): void
@@ -60,15 +70,5 @@ final class PermissionSubscriber implements EventSubscriberInterface
         }
 
         throw new AccessDeniedException();
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            ControllerEvent::class => 'validate',
-        ];
     }
 }

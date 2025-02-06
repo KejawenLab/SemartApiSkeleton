@@ -25,9 +25,10 @@ final class Report extends AbstractController
 {
     public function __construct(
         private readonly CronReportService $service,
-        private readonly Paginator $paginator,
-        private readonly SettingService $settingService,
-    ) {
+        private readonly Paginator         $paginator,
+        private readonly SettingService    $settingService,
+    )
+    {
     }
 
     #[Route(path: '/crons/{id}/logs', name: self::class, methods: ['GET'], priority: -27)]

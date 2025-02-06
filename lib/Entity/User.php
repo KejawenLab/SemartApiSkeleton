@@ -19,7 +19,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt')]
@@ -99,31 +99,6 @@ class User implements UserInterface
         $this->lastLogin = new DateTimeImmutable();
     }
 
-    public function getId(): ?string
-    {
-        return (string) $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = StringUtil::lowercase($username);
-    }
-
-    public function getPassword(): ?string
-    {
-        return (string) $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
     public function getGroup(): ?GroupInterface
     {
         return $this->group;
@@ -146,7 +121,7 @@ class User implements UserInterface
 
     public function getProfileImage(): ?string
     {
-        if (!$this->profileImage) {
+        if ($this->profileImage === null || $this->profileImage === '') {
             return $this->profileImage;
         }
 
@@ -158,16 +133,6 @@ class User implements UserInterface
     public function setProfileImage(?string $profileImage): void
     {
         $this->profileImage = $profileImage;
-    }
-
-    public function getFullName(): ?string
-    {
-        return $this->fullName;
-    }
-
-    public function setFullName(string $fullName): void
-    {
-        $this->fullName = StringUtil::title($fullName);
     }
 
     public function getEmail(): ?string
@@ -215,14 +180,39 @@ class User implements UserInterface
         return $this->getUsername();
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): void
+    {
+        $this->username = StringUtil::lowercase($username);
+    }
+
     public function getRecordId(): ?string
     {
         return $this->getId();
     }
 
+    public function getId(): ?string
+    {
+        return (string)$this->id;
+    }
+
     public function getCredential(): ?string
     {
         return $this->getPassword();
+    }
+
+    public function getPassword(): ?string
+    {
+        return (string)$this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     public function isEncoded(): bool
@@ -243,5 +233,15 @@ class User implements UserInterface
     public function getNullOrString(): ?string
     {
         return $this->getFullName();
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): void
+    {
+        $this->fullName = StringUtil::title($fullName);
     }
 }

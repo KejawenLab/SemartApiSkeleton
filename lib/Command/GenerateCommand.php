@@ -39,8 +39,7 @@ final class GenerateCommand extends Command
             ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
             ->addOption('admin', 'admin', InputOption::VALUE_NONE)
             ->addOption('api', 'api', InputOption::VALUE_NONE)
-            ->addOption('folder', 'folder', InputOption::VALUE_NONE)
-        ;
+            ->addOption('folder', 'folder', InputOption::VALUE_NONE);
     }
 
     /**
@@ -97,7 +96,7 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
             'command' => 'cache:clear',
         ]), $output);
 
-        $io->success('Restart your container to apply changes');
+        $io->success('Code generated successfully');
 
         return 0;
     }

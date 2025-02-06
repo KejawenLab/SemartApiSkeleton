@@ -40,7 +40,7 @@ final class CronReportService extends AbstractService
             )
         );
 
-        return (int) $queryBuilder->getQuery()->getSingleScalarResult();
+        return (int)$queryBuilder->getQuery()->getSingleScalarResult();
     }
 
     public function clean(): void
