@@ -91,10 +91,22 @@ By: KejawenLab - Muhamad Surya Iksanudin<<comment>surya.iksanudin@gmail.com</com
         }
 
         $io->title('Clear Cache');
-        $update = $application->find('cache:clear');
-        $update->run(new ArrayInput([
+
+
+        $input = new ArrayInput([
             'command' => 'cache:clear',
-        ]), $output);
+        ]);
+        $input->setInteractive(false);
+        $cacheClear = $application->find('cache:clear');
+        $cacheClear->run($input, $output);
+
+        $input = new ArrayInput([
+            'command' => 'doctrine:schema:update',
+            '--force' => null,
+        ]);
+        $input->setInteractive(false);
+        $schemaUpdater = $application->find('doctrine:schema:update');
+        $schemaUpdater->run($input, $output);
 
         $io->success('Code generated successfully');
 

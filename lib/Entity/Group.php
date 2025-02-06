@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\ApiSkeleton\Repository\GroupRepository;
-use KejawenLab\ApiSkeleton\Security\GroupIdGenerator;
+use KejawenLab\ApiSkeleton\Security\IdGenerator;
 use KejawenLab\ApiSkeleton\Security\Model\GroupInterface;
 use KejawenLab\ApiSkeleton\Util\StringUtil;
 use OpenApi\Attributes as OA;
@@ -33,7 +33,7 @@ class Group implements GroupInterface
     #[OA\Property(type: 'string')]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
-    #[ORM\CustomIdGenerator(class: GroupIdGenerator::class)]
+    #[ORM\CustomIdGenerator(class: IdGenerator::class)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     private UuidInterface $id;
 
