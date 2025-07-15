@@ -84,8 +84,15 @@ final class Paginator
     private function count(QueryBuilder $queryBuilder, string $deviceId, bool $disableCache = false): int
     {
         $count = clone $queryBuilder;
+        $groupByParts = $count->getDQLPart('groupBy');
 
-        $count->select('COUNT(1) AS total');
+        if (empty($groupByParts)) {
+            $count->select('COUNT(1) as total');
+        } else {
+            $count->select(sprintf('COUNT(DISTINCT %s) as total', implode(', ', $groupByParts)));
+            $count->resetDQLPart('groupBy');
+        }
+
         $count->resetDQLPart('orderBy');
 
         $query = $count->getQuery();
